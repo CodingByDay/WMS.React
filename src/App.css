@@ -19,6 +19,23 @@
   background-color: white;
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  top: 50vh;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+button.btn.btn-primary.dashboard {
+  margin: 1em;
+  height: 10em;
+  font-weight: bolder;
+
+}
+
 .Auth-form-content {
   padding-left: 12%;
   padding-right: 12%;
