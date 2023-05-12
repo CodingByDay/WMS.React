@@ -4,7 +4,23 @@
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
+div#wrong {
+  margin-top: 0.4em;
+  display: none;
+}
+.alert.alert-danger.password {
+  margin-top: 0.5em;
+  display: none;
+}
+img.loader {
+  /* width: 50%; */
+  /* position: absolute; */
+  position: absolute;
+  left: 50%;
+  display: none;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .table_responsive_positions {
   height: 30vh;
   overflow-y: scroll;
