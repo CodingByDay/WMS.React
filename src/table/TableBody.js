@@ -1,7 +1,11 @@
 const TableBody = ({ tableData, columns }) => {
 
-
-
+    try {
+        var len = tableData.Items.length;
+    } catch (e) {
+        return null;
+    }
+    window.items = tableData.Items;
     // React is awesome!
     // You can use JSX if you like
     return (
