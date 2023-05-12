@@ -2,6 +2,8 @@ import { useNavigate  } from 'react-router-dom';
 import HeaderOrderListing from './HeaderOrderListing';
 import OrderHeadsListing from './OrderHeadsListing';
 import OrderPositions from './OrderPositions';
+import Header from './Header';
+import Footer from './Footer';
 import { useEffect, useState } from "react";
 
 
@@ -20,9 +22,12 @@ export default function Listing() {
     return ( 
 
         <div>
+        <Header/>   
         <HeaderOrderListing />
         <OrderHeadsListing />
         <OrderPositions />     
+        <Footer />
+
         </div>
 
     ); 

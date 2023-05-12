@@ -1,7 +1,50 @@
 .App {
   background-color: white;
 }
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
+.table_responsive_positions {
+  height: 30vh;
+  overflow-y: scroll;
+  margin-left: 2em;
+  margin-right: 2em;
+  position: absolute;
+  bottom:2em;
+  width: 90vw;
+}
+
+.table_responsive_order {
+  height: 30vh;
+  overflow-y: scroll;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 5em;
+}
+
+.footer {
+  height: 2em;
+  position: absolute;
+  bottom:0px;
+}
+button.btn.btn-primary.navbar.logout {
+  font-weight: 700;
+}
+.select-filters {
+  width: max-content;
+}
+.filters {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  width: min-content;
+  margin: 2em;
+}
+
+button svg {
+  margin: 0.4em;
+}
 .Auth-form-container {
   display: flex;
   justify-content: center;
@@ -9,7 +52,11 @@
   width: 100vw;
   height: 100vh;
 }
-
+.navbar {
+  height: max-content;
+  padding: 1em;
+  background: black;
+}
 .Auth-form {
   width: 420px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
@@ -18,7 +65,9 @@
   border-radius: 8px;
   background-color: white;
 }
-
+.logout button {
+  margin: 0.3em;
+}
 .menu {
   display: flex;
   flex-direction: column;

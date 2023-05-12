@@ -1,5 +1,5 @@
 import { useNavigate  } from 'react-router-dom';
-
+import Table from '../table/Table';
 
 
 export default function OrderPositions() { 
@@ -10,7 +10,7 @@ export default function OrderPositions() {
 
     return ( 
         <div>
-            order positions    
+            <Table className="positions-table" type="position" class = "table_responsive_positions"/>
        </div>
     ); 
 

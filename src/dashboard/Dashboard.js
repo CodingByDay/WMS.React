@@ -1,5 +1,7 @@
 import { useNavigate  } from 'react-router-dom';
 
+import Header from './Header';
+import Footer from './Footer';
 
 
 export function Dashboard() { 
@@ -18,7 +20,10 @@ export function Dashboard() {
     }
   }
     return ( 
-       <div class = "menu"> 
+      <div>
+  
+      <Header/>
+       <div className = "menu"> 
              <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
             </button>
@@ -31,9 +36,10 @@ export function Dashboard() {
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
               Nastavitve
             </button>
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("logout")} >
-              Odjava
-            </button>
+      
       </div> 
+      <Footer />
+      </div> 
+
     ); 
 } 
