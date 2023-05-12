@@ -4,11 +4,11 @@ import { useState } from "react";
 import tableData1 from "./tableData1.json";
 const Table = (props) => {
 
+  const [tableData, setTableData] = useState(tableData1);
 
 
 
 
- const [tableData, setTableData] = useState(tableData1);
 
  const columnsOrder = [
   { label: "Sladišče", accessor: "warehouse" },
@@ -51,17 +51,18 @@ const columnsPositions = [
       columns = columnsPositions;
 
     }
-
+    
 
  return (
-  <>
+
     <div className={props.class}>
+
     <table className="table">
     <TableHead className="orders" columns={columns} />
-    <TableBody className = "positions" columns={columns} tableData={tableData} />
+    <TableBody className = "positions" columns={columns} tableData={props.data} />
    </table>
    </div>
-  </>
+
  );
 };
 

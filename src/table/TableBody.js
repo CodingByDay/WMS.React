@@ -1,7 +1,12 @@
 const TableBody = ({ tableData, columns }) => {
+
+
+
+    // React is awesome!
+    // You can use JSX if you like
     return (
      <tbody>
-      {tableData.map((data) => {
+      {tableData.Items.map((data) => {
        return (
         <tr key={data.id}>
          {columns.map(({ accessor }) => {

@@ -11,9 +11,6 @@ import ListingService from '../services/ListingService';
 
 export default function Listing() { 
     checkUID ()
-
-
-
     function isUUID ( uuid ) {
       let s = "" + uuid;
       s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
@@ -22,8 +19,6 @@ export default function Listing() {
       }
       return true;
      } 
-  
-  
   
     function checkUID () {
       const cookies = new Cookies();
@@ -35,27 +30,29 @@ export default function Listing() {
     } else {
       window.location.href = "/";
     }
-     
     }
-   
+  
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-            var data =  ListingService.getAllListings().then(response => { 
-            setOrders(response.data);
+              var data =  ListingService.getAllListings().then(response => { 
+              setOrders(response);
+              window.items = response;
            });
+           
+     
     }, []);
 
   
     return ( 
 
         <div>
+     
         <Header/>   
         <HeaderOrderListing />
-        <OrderHeadsListing />
+        <OrderHeadsListing data = {orders} />
         <OrderPositions />     
         <Footer />
-
         </div>
 
     ); 
