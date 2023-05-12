@@ -1,9 +1,16 @@
 import { useNavigate  } from 'react-router-dom';
 import Select from 'react-select'
 import { MdLogout, MdHome } from "react-icons/md";
+import Cookies from 'universal-cookie';
 
 
 export default function Header() { 
+
+    function handleLogout() { 
+        const cookies = new Cookies();
+        cookies.remove('uid', { path: '/' });
+        navigate('/');
+    }
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -38,7 +45,7 @@ export default function Header() {
 
                 {button}
 
-                <button className="btn btn-primary navbar-internal logout" onClick={() => navigate('/')}>Odjava             
+                <button className="btn btn-primary navbar-internal logout" onClick={() => handleLogout()}>Odjava             
                 <MdLogout />
                 </button>
             </div>

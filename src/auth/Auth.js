@@ -4,36 +4,37 @@ import { useNavigate  } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import  Loader  from "../loader/Loader";
 import $ from 'jquery';
+import Cookies from 'universal-cookie';
+
+
 export default function Auth(props) {
+
+
+  function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
     var password = ""  
     let navigate = useNavigate();
-
-
-  
     const handleClick = async () => {
       $("#wrong").css("display", "none");
-
       var loader = document.getElementById("loader");
       loader.style.display = "block";
       await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=loginUser&password=${password}&i=web`)
       .then(response => {
           if(response.data.Items[1].Name === "Error") {
-            setTimeout(function() { 
-              
-              
+            setTimeout(function() {              
               loader.style.display = "none";
-              $("#wrong").css("display", "block");
-
-          
-          
-          }, 2000);             
-
-              
-            
+              $("#wrong").css("display", "block");  
+          }, 2000);                        
           } else {
-              setTimeout(function() { navigate('/dashboard'); }, 2000);             
-
-
+              // Successful login 
+              var ts = Math.round(new Date().getTime() / 1000);
+              const cookies = new Cookies();
+              cookies.set('uid', uuidv4(), { path: '/' });
+              setTimeout(function() { navigate('/dashboard'); }, 2000);      
           }
       })
       .catch(error => {
@@ -45,8 +46,6 @@ export default function Auth(props) {
     }
   return (
     <div>
-
-
     <Loader />
 
 
