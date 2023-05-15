@@ -44,11 +44,19 @@ export default function Listing() {
            }); 
     }, []);
 
-
+  async function getPositions(order) {
+    var data =  ListingService.getAllPositions(order).then(response => { 
+      console.log(response.data);
+      setPositions(response);
+    });
+  }
   const [data, setData] = useState([]);
 
-  const childToParent = (data) => {
-    alert("Parents are cool!");
+  const  childToParent = (data) => {
+    console.log(data)
+    
+
+    getPositions(data.childNodes[4].innerHTML)
   }
 
 
