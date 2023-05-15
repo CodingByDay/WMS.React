@@ -32,8 +32,10 @@ export default function Listing() {
     }
     }
   
+    // orders
     const [orders, setOrders] = useState([]);
 
+    // positions
     useEffect(() => {
               var data =  ListingService.getAllListings().then(response => { 
               setOrders(response);

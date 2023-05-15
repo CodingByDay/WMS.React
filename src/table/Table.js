@@ -11,12 +11,12 @@ const Table = (props) => {
 
 
  const columnsOrder = [
-  { label: "Sladišče", accessor: "warehouse" },
-  { label: "Prejemnik", accessor: "consignee" },
-  { label: "Rok dobave", accessor: "delivery_deadline" },
-  { label: "Tip dokumenta", accessor: "document_type" },
-  { label: "Ključ", accessor: "erp_key" },
-  { label: "Sprejemnik", accessor: "receiver"}
+  { label: "Sladišče", accessor: "Warehouse", type: "string", id: 1},
+  { label: "Prejemnik", accessor: "Consignee", type: "string", id: 0},
+  { label: "Rok dobave", accessor: "DeliveryDeadline", type: "date", id: 6},
+  { label: "Tip dokumenta", accessor: "DocumentType", type: "string", id: 7},
+  { label: "Ključ", accessor: "Key", type: "string", id: 8},
+  { label: "Sprejemnik", accessor: "Receiver", type: "string", id: 14}
  ];
 
 

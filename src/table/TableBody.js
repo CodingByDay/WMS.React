@@ -5,7 +5,14 @@ const TableBody = ({ tableData, columns }) => {
     } catch (e) {
         return null;
     }
-    window.items = tableData.Items;
+
+    function getColumn(accessor) {
+        for(var i = 0; i < columns.length; i++) {
+            if(columns[i].accessor == accessor) {
+                return columns[i];
+            }
+        }
+    }
     // React is awesome!
     // You can use JSX if you like
     return (
@@ -14,8 +21,30 @@ const TableBody = ({ tableData, columns }) => {
        return (
         <tr key={data.id}>
          {columns.map(({ accessor }) => {
-          const tData = data[accessor] ? data[accessor] : "——";
-          return <td key={accessor}>{tData}</td>;
+
+        var column = getColumn(accessor);
+
+        var type = "StringValue";  
+        if (column.type=== "string") {
+            type = "StringValue";
+        } else if (column.type=== "int") {
+            type = "IntValue";
+        } else if (column.type=== "date") {
+            type = "DoubleValue";
+        } else if (column.type=== "double") {
+            type = "DoubleValue";
+        } else if (column.type=== "bool") {
+            type = "BoolValue";
+        }
+
+        var tData = ""
+        try {
+            tData = data.Properties.Items[column.id][type];
+        } catch (e) {
+
+        }
+
+        return <td>{tData}</td>;
          })}
         </tr>
        );
@@ -26,3 +55,7 @@ const TableBody = ({ tableData, columns }) => {
 
 
    export default TableBody;
+
+
+
+   
