@@ -2,7 +2,7 @@ import { useNavigate  } from 'react-router-dom';
 import Table from '../table/Table';
 
 
-export default function OrderPositions() { 
+export default function OrderPositions(props) { 
 
 
 
@@ -10,7 +10,7 @@ export default function OrderPositions() {
 
     return ( 
         <div>
-            <Table className="positions-table" type="position" class = "table_responsive_positions"/>
+            <Table className="positions-table" type="position" class = "table_responsive_positions" childToParent = {props.childToParent} />
        </div>
     ); 
 

@@ -1,10 +1,15 @@
-const TableBody = ({ tableData, columns }) => {
+const TableBody = (props) => {
+
+    var tableData = props.tableData;
 
     try {
         var len = tableData.Items.length;
     } catch (e) {
         return null;
     }
+
+    var columns = props.columns;
+    var returnRow = props.returnRow;
 
     function getColumn(accessor) {
         for(var i = 0; i < columns.length; i++) {
@@ -13,17 +18,19 @@ const TableBody = ({ tableData, columns }) => {
             }
         }
     }
-    // React is awesome!
-    // You can use JSX if you like
+
+    const getColumnData = event => {
+        var parent = event.target.parentElement;
+        returnRow(parent);
+    }
+
     return (
      <tbody>
       {tableData.Items.map((data) => {
        return (
-        <tr key={data.id}>
-         {columns.map(({ accessor }) => {
-
+        <tr onClick={getColumnData}>
+        { columns.map(({ accessor }) => {
         var column = getColumn(accessor);
-
         var type = "StringValue";  
         if (column.type=== "string") {
             type = "StringValue";
@@ -36,15 +43,11 @@ const TableBody = ({ tableData, columns }) => {
         } else if (column.type=== "bool") {
             type = "BoolValue";
         }
-
         var tData = ""
         try {
             tData = data.Properties.Items[column.id][type];
-        } catch (e) {
-
-        }
-
-        return <td>{tData}</td>;
+        } catch (e) {}
+            return <td>{tData}</td>;
          })}
         </tr>
        );

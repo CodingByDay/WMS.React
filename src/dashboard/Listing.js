@@ -36,25 +36,34 @@ export default function Listing() {
     const [orders, setOrders] = useState([]);
 
     // positions
+    const [positions, setPositions] = useState([]);
+
     useEffect(() => {
               var data =  ListingService.getAllListings().then(response => { 
               setOrders(response);
-              window.items = response;
-           });
-           
-     
+           }); 
     }, []);
 
-  
+
+  const [data, setData] = useState([]);
+
+  const childToParent = (data) => {
+    alert("Parents are cool!");
+  }
+
+
+
+
     return ( 
 
         <div>
      
         <Header/>   
         <HeaderOrderListing />
-        <OrderHeadsListing data = {orders} />
-        <OrderPositions />     
+        <OrderHeadsListing data = {orders} childToParent = {childToParent} />
+        <OrderPositions childToParent = {childToParent} />     
         <Footer />
+
         </div>
 
     ); 

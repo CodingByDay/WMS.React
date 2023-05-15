@@ -9,7 +9,6 @@ const Table = (props) => {
 
 
 
-
  const columnsOrder = [
   { label: "Sladišče", accessor: "Warehouse", type: "string", id: 1},
   { label: "Prejemnik", accessor: "Consignee", type: "string", id: 0},
@@ -57,9 +56,9 @@ const columnsPositions = [
 
     <div className={props.class}>
 
-    <table className="table">
+    <table className="table" id={props.passID}>
     <TableHead className="orders" columns={columns} />
-    <TableBody className = "positions" columns={columns} tableData={props.data} />
+    <TableBody returnRow = {props.childToParent} className = "positions" columns={columns} tableData={props.data}  />
    </table>
    </div>
 

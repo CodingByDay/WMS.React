@@ -9,7 +9,7 @@ export default function OrderHeadsListing(props) {
     return ( 
         <div>
 
-         <Table className="orders_table" type = "order" class = "table_responsive_order" data = {props.data} /> 
+         <Table className="orders_table" childToParent = {props.childToParent} type = "order" class = "table_responsive_order" passID = "orders-table" data = {props.data} /> 
 
        </div>
     ); 
