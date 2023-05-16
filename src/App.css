@@ -7,6 +7,20 @@ button#openRange {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+.nameModule {
+  opacity: 1;
+  z-index: 1000;
+  position: fixed;
+  top: 50vh;
+  left: 60vw;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+}
+.nameModule {
+  opacity: 1;
+  z-index: 1000;
+}
+
 div#wrong {
   margin-top: 0.4em;
   display: none;

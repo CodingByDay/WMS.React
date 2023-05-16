@@ -11,7 +11,7 @@ const ListingService  = {
 
     async getAllPositions(order) {
         const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=ook&pars=${order}&i=web`)
-        return response;
+        return response.data;
     }
     
 }

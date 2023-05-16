@@ -3,20 +3,25 @@ import Select from 'react-select'
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { addDays, format, isWeekend } from 'date-fns';
+import { addDays, addYears, format, isWeekend } from 'date-fns';
 import { useState } from 'react';
 import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 
 
 export default function HeaderOrderListing() { 
 
-    var open = false;
+    const [state, setState] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+        }
+    ]);
 
-    const selectionRange = {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-      }
+
+
+    const [open, setOpen] = useState(false);
+
 
     
     const options = [
@@ -27,8 +32,23 @@ export default function HeaderOrderListing() {
       
 
   let navigate = useNavigate();
+  const searchTable = () => { 
+    alert('Search table');
+  };
 
-  
+
+  const toggleVisibility = () => {
+    setOpen(!open);
+  };
+
+
+  const handleSelect = (ranges) => { 
+    const { selection } = ranges;
+    setState([selection]);
+  };
+
+
+
     return ( 
 
 
@@ -49,14 +69,20 @@ export default function HeaderOrderListing() {
             />
 
 
-         <button className="btn btn-primary" id="openRange">
+         <button className="btn btn-primary" onClick={toggleVisibility} id="openRange">
               Izberite
               <MdDateRange />
          </button>   
 
 
          {open && (
-            <DateRangePicker ranges={[selectionRange]}/>
+            <div className="nameModule">
+              <DateRangePicker ranges={state}
+                          
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              onChange={handleSelect}/>
+            </div>
          )}
 
         
@@ -68,13 +94,15 @@ export default function HeaderOrderListing() {
               className="form-control mt-1"
               placeholder="Prejemnik"
             />
-              <input
+
+            <input
               id = "consignee"
               type="text"
               className="form-control mt-1"
               placeholder="Naročnik"
             />
-  <button className="btn btn-primary" id="search">
+
+         <button className="btn btn-primary" onClick={searchTable} id="search">
               Poiščite
               <MdOutlineSearch />
          </button> 

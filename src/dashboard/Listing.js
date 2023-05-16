@@ -50,7 +50,7 @@ export default function Listing() {
 
 
 
-      setPositions(response.data);
+      setPositions(response);
       
     });
   }
