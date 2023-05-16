@@ -22,20 +22,10 @@ const Table = (props) => {
 
 const columnsPositions = [
     { label: "Ident", accessor: "Ident", type: "string", id: 2 },
-    { label: "Alt", accessor: "Name", type: "string", id: 3 },
-    { label: "Opis", accessor: "Name", type: "string", id: 12 },
-    { label: "U/M", accessor: "No", type: "int", id: 9 },
-    { label: "Količina", accessor: "OpenQty", type: "string", id: 4 },
-    { label: "Cena za enoto", accessor: "priceunit", type: "string", id: 1 },
-    { label: "D1 %", accessor: "No", type: "int", id: 9  },
-    { label: "D2 %", accessor: "No", type: "int", id: 9  },
-    { label: "SD %", accessor: "No", type: "int", id: 9  },
-    { label: "Popust", accessor: "No", type: "int", id: 9  },
-    { label: "Vrednost", accessor: "No", type: "int", id: 9  },
-    { label: "VAT", accessor: "No", type: "int", id: 9  },
-    { label: "Dolgovani znesek", accessor: "No", type: "int", id: 9  },
-    { label: "Odposlano", accessor: "No", type: "int", id: 9  },
-    { label: "Paketi", accessor: "No", type: "int", id: 9  },
+    { label: "Naziv", accessor: "Name", type: "string", id: 3 },
+    { label: "Odprto", accessor: "OpenQty", type: "double", id: 4 },
+    { label: "Skupna količina", accessor: "FullQty", type: "double", id: 5 },
+    
 ]
 
 

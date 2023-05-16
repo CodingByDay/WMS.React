@@ -1,6 +1,9 @@
 .App {
   background-color: white;
 }
+button#openRange {
+  display: flex;
+}
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
@@ -50,12 +53,23 @@ button.btn.btn-primary.navbar.logout {
 .select-filters {
   width: max-content;
 }
+
 .filters {
   display: flex;
   gap: 1em;
-  flex-direction: column;
-  width: min-content;
+  flex-direction: row;
+  width: max-content;
   margin: 2em;
+  height: 2em;
+  align-items: center;
+}
+
+#documentType {
+  width: 100%;
+}
+
+button#search {
+  display: flex;
 }
 
 button svg {

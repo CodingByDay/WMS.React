@@ -10,7 +10,7 @@ const ListingService  = {
 
 
     async getAllPositions(order) {
-        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=ook&pars=2301150000002&i=web`)
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=ook&pars=${order}&i=web`)
         return response;
     }
     

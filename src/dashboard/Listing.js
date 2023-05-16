@@ -45,11 +45,16 @@ export default function Listing() {
     }, []);
 
   async function getPositions(order) {
-    var data =  ListingService.getAllPositions(order).then(response => { 
+      var data =  ListingService.getAllPositions(order).then(response => { 
+
+
+
+
       setPositions(response.data);
-      window.positions = response.data;
+      
     });
   }
+
   const [data, setData] = useState([]);
 
   const  childToParent = (data) => {
