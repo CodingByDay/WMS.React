@@ -10,7 +10,7 @@ const Table = (props) => {
 
 
  const columnsOrder = [
-  { label: "Sladišče", accessor: "Warehouse", type: "string", id: 1},
+  { label: "Skladišče", accessor: "Warehouse", type: "string", id: 1},
   { label: "Prejemnik", accessor: "Consignee", type: "string", id: 0},
   { label: "Rok dobave", accessor: "DeliveryDeadline", type: "date", id: 6},
   { label: "Tip dokumenta", accessor: "DocumentType", type: "string", id: 7},
@@ -45,7 +45,6 @@ const columnsPositions = [
  return (
 
     <div className={props.class}>
-
     <table className="table" id={props.passID}>
     <TableHead className="orders" columns={columns} />
     <TableBody returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />

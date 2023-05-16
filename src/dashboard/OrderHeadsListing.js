@@ -4,8 +4,7 @@ import Table from '../table/Table';
 
 export default function OrderHeadsListing(props) { 
 
-console.log("================================");
-console.log(props.sort);
+
   let navigate = useNavigate();
     return ( 
         <div>

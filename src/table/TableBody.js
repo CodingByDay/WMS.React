@@ -2,13 +2,14 @@ const TableBody = (props) => {
    
     var tableData = props.tableData;
 
-
-
-
     try {
+
         var len = tableData.Items.length;
+
     } catch (e) {
+
         return null;
+
     }
 
 tableData = tableData.Items.filter((data) => {
@@ -17,23 +18,50 @@ tableData = tableData.Items.filter((data) => {
         return true;
     }
 
-    var type = props.sort.type;
-    var field = data.Properties.Items[7]["StringValue"];
-
-    if (type != field &&type!="") {
+    var term = props.sort.type.toLowerCase();;
+    var field = data.Properties.Items[7]["StringValue"].toLowerCase();
+    if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
-}).filter((data) => {
 
+}).filter((data) => {
     if(typeof props.sort == "undefined") {
         return true;
     }
-
-    var type = props.sort.document;
-    var field = data.Properties.Items[8]["StringValue"];
-
-    if (type != field &&type!="") {
+    var term = props.sort.document.toLowerCase();;
+    var field = data.Properties.Items[8]["StringValue"].toLowerCase();
+    if (!field.includes(term) &&term!="") {
+        return false;
+    }
+        return true; 
+ }).filter((data) => {
+    if(typeof props.sort == "undefined") {
+        return true;
+    }
+    var term = props.sort.warehouse.toLowerCase();
+    var field = data.Properties.Items[1]["StringValue"].toLowerCase();
+    if (!field.includes(term) &&term!="") {
+        return false;
+    }
+        return true; 
+ }).filter((data) => {
+    if(typeof props.sort == "undefined") {
+        return true;
+    }
+    var term = props.sort.consignee.toLowerCase();
+    var field = data.Properties.Items[0]["StringValue"].toLowerCase();
+    if (!field.includes(term) &&term!="") {
+        return false;
+    }
+        return true; 
+ }).filter((data) => {
+    if(typeof props.sort == "undefined") {
+        return true;
+    }
+    var term = props.sort.client.toLowerCase();
+    var field = data.Properties.Items[14]["StringValue"].toLowerCase();
+    if (!field.includes(term) && term != "") {
         return false;
     }
         return true; 

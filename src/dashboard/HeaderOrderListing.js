@@ -10,15 +10,17 @@ import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 
 export default function HeaderOrderListing(props) { 
+
     useEffect(() => {
         var data =  SortingService.getAllDocumentTypes().then(response => { 
         var types = [];
+        types.push ({value: "", label: ""});
 
                 for (var i = 0; i < response.Items.length; i++) {
-                          types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue}); 
-                       
+                          types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
                 }
-        setTypes(types);
+                
+                setTypes(types);
      }); 
     }, []);
 
@@ -32,17 +34,14 @@ export default function HeaderOrderListing(props) {
             key: 'selection',
         }
     ]);
+
     const [open, setOpen] = useState(false);
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState("")
-    // States
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
+
+
       
 
   let navigate = useNavigate();
@@ -63,12 +62,15 @@ export default function HeaderOrderListing(props) {
   function onChangeDocument(e) {
     setDocument(e.target.value);
   }
+
   function onChangeConsignee(e) {
     setConsignee(e.target.value);
   }
+
   function onChangeWarehouse(e) {
     setWarehouse(e.target.value);
   }
+
   function onChangeReceiver(e) {
     setClient(e.target.value);
   }
@@ -114,9 +116,6 @@ export default function HeaderOrderListing(props) {
               onChange={handleSelect}/>
             </div>
          )}
-
-        
-
 
             <input
               id = "receiver"
