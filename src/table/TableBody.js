@@ -56,11 +56,12 @@ tableData = tableData.Items.filter((data) => {
     }
         return true; 
  }).filter((data) => {
+    console.log(data);
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.client.toLowerCase();
-    var field = data.Properties.Items[14]["StringValue"].toLowerCase();
+    var field = data.Properties.Items[13]["StringValue"].toLowerCase();
     if (!field.includes(term) && term != "") {
         return false;
     }

@@ -64,7 +64,7 @@ export default function HeaderOrderListing(props) {
   }
 
   function onChangeConsignee(e) {
-    setConsignee(e.target.value);
+    setClient(e.target.value);
   }
 
   function onChangeWarehouse(e) {
@@ -72,7 +72,7 @@ export default function HeaderOrderListing(props) {
   }
 
   function onChangeReceiver(e) {
-    setClient(e.target.value);
+    setConsignee(e.target.value);
   }
 
   function onChangeType(e) {
