@@ -11,15 +11,16 @@ const TableBody = (props) => {
         return null;
 
     }
-
+window.test = tableData.Items;
 tableData = tableData.Items.filter((data) => {
 
     if(typeof props.sort == "undefined") {
         return true;
     }
 
-    var term = props.sort.type.toLowerCase();;
-    var field = data.Properties.Items[7]["StringValue"].toLowerCase();
+    var term = props.sort.type.toLowerCase();
+    
+    var field = data.Properties?.Items[7]["StringValue"]?.toLowerCase();
     if (!field.includes(term) &&term!="") {
         return false;
     }
@@ -30,7 +31,7 @@ tableData = tableData.Items.filter((data) => {
         return true;
     }
     var term = props.sort.document.toLowerCase();;
-    var field = data.Properties.Items[8]["StringValue"].toLowerCase();
+    var field = data.Properties?.Items[8]["StringValue"]?.toLowerCase();
     if (!field.includes(term) &&term!="") {
         return false;
     }
@@ -40,7 +41,7 @@ tableData = tableData.Items.filter((data) => {
         return true;
     }
     var term = props.sort.warehouse.toLowerCase();
-    var field = data.Properties.Items[1]["StringValue"].toLowerCase();
+    var field = data.Properties?.Items[1]["StringValue"]?.toLowerCase();
     if (!field.includes(term) &&term!="") {
         return false;
     }
@@ -50,18 +51,32 @@ tableData = tableData.Items.filter((data) => {
         return true;
     }
     var term = props.sort.consignee.toLowerCase();
-    var field = data.Properties.Items[0]["StringValue"].toLowerCase();
+    var field = data.Properties?.Items[0]["StringValue"]?.toLowerCase();
     if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
  }).filter((data) => {
-    console.log(data);
+
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.client.toLowerCase();
-    var field = data.Properties.Items[13]["StringValue"].toLowerCase();
+    var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
+    console.log(field);
+    if (!field.includes(term) && term != "") {
+        return false;
+    }
+        return true; 
+ }).filter((data) => {
+    if(typeof props.sort == "undefined") {
+        return true;
+    }
+    var term = props.sort.consignee.toLowerCase();
+
+    var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
+    console.log(field);
+
     if (!field.includes(term) && term != "") {
         return false;
     }
@@ -74,6 +89,16 @@ tableData = tableData.Items.filter((data) => {
     var columns = props.columns;
     var returnRow = props.returnRow;
 
+
+    function findIndex(array, accesor) {
+        for(var i=0;i<array.Properties.Items.length;i++) {
+        if(window.test[0].Properties.Items[i].Name == accesor) {
+            return i;
+        }
+        }
+        return -1;
+    }
+  
     function getColumn(accessor) {
         for(var i = 0; i < columns.length; i++) {
             if(columns[i].accessor == accessor) {
@@ -108,7 +133,7 @@ tableData = tableData.Items.filter((data) => {
         } else if (column.type=== "int") {
             type = "IntValue";
         } else if (column.type=== "date") {
-            type = "DoubleValue";
+            type = "DateTimeValue";
         } else if (column.type=== "double") {
             type = "DoubleValue";
         } else if (column.type=== "bool") {
@@ -116,7 +141,9 @@ tableData = tableData.Items.filter((data) => {
         }
         var tData = ""
         try {
-            tData = data.Properties.Items[column.id][type];
+            var index = findIndex(data, accessor);
+        
+            tData = data.Properties.Items[index][type];
         } catch (e) {}
             return <td>{tData}</td>;
          })}
