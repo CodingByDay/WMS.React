@@ -10,29 +10,21 @@ import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 
 export default function HeaderOrderListing() { 
-
-
-
     useEffect(() => {
         var data =  SortingService.getAllDocumentTypes().then(response => { 
-
-
-
-
         var types = [];
 
                 for (var i = 0; i < response.Items.length; i++) {
-                          types.push(response.Items[i].Properties.Items[0].StringValue); 
+                          types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue}); 
                        
                 }
-
         setTypes(types);
      }); 
     }, []);
 
+    // States
     const [types, setTypes] = useState([]);
-
-
+    const [document, setDocument] = useState("")
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -40,13 +32,12 @@ export default function HeaderOrderListing() {
             key: 'selection',
         }
     ]);
-
-
-
     const [open, setOpen] = useState(false);
-
-
-    
+    const [consignee, setConsignee] = useState("")
+    const [client, setClient] = useState("")
+    const [warehouse, setWarehouse] = useState("")
+    const [documentType, setDocumentType] = useState("")
+    // States
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -56,37 +47,53 @@ export default function HeaderOrderListing() {
 
   let navigate = useNavigate();
   const searchTable = () => { 
-    alert('Search table');
+    var sorting = {type: documentType, document: document, consignee: consignee, client: client, warehouse: warehouse}
+    console.log(sorting)
   };
-
 
   const toggleVisibility = () => {
     setOpen(!open);
   };
-
 
   const handleSelect = (ranges) => { 
     const { selection } = ranges;
     setState([selection]);
   };
 
+  function onChangeDocument(e) {
+    setDocument(e.target.value);
+  }
+  function onChangeConsignee(e) {
+    setConsignee(e.target.value);
+  }
+  function onChangeWarehouse(e) {
+    setWarehouse(e.target.value);
+  }
+  function onChangeReceiver(e) {
+    setClient(e.target.value);
+  }
 
+  function onChangeType(e) {
+    setDocumentType(e.value);
+  }
 
     return ( 
-
-
         <div className="filters">
-             <Select className='select-filters' options={types} id='documentType'/>
+             <Select className='select-filters' onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+
              <input
               id = "documentSearch"
               type="text"
+              onChange={(e)=> onChangeDocument(e)}
               className="form-control mt-1"
-              placeholder="Tip dokumenta"
+              placeholder="Dokumenta"
              />
+
 
              <input
               id = "warehouse"
               type="text"
+              onChange={(e)=> onChangeWarehouse(e)}
               className="form-control mt-1"
               placeholder="Skladišče"
             />
@@ -114,6 +121,7 @@ export default function HeaderOrderListing() {
             <input
               id = "receiver"
               type="text"
+              onChange={(e)=> onChangeReceiver(e)}
               className="form-control mt-1"
               placeholder="Prejemnik"
             />
@@ -121,6 +129,7 @@ export default function HeaderOrderListing() {
             <input
               id = "consignee"
               type="text"
+              onChange={(e)=> onChangeConsignee(e)}
               className="form-control mt-1"
               placeholder="Naročnik"
             />
