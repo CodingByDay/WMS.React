@@ -1,11 +1,33 @@
 const TableBody = (props) => {
-
+   
     var tableData = props.tableData;
+
+
+
+
     try {
         var len = tableData.Items.length;
     } catch (e) {
         return null;
     }
+
+tableData = tableData.Items.filter((data) => {
+
+    if(typeof props.sort == "undefined") {
+        return false;
+        }
+       var type = props.sort.type;
+       var field = data.Properties.Items[7]["StringValue"];
+       if (type != field &&type!="") {
+        return false;
+       }
+       return false;
+    
+})
+
+console.log(tableData)
+
+
     var columns = props.columns;
     var returnRow = props.returnRow;
 
@@ -24,7 +46,15 @@ const TableBody = (props) => {
 
     return (
      <tbody>
-      {tableData.Items.map((data) => {
+      {
+      
+      
+     tableData.map((data) => {
+
+       
+
+
+
        return (
         <tr onClick={getColumnData}>
         { columns.map(({ accessor }) => {
@@ -49,6 +79,10 @@ const TableBody = (props) => {
          })}
         </tr>
        );
+
+
+
+
       })}
      </tbody>
     );

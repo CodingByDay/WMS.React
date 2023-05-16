@@ -56,12 +56,17 @@ export default function Listing() {
   }
 
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState();
+
 
   const  childToParent = (data) => {
       getPositions(data.childNodes[4].innerHTML)
   }
 
 
+  const getSortingObject = (sorting) => {
+    setSort(sorting);
+  }
 
 
     return ( 
@@ -69,8 +74,8 @@ export default function Listing() {
         <div>
      
         <Header/>   
-        <HeaderOrderListing />
-        <OrderHeadsListing data = {orders} childToParent = {childToParent} />
+        <HeaderOrderListing getSortingObject = {getSortingObject} />
+        <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
         <OrderPositions data = {positions} childToParent = {childToParent} />     
         <Footer />
 

@@ -48,7 +48,7 @@ const columnsPositions = [
 
     <table className="table" id={props.passID}>
     <TableHead className="orders" columns={columns} />
-    <TableBody returnRow = {props.childToParent} className = "positions" columns={columns} tableData={props.data}  />
+    <TableBody returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
    </table>
    </div>
 

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 
-export default function HeaderOrderListing() { 
+export default function HeaderOrderListing(props) { 
     useEffect(() => {
         var data =  SortingService.getAllDocumentTypes().then(response => { 
         var types = [];
@@ -47,8 +47,8 @@ export default function HeaderOrderListing() {
 
   let navigate = useNavigate();
   const searchTable = () => { 
-    var sorting = {type: documentType, document: document, consignee: consignee, client: client, warehouse: warehouse}
-    console.log(sorting)
+    var sorting = {type: documentType, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
+    props.getSortingObject(sorting)
   };
 
   const toggleVisibility = () => {
