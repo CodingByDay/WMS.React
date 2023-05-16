@@ -14,18 +14,32 @@ const TableBody = (props) => {
 tableData = tableData.Items.filter((data) => {
 
     if(typeof props.sort == "undefined") {
-        return false;
-        }
-       var type = props.sort.type;
-       var field = data.Properties.Items[7]["StringValue"];
-       if (type != field &&type!="") {
-        return false;
-       }
-       return false;
-    
-})
+        return true;
+    }
 
-console.log(tableData)
+    var type = props.sort.type;
+    var field = data.Properties.Items[7]["StringValue"];
+
+    if (type != field &&type!="") {
+        return false;
+    }
+        return true; 
+}).filter((data) => {
+
+    if(typeof props.sort == "undefined") {
+        return true;
+    }
+
+    var type = props.sort.document;
+    var field = data.Properties.Items[8]["StringValue"];
+
+    if (type != field &&type!="") {
+        return false;
+    }
+        return true; 
+ });
+
+
 
 
     var columns = props.columns;
