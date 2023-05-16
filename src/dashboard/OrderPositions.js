@@ -4,7 +4,6 @@ import Table from '../table/Table';
 
 export default function OrderPositions(props) { 
 
-  console.log(props.data);
 
   let navigate = useNavigate();
 

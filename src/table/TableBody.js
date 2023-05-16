@@ -1,13 +1,11 @@
 const TableBody = (props) => {
 
     var tableData = props.tableData;
-
     try {
         var len = tableData.Items.length;
     } catch (e) {
         return null;
     }
-
     var columns = props.columns;
     var returnRow = props.returnRow;
     console.log("Finally")

@@ -22,20 +22,20 @@ const Table = (props) => {
 
 const columnsPositions = [
     { label: "Ident", accessor: "Ident", type: "string", id: 2 },
-    { label: "Alt", accessor: "alt", type: "string", id: 1 },
-    { label: "Opis", accessor: "description", type: "string", id: 1 },
-    { label: "U/M", accessor: "um", type: "string", id: 1 },
-    { label: "Količina", accessor: "quantity", type: "string", id: 1 },
+    { label: "Alt", accessor: "Name", type: "string", id: 3 },
+    { label: "Opis", accessor: "Name", type: "string", id: 12 },
+    { label: "U/M", accessor: "No", type: "int", id: 9 },
+    { label: "Količina", accessor: "OpenQty", type: "string", id: 4 },
     { label: "Cena za enoto", accessor: "priceunit", type: "string", id: 1 },
-    { label: "D1 %", accessor: "d1", type: "string", id: 1 },
-    { label: "D2 %", accessor: "d2", type: "string", id: 1 },
-    { label: "SD %", accessor: "d3", type: "string", id: 1 },
-    { label: "Popust", accessor: "discount", type: "string", id: 1 },
-    { label: "Vrednost", accessor: "value", type: "string", id: 1 },
-    { label: "VAT", accessor: "vat", type: "string", id: 1 },
-    { label: "Dolgovani znesek", accessor: "dueamount", type: "string", id: 1 },
-    { label: "Odposlano", accessor: "sent", type: "string", id: 1 },
-    { label: "Paketi", accessor: "packages", type: "string", id: 1 },
+    { label: "D1 %", accessor: "No", type: "int", id: 9  },
+    { label: "D2 %", accessor: "No", type: "int", id: 9  },
+    { label: "SD %", accessor: "No", type: "int", id: 9  },
+    { label: "Popust", accessor: "No", type: "int", id: 9  },
+    { label: "Vrednost", accessor: "No", type: "int", id: 9  },
+    { label: "VAT", accessor: "No", type: "int", id: 9  },
+    { label: "Dolgovani znesek", accessor: "No", type: "int", id: 9  },
+    { label: "Odposlano", accessor: "No", type: "int", id: 9  },
+    { label: "Paketi", accessor: "No", type: "int", id: 9  },
 ]
 
 

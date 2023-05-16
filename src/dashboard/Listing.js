@@ -46,17 +46,14 @@ export default function Listing() {
 
   async function getPositions(order) {
     var data =  ListingService.getAllPositions(order).then(response => { 
-      console.log(response.data);
-      setPositions(response);
+      setPositions(response.data);
+      window.positions = response.data;
     });
   }
   const [data, setData] = useState([]);
 
   const  childToParent = (data) => {
-    console.log(data)
-    
-
-    getPositions(data.childNodes[4].innerHTML)
+      getPositions(data.childNodes[4].innerHTML)
   }
 
 
@@ -69,7 +66,7 @@ export default function Listing() {
         <Header/>   
         <HeaderOrderListing />
         <OrderHeadsListing data = {orders} childToParent = {childToParent} />
-        <OrderPositions childToParent = {childToParent} />     
+        <OrderPositions data = {positions} childToParent = {childToParent} />     
         <Footer />
 
         </div>
