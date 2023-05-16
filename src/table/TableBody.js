@@ -8,8 +8,7 @@ const TableBody = (props) => {
     }
     var columns = props.columns;
     var returnRow = props.returnRow;
-    console.log("Finally")
-    console.log(tableData)
+
     function getColumn(accessor) {
         for(var i = 0; i < columns.length; i++) {
             if(columns[i].accessor == accessor) {

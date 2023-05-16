@@ -42,9 +42,7 @@ export default function Header() {
             <div className='logo'></div>
             <div className='menu'></div>
             <div className='logout'>
-
                 {button}
-
                 <button className="btn btn-primary navbar-internal logout" onClick={() => handleLogout()}>Odjava             
                 <MdLogout />
                 </button>

@@ -4,11 +4,34 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { addDays, addYears, format, isWeekend } from 'date-fns';
-import { useState } from 'react';
-import { MdOutlineSearch, MdDateRange } from "react-icons/md";
+import { useEffect, useState } from "react";
 
+import { MdOutlineSearch, MdDateRange } from "react-icons/md";
+import  SortingService  from '../services/SortingService'
 
 export default function HeaderOrderListing() { 
+
+
+
+    useEffect(() => {
+        var data =  SortingService.getAllDocumentTypes().then(response => { 
+
+
+
+
+        var types = [];
+
+                for (var i = 0; i < response.Items.length; i++) {
+                          types.push(response.Items[i].Properties.Items[0].StringValue); 
+                       
+                }
+
+        setTypes(types);
+     }); 
+    }, []);
+
+    const [types, setTypes] = useState([]);
+
 
     const [state, setState] = useState([
         {
@@ -53,7 +76,7 @@ export default function HeaderOrderListing() {
 
 
         <div className="filters">
-             <Select className='select-filters' options={options} id='documentType'/>
+             <Select className='select-filters' options={types} id='documentType'/>
              <input
               id = "documentSearch"
               type="text"
