@@ -5,9 +5,10 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { addDays, addYears, format, isWeekend } from 'date-fns';
 import { useEffect, useState } from "react";
-
 import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
+
+
 
 export default function HeaderOrderListing(props) { 
 
@@ -41,11 +42,8 @@ export default function HeaderOrderListing(props) {
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState("")
 
-
-      
-
   let navigate = useNavigate();
-  const searchTable = () => { 
+  function searchTable() { 
     var sorting = {type: documentType, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
     props.getSortingObject(sorting)
   };
@@ -57,26 +55,32 @@ export default function HeaderOrderListing(props) {
   const handleSelect = (ranges) => { 
     const { selection } = ranges;
     setState([selection]);
+    searchTable()
   };
 
   function onChangeDocument(e) {
     setDocument(e.target.value);
+    searchTable()
   }
 
   function onChangeConsignee(e) {
     setClient(e.target.value);
+    searchTable()
   }
 
   function onChangeWarehouse(e) {
     setWarehouse(e.target.value);
+    searchTable()
   }
 
   function onChangeReceiver(e) {
     setConsignee(e.target.value);
+    searchTable()
   }
 
   function onChangeType(e) {
     setDocumentType(e.value);
+    searchTable()
   }
 
     return ( 
@@ -133,10 +137,7 @@ export default function HeaderOrderListing(props) {
               placeholder="Naročnik"
             />
 
-         <button className="btn btn-primary" onClick={searchTable} id="search">
-              Poiščite
-              <MdOutlineSearch />
-         </button> 
+         
         </div>
 
 

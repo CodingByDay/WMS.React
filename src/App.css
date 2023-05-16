@@ -1,6 +1,13 @@
 .App {
   background-color: white;
 }
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10em;
+}
 button#openRange {
   display: flex;
 }
