@@ -7,7 +7,9 @@
   gap: 3em;
   justify-content: center;
 }
-
+.buttonsHeader button {
+  width: 10em;
+}
 
 /* filter on transaction screen */
 #transactionType,
@@ -22,8 +24,14 @@
 #documentType {
   width: 20vw;
 }
-
-
+.buttonsHeader {
+  display: flex;
+  /* justify-content: space-between; */
+  margin: 5em;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 
 
 .columnDivider {
@@ -84,7 +92,7 @@ img.loader {
   width: 90vw;
 }
 
-.table_responsive_order {
+.table_responsive_order, .table_responsive_transaction {
   height: 30vh;
   overflow-y: scroll;
   margin-left: 2em;

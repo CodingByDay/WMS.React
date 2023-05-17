@@ -27,7 +27,23 @@ const columnsPositions = [
     { label: "Skupna količina", accessor: "FullQty", type: "double", id: 5 },
     
 ]
+const columnsTransaction = [
+  { label: "ID", accessor: "ID", type: "string", id: 2 },
+  { label: "Tip transakcije", accessor: "Tip transakcije", type: "string", id: 3 },
+  { label: "Status", accessor: "Status", type: "double", id: 4 },
+  { label: "P.D", accessor: "P.D", type: "double", id: 5 },
+  { label: "ERP ključ", accessor: "erp", type: "double", id: 5 },
+  { label: "Nalog za transakcijo", accessor: "transactionOrder", type: "double", id: 5 },
+  { label: "Stranka", accessor: "client", type: "double", id: 5 },
+  { label: "Skladišče", accessor: "warehouse", type: "double", id: 5 },
+  { label: "Datum", accessor: "date", type: "double", id: 5 },
+  { label: "Vnesel", accessor: "person", type: "double", id: 5 },
+  { label: "Datum vnosa", accessor: "date", type: "double", id: 5 },
+  { label: "Spremenil", accessor: "modified", type: "double", id: 5 },
+  { label: "Datum spremembe", accessor: "dateModified", type: "double", id: 5 },
 
+  
+]
 
     let columns;
 
@@ -35,10 +51,14 @@ const columnsPositions = [
 
       columns = columnsOrder;
 
-    } else {
+    } else if(props.type === "position") {
 
       columns = columnsPositions;
 
+    } else if(props.type === "transaction") { 
+
+      columns = columnsTransaction;
+      
     }
     
 

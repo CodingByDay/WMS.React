@@ -10,7 +10,7 @@ import ListingService from '../services/ListingService';
 import TransactionFilters from './TransactionFilters';
 import TransactionHeads from './TransactionHeads';
 import TransactionPositions from './TransactionPositions';
-
+import TransactionHeaderButtons from './TransactionHeaderButtons';
 export default function Transactions() { 
     checkUID ()
     function isUUID ( uuid ) {
@@ -41,6 +41,7 @@ export default function Transactions() {
         <Header />   
 
         <TransactionFilters />
+        <TransactionHeaderButtons />
         <TransactionHeads />
         <TransactionPositions />
 
