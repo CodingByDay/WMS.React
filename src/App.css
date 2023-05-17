@@ -1,7 +1,36 @@
 .App {
   background-color: white;
 }
+.transactionFilters {
+  margin-top: 2em;
+  display: flex;
+  gap: 3em;
+  justify-content: center;
+}
 
+
+/* filter on transaction screen */
+#transactionType,
+#businessEvent,
+#transactionOrder,
+#transactionId,
+#transactionStatus,
+#client,
+#ident,
+#identName,
+#erpKey,
+#documentType {
+  width: 20vw;
+}
+
+
+
+
+.columnDivider {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 .dashboard {
   display: flex;
   justify-content: space-between;

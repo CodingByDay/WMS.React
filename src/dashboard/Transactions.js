@@ -7,7 +7,9 @@ import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
-
+import TransactionFilters from './TransactionFilters';
+import TransactionHeads from './TransactionHeads';
+import TransactionPositions from './TransactionPositions';
 
 export default function Transactions() { 
     checkUID ()
@@ -37,7 +39,11 @@ export default function Transactions() {
         <div>
      
         <Header />   
-        <h1>Transactions</h1>
+
+        <TransactionFilters />
+        <TransactionHeads />
+        <TransactionPositions />
+
         <Footer />
 
         </div>
