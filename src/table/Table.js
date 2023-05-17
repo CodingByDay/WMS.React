@@ -79,7 +79,7 @@ const columnsTransactionPosition = [
       
       columns = columnsTransactionPosition;
     }
-    
+     console.log(props.data);
 
  return (
 

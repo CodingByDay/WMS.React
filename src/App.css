@@ -92,7 +92,17 @@ img.loader {
   width: 90vw;
 }
 
-
+.visualization {
+  width: 14%;
+  height: 30vh;
+  margin-bottom: 2em;
+  background: #61dafb;
+}
+h3.information {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30vh;
+}
 .table_responsive_positions {
   height: 40vh;
   overflow-y: scroll;
@@ -102,7 +112,18 @@ img.loader {
   bottom:2em;
   width: 90vw;
 }
-
+#warehouseStock, #locationStock, #identStock {
+  margin: 1em;
+  width: 30em;
+}
+.stock-container {
+  margin-top: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
 .table_responsive_order, .table_responsive_transaction {
   height: 25vh;
   overflow-y: scroll;

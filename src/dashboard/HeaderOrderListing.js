@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 
-
-
 export default function HeaderOrderListing(props) { 
 
     useEffect(() => {
@@ -17,11 +15,13 @@ export default function HeaderOrderListing(props) {
         var types = [];
         types.push ({value: "", label: ""});
 
-                for (var i = 0; i < response.Items.length; i++) {
-                          types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
-                }
-                
-                setTypes(types);
+        
+            for (var i = 0; i < response.Items.length; i++) {
+                      types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
+            }            
+            setTypes(types);
+
+
      }); 
     }, []);
 
@@ -80,8 +80,6 @@ export default function HeaderOrderListing(props) {
 
   function onChangeType(e) {
     setDocumentType(e.value);
-
-    searchTable()
   }
 
     return ( 

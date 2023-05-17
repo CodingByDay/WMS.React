@@ -204,6 +204,7 @@ export default function TransactionFilters(props) {
                     <Dropdown
                         title={props.title}
                         placeholder="Poslovni dogodek"
+
                         id='businessEvent'
                         onKeyDown={(e) => onKeyDownBusinessEvent(e)}
                         options={businessEvent}

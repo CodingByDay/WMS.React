@@ -92,7 +92,7 @@ tableData = tableData.Items.filter((data) => {
 
     function findIndex(array, accesor) {
         for(var i=0;i<array.Properties.Items.length;i++) {
-        if(window.test[0].Properties.Items[i].Name == accesor) {
+        if(array[0].Properties.Items[i].Name == accesor) {
             return i;
         }
         }

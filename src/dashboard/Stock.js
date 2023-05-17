@@ -7,7 +7,7 @@ import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
-
+import Select from 'react-select'
 
 export default function Stock() { 
     checkUID ()
@@ -37,7 +37,22 @@ export default function Stock() {
         <div>
      
         <Header />   
-        <h1>Stock value place</h1>
+
+
+        <div class ="stock-container">
+          
+        <Select className='select-filters' options={[]} id='warehouseStock'/>
+        <Select className='select-filters' options={[]} id='locationStock'/>
+        <Select className='select-filters' options={[]} id='identStock'/>
+
+
+        <div class = 'visualization'>
+            <h3 className='information'>Ni zaloge</h3>
+
+        </div>
+        <button className="btn btn-primary">Prikaži</button>
+        </div>
+
         <Footer />
 
         </div>
