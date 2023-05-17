@@ -7,7 +7,7 @@
   gap: 3em;
   justify-content: center;
 }
-.buttonsHeader button {
+.buttonsHeader button, .buttonsPositions button {
   width: 10em;
 }
 
@@ -24,10 +24,9 @@
 #documentType {
   width: 20vw;
 }
-.buttonsHeader {
+.buttonsHeader, .buttonsPositions {
   display: flex;
-  /* justify-content: space-between; */
-  margin: 5em;
+  margin: 1em;
   align-content: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -82,8 +81,20 @@ img.loader {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.table_responsive_positions_transactions {
+  height: 40vh;
+  overflow-y: scroll;
+  margin-left: 2em;
+  margin-right: 2em;
+  position: absolute;
+  bottom:2em;
+  width: 90vw;
+}
+
+
 .table_responsive_positions {
-  height: 30vh;
+  height: 40vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
@@ -93,7 +104,7 @@ img.loader {
 }
 
 .table_responsive_order, .table_responsive_transaction {
-  height: 30vh;
+  height: 25vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
