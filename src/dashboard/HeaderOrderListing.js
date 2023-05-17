@@ -80,6 +80,7 @@ export default function HeaderOrderListing(props) {
 
   function onChangeType(e) {
     setDocumentType(e.value);
+
     searchTable()
   }
 

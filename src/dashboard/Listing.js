@@ -46,12 +46,7 @@ export default function Listing() {
 
   async function getPositions(order) {
       var data =  ListingService.getAllPositions(order).then(response => { 
-
-
-
-
-      setPositions(response);
-      
+      setPositions(response);  
     });
   }
 

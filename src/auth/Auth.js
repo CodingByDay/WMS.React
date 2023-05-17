@@ -52,9 +52,10 @@ export default function Auth(props) {
     <div className="Auth-form-container">
   
         <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Prijava</h3>
+          <center><img src="distribution.png" width={200} /></center>
+          <h3 className="Auth-form-title" style={{marginTop: 1 + "em"}}>Prijava</h3>
           
-          <div className="form-group mt-3" id="password-div">
+          <div className="form-group mt-3" id="password-div" >
             <label>Password</label>
             <input
               id = "password"
