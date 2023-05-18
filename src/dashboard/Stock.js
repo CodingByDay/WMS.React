@@ -18,15 +18,29 @@ export default function Stock() {
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
-
     useEffect(() => {
 
-      var data =  StockService.getWarehouses().then(response => {  
-          var warehouses = onlyWarehouses(response);
-          window.warehouses = warehouses;     
-          setWarehouses(warehouses);     
-      }); 
+    var data =  StockService.getWarehouses().then(response => {  
+        var warehouses = onlyWarehouses(response);
+        window.warehouses = warehouses;     
+        setWarehouses(warehouses);     
+    }); 
+   
+    var ident =  StockService.getIdents().then(response => {  
+        var identsFinal = [];
 
+        for (var i = 0; i < response.length; i++) {  
+          try {
+                    identsFinal.push({value: response[i], label: response[i]}); 
+          } catch (e) {
+            continue;
+          }
+        }
+
+        setidents(identsFinal);
+
+
+    });
       }, []);
 
 
@@ -74,7 +88,6 @@ export default function Stock() {
             for (var i = 0; i < response.Items.length; i++) {  
                 locations.push({value: response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue});
             }
-
 
             setLocations(locations);       
             
