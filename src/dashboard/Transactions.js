@@ -41,6 +41,7 @@ export default function Transactions() {
 
 
      const childToParent = (data) => {
+      console.log(data)
       getPositions(data.childNodes[4].innerHTML)
      }
 
@@ -76,7 +77,7 @@ export default function Transactions() {
         <TransactionHeaderButtons />
         <TransactionHeads data = {transactions} childToParent = {childToParent} />
         <TransactionPositionsButtons />
-        <TransactionPositions />
+        <TransactionPositions data = {positions} childToParent = {childToParent} />
 
         <Footer />
 
