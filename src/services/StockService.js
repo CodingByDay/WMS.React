@@ -1,3 +1,0 @@
-// warehouse
-// location
-// ident 

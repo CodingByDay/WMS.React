@@ -8,9 +8,13 @@ import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
 import Select from 'react-select'
+import { StockService } from '../services/StockService';
+
 
 export default function Stock() { 
+
     checkUID ()
+
     function isUUID ( uuid ) {
       let s = "" + uuid;
       s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
@@ -28,7 +32,9 @@ export default function Stock() {
           return;
         } 
     } else {
+
           window.location.href = "/";
+          
     }
     }
   
@@ -47,7 +53,7 @@ export default function Stock() {
 
 
         <div class = 'visualization'>
-            <h3 className='information'>Ni zaloge</h3>
+        <h3 className='information'>Ni zaloge</h3>
 
         </div>
         <button className="btn btn-primary">Prikaži</button>

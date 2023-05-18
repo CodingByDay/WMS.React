@@ -41,12 +41,12 @@ export default function Transactions() {
 
 
      const childToParent = (data) => {
-      console.log(data)
-      getPositions(data.childNodes[4].innerHTML)
+        getPositions(data.childNodes[0].innerHTML)
      }
 
 
      async function getPositions(order) {
+      alert(order);
       var data =  ListingService.getAllPositions(order).then(response => { 
       setPositions(response);  
     });

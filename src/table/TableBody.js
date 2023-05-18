@@ -63,7 +63,7 @@ tableData = tableData.Items.filter((data) => {
     }
     var term = props.sort.client.toLowerCase();
     var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
-    console.log(field);
+
     if (!field.includes(term) && term != "") {
         return false;
     }
@@ -144,7 +144,7 @@ tableData = tableData.Items.filter((data) => {
             var index = findIndex(data, accessor);
             
             tData = data.Properties.Items[index][type];
-            console.log(tData);
+          
         } catch (e) {
 
             var result = 9+9;
