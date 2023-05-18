@@ -68,11 +68,16 @@ export default function Stock() {
     function handleWarehouseChange(event) { 
         setWarehouses(event.value);
         var positions =  StockService.getLocations(event.value).then(response => {  
-          
-            alert(response);
-            console.log(response);
-            window.locations  = response;
-            setLocations(onlyLocations(response));       
+
+            var locations = [];
+
+            for (var i = 0; i < response.Items.length; i++) {  
+                locations.push({value: response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue});
+            }
+
+
+            setLocations(locations);       
+            
         }); 
 
     }
