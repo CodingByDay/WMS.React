@@ -13,23 +13,29 @@ import StockService  from '../services/StockService';
 
 export default function Stock() { 
     checkUID ()
+ 
     const [orders, setOrders] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
 
-
-
-
-
     useEffect(() => {
+
       var data =  StockService.getWarehouses().then(response => {  
-      window.warehouses = response;
-      setWarehouses(response);
+          var warehouses = onlyWarehouses(response);
+          window.warehouses = warehouses;     
+          setWarehouses(warehouses);     
+      }); 
+      }, []);
 
-   }); 
-}, []);
 
+    function onlyWarehouses(data) { 
+        var returnArray = [];
+        for (var i = 0; i < data.Items.length; i++) {  
+            returnArray.push(data.Items[i].Properties.Items[0].StringValue);           
+        }
+        return returnArray;
+    }
 
     function isUUID ( uuid ) {
       let s = "" + uuid;
