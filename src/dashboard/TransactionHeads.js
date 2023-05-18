@@ -9,7 +9,7 @@ export default function TransactionHeads(props) {
 
     return ( 
         <div>
-                  <Table className="orders_table" type = "transaction" class = "table_responsive_transaction" passID = "transactions-table"  /> 
+                  <Table className="orders_table" type = "transaction" class = "table_responsive_transaction" data = {props.data} childToParent = {props.childToParent} sort = {props.sort} passID = "transactions-table"  /> 
 
        </div>
     ); 

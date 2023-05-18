@@ -38,6 +38,7 @@ export function Dashboard() {
   }
  
 
+
   const routeChange = (option) => {
     let path = "/" + option;
 
@@ -68,7 +69,7 @@ export function Dashboard() {
               <img src='packages.png' width={100} />
 
             </button>
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
+            <button className="btn btn-primary dashboard" onClick = { window["showAlert"] }>
               Nastavitve
               <img src='settings.png' width={100} />
 
