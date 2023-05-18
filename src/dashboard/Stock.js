@@ -12,8 +12,8 @@ import StockService  from '../services/StockService';
 
 
 export default function Stock() { 
-    checkUID ()
- 
+
+    checkUID () 
     const [orders, setOrders] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
@@ -26,14 +26,17 @@ export default function Stock() {
           window.warehouses = warehouses;     
           setWarehouses(warehouses);     
       }); 
+
       }, []);
 
 
     function onlyWarehouses(data) { 
         var returnArray = [];
+
         for (var i = 0; i < data.Items.length; i++) {  
-            returnArray.push(data.Items[i].Properties.Items[0].StringValue);           
+            returnArray.push({value: data.Items[i].Properties.Items[0].StringValue, label: data.Items[i].Properties.Items[0].StringValue});           
         }
+
         return returnArray;
     }
 
@@ -43,7 +46,7 @@ export default function Stock() {
       if (s === null) {
         return false;
       }
-      return true;
+        return true;
      } 
   
     function checkUID () {
@@ -54,12 +57,27 @@ export default function Stock() {
           return;
         } 
     } else {
-
           window.location.href = "/";
+    }
+    }
+    
+
+    function onlyLocations (array) { }
+
+
+    function handleWarehouseChange(event) { 
+        setWarehouses(event.value);
+        var positions =  StockService.getLocations(event.value).then(response => {  
+          
+            alert(response);
+            console.log(response);
+            window.locations  = response;
+            setLocations(onlyLocations(response));       
+        }); 
 
     }
-    }
-  
+
+
     return ( 
 
         <div>
@@ -67,11 +85,10 @@ export default function Stock() {
         <Header />   
 
 
-        <div class ="stock-container">
-          
-        <Select className='select-filters' options={[]} id='warehouseStock'/>
-        <Select className='select-filters' options={[]} id='locationStock'/>
-        <Select className='select-filters' options={[]} id='identStock'/>
+        <div class ="stock-container">   
+        <Select className='select-filters' onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
+        <Select className='select-filters' options={locations} id='locationStock'/>
+        <Select className='select-filters' options={idents} id='identStock'/>
 
 
         <div class = 'visualization'>
