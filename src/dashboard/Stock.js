@@ -8,12 +8,28 @@ import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
 import Select from 'react-select'
-import { StockService } from '../services/StockService';
+import StockService  from '../services/StockService';
 
 
 export default function Stock() { 
-
     checkUID ()
+    const [orders, setOrders] = useState([]);
+    const [warehouses, setWarehouses] = useState([]);
+    const [locations, setLocations] = useState([]);
+    const [idents, setidents] = useState([]);
+
+
+
+
+
+    useEffect(() => {
+      var data =  StockService.getWarehouses().then(response => {  
+      window.warehouses = response;
+      setWarehouses(response);
+
+   }); 
+}, []);
+
 
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -34,7 +50,7 @@ export default function Stock() {
     } else {
 
           window.location.href = "/";
-          
+
     }
     }
   

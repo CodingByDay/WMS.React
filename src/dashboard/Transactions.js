@@ -13,18 +13,15 @@ import TransactionPositions from './TransactionPositions';
 import TransactionHeaderButtons from './TransactionHeaderButtons';
 import TransactionPositionsButtons from './TransactionPositionsButtons';
 import TransactionService from '../services/TransactionService';
-
+import StockService from '../services/StockService';
 
 export default function Transactions() { 
+
     checkUID ()
-
-
-
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
 
-
-     useEffect(() => {
+    useEffect(() => {
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
            }); 
@@ -36,7 +33,7 @@ export default function Transactions() {
       if (s === null) {
         return false;
       }
-      return true;
+        return true;
      } 
 
 
@@ -45,12 +42,9 @@ export default function Transactions() {
      }
 
 
-     async function getPositions(order) {
-
-      alert(order);
-      
-      var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
-      setPositions(response);  
+     async function getPositions(order) {      
+        var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
+        setPositions(response);  
     });
   }
 
@@ -64,8 +58,6 @@ export default function Transactions() {
       } else {
             window.location.href = "/";
       }
-
-
     }
   
     return ( 
@@ -73,13 +65,11 @@ export default function Transactions() {
         <div>
      
         <Header />   
-
         <TransactionFilters />
         <TransactionHeaderButtons />
         <TransactionHeads data = {transactions} childToParent = {childToParent} />
         <TransactionPositionsButtons />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
-
         <Footer />
 
         </div>
