@@ -91,12 +91,24 @@ export default function Stock() {
     
     const handleInventory = (e) => {
 
-        if(warehouse === "" || location === "" || ident === "") {
+        if(ident === "" || warehouse === "" || location === "") {
 
           window["showAlert"]("Obvestilo", "Podatki manjkajo", "error")
 
+        } else {
 
+        var locationFinal = ""
+
+        if(location === "") { 
+          locationFinal = "|"
         }
+
+        var finalParams = ident +  "|" + locationFinal + "|" + warehouse;
+        
+        var stockValue =  StockService.getStock(finalParams).then(response => {  
+            window.stock = response;
+        }); 
+
     }
 
   
