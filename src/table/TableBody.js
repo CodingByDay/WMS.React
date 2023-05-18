@@ -11,7 +11,7 @@ const TableBody = (props) => {
         return null;
 
     }
-window.test = tableData.Items;
+
 tableData = tableData.Items.filter((data) => {
 
     if(typeof props.sort == "undefined") {
@@ -75,7 +75,7 @@ tableData = tableData.Items.filter((data) => {
     var term = props.sort.consignee.toLowerCase();
 
     var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
-    console.log(field);
+
 
     if (!field.includes(term) && term != "") {
         return false;
@@ -92,7 +92,7 @@ tableData = tableData.Items.filter((data) => {
 
     function findIndex(array, accesor) {
         for(var i=0;i<array.Properties.Items.length;i++) {
-        if(array[0].Properties.Items[i].Name == accesor) {
+        if(array.Properties.Items[i].Name == accesor) {
             return i;
         }
         }
@@ -142,9 +142,13 @@ tableData = tableData.Items.filter((data) => {
         var tData = ""
         try {
             var index = findIndex(data, accessor);
-        
+            
             tData = data.Properties.Items[index][type];
-        } catch (e) {}
+            console.log(tData);
+        } catch (e) {
+
+            var result = 9+9;
+        }
             return <td>{tData}</td>;
          })}
         </tr>
