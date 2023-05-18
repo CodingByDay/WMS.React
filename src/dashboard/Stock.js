@@ -18,6 +18,20 @@ export default function Stock() {
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
+    const [ident, setIdent] = useState("");
+    const [stock, setStock] = useState(0);
+    const [location, setLocation] = useState("");
+    const [warehouse, setWarehouse] = useState("");
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
 
     var data =  StockService.getWarehouses().then(response => {  
@@ -75,12 +89,28 @@ export default function Stock() {
     }
     }
     
+    const handleInventory = (e) => {
 
-    function onlyLocations (array) { }
+        if(warehouse === "" || location === "" || ident === "") {
 
+          window["showAlert"]("Obvestilo", "Podatki manjkajo", "error")
+
+
+        }
+    }
+
+  
+
+    function handleIdentChange(event) { 
+      setIdent(event.value);
+    }
+    function handleLocationChange(event) {
+      setLocation(event.value);
+     }
 
     function handleWarehouseChange(event) { 
-        setWarehouses(event.value);
+        setWarehouse(event.value); 
+
         var positions =  StockService.getLocations(event.value).then(response => {  
 
             var locations = [];
@@ -103,17 +133,21 @@ export default function Stock() {
         <Header />   
 
 
-        <div class ="stock-container">   
+        <div class ="stock-container">  
+
+
+
+
         <Select className='select-filters' onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
-        <Select className='select-filters' options={locations} id='locationStock'/>
-        <Select className='select-filters' options={idents} id='identStock'/>
+        <Select className='select-filters' onChange={handleLocationChange} options={locations} id='locationStock'/>
+        <Select className='select-filters' onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
         <div class = 'visualization'>
         <h3 className='information'>Ni zaloge</h3>
 
         </div>
-        <button className="btn btn-primary">Prikaži</button>
+        <button className="btn btn-primary" onClick={handleInventory}>Prikaži</button>
         </div>
 
         <Footer />

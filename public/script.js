@@ -1,3 +1,4 @@
-function showAlert() {
-    swal("Obvestilo", "Funkcionalnost še ni podprta", "error");
+function showAlert(title, message, type) {
+
+    swal(title, message, type);
 }

@@ -37,7 +37,10 @@ export function Dashboard() {
    
   }
  
+  function handleSettings () {
 
+    window["showAlert"]("Obvestilo", "Funkcionalnost še ni podprta", "error")
+  }
 
   const routeChange = (option) => {
     let path = "/" + option;
@@ -53,26 +56,25 @@ export function Dashboard() {
   
       <Header/>
        <div className = "menu"> 
-             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
+
+            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
-
-
               <img src='shopping-bag.png' width={100}/>
             </button>
+
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
               Transakcije
               <img src='transaction.png' width={100} />
-
             </button>
+
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
               Zaloga
               <img src='packages.png' width={100} />
-
             </button>
-            <button className="btn btn-primary dashboard" onClick = { window["showAlert"] }>
+
+            <button className="btn btn-primary dashboard" onClick = { handleSettings }>
               Nastavitve
               <img src='settings.png' width={100} />
-
             </button>
       
       </div> 
