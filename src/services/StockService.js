@@ -2,9 +2,7 @@ import axios from 'axios';
 
 const StockService  =  {
 
-
     async getStock(params) {
-       alert(params);
        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=str&pars=${params}&i=web`)
        return response.data;
     },  

@@ -9,7 +9,7 @@ import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
 import Select from 'react-select'
 import StockService  from '../services/StockService';
-
+import $ from 'jquery'; 
 
 export default function Stock() { 
 
@@ -90,29 +90,37 @@ export default function Stock() {
     }
     
     const handleInventory = (e) => {
-
-        if(ident === "" || warehouse === "" || location === "") {
-
+        if(ident === "" || warehouse === "") {
           window["showAlert"]("Obvestilo", "Podatki manjkajo", "error")
-
         } else {
-
         var locationFinal = ""
-
         if(location === "") { 
-          locationFinal = "|"
+          locationFinal = ""
         }
-
-        var finalParams = ident +  "|" + locationFinal + "|" + warehouse;
-        
-        var stockValue =  StockService.getStock(finalParams).then(response => {  
-            window.stock = response;
+        var finalParams = warehouse +  "|" + locationFinal + "|" + ident;
+        var stockValue =  StockService.getStock(finalParams).then(response => {          
+        var stocks = [];
+        var stockAmount = 0;
+        for(var i = 0; i < response.Items.length; i++) {  
+            stocks.push ( {location: response.Items[i].Properties.Items[1].StringValue, quantity: response.Items[i].Properties.Items[5].DoubleValue} )
+            stockAmount = stockAmount + response.Items[i].Properties.Items[5].DoubleValue;
+        }
+        var finalInformation = "";
+        for(var i = 0; i < stocks.length; i++) {  
+            finalInformation = finalInformation + "\n" + stocks[i].location + " - " + stocks[i].quantity;
+        }
+        var information = $("#information");
+        information.text(finalInformation);
+        if(stockAmount > 0) { 
+          $(".visualization").css("color", "green");
+        } else {
+          $(".visualization").css("color", "red");
+        }
         }); 
 
     }
 
-  
-
+  }
     function handleIdentChange(event) { 
       setIdent(event.value);
     }
@@ -156,7 +164,7 @@ export default function Stock() {
 
 
         <div class = 'visualization'>
-        <h3 className='information'>Ni zaloge</h3>
+        <h3 className='information' id='information'>Ni zaloge</h3>
 
         </div>
         <button className="btn btn-primary" onClick={handleInventory}>Prikaži</button>
