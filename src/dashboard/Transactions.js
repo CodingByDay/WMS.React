@@ -46,14 +46,15 @@ export default function Transactions() {
 
 
      async function getPositions(order) {
+
       alert(order);
-      var data =  ListingService.getAllPositions(order).then(response => { 
+      
+      var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
       setPositions(response);  
     });
   }
+
     function checkUID () {
-
-
       const cookies = new Cookies();
       var cookie = cookies.get('uid');
       if (typeof cookie !== "undefined") {     

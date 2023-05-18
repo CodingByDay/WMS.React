@@ -48,16 +48,15 @@ const columnsTransaction = [
 ]
 
 const columnsTransactionPosition = [
-  { label: "ID transakcije", accessor: "ID", type: "string", id: 2 },
-  { label: "Ključ transakcije", accessor: "Tip transakcije", type: "string", id: 3 },
-  { label: "Pozicija transakcije", accessor: "Status", type: "double", id: 4 },
-  { label: "Ident", accessor: "P.D", type: "double", id: 5 },
-  { label: "Naziv identa", accessor: "erp", type: "double", id: 5 },
-  { label: "WMS količina", accessor: "transactionOrder", type: "double", id: 5 },
-  { label: "Odprta količina", accessor: "client", type: "double", id: 5 },
-  { label: "Zaloga", accessor: "warehouse", type: "double", id: 5 },
-  
 
+  { label: "ID transakcije", accessor: "HeadID", type: "string", id: 0 },
+  { label: "Ključ transakcije", accessor: "Tip transakcije", type: "string", id: 3 },
+  { label: "Pozicija transakcije", accessor: "LinkNo", type: "int", id: 2 },
+  { label: "Ident", accessor: "P.D", type: "string", id: 5 },
+  { label: "Naziv identa", accessor: "IdentName", type: "string", id: 5 },
+  { label: "WMS količina", accessor: "Qty", type: "double", id: 5 },
+  { label: "Odprta količina", accessor: "Qty", type: "double", id: 5 },
+  { label: "Zaloga", accessor: "Qty", type: "double", id: 8 },
   
 ]
 
