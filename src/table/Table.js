@@ -7,8 +7,7 @@ import tableData1 from "./tableData1.json";
 
 
 const Table = (props) => {
-
- const [tableData, setTableData] = useState(tableData1);
+const [tableData, setTableData] = useState(tableData1);
 
  const columnsOrder = [
   { label: "Skladišče", accessor: "Warehouse", type: "StringValue"},
@@ -50,13 +49,12 @@ const columnsTransaction = [
 const columnsTransactionPosition = [
 
   { label: "ID transakcije", accessor: "HeadID", type: "StringValue" },
-  { label: "Ključ transakcije", accessor: "Tip transakcije", type: "StringValue" },
-  { label: "Pozicija transakcije", accessor: "LinkNo", type: "IntValue" },
-  { label: "Ident", accessor: "P.D", type: "StringValue" },
+  { label: "Ključ transakcije", accessor: "Key", type: "StringValue" },
+  { label: "Pozicija transakcije", accessor: "No", type: "IntValue" },
+  { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
   { label: "WMS količina", accessor: "Qty", type: "DoubleValue" },
-  { label: "Odprta količina", accessor: "Qty", type: "DoubleValue" },
-  { label: "Zaloga", accessor: "Qty", type: "DoubleValue" },
+
   
 ]
 

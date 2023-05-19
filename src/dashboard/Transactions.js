@@ -38,8 +38,6 @@ export default function Transactions() {
 
 
      const childToParent = (data) => {
-        console.log(data)
-        window.child = data;
         getPositions(data.childNodes[0].innerHTML)
      }
 
