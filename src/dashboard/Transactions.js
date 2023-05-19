@@ -38,12 +38,15 @@ export default function Transactions() {
 
 
      const childToParent = (data) => {
+        console.log(data)
+        window.child = data;
         getPositions(data.childNodes[0].innerHTML)
      }
 
 
      async function getPositions(order) {      
         var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
+        window.positions = response;
         setPositions(response);  
     });
   }

@@ -40,7 +40,6 @@ export default function Listing() {
 
     useEffect(() => {
               var data =  ListingService.getAllListings().then(response => { 
-              console.log(response);
               setOrders(response);
            }); 
     }, []);

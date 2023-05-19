@@ -33,16 +33,16 @@ const columnsTransaction = [
   { label: "ID", accessor: "HeadID", type: "IntValue"},
   { label: "Tip transakcije", accessor: "DocumentType", type: "StringValue"},
   { label: "Status", accessor: "Status", type: "DoubleValue"},
-  { label: "P.D", accessor: "P.D", type: "DoubleValue", id: 5 },
-  { label: "ERP ključ", accessor: "erp", type: "DoubleValue"},
-  { label: "Nalog za transakcijo", accessor: "transactionOrder", type: "DoubleValue" },
+  { label: "P.D", accessor: "DocumentType", type: "DoubleValue"},
+  { label: "ERP ključ", accessor: "Key", type: "StringValue"},
+  { label: "Nalog za transakcijo", accessor: "LinkKey", type: "StringValue" },
   { label: "Stranka", accessor: "Receiver", type: "StringValue" },
-  { label: "Skladišče", accessor: "Wharehouse", type: "StringValue" },
-  { label: "Datum", accessor: "date", type: "DoubleValue" },
+  { label: "Skladišče", accessor: "WharehouseName", type: "StringValue" },
+  { label: "Datum", accessor: "Date", type: "DateTimeValue" },
   { label: "Vnesel", accessor: "ClerkName", type: "StringValue" },
   { label: "Datum vnosa", accessor: "DateInserted", type: "DateTimeValue" },
-  { label: "Spremenil", accessor: "modified", type: "DoubleValue" },
-  { label: "Datum spremembe", accessor: "dateModified", type: "DoubleValue" },
+  { label: "Spremenil", accessor: "ClerkChangedName", type: "StringValue" },
+  { label: "Datum spremembe", accessor: "DateChanged", type: "DateTimeValue" },
 
   
 ]

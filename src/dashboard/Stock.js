@@ -86,7 +86,7 @@ export default function Stock() {
         } 
     } else {
           window.location.href = "/";
-    }
+      }
     }
     
     const handleInventory = (e) => {

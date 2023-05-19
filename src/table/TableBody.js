@@ -1,90 +1,135 @@
 import DataAccess from "../utility/DataAccess";
 
 const TableBody = (props) => {
-   
     var tableData = props.tableData;
-
     try {
-
         var len = tableData.Items.length;
-
     } catch (e) {
-
         return null;
+}
 
-    }
+
+
 
 tableData = tableData.Items.filter((data) => {
+
+
+
+
+
 
     if(typeof props.sort == "undefined") {
         return true;
     }
 
     var term = props.sort.type.toLowerCase();
-    
-    var field = data.Properties?.Items[7]["StringValue"]?.toLowerCase();
+    var field = DataAccess.getData(data, "DocumentType", "StringValue");
     if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
 
+
+
+
+
+
+
 }).filter((data) => {
+
+
+    // TODO: Conditional sorting
+
+
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.document.toLowerCase();;
-    var field = data.Properties?.Items[8]["StringValue"]?.toLowerCase();
+    var field = DataAccess.getData(data, "Key", "StringValue");
+
     if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
+
+
+
+
+
+
  }).filter((data) => {
+
+
+
+    // TODO: Conditional sorting
+
+
+
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.warehouse.toLowerCase();
-    var field = data.Properties?.Items[1]["StringValue"]?.toLowerCase();
+    var field = DataAccess.getData(data, "Warehouse", "StringValue");
+
     if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
+
+
+
+
+
+
  }).filter((data) => {
+
+
+    // TODO: Conditional sorting
+
+
+
+
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.consignee.toLowerCase();
-    var field = data.Properties?.Items[0]["StringValue"]?.toLowerCase();
+    var field = DataAccess.getData(data, "Consignee", "StringValue");
     if (!field.includes(term) &&term!="") {
         return false;
     }
         return true; 
+
+
+
+
+
  }).filter((data) => {
+
+
+    // TODO: Conditional sorting
+
+
+
 
     if(typeof props.sort == "undefined") {
         return true;
     }
     var term = props.sort.client.toLowerCase();
-    var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
+    var field = DataAccess.getData(data, "Receiver", "StringValue");
 
     if (!field.includes(term) && term != "") {
         return false;
     }
         return true; 
- }).filter((data) => {
-    if(typeof props.sort == "undefined") {
-        return true;
-    }
-    var term = props.sort.consignee.toLowerCase();
-
-    var field = data.Properties?.Items[13]["StringValue"]?.toLowerCase();
 
 
-    if (!field.includes(term) && term != "") {
-        return false;
-    }
-        return true; 
- });
 
+
+
+
+ })
+
+    // TODO: Conditional sorting
 
 
 
@@ -117,34 +162,21 @@ tableData = tableData.Items.filter((data) => {
     return (
      <tbody>
       {
-      
-      
      tableData.map((data, index) => {
-       
-
-
-
        return (
         <tr onClick={getColumnData}>
         { columns.map(({ accessor }) => {
         var column = getColumn(accessor);
         
         var tData = ""
-        try {
-
-            
-            tData = DataAccess.getData(data, column.accessor, column.type);
-          
+        try {          
+            tData = DataAccess.getData(data, column.accessor, column.type);  
         } catch (e) {
         }
             return <td>{tData}</td>;
          })}
         </tr>
        );
-
-
-
-
       })}
      </tbody>
     );
