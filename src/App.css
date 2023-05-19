@@ -125,7 +125,7 @@ h3.information {
   align-content: center;
 }
 .table_responsive_order, .table_responsive_transaction {
-  height: 25vh;
+  height: 45vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;

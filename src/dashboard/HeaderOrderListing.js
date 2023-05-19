@@ -30,8 +30,9 @@ export default function HeaderOrderListing(props) {
 
   
     useEffect(() => {
+ 
         var data =  SortingService.getAllDocumentTypes().then(response => { 
-            var types = [];
+        var types = [];
         
 
         
@@ -42,16 +43,22 @@ export default function HeaderOrderListing(props) {
 
 
      }); 
-    }, []);
+
+
+        // filter the table
+
+        searchTable();
+
+    }, [documentType, consignee, client, warehouse, document]);
 
 
 
     let navigate = useNavigate();
 
   function searchTable() { 
-    console.log(documentType)
-    //var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
-    //props.getSortingObject(sorting)
+
+    var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
+    props.getSortingObject(sorting)
   };
 
   const toggleVisibility = () => {
@@ -63,40 +70,36 @@ export default function HeaderOrderListing(props) {
   };
 
   function onChangeDocument(e) {
-
     setDocument(e.target.value)
-    searchTable()
   }
 
   function onChangeConsignee(e) {
-
       setConsignee(e.target.value)
-      searchTable()
-
   }
 
 
   
   function onChangeWarehouse(e) {
-
     setWarehouse(e.target.value)
-    searchTable()
   }
 
   function onChangeReceiver(e) {
 
     setClient(e.target.value);
-    searchTable()
-  }
 
+  }
+  var reload = false;
   function onChangeType(e) {
-    setDocumentType ({value: e.value, label:e.label});
-    searchTable();
+    const mutated = {value: e.value, label:e.label}
+    setDocumentType (mutated);   
   }
 
     return ( 
         <div className="filters">
+
+
              <Select className='select-filters' value={documentType}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+
 
              <input
               id = "documentSearch"

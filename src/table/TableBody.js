@@ -14,10 +14,6 @@ const TableBody = (props) => {
 tableData = tableData.Items.filter((data) => {
 
 
-
-
-
-
     if(typeof props.sort == "undefined") {
         return true;
     }
@@ -28,10 +24,6 @@ tableData = tableData.Items.filter((data) => {
         return false;
     }
         return true; 
-
-
-
-
 
 
 
