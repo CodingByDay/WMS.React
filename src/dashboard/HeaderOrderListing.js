@@ -7,23 +7,9 @@ import { addDays, addYears, format, isWeekend } from 'date-fns';
 import { useEffect, useState } from "react";
 import { MdOutlineSearch, MdDateRange } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
+import { flushSync } from 'react-dom';
 
 export default function HeaderOrderListing(props) { 
-
-    useEffect(() => {
-        var data =  SortingService.getAllDocumentTypes().then(response => { 
-        var types = [];
-        types.push ({value: "", label: ""});
-
-        
-            for (var i = 0; i < response.Items.length; i++) {
-                      types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
-            }            
-            setTypes(types);
-
-
-     }); 
-    }, []);
 
     // States
     const [types, setTypes] = useState([]);
@@ -40,12 +26,32 @@ export default function HeaderOrderListing(props) {
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")
     const [warehouse, setWarehouse] = useState("")
-    const [documentType, setDocumentType] = useState("")
+    const [documentType, setDocumentType] = useState({value:"",label:""})
 
-  let navigate = useNavigate();
+  
+    useEffect(() => {
+        var data =  SortingService.getAllDocumentTypes().then(response => { 
+            var types = [];
+        
+
+        
+            for (var i = 0; i < response.Items.length; i++) {
+                      types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
+            }            
+            setTypes(types);
+
+
+     }); 
+    }, []);
+
+
+
+    let navigate = useNavigate();
+
   function searchTable() { 
-    var sorting = {type: documentType, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
-    props.getSortingObject(sorting)
+    console.log(documentType)
+    //var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
+    //props.getSortingObject(sorting)
   };
 
   const toggleVisibility = () => {
@@ -54,37 +60,43 @@ export default function HeaderOrderListing(props) {
 
   const handleSelect = (ranges) => { 
     const { selection } = ranges;
-    setState([selection]);
-    searchTable()
   };
 
   function onChangeDocument(e) {
-    setDocument(e.target.value);
+
+    setDocument(e.target.value)
     searchTable()
   }
 
   function onChangeConsignee(e) {
-    setClient(e.target.value);
-    searchTable()
+
+      setConsignee(e.target.value)
+      searchTable()
+
   }
 
+
+  
   function onChangeWarehouse(e) {
-    setWarehouse(e.target.value);
+
+    setWarehouse(e.target.value)
     searchTable()
   }
 
   function onChangeReceiver(e) {
-    setConsignee(e.target.value);
+
+    setClient(e.target.value);
     searchTable()
   }
 
   function onChangeType(e) {
-    setDocumentType(e.value);
+    setDocumentType ({value: e.value, label:e.label});
+    searchTable();
   }
 
     return ( 
         <div className="filters">
-             <Select className='select-filters' onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select className='select-filters' value={documentType}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
              <input
               id = "documentSearch"
