@@ -1,3 +1,5 @@
+import DataAccess from "../utility/DataAccess";
+
 const TableBody = (props) => {
    
     var tableData = props.tableData;
@@ -117,8 +119,7 @@ tableData = tableData.Items.filter((data) => {
       {
       
       
-     tableData.map((data) => {
-
+     tableData.map((data, index) => {
        
 
 
@@ -127,27 +128,14 @@ tableData = tableData.Items.filter((data) => {
         <tr onClick={getColumnData}>
         { columns.map(({ accessor }) => {
         var column = getColumn(accessor);
-        var type = "StringValue";  
-        if (column.type=== "string") {
-            type = "StringValue";
-        } else if (column.type=== "int") {
-            type = "IntValue";
-        } else if (column.type=== "date") {
-            type = "DateTimeValue";
-        } else if (column.type=== "double") {
-            type = "DoubleValue";
-        } else if (column.type=== "bool") {
-            type = "BoolValue";
-        }
+        
         var tData = ""
         try {
-            var index = findIndex(data, accessor);
+
             
-            tData = data.Properties.Items[index][type];
+            tData = DataAccess.getData(data, column.accessor, column.type);
           
         } catch (e) {
-
-            var result = 9+9;
         }
             return <td>{tData}</td>;
          })}

@@ -11,52 +11,52 @@ const Table = (props) => {
  const [tableData, setTableData] = useState(tableData1);
 
  const columnsOrder = [
-  { label: "Skladišče", accessor: "Warehouse", type: "string", id: 1},
-  { label: "Prejemnik", accessor: "Consignee", type: "string", id: 0},
-  { label: "Rok dobave", accessor: "DeliveryDeadline", type: "date", id: 6},
-  { label: "Tip dokumenta", accessor: "DocumentType", type: "string", id: 7},
-  { label: "Ključ", accessor: "Key", type: "string", id: 8},
-  { label: "Sprejemnik", accessor: "Receiver", type: "string", id: 14}
+  { label: "Skladišče", accessor: "Warehouse", type: "StringValue"},
+  { label: "Prejemnik", accessor: "Consignee", type: "StringValue"},
+  { label: "Rok dobave", accessor: "DeliveryDeadline", type: "DateTimeValue"},
+  { label: "Tip dokumenta", accessor: "DocumentType", type: "StringValue"},
+  { label: "Ključ", accessor: "Key", type: "StringValue"},
+  { label: "Sprejemnik", accessor: "Receiver", type: "StringValue"}
  ];
 
 
 
 const columnsPositions = [
-    { label: "Ident", accessor: "Ident", type: "string", id: 2 },
-    { label: "Naziv", accessor: "Name", type: "string", id: 3 },
-    { label: "Odprto", accessor: "OpenQty", type: "double", id: 4 },
-    { label: "Skupna količina", accessor: "FullQty", type: "double", id: 5 },
+    { label: "Ident", accessor: "Ident", type: "StringValue"},
+    { label: "Naziv", accessor: "Name", type: "StringValue"},
+    { label: "Odprto", accessor: "OpenQty", type: "DoubleValue"},
+    { label: "Skupna količina", accessor: "FullQty", type: "DoubleValue"},
     
 ]
 
 const columnsTransaction = [
-  { label: "ID", accessor: "HeadID", type: "int", id: 0 },
-  { label: "Tip transakcije", accessor: "DocumentType", type: "string", id: 2 },
-  { label: "Status", accessor: "Status", type: "double", id: 4 },
-  { label: "P.D", accessor: "P.D", type: "double", id: 5 },
-  { label: "ERP ključ", accessor: "erp", type: "double", id: 5 },
-  { label: "Nalog za transakcijo", accessor: "transactionOrder", type: "double", id: 5 },
-  { label: "Stranka", accessor: "Receiver", type: "string", id: 3 },
-  { label: "Skladišče", accessor: "Wharehouse", type: "string", id: 10 },
-  { label: "Datum", accessor: "date", type: "double", id: 5 },
-  { label: "Vnesel", accessor: "ClerkName", type: "string", id: 11 },
-  { label: "Datum vnosa", accessor: "DateInserted", type: "date", id: 8 },
-  { label: "Spremenil", accessor: "modified", type: "double", id: 5 },
-  { label: "Datum spremembe", accessor: "dateModified", type: "double", id: 5 },
+  { label: "ID", accessor: "HeadID", type: "IntValue"},
+  { label: "Tip transakcije", accessor: "DocumentType", type: "StringValue"},
+  { label: "Status", accessor: "Status", type: "DoubleValue"},
+  { label: "P.D", accessor: "P.D", type: "DoubleValue", id: 5 },
+  { label: "ERP ključ", accessor: "erp", type: "DoubleValue"},
+  { label: "Nalog za transakcijo", accessor: "transactionOrder", type: "DoubleValue" },
+  { label: "Stranka", accessor: "Receiver", type: "StringValue" },
+  { label: "Skladišče", accessor: "Wharehouse", type: "StringValue" },
+  { label: "Datum", accessor: "date", type: "DoubleValue" },
+  { label: "Vnesel", accessor: "ClerkName", type: "StringValue" },
+  { label: "Datum vnosa", accessor: "DateInserted", type: "DateTimeValue" },
+  { label: "Spremenil", accessor: "modified", type: "DoubleValue" },
+  { label: "Datum spremembe", accessor: "dateModified", type: "DoubleValue" },
 
   
 ]
 
 const columnsTransactionPosition = [
 
-  { label: "ID transakcije", accessor: "HeadID", type: "string", id: 0 },
-  { label: "Ključ transakcije", accessor: "Tip transakcije", type: "string", id: 3 },
-  { label: "Pozicija transakcije", accessor: "LinkNo", type: "int", id: 2 },
-  { label: "Ident", accessor: "P.D", type: "string", id: 5 },
-  { label: "Naziv identa", accessor: "IdentName", type: "string", id: 5 },
-  { label: "WMS količina", accessor: "Qty", type: "double", id: 5 },
-  { label: "Odprta količina", accessor: "Qty", type: "double", id: 5 },
-  { label: "Zaloga", accessor: "Qty", type: "double", id: 8 },
+  { label: "ID transakcije", accessor: "HeadID", type: "StringValue" },
+  { label: "Ključ transakcije", accessor: "Tip transakcije", type: "StringValue" },
+  { label: "Pozicija transakcije", accessor: "LinkNo", type: "IntValue" },
+  { label: "Ident", accessor: "P.D", type: "StringValue" },
+  { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
+  { label: "WMS količina", accessor: "Qty", type: "DoubleValue" },
+  { label: "Odprta količina", accessor: "Qty", type: "DoubleValue" },
+  { label: "Zaloga", accessor: "Qty", type: "DoubleValue" },
   
 ]
 
