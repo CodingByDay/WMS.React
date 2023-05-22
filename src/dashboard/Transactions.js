@@ -14,20 +14,18 @@ import TransactionHeaderButtons from './TransactionHeaderButtons';
 import TransactionPositionsButtons from './TransactionPositionsButtons';
 import TransactionService from '../services/TransactionService';
 import StockService from '../services/StockService';
-import Add from '../popup/Add';
+import Add from '../popup/Add'
+import AddHeadDocument from '../popup/AddHeadDocument'
+
 
 
 
 export default function Transactions() { 
-
     checkUID ()
-
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
-
     const [show, setShow] = useState(false);
-
-
+    const [head, showHead] = useState(false);
     useEffect(() => {
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
@@ -82,6 +80,9 @@ export default function Transactions() {
 
                 var toggled = ! show;
                 setShow(toggled);
+            } else {
+                var toggled = ! show;
+                setShow(toggled);
             }
         }
       } else {
@@ -95,14 +96,14 @@ export default function Transactions() {
         <div>
         <Header />   
         <TransactionFilters />
-        <TransactionHeaderButtons  />
+        <TransactionHeaderButtons reactToFront = {reactToFront}   />
         <TransactionHeads data = {transactions} childToParent = {childToParent} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
 
 
         <Add show = {show} />
-
+        <AddHeadDocument  />
 
         <Footer />
         </div>

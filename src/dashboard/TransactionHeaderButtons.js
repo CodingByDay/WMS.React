@@ -4,12 +4,10 @@ import { MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineM
 
 export default function TransactionHeaderButtons(props) { 
 
+    
     function toggleAddPosition() {
-        alert("Dodaj pozicije");
+        props.reactToFront({type: 'transaction', action: 'add', table: 'header'});
     }
-
-
-
 
 
 
@@ -41,7 +39,7 @@ export default function TransactionHeaderButtons(props) {
              <MdEdit />
 
              </button>
-             <button className="btn btn-primary" onClick={toggleAddPosition}>Dodaj
+             <button className="btn btn-primary" onClick={toggleAddPosition} id=''>Dodaj
              
              
              <MdAdd />
