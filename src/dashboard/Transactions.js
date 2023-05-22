@@ -22,6 +22,9 @@ import AddHeadDocument from '../popup/AddHeadDocument'
 
 export default function Transactions() { 
     checkUID ()
+
+
+
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
@@ -32,6 +35,7 @@ export default function Transactions() {
               setTransactions(response);
            }); 
     }, []);
+
 
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -50,7 +54,6 @@ export default function Transactions() {
 
      async function getPositions(order) {      
         var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
-
         setPositions(response);  
     });
   }
@@ -94,6 +97,9 @@ export default function Transactions() {
     return ( 
       
         <div>
+
+
+
         <Header />   
         <TransactionFilters />
         <TransactionHeaderButtons reactToFront = {reactToFront}   />
@@ -106,6 +112,9 @@ export default function Transactions() {
         <AddHeadDocument show = {head}  />
 
         <Footer />
+
+
+        
         </div>
 
     ); 

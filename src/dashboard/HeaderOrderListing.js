@@ -14,6 +14,8 @@ export default function HeaderOrderListing(props) {
     // States
     const [types, setTypes] = useState([]);
     const [document, setDocument] = useState("")
+
+
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -22,6 +24,7 @@ export default function HeaderOrderListing(props) {
         }
     ]);
 
+    
     const [open, setOpen] = useState(false);
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")

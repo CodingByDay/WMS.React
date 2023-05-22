@@ -2,10 +2,15 @@
 import $ from 'jquery'; 
 import { useEffect, useState } from "react";
 import Select from 'react-select'
+import IssuedGoods from '../popup/IssuedGoods';
+
+
+
 
 export default function AddHeadDocument(props) { 
 
 
+    var component = null;
 
 
     const  [documentType, setDocumentType] = useState([]);
@@ -14,13 +19,30 @@ export default function AddHeadDocument(props) {
     useEffect(() => {
         setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
 
-
-        alert(type.value)
+    if(type !== undefined) {
         switch (type.value) {  
+            case "Izdaja blaga":
+                
+                component = <IssuedGoods />;
 
+                break;
+            case "Prevzem blaga":
+                
+                component = <IssuedGoods />;
 
+                break;
+            case "Medskladišnica":
+                
+                component = <IssuedGoods />;
+
+                break;
+            case "Inventura":
+                
+                component = <IssuedGoods />;
+
+                break;
         }
-
+    }
 
 
     }, [type]);
@@ -64,7 +86,8 @@ export default function AddHeadDocument(props) {
 
                 </div>
                 
-             
+                {console.log("This is just a test for the component conditional rendering")}
+                {IssuedGoods}
 
         </div>
     </div>
@@ -73,7 +96,7 @@ export default function AddHeadDocument(props) {
 
 
 
-</div>
+        </div>
 
 
 
