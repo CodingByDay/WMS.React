@@ -5,7 +5,12 @@ import Select from 'react-select'
 
 export default function Add(props) { 
 
-    
+
+
+
+
+
+    var elms = data.push.props
     if(props.show) {
 
         $("#edit").css("display", "block");
@@ -40,4 +45,4 @@ export default function Add(props) {
     </div>
     
     ); 
-} 
+    };
