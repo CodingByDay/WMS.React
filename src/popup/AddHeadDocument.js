@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { useEffect, useState } from "react";
 import Select from 'react-select'
 import IssuedGoods from '../popup/IssuedGoods';
-
+import Interwarehouse from '../popup/Interwarehouse';
 
 
 
@@ -37,7 +37,7 @@ export default function AddHeadDocument(props) {
                 break;
             case "Medskladišnica":
                 
-                component = <IssuedGoods />;
+                component = <Interwarehouse />;
                 setConditional(component);
 
                 break;
@@ -87,7 +87,7 @@ export default function AddHeadDocument(props) {
     <div class="row">
         <div class="col-md-3 mx-auto">
 
-                <div class="form-group row">
+                <div class="form-group row" id="main-select">
 
                 <Select className='select-filters' onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
 

@@ -6,10 +6,31 @@
   color: black;
 }
 
+.layout-interwarehouse-goods {
+  display: flex;
+  gap: 2em;
+}
 
 div#edit, div#addHeader {
   height: -webkit-fill-available;
   width: -webkit-fill-available;
+}
+
+.layout-issued-goods, .layout-issued-goods {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  top: 12em;
+  position: relative;
+}
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+#main-select {
+  margin: 2em;
 }
 
 .header_part {
