@@ -8,8 +8,6 @@ export default function TransactionPositionsButtons(props) {
     let navigate = useNavigate();
 
 
-
-
     
 
     function toggleAddPosition() {

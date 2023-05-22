@@ -25,7 +25,8 @@ export default function Transactions() {
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
-    const [head, showHead] = useState(false);
+    const [head, setHead] = useState(false);
+ 
     useEffect(() => {
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
@@ -49,7 +50,7 @@ export default function Transactions() {
 
      async function getPositions(order) {      
         var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
-        window.positions = response;
+
         setPositions(response);  
     });
   }
@@ -77,12 +78,11 @@ export default function Transactions() {
         if(action === "add") { 
 
             if(table === "positions") {    
-
                 var toggled = ! show;
                 setShow(toggled);
             } else {
                 var toggled = ! show;
-                setShow(toggled);
+                setHead(toggled);
             }
         }
       } else {
@@ -103,7 +103,7 @@ export default function Transactions() {
 
 
         <Add show = {show} />
-        <AddHeadDocument  />
+        <AddHeadDocument show = {head}  />
 
         <Footer />
         </div>

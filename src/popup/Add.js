@@ -2,7 +2,7 @@
 import $ from 'jquery'; 
 
 
-export default function Settings(props) { 
+export default function Add(props) { 
 
     
     if(props.show) {
@@ -57,7 +57,7 @@ export default function Settings(props) {
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="inputFirstname">Ident</label>
-                        <input type="text" class="form-control" id="inputFirstname" placeholder="First name" />
+                        <input type="text" class="form-control" id="ident" placeholder="Ident" />
                     </div>
                     <div class="col-sm-6">
                         <label>Podatki o naročilo</label>

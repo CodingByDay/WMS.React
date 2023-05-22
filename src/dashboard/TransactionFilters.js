@@ -28,6 +28,7 @@ export default function TransactionFilters(props) {
     const [identName, setIdentName] = useState([]);
     const [erpKey, setErpKey] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState("");
+    
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -36,12 +37,13 @@ export default function TransactionFilters(props) {
         }
     ]);
     const [user, setUser] = useState([]);
+
+
     // Data flow
     useEffect(() => {
-         setTransactionType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
-         var data =  TransactionService.getAllDocumentTypes().then(response => { 
 
-
+            setTransactionType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
+            var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
             
             for(var i = 0; i < response.type.length;i++) {
@@ -204,7 +206,6 @@ export default function TransactionFilters(props) {
                     <Dropdown
                         title={props.title}
                         placeholder="Poslovni dogodek"
-
                         id='businessEvent'
                         onKeyDown={(e) => onKeyDownBusinessEvent(e)}
                         options={businessEvent}

@@ -2,27 +2,23 @@
 import $ from 'jquery'; 
 
 
-export default function Settings(props) { 
+export default function AddHeadDocument(props) { 
 
     
     if(props.show) {
-
-        $("#edit").css("display", "block");
-
+        $("#addHeader").css("display", "block");
     } else {
-
-        $("#edit").css("display", "none");
-
+        $("#addHeader").css("display", "none");
     }
   
     return ( 
 
-        <div className="edit" id='edit'>
+        <div className="addHeaderClass" id='addHeader'>
      
 
 
         <div class="header_part">
-            <h1 id='close_add'>X</h1>
+            <h1 id='close_add_header'>X</h1>
         </div>
 
 
