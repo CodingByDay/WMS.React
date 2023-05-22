@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Select from 'react-select'
 import IssuedGoods from '../popup/IssuedGoods';
 import Interwarehouse from '../popup/Interwarehouse';
+import TakeOver from './TakeOver';
 
 
 
@@ -31,7 +32,7 @@ export default function AddHeadDocument(props) {
                 break;
             case "Prevzem blaga":
                 
-                component = <IssuedGoods />;
+                component = <TakeOver />;
                 setConditional(component);
 
                 break;

@@ -16,6 +16,18 @@ div#edit, div#addHeader {
   width: -webkit-fill-available;
 }
 
+
+.layout-takeover-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.layout-takeover-goods {
+  display: flex;
+  gap: 2em;
+}
+
+
 .layout-issued-goods, .layout-issued-goods {
   display: flex;
   flex-direction: row;
