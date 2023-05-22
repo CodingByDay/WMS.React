@@ -2,7 +2,9 @@
   background-color: white;
 }
 
-
+#transactionTypePopup {
+  color: black;
+}
 
 
 div#edit, div#addHeader {
