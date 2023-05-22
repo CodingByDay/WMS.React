@@ -22,6 +22,7 @@ div#edit, div#addHeader {
   flex-direction: column;
   gap: 2em;
 }
+
 .layout-takeover-goods {
   display: flex;
   gap: 2em;

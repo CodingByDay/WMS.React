@@ -5,7 +5,7 @@ import Select from 'react-select'
 import IssuedGoods from '../popup/IssuedGoods';
 import Interwarehouse from '../popup/Interwarehouse';
 import TakeOver from './TakeOver';
-
+import WorkOrder from './WorkOrder';
 
 
 export default function AddHeadDocument(props) { 
@@ -48,6 +48,9 @@ export default function AddHeadDocument(props) {
                 setConditional(component);
 
                 break;
+            case "Delovni nalog":
+                component = <WorkOrder />;
+                setConditional(component);
         }
     }
 
