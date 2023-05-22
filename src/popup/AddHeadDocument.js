@@ -15,30 +15,36 @@ export default function AddHeadDocument(props) {
 
     const  [documentType, setDocumentType] = useState([]);
     const [type, setType] = useState();
+    const [conditional, setConditional] = useState();
 
     useEffect(() => {
         setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
 
     if(type !== undefined) {
         switch (type.value) {  
-            case "Izdaja blaga":
-                
+
+            case "Izdaja blaga":          
+
                 component = <IssuedGoods />;
+                setConditional(component);
 
                 break;
             case "Prevzem blaga":
                 
                 component = <IssuedGoods />;
+                setConditional(component);
 
                 break;
             case "Medskladišnica":
                 
                 component = <IssuedGoods />;
+                setConditional(component);
 
                 break;
             case "Inventura":
                 
                 component = <IssuedGoods />;
+                setConditional(component);
 
                 break;
         }
@@ -82,12 +88,12 @@ export default function AddHeadDocument(props) {
         <div class="col-md-3 mx-auto">
 
                 <div class="form-group row">
-                <Select className='select-filters' onChange={onChangeTypePopup}  placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+
+                <Select className='select-filters' onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
 
                 </div>
                 
-                {console.log("This is just a test for the component conditional rendering")}
-                {IssuedGoods}
+                {conditional}
 
         </div>
     </div>
