@@ -4,6 +4,15 @@ import { MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineM
 
 export default function TransactionHeaderButtons(props) { 
 
+    function toggleAddPosition() {
+        alert("Dodaj pozicije");
+    }
+
+
+
+
+
+
     let navigate = useNavigate();
     return ( 
         <div>
@@ -32,7 +41,7 @@ export default function TransactionHeaderButtons(props) {
              <MdEdit />
 
              </button>
-             <button className="btn btn-primary">Dodaj
+             <button className="btn btn-primary" onClick={toggleAddPosition}>Dodaj
              
              
              <MdAdd />

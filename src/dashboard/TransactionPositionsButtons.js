@@ -6,6 +6,17 @@ import { MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineM
 export default function TransactionPositionsButtons(props) { 
 
     let navigate = useNavigate();
+
+
+
+
+    
+
+    function toggleAddPosition() {
+        props.reactToFront({type: 'transaction', action: 'add', table: 'positions'});
+    }
+
+
     return ( 
         
         <div>
@@ -13,17 +24,26 @@ export default function TransactionPositionsButtons(props) {
         <div className='buttonsPositionsOuter'>
 
         <div className='buttonsPositions'>
-             <button className="btn btn-primary">Dodaj
+
+
+
+             <button className="btn btn-primary" onClick={toggleAddPosition}>Dodaj
              
-             
-             
+                       
              <MdAdd />
+
+
              </button>
+
+
              <button className="btn btn-primary">Ključ
              
              <MdOutlineMerge />
              
              </button>
+
+
+
              <button className="btn btn-primary">Izbriši
              
              <MdOutlineQrCode />
