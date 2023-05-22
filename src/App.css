@@ -16,6 +16,18 @@ div#edit, div#addHeader {
   width: -webkit-fill-available;
 }
 
+.add-container-workorder {
+  width: max-content;
+}
+
+
+.add-container-workorder {
+  width: max-content;
+  gap: 3em;
+  display: flex;
+  flex-direction: column;
+}
+
 
 .layout-takeover-container {
   display: flex;
