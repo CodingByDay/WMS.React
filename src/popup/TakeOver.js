@@ -5,9 +5,9 @@ import Select from 'react-select'
 
 export default function TakeOver(props) { 
 
-   
 
-
+     
+      
 
 
   
@@ -43,6 +43,8 @@ export default function TakeOver(props) {
 
         <div className='left-column'>
 
+
+
         <Select className='select-filters' placeholder={"Vrsta dokumenta"} id='documentType'/>
         <Select className='select-filters' placeholder={"Tip Skladišče"} id='warehouse'/>
         <Select className='select-filters' placeholder={"Skladišče"} id='buyer'/>
@@ -62,4 +64,6 @@ export default function TakeOver(props) {
 
 
         ); 
-} 
+}
+
+

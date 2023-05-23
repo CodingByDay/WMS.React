@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 export default function WorkOrder(props) { 
 
-    var elms = data.push.props
+
     if(props.show) {
         $("#edit").css("display", "block");
     } else {

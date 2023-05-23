@@ -31,7 +31,7 @@ const columnsPositions = [
 const columnsTransaction = [
   { label: "ID", accessor: "HeadID", type: "IntValue"},
   { label: "Tip transakcije", accessor: "DocumentType", type: "StringValue"},
-  { label: "Status", accessor: "Status", type: "DoubleValue"},
+  { label: "Status", accessor: "Status", type: "StringValue"},
   { label: "P.D", accessor: "DocumentType", type: "DoubleValue"},
   { label: "ERP ključ", accessor: "Key", type: "StringValue"},
   { label: "Nalog za transakcijo", accessor: "LinkKey", type: "StringValue" },

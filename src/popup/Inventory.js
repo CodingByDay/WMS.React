@@ -2,7 +2,7 @@
 import $ from 'jquery'; 
 
 
-export default function Add(props) { 
+export default function Inventory(props) { 
 
     
     if(props.show) {
