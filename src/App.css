@@ -2,8 +2,30 @@
   background-color: white;
 }
 
+
+
+#buyer {
+  display: none;
+}
+
+#documentType, #warehouse, #buyer, #documentDate {
+  width:5vw;
+}
+
+.layout-issued-goods {
+  color: black;
+}
+
+
 #transactionTypePopup {
   color: black;
+}
+
+.layout-issued-goods-header-checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  width: fit-content;
+  gap: 1em;
 }
 
 .layout-interwarehouse-goods {

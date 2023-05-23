@@ -23,8 +23,6 @@ import AddHeadDocument from '../popup/AddHeadDocument'
 export default function Transactions() { 
     checkUID ()
 
-
-
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
