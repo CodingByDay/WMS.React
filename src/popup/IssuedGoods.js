@@ -1,3 +1,4 @@
+import DataAccess from "../utility/DataAccess";
 
 import $ from 'jquery'; 
 import Select from 'react-select'
@@ -10,7 +11,7 @@ export default function IssuedGoods(props) {
     // States
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
-
+    const [buyer, setBuyer] = useState([]);
     useEffect(() => {
         var documentTypes =  PopupService.getAllDocumentTypes().then(response => { 
             var types = [];
@@ -32,10 +33,15 @@ export default function IssuedGoods(props) {
 
 
     var subjects =  PopupService.getSubjects().then(response => { 
-        alert("test");
-        window.subjects = response.Items;                
-
- });
+        window.subjects = response;
+        var subjectsList = [];
+        // Continue here figure out what to do with the response...
+       for(var i = 0; i < response.Items.length; i++) {
+        var field = DataAccess.getData(response.Items, "ID", "StringValue");
+        subjectsList.push({value: field, label: field});
+       }
+       setBuyer(subjectsList); 
+    });
 
 
 
