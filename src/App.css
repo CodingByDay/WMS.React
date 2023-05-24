@@ -59,7 +59,10 @@ div#edit, div#addHeader {
   display: flex;
   gap: 2em;
 }
-
+.header_part h1 {
+  font-size: initial;
+  cursor:pointer;
+}
 
 .layout-issued-goods, .layout-issued-goods {
   display: flex;

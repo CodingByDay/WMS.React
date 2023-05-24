@@ -59,6 +59,10 @@ export default function AddHeadDocument(props) {
     }, [type]);
 
 
+    function close() {
+        props.changeVisibility(false)
+    }
+
     function onChangeTypePopup(e) {
         const mutated = {value: e.value, label:e.label}
         setType (mutated);   
@@ -76,7 +80,7 @@ export default function AddHeadDocument(props) {
      
 
 
-        <div class="header_part">
+        <div class="header_part" onClick={close}>
             <h1 id='close_add_header'>X</h1>
         </div>
 

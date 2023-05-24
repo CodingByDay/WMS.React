@@ -91,6 +91,9 @@ export default function Transactions() {
       }
    }
 
+    const changeVisibility = (data) => {
+        setHead(data)
+    }
   
     return ( 
       
@@ -100,14 +103,14 @@ export default function Transactions() {
 
         <Header />   
         <TransactionFilters />
-        <TransactionHeaderButtons reactToFront = {reactToFront}   />
+        <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} childToParent = {childToParent} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
 
 
         <Add show = {show} />
-        <AddHeadDocument show = {head}  />
+        <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
 
