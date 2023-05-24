@@ -45,12 +45,7 @@ export default function TransactionHeaderButtons(props) {
              <MdAdd />
 
              </button>
-             <button className="btn btn-primary">Združi
-             
-             
-             <MdOutlineMerge />
 
-             </button>
         </div>
         </div>
 

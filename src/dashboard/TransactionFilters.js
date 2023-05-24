@@ -75,10 +75,11 @@ export default function TransactionFilters(props) {
         setTransactionType(e.target.value);
     }
     function onChangeBusinessEvent(e) {
-
-        $("#businessEvent-option").text(e.code)
-        
-
+      var old = $("#businessEvent-option")[0].innerHTML ;
+      $("#businessEvent-option")[0].innerHTML = e.code;
+      if(old == e.code || old == "") {
+      onChangeBusinessEvent(e);
+      }
     }
     function onChangeTransactionOrder(e) {
         setTransactionOrder(e.target.value);
