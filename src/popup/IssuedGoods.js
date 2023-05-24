@@ -12,6 +12,20 @@ export default function IssuedGoods(props) {
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [buyer, setBuyer] = useState([]);
+
+
+
+
+
+
+    // Chosen states
+
+    const [document, setDocument] = useState("")
+    const [warehouse, setWarehouse] = useState("")
+    const [client, setClient] = useState("")
+    const [date, setDate] = useState("")
+
+
     useEffect(() => {
         var documentTypes =  PopupService.getAllDocumentTypes().then(response => { 
             var types = [];
@@ -33,12 +47,11 @@ export default function IssuedGoods(props) {
 
 
     var subjects =  PopupService.getSubjects().then(response => { 
-        window.subjects = response;
-        var subjectsList = [];
-        // Continue here figure out what to do with the response...
+            window.subjects = response;
+            var subjectsList = [];   
        for(var i = 0; i < response.Items.length; i++) {
-        var field = DataAccess.getData(response.Items, "ID", "StringValue");
-        subjectsList.push({value: field, label: field});
+            var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
+            subjectsList.push({value: field, label: field});
        }
        setBuyer(subjectsList); 
     });
@@ -76,6 +89,52 @@ export default function IssuedGoods(props) {
     }
 
   
+
+    function onChangeType(e) {
+        console.log(e);
+        setDocument(e.value)
+    }
+
+
+    function onChangeWarehouse(e) {
+ 
+        setWarehouse(e.value)
+    }
+
+
+
+    function onChangeBuyer(e) {
+
+        setClient(e.value)
+    }
+
+
+    function onDateChange(e) {
+        setDate(e.target.value)
+    }
+
+
+
+    async function createHeadDocument ()  {
+      var documentData = document;
+      var warehouseData = warehouse;
+      var clientData = client;
+      var dateData = date;
+      var byClient = false
+
+
+      if ($('#byOrder').is(":checked"))
+        {
+            byClient = true;
+        }
+
+       if(window.confirm('Ali želite kreirati dokument')) {
+          alert("yes")
+       }
+
+
+    }
+
     return ( 
 
 
@@ -107,11 +166,14 @@ export default function IssuedGoods(props) {
         <div className='left-column'>
 
 
-        <Select className='select-filters' placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
-        <Select className='select-filters' placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-        <Select className='select-filters' placeholder={"Kupec"} id='buyer' />
+        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
+             <MdAdd />
+        </button>
         </div>
-        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+        <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
 
 
 
@@ -121,11 +183,7 @@ export default function IssuedGoods(props) {
 
 
         </div>
-        <button className="btn btn-primary">Potrdi
-             
-             <MdAdd />
-
-             </button>
+    
         </div>
 
 

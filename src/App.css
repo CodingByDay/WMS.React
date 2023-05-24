@@ -2,8 +2,6 @@
   background-color: white;
 }
 
-
-
 #buyer {
   display: none;
 }
@@ -67,7 +65,7 @@ div#edit, div#addHeader {
   display: flex;
   flex-direction: row;
   gap: 2em;
-  top: 12em;
+  top: 1em;
   position: relative;
 }
 .left-column {

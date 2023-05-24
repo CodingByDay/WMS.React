@@ -6,6 +6,7 @@ import IssuedGoods from '../popup/IssuedGoods';
 import Interwarehouse from '../popup/Interwarehouse';
 import TakeOver from './TakeOver';
 import WorkOrder from './WorkOrder';
+import { MdAdd} from "react-icons/md";
 
 
 export default function AddHeadDocument(props) { 
@@ -98,11 +99,11 @@ export default function AddHeadDocument(props) {
                 </div>
                 
                 {conditional}
-
         </div>
+
+
+        
     </div>
-
-
 
 
 
