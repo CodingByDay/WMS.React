@@ -9,6 +9,8 @@ import { MdAdd} from "react-icons/md";
 
 export default function IssuedGoods(props) { 
     // States
+
+
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [buyer, setBuyer] = useState([]);
@@ -91,7 +93,7 @@ export default function IssuedGoods(props) {
   
 
     function onChangeType(e) {
-        console.log(e);
+     
         setDocument(e.value)
     }
 
@@ -123,13 +125,18 @@ export default function IssuedGoods(props) {
       var byClient = false
 
 
-      if ($('#byOrder').is(":checked"))
+      if($('#byOrder').is(":checked"))
         {
             byClient = true;
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-          alert("yes")
+        var data =  PopupService.setMoveHead({DocumentType: documentData, WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+
+            console.log(data);
+            alert("Finished")
+
+        }); 
        }
 
 
