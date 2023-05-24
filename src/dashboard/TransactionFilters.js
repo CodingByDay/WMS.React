@@ -11,6 +11,7 @@ import _ from 'lodash';
 import { HiChevronDown } from "react-icons/hi";
 import TransactionService from '../services/TransactionService';
 import $ from 'jquery'; 
+import DataAccess from "../utility/DataAccess";
 
 
 
@@ -28,7 +29,9 @@ export default function TransactionFilters(props) {
     const [identName, setIdentName] = useState([]);
     const [erpKey, setErpKey] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState("");
-    
+    const [order, setOrder] = useState("");
+
+
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -36,14 +39,28 @@ export default function TransactionFilters(props) {
             key: 'selection',
         }
     ]);
+
+
     const [user, setUser] = useState([]);
 
 
       // Data flow
       useEffect(() => {
-      if(selectedEvent!="") {
-      $("#businessEvent-option").text(selectedEvent);
-      }
+
+
+
+        var dn = TransactionService.getAllTransactions().then(response=> {
+            var transactions = []
+            for(var i=0;i<response.Items.length;i++) {
+                var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
+                transactions.push({label: field,  value: field});
+            }
+            setTransactionOrder(transactions)
+          });
+
+            if(selectedEvent!="") {
+               $("#businessEvent-option").text(selectedEvent);
+            }
             setTransactionType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
             var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
@@ -54,7 +71,6 @@ export default function TransactionFilters(props) {
             setBusinessEvent(types);
          }); 
          setTransactionStatus([{value: 'Odprt', label: 'Odprt'}, {value: 'Prenesen', label: 'Prenesen'}]);
-     
     }, [selectedEvent]);
 
 
@@ -212,15 +228,11 @@ export default function TransactionFilters(props) {
                         onChange={(action, item) => onChangeBusinessEvent(item)}
                         onRenderOption={onRenderOptionBusinessEvent}                
                     />
-                      <Dropdown
-                        title={props.title}
-                        placeholder={"Nalog za transakcijo"}
-                        id='transactionOrder'
-                        options={transactionOrder}                  
-                        onRenderLabel={props.selectedValue}
-                        onChange={(e) => onChangeTransactionOrder(e)}
-                        onRenderOption={onRenderTransactionOrder}                
-                    />
+
+
+                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} options={transactionOrder} id='transactionOrder'/>
+
+
                     </div>
                     <div className='columnDivider'>
                     <Dropdown

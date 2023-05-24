@@ -17,13 +17,24 @@ const TransactionService  = {
    },
 
 
+   async getAllDocumentTypes() {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=dt&i=web`)
+        return await this.getCorrectDataBusinessEvents( response.data );
+    },  
+
+
+
     async getAllDocumentTypes() {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=dt&i=web`)
         return await this.getCorrectDataBusinessEvents( response.data );
     },  
 
     async getAllTransactions() {
+
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=mh&i=web`)
+        
+        console.log(response.data)
+
         return response.data;
     },
 
