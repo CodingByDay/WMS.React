@@ -69,7 +69,8 @@ export default function HeaderOrderListing(props) {
   };
 
   const handleSelect = (ranges) => { 
-    const { selection } = ranges;
+    setState(ranges)
+   
   };
 
   function onChangeDocument(e) {
@@ -130,11 +131,15 @@ export default function HeaderOrderListing(props) {
 
          {open && (
             <div className="nameModule">
-              <DateRangePicker ranges={state}
-                          
+
+
+
+              <DateRangePicker ranges={[state]}                       
               showSelectionPreview={true}
-              moveRangeOnFirstSelection={false}
-              onChange={handleSelect}/>
+              moveRangeOnFirstSelection={true}
+              onChange={handleSelect} />
+
+
             </div>
          )}
 

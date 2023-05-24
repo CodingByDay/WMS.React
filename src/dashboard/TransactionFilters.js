@@ -248,7 +248,14 @@ export default function TransactionFilters(props) {
                     <Select className='select-filters' placeholder={"Status transakcije"} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
 
 
-                    <Dropdown
+
+
+
+
+
+                 
+
+                    <Select
                         title={props.title}
                         placeholder={"Stranka"}
                         id='client'
@@ -258,6 +265,11 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeClient(e)} 
                         onRenderOption={onRenderClient}                
                     />
+
+
+
+
+
                     </div>
                     <div className='columnDivider'>
                     <Dropdown
