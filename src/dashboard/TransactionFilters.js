@@ -39,9 +39,11 @@ export default function TransactionFilters(props) {
     const [user, setUser] = useState([]);
 
 
-    // Data flow
-    useEffect(() => {
-
+      // Data flow
+      useEffect(() => {
+      if(selectedEvent!="") {
+      $("#businessEvent-option").text(selectedEvent);
+      }
             setTransactionType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
             var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
@@ -53,7 +55,7 @@ export default function TransactionFilters(props) {
          }); 
          setTransactionStatus([{value: 'Odprt', label: 'Odprt'}, {value: 'Prenesen', label: 'Prenesen'}]);
      
-    }, []);
+    }, [selectedEvent]);
 
 
 
@@ -75,11 +77,9 @@ export default function TransactionFilters(props) {
         setTransactionType(e.target.value);
     }
     function onChangeBusinessEvent(e) {
-      var old = $("#businessEvent-option")[0].innerHTML ;
-      $("#businessEvent-option")[0].innerHTML = e.code;
-      if(old == e.code || old == "") {
-      onChangeBusinessEvent(e);
-      }
+
+      setSelectedEvent(e.code)
+
     }
     function onChangeTransactionOrder(e) {
         setTransactionOrder(e.target.value);
@@ -110,7 +110,6 @@ export default function TransactionFilters(props) {
     }
 
     function onKeyDownBusinessEvent (e) {
-        console.log(e);
     }
 
     const onRenderOptionBusinessEvent = item => {
@@ -210,7 +209,6 @@ export default function TransactionFilters(props) {
                         id='businessEvent'
                         onKeyDown={(e) => onKeyDownBusinessEvent(e)}
                         options={businessEvent}
-                        onRenderLabel={props.selectedValue}
                         onChange={(action, item) => onChangeBusinessEvent(item)}
                         onRenderOption={onRenderOptionBusinessEvent}                
                     />

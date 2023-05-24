@@ -5,7 +5,7 @@ function showAlert(title, message, type) {
 
 
 
-function showDialogConfirm(title, message, type) {
+async function showDialogConfirm(title, message, type) {
 
     swal({
         title: 'Do you want to save the changes?',
