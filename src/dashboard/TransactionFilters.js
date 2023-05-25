@@ -118,14 +118,9 @@ export default function TransactionFilters(props) {
 
     }, [selectedEvent]);
 
-
-
-
-
-
-
     // Definition of application states
     // Methods for selection
+
     const handleSelect = (ranges) => { 
         const { selection } = ranges;
         setState([selection]);
@@ -157,9 +152,7 @@ export default function TransactionFilters(props) {
     function onChangeIdent(e) {
         setIdent(e.target.value);
     }
-    function onChangeIdentName(e) {
-        setIdentName(e.target.value);
-    }
+
     function onChangeErpKey(e) {
         setErpKey(e.target.value);
     }
@@ -190,34 +183,6 @@ export default function TransactionFilters(props) {
       };
 
 
-      const onRenderTransactionOrder = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td>{item.order}</td>
-                <td>{item.client}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
-
-      const onRenderTransactionId = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td>{item.id}</td>
-                <td>{item.erpKey}</td>
-                <td>{item.order}</td>
-                <td>{item.businessEvent}</td>
-                <td>{item.date}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
       const onRenderClient = item => {
         return (
           <table>
@@ -230,18 +195,7 @@ export default function TransactionFilters(props) {
           </table>
         );
       }
-      const onRenderIdent = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td>{item.ident}</td>
-                <td>{item.name}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
+   
   
       const onRenderErpKey = item => {
         return (
@@ -262,8 +216,10 @@ export default function TransactionFilters(props) {
             <div className="transactionFilters">
 
 
-                    <div className='columnDivider'>                 
+                    <div className='columnDivider'> 
+
                     <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>
+
                     <Dropdown
                         title={props.title}
                         placeholder="Poslovni dogodek"
@@ -275,10 +231,11 @@ export default function TransactionFilters(props) {
                     />
 
 
-                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} options={transactionOrder} id='transactionOrder'/>
+                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
 
 
                     </div>
+
                     <div className='columnDivider'>
 
 
@@ -290,15 +247,10 @@ export default function TransactionFilters(props) {
                       onChange={(e) => onChangeTransactionId(e)} 
                       className="form-control mt-1"
                       />
+
+
                     <Select className='select-filters' placeholder={"Status transakcije"} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
 
-
-
-
-
-
-
-                 
 
                     <Select
                         title={props.title}
@@ -310,9 +262,6 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeClient(e)} 
                         onRenderOption={onRenderClient}                
                     />
-
-
-
 
 
                     </div>
@@ -341,11 +290,16 @@ export default function TransactionFilters(props) {
                     <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
 
                     </div>
+
+
+
                     <div className='columnDivider'>
                     <button className="btn btn-primary" placeholder={"Izberite"} onClick={toggleVisibility} id="openRange">
                     Izberite
                     <MdDateRange />
                     </button>  
+
+
                     {open && (
                     <div className="nameModule">
                     <DateRangePicker ranges={state}                   

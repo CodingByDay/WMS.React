@@ -34,12 +34,8 @@ export default function IssuedGoods(props) {
             for (var i = 0; i < response.Items.length; i++) {
                 types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
             }     
-
             setDocumentTypes(types);
         }); 
-
-
-
 
         var warehouses =  PopupService.getWarehouses().then(response => {  
         var warehouses = onlyWarehouses(response);
@@ -131,11 +127,8 @@ export default function IssuedGoods(props) {
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-        var data =  PopupService.setMoveHead({DocumentType: documentData, WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
-
-            console.log(data);
-            alert("Finished")
-
+            var data =  PopupService.setMoveHead({DocumentType: documentData, WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+            
         }); 
        }
 
@@ -157,19 +150,7 @@ export default function IssuedGoods(props) {
 
         </div>
 
-
-
-
-
-
         <div className='layout-issued-goods'>
-
-
-
-
-
-
-
         <div className='left-column'>
 
 
