@@ -168,48 +168,48 @@ export default function TransactionFilters(props) {
 
     function onChangeTransactionType(e) {
       console.log(e);
-       setSelectedTransationType(e.target.value)
+       setSelectedTransationType(e.value)
     }
 
 
     function onChangeBusinessEvent(e) {
         console.log(e);
-        setSelectedBusinessEvent(e.target.value);
+        setSelectedBusinessEvent(e.code);
     }
 
 
     function onChangeTransactionOrder(e) {
         console.log(e);
-        setSelectedWorkOrder(e.target.value);
+        setSelectedWorkOrder(e.value);
     }
 
     function onChangeTransactionId(e) {
         console.log(e);
-        setSelectedTransactionId(e.target.value);
+        setSelectedTransactionId(e.value);
     }
 
     function onChangeTransactionStatus(e) {
         console.log(e);
-        setSelectedStatus(e.target.value);
+        setSelectedStatus(e.value);
     }
 
     function onChangeClient(e) {
         console.log(e);
-        setSelectedClient(e.target.value);
+        setSelectedClient(e.value);
     }
 
     function onChangeIdent(e) {
         console.log(e);
-        setSelectedIdent(e.target.value);
+        setSelectedIdent(e.value);
     }
 
     function onChangeErpKey(e) {
       console.log(e);
-      setSelectedErpKey(e.target.value);
+      setSelectedErpKey(e.value);
     }
     function onChangeUser(e) {
       console.log(e);
-      setSelectedUser(e.target.value);
+      setSelectedUser(e.value);
     }
     function toggleVisibility() {
         open = !open;
