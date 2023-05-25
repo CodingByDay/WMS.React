@@ -248,9 +248,9 @@ export default function TransactionFilters(props) {
           <table>
             <tbody>
               <tr>
-                <td>{item.erpKey}</td>
-                <td>{item.client}</td>
-                <td>{item.warehouse}</td>
+                <td style={{ width: 150 }}>{item.erpKey}</td>
+                <td style={{ width: 150 }}>{item.client}</td>
+                <td style={{ width: 150 }}>{item.warehouse}</td>
               </tr>
             </tbody>
           </table>

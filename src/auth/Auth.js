@@ -24,6 +24,8 @@ export default function Auth(props) {
       loader.style.display = "block";
       await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=loginUser&password=${password}&i=web`)
       .then(response => {
+          console.log(response)
+
           if(response.data.Items[1].Name === "Error") {
             setTimeout(function() {              
               loader.style.display = "none";
