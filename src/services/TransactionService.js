@@ -46,8 +46,17 @@ const TransactionService  = {
     async getClients() {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=su&i=web`)
         return response.data;
-    }
+    },
  
+
+    async getErpKeys() {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=erp&i=web`)
+        return response.data;
+    }
+
+
+
+
     
 }
 

@@ -74,22 +74,36 @@ export default function TransactionFilters(props) {
 
 
 
+         var erp = TransactionService.getErpKeys().then(response=> {
+          var erps = [];
+
+          for(var i=0;i<response.Items.length;i++) {
+
+
+          var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
+          var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
+          var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
+
+          erps.push({erpKey: erpKey, client: client, warehouse: warehouse});
+          }
+          setErpKey(erps)
+        });
          // Filling the clients table
 
 
         var clients = TransactionService.getClients().then(response=> {
-            window.clients = response;
-
-            var transactions = []
-
+            var clients = []
             for(var i=0;i<response.Items.length;i++) {
-                var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
-                transactions.push({label: field,  value: field});
+                var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
+                clients.push({label: field,  value: field});
             }
 
-            setTransactionOrder(transactions)
+            setClient(clients)
 
           });
+
+
+
 
 
     }, [selectedEvent]);
@@ -227,7 +241,6 @@ export default function TransactionFilters(props) {
                 <td>{item.erpKey}</td>
                 <td>{item.client}</td>
                 <td>{item.warehouse}</td>
-                <td>{item.date}</td>
               </tr>
             </tbody>
           </table>
@@ -237,8 +250,9 @@ export default function TransactionFilters(props) {
     return ( 
         <div>
             <div className="transactionFilters">
-                    <div className='columnDivider'>
-                   
+
+
+                    <div className='columnDivider'>                 
                     <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>
                     <Dropdown
                         title={props.title}
@@ -256,16 +270,16 @@ export default function TransactionFilters(props) {
 
                     </div>
                     <div className='columnDivider'>
-                    <Dropdown
-                        title={props.title}
-                        placeholder={"ID transakcije"} 
-                        id='transactionId'
-                        options={transactionId}
-                        selectedKey={props.value}
-                        onRenderLabel={props.selectedValue}
-                        onChange={(e) => onChangeTransactionId(e)} 
-                        onRenderOption={onRenderTransactionId}                
-                    />
+
+
+        
+                     <input
+                      id = "receiver"
+                      type="text"
+                      placeholder={"ID transakcije"} 
+                      onChange={(e) => onChangeTransactionId(e)} 
+                      className="form-control mt-1"
+                      />
                     <Select className='select-filters' placeholder={"Status transakcije"} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
 
 
