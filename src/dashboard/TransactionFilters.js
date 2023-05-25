@@ -76,10 +76,7 @@ export default function TransactionFilters(props) {
 
          var erp = TransactionService.getErpKeys().then(response=> {
           var erps = [];
-
           for(var i=0;i<response.Items.length;i++) {
-
-
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
           var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
@@ -97,13 +94,19 @@ export default function TransactionFilters(props) {
                 var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
                 clients.push({label: field,  value: field});
             }
-
             setClient(clients)
-
           });
 
 
+          var idents = TransactionService.getIdents.then(response=> {
+            window.identity = response;
+            var idents = []
+            for(var i=0;i<response.length;i++) {
 
+                idents.push({label: response[i],  value: response[i]});
+            }
+            setIdent(clients)
+          });
 
 
     }, [selectedEvent]);
