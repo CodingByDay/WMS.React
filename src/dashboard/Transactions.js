@@ -27,7 +27,8 @@ export default function Transactions() {
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
     const [head, setHead] = useState(false);
- 
+    const [filters, setFilters] = useState();
+
     useEffect(() => {
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
@@ -91,10 +92,17 @@ export default function Transactions() {
       }
    }
 
+
     const changeVisibility = (data) => {
         setHead(data)
     }
-  
+
+    const bringBackFilters = (sorting) => {
+      // Sorting object comes back from the children component
+      // Pass the sorting object down through the children
+      setFilters(sorting)
+    }
+
     return ( 
       
         <div>
@@ -102,13 +110,11 @@ export default function Transactions() {
 
 
         <Header />   
-        <TransactionFilters />
+        <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
-        <TransactionHeads data = {transactions} childToParent = {childToParent} />
+        <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
-
-
         <Add show = {show} />
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 

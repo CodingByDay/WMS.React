@@ -18,6 +18,8 @@ import DataAccess from "../utility/DataAccess";
 
 export default function TransactionFilters(props) { 
     let open = false;
+
+
     // Definintion of application states
     const [transactionType, setTransactionType] = useState([]);
     const [businessEvent, setBusinessEvent] = useState([]);
@@ -30,6 +32,32 @@ export default function TransactionFilters(props) {
     const [erpKey, setErpKey] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState("");
     const [order, setOrder] = useState("");
+
+
+
+
+
+
+
+
+
+
+
+    // Place for the selected states 
+
+    const [selectedTransationType, setSelectedTransationType] = useState("");
+    const [selectedBusinessEvent, setSelectedBusinessEvent] = useState("");
+    const [selectedWorkOrder, setSelectedWorkOrder] = useState("");
+    const [selectedTransactionId, setSelectedTransactionId] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState("");
+    const [selectedClient, setSelectedClient] = useState("");
+    const [selectedIdent, setSelectedIdent] = useState("");
+    const [selectedErpKey, setSelectedErpKey] = useState("");
+    const [selectedUser, setSelectedUser] = useState("");
+
+    // Place for the selected states 
+
+
 
 
     const [state, setState] = useState([
@@ -116,7 +144,16 @@ export default function TransactionFilters(props) {
           });
 
 
-    }, [selectedEvent]);
+
+
+
+
+
+
+
+          props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser})
+
+    }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedWorkOrder, setSelectedTransactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser]);
 
     // Definition of application states
     // Methods for selection
@@ -130,34 +167,49 @@ export default function TransactionFilters(props) {
     
 
     function onChangeTransactionType(e) {
-        setTransactionType(e.target.value);
+      console.log(e);
+       setSelectedTransationType(e.target.value)
     }
+
+
     function onChangeBusinessEvent(e) {
-
-      setSelectedEvent(e.code)
-
+        console.log(e);
+        setSelectedBusinessEvent(e.target.value);
     }
+
+
     function onChangeTransactionOrder(e) {
-        setTransactionOrder(e.target.value);
+        console.log(e);
+        setSelectedWorkOrder(e.target.value);
     }
+
     function onChangeTransactionId(e) {
-        setTransactionId(e.target.value);
+        console.log(e);
+        setSelectedTransactionId(e.target.value);
     }
+
     function onChangeTransactionStatus(e) {
-        setTransactionStatus(e.target.value);
+        console.log(e);
+        setSelectedStatus(e.target.value);
     }
+
     function onChangeClient(e) {
-        setClient(e.target.value);
+        console.log(e);
+        setSelectedClient(e.target.value);
     }
+
     function onChangeIdent(e) {
-        setIdent(e.target.value);
+        console.log(e);
+        setSelectedIdent(e.target.value);
     }
 
     function onChangeErpKey(e) {
-        setErpKey(e.target.value);
+      console.log(e);
+      setSelectedErpKey(e.target.value);
     }
     function onChangeUser(e) {
-        setErpKey(e.target.value);
+      console.log(e);
+      setSelectedUser(e.target.value);
     }
     function toggleVisibility() {
         open = !open;
