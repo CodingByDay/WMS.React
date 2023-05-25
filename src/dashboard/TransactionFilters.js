@@ -98,14 +98,21 @@ export default function TransactionFilters(props) {
           });
 
 
-          var idents = TransactionService.getIdents.then(response=> {
-            window.identity = response;
-            var idents = []
-            for(var i=0;i<response.length;i++) {
+          var idents = TransactionService.getIdents().then(response=> {
 
-                idents.push({label: response[i],  value: response[i]});
+    
+            var identObjects = []
+
+            // This is the place to check if all of the idents are correctly rendered.
+            for(var i=0;i<response.data.length;i++) {
+
+              identObjects.push({label: response.data[i],  value: response.data[i]});
             }
-            setIdent(clients)
+
+
+
+            window.identity = identObjects;
+            setIdent(identObjects)
           });
 
 
@@ -309,18 +316,17 @@ export default function TransactionFilters(props) {
 
 
                     </div>
+
                     <div className='columnDivider'>
-                    <Dropdown
-                        title={props.title}
+
+
+                    <Select 
                         placeholder={"Ident"}
                         id='ident'
                         options={ident}
-                        selectedKey={props.value}
-                        onRenderLabel={props.selectedValue}
                         onChange={(e) => onChangeIdent(e)} 
-                        onRenderOption={onRenderIdent}                
                     />
-                    <Select className='select-filters' placeholder={"Naziv identa"} onChange={(e) => onChangeIdentName(e)} options={identName} id='identName'/>
+
                     <Dropdown
                         title={props.title}
                         placeholder={"ERP ključ"}
@@ -331,6 +337,9 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeErpKey(e)} 
                         onRenderOption={onRenderErpKey}                
                     />
+
+                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
+
                     </div>
                     <div className='columnDivider'>
                     <button className="btn btn-primary" placeholder={"Izberite"} onClick={toggleVisibility} id="openRange">
@@ -345,7 +354,6 @@ export default function TransactionFilters(props) {
                     onChange={handleSelect}/>
                     </div>
                      )}
-                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
                     </div>
                     </div>
 

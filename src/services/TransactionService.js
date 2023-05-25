@@ -59,7 +59,7 @@ const TransactionService  = {
     {
 
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=idx&i=web`)
-        return response.data;
+        return response;
     }
 
 }
