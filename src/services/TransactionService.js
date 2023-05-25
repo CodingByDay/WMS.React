@@ -33,13 +33,18 @@ const TransactionService  = {
 
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=mh&i=web`)
         
-        console.log(response.data)
+
 
         return response.data;
     },
 
     async getPositionsByHeadId(headId) {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=mi&pars=${headId}&i=web`)
+        return response.data;
+    },
+    
+    async getClients() {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=su&i=web`)
         return response.data;
     }
  

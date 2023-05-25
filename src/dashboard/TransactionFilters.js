@@ -71,6 +71,27 @@ export default function TransactionFilters(props) {
             setBusinessEvent(types);
          }); 
          setTransactionStatus([{value: 'Odprt', label: 'Odprt'}, {value: 'Prenesen', label: 'Prenesen'}]);
+
+
+
+         // Filling the clients table
+
+
+        var clients = TransactionService.getClients().then(response=> {
+            window.clients = response;
+
+            var transactions = []
+
+            for(var i=0;i<response.Items.length;i++) {
+                var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
+                transactions.push({label: field,  value: field});
+            }
+
+            setTransactionOrder(transactions)
+
+          });
+
+
     }, [selectedEvent]);
 
 
