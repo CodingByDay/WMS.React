@@ -3,7 +3,6 @@ import DataAccess from "../utility/DataAccess";
 const TableBody = (props) => {
     var tableData = props.tableData;
     var table = props.table;
-    console.log(tableData);
     try {
         var len = tableData.Items.length;
     } catch (e) {
@@ -150,7 +149,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
          })}
         </tbody>
        );
-} else if(!window.location.href.includes("transactions")&&table=="heads") {
+} else if(!window.location.href.includes("transactions") && table=="heads") {
+
+
 
     tableData = tableData.Items.filter((data) => {
 
@@ -260,7 +261,28 @@ if(window.location.href.includes("transactions")&&table=="heads") {
     
     
     
-     })
+        }).filter((data) => {
+
+            if(typeof props.sort == "undefined") {
+                return true;
+            }
+
+
+
+            var dateFrom = props.sort.period.startDate;
+            window.from = dateFrom
+
+
+            var endDate= props.sort.period.endDate;
+            window.to = endDate
+
+            var field = DataAccess.getData(data, "DeliveryDeadline", "DateTimeValue");
+    
+            window.deadline = field;
+        
+            return true;
+
+        });
     
         // TODO: Conditional sorting
     
@@ -313,9 +335,111 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           })}
          </tbody>
         );
-       };
+       } else if(window.location.href.includes("transactions") && table == "positions") {
+
+
+        var columns = props.columns;
+        var returnRow = props.returnRow;
     
-}
+    
+        function findIndex(array, accesor) {
+            for(var i=0;i<array.Properties.Items.length;i++) {
+            if(array.Properties.Items[i].Name == accesor) {
+                return i;
+            }
+            }
+            return -1;
+        }
+      
+        function getColumn(accessor) {
+            for(var i = 0; i < columns.length; i++) {
+                if(columns[i].accessor == accessor) {
+                    return columns[i];
+                }
+            }
+        }
+    
+        const getColumnData = event => {
+            var parent = event.target.parentElement;
+            returnRow(parent);
+        }
+        tableData = tableData.Items;
+    
+        return (
+         <tbody>
+          {
+         tableData.map((data, index) => {
+           return (
+            <tr onClick={getColumnData}>
+            { columns.map(({ accessor }) => {
+            var column = getColumn(accessor);
+            
+            var tData = ""
+            try {          
+                tData = DataAccess.getData(data, column.accessor, column.type);  
+            } catch (e) {
+            }
+                return <td>{tData}</td>;
+             })}
+            </tr>
+           );
+          })}
+         </tbody>
+        );
+
+       } else if (!window.location.href.includes("transactions") && table == "positions") {
+        
+        var columns = props.columns;
+        var returnRow = props.returnRow;
+    
+    
+        function findIndex(array, accesor) {
+            for(var i=0;i<array.Properties.Items.length;i++) {
+            if(array.Properties.Items[i].Name == accesor) {
+                return i;
+            }
+            }
+            return -1;
+        }
+      
+        function getColumn(accessor) {
+            for(var i = 0; i < columns.length; i++) {
+                if(columns[i].accessor == accessor) {
+                    return columns[i];
+                }
+            }
+        }
+    
+        const getColumnData = event => {
+            var parent = event.target.parentElement;
+            returnRow(parent);
+        }
+        tableData = tableData.Items;
+
+        return (
+         <tbody>
+          {
+         tableData.map((data, index) => {
+           return (
+            <tr onClick={getColumnData}>
+            { columns.map(({ accessor }) => {
+            var column = getColumn(accessor);
+            
+            var tData = ""
+            try {          
+                tData = DataAccess.getData(data, column.accessor, column.type);  
+            } catch (e) {
+            }
+                return <td>{tData}</td>;
+             })}
+            </tr>
+           );
+          })}
+         </tbody>
+        );
+       }
+      
+} 
 
 
 

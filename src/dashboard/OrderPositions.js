@@ -9,7 +9,7 @@ export default function OrderPositions(props) {
 
     return ( 
         <div>
-            <Table className="positions-table" type="position" class = "table_responsive_positions" data = {props.data} childToParent = {props.childToParent} />
+            <Table table = "positions" className="positions-table" type="position" class = "table_responsive_positions" data = {props.data} childToParent = {props.childToParent} />
        </div>
     ); 
 

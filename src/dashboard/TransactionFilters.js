@@ -143,8 +143,6 @@ export default function TransactionFilters(props) {
               identObjects.push({label: response.data[i],  value: response.data[i]});
             }
 
-
-
             window.identity = identObjects;
             setIdent(identObjects)
           });
@@ -165,48 +163,45 @@ export default function TransactionFilters(props) {
     
 
     function onChangeTransactionType(e) {
-      console.log(e);
        setSelectedTransationType(e.value)
     }
 
 
     function onChangeBusinessEvent(e) {
-        console.log(e);
         setSelectedBusinessEvent(e.code);
     }
 
 
     function onChangeTransactionOrder(e) {
-        console.log(e);
         setSelectedWorkOrder(e.value);
     }
 
     function onChangeTransactionId(e) {
-        console.log(e);
+   
         setSelectedTransactionId(e.value);
     }
 
     function onChangeTransactionStatus(e) {
-        console.log(e);
+ 
         setSelectedStatus(e.value);
     }
 
     function onChangeClient(e) {
-        console.log(e);
+  
         setSelectedClient(e.value);
     }
 
     function onChangeIdent(e) {
-        console.log(e);
+
         setSelectedIdent(e.value);
     }
 
     function onChangeErpKey(e) {
-      console.log(e);
+
       setSelectedErpKey(e.value);
     }
     function onChangeUser(e) {
-      console.log(e);
+
       setSelectedUser(e.value);
     }
     function toggleVisibility() {

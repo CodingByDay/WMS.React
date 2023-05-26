@@ -16,13 +16,13 @@ export default function HeaderOrderListing(props) {
     const [document, setDocument] = useState("")
 
 
-    const [state, setState] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection',
-        }
-    ]);
+    const [state, setState] = useState(
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection'
+      }
+    );
 
     
     const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function HeaderOrderListing(props) {
 
         searchTable();
 
-    }, [documentType, consignee, client, warehouse, document]);
+    }, [documentType, consignee, client, warehouse, document, state]);
 
 
 
@@ -69,7 +69,7 @@ export default function HeaderOrderListing(props) {
   };
 
   const handleSelect = (ranges) => { 
-    setState(ranges)
+ 
    
   };
 
@@ -132,15 +132,21 @@ export default function HeaderOrderListing(props) {
          {open && (
             <div className="nameModule">
 
-
-
-              <DateRangePicker ranges={[state]}                       
-              showSelectionPreview={true}
-              moveRangeOnFirstSelection={true}
-              onChange={handleSelect} />
+              
+          <DateRangePicker
+            onChange={item => setState([item.selection])}
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={1}
+            ranges={state}
+            direction="horizontal"
+          />
 
 
             </div>
+
+
+
          )}
 
             <input
