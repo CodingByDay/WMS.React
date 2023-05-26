@@ -9,7 +9,7 @@ export default function TransactionPositions(props) {
 
     return ( 
         <div>
-            <Table className="positions-table" data = {props.data} type="positionsTransaction" class = "table_responsive_positions_transactions"  />
+            <Table table = "heads" className="positions-table" data = {props.data} type="positionsTransaction" class = "table_responsive_positions_transactions"  />
 
        </div>
     ); 

@@ -112,9 +112,9 @@ export default function Transactions() {
         <Header />   
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
-        <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
+        <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} type="head" />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
-        <TransactionPositions data = {positions} childToParent = {childToParent} />
+        <TransactionPositions data = {positions} childToParent = {childToParent}  type="bottom"/>
         <Add show = {show} />
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 

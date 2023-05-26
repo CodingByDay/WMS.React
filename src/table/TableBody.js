@@ -2,17 +2,18 @@ import DataAccess from "../utility/DataAccess";
 
 const TableBody = (props) => {
     var tableData = props.tableData;
+    var table = props.table;
+    console.log(tableData);
     try {
         var len = tableData.Items.length;
     } catch (e) {
         return null;
 }
 
-if(window.location.href.includes("transactions")) {
+if(window.location.href.includes("transactions")&&table=="heads") {
      // TODO: Conditional sorting
     
-    
-    
+
      var columns = props.columns;
      var returnRow = props.returnRow;
  
@@ -38,7 +39,44 @@ if(window.location.href.includes("transactions")) {
          var parent = event.target.parentElement;
          returnRow(parent);
      }
-} else {
+
+     tableData = tableData.Items.filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+    
+        var term = props.sort.selectedBusinessEvent.toLowerCase();
+        var field = DataAccess.getData(data, "DocumentType", "StringValue");
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+            return true; 
+        
+    })
+
+     return (
+        <tbody>
+         {
+        tableData.map((data, index) => {
+          return (
+           <tr onClick={getColumnData}>
+           { columns.map(({ accessor }) => {
+           var column = getColumn(accessor);
+           
+           var tData = ""
+           try {          
+               tData = DataAccess.getData(data, column.accessor, column.type);  
+           } catch (e) {
+           }
+               return <td>{tData}</td>;
+            })}
+           </tr>
+          );
+         })}
+        </tbody>
+       );
+} else if(!window.location.href.includes("transactions")&&table=="heads") {
 
     tableData = tableData.Items.filter((data) => {
 

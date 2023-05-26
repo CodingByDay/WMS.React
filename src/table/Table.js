@@ -85,7 +85,7 @@ const columnsTransactionPosition = [
     <div className={props.class}>
     <table className="table" id={props.passID}>
     <TableHead className="orders" columns={columns} />
-    <TableBody returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
+    <TableBody table = {props.table} returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
    </table>
    </div>
 
