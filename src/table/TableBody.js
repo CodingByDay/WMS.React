@@ -126,7 +126,42 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         }
 
             return true;    
-    })
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        
+
+
+        var dateFrom = props.sort.period[0].startDate;
+  
+
+
+        var endDate= props.sort.period[0].endDate;
+
+        var today = new Date();
+
+        if(dateFrom.toISOString() === endDate.toISOString() && dateFrom.toDateString() === today.toDateString()) { 
+
+            return true;
+        }
+      
+       
+        var field = DataAccess.getData(data, "Date", "DateTimeValue");
+
+        var deadline = new Date(field)
+        
+
+        if(dateFrom<=deadline && endDate>=deadline) { 
+            return true;
+        } else {
+            return false;
+        }
+        
+
+    });
 
      return (
         <tbody>
@@ -290,7 +325,6 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             
 
             if(dateFrom<=deadline && endDate>=deadline) { 
-
                 return true;
             } else {
                 return false;

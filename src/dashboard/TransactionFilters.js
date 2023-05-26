@@ -17,7 +17,7 @@ import DataAccess from "../utility/DataAccess";
 
 
 export default function TransactionFilters(props) { 
-    let open = false;
+  
 
 
     // Definintion of application states
@@ -32,7 +32,7 @@ export default function TransactionFilters(props) {
     const [erpKey, setErpKey] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState("");
     const [order, setOrder] = useState("");
-
+    const [open, setOpen] = useState(false);
 
 
 
@@ -59,14 +59,13 @@ export default function TransactionFilters(props) {
 
 
 
-
     const [state, setState] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection',
-        }
-    ]);
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection'
+      }
+     ] );
 
 
     const [user, setUser] = useState([]);
@@ -147,9 +146,9 @@ export default function TransactionFilters(props) {
             setIdent(identObjects)
           });
 
-          props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser})
+          props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
 
-    }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedWorkOrder, setSelectedTransactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser]);
+    }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedWorkOrder, setSelectedTransactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser, state]);
 
     // Definition of application states
     // Methods for selection
@@ -205,7 +204,8 @@ export default function TransactionFilters(props) {
       setSelectedUser(e.value);
     }
     function toggleVisibility() {
-        open = !open;
+        var open = !open;
+        setOpen(open);
     }
 
     function onKeyDownBusinessEvent (e) {
@@ -347,10 +347,14 @@ export default function TransactionFilters(props) {
 
                     {open && (
                     <div className="nameModule">
-                    <DateRangePicker ranges={state}                   
-                    showSelectionPreview={true}
-                    moveRangeOnFirstSelection={false}
-                    onChange={handleSelect}/>
+                    <DateRangePicker
+                      onChange={item => setState([item.selection])}
+                      showSelectionPreview={true}
+                      moveRangeOnFirstSelection={false}
+                      months={1}
+                      ranges={state}
+                      direction="horizontal"
+                    />
                     </div>
                      )}
                     </div>
