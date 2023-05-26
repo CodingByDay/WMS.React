@@ -204,8 +204,9 @@ export default function TransactionFilters(props) {
       setSelectedUser(e.value);
     }
     function toggleVisibility() {
-        var open = !open;
-        setOpen(open);
+
+
+        setOpen(!open);
     }
 
     function onKeyDownBusinessEvent (e) {
@@ -339,12 +340,13 @@ export default function TransactionFilters(props) {
 
 
                     <div className='columnDivider'>
-                    <button className="btn btn-primary" placeholder={"Izberite"} onClick={toggleVisibility} id="openRange">
+                    <button className="btn btn-primary" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
                     Izberite
                     <MdDateRange />
                     </button>  
 
 
+                   
                     {open && (
                     <div className="nameModule">
                     <DateRangePicker
