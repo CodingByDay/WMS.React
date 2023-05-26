@@ -14,52 +14,37 @@ export default function HeaderOrderListing(props) {
     // States
     const [types, setTypes] = useState([]);
     const [document, setDocument] = useState("")
-
-
-    const [state, setState] = useState(
+    const [state, setState] = useState([
       {
         startDate: new Date(),
         endDate: new Date(),
         key: 'selection'
       }
-    );
-
-    
+     ] ); 
     const [open, setOpen] = useState(false);
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState({value:"",label:""})
-
-  
     useEffect(() => {
- 
         var data =  SortingService.getAllDocumentTypes().then(response => { 
         var types = [];
-        
-
-        
+           
             for (var i = 0; i < response.Items.length; i++) {
                       types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
             }            
             setTypes(types);
-
-
      }); 
 
-
         // filter the table
-
         searchTable();
-
     }, [documentType, consignee, client, warehouse, document, state]);
 
 
 
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
   function searchTable() { 
-
     var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
     props.getSortingObject(sorting)
   };
@@ -82,7 +67,6 @@ export default function HeaderOrderListing(props) {
   }
 
 
-  
   function onChangeWarehouse(e) {
     setWarehouse(e.target.value)
   }

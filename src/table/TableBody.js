@@ -267,20 +267,35 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 return true;
             }
 
+            
 
 
-            var dateFrom = props.sort.period.startDate;
-            window.from = dateFrom
+            var dateFrom = props.sort.period[0].startDate;
+      
 
 
-            var endDate= props.sort.period.endDate;
-            window.to = endDate
+            var endDate= props.sort.period[0].endDate;
 
+            var today = new Date();
+
+            if(dateFrom.toISOString() === endDate.toISOString() && dateFrom.toDateString() === today.toDateString()) { 
+
+                return true;
+            }
+          
+           
             var field = DataAccess.getData(data, "DeliveryDeadline", "DateTimeValue");
     
-            window.deadline = field;
-        
-            return true;
+            var deadline = new Date(field)
+            
+
+            if(dateFrom<=deadline && endDate>=deadline) { 
+
+                return true;
+            } else {
+                return false;
+            }
+            
 
         });
     
