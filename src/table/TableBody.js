@@ -45,14 +45,88 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         if(typeof props.sort == "undefined") {
             return true;
         }
-    
         var term = props.sort.selectedBusinessEvent.toLowerCase();
         var field = DataAccess.getData(data, "DocumentType", "StringValue");
         if (!field.includes(term) &&term!="") {
             return false;
         }
+
             return true; 
         
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedClient.toLowerCase();
+
+        var field = DataAccess.getData(data, "Receiver", "StringValue");
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+
+            return true;    
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedErpKey.toLowerCase();
+
+        var field = DataAccess.getData(data, "Key", "StringValue");
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+
+            return true;    
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedStatus.toLowerCase();
+
+        var field = DataAccess.getData(data, "Status", "StringValue");
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+            return true;    
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedUser.toLowerCase();
+
+        var field = DataAccess.getData(data, "ClerkName", "StringValue");
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+
+            return true;    
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedWorkOrder.toLowerCase();
+
+        var field = DataAccess.getData(data, "LinkKey", "StringValue");
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+
+            return true;    
     })
 
      return (
