@@ -16,7 +16,7 @@ import TransactionService from '../services/TransactionService';
 import StockService from '../services/StockService';
 import Add from '../popup/Add'
 import AddHeadDocument from '../popup/AddHeadDocument'
-
+import Loader from '../loader/Loader';
 
 
 
@@ -30,6 +30,12 @@ export default function Transactions() {
     const [filters, setFilters] = useState();
 
     useEffect(() => {
+
+              window['toggleLoaader']("loader", false);
+              
+
+
+
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
            }); 
@@ -106,10 +112,11 @@ export default function Transactions() {
     return ( 
       
         <div>
+          <Loader />
 
-
-
+        <div className="content">
         <Header />   
+   
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
@@ -119,7 +126,7 @@ export default function Transactions() {
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
-
+        </div>
 
         
         </div>
