@@ -91,9 +91,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var term = props.sort.selectedStatus.toLowerCase();
 
-        var field = DataAccess.getData(data, "Status", "StringValue");
+        var field = DataAccess.getData(data, "Status", "StringValue").toLowerCase();;
 
-        if (!field.includes(term) &&term!="") {
+        if (field!=term&&term!="") {
             return false;
         }
             return true;    

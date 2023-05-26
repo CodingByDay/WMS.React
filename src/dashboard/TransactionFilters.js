@@ -79,6 +79,7 @@ export default function TransactionFilters(props) {
 
         var dn = TransactionService.getAllTransactions().then(response=> {
             var transactions = []
+            transactions.push({value: '', label: ''})
             for(var i=0;i<response.Items.length;i++) {
                 var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
                 transactions.push({label: field,  value: field});
@@ -89,21 +90,24 @@ export default function TransactionFilters(props) {
             if(selectedEvent!="") {
                $("#businessEvent-option").text(selectedEvent);
             }
-            setTransactionType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
+            setTransactionType([{value: '', label: ''},{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
             var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
-            
+            types.push({value: '', label: ''})
+
             for(var i = 0; i < response.type.length;i++) {
                 types.push({code: response.type[i], type: response.names[i]});
             }
             setBusinessEvent(types);
          }); 
-         setTransactionStatus([{value: 'Odprt', label: 'Odprt'}, {value: 'Prenesen', label: 'Prenesen'}]);
+         setTransactionStatus([{value: '', label: ''},{value: 'Odprt', label: 'Odprt'}, {value: 'Zaključen', label: 'Zaključen'}]);
 
 
 
          var erp = TransactionService.getErpKeys().then(response=> {
           var erps = [];
+          erps.push({erpKey: "", client: "", warehouse: ""})
+
           for(var i=0;i<response.Items.length;i++) {
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
@@ -118,6 +122,8 @@ export default function TransactionFilters(props) {
 
         var clients = TransactionService.getClients().then(response=> {
             var clients = []
+            clients.push({value: '', label: ''})
+
             for(var i=0;i<response.Items.length;i++) {
                 var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
                 clients.push({label: field,  value: field});
@@ -130,10 +136,10 @@ export default function TransactionFilters(props) {
 
     
             var identObjects = []
+            identObjects.push({value: '', label: ''})
 
             // This is the place to check if all of the idents are correctly rendered.
             for(var i=0;i<response.data.length;i++) {
-
               identObjects.push({label: response.data[i],  value: response.data[i]});
             }
 
@@ -142,14 +148,6 @@ export default function TransactionFilters(props) {
             window.identity = identObjects;
             setIdent(identObjects)
           });
-
-
-
-
-
-
-
-
 
           props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser})
 
