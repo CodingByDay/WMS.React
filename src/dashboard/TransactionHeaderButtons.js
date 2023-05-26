@@ -34,11 +34,7 @@ export default function TransactionHeaderButtons(props) {
              <MdDeleteOutline />
 
              </button>
-             <button className="btn btn-primary">Popravi
-             
-             <MdEdit />
 
-             </button>
              <button className="btn btn-primary" onClick={toggleAddPosition} id=''>Dodaj
              
              
