@@ -177,8 +177,8 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                tData = DataAccess.getData(data, column.accessor, column.type);  
            } catch (e) {
            }
-               return <td>{tData}</td>;
-            })}
+           return <td key={accessor} className={accessor}>{tData}</td>;
+        })}
            </tr>
           );
          })}
@@ -377,8 +377,8 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
             }
-                return <td>{tData}</td>;
-             })}
+            return <td key={accessor} className={accessor}>{tData}</td>;
+        })}
             </tr>
            );
           })}
@@ -429,8 +429,8 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
             }
-                return <td>{tData}</td>;
-             })}
+            return <td key={accessor} className={accessor}>{tData}</td>;
+        })}
             </tr>
            );
           })}
@@ -480,7 +480,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
             }
-                return <td>{tData}</td>;
+                return <td key={accessor} className={accessor}>{tData}</td>;
              })}
             </tr>
            );

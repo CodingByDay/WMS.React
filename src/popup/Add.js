@@ -14,7 +14,21 @@ export default function Add(props) {
 
     const [ident, setIdent] = useState("");
     const [identList, setIdentsList] = useState([]);
+    const [transactionData, setTransactionData] = useState({})
+  
 
+
+    if(typeof props.selected.childNodes!== "undefined") {
+        console.clear();
+        var rowProperty = {};
+        console.log(props.selected)
+    for(var i=0;i<props.selected.childNodes.length;i++) { 
+        rowProperty[`${props.selected.childNodes[i]}`] = props.selected.childNodes[i].innerHTML;
+    }
+
+    window.row = props.selected;
+    }
+    setTransactionData(rowProperty)
 
     useEffect(() => {
 
@@ -28,25 +42,14 @@ export default function Add(props) {
             }
             window.identity = identObjects;
             setIdentsList(identObjects);
-    
           });
 
-
-          console.log("Component rendering");
-          console.log(props.selected);
+      
 }, []);
-
-
-
-
-
- 
-  
 
     function onChangeIdent(e) {
         setIdent(e.value);
     }
-
 
     if(props.show) {
 
@@ -58,6 +61,9 @@ export default function Add(props) {
 
     }
   
+
+
+
     return ( 
 
         <div className="edit" id='edit'>

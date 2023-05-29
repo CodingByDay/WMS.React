@@ -174,7 +174,7 @@ $(".table_responsive_positions_transactions tr").click(function () {
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
-        <Add show = {show} />
+        <Add show = {show} selected = {selectedRowTransactionsHeads} />
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 
 
