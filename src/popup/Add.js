@@ -57,7 +57,7 @@ export default function Add(props) {
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="inputFirstname">Ident</label>
-                        <input type="text" class="form-control" id="ident" placeholder="Ident" />
+                        <input type="text" class="form-control" id="identForm" placeholder="Ident" />
                     </div>
                     <div class="col-sm-6">
                         <label>Podatki o naročilo</label>
@@ -67,32 +67,32 @@ export default function Add(props) {
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="inputAddressLine1">Naziv</label>
-                        <input type="text" class="form-control" id="identName" placeholder="Street Address" />
+                        <input type="text" class="form-control" id="naziv" placeholder="Naziv" />
                     </div>
                     <div class="col-sm-6">
-                        <label for="inputAddressLine2">Količina</label>
-                        <input type="text" class="form-control" id="inputAddressLine2" placeholder="Line 2" />
+                        <label for="inputAddressLine2">Pozicija</label>
+                        <input type="text" class="form-control" id="quantityForm" placeholder="Pozicija" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity" placeholder="City" />
+                        <label for="inputCity">Naročilo</label>
+                        <input type="text" class="form-control" id="orderForm" placeholder="Naročilo" />
                     </div>
                     <div class="col-sm-6">
-                        <label for="inputState">State</label>
-                        <input type="text" class="form-control" id="inputState" placeholder="State" />
+                        <label for="inputState">Odprta količina</label>
+                        <input type="text" class="form-control" id="quantityForm" placeholder="Količina" />
                     </div>
 
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputContactNumber">Contact Number</label>
-                        <input type="number" class="form-control" id="inputContactNumber" placeholder="Contact Number" />
+                        <label for="inputContactNumber">Kontaktna številka</label>
+                        <input type="number" class="form-control" id="inputContactNumberForm" placeholder="Kontakt" />
                     </div>
                     <div class="col-sm-6">
-                        <label for="inputWebsite">Website</label>
-                        <input type="text" class="form-control" id="inputWebsite" placeholder="Website" />
+                        <label for="inputWebsite">Datum dobave</label>
+                        <input type="text" class="form-control" id="dateShipping" placeholder="Datum dobave" />
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary px-4 float-right">Save</button>
