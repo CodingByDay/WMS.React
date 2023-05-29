@@ -126,13 +126,13 @@ $(".table_responsive_positions_transactions tr").click(function () {
 
    async function finishHeadDocument() {
         if(window.confirm("Ali ste sigurni da želite zaključiti dokument?")) {
-              var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
-              if(response.data.includes("OK!")) {
-                  alert("Pobrisano")
-              }
+              var data =  TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+                var data =  TransactionService.getAllTransactions().then(response => { 
+                  setTransactions(response);
+                  window.showAlert("Informacija", "Uspešno zaključeno", "success")
+                  }); 
            }); 
-      } 
-        
+      }      
    }
 
 
@@ -142,11 +142,11 @@ $(".table_responsive_positions_transactions tr").click(function () {
       var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
 
       if(response.data.includes("OK!")) {
-            var data =  TransactionService.getAllTransactions().then(response => { 
+              var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
               window.showAlert("Informacija", "Uspešno pobrisano", "success")
               }); 
-         }
+      }
    }); 
   } 
 }
