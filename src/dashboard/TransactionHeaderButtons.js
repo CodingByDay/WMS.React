@@ -13,6 +13,9 @@ export default function TransactionHeaderButtons(props) {
         props.reactToFront({type: 'transaction', action: 'delete', table: 'header'});
     }
 
+    function finishDocument() {
+        props.reactToFront({type: 'transaction', action: 'finish', table: 'header'});
+    }
 
     let navigate = useNavigate();
     return ( 
@@ -20,7 +23,7 @@ export default function TransactionHeaderButtons(props) {
 
         <div className='buttonsHeaderOuter'>
         <div className='buttonsHeader'>
-             <button className="btn btn-primary">Prenesi
+             <button className="btn btn-primary" onClick={finishDocument}>Prenesi
              
              
              

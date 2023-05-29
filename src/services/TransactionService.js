@@ -57,9 +57,20 @@ const TransactionService  = {
 
     async getIdents()
     {
-
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=idx&i=web`)
         return response;
+    },
+
+    async deleteHeadDocument(id) {
+//  Brisanje dokumenta.
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)
+        return response;
+    },
+
+
+    async finishHeadDocument(id) {
+//  Finishing the transaction.
+    
     }
 
 }

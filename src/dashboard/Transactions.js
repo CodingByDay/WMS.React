@@ -51,6 +51,8 @@ $(".table_responsive_transaction tr").click(function () {
 	$(selectedRowTransactionsHeads).css("background-color", "unset")
 	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
   setSelectedRowHeadsTransactions (	this );
+  window.selectedHeadDocumentRow = this;
+
 });
 
 $(".table_responsive_positions_transactions tr").click(function () {
@@ -104,7 +106,6 @@ $(".table_responsive_positions_transactions tr").click(function () {
       var action = data.action;
       var table = data.table;
       if(type === "transaction") { 
-        alert("Deleting...");
 
         if(action === "add") { 
 
@@ -116,14 +117,58 @@ $(".table_responsive_positions_transactions tr").click(function () {
                 setHead(toggled);
             }
         } else if (action === "delete") {
-          alert("Deleting...");
+               deleteHeadDocument();
+        } else if (action === "finish") {
+               finishHeadDocument();
         }
-      } else {
-        alert("Deleting... else");
-
-      }
+      } 
    }
 
+
+   async function finishHeadDocument() {
+        window['swal']({
+          title: "Ali ste sigurni?",
+          text: "Ali želite zaključiti transakciju?",
+          icon: "warning",
+          buttons: [
+            'Ne',
+            'Da, siguren sem!'
+          ],
+          dangerMode: true,
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            var data =  TransactionService.deleteHeadDocument(4).then(response => { 
+              alert(response)
+           }); 
+          } else {
+          
+          }
+        })
+   }
+
+
+   function deleteHeadDocument() { 
+    window['swal']({
+      title: "Ali ste sigurni?",
+      text: "Ali želite pobrisati transakciju?",
+      icon: "warning",
+      buttons: [
+        'Ne',
+        'Da, siguren sem!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+          var data =  TransactionService.deleteHeadDocument(4).then(response => { 
+          if(response.data.includes("OK!")) {
+             window['showAlert']('Uspešno pobrisana pozicija', '', 'success')
+          }
+       }); 
+      } else {
+      
+      }
+    })
+   }
 
     const changeVisibility = (data) => {
         setHead(data)
