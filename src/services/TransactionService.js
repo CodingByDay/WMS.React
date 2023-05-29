@@ -62,15 +62,16 @@ const TransactionService  = {
     },
 
     async deleteHeadDocument(id) {
-//  Brisanje dokumenta.
+        //  Brisanje dokumenta.
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)
         return response;
     },
 
 
     async finishHeadDocument(id) {
-//  Finishing the transaction.
-    
+        //  Finishing the transaction.
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)
+        return response;
     }
 
 }

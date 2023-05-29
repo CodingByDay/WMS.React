@@ -7,9 +7,6 @@ export default function TransactionPositionsButtons(props) {
 
     let navigate = useNavigate();
 
-
-    
-
     function toggleAddPosition() {
         props.reactToFront({type: 'transaction', action: 'add', table: 'positions'});
     }
@@ -24,12 +21,9 @@ export default function TransactionPositionsButtons(props) {
         <div className='buttonsPositions'>
 
 
-
              <button className="btn btn-primary" onClick={toggleAddPosition}>Dodaj
-             
-                       
+                                   
              <MdAdd />
-
 
              </button>
 

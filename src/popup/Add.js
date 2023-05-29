@@ -1,10 +1,45 @@
 
 import $ from 'jquery'; 
+import { useNavigate  } from 'react-router-dom';
+import Table from '../table/Table';
+import { useEffect, useState } from "react";
+import Select from 'react-select'
+import _ from 'lodash';
+import TransactionService from '../services/TransactionService';
+
+
 
 
 export default function Add(props) { 
 
+    const [ident, setIdent] = useState("");
+    const [identList, setIdentsList] = useState([]);
+
+
+    useEffect(() => {
+
+        var idents = TransactionService.getIdents().then(response=> { 
+
+            var identObjects = []
+            identObjects.push({value: '', label: ''})
+            // This is the place to check if all of the idents are correctly rendered.
+            for(var i=0;i<response.data.length;i++) {
+              identObjects.push({label: response.data[i],  value: response.data[i]});
+            }
+            window.identity = identObjects;
+            setIdentsList(identObjects);
     
+          });
+}, []);
+
+
+  
+
+    function onChangeIdent(e) {
+        setIdent(e.value);
+    }
+
+
     if(props.show) {
 
         $("#edit").css("display", "block");
@@ -56,18 +91,22 @@ export default function Add(props) {
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputFirstname">Ident</label>
-                        <input type="text" class="form-control" id="identForm" placeholder="Ident" />
+                  
                     </div>
                     <div class="col-sm-6">
-                        <label>Podatki o naročilo</label>
+
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputAddressLine1">Naziv</label>
-                        <input type="text" class="form-control" id="naziv" placeholder="Naziv" />
+                    <label for="inputFirstname">Ident</label>
+                        <Select 
+                        placeholder={"Ident"}
+                        id='identListControl'
+                        options={identList}
+                        onChange={(e) => onChangeIdent(e)} 
+                    />
                     </div>
                     <div class="col-sm-6">
                         <label for="inputAddressLine2">Pozicija</label>
@@ -76,7 +115,7 @@ export default function Add(props) {
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputCity">Naročilo</label>
+                    <label for="inputCity">Naročilo</label>
                         <input type="text" class="form-control" id="orderForm" placeholder="Naročilo" />
                     </div>
                     <div class="col-sm-6">
@@ -87,8 +126,8 @@ export default function Add(props) {
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="inputContactNumber">Kontaktna številka</label>
-                        <input type="number" class="form-control" id="inputContactNumberForm" placeholder="Kontakt" />
+                    <label for="inputContactNumber">Količina</label>
+                        <input type="number" class="form-control" id="inputContactNumberForm" placeholder="Količina" />
                     </div>
                     <div class="col-sm-6">
                         <label for="inputWebsite">Datum dobave</label>

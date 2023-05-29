@@ -99,11 +99,10 @@ export default function TransactionFilters(props) {
             }
             setBusinessEvent(types);
          }); 
-         setTransactionStatus([{value: '', label: ''},{value: 'Odprt', label: 'Odprt'}, {value: 'Zaključen', label: 'Zaključen'}]);
 
 
-
-         var erp = TransactionService.getErpKeys().then(response=> {
+          setTransactionStatus([{value: '', label: ''},{value: 'Odprt', label: 'Odprt'}, {value: 'Zaključen', label: 'Zaključen'}]);
+          var erp = TransactionService.getErpKeys().then(response=> {
           var erps = [];
           erps.push({erpKey: "", client: "", warehouse: ""})
 
@@ -111,7 +110,6 @@ export default function TransactionFilters(props) {
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
           var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
-
           erps.push({erpKey: erpKey, client: client, warehouse: warehouse});
           }
           setErpKey(erps)
