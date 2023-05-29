@@ -18,17 +18,7 @@ export default function Add(props) {
   
 
 
-    if(typeof props.selected.childNodes!== "undefined") {
-        console.clear();
-        var rowProperty = {};
-        console.log(props.selected)
-    for(var i=0;i<props.selected.childNodes.length;i++) { 
-        rowProperty[`${props.selected.childNodes[i]}`] = props.selected.childNodes[i].innerHTML;
-    }
 
-    window.row = props.selected;
-    }
-    setTransactionData(rowProperty)
 
     useEffect(() => {
 
@@ -44,6 +34,28 @@ export default function Add(props) {
             setIdentsList(identObjects);
           });
 
+
+
+
+          if(typeof props.selected.childNodes!== "undefined") {
+
+            
+            console.clear();
+            console.log(props.selected);
+
+
+            var rowProperty = {};
+
+            for(var i=0;i<props.selected.childNodes.length;i++) { 
+                rowProperty[`${props.selected.childNodes[i]}`] = props.selected.childNodes[i].innerHTML;
+            }    
+
+  
+
+            setTransactionData(rowProperty)
+
+
+        }
       
 }, []);
 
