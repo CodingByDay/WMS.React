@@ -17,6 +17,7 @@ import StockService from '../services/StockService';
 import Add from '../popup/Add'
 import AddHeadDocument from '../popup/AddHeadDocument'
 import Loader from '../loader/Loader';
+import $ from 'jquery'; 
 
 
 
@@ -31,7 +32,7 @@ export default function Transactions() {
 
     useEffect(() => {
 
-              window['toggleLoaader']("loader", false);
+            //  / window['toggleLoaader']("loader", false);
               
 
 
@@ -40,6 +41,31 @@ export default function Transactions() {
               setTransactions(response);
            }); 
     }, []);
+
+
+    
+    
+var selectedRowHeadsTransactions = 0;
+
+$(".table_responsive_transaction tr").click(function () {
+	$(selectedRowHeadsTransactions).css("background-color", "unset")
+	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
+	selectedRowHeadsTransactions = this;
+});
+
+
+
+var selectedRowHeadsPositions = 0;
+
+$(".table_responsive_positions_transactions tr").click(function () {
+	$(selectedRowHeadsPositions).css("background-color", "unset")
+	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
+	selectedRowHeadsPositions = this;
+});
+
+
+
+
 
 
     function isUUID ( uuid ) {
@@ -112,7 +138,6 @@ export default function Transactions() {
     return ( 
       
         <div>
-          <Loader />
 
         <div className="content">
         <Header />   
