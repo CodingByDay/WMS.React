@@ -388,7 +388,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
 
         var columns = props.columns;
-
+        var returnRow = props.returnRow;
     
     
         function findIndex(array, accesor) {
@@ -408,7 +408,11 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             }
         }
     
-    
+        const getColumnData = event => {
+            var parent = event.target.parentElement;
+          
+            returnRow(parent);
+        }
         tableData = tableData.Items;
     
         return (
@@ -416,7 +420,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr>
+            <tr onClick={getColumnData}>
             { columns.map(({ accessor }) => {
             var column = getColumn(accessor);
             

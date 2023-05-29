@@ -176,37 +176,29 @@ export default function TransactionFilters(props) {
     }
 
     function onChangeTransactionId(e) {
-   
         setSelectedTransactionId(e.value);
     }
 
     function onChangeTransactionStatus(e) {
- 
         setSelectedStatus(e.value);
     }
 
     function onChangeClient(e) {
-  
         setSelectedClient(e.value);
     }
 
     function onChangeIdent(e) {
-
         setSelectedIdent(e.value);
     }
 
     function onChangeErpKey(e) {
-
       setSelectedErpKey(e.value);
     }
     function onChangeUser(e) {
-
       setSelectedUser(e.value);
     }
     function toggleVisibility() {
-
-
-        setOpen(!open);
+      setOpen(!open);
     }
 
     function onKeyDownBusinessEvent (e) {
