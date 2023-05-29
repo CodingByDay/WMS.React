@@ -30,9 +30,17 @@ export default function Add(props) {
             setIdentsList(identObjects);
     
           });
+
+
+          console.log("Component rendering");
+          console.log(props.selected);
 }, []);
 
 
+
+
+
+ 
   
 
     function onChangeIdent(e) {
@@ -98,6 +106,11 @@ export default function Add(props) {
 
                     </div>
                 </div>
+
+
+
+                <div className='editable-group'>
+
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputFirstname">Ident</label>
@@ -134,7 +147,11 @@ export default function Add(props) {
                         <input type="text" class="form-control" id="dateShipping" placeholder="Datum dobave" />
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary px-4 float-right">Save</button>
+                </div>
+
+
+
+                <button type="button" class="btn btn-primary px-4 float-right">Dodaj poziciju</button>
 
         </div>
     </div>
