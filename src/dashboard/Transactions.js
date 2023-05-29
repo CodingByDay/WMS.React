@@ -22,7 +22,11 @@ import $ from 'jquery';
 
 
 export default function Transactions() { 
+
     checkUID ()
+
+    const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] = useState({});
+    const [selectedRowTransactionsPositions, setSelectedRowHeadsTransactionsPositions] = useState({});
 
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
@@ -32,11 +36,8 @@ export default function Transactions() {
 
     useEffect(() => {
 
-            //  / window['toggleLoaader']("loader", false);
+              // window['toggleLoaader']("loader", false);
               
-
-
-
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
            }); 
@@ -45,22 +46,17 @@ export default function Transactions() {
 
     
     
-var selectedRowHeadsTransactions = 0;
 
 $(".table_responsive_transaction tr").click(function () {
-	$(selectedRowHeadsTransactions).css("background-color", "unset")
+	$(selectedRowTransactionsHeads).css("background-color", "unset")
 	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-	selectedRowHeadsTransactions = this;
+  setSelectedRowHeadsTransactions (	this );
 });
 
-
-
-var selectedRowHeadsPositions = 0;
-
 $(".table_responsive_positions_transactions tr").click(function () {
-	$(selectedRowHeadsPositions).css("background-color", "unset")
+	$(selectedRowTransactionsPositions).css("background-color", "unset")
 	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-	selectedRowHeadsPositions = this;
+	setSelectedRowHeadsTransactionsPositions ( this );
 });
 
 
@@ -108,6 +104,7 @@ $(".table_responsive_positions_transactions tr").click(function () {
       var action = data.action;
       var table = data.table;
       if(type === "transaction") { 
+        alert("Deleting...");
 
         if(action === "add") { 
 
@@ -118,8 +115,11 @@ $(".table_responsive_positions_transactions tr").click(function () {
                 var toggled = ! show;
                 setHead(toggled);
             }
+        } else if (action === "delete") {
+          alert("Deleting...");
         }
       } else {
+        alert("Deleting... else");
 
       }
    }
@@ -140,6 +140,7 @@ $(".table_responsive_positions_transactions tr").click(function () {
         <div>
 
         <div className="content">
+
         <Header />   
    
         <TransactionFilters bringBackFilters = {bringBackFilters} />
@@ -149,6 +150,7 @@ $(".table_responsive_positions_transactions tr").click(function () {
         <TransactionPositions data = {positions} childToParent = {childToParent} />
         <Add show = {show} />
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
+
 
         <Footer />
         </div>

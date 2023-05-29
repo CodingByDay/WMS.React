@@ -9,6 +9,9 @@ export default function TransactionHeaderButtons(props) {
         props.reactToFront({type: 'transaction', action: 'add', table: 'header'});
     }
 
+    function deleteHeadDocument() {
+        props.reactToFront({type: 'transaction', action: 'delete', table: 'header'});
+    }
 
 
     let navigate = useNavigate();
@@ -29,7 +32,7 @@ export default function TransactionHeaderButtons(props) {
              <MdOutlineCancel />
 
              </button>
-             <button className="btn btn-primary">Izbriši
+             <button className="btn btn-primary" onClick={deleteHeadDocument}>Izbriši
              
              <MdDeleteOutline />
 
