@@ -51,7 +51,6 @@ $(".table_responsive_transaction tr").click(function () {
 	$(selectedRowTransactionsHeads).css("background-color", "unset")
 	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
   setSelectedRowHeadsTransactions (	this );
-  window.selectedHeadDocumentRow = this;
 
 });
 
@@ -126,49 +125,31 @@ $(".table_responsive_positions_transactions tr").click(function () {
 
 
    async function finishHeadDocument() {
-        window['swal']({
-          title: "Ali ste sigurni?",
-          text: "Ali želite zaključiti transakciju?",
-          icon: "warning",
-          buttons: [
-            'Ne',
-            'Da, siguren sem!'
-          ],
-          dangerMode: true,
-        }).then(function(isConfirm) {
-          if (isConfirm) {
-            var data =  TransactionService.deleteHeadDocument(4).then(response => { 
-              alert(response)
+        if(window.confirm("Ali ste sigurni da želite zaključiti dokument?")) {
+              var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+              if(response.data.includes("OK!")) {
+                  alert("Pobrisano")
+              }
            }); 
-          } else {
-          
-          }
-        })
+      } 
+        
    }
 
 
    function deleteHeadDocument() { 
-    window['swal']({
-      title: "Ali ste sigurni?",
-      text: "Ali želite pobrisati transakciju?",
-      icon: "warning",
-      buttons: [
-        'Ne',
-        'Da, siguren sem!'
-      ],
-      dangerMode: true,
-    }).then(function(isConfirm) {
-      if (isConfirm) {
-          var data =  TransactionService.deleteHeadDocument(4).then(response => { 
-          if(response.data.includes("OK!")) {
-             window['showAlert']('Uspešno pobrisana pozicija', '', 'success')
-          }
-       }); 
-      } else {
-      
-      }
-    })
-   }
+    if(window.confirm("Ali ste sigurni da želite zbrisati dokument?")) {
+ 
+      var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+
+      if(response.data.includes("OK!")) {
+            var data =  TransactionService.getAllTransactions().then(response => { 
+              setTransactions(response);
+              window.showAlert("Informacija", "Uspešno pobrisano", "success")
+              }); 
+         }
+   }); 
+  } 
+}
 
     const changeVisibility = (data) => {
         setHead(data)
