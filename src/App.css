@@ -2,6 +2,12 @@
   background-color: white;
 }
 
+
+
+
+#edit {
+  color: black!important;
+}
 #buyer {
   display: none;
 }

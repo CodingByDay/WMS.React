@@ -28,6 +28,10 @@ export default function Transactions() {
     const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] = useState({});
     const [selectedRowTransactionsPositions, setSelectedRowHeadsTransactionsPositions] = useState({});
 
+
+
+
+
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
@@ -51,7 +55,6 @@ $(".table_responsive_transaction tr").click(function () {
 	$(selectedRowTransactionsHeads).css("background-color", "unset")
 	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
   setSelectedRowHeadsTransactions (	this );
-
 });
 
 $(".table_responsive_positions_transactions tr").click(function () {
@@ -174,7 +177,7 @@ $(".table_responsive_positions_transactions tr").click(function () {
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
-        <Add show = {show} selected = {selectedRowTransactionsHeads} />
+        <Add show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 
 

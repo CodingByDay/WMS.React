@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Select from 'react-select'
 import _ from 'lodash';
 import TransactionService from '../services/TransactionService';
+import { Dropdown, Stack } from '@fluentui/react'
 
 
 
@@ -14,8 +15,10 @@ export default function Add(props) {
 
     const [ident, setIdent] = useState("");
     const [identList, setIdentsList] = useState([]);
-    const [transactionData, setTransactionData] = useState({})
-  
+    const [transactionData, setTransactionData] = useState({});
+    const [orderData, setOrderData] = useState([]);
+
+
 
 
 
@@ -39,9 +42,8 @@ export default function Add(props) {
 
           if(typeof props.selected.childNodes!== "undefined") {
 
-            
-            console.clear();
-            console.log(props.selected);
+
+            // Continue here tomarow.
 
 
             var rowProperty = {};
@@ -59,22 +61,91 @@ export default function Add(props) {
       
 }, []);
 
+
+
+const onRenderOrderAdd = item => {
+        return (
+          <table>
+            <tbody>
+              <tr>
+                <td style={{ width: 150 }}>{item.order}</td>
+                <td style={{ width: 150 }}>{item.client}</td>
+                <td style={{ width: 150 }}>{item.quantity}</td>
+                <td style={{ width: 150 }}>{item.date}</td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      }
+
+    function findValueByClassWithinArray(array, classNameValue) {
+
+        for (var i = 0; i < array.length; i++) {
+            var currentObject = array[i];
+            if(currentObject.className === classNameValue) {
+                return currentObject.innerHTML;
+            }
+        }
+        
+        
+        return "";
+        
+    }
+
+
+
     function onChangeIdent(e) {
         setIdent(e.value);
+        updateOrders(e.value);
     }
+
+
+
+    function updateOrders(value) { 
+        
+    }
+
+
+
 
     if(props.show) {
 
+        
         $("#edit").css("display", "block");
 
+        var rowProperty = {};
+        if(typeof props.selected.childNodes!== "undefined") {
+       
+            var headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
+            var documentType = findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
+            // Missing value for String representation of the document.
+            var client = findValueByClassWithinArray(props.selected.childNodes, "Receiver");
+            var warehouse = findValueByClassWithinArray(props.selected.childNodes, "WharehouseName")
+
+            var transactionIdElement = document.getElementById("transactionIdAdd");
+            transactionIdElement.value = headId
+     
+            var typeAdd = document.getElementById("typeAdd");
+            typeAdd.value = documentType
+
+            var documentTypeAdd = document.getElementById("documentTypeAdd");
+
+            var clientAdd = document.getElementById("clientAdd");
+            clientAdd.value = client;
+
+            var warehouseAdd = document.getElementById("warehouseAdd");
+            warehouseAdd.value = warehouse;
+
+        }
+
+
     } else {
-
-        $("#edit").css("display", "none");
-
+            $("#edit").css("display", "none");
     }
   
 
 
+    if (props.filters.selectedTransationType == "Prevzem blaga") {
 
     return ( 
 
@@ -91,6 +162,9 @@ export default function Add(props) {
 
         <div class="container py-5">
     <div class="row">
+
+
+
         <div class="col-md-3 mx-auto">
 
                 <div class="form-group row">
@@ -147,7 +221,14 @@ export default function Add(props) {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputCity">Naročilo</label>
-                        <input type="text" class="form-control" id="orderForm" placeholder="Naročilo" />
+                      
+                    <Dropdown
+                        placeholder="Naročilo"
+                        id='orderInformationAdd'
+                        options={orderData}
+                        onRenderOption={onRenderOrderAdd}                
+                    />
+
                     </div>
                     <div class="col-sm-6">
                         <label for="inputState">Odprta količina</label>
@@ -184,4 +265,14 @@ export default function Add(props) {
         </div>
 
     ); 
+
+   } else if (props.filters.selectedTransationType == "Medskladišnica") {
+        
+   } else if (props.filters.selectedTransationType == "Izdaja blaga") {
+
+   } else if (props.filters.selectedTransationType == "Delovni nalog") {
+
+   } else if (props.filters.selectedTransationType == "Inventura") {
+    
+   }
 } 

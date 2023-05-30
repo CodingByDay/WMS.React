@@ -277,11 +277,13 @@ export default function TransactionFilters(props) {
 
         
                      <input
+
                       id = "receiver"
                       type="text"
                       placeholder={"ID transakcije"} 
                       onChange={(e) => onChangeTransactionId(e)} 
                       className="form-control mt-1"
+                 
                       />
 
 
