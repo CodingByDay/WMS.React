@@ -53,33 +53,34 @@ export function Dashboard() {
   }
     return ( 
       <div>
-  
-      <Header/>
+          <Header/>
+     <div className='main-menu-design'>
+    
        <div className = "menu"> 
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
-              <img src='shopping-bag.png' width={100}/>
+              <img src='shopping-bag.png' width={50}/>
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
               Transakcije
-              <img src='transaction.png' width={100} />
+              <img src='transaction.png' width={50} />
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
               Zaloga
-              <img src='packages.png' width={100} />
+              <img src='packages.png' width={50} />
             </button>
 
             <button className="btn btn-primary dashboard" onClick = { handleSettings }>
               Nastavitve
-              <img src='settings.png' width={100} />
+              <img src='settings.png' width={50} />
             </button>
       
       </div> 
       <Footer />
       </div> 
-
+      </div>
     ); 
 } 

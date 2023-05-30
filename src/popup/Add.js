@@ -145,7 +145,7 @@ const onRenderOrderAdd = item => {
   
 
 
-    if (props.filters.selectedTransationType == "Prevzem blaga") {
+
 
     return ( 
 
@@ -266,13 +266,4 @@ const onRenderOrderAdd = item => {
 
     ); 
 
-   } else if (props.filters.selectedTransationType == "Medskladišnica") {
-        
-   } else if (props.filters.selectedTransationType == "Izdaja blaga") {
-
-   } else if (props.filters.selectedTransationType == "Delovni nalog") {
-
-   } else if (props.filters.selectedTransationType == "Inventura") {
-    
-   }
 } 

@@ -72,8 +72,13 @@ const TransactionService  = {
         //  Finishing the transaction.
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)
         return response;
-    }
+    },
 
+    async getOrdersForIdent(ident)
+    {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${ident}&i=web`)
+        return response;
+    }
 }
 
 

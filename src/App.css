@@ -1,8 +1,72 @@
 .App {
   background-color: white;
 }
+.navbar {
+box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
+background: none;
+}
+button#loginButton {
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  width: fit-content;
+  margin: auto;
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  border: none;
+  font-family: "Titillium Web", sans-serif!important;
+  font-size: 0.875em;
+  font-weight: 800;
+}
+*{font-family: 'Calibri';}
+.login.disabled {
+  background-image: none;
+}
+
+.Auth-form-content {
+  box-shadow: 10px 10px lightblue;
+}
+
+.Auth-form-content {
+  padding: 2em;
+  background: white;
+  border-radius: 0.3em;
+  box-shadow: burlywood;
 
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main-menu-design
+{
+  background-image: url("/public/background-menu-transparent.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+span.actions svg {
+  margin: 0.4em;
+}
+
+
+span.actions {
+  margin: 1em;
+  color: #404042;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 1.4em;
+  font-weight: 600;
+  padding: 0.3e;
+}
+.login
+{
+  background-image: url("/public/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 #edit {
@@ -180,7 +244,7 @@ div#addHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10em;
+  padding-left: 2em;
 }
 button#openRange {
   display: flex;
@@ -291,7 +355,34 @@ button.btn.btn-primary.navbar.logout {
   height: 2em;
   align-items: center;
 }
+.menu button {
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  font-size: 1.1em;
+  font-weight: 900!important;
+}
 
+
+button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-internal.home {
+  margin-right: 2em!important;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  border: none;
+  font-family: "Titillium Web", sans-serif!important;
+  font-size: 0.875em;
+  font-weight: 800;
+  font-size: 0.7em!important;
+}
+
+
+.logo {
+  margin:auto !important;
+}
 #documentType {
   width: 100%;
 }
@@ -313,7 +404,7 @@ button svg {
 .navbar {
   height: max-content;
   padding: 1em;
-  background: black;
+
 }
 .Auth-form {
   width: 420px;
@@ -329,24 +420,27 @@ button svg {
 .menu {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 20%;
   margin: auto;
   top: 50vh;
   position: relative;
   transform: translateY(-50%);
 }
 
+
+
 button.btn.btn-primary.dashboard {
-  margin: 1em;
-  height: 10em;
+  border: none;
+}
+
+button.btn.btn-primary.dashboard {
+  margin: 0.3em;
+  height: 5em;
   font-weight: bolder;
 
 }
 
-.Auth-form-content {
-  padding-left: 12%;
-  padding-right: 12%;
-}
+
 
 .Auth-form-title {
   text-align: center;

@@ -11,7 +11,7 @@ export default function Footer() {
     return ( 
       <div>
        <div className = "footer"> 
-             <h5>All rights reserved 2023 In.Sist d.o.o.</h5>  
+   
        </div> 
       </div> 
 

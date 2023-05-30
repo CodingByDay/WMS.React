@@ -20,11 +20,12 @@ export default function Auth(props) {
     let navigate = useNavigate();
     const handleClick = async () => {
       $("#wrong").css("display", "none");
+      $(".login").toggleClass("disabled");
       var loader = document.getElementById("loader");
       loader.style.display = "block";
       await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=loginUser&password=${password}&i=web`)
       .then(response => {
-          console.log(response)
+       // $(".login").toggleClass("disabled");
 
           if(response.data.Items[1].Name === "Error") {
             setTimeout(function() {              
@@ -47,24 +48,30 @@ export default function Auth(props) {
         password = e.target.value;
     }
   return (
-    <div>
+    <div className="login"
+    
+
+    
+    
+    
+    >
     <Loader />
 
 
     <div className="Auth-form-container">
   
         <div className="Auth-form-content">
-          <center><img src="distribution.png" width={200} /></center>
-          <h3 className="Auth-form-title" style={{marginTop: 1 + "em"}}>Prijava</h3>
+          <center><img src="logo_riko.png" width={200} /></center>
+          <h3 className="Auth-form-title" style={{marginTop: 1 + "em"}}></h3>
           
           <div className="form-group mt-3" id="password-div" >
-            <label>Password</label>
+
             <input
               id = "password"
               onChange={(e)=> onChangePassword(e)}
               type="password"
               className="form-control mt-1"
-              placeholder="Enter password"
+              placeholder="Vnesite geslo"
             />
             
           </div>
@@ -72,8 +79,8 @@ export default function Auth(props) {
         Napačno geslo.
            </div>
           <div className="d-grid gap-2 mt-3">
-            <button className="btn btn-primary" onClick={handleClick}>
-              Submit
+            <button className="btn btn-primary" id="loginButton" onClick={handleClick}>
+              Prijava
             </button>
           </div>
           

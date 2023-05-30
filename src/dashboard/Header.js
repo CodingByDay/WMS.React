@@ -28,24 +28,26 @@ export default function Header() {
 
   if(pathname != '/dashboard') {
 
-    button =  <button className="btn btn-primary navbar-internal home" onClick={() => navigate('/dashboard')}>Domov  
+    button =  <span className='actions' onClick={() => navigate('/dashboard')}>Domov  
 
     <MdHome />
 
-    </button>
+    </span>
   }
   
     return ( 
 
 
         <div className="navbar">
-            <div className='logo'></div>
+            <div className='logo'>
+                <center><img src='logo_riko.png'  class='logo' alt='Riko WMS' height={40} /></center>
+            </div>
             <div className='menu'></div>
             <div className='logout'>
                 {button}
-                <button className="btn btn-primary navbar-internal logout" onClick={() => handleLogout()}>Odjava             
+                <span className='actions' onClick={() => handleLogout()}>Odjava             
                 <MdLogout />
-                </button>
+                </span>
             </div>
         </div>
 
