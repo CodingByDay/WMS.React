@@ -168,10 +168,10 @@ $(".table_responsive_positions_transactions tr").click(function () {
       
         <div>
 
-        <div className="content">
+        <div>
 
         <Header />   
-   
+        <div className="content-transactions">
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
@@ -180,10 +180,9 @@ $(".table_responsive_positions_transactions tr").click(function () {
         <Add show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
         <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
 
-
         <Footer />
         </div>
-
+        </div>
         
         </div>
 

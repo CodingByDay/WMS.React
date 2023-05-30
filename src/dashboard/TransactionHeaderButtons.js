@@ -23,30 +23,30 @@ export default function TransactionHeaderButtons(props) {
 
         <div className='buttonsHeaderOuter'>
         <div className='buttonsHeader'>
-             <button className="btn btn-primary" onClick={finishDocument}>Prenesi
+             <span className='actions smallerr' onClick={finishDocument}>Prenesi
              
              
              
              <MdDownload />
-             </button>
-             <button className="btn btn-primary">Storniraj
+             </span>
+             <span className='actions smallerr'>Storniraj
              
              
              <MdOutlineCancel />
 
-             </button>
-             <button className="btn btn-primary" onClick={deleteHeadDocument}>Izbriši
+             </span>
+             <span className='actions smallerr'onClick={deleteHeadDocument}>Izbriši
              
              <MdDeleteOutline />
 
-             </button>
+             </span>
 
-             <button className="btn btn-primary" onClick={toggleAddPosition} id=''>Dodaj
+             <span className='actions smallerr' onClick={toggleAddPosition} id=''>Dodaj
              
              
              <MdAdd />
 
-             </button>
+             </span>
 
         </div>
         </div>

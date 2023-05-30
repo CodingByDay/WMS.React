@@ -69,13 +69,17 @@ export default function Listing() {
 
         <div>
      
-        <Header/>   
+        <Header/>  
+        <div className='listing-bg' >
         <HeaderOrderListing getSortingObject = {getSortingObject} />
         <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
         <OrderPositions data = {positions} childToParent = {childToParent} />     
         <Footer />
 
         </div>
+        </div>
+
+        
 
     ); 
 } 

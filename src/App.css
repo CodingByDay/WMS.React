@@ -38,20 +38,49 @@ button#loginButton {
   flex-direction: column;
   justify-content: space-between;
 }
-.main-menu-design
+
+
+td {
+  background: white!important;
+}
+.main-menu-design, .listing-bg, .content-transactions, .stock-container
 {
   background-image: url("/public/background-menu-transparent.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
 }
+table, {
+  background: white;
+}
 
+table {
+  background-image: none !important;
+}
+span {
+  cursor: pointer;
+}
 
 span.actions svg {
   margin: 0.4em;
+  cursor: pointer;
 }
 
-
+span#openRange {
+  margin: 1em;
+  padding-top: 0.3em;
+  border: 1px solid gray;
+  color: white;
+  padding: 0.21em;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.3e;
+  border-radius: 0.375rem;
+  display: flex;
+  border: 1px solid #ced4da;
+}
 span.actions {
   margin: 1em;
   color: #404042;
@@ -60,6 +89,51 @@ span.actions {
   font-size: 1.4em;
   font-weight: 600;
   padding: 0.3e;
+}
+
+span.actions.smaller{
+  margin: 1em;
+  color: #404042;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.3e;
+}
+
+.smallerrr{
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  border: none;
+  font-family: "Titillium Web", sans-serif!important;
+  font-size: 0.875em!important;
+  font-weight: 600;
+  border-radius: 1em;
+  color: white!important;
+}
+
+
+span.actions.smallerr{
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  border: none;
+  font-family: "Titillium Web", sans-serif!important;
+  font-size: 0.875em;
+  font-weight: 600;
+  border-radius: 1em;
+  color: white;
 }
 .login
 {
@@ -156,9 +230,9 @@ div#edit, div#addHeader {
 }
 
 .transactionFilters {
-  margin-top: 2em;
+  margin-top: 1em;
   display: flex;
-  gap: 3em;
+  gap: 2em;
   justify-content: center;
 }
 
@@ -234,11 +308,14 @@ div#addHeader {
   justify-content: space-evenly;
 }
 
+#businessEvent-option,#erpKey-option {
+  border: 1px solid #ced4da;
+}
 
 .columnDivider {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
 }
 .dashboard {
   display: flex;
@@ -285,14 +362,17 @@ img.loader {
 }
 
 .table_responsive_positions_transactions {
-  height: 35vh;
+  height: 40vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
   position: absolute;
   bottom:2em;
-  width: 90vw;
+  width: 96.6vw;
 }
+
+
+
 
 .visualization {
   width: 14%;
@@ -311,15 +391,20 @@ h3.information {
   margin-left: 2em;
   margin-right: 2em;
   position: absolute;
-  bottom:2em;
-  width: 90vw;
+  bottom: 2em;
+  width: 95.6vw;
+}
+
+td {
+  height: 0.4em!important;
+  font-size: 0.6em!important;
 }
 #warehouseStock, #locationStock, #identStock {
   margin: 1em;
   width: 30em;
 }
 .stock-container {
-  margin-top: 30vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -327,11 +412,10 @@ h3.information {
   align-content: center;
 }
 .table_responsive_order, .table_responsive_transaction {
-  height: 30vh;
+  height: 20vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
-  margin-bottom: 5em;
 }
 
 .footer {
@@ -360,6 +444,7 @@ button.btn.btn-primary.navbar.logout {
   font-size: 1.1em;
   font-weight: 900!important;
 }
+
 
 
 button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-internal.home {

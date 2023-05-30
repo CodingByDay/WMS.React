@@ -21,36 +21,36 @@ export default function TransactionPositionsButtons(props) {
         <div className='buttonsPositions'>
 
 
-             <button className="btn btn-primary" onClick={toggleAddPosition}>Dodaj
+             <span className='actions smallerr' onClick={toggleAddPosition}>Dodaj
                                    
              <MdAdd />
 
-             </button>
+             </span>
 
 
-             <button className="btn btn-primary">Ključ
+             <span className='actions smallerr'>Ključ
              
              <MdOutlineMerge />
              
-             </button>
+             </span>
 
 
 
-             <button className="btn btn-primary">Izbriši
+             <span className='actions smallerr'>Izbriši
              
              <MdOutlineQrCode />
              
-             </button>
-             <button className="btn btn-primary">Serijske
+             </span>
+             <span className='actions smallerr'>Serijske
              
              <MdOutlineQrCode />
              
-             </button>
-             <button className="btn btn-primary">Menjave ser.
+             </span>
+             <span className='actions smallerr'>Menjave ser.
              
              <MdEdit />
              
-             </button>
+             </span>
         </div>
 
 

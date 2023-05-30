@@ -167,7 +167,7 @@ export default function Stock() {
         <h3 className='information' id='information'>Ni zaloge</h3>
 
         </div>
-        <button className="btn btn-primary" onClick={handleInventory}>Prikaži</button>
+        <span className='actions smallerrr' onClick={handleInventory}>Prikaži</span>
         </div>
 
         <Footer />

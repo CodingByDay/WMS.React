@@ -256,6 +256,9 @@ export default function TransactionFilters(props) {
 
                     <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>
 
+                   
+
+                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Dropdown
                         title={props.title}
                         placeholder="Poslovni dogodek"
@@ -267,24 +270,13 @@ export default function TransactionFilters(props) {
                     />
 
 
-                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
-
-
                     </div>
 
                     <div className='columnDivider'>
 
 
         
-                     <input
-
-                      id = "receiver"
-                      type="text"
-                      placeholder={"ID transakcije"} 
-                      onChange={(e) => onChangeTransactionId(e)} 
-                      className="form-control mt-1"
-                 
-                      />
+                    
 
 
                     <Select className='select-filters' placeholder={"Status transakcije"} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
@@ -301,7 +293,13 @@ export default function TransactionFilters(props) {
                         onRenderOption={onRenderClient}                
                     />
 
-
+<input
+                      id = "receiver"
+                      type="text"
+                      placeholder={"ID transakcije"} 
+                      onChange={(e) => onChangeTransactionId(e)} 
+                      className="form-control mt-1"
+                      />
                     </div>
 
                     <div className='columnDivider'>
@@ -314,6 +312,9 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeIdent(e)} 
                     />
 
+                   
+
+                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
                     <Dropdown
                         title={props.title}
                         placeholder={"ERP ključ"}
@@ -324,18 +325,18 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeErpKey(e)} 
                         onRenderOption={onRenderErpKey}                
                     />
-
-                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
-
                     </div>
 
 
 
                     <div className='columnDivider'>
-                    <button className="btn btn-primary" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
+
+
+
+                    <span className="actions smallerr" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
                     Izberite
                     <MdDateRange />
-                    </button>  
+                    </span>  
 
 
                    

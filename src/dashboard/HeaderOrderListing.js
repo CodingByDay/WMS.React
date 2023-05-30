@@ -107,10 +107,10 @@ export default function HeaderOrderListing(props) {
             />
 
 
-         <button className="btn btn-primary" onClick={toggleVisibility} id="openRange">
+         <span className='actions smallerr' onClick={toggleVisibility} id="openRange">
               Izberite
               <MdDateRange />
-         </button>   
+         </span>   
 
 
          {open && (
