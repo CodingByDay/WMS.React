@@ -101,8 +101,14 @@ const onRenderOrderAdd = item => {
 
 
 
-    function updateOrders(value) { 
-        
+    function updateOrders(ident, type) { 
+        if(typeof props.selected.childNodes!== "undefined") {  
+          var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
+          TransactionService.getOrdersForIdent(ident, type).then(response => { 
+                alert("Test");
+                console.log(response);
+         }); 
+        }
     }
 
 
@@ -115,8 +121,6 @@ const onRenderOrderAdd = item => {
 
         var rowProperty = {};
         if(typeof props.selected.childNodes!== "undefined") {  
-            var documentTypeStringValue  = findValueByClassWithinArray(props.selected.childNodes, "Type");
-            setDocumentTypeStringValue(documentTypeStringValue);
             var headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
             var documentType = findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
             // Missing value for String representation of the document.
@@ -137,7 +141,7 @@ const onRenderOrderAdd = item => {
     }
   
 
-    alert(documentTypeString)
+    // var documentTypeStringValue  = findValueByClassWithinArray(props.selected.childNodes, "Type");
     
 
     return ( 
