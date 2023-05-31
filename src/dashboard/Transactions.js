@@ -48,7 +48,9 @@ export default function Transactions() {
     }, []);
 
 
-    
+              $('#close_add').on('click', function(){
+                  setShow(false);
+              });
     
 
 $(".table_responsive_transaction tr").click(function () {
