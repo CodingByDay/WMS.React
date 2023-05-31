@@ -22,19 +22,13 @@ const TransactionService  = {
         return await this.getCorrectDataBusinessEvents( response.data );
     },  
 
-
-
     async getAllDocumentTypes() {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=dt&i=web`)
         return await this.getCorrectDataBusinessEvents( response.data );
     },  
 
     async getAllTransactions() {
-
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=mh&i=web`)
-        
-
-
         return response.data;
     },
 
@@ -47,13 +41,11 @@ const TransactionService  = {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=su&i=web`)
         return response.data;
     },
- 
 
     async getErpKeys() {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=erp&i=web`)
         return response.data;
     },
-
 
     async getIdents()
     {
@@ -67,17 +59,16 @@ const TransactionService  = {
         return response;
     },
 
-
     async finishHeadDocument(id) {
         //  Finishing the transaction.
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)
         return response;
     },
 
-    async getOrdersForIdent(ident)
+    async getOrdersForIdent(ident, type)
     {
-        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${ident}&i=web`)
-        return response;
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=oo&pars=${ident}|0200|0&i=web`)
+        return response.data;
     }
 }
 
