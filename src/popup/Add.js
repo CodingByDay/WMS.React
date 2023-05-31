@@ -17,7 +17,7 @@ export default function Add(props) {
     const [identList, setIdentsList] = useState([]);
     const [transactionData, setTransactionData] = useState({});
     const [orderData, setOrderData] = useState([]);
-
+    const [documentTypeString, setDocumentTypeStringValue] = useState("");
 
 
 
@@ -114,25 +114,21 @@ const onRenderOrderAdd = item => {
         $("#edit").css("display", "block");
 
         var rowProperty = {};
-        if(typeof props.selected.childNodes!== "undefined") {
-       
+        if(typeof props.selected.childNodes!== "undefined") {  
+            var documentTypeStringValue  = findValueByClassWithinArray(props.selected.childNodes, "Type");
+            setDocumentTypeStringValue(documentTypeStringValue);
             var headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
             var documentType = findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
             // Missing value for String representation of the document.
             var client = findValueByClassWithinArray(props.selected.childNodes, "Receiver");
             var warehouse = findValueByClassWithinArray(props.selected.childNodes, "WharehouseName")
-
             var transactionIdElement = document.getElementById("transactionIdAdd");
             transactionIdElement.value = headId
-     
             var typeAdd = document.getElementById("typeAdd");
             typeAdd.value = documentType
-
             var documentTypeAdd = document.getElementById("documentTypeAdd");
-
             var clientAdd = document.getElementById("clientAdd");
             clientAdd.value = client;
-
             var warehouseAdd = document.getElementById("warehouseAdd");
             warehouseAdd.value = warehouse;
         }
@@ -141,7 +137,7 @@ const onRenderOrderAdd = item => {
     }
   
 
-
+    alert(documentTypeString)
     
 
     return ( 
