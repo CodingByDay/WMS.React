@@ -101,14 +101,18 @@ const onRenderOrderAdd = item => {
 
 
 
-    function updateOrders(ident, type) { 
-        if(typeof props.selected.childNodes!== "undefined") {  
-          var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
-          TransactionService.getOrdersForIdent(ident, type).then(response => { 
-                alert("Test");
-                console.log(response);
-         }); 
-        }
+    function updateOrders(ident) { 
+          // Continue here.
+
+
+
+
+
+        var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
+        TransactionService.getOrdersForIdent(ident, type).then(response => { 
+                
+        });
+
     }
 
 
