@@ -105,12 +105,9 @@ const onRenderOrderAdd = item => {
           // Continue here.
 
 
-
-
-
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
         TransactionService.getOrdersForIdent(ident, type).then(response => { 
-                
+        window.response = response;       
         });
 
     }
