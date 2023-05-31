@@ -167,15 +167,50 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         <tbody>
          {
         tableData.map((data, index) => {
+        
+          
           return (
            <tr onClick={getColumnData}>
            { columns.map(({ accessor }) => {
            var column = getColumn(accessor);
            
            var tData = ""
-           try {          
-               tData = DataAccess.getData(data, column.accessor, column.type);  
+           try {         
+            tData = "";
+            if(column.accessor == "Type") {
+                switch (DataAccess.getData(data, column.accessor, column.type)) {
+                    case 'E':
+                        tData = "Medskladišnica";
+                        break;
+                    case 'I':
+                        tData = "Prevzem";
+                        break;
+                    case 'P':
+                        tData = 'Izdaja';
+                        break;
+                    case 'W':
+                        tData = 'Delovni nalog';
+                        break;
+                    case 'WI':
+                        tData = 'Delovni nalog';
+                        break;
+                    case 'N':
+                        tData = 'Inventura';
+                        break;
+                    case 'NI':
+                        tData = 'Inventura';
+                        break; 
+                    case 'NP':
+                        tData = 'Inventura';
+                        break;     
+
+                }
+            } else {
+                tData = DataAccess.getData(data, column.accessor, column.type);  
+
+            } 
            } catch (e) {
+                // Test 
            }
            return <td className={accessor}>{tData}</td>;
         })}

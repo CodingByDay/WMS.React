@@ -135,17 +135,14 @@ const onRenderOrderAdd = item => {
 
             var warehouseAdd = document.getElementById("warehouseAdd");
             warehouseAdd.value = warehouse;
-
         }
-
-
     } else {
             $("#edit").css("display", "none");
     }
   
 
 
-
+    
 
     return ( 
 
