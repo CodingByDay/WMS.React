@@ -40,20 +40,20 @@ const PopupService  =  {
                 duplicates.push(response.data.Items[i]);
             }
         }
-        if(duplicates.Items.length <= 0) {
+        if(duplicates.length <= 0) {
             return {};
         } else {
             // Delete positions with the empty openQty
 
-            for (var i = 0; i < duplicates.data.Items.length; i++) {   
-                var openQty = DataAccess.getData(duplicates.data.Items[i], "OpenQty", "DoubleValue");
+            for (var i = 0; i < duplicates.length; i++) {   
+                var openQty = DataAccess.getData(duplicates[i], "OpenQty", "DoubleValue");
                 if (openQty == 0) {
                     duplicates.splice(i, 1);
                 }
             }
 
         }
-        if(duplicates.Items.length <= 0) {
+        if(duplicates.length <= 0) {
             return {};
         } else {
             return duplicates[0];
