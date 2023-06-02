@@ -54,7 +54,7 @@ export default function TransactionFilters(props) {
     const [selectedIdent, setSelectedIdent] = useState("");
     const [selectedErpKey, setSelectedErpKey] = useState("");
     const [selectedUser, setSelectedUser] = useState("");
-
+    const [ids, setIds]= useState([]);  
     // Place for the selected states 
 
 
@@ -74,15 +74,19 @@ export default function TransactionFilters(props) {
       // Data flow
       useEffect(() => {
 
-
+        
+        var ids = [];
 
         var dn = TransactionService.getAllTransactions().then(response=> {
             var transactions = []
             transactions.push({value: '', label: ''})
             for(var i=0;i<response.Items.length;i++) {
+                var id = DataAccess.getData(response.Items[i], "HeadID", "IntValue");
                 var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
                 transactions.push({label: field,  value: field});
+                ids.push({value: id, label:id});
             }
+            setIds(ids);
             setTransactionOrder(transactions)
           });
 
@@ -192,72 +196,25 @@ export default function TransactionFilters(props) {
     function onChangeErpKey(e) {
       setSelectedErpKey(e.value);
     }
+
     function onChangeUser(e) {
       setSelectedUser(e.value);
     }
+
     function toggleVisibility() {
       setOpen(!open);
     }
 
     function onKeyDownBusinessEvent (e) {
+
     }
 
-    const onRenderOptionBusinessEvent = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td style={{ width: 150 }}>{item.code}</td>
-                <td style={{ width: 50 }} />
-                <td> {_.get(item, 'type', '').length > 60
-              ? `${item.type.substring(0, 55)}...`
-              : item.type}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      };
-
-
-      const onRenderClient = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td>{item.name}</td>
-                <td>{item.longName}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
-   
-  
-      const onRenderErpKey = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td style={{ width: 150 }}>{item.erpKey}</td>
-                <td style={{ width: 150 }}>{item.client}</td>
-                <td style={{ width: 150 }}>{item.warehouse}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
-
+    
     return ( 
         <div>
             <div className="transactionFilters">
-
-
                     <div className='columnDivider'> 
-
-                    <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>
-
-                   
-
+                    <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>    
                     <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
                     title={props.title}
@@ -267,10 +224,6 @@ export default function TransactionFilters(props) {
                     options={businessEvent}
                     onChange={(action, item) => onChangeBusinessEvent(item)}
                     />
-
-                   
-
-
                     </div>
 
                     <div className='columnDivider'>
@@ -284,18 +237,17 @@ export default function TransactionFilters(props) {
 
 
                     <Select
-                        title={props.title}
+
                         placeholder={"Stranka"}
                         id='client'
                         options={client}
-                        selectedKey={props.value}
-                        onRenderLabel={props.selectedValue}
                         onChange={(e) => onChangeClient(e)} 
-                        onRenderOption={onRenderClient}                
+                              
                     />
   <Select
                                  id = "idTransaction"
                                  type="text"
+                                 options={ids}
                                  placeholder={"ID transakcije"} 
                                  onChange={(e) => onChangeTransactionId(e)} 
                                     

@@ -86,7 +86,7 @@ export default function HeaderOrderListing(props) {
         <div className="filters">
 
 
-             <Select className='select-filters' value={documentType}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select className='select-filterss' placeholder={"Tip dokumenta"}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
 
              <input
@@ -94,7 +94,7 @@ export default function HeaderOrderListing(props) {
               type="text"
               onChange={(e)=> onChangeDocument(e)}
               className="form-control mt-1"
-              placeholder="Dokumenta"
+              placeholder="Dokument"
              />
 
 

@@ -3,6 +3,8 @@ import { useNavigate  } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Cookies from 'universal-cookie';
+import $ from 'jquery'; 
+import { useEffect, useState } from "react";
 
 
 export function Dashboard() { 
@@ -11,6 +13,12 @@ export function Dashboard() {
 
   checkUID ()
 
+  const [subMenu, setSubMenu] = useState(false);
+
+
+  $("#settings").hover(
+    $(".settings-divider").toggle()
+  )
 
 
   function isUUID ( uuid ) {
@@ -73,14 +81,45 @@ export function Dashboard() {
               <img src='packages.png' width={50} />
             </button>
 
-            <button className="btn btn-primary dashboard" onClick = { handleSettings }>
+            
+            <button className="btn btn-primary dashboard" id='settings' onClick = { handleSettings }>
               Nastavitve
               <img src='settings.png' width={50} />
             </button>
+            </div>
+
+            <div className='settings-divider'>
+            <div className='settings-divider-context'>
+              <button className="btn btn-primary sub" id='1' >
+              Sistem
+              <img src='settings.png' width={50} />
+            </button>
+            <button className="btn btn-primary sub" id='2' >
+              Vrste dokumentov
+              <img src='settings.png' width={50} />
+            </button>
+            <button className="btn btn-primary sub" id='3' >
+              Skladišča
+              <img src='settings.png' width={50} />
+            </button>
+            <button className="btn btn-primary sub" id='4' >
+              Čitalci
+              <img src='settings.png' width={50} />
+            </button>
+            <button className="btn btn-primary sub" id='5' >
+              Tiskalniki
+              <img src='settings.png' width={50} />
+            </button>
+            <button className="btn btn-primary sub" id='6' >
+              Uporabniki
+              <img src='settings.png' width={50} />
+            </button>
+            </div>
+            </div>
       
       </div> 
       <Footer />
       </div> 
-      </div>
+    
     ); 
 } 

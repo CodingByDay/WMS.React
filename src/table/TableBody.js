@@ -45,7 +45,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.selectedBusinessEvent.toLowerCase();
-        var field = DataAccess.getData(data, "DocumentType", "StringValue");
+        var field = DataAccess.getData(data, "DocumentType", "StringValue").toLowerCase();;
         if (!field.includes(term) &&term!="") {
             return false;
         }
@@ -60,7 +60,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var term = props.sort.selectedClient.toLowerCase();
 
-        var field = DataAccess.getData(data, "Receiver", "StringValue");
+        var field = DataAccess.getData(data, "Receiver", "StringValue").toLowerCase();;
 
         if (!field.includes(term) &&term!="") {
             return false;
@@ -75,7 +75,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var term = props.sort.selectedErpKey.toLowerCase();
 
-        var field = DataAccess.getData(data, "Key", "StringValue");
+        var field = DataAccess.getData(data, "Key", "StringValue").toLowerCase();;
 
         if (!field.includes(term) &&term!="") {
             return false;
@@ -104,7 +104,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var term = props.sort.selectedUser.toLowerCase();
 
-        var field = DataAccess.getData(data, "ClerkName", "StringValue");
+        var field = DataAccess.getData(data, "ClerkName", "StringValue").toLowerCase();;
 
         if (!field.includes(term) &&term!="") {
             return false;
@@ -119,7 +119,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var term = props.sort.selectedWorkOrder.toLowerCase();
 
-        var field = DataAccess.getData(data, "LinkKey", "StringValue");
+        var field = DataAccess.getData(data, "LinkKey", "StringValue").toLowerCase();;
 
         if (!field.includes(term) &&term!="") {
             return false;
@@ -231,7 +231,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         }
     
         var term = props.sort.type.toLowerCase();
-        var field = DataAccess.getData(data, "DocumentType", "StringValue");
+        var field = DataAccess.getData(data, "DocumentType", "StringValue").toLowerCase();;
         if (!field.includes(term) &&term!="") {
             return false;
         }
@@ -249,7 +249,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.document.toLowerCase();;
-        var field = DataAccess.getData(data, "Key", "StringValue");
+        var field = DataAccess.getData(data, "Key", "StringValue").toLowerCase();;
     
         if (!field.includes(term) &&term!="") {
             return false;
@@ -273,8 +273,8 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.warehouse.toLowerCase();
-        var field = DataAccess.getData(data, "Warehouse", "StringValue");
-    
+        var field = DataAccess.getData(data, "Warehouse", "StringValue").toLowerCase();;
+
         if (!field.includes(term) &&term!="") {
             return false;
         }
@@ -297,7 +297,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.consignee.toLowerCase();
-        var field = DataAccess.getData(data, "Consignee", "StringValue");
+        var field = DataAccess.getData(data, "Consignee", "StringValue").toLowerCase();;
         if (!field.includes(term) &&term!="") {
             return false;
         }
@@ -319,7 +319,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.client.toLowerCase();
-        var field = DataAccess.getData(data, "Receiver", "StringValue");
+        var field = DataAccess.getData(data, "Receiver", "StringValue").toLowerCase();;
     
         if (!field.includes(term) && term != "") {
             return false;
@@ -409,7 +409,11 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             
             var tData = ""
             try {          
+                if (column.type!="DateTimeValue") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
+                } else {
+                    tData = new Date(DataAccess.getData(data, column.accessor, column.type)).toLocaleDateString()
+                }
             } catch (e) {
             }
             return <td className={accessor}>{tData}</td>;

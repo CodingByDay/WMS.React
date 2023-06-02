@@ -5,6 +5,30 @@
 box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
 background: none;
 }
+.settings-divider-context {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.settings-divider {
+  display: block;
+  width: fit-content;
+  position: absolute;
+  right: 3em;
+  top: 30vh;
+}
+
+
+.settings-divider-context button {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.settings-divider {
+  display: none;
+}
 button#loginButton {
   padding-left: 2em;
   padding-right: 2em;
@@ -421,7 +445,7 @@ td {
   align-content: center;
 }
 .table_responsive_order, .table_responsive_transaction {
-  height: 20vh;
+  height: 30vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
@@ -473,9 +497,10 @@ button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-int
   font-size: 0.7em!important;
 }
 
-
 .logo {
-  margin:auto !important;
+  left: 2vh;
+  position: relative;
+
 }
 #documentType {
   width: 100%;
