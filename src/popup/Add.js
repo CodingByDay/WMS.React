@@ -108,13 +108,11 @@ const onRenderOrderAdd = item => {
 
     function onChangeOrder(e) {
         var ident = document.getElementById("identListControl").innerText;
-
-
-        alert(ident)
+        // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.value, ident).then(response => { 
 
 
-            alert("test");
+            // Test the result
         });
            
     }

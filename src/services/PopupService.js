@@ -32,25 +32,32 @@ const PopupService  =  {
 
   
     async getOrderDataFromIdentAndOrderNumber(order, ident) {
-
-
-
-
         const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=ook&pars=${order}&i=web`)
-
-
         var duplicates = [];
-
-        for (var i = 0; i < response.Items.length; i++) {   
-
-            var ident = DataAccess.getData(response.Items[i], "Ident", "StringValue");
-            alert(ident)
-           //if ()
+        for (var i = 0; i < response.data.Items.length; i++) {   
+            var ident = DataAccess.getData(response.data.Items[i], "Ident", "StringValue");
+            if(ident == ident ) {
+                duplicates.push(response.data.Items[i]);
+            }
         }
+        if(duplicates.Items.length <= 0) {
+            return {};
+        } else {
+            // Delete positions with the empty openQty
 
+            for (var i = 0; i < duplicates.data.Items.length; i++) {   
+                var openQty = DataAccess.getData(duplicates.data.Items[i], "OpenQty", "DoubleValue");
+                if (openQty == 0) {
+                    duplicates.splice(i, 1);
+                }
+            }
 
-        return response.data;      
-
+        }
+        if(duplicates.Items.length <= 0) {
+            return {};
+        } else {
+            return duplicates[0];
+        }    
     }  
 }
 
