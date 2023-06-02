@@ -111,6 +111,15 @@ const onRenderOrderAdd = item => {
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.value, ident).then(response => { 
 
+            var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
+            var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
+            var no = DataAccess.getData(response, "No", "IntValue");
+
+            alert("test")
+            document.getElementById("positionNumber").value = no;
+            document.getElementById("openQty").value = qty;
+            document.getElementById("deadlineDate").value = deadline;
+
 
             // Test the result
         });
@@ -238,7 +247,7 @@ const onRenderOrderAdd = item => {
                     </div>
                     <div class="col-sm-6">
                         <label for="inputAddressLine2">Pozicija</label>
-                        <input type="text" class="form-control" id="quantityForm" placeholder="Pozicija" />
+                        <input type="text" class="form-control" id="positionNumber" placeholder="Pozicija" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -258,7 +267,7 @@ const onRenderOrderAdd = item => {
                     </div>
                     <div class="col-sm-6">
                         <label for="inputState">Odprta količina</label>
-                        <input type="text" class="form-control" id="quantityForm" placeholder="Količina" />
+                        <input type="text" class="form-control" id="openQty" placeholder="Količina" />
                     </div>
 
                 </div>
@@ -269,7 +278,7 @@ const onRenderOrderAdd = item => {
                     </div>
                     <div class="col-sm-6">
                         <label for="inputWebsite">Datum dobave</label>
-                        <input type="text" class="form-control" id="dateShipping" placeholder="Datum dobave" />
+                        <input type="text" class="form-control" id="deadlineDate" placeholder="Datum dobave" />
                     </div>
                 </div>
                 </div>
