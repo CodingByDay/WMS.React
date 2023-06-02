@@ -12,6 +12,11 @@ export default function TransactionPositionsButtons(props) {
     }
 
 
+    function deletePosition() {
+        props.reactToFront({type: 'transaction', action: 'delete', table: 'positions'});
+
+    }
+
     return ( 
         
         <div>
@@ -36,7 +41,7 @@ export default function TransactionPositionsButtons(props) {
 
 
 
-             <span className='actions smallerr'>Izbriši
+             <span className='actions smallerr' onClick={deletePosition}>Izbriši
              
              <MdOutlineQrCode />
              

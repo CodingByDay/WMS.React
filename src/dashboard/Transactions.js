@@ -41,11 +41,10 @@ export default function Transactions() {
     useEffect(() => {
 
               // window['toggleLoaader']("loader", false);
-              
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
            }); 
-    }, []);
+    }, [selectedRowTransactionsPositions]);
 
 
               $('#close_add').on('click', function(){
@@ -53,17 +52,17 @@ export default function Transactions() {
               });
     
 
-$(".table_responsive_transaction tr").click(function () {
-	$(selectedRowTransactionsHeads).css("background-color", "unset")
-	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-  setSelectedRowHeadsTransactions (	this );
-});
+      $(".table_responsive_transaction tr").click(function () {
+        $(selectedRowTransactionsHeads).css("background-color", "unset")
+        $(this).css("background-color", "rgba(237, 232, 235, 0.8)")
+        setSelectedRowHeadsTransactions (	this );
+      });
 
-$(".table_responsive_positions_transactions tr").click(function () {
-	$(selectedRowTransactionsPositions).css("background-color", "unset")
-	$(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-	setSelectedRowHeadsTransactionsPositions ( this );
-});
+      $(".table_responsive_positions_transactions tr").click(function () {
+        $(selectedRowTransactionsPositions).css("background-color", "unset")
+        $(this).css("background-color", "rgba(237, 232, 235, 0.8)")
+        setSelectedRowHeadsTransactionsPositions ( this );
+      });
 
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -116,7 +115,15 @@ $(".table_responsive_positions_transactions tr").click(function () {
                 setHead(toggled);
             }
         } else if (action === "delete") {
+          if(table === "positions") {   
+
+              alert("test")
+              console.log(selectedRowTransactionsPositions)
+
+              
+          } else {
                deleteHeadDocument();
+          }
         } else if (action === "finish") {
                finishHeadDocument();
         }
