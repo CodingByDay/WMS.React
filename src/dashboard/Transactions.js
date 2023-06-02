@@ -18,6 +18,7 @@ import Add from '../popup/Add'
 import AddHeadDocument from '../popup/AddHeadDocument'
 import Loader from '../loader/Loader';
 import $ from 'jquery'; 
+import DataAccess from '../utility/DataAccess';
 
 
 
@@ -117,10 +118,12 @@ export default function Transactions() {
         } else if (action === "delete") {
           if(table === "positions") {   
 
-              alert("test")
-              console.log(selectedRowTransactionsPositions)
 
-              
+            window.select = selectedRowTransactionsHeads;
+            var idToDelete = selectedRowTransactionsHeads.childNodes[0].innerHTML
+
+            alert(idToDelete);
+
           } else {
                deleteHeadDocument();
           }
