@@ -41,16 +41,8 @@ export default function TransactionPositionsButtons(props) {
              <MdOutlineQrCode />
              
              </span>
-             <span className='actions smallerr'>Serijske
-             
-             <MdOutlineQrCode />
-             
-             </span>
-             <span className='actions smallerr'>Menjave ser.
-             
-             <MdEdit />
-             
-             </span>
+            
+            
         </div>
 
 

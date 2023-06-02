@@ -7,7 +7,7 @@ import Select from 'react-select'
 import _ from 'lodash';
 import TransactionService from '../services/TransactionService';
 import { Dropdown, Stack } from '@fluentui/react'
-
+import DataAccess from '../utility/DataAccess';
 
 
 
@@ -102,12 +102,24 @@ const onRenderOrderAdd = item => {
 
 
     function updateOrders(ident) { 
-          // Continue here.
-
-
+        // Continue here.
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
         TransactionService.getOrdersForIdent(ident, type).then(response => { 
-        window.response = response;       
+          
+         
+        
+            var items = []
+            items.push({value: '', label: ''})
+
+            for(var i = 0; i < response.Items.length;i++) {
+                var item = response.Items[i]           
+                var key = DataAccess.getData(item, "Key", "StringValue")
+                items.push({label: key, value: key})            
+                // Test this
+
+            }             
+            setOrderData(items)
+            // Multi column place for the data collection //
         });
 
     }
@@ -173,10 +185,7 @@ const onRenderOrderAdd = item => {
                                 <label for="inputFirstname">Tip</label>
                                 <input type="text" class="form-control" id="typeAdd" disabled/>
                 </div>
-                <div class="form-group row">
-                                <label for="inputFirstname">Posl. Dog.</label>
-                                <input type="text" class="form-control" id="documentTypeAdd" disabled />
-                </div>
+                
                 <div class="form-group row">
                                 <label for="inputFirstname">Naročnik</label>
                                 <input type="text" class="form-control" id="clientAdd" disabled />
@@ -219,14 +228,16 @@ const onRenderOrderAdd = item => {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputCity">Naročilo</label>
-                      
-                    <Dropdown
+
+
+                    <Select
                         placeholder="Naročilo"
                         id='orderInformationAdd'
                         options={orderData}
-                        onRenderOption={onRenderOrderAdd}                
-                    />
-
+                        onRenderOption={onRenderOrderAdd}   
+                     />
+   
+            
                     </div>
                     <div class="col-sm-6">
                         <label for="inputState">Odprta količina</label>
