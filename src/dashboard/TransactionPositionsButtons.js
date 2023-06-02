@@ -17,6 +17,12 @@ export default function TransactionPositionsButtons(props) {
 
     }
 
+
+    function editPosition () {
+        alert("Urejanje pozicije")
+    }
+
+
     return ( 
         
         <div>
@@ -33,12 +39,11 @@ export default function TransactionPositionsButtons(props) {
              </span>
 
 
-             <span className='actions smallerr'>Ključ
-             
-             <MdOutlineMerge />
-             
-             </span>
+            <span className='actions smallerr' onClick={editPosition}>Popravi
+                                   
+             <MdEdit />
 
+             </span>
 
 
              <span className='actions smallerr' onClick={deletePosition}>Izbriši
