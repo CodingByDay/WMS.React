@@ -8,7 +8,7 @@ import _ from 'lodash';
 import TransactionService from '../services/TransactionService';
 import { Dropdown, Stack } from '@fluentui/react'
 import DataAccess from '../utility/DataAccess';
-
+import PopupService from '../services/PopupService';
 
 
 export default function Add(props) { 
@@ -35,6 +35,7 @@ export default function Add(props) {
             }
             window.identity = identObjects;
             setIdentsList(identObjects);
+            setIdent("")
           });
 
 
@@ -58,8 +59,13 @@ export default function Add(props) {
 
 
         }
-      
-}, []);
+
+
+
+
+
+
+}, [ident]);
 
 
 
@@ -96,10 +102,22 @@ const onRenderOrderAdd = item => {
 
     function onChangeIdent(e) {
         setIdent(e.value);
+  
         updateOrders(e.value);
     }
 
+    function onChangeOrder(e) {
+        var ident = document.getElementById("identListControl").innerText;
 
+
+        alert(ident)
+        PopupService.getOrderDataFromIdentAndOrderNumber(e.value, ident).then(response => { 
+
+
+            alert("test");
+        });
+           
+    }
 
     function updateOrders(ident) { 
         // Continue here.
@@ -234,7 +252,8 @@ const onRenderOrderAdd = item => {
                         placeholder="Naročilo"
                         id='orderInformationAdd'
                         options={orderData}
-                        onRenderOption={onRenderOrderAdd}   
+                        onRenderOption={onRenderOrderAdd}  
+                        onChange={onChangeOrder} 
                      />
    
             
@@ -248,7 +267,7 @@ const onRenderOrderAdd = item => {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputContactNumber">Količina</label>
-                        <input type="number" class="form-control" id="inputContactNumberForm" placeholder="Količina" />
+                        <input type="number" class="form-control" id="inputContactNumberForm" value={"0"} placeholder="Količina" />
                     </div>
                     <div class="col-sm-6">
                         <label for="inputWebsite">Datum dobave</label>
