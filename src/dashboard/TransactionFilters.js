@@ -95,7 +95,7 @@ export default function TransactionFilters(props) {
             types.push({value: '', label: ''})
 
             for(var i = 0; i < response.type.length;i++) {
-                types.push({code: response.type[i], type: response.names[i]});
+                types.push({value: response.type[i] + " * " + response.names[i], label: response.type[i] + " * " + response.names[i]});
             }
             setBusinessEvent(types);
          }); 
@@ -129,9 +129,7 @@ export default function TransactionFilters(props) {
           });
 
 
-          var idents = TransactionService.getIdents().then(response=> {
-
-    
+          var idents = TransactionService.getIdents().then(response=> {   
             var identObjects = []
             identObjects.push({value: '', label: ''})
 
@@ -140,8 +138,10 @@ export default function TransactionFilters(props) {
               identObjects.push({label: response.data[i],  value: response.data[i]});
             }
 
-            window.identity = identObjects;
+
+
             setIdent(identObjects)
+            
           });
 
           props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
@@ -259,15 +259,16 @@ export default function TransactionFilters(props) {
                    
 
                     <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
-                    <Dropdown
-                        title={props.title}
-                        placeholder="Poslovni dogodek"
-                        id='businessEvent'
-                        onKeyDown={(e) => onKeyDownBusinessEvent(e)}
-                        options={businessEvent}
-                        onChange={(action, item) => onChangeBusinessEvent(item)}
-                        onRenderOption={onRenderOptionBusinessEvent}                
+                    <Select 
+                    title={props.title}
+                    placeholder="Poslovni dogodek"
+                    id='businessEvent'
+                    onKeyDown={(e) => onKeyDownBusinessEvent(e)}
+                    options={businessEvent}
+                    onChange={(action, item) => onChangeBusinessEvent(item)}
                     />
+
+                   
 
 
                     </div>
@@ -315,6 +316,9 @@ export default function TransactionFilters(props) {
                    
 
                     <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
+
+                
+
                     <Dropdown
                         title={props.title}
                         placeholder={"ERP ključ"}
