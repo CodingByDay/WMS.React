@@ -110,7 +110,7 @@ export default function TransactionFilters(props) {
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
           var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
-          erps.push({erpKey: erpKey, client: client, warehouse: warehouse});
+          erps.push({label: erpKey + " * " + warehouse, value: erpKey + " * " + warehouse});
           }
           setErpKey(erps)
         });
@@ -293,14 +293,14 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeClient(e)} 
                         onRenderOption={onRenderClient}                
                     />
+  <Select
+                                 id = "idTransaction"
+                                 type="text"
+                                 placeholder={"ID transakcije"} 
+                                 onChange={(e) => onChangeTransactionId(e)} 
+                                    
+                    />
 
-<input
-                      id = "receiver"
-                      type="text"
-                      placeholder={"ID transakcije"} 
-                      onChange={(e) => onChangeTransactionId(e)} 
-                      className="form-control mt-1"
-                      />
                     </div>
 
                     <div className='columnDivider'>
@@ -317,9 +317,7 @@ export default function TransactionFilters(props) {
 
                     <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
 
-                
-
-                    <Dropdown
+                    <Select 
                         title={props.title}
                         placeholder={"ERP ključ"}
                         id='erpKey'
@@ -327,8 +325,9 @@ export default function TransactionFilters(props) {
                         selectedKey={props.value}
                         onRenderLabel={props.selectedValue}
                         onChange={(e) => onChangeErpKey(e)} 
-                        onRenderOption={onRenderErpKey}                
+
                     />
+
                     </div>
 
 
