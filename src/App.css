@@ -23,6 +23,13 @@ div#addHeader {
 }
 
 
+.warehouses-container {
+  display: none;
+}
+
+.interwarehouse {
+  margin-top: 1em;
+}
 
 .body_part input {
   width: max-content!important;
