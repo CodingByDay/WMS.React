@@ -69,6 +69,12 @@ const TransactionService  = {
     {
         const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=oo&pars=${ident}|0200|0&i=web`)
         return response.data;
+    },
+
+    async getUsers()
+    {
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=usr&i=web`)
+        return response.data;
     }
 }
 

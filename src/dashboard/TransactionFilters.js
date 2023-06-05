@@ -33,7 +33,7 @@ export default function TransactionFilters(props) {
     const [selectedEvent, setSelectedEvent] = useState("");
     const [order, setOrder] = useState("");
     const [open, setOpen] = useState(false);
-
+    const [users, setUsers] = useState([]);
 
 
 
@@ -147,6 +147,22 @@ export default function TransactionFilters(props) {
             setIdent(identObjects)
             
           });
+
+
+          var users = TransactionService.getUsers().then(response=> { 
+              var users = [];
+              for (var i=0; i<response.Items.length; i++) {
+                  var user = DataAccess.getData(response.Items[i], "Subject", "StringValue");
+                  users.push({ label: user, value: user });
+              }          
+              setUsers(users);
+          });
+
+
+
+
+
+
 
           props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
 
@@ -267,7 +283,7 @@ export default function TransactionFilters(props) {
 
                    
 
-                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={user} id='documentType'/>
+                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={users} id='documentType'/>
 
                     <Select 
                         title={props.title}

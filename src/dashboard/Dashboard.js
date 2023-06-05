@@ -16,9 +16,8 @@ export function Dashboard() {
   const [subMenu, setSubMenu] = useState(false);
 
 
-  $("#settings").hover(
-    $(".settings-divider").toggle()
-  )
+
+
 
 
   function isUUID ( uuid ) {
@@ -46,8 +45,8 @@ export function Dashboard() {
   }
  
   function handleSettings () {
-
-    window["showAlert"]("Obvestilo", "Funkcionalnost še ni podprta", "error")
+    $(".settings-divider").toggle();
+   // Toggle the visibility
   }
 
   const routeChange = (option) => {
@@ -82,7 +81,7 @@ export function Dashboard() {
             </button>
 
             
-            <button className="btn btn-primary dashboard" id='settings' onClick = { handleSettings }>
+            <button className="btn btn-primary dashboard" id='settings-hover' onClick = { handleSettings }>
               Nastavitve
               <img src='settings.png' width={50} />
             </button>
