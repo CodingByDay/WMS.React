@@ -48,7 +48,7 @@ export default function TransactionPositionsButtons(props) {
 
              <span className='actions smallerr' onClick={deletePosition}>Izbriši
              
-             <MdOutlineQrCode />
+             <MdDeleteOutline />
              
              </span>
             

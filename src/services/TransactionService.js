@@ -75,6 +75,11 @@ const TransactionService  = {
     {
         const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=usr&i=web`)
         return response.data;
+    },
+
+    async deleteMoveItem(id) {
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveItem&item=${id}&i=web`)
+        return response;
     }
 }
 

@@ -114,8 +114,6 @@ const onRenderOrderAdd = item => {
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
             var no = DataAccess.getData(response, "No", "IntValue");
-
-            alert("test")
             document.getElementById("positionNumber").value = no;
             document.getElementById("openQty").value = qty;
             document.getElementById("deadlineDate").value = deadline;
@@ -285,7 +283,7 @@ const onRenderOrderAdd = item => {
 
 
 
-                <button type="button" class="btn btn-primary px-4 float-right">Dodaj poziciju</button>
+                <button type="button" class="btn btn-primary px-4 float-right" id="addPositionButton">Dodaj poziciju</button>
 
         </div>
     </div>

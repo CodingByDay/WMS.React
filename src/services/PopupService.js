@@ -11,7 +11,10 @@ const PopupService  =  {
        return response.data;
     }, 
     
-  
+    async getAllDocumentTypeOfEvent(event) {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=dt&pars=${event}&i=web`)
+        return response.data;
+     }, 
     async getWarehouses() {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&pars=95&i=web`)
         return response.data;

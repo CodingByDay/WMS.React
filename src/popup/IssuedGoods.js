@@ -10,15 +10,9 @@ import { MdAdd} from "react-icons/md";
 export default function IssuedGoods(props) { 
     // States
 
-
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [buyer, setBuyer] = useState([]);
-
-
-
-
-
 
     // Chosen states
 
@@ -29,7 +23,7 @@ export default function IssuedGoods(props) {
 
 
     useEffect(() => {
-        var documentTypes =  PopupService.getAllDocumentTypes().then(response => { 
+        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
             var types = [];
             for (var i = 0; i < response.Items.length; i++) {
                 types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
@@ -146,7 +140,7 @@ export default function IssuedGoods(props) {
         <div className='layout-issued-goods-header-checkbox'>
 
         <label for="byOrder">Po naročilo</label>
-        <input type="checkbox" id='byOrder' />
+        <input type="checkbox" checked id='byOrder' />
 
         </div>
 

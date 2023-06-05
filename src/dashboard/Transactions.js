@@ -28,11 +28,6 @@ export default function Transactions() {
 
     const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] = useState({});
     const [selectedRowTransactionsPositions, setSelectedRowHeadsTransactionsPositions] = useState({});
-
-
-
-
-
     const [transactions, setTransactions] = useState([]);
     const [positions, setPositions] = useState([]);
     const [show, setShow] = useState(false);
@@ -117,13 +112,8 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
-
-
-            window.select = selectedRowTransactionsHeads;
-            var idToDelete = selectedRowTransactionsHeads.childNodes[0].innerHTML
-
-            alert(idToDelete);
-
+              var idToDelete = selectedRowTransactionsPositions.childNodes[0].innerHTML
+              deleteItemDocument(idToDelete);       
           } else {
                deleteHeadDocument();
           }
@@ -160,6 +150,26 @@ export default function Transactions() {
    }); 
   } 
 }
+
+
+function deleteItemDocument(id) { 
+  if(window.confirm("Ali ste sigurni da želite zbrisati dokument?")) {
+
+    var data =  TransactionService.deleteMoveItem(id).then(response => { 
+
+    if(response.data.includes("OK!")) {
+            var data =  TransactionService.getAllTransactions().then(response => { 
+            setTransactions(response);
+            window.showAlert("Informacija", "Uspešno pobrisano", "success")
+            }); 
+    }
+ }); 
+} 
+}
+
+
+
+
 
     const changeVisibility = (data) => {
         setHead(data)

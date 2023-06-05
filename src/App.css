@@ -18,7 +18,15 @@ background: none;
   right: 3em;
   top: 30vh;
 }
+div#addHeader {
+  color: black;
+}
 
+
+
+.body_part input {
+  width: max-content!important;
+}
 
 .settings-divider-context button {
   display: flex;
