@@ -22,7 +22,7 @@ export default function TakeOver(props) {
 
 
     useEffect(() => {
-        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
+        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("I").then(response => { 
             var types = [];
             for (var i = 0; i < response.Items.length; i++) {
                 types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
@@ -107,6 +107,7 @@ export default function TakeOver(props) {
 
 
     async function createHeadDocument ()  {
+
       var documentData = document;
       var warehouseData = warehouse;
       var clientData = client;
@@ -120,7 +121,7 @@ export default function TakeOver(props) {
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "E", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
             
         }); 
        }

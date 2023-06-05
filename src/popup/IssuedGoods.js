@@ -121,7 +121,7 @@ export default function IssuedGoods(props) {
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
             
         }); 
        }
