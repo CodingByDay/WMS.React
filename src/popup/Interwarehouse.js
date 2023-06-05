@@ -134,7 +134,7 @@ export default function Interwarehouse(props) {
       }
 
      if(window.confirm('Ali želite kreirati dokument')) {
-          var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+          var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "E", Issuer: selectedIssuer, Receiver: selectedReceiver, ByOrder: byClient, LinkKey: ""}).then(response => { 
           props.close();
           props.render();    
       }); 
@@ -172,6 +172,7 @@ function changeEvent(e) {
             <Select className='select-filters interwarehouse' isDisabled={true} value={selectedIssuer} options={issueWarehouse} placeholder={"Izdajno skladišče"} id='issuingWarehouse'/>
             <Select className='select-filters interwarehouse' isDisabled={true} value={selectedReceiver} options={receiveWarehouse} placeholder={"Prejemno skladišče"} id='receivingWarehouse'/>
         </div>
+
         <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
              <MdAdd />
         </button>
