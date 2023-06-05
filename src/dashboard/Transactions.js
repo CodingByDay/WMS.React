@@ -93,8 +93,6 @@ export default function Transactions() {
       }
     }
 
-
-
     const reactToFront = (data) => {
       var type = data.type;
       var action = data.action;
@@ -145,7 +143,7 @@ export default function Transactions() {
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
               window.showAlert("Informacija", "Uspešno pobrisano", "success")
-              }); 
+        }); 
       }
    }); 
   } 

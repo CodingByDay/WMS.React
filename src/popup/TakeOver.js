@@ -121,7 +121,7 @@ export default function TakeOver(props) {
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "E", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "I", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
             
         }); 
        }

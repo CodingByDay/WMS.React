@@ -108,12 +108,12 @@ export default function IssuedGoods(props) {
 
 
     async function createHeadDocument ()  {
+
       var documentData = document;
       var warehouseData = warehouse;
       var clientData = client;
       var dateData = date;
-      var byClient = false
-
+      var byClient = false;
 
       if($('#byOrder').is(":checked"))
         {
@@ -122,7 +122,8 @@ export default function IssuedGoods(props) {
 
        if(window.confirm('Ali želite kreirati dokument')) {
             var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
-            
+            props.close();
+            props.render();            
         }); 
        }
 

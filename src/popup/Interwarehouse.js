@@ -22,8 +22,7 @@ export default function Interwarehouse(props) {
         <div className='layout-interwarehouse-checkbox'>
 
 
-        <input type="checkbox" />
-
+        <input type="checkbox" checked />
 
 
         </div>

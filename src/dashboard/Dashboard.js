@@ -46,7 +46,7 @@ export function Dashboard() {
  
   function handleSettings () {
     $(".settings-divider").toggle();
-   // Toggle the visibility
+    // Toggle the visibility
   }
 
   const routeChange = (option) => {

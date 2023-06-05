@@ -28,30 +28,30 @@ export default function AddHeadDocument(props) {
 
             case "Izdaja blaga":          
 
-                component = <IssuedGoods />;
+                component = <IssuedGoods close={close} render={props.render} />;
                 setConditional(component);
 
                 break;
             case "Prevzem blaga":
                 
-                component = <TakeOver />;
+                component = <TakeOver close={close} render={props.render} />;
                 setConditional(component);
 
                 break;
             case "Medskladišnica":
                 
-                component = <Interwarehouse />;
+                component = <Interwarehouse close={close} render={props.render}/>;
                 setConditional(component);
 
                 break;
             case "Inventura":
                 
-                component = <IssuedGoods />;
+                component = <IssuedGoods close={close} render={props.render}/>;
                 setConditional(component);
 
                 break;
             case "Delovni nalog":
-                component = <WorkOrder />;
+                component = <WorkOrder close={close} render={props.render} />;
                 setConditional(component);
         }
     }
@@ -60,10 +60,11 @@ export default function AddHeadDocument(props) {
     }, [type]);
 
 
-    function close() {
-        props.changeVisibility(false)
-    }
 
+    const close = () => {
+        props.changeVisibility(false)
+
+    }
     function onChangeTypePopup(e) {
         const mutated = {value: e.value, label:e.label}
         setType (mutated);   
@@ -99,7 +100,7 @@ export default function AddHeadDocument(props) {
 
                 <div class="form-group row" id="main-select">
 
-                <Select className='select-filters' onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+                <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
 
                 </div>
                 
