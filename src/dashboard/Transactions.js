@@ -25,7 +25,6 @@ import DataAccess from '../utility/DataAccess';
 export default function Transactions() { 
 
     checkUID ()
-
     const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] = useState({});
     const [selectedRowTransactionsPositions, setSelectedRowHeadsTransactionsPositions] = useState({});
     const [transactions, setTransactions] = useState([]);
@@ -35,7 +34,6 @@ export default function Transactions() {
     const [filters, setFilters] = useState();
 
     useEffect(() => {
-
               // window['toggleLoaader']("loader", false);
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
@@ -43,9 +41,9 @@ export default function Transactions() {
     }, [selectedRowTransactionsPositions]);
 
 
-              $('#close_add').on('click', function(){
-                  setShow(false);
-              });
+        $('#close_add').on('click', function(){
+            setShow(false);
+        });
     
 
       $(".table_responsive_transaction tr").click(function () {
@@ -166,7 +164,12 @@ function deleteItemDocument(id) {
 }
 
 
-
+    const renderComponent = () => { 
+      var data =  TransactionService.getAllTransactions().then(response => { 
+        setTransactions(response);
+        window.showAlert("Informacija", "Uspešno dodano", "success")
+  }); 
+    }
 
 
     const changeVisibility = (data) => {
@@ -193,7 +196,7 @@ function deleteItemDocument(id) {
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
         <Add show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
-        <AddHeadDocument show = {head} changeVisibility = {changeVisibility}  />
+        <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
         </div>

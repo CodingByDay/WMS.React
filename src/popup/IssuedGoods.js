@@ -123,7 +123,7 @@ export default function IssuedGoods(props) {
        if(window.confirm('Ali želite kreirati dokument')) {
             var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
             props.close();
-            props.render();            
+            props.render();    
         }); 
        }
 
