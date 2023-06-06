@@ -23,6 +23,26 @@ export default function WorkOrder(props) {
         $("#edit").css("display", "none");
     }
 
+
+
+    async function createHeadDocument ()  {
+
+
+    
+     
+         if(window.confirm('Ali želite kreirati dokument')) {
+              var data =  PopupService.setMoveHead({ Type: "W"}).then(response => { 
+              props.close();
+              props.render();    
+          }); 
+         }
+    
+    
+    }
+
+
+
+
     function changeWorkOrder(e) {
         var data =  PopupService.getWorkOrderDetail(e.value).then(response => { 
 
@@ -31,12 +51,32 @@ export default function WorkOrder(props) {
             var name = DataAccess.getData(response, "Name", "StringValue");
             var qty = DataAccess.getData(response, "OpenQty", "DoubleVal");
 
-            alert(client)
-            alert(ident)
-            alert(name)
-            alert(qty)
+            var clientField = document.getElementById("clientPopup");
+            var identField = document.getElementById("identPopup");
+            var nameField = document.getElementById("namePopup");
+            var qtyField = document.getElementById("openQtyPopup");
+            
+            if(typeof client === "undefined") {
+                client = "";
+            }
 
+            if(typeof ident === "undefined") {
+                ident = "";
+            }
 
+            if(typeof name === "undefined") {
+                name = "";
+            }
+
+            if(typeof qty === "undefined") {
+                qty = "";
+            }
+
+            clientField.value = client;
+            identField.value = ident;
+            nameField.value = name;
+            qtyField.value = qty;
+            
         }); 
     }
 
@@ -50,11 +90,12 @@ export default function WorkOrder(props) {
        </div>
 
 
-       <input type="text" id="client" placeholder='Naročnik' class="form-control" />
-       <input type="text" id="ident" placeholder='Ident' class="form-control" />
-       <input type="text" id="name" placeholder='Naziv' class="form-control" />
-       <input type="text" id="openQty" placeholder = 'Odprta količina' class="form-control" />
+       <input type="text" id="clientPopup" placeholder='Naročnik' class="form-control" />
+       <input type="text" id="identPopup" placeholder='Ident' class="form-control" />
+       <input type="text" id="namePopup" placeholder='Naziv' class="form-control" />
+       <input type="text" id="openQtyPopup" placeholder = 'Odprta količina' class="form-control" />
 
+       <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi</button>   
 
     </div>
     
