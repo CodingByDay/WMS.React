@@ -27,6 +27,25 @@ const PopupService  =  {
         return response.data;
     },
 
+    async getAllWorkOrders() { 
+        var orders = [];
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wox&i=web`)
+        window.orders = response.data;
+        return response.data;
+    },
+
+
+
+
+    async getWorkOrderDetail(workOrder) { 
+        var orders = [];
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=wo&id=${workOrder}&i=web`)
+        window.detail = response.data;
+        return response.data;
+    },
+
+
+
     // Requires the CORS policy.
     // This is the method for setting the moveHead.
     async setMoveHead(data) { 
