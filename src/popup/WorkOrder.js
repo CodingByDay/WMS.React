@@ -1,9 +1,24 @@
+import DataAccess from "../utility/DataAccess";
 
 import $ from 'jquery'; 
 import Select from 'react-select'
-
+import PopupService from '../services/PopupService';
+import { useEffect, useState } from "react";
+import { MdAdd} from "react-icons/md";
 
 export default function WorkOrder(props) { 
+
+
+
+
+    const [workOrders, setWorkOrders] = useState([]);
+
+    useEffect(() => {
+        alert("Test");
+    }, []);
+
+
+
 
 
     if(props.show) {
@@ -18,15 +33,14 @@ export default function WorkOrder(props) {
 
 
        <div className='first-row'> 
-            <Select className='select-filters' placeholder={"Tip transakcije"} id='documentType'/>
-            <input type="text" id="example" class="form-control" /> 
+            <Select className='select-filters' placeholder={"Delovni nalog"} id='workOrder' />
        </div>
 
 
-       <input type="text" id="example" class="form-control" />
-       <input type="text" id="example" class="form-control" />
-       <input type="text" id="example" class="form-control" />
-       <input type="text" id="example" class="form-control" />
+       <input type="text" id="client" placeholder='Naročnik' class="form-control" />
+       <input type="text" id="ident" placeholder='Ident' class="form-control" />
+       <input type="text" id="name" placeholder='Naziv' class="form-control" />
+       <input type="text" id="openQty" placeholder = 'Odprta količina' class="form-control" />
 
 
     </div>

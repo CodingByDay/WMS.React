@@ -6,6 +6,7 @@ import IssuedGoods from '../popup/IssuedGoods';
 import Interwarehouse from '../popup/Interwarehouse';
 import TakeOver from './TakeOver';
 import WorkOrder from './WorkOrder';
+import Inventory from './Inventory';
 import { MdAdd} from "react-icons/md";
 
 
@@ -46,7 +47,7 @@ export default function AddHeadDocument(props) {
                 break;
             case "Inventura":
                 
-                component = <IssuedGoods close={close} render={props.render}/>;
+                component = <Inventory close={close} render={props.render}/>;
                 setConditional(component);
 
                 break;

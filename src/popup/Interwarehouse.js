@@ -134,7 +134,7 @@ export default function Interwarehouse(props) {
       }
 
      if(window.confirm('Ali želite kreirati dokument')) {
-          var data =  PopupService.setMoveHead({ DocumentType: documentData, Type: "E", Issuer: selectedIssuer, Receiver: selectedReceiver, LinkKey: "" }).then(response => { 
+          var data =  PopupService.setMoveHead({ DocumentType: documentData, Type: "E", Issuer: selectedIssuer.label, Receiver: selectedReceiver.label, LinkKey: "" }).then(response => { 
           props.close();
           props.render();    
       }); 

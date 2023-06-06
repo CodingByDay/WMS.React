@@ -152,7 +152,7 @@ export default function TakeOver(props) {
 
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
 
-        <input placeholder="Select date" type="date" id="example" class="form-control" />
+        <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
 
         </div>
 
