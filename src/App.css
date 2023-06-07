@@ -22,8 +22,37 @@ div#addHeader {
   color: black;
 }
 
+.right-part {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 
-.warehouses-container {
+.outer_container {
+  display: flex;
+}
+
+
+.left-part input {
+  margin: 1em;
+}
+
+#locationComponent {
+   display: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: max-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    padding: 10px;
+    color: white;
+    opacity: 1;
+    background: white;
+}
+ .warehouses-container {
   display: none;
 }
 

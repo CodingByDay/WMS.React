@@ -1,4 +1,6 @@
 const TableHead = ({ columns }) => {
+
+    try {
     return (
      <thead>
       <tr>
@@ -8,6 +10,9 @@ const TableHead = ({ columns }) => {
       </tr>
      </thead>
     );
+    } catch (e) {
+        return null;
+    }
    };
    
    export default TableHead;

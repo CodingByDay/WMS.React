@@ -176,16 +176,16 @@ function deleteItemDocument(id) {
 
     const changeAddVisibility = (data, close) => {
 
-      setShow(close)
+      setShow(false)
       if(data.serial)
       {
 
-        var component = <LocationComponent show={componentVisibility} />
+        var component = <SerialComponent data = {data} show={componentVisibility} />
         setComponent(component);
 
       } else {
 
-        var component = <SerialComponent show={componentVisibility} />
+        var component = <LocationComponent data = {data} show={componentVisibility} />
         setComponent(component);
 
       }

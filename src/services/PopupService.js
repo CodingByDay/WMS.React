@@ -41,7 +41,7 @@ const PopupService  =  {
 
         var serialNumber = DataAccess.getData(response.data, "HasSerialNumber", "BoolValue")
 
-        alert(serialNumber)
+    
 
         if (typeof serialNumber !== "undefined")
         {

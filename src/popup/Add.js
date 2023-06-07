@@ -203,7 +203,7 @@ const onRenderOrderAdd = item => {
 
 
 
-            props.addVisibility(data, true);
+            props.addVisibility(data, false);
         });
     }
     

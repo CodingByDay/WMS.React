@@ -9,11 +9,12 @@ import TransactionService from '../services/TransactionService';
 import { Dropdown, Stack } from '@fluentui/react'
 import DataAccess from '../utility/DataAccess';
 import PopupService from '../services/PopupService';
+import { MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode, MdDeleteOutline} from "react-icons/md";
 
 
 export default function LocationComponent (props) { 
 
-
+    const [tableData, setTabledata] = useState([]);
     if (props.show) {
         $(".locationComponent").css("display", "block");
     } else {
@@ -22,9 +23,51 @@ export default function LocationComponent (props) {
     }
 
     return ( 
-        <div className='locationComponent'>
-            <h1>LocationComponent</h1>
+        <div id="locationComponent" className='locationComponent'>      
+            <div class="header_part">
+            <h1 id='close_add'>X</h1></div>
+            <div className='outer_container'>
+            <div className="bodyLocationComponent">
+            <div className='left-part'>
+            <div class="col-sm-6">
+                        <input type="text" class="form-control" id="identLocationComponent" placeholder="Ident" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="nameLocationComponent" placeholder="Naziv" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="neededQtyLocationComponent" placeholder="Potrebna količina" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="qty" placeholder="Količina" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="difference" placeholder="Razlika" />
+                    </div>
+            </div>
+            </div>
+            <div className='right-part'>
+            <span className='actions smallerr'id=''>Potrdi
+             
+             
+             <MdAdd />
+
+             </span>  <span className='actions smallerr' id=''>Briši
+                   
+             <MdDeleteOutline />
+
+             </span>
+
+
+            </div>
+
         </div>
+
+        <Table className="location-component_table" data = {tableData} type = "locationComponent" class = "table_responsive_location-component" data = {props.data} /> 
+
+
+        </div>
+
       
         
 
