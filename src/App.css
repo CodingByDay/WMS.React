@@ -37,6 +37,15 @@ div#addHeader {
   margin: 2em;
 }
 
+
+
+.add-location-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: space-between;
+}
+
 .left-part input {
   margin: 1em;
 }

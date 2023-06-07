@@ -9,7 +9,7 @@ import TransactionService from '../services/TransactionService';
 import { Dropdown, Stack } from '@fluentui/react'
 import DataAccess from '../utility/DataAccess';
 import PopupService from '../services/PopupService';
-import { MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode, MdDeleteOutline} from "react-icons/md";
+import { MdAdd, MdOutlineMerge, MdEdit, MdOutlineKey, MdOutlineQrCode, MdDeleteOutline} from "react-icons/md";
 
 
 export default function LocationComponent (props) { 
@@ -56,16 +56,43 @@ export default function LocationComponent (props) {
             </div>
 
             </div>
-            <div className='right-part'>
-            <span className='actions smallerr'id=''>Potrdi
-             
-             
+
+
+
+            <div className='add-location-container'>
+
+                <Select 
+                            placeholder={"Lokacija"}
+                            id='locationSelect'
+                />
+                <input 
+                placeholder = "qty"
+                id='qtyAddLocation'
+                className='form-control'
+                />
+
+
+
+            <span className='actions smallerr' id=''>Dodaj           
              <MdAdd />
+             </span>
+            </div>
 
-             </span>  <span className='actions smallerr' id=''>Briši
-                   
+
+
+
+
+
+            <div className='right-part'>
+
+             <span className='actions smallerr'id=''>Potrdi         
+             <MdEdit />
+             </span> 
+
+          
+
+             <span className='actions smallerr' id=''>Briši               
              <MdDeleteOutline />
-
              </span>
 
 

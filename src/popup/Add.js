@@ -246,7 +246,8 @@ export default function Add(props) {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputFirstname">Ident</label>
-                        <Select 
+
+                    <Select 
                         placeholder={"Ident"}
                         id='identListControl'
                         options={identList}
