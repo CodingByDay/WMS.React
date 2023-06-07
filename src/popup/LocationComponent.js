@@ -13,7 +13,7 @@ import { MdAdd, MdOutlineMerge, MdEdit, MdOutlineKey, MdOutlineQrCode, MdDeleteO
 
 
 export default function LocationComponent (props) { 
-
+    const [locations, setLocations] = useState([])
     const [tableData, setTabledata] = useState([]);
     if (props.show) {
         $(".locationComponent").css("display", "block");
@@ -23,21 +23,23 @@ export default function LocationComponent (props) {
 
 
     useEffect(() => {
-
-
-        console.log(props.data);
-
-        
         document.getElementById("identLocationComponent").value = props.data.ident.value;
         document.getElementById("nameLocationComponent").value = props.data.name;
         document.getElementById("neededQtyLocationComponent").value = props.data.real;
         document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value)
+        // 
+
+        var data =  TransactionService.getLocations(props.data.warehouse).then(response => { 
+            var locations = [];
+
+            for (var i = 0; i < response.Items.length; i++) {  
+                locations.push({value: response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue});
+            }
+
+            setLocations(locations);     
+      });
 
 
-
-
-
-        alert(props.data.warehouse)
     }); 
 
 
@@ -72,7 +74,7 @@ export default function LocationComponent (props) {
 
             <div className='add-location-container'>
 
-                <Select 
+                <Select     options={locations}
                             placeholder={"Lokacija"}
                             id='locationSelect'
                 />

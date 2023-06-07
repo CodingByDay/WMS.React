@@ -36,9 +36,9 @@ div#addHeader {
 .table_responsive_location-component {
   margin: 2em;
 }
-
-
-
+#locationComponent div{
+  color: black!important;
+}
 .add-location-container {
   display: flex;
   flex-direction: column;
