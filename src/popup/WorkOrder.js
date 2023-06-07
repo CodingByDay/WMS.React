@@ -23,34 +23,23 @@ export default function WorkOrder(props) {
         $("#edit").css("display", "none");
     }
 
-
-
     async function createHeadDocument ()  {
-
-
-    
-     
+   
          if(window.confirm('Ali želite kreirati dokument')) {
               var data =  PopupService.setMoveHead({ Type: "W"}).then(response => { 
               props.close();
               props.render();    
           }); 
          }
-    
-    
     }
 
-
-
-
     function changeWorkOrder(e) {
-        var data =  PopupService.getWorkOrderDetail(e.value).then(response => { 
-
+        
+            var data =  PopupService.getWorkOrderDetail(e.value).then(response => { 
             var client = DataAccess.getData(response, "Consignee", "StringValue");
             var ident = DataAccess.getData(response, "Ident", "StringValue");
             var name = DataAccess.getData(response, "Name", "StringValue");
             var qty = DataAccess.getData(response, "OpenQty", "DoubleVal");
-
             var clientField = document.getElementById("clientPopup");
             var identField = document.getElementById("identPopup");
             var nameField = document.getElementById("namePopup");

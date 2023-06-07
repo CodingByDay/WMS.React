@@ -175,8 +175,9 @@ function deleteItemDocument(id) {
     }
 
     const changeAddVisibility = (data, close) => {
+      
+      setShow(close)
 
-      setShow(false)
       if(data.serial)
       {
 

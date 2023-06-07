@@ -46,7 +46,7 @@ export default function AddHeadDocument(props) {
 
                 break;
             case "Inventura":
-                
+    
                 component = <Inventory close={close} render={props.render}/>;
                 setConditional(component);
 

@@ -37,20 +37,26 @@ const PopupService  =  {
 
     async hasSerialNumberIdent(ident)
     {
+        var ret = {};
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=id&id=${ident}&i=web`)
 
         var serialNumber = DataAccess.getData(response.data, "HasSerialNumber", "BoolValue")
-
+        var identName = DataAccess.getData(response.data, "Name", "StringValue");
     
 
         if (typeof serialNumber !== "undefined")
         {
             if (serialNumber) {
-                return serialNumber;
+                ret.serial = true
             }
         }
 
-        return false;
+        ret.serial = false;
+        ret.name = identName;
+
+
+        return ret;
+
     },
 
 

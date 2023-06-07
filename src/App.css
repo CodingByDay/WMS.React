@@ -30,8 +30,12 @@ div#addHeader {
 
 .outer_container {
   display: flex;
+  justify-content: space-around;
 }
 
+.table_responsive_location-component {
+  margin: 2em;
+}
 
 .left-part input {
   margin: 1em;
@@ -40,8 +44,8 @@ div#addHeader {
 #locationComponent {
    display: none;
     width: -moz-fit-content;
-    width: fit-content;
-    height: max-content;
+    width: 50%;
+    height: 70%;
     position: absolute;
     left: 50%;
     top: 50%;

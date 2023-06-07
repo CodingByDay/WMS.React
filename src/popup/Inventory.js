@@ -139,13 +139,11 @@ export default function Inventory(props) {
         <div className='layout-inventory-goods'>
 
         <div className='left-column'>
-
        
         <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
 
         <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
-
             <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
                 <MdAdd />
             </button>

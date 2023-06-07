@@ -176,12 +176,10 @@ function changeEvent(e) {
         <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
              <MdAdd />
         </button>
+        
         </div>
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-
-
-
-        <input placeholder="Select date" type="date" id="example" class="form-control" />
+        <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
         </div>
         </div>
         </div>

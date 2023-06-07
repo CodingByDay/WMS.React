@@ -54,10 +54,18 @@ const columnsTransactionPosition = [
   { label: "Pozicija transakcije", accessor: "No", type: "IntValue" },
   { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
-  { label: "WMS količina", accessor: "Qty", type: "DoubleValue" },
-
-  
+  { label: "WMS količina", accessor: "Qty", type: "DoubleValue" }, 
 ]
+
+
+const columnsLocationComponent = [
+  { label: "Lokacija"},
+  { label: "Količina" },
+]
+
+
+
+
 
     let columns;
 
@@ -76,6 +84,11 @@ const columnsTransactionPosition = [
     } else if (props.type === "positionsTransaction") {
       
       columns = columnsTransactionPosition;
+      
+    } else if (props.type === "locationComponent") { 
+
+      columns = columnsLocationComponent;
+
     }
 
 

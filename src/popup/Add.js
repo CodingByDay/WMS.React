@@ -69,21 +69,6 @@ export default function Add(props) {
 
 
 
-const onRenderOrderAdd = item => {
-        return (
-          <table>
-            <tbody>
-              <tr>
-                <td style={{ width: 150 }}>{item.order}</td>
-                <td style={{ width: 150 }}>{item.client}</td>
-                <td style={{ width: 150 }}>{item.quantity}</td>
-                <td style={{ width: 150 }}>{item.date}</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      }
-
     function findValueByClassWithinArray(array, classNameValue) {
 
         for (var i = 0; i < array.length; i++) {
@@ -192,18 +177,15 @@ const onRenderOrderAdd = item => {
         var realQty = document.getElementById("realQty").value;
         var positionNumber = document.getElementById("positionNumber").value;
         var deadlineDate = document.getElementById("deadlineDate").value;
-        var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false};
+        var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:""};
 
 
         // Place to check for the serial number
-        PopupService.hasSerialNumberIdent(ident.value).then(response => { 
-          
-            data.serial = response;
+        PopupService.hasSerialNumberIdent(ident.value).then(response => {           
+            data.serial = response.serial;
+            data.name = response.name;
             // Multi column place for the data collection //
-
-
-
-            props.addVisibility(data, false);
+            props.addVisibility(data, true);
         });
     }
     
@@ -302,7 +284,7 @@ const onRenderOrderAdd = item => {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputContactNumber">Količina</label>
-                        <input type="number" class="form-control" id="realQty" value={"0"} placeholder="Količina" />
+                        <input type='number' class="form-control" id="realQty" placeholder="Količina" />
                     </div>
                     <div class="col-sm-6">
                         <label for="inputWebsite">Datum dobave</label>

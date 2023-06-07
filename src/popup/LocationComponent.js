@@ -19,8 +19,16 @@ export default function LocationComponent (props) {
         $(".locationComponent").css("display", "block");
     } else {
         $(".locationComponent").css("display", "none");
-
     }
+
+
+    useEffect(() => {
+        document.getElementById("identLocationComponent").value = props.data.ident.value;
+        document.getElementById("nameLocationComponent").value = props.data.name;
+        document.getElementById("neededQtyLocationComponent").value = props.data.real;
+        document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value)
+    }); 
+
 
     return ( 
         <div id="locationComponent" className='locationComponent'>      
@@ -29,8 +37,9 @@ export default function LocationComponent (props) {
             <div className='outer_container'>
             <div className="bodyLocationComponent">
             <div className='left-part'>
+
             <div class="col-sm-6">
-                        <input type="text" class="form-control" id="identLocationComponent" placeholder="Ident" />
+                <input type="text" class="form-control" id="identLocationComponent" placeholder="Ident" />
                     </div>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nameLocationComponent" placeholder="Naziv" />
@@ -39,12 +48,13 @@ export default function LocationComponent (props) {
                         <input type="text" class="form-control" id="neededQtyLocationComponent" placeholder="Potrebna količina" />
                     </div>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="qty" placeholder="Količina" />
+                        <input type="text" class="form-control" id="qtyLocationComponent" value="0" placeholder="Količina" />
                     </div>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="difference" placeholder="Razlika" />
-                    </div>
+                        <input type="text" class="form-control" id="differenceLocationComponent" placeholder="Razlika" />
+                </div>
             </div>
+
             </div>
             <div className='right-part'>
             <span className='actions smallerr'id=''>Potrdi
