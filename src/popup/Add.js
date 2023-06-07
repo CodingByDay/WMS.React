@@ -13,12 +13,12 @@ import PopupService from '../services/PopupService';
 
 export default function Add(props) { 
 
-    const [ident, setIdent] = useState("");
+    const [ident, setIdent] = useState({});
     const [identList, setIdentsList] = useState([]);
     const [transactionData, setTransactionData] = useState({});
     const [orderData, setOrderData] = useState([]);
     const [documentTypeString, setDocumentTypeStringValue] = useState("");
-
+    const [orderCurrent, setOrderCurrent] = useState([]);
 
 
 
@@ -35,7 +35,7 @@ export default function Add(props) {
             }
             window.identity = identObjects;
             setIdentsList(identObjects);
-            setIdent("")
+
           });
 
 
@@ -101,12 +101,23 @@ const onRenderOrderAdd = item => {
 
 
     function onChangeIdent(e) {
-        setIdent(e.value);
+        document.getElementById("positionNumber").value = "";
+        document.getElementById("openQty").value = "";
+        document.getElementById("deadlineDate").value = "";
+
+        
+
+        setIdent({label: e.value, value: e.value });
   
         updateOrders(e.value);
     }
 
     function onChangeOrder(e) {
+
+        setOrderCurrent({label: e.value, value: e.value});
+        document.getElementById("positionNumber").value = "";
+        document.getElementById("openQty").value = "";
+        document.getElementById("deadlineDate").value = "";
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.value, ident).then(response => { 
@@ -130,7 +141,7 @@ const onRenderOrderAdd = item => {
         TransactionService.getOrdersForIdent(ident, type).then(response => { 
           
          
-        
+
             var items = []
             items.push({value: '', label: ''})
 
@@ -176,8 +187,25 @@ const onRenderOrderAdd = item => {
             $("#edit").css("display", "none");
     }
   
+    function CommitPosition(e) {
+        var openQty = document.getElementById("openQty").value;
+        var realQty = document.getElementById("realQty").value;
+        var positionNumber = document.getElementById("positionNumber").value;
+        var deadlineDate = document.getElementById("deadlineDate").value;
+        var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false};
 
-    // var documentTypeStringValue  = findValueByClassWithinArray(props.selected.childNodes, "Type");
+
+        // Place to check for the serial number
+        PopupService.hasSerialNumberIdent(ident.value).then(response => { 
+          
+            data.serial = response;
+            // Multi column place for the data collection //
+
+
+
+            props.addVisibility(data, true);
+        });
+    }
     
 
     return ( 
@@ -240,6 +268,7 @@ const onRenderOrderAdd = item => {
                         placeholder={"Ident"}
                         id='identListControl'
                         options={identList}
+                        value={ident}
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
@@ -257,7 +286,8 @@ const onRenderOrderAdd = item => {
                         placeholder="Naročilo"
                         id='orderInformationAdd'
                         options={orderData}
-                        onRenderOption={onRenderOrderAdd}  
+                        value={orderCurrent}
+      
                         onChange={onChangeOrder} 
                      />
    
@@ -272,7 +302,7 @@ const onRenderOrderAdd = item => {
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="inputContactNumber">Količina</label>
-                        <input type="number" class="form-control" id="inputContactNumberForm" value={"0"} placeholder="Količina" />
+                        <input type="number" class="form-control" id="realQty" value={"0"} placeholder="Količina" />
                     </div>
                     <div class="col-sm-6">
                         <label for="inputWebsite">Datum dobave</label>
@@ -283,7 +313,7 @@ const onRenderOrderAdd = item => {
 
 
 
-                <button type="button" class="btn btn-primary px-4 float-right" id="addPositionButton">Dodaj poziciju</button>
+                <button type="button" class="btn btn-primary px-4 float-right" onClick={CommitPosition} id="addPositionButton">Dodaj poziciju</button>
 
         </div>
     </div>

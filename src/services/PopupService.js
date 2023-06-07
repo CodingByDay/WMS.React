@@ -35,12 +35,30 @@ const PopupService  =  {
     },
 
 
+    async hasSerialNumberIdent(ident)
+    {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=id&id=${ident}&i=web`)
+
+        var serialNumber = DataAccess.getData(response.data, "HasSerialNumber", "BoolValue")
+
+        alert(serialNumber)
+
+        if (typeof serialNumber !== "undefined")
+        {
+            if (serialNumber) {
+                return serialNumber;
+            }
+        }
+
+        return false;
+    },
+
 
 
     async getWorkOrderDetail(workOrder) { 
         var orders = [];
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=wo&id=${workOrder}&i=web`)
-        window.detail = response.data;
+
         return response.data;
     },
 

@@ -19,6 +19,8 @@ import AddHeadDocument from '../popup/AddHeadDocument'
 import Loader from '../loader/Loader';
 import $ from 'jquery'; 
 import DataAccess from '../utility/DataAccess';
+import LocationComponent from '../popup/LocationComponent';
+import SerialComponent from '../popup/SerialComponent';
 
 
 
@@ -32,7 +34,8 @@ export default function Transactions() {
     const [show, setShow] = useState(false);
     const [head, setHead] = useState(false);
     const [filters, setFilters] = useState();
-
+    const [component, setComponent] = useState();
+    const [componentVisibility, setVisibilityComponent] = useState(true)
     useEffect(() => {
               // window['toggleLoaader']("loader", false);
               var data =  TransactionService.getAllTransactions().then(response => { 
@@ -171,6 +174,22 @@ function deleteItemDocument(id) {
   }); 
     }
 
+    const changeAddVisibility = (data, close) => {
+
+      setShow(close)
+      if(data.serial)
+      {
+
+        var component = <LocationComponent show={componentVisibility} />
+        setComponent(component);
+
+      } else {
+
+        var component = <SerialComponent show={componentVisibility} />
+        setComponent(component);
+
+      }
+    }
 
     const changeVisibility = (data) => {
         setHead(data)
@@ -195,7 +214,8 @@ function deleteItemDocument(id) {
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
-        <Add show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
+        <Add addVisibility = {changeAddVisibility} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
+        {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
