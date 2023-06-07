@@ -23,10 +23,21 @@ export default function LocationComponent (props) {
 
 
     useEffect(() => {
+
+
+        console.log(props.data);
+
+        
         document.getElementById("identLocationComponent").value = props.data.ident.value;
         document.getElementById("nameLocationComponent").value = props.data.name;
         document.getElementById("neededQtyLocationComponent").value = props.data.real;
         document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value)
+
+
+
+
+
+        alert(props.data.warehouse)
     }); 
 
 

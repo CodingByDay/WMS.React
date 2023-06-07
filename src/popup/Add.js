@@ -173,11 +173,14 @@ export default function Add(props) {
     }
   
     function CommitPosition(e) {
+
         var openQty = document.getElementById("openQty").value;
         var realQty = document.getElementById("realQty").value;
         var positionNumber = document.getElementById("positionNumber").value;
         var deadlineDate = document.getElementById("deadlineDate").value;
-        var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:""};
+        var warehouse = document.getElementById("warehouseAdd").value;
+
+        var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:"", warehouse: warehouse, data: data};
 
 
         // Place to check for the serial number
