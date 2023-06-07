@@ -165,8 +165,15 @@ export default function Add(props) {
             var documentTypeAdd = document.getElementById("documentTypeAdd");
             var clientAdd = document.getElementById("clientAdd");
             clientAdd.value = client;
+
+
+
+
             var warehouseAdd = document.getElementById("warehouseAdd");
             warehouseAdd.value = warehouse;
+
+
+            
         }
     } else {
             $("#edit").css("display", "none");

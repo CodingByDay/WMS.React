@@ -19,7 +19,7 @@ export default function TransactionPositionsButtons(props) {
 
 
     function editPosition () {
-        alert("Urejanje pozicije")
+        //alert("Urejanje pozicije")
     }
 
 

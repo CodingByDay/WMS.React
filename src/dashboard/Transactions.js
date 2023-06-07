@@ -52,6 +52,7 @@ export default function Transactions() {
       $(".table_responsive_transaction tr").click(function () {
         $(selectedRowTransactionsHeads).css("background-color", "unset")
         $(this).css("background-color", "rgba(237, 232, 235, 0.8)")
+   
         setSelectedRowHeadsTransactions (	this );
       });
 
@@ -175,7 +176,7 @@ function deleteItemDocument(id) {
     }
 
     const changeAddVisibility = (data, close) => {
-      
+
       setShow(close)
 
       if(data.serial)

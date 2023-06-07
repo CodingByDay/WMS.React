@@ -13,8 +13,11 @@ import { MdAdd, MdOutlineMerge, MdEdit, MdOutlineKey, MdOutlineQrCode, MdDeleteO
 
 
 export default function LocationComponent (props) { 
+    const [openOrder, setOpenOrder] = useState([]);
     const [locations, setLocations] = useState([])
     const [tableData, setTabledata] = useState([]);
+    const [location, setLocation] = useState("")
+    const [locationComponentAdd, setLocationComponentAdd] = useState({});
     if (props.show) {
         $(".locationComponent").css("display", "block");
     } else {
@@ -23,11 +26,12 @@ export default function LocationComponent (props) {
 
 
     useEffect(() => {
+
         document.getElementById("identLocationComponent").value = props.data.ident.value;
         document.getElementById("nameLocationComponent").value = props.data.name;
         document.getElementById("neededQtyLocationComponent").value = props.data.real;
         document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value)
-        // 
+       
 
         var data =  TransactionService.getLocations(props.data.warehouse).then(response => { 
             var locations = [];
@@ -41,6 +45,18 @@ export default function LocationComponent (props) {
 
 
     }); 
+
+
+    function changeAddLocation(e) {
+        setLocationComponentAdd({label: e.value, value: e.value});
+    }
+
+
+    function addLocation(e) {
+        var qty = document.getElementById("qtyAddLocation").value;   
+    }
+
+
 
 
     return ( 
@@ -76,17 +92,22 @@ export default function LocationComponent (props) {
 
                 <Select     options={locations}
                             placeholder={"Lokacija"}
+                            onChange={changeAddLocation}
+                            value={locationComponentAdd}
                             id='locationSelect'
                 />
+
+
+
                 <input 
-                placeholder = "qty"
-                id='qtyAddLocation'
-                className='form-control'
+                            placeholder = "qty"
+                            id='qtyAddLocation'
+                            className='form-control'
                 />
 
 
 
-            <span className='actions smallerr' id=''>Dodaj           
+            <span className='actions smallerr' onClick={addLocation} id=''>Dodaj           
              <MdAdd />
              </span>
             </div>
