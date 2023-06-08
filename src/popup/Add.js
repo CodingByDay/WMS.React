@@ -94,8 +94,8 @@ export default function Add(props) {
     }
 
     function onChangeOrder(e) {
-
-        setOrderCurrent({label: e.value, value: e.value});
+        
+        setOrderCurrent({label: e.key + " poz. " + e.no, value: e.key+ " poz. " + e.no, key: e.key, no: e.no, deadline: e.deadline });
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
@@ -124,7 +124,7 @@ export default function Add(props) {
             window.orders = response;
 
             var items = []
-            items.push({value: '', label: ''})
+            items.push({value: '', label: '', key: ''})
 
             for(var i = 0; i < response.Items.length;i++) {
                 var item = response.Items[i]    
@@ -135,7 +135,7 @@ export default function Add(props) {
 
 
 
-                items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key})            
+                items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key, no: no, deadline: deadline})            
                 // Test this
 
             }             
@@ -189,6 +189,7 @@ export default function Add(props) {
         PopupService.hasSerialNumberIdent(ident.value).then(response => {           
             data.serial = response.serial;
             data.name = response.name;
+            data.transaction = document.getElementById("transactionIdAdd").value;
             // Multi column place for the data collection //
             props.addVisibility(orderCurrent, data, true);
         });

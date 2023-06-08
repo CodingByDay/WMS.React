@@ -80,8 +80,12 @@ export default function LocationComponent (props) {
 
 
     function commitPositions (e) {
-        console.log(props.old)
+      
+        var key = props.old.key;
+        var no = props.old.no;
+        var transactionHeadID = props.data.transaction;
 
+        alert(`${key}     ${no}       ${transactionHeadID}`)
 
         for (var i=0; i<tableData.length; i++) {
 

@@ -13,7 +13,6 @@ const TableBody = (props) => {
             
         var columns = props.columns;
         var tableDataInner = props.tableData;
-        console.log(tableDataInner);
         return (
             <tbody>
              {
