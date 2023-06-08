@@ -89,11 +89,7 @@ export default function Add(props) {
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
-
-        
-
         setIdent({label: e.value, value: e.value });
-  
         updateOrders(e.value);
     }
 
@@ -105,7 +101,7 @@ export default function Add(props) {
         document.getElementById("deadlineDate").value = "";
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
-        PopupService.getOrderDataFromIdentAndOrderNumber(e.value, ident).then(response => { 
+        PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
 
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
@@ -125,15 +121,21 @@ export default function Add(props) {
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
         TransactionService.getOrdersForIdent(ident, type).then(response => { 
           
-         
+            window.orders = response;
 
             var items = []
             items.push({value: '', label: ''})
 
             for(var i = 0; i < response.Items.length;i++) {
-                var item = response.Items[i]           
+                var item = response.Items[i]    
+
                 var key = DataAccess.getData(item, "Key", "StringValue")
-                items.push({label: key, value: key})            
+                var no = DataAccess.getData(item, "No", "IntValue");
+                var deadline = DataAccess.getData(item, "DeliveryDeadline", "DateTimeValue" )
+
+
+
+                items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key})            
                 // Test this
 
             }             
@@ -165,15 +167,8 @@ export default function Add(props) {
             var documentTypeAdd = document.getElementById("documentTypeAdd");
             var clientAdd = document.getElementById("clientAdd");
             clientAdd.value = client;
-
-
-
-
             var warehouseAdd = document.getElementById("warehouseAdd");
-            warehouseAdd.value = warehouse;
-
-
-            
+            warehouseAdd.value = warehouse;     
         }
     } else {
             $("#edit").css("display", "none");
@@ -195,7 +190,7 @@ export default function Add(props) {
             data.serial = response.serial;
             data.name = response.name;
             // Multi column place for the data collection //
-            props.addVisibility(data, true);
+            props.addVisibility(orderCurrent, data, true);
         });
     }
     

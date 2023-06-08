@@ -175,19 +175,19 @@ function deleteItemDocument(id) {
   }); 
     }
 
-    const changeAddVisibility = (data, close) => {
+    const changeAddVisibility = (old, data, close) => {
 
       setShow(close)
 
       if(data.serial)
       {
 
-        var component = <SerialComponent data = {data} show={componentVisibility} />
+        var component = <SerialComponent  data = {data} show={componentVisibility} />
         setComponent(component);
 
       } else {
 
-        var component = <LocationComponent data = {data} show={componentVisibility} />
+        var component = <LocationComponent old = {old} data = {data} show={componentVisibility} />
         setComponent(component);
 
       }

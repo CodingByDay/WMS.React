@@ -79,7 +79,15 @@ export default function LocationComponent (props) {
     }
 
 
+    function commitPositions (e) {
+        console.log(props.old)
 
+
+        for (var i=0; i<tableData.length; i++) {
+
+
+        }
+    }
 
     return ( 
         <div id="locationComponent" className='locationComponent'>      
@@ -143,7 +151,8 @@ export default function LocationComponent (props) {
 
             <div className='right-part'>
 
-             <span className='actions smallerr'id=''>Potrdi         
+             <span 
+              onClick={commitPositions} className='actions smallerr'id=''>Potrdi         
              <MdEdit />
              </span> 
 
