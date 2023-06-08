@@ -41,11 +41,11 @@ export default function Transactions() {
 
       loader.style.display = "block";
       $("main-container").css ("display", "none");
-              // window['toggleLoaader']("loader", false);
-              var data =  TransactionService.getAllTransactions().then(response => { 
-              setTransactions(response);
-              loader.style.display = "none";
-              $(".main-container").css ("display", "block");
+      // window['toggleLoaader']("loader", false);
+      var data =  TransactionService.getAllTransactions().then(response => { 
+      setTransactions(response);
+      loader.style.display = "none";
+      $(".main-container").css ("display", "block");
 
 
            }); 
