@@ -7,6 +7,7 @@ import tableData1 from "./tableData1.json";
 
 
 const Table = (props) => {
+
 const [tableData, setTableData] = useState(tableData1);
 
  const columnsOrder = [
@@ -59,8 +60,8 @@ const columnsTransactionPosition = [
 
 
 const columnsLocationComponent = [
-  { label: "Lokacija"},
-  { label: "Količina" },
+  { label: "Lokacija", accessor: "Location", type: "StringValue" },
+  { label: "Količina", accessor: "Quantity", type: "DoubleValue" },
 ]
 
 
@@ -97,10 +98,10 @@ const columnsLocationComponent = [
  return (
 
     <div className={props.class}>
-    <table className="table" id={props.passID}>
-    <TableHead className="orders" columns={columns} />
-    <TableBody table = {props.table} returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
-   </table>
+        <table className="table" id={props.passID}>
+        <TableHead className="orders" columns={columns} />
+        <TableBody table = {props.table} returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
+      </table>
    </div>
 
  );

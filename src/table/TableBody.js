@@ -1,8 +1,52 @@
 import DataAccess from "../utility/DataAccess";
 
 const TableBody = (props) => {
+
+
+
     var tableData = props.tableData;
     var table = props.table;
+
+
+    if (window.location.href.includes("transactions") && table == "location") 
+    {
+            
+        var columns = props.columns;
+        var tableDataInner = props.tableData;
+        
+        return (
+            <tbody>
+             {
+            tableDataInner.map((data, index) => {
+              return (
+               <tr>
+               { columns.map(({ accessor }) => {
+
+               
+               var tData = data[`${accessor}`];
+               try {          
+                  
+               } catch (e) {
+               }
+                   return <td className>{tData}</td>;
+                })}
+               </tr>
+              );
+             })}
+            </tbody>
+           );
+    }      
+
+
+
+
+
+
+
+
+
+
+  
     try {
         var len = tableData.Items.length;
     } catch (e) {
@@ -526,8 +570,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           })}
          </tbody>
         );
-       }
-      
+       } 
 } 
 
 

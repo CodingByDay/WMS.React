@@ -53,7 +53,15 @@ export default function LocationComponent (props) {
 
 
     function addLocation(e) {
+
         var qty = document.getElementById("qtyAddLocation").value;   
+        var location = locationComponentAdd;
+        var items = tableData;
+
+
+        items.push({Quantity: qty, Location: location.value})
+        setTabledata(items);
+        console.log(tableData)
     }
 
 
@@ -90,7 +98,9 @@ export default function LocationComponent (props) {
 
             <div className='add-location-container'>
 
-                <Select     options={locations}
+                <Select  
+                
+                            options={locations}
                             placeholder={"Lokacija"}
                             onChange={changeAddLocation}
                             value={locationComponentAdd}
@@ -134,7 +144,7 @@ export default function LocationComponent (props) {
 
         </div>
 
-        <Table className="location-component_table" data = {tableData} type = "locationComponent" class = "table_responsive_location-component" data = {props.data} /> 
+        <Table className="location-component_table" table="location" data = {tableData} type = "locationComponent" class = "table_responsive_location-component" /> 
 
 
         </div>
