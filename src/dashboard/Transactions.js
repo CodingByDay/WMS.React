@@ -83,6 +83,11 @@ export default function Transactions() {
     });
   }
 
+
+  function isObjectEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
     function checkUID () {
       const cookies = new Cookies();
       var cookie = cookies.get('uid');
@@ -104,8 +109,13 @@ export default function Transactions() {
         if(action === "add") { 
 
             if(table === "positions") {    
+
+     
+
+                if(!isObjectEmpty(selectedRowTransactionsHeads)) {
                 var toggled = ! show;
                 setShow(toggled);
+              }
             } else {
                 var toggled = ! show;
                 setHead(toggled);

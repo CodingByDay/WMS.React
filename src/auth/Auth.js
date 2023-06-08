@@ -10,6 +10,20 @@ import Cookies from 'universal-cookie';
 export default function Auth(props) {
 
 
+
+
+
+
+
+  function onKeyDownPassword(e) {
+    if(e.key == "Enter") {
+      handleClick();
+    }
+  }
+
+
+
+
   function uuidv4() {
     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -70,6 +84,7 @@ export default function Auth(props) {
               id = "password"
               onChange={(e)=> onChangePassword(e)}
               type="password"
+              onKeyDown={onKeyDownPassword}
               className="form-control mt-1"
               placeholder="Vnesite geslo"
             />

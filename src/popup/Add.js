@@ -300,9 +300,9 @@ export default function Add(props) {
                 </div>
                 </div>
 
+                <span className='actions smallerr' onClick={CommitPosition} id="addPositionButton" >Dodaj poziciju           
+                </span>
 
-
-                <button type="button" class="btn btn-primary px-4 float-right" onClick={CommitPosition} id="addPositionButton">Dodaj poziciju</button>
 
         </div>
     </div>
