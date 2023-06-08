@@ -7,6 +7,8 @@ import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
+import Loader from '../loader/Loader';
+import $ from 'jquery'; 
 
 
 export default function Listing() { 
@@ -39,9 +41,15 @@ export default function Listing() {
     const [positions, setPositions] = useState([]);
 
     useEffect(() => {
+      var loader = document.getElementById("loader");
+
+              loader.style.display = "block";
+              $(".main-container").css ("display", "none");
               var data =  ListingService.getAllListings().then(response => { 
               window.transactionsObjects = response;
               setOrders(response);
+              loader.style.display = "none";
+              $(".main-container").css ("display", "block");
            }); 
     }, []);
 
@@ -68,7 +76,8 @@ export default function Listing() {
     return ( 
 
         <div>
-     
+       <Loader />
+        <div className='main-container'></div>
         <Header/>  
         <div className='listing-bg' >
         <HeaderOrderListing getSortingObject = {getSortingObject} />
@@ -76,7 +85,9 @@ export default function Listing() {
         <OrderPositions data = {positions} childToParent = {childToParent} />     
         <Footer />
 
+        
         </div>
+
         </div>
 
         
