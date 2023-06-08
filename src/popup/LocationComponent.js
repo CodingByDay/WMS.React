@@ -53,15 +53,29 @@ export default function LocationComponent (props) {
 
 
     function addLocation(e) {
-
-        var qty = document.getElementById("qtyAddLocation").value;   
+        var neededQty = document.getElementById("neededQtyLocationComponent").value;
+        var qty = document.getElementById("qtyAddLocation").value;  
         var location = locationComponentAdd;
         var items = tableData;
 
+        items.push({Quantity: parseFloat(qty), Location: location.value})
 
-        items.push({Quantity: qty, Location: location.value})
+        var qtyCount = parseFloat("0.00");
+
+        for(var i=0; i<items.length; i++) {
+            qtyCount += parseFloat(items[i].Quantity)
+        }
+
+        if(qtyCount > neededQty) {
+            alert(`Količina ne sme presegati ${neededQty}!!!`)
+            items.splice(-1,1)
+
+        } else if (qtyCount == neededQty) { 
+            alert(`Količina je dosežena!`);
+        }
+
         setTabledata(items);
-        console.log(tableData)
+      
     }
 
 

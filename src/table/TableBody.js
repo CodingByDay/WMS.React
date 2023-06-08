@@ -13,11 +13,14 @@ const TableBody = (props) => {
             
         var columns = props.columns;
         var tableDataInner = props.tableData;
-        
+        console.log(tableDataInner);
         return (
             <tbody>
              {
-            tableDataInner.map((data, index) => {
+
+              tableDataInner.map((data, index) => {
+
+
               return (
                <tr>
                { columns.map(({ accessor }) => {
