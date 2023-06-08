@@ -73,9 +73,7 @@ div#addHeader {
   margin-top: 1em;
 }
 
-.body_part input {
-  width: max-content!important;
-}
+
 
 .settings-divider-context button {
   display: flex;
@@ -593,6 +591,11 @@ button svg {
 .logout button {
   margin: 0.3em;
 }
+
+.editable-group {
+  margin-bottom: 2em;
+}
+
 .menu {
   display: flex;
   flex-direction: column;

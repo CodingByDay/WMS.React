@@ -17,7 +17,7 @@ export default function LocationComponent (props) {
     const [locations, setLocations] = useState([])
     const [tableData, setTabledata] = useState([]);
     const [location, setLocation] = useState("")
-    const [locationComponentAdd, setLocationComponentAdd] = useState({});
+    const [locationComponentAdd, setLocationComponentAdd] = useState([]);
     if (props.show) {
         $(".locationComponent").css("display", "block");
     } else {
@@ -51,6 +51,9 @@ export default function LocationComponent (props) {
         setLocationComponentAdd({label: e.value, value: e.value});
     }
 
+    function closePopup(e) {
+
+    }
 
     function addLocation(e) {
         var neededQty = document.getElementById("neededQtyLocationComponent").value;
@@ -85,17 +88,20 @@ export default function LocationComponent (props) {
         var no = props.old.no;
         var transactionHeadID = props.data.transaction;
 
-        alert(`${key}     ${no}       ${transactionHeadID}`)
-
         for (var i=0; i<tableData.length; i++) {
-
-
+            var row = tableData[i];
+            var location = row.Location;
+            var qty = row.Quantity;
+            PopupService.commitPosition({LinkKey: parseInt(key), LinkNo: no, Ident: props.data.ident.value, HeadID: transactionHeadID, Location: location, Qty: qty}).then(response => { 
+                alert(response)
+          });
+            
         }
     }
 
     return ( 
         <div id="locationComponent" className='locationComponent'>      
-            <div class="header_part">
+            <div class="header_part" onClick={closePopup}>
             <h1 id='close_add'>X</h1></div>
             <div className='outer_container'>
             <div className="bodyLocationComponent">
@@ -129,14 +135,14 @@ export default function LocationComponent (props) {
                             options={locations}
                             placeholder={"Lokacija"}
                             onChange={changeAddLocation}
-                            value={locationComponentAdd}
+                            value={locationComponentAdd.value}
                             id='locationSelect'
                 />
 
 
 
                 <input 
-                            placeholder = "qty"
+                            placeholder = "Količina"
                             id='qtyAddLocation'
                             className='form-control'
                 />

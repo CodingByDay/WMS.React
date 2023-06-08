@@ -37,9 +37,17 @@ export default function Transactions() {
     const [component, setComponent] = useState();
     const [componentVisibility, setVisibilityComponent] = useState(true)
     useEffect(() => {
+      var loader = document.getElementById("loader");
+
+      loader.style.display = "block";
+      $("main-container").css ("display", "none");
               // window['toggleLoaader']("loader", false);
               var data =  TransactionService.getAllTransactions().then(response => { 
               setTransactions(response);
+              loader.style.display = "none";
+              $(".main-container").css ("display", "block");
+
+
            }); 
     }, [selectedRowTransactionsPositions]);
 
@@ -218,7 +226,8 @@ function deleteItemDocument(id) {
         <div>
 
         <div>
-
+        <Loader />
+        <div className='main-container'>
         <Header />   
         <div className="content-transactions">
         <TransactionFilters bringBackFilters = {bringBackFilters} />
@@ -231,6 +240,7 @@ function deleteItemDocument(id) {
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
+        </div>
         </div>
         </div>
         

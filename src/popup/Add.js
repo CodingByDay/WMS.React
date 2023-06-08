@@ -13,7 +13,7 @@ import PopupService from '../services/PopupService';
 
 export default function Add(props) { 
 
-    const [ident, setIdent] = useState({});
+    const [ident, setIdent] = useState([]);
     const [identList, setIdentsList] = useState([]);
     const [transactionData, setTransactionData] = useState({});
     const [orderData, setOrderData] = useState([]);
@@ -257,7 +257,7 @@ export default function Add(props) {
                         placeholder={"Ident"}
                         id='identListControl'
                         options={identList}
-                        value={ident}
+                        value={ident.valssue}
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>

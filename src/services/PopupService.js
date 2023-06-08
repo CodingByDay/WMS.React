@@ -39,27 +39,25 @@ const PopupService  =  {
     {
         var ret = {};
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=id&id=${ident}&i=web`)
-
         var serialNumber = DataAccess.getData(response.data, "HasSerialNumber", "BoolValue")
         var identName = DataAccess.getData(response.data, "Name", "StringValue");
-    
-
         if (typeof serialNumber !== "undefined")
         {
             if (serialNumber) {
                 ret.serial = true
             }
         }
-
         ret.serial = false;
         ret.name = identName;
-
-
         return ret;
 
     },
 
-
+    async commitPosition(data) {
+        console.log(data);
+        const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mi&i=web`, data)
+        return response.data;
+    },
 
     async getWorkOrderDetail(workOrder) { 
         var orders = [];
