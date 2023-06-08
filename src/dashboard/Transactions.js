@@ -40,7 +40,7 @@ export default function Transactions() {
       var loader = document.getElementById("loader");
 
       loader.style.display = "block";
-      $("main-container").css ("display", "none");
+      $(".main-container").css ("display", "none");
       // window['toggleLoaader']("loader", false);
       var data =  TransactionService.getAllTransactions().then(response => { 
       setTransactions(response);

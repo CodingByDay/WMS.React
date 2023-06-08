@@ -17,7 +17,7 @@ export default function LocationComponent (props) {
     const [locations, setLocations] = useState([])
     const [tableData, setTabledata] = useState([]);
     const [location, setLocation] = useState("")
-    const [locationComponentAdd, setLocationComponentAdd] = useState([]);
+    const [locationComponentAdd, setLocationComponentAdd] = useState();
     if (props.show) {
         $(".locationComponent").css("display", "block");
     } else {
@@ -44,7 +44,7 @@ export default function LocationComponent (props) {
       });
 
 
-    }); 
+    },[]); 
 
 
     function changeAddLocation(e) {
@@ -52,7 +52,7 @@ export default function LocationComponent (props) {
     }
 
     function closePopup(e) {
-
+        $(".locationComponent").css("display", "none");
     }
 
     function addLocation(e) {
@@ -135,7 +135,7 @@ export default function LocationComponent (props) {
                             options={locations}
                             placeholder={"Lokacija"}
                             onChange={changeAddLocation}
-                            value={locationComponentAdd.value}
+                            value={locationComponentAdd}
                             id='locationSelect'
                 />
 
