@@ -179,17 +179,31 @@ export default function Add(props) {
         var warehouse = document.getElementById("warehouseAdd").value;
         var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:"", warehouse: warehouse, data: data};
         // getDocumentTypeStringBasedOnCode API call
-        PopupService.getDocumentTypeStringBasedOnCode("0115").then(response => {           
-            alert(response)
+        PopupService.getDocumentTypeStringBasedOnCode(document.getElementById("typeAdd").value).then(response => {           
+            if(response.includes("Prenos")) {
+                // Medskladišnica E
+            } else if(response.includes("Odpremni")) {
+                PopupService.hasSerialNumberIdent(ident.value).then(response => {           
+                    data.serial = response.serial;
+                    alert(data.serial);
+                });           
+            } else if(response.includes("Naročilo")) {
+                PopupService.hasSerialNumberIdent(ident.value).then(response => {           
+                    data.serial = response.serial;
+                    data.name = response.name;
+                    data.transaction = document.getElementById("transactionIdAdd").value;
+                    // Multi column place for the data collection //
+                    props.addVisibility(orderCurrent, data, true);
+                });
+            } else if(response.includes("Proizvodnja") || response.inlcudes("DN")) {
+                // Delovni nalog
+            } else if(response.includes("Inventura")) {
+                // Inventura N
+            }           
+
         });
         // Place to check for the serial number
-        PopupService.hasSerialNumberIdent(ident.value).then(response => {           
-            data.serial = response.serial;
-            data.name = response.name;
-            data.transaction = document.getElementById("transactionIdAdd").value;
-            // Multi column place for the data collection //
-            props.addVisibility(orderCurrent, data, true);
-        });
+        
     }
     
 
