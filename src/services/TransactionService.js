@@ -70,7 +70,8 @@ const TransactionService  = {
 
     async getOrdersForIdent(ident, type)
     {
-        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=oo&pars=${ident}|0200|0&i=web`)
+        alert(type)
+        const response = await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=oo&pars=${ident}|${type}|0&i=web`)
         return response.data;
     },
 

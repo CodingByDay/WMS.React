@@ -102,7 +102,7 @@ export default function Add(props) {
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
-
+            window.orderTest = response;
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
             var no = DataAccess.getData(response, "No", "IntValue");
@@ -120,15 +120,12 @@ export default function Add(props) {
         // Continue here.
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
         TransactionService.getOrdersForIdent(ident, type).then(response => { 
-          
-            window.orders = response;
 
             var items = []
             items.push({value: '', label: '', key: ''})
 
             for(var i = 0; i < response.Items.length;i++) {
                 var item = response.Items[i]    
-
                 var key = DataAccess.getData(item, "Key", "StringValue")
                 var no = DataAccess.getData(item, "No", "IntValue");
                 var deadline = DataAccess.getData(item, "DeliveryDeadline", "DateTimeValue" )
@@ -175,16 +172,16 @@ export default function Add(props) {
     }
   
     function CommitPosition(e) {
-
         var openQty = document.getElementById("openQty").value;
         var realQty = document.getElementById("realQty").value;
         var positionNumber = document.getElementById("positionNumber").value;
         var deadlineDate = document.getElementById("deadlineDate").value;
         var warehouse = document.getElementById("warehouseAdd").value;
-
         var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:"", warehouse: warehouse, data: data};
-
-
+        // getDocumentTypeStringBasedOnCode API call
+        PopupService.getDocumentTypeStringBasedOnCode("0115").then(response => {           
+            alert(response)
+        });
         // Place to check for the serial number
         PopupService.hasSerialNumberIdent(ident.value).then(response => {           
             data.serial = response.serial;

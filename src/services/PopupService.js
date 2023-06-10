@@ -53,8 +53,31 @@ const PopupService  =  {
 
     },
 
+
+
+    async getDocumentTypeStringBasedOnCode(code) {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=dt&pars=E;I;P;W;WI;N;NI;NP&i=web`)
+
+
+
+        var data = response.data;
+
+        for(var i = 0; i < data.Items.length; i++) {
+            var currect = data.Items[i];
+            var codeInternal = DataAccess.getData(currect, "Code", "StringValue")
+            if (codeInternal == code ) {
+                var returnString = DataAccess.getData(currect, "Name", "StringValue");
+                return returnString;
+            }
+        }
+
+        return "";
+    },
+
+
+
+
     async commitPosition(data) {
-        console.log(data);
         const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mi&i=web`, data)
         return response.data;
     },
@@ -62,7 +85,6 @@ const PopupService  =  {
     async getWorkOrderDetail(workOrder) { 
         var orders = [];
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=wo&id=${workOrder}&i=web`)
-
         return response.data;
     },
 
