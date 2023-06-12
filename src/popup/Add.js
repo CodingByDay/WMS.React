@@ -171,6 +171,25 @@ export default function Add(props) {
             $("#edit").css("display", "none");
     }
   
+
+    function CommitPositionSingular(old, data) {
+
+        console.log(old)
+        console.log(data)
+
+        var key = old.key;
+        var no = old.no;
+        var transactionHeadID = data.transaction;
+
+        alert(transactionHeadID)
+
+        PopupService.commitPosition({LinkKey: parseInt(key), LinkNo: no, Ident: data.ident.value, HeadID: document.getElementById("transactionIdAdd").value, Qty: document.getElementById("realQty").value}).then(response => { 
+           alert(response)
+        });            
+        var objectToCommit = {}
+    }
+
+
     function CommitPosition(e) {
         var openQty = document.getElementById("openQty").value;
         var realQty = document.getElementById("realQty").value;
@@ -185,7 +204,7 @@ export default function Add(props) {
             } else if(response.includes("Odpremni")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
-                    alert(data.serial);
+                    CommitPositionSingular(orderCurrent, data);                   
                 });           
             } else if(response.includes("Naročilo")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           

@@ -55,19 +55,24 @@ export default function Transactions() {
         $('#close_add').on('click', function(){
             setShow(false);
         });
-    
+      
 
       $(".table_responsive_transaction tr").click(function () {
-        $(selectedRowTransactionsHeads).css("background-color", "unset")
-        $(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-   
+
+
+        $(this).addClass("mark_row")
+
+        $(selectedRowTransactionsHeads).removeClass("mark_row")
+
         setSelectedRowHeadsTransactions (	this );
       });
 
       $(".table_responsive_positions_transactions tr").click(function () {
-        $(selectedRowTransactionsPositions).css("background-color", "unset")
-        $(this).css("background-color", "rgba(237, 232, 235, 0.8)")
-        setSelectedRowHeadsTransactionsPositions ( this );
+
+      $(selectedRowTransactionsPositions).removeClass("mark_row")
+
+      $(this).addClass("mark_row")
+      setSelectedRowHeadsTransactionsPositions ( this );
       });
 
     function isUUID ( uuid ) {
@@ -209,6 +214,8 @@ function deleteItemDocument(id) {
         setComponent(component);
 
       }
+
+      
     }
 
     const changeVisibility = (data) => {

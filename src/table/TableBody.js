@@ -24,6 +24,9 @@ const TableBody = (props) => {
                <tr>
                { columns.map(({ accessor }) => {
 
+                if(accessor == "Chosen") {
+                    return <td className={accessor}></td>;
+                }
                
                var tData = data[`${accessor}`];
                try {          
@@ -216,8 +219,11 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         
           
           return (
-           <tr onClick={getColumnData}>
+           <tr onClick={getColumnData}className="row-style"> 
            { columns.map(({ accessor }) => {
+            if(accessor == "Chosen") {
+                return <td className={accessor}></td>;
+            }
            var column = getColumn(accessor);
            
            var tData = ""
@@ -451,6 +457,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            return (
             <tr onClick={getColumnData}>
             { columns.map(({ accessor }) => {
+                 if(accessor == "Chosen") {
+                    return <td className={accessor}></td>;
+                }
             var column = getColumn(accessor);
             
             var tData = ""
@@ -507,6 +516,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            return (
             <tr onClick={getColumnData}>
             { columns.map(({ accessor }) => {
+                 if(accessor == "Chosen") {
+                    return <td className={accessor}></td>;
+                }
             var column = getColumn(accessor);
             
             var tData = ""

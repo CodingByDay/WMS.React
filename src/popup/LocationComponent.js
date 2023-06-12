@@ -72,11 +72,9 @@ export default function LocationComponent (props) {
         if(qtyCount > neededQty) {
             alert(`Količina ne sme presegati ${neededQty}!!!`)
             items.splice(-1,1)
-
         } else if (qtyCount == neededQty) { 
             alert(`Količina je dosežena!`);
         }
-
         setTabledata(items);
       
     }

@@ -11,6 +11,7 @@ const Table = (props) => {
 const [tableData, setTableData] = useState(tableData1);
 
  const columnsOrder = [
+
   { label: "Skladišče", accessor: "Warehouse", type: "StringValue"},
   { label: "Prejemnik", accessor: "Consignee", type: "StringValue"},
   { label: "Rok dobave", accessor: "DeliveryDeadline", type: "DateTimeValue"},
@@ -22,6 +23,7 @@ const [tableData, setTableData] = useState(tableData1);
 
 
 const columnsPositions = [
+
     { label: "Ident", accessor: "Ident", type: "StringValue"},
     { label: "Naziv", accessor: "Name", type: "StringValue"},
     { label: "Odprto", accessor: "OpenQty", type: "DoubleValue"},
@@ -30,6 +32,7 @@ const columnsPositions = [
 ]
 
 const columnsTransaction = [
+
   { label: "ID", accessor: "HeadID", type: "IntValue"},
   { label: "Tip transakcije", accessor: "DocumentType", type: "StringValue"},
   { label: "Dokument", accessor: "Type", type: "StringValue"},
@@ -49,7 +52,7 @@ const columnsTransaction = [
 ]
 
 const columnsTransactionPosition = [
-
+  { label: ""},
   { label: "ID transakcije", accessor: "HeadID", type: "IntValue" },
   { label: "Ključ transakcije", accessor: "Key", type: "StringValue" },
   { label: "Pozicija transakcije", accessor: "No", type: "IntValue" },
@@ -63,9 +66,6 @@ const columnsLocationComponent = [
   { label: "Lokacija", accessor: "Location", type: "StringValue" },
   { label: "Količina", accessor: "Quantity", type: "DoubleValue" },
 ]
-
-
-
 
 
     let columns;
@@ -98,7 +98,7 @@ const columnsLocationComponent = [
  return (
 
     <div className={props.class}>
-        <table className="table" id={props.passID}>
+        <table className="table notStripped" id={props.passID}>
         <TableHead className="orders" columns={columns} />
         <TableBody table = {props.table} returnRow = {props.childToParent} className = "positions" columns={columns} sort = {props.sort} tableData={props.data}  />
       </table>

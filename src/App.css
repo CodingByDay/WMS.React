@@ -84,6 +84,8 @@ div#addHeader {
 .settings-divider {
   display: none;
 }
+
+
 button#loginButton {
   padding-left: 2em;
   padding-right: 2em;
@@ -122,17 +124,20 @@ button#loginButton {
 td {
   background: white!important;
 }
+
 .main-menu-design, .listing-bg, .content-transactions, .stock-container
 {
   background-image: url("/public/background-menu-transparent.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-}
-table, {
-  background: white;
+}tr.mark_row {
+  border: 2px solid gray;
 }
 
+.notStripped tr {
+  background-color: none;
+}
 table {
   background-image: none !important;
 }
