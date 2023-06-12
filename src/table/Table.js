@@ -44,11 +44,7 @@ const columnsTransaction = [
   { label: "Skladišče", accessor: "WharehouseName", type: "StringValue" },
   { label: "Datum", accessor: "Date", type: "DateTimeValue" },
   { label: "Vnesel", accessor: "ClerkName", type: "StringValue" },
-  { label: "Datum vnosa", accessor: "DateInserted", type: "DateTimeValue" },
-  { label: "Spremenil", accessor: "ClerkChangedName", type: "StringValue" },
-  { label: "Datum spremembe", accessor: "DateChanged", type: "DateTimeValue" },
-
-  
+  { label: "Datum vnosa", accessor: "DateInserted", type: "DateTimeValue" },  
 ]
 
 const columnsTransactionPosition = [
