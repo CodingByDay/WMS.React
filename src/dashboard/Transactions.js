@@ -37,6 +37,7 @@ export default function Transactions() {
     const [component, setComponent] = useState();
     const [componentVisibility, setVisibilityComponent] = useState(true)
     useEffect(() => {
+
       var loader = document.getElementById("loader");
 
       loader.style.display = "block";
@@ -49,7 +50,7 @@ export default function Transactions() {
 
 
            }); 
-    }, [selectedRowTransactionsPositions]);
+    }, []);
 
 
         $('#close_add').on('click', function(){
@@ -90,10 +91,16 @@ export default function Transactions() {
      }
 
 
-     async function getPositions(order) {      
-        var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
-        setPositions(response);  
-    });
+     async function getPositions(order) {   
+      
+        if(order!= "") {  
+
+            var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
+            setPositions(response);  
+
+        });
+
+      }
   }
 
 
