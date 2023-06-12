@@ -99,7 +99,11 @@ button#loginButton {
   font-size: 0.875em;
   font-weight: 800;
 }
-*{font-family: 'Calibri';}
+*{font-family: 'Calibri';
+
+font-size: small;
+
+}
 .login.disabled {
   background-image: none;
 }
@@ -163,7 +167,7 @@ span#openRange {
   padding-left: 1rem;
   font-size: 1em;
   font-weight: 600;
-  padding: 0.3e;
+  padding-top: 0.3em;
   border-radius: 0.375rem;
   display: flex;
   border: 1px solid #ced4da;
@@ -213,7 +217,7 @@ span.actions.smallerr{
   padding-bottom: 0.4em;
   width: -moz-fit-content;
   width: fit-content;
-  margin: auto;
+
   background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
   border: none;
   font-family: "Titillium Web", sans-serif!important;
@@ -396,12 +400,19 @@ div#addHeader {
 #documentType {
   width: 20vw;
 }
+
+
+
+span#openRangeTransaction {
+  margin: 0;
+}
 .buttonsHeader, .buttonsPositions {
   display: flex;
   margin: 1em;
   align-content: center;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+
 }
 
 #businessEvent-option,#erpKey-option {
@@ -464,10 +475,12 @@ img.loader {
   margin-right: 2em;
   position: absolute;
   bottom:2em;
-  width: 96.6vw;
+  width: 95vw;
 }
 
-
+.table_responsive_transaction {
+  width: 95vw;
+}
 
 
 .visualization {

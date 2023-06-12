@@ -219,7 +219,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         
           
           return (
-           <tr onClick={getColumnData}className="row-style"> 
+           <tr onClick={getColumnData} className="row-style"> 
            { columns.map(({ accessor }) => {
             if(accessor == "Chosen") {
                 return <td className={accessor}></td>;

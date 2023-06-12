@@ -77,14 +77,14 @@ export default function Listing() {
 
         <div>
        <Loader />
-        <div className='main-container'></div>
+        <div className='main-container'>
         <Header/>  
         <div className='listing-bg' >
         <HeaderOrderListing getSortingObject = {getSortingObject} />
         <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
         <OrderPositions data = {positions} childToParent = {childToParent} />     
         <Footer />
-
+        </div>
         
         </div>
 

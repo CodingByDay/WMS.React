@@ -304,7 +304,7 @@ export default function TransactionFilters(props) {
 
 
 
-                    <span className="actions smallerr" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
+                    <span className="actions smallerr filter" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
                     Izberite
                     <MdDateRange />
                     </span>  
