@@ -134,7 +134,10 @@ td {
 }tr.mark_row {
   border: 2px solid gray;
 }
-
+table#transactions-table tr, table#table_responsive_positions_transactions tr {
+  white-space: nowrap;
+  overflow: hidden;
+}
 .notStripped tr {
   background-color: none;
 }

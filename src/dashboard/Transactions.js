@@ -59,7 +59,7 @@ export default function Transactions() {
       
 
       $(".table_responsive_transaction tr").click(function () {
-
+        if($(this)[0].childNodes[0].innerHTML.startsWith("ID")) {return;}
 
         $(this).addClass("mark_row")
 
@@ -69,6 +69,7 @@ export default function Transactions() {
       });
 
       $(".table_responsive_positions_transactions tr").click(function () {
+        if($(this)[0].childNodes[0].innerHTML.startsWith("ID")) {return;}
 
       $(selectedRowTransactionsPositions).removeClass("mark_row")
 
@@ -92,7 +93,7 @@ export default function Transactions() {
 
 
      async function getPositions(order) {   
-      
+
         if(order!= "") {  
 
             var data =  TransactionService.getPositionsByHeadId(order).then(response => { 

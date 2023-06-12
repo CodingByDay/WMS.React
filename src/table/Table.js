@@ -52,7 +52,7 @@ const columnsTransaction = [
 ]
 
 const columnsTransactionPosition = [
-  { label: ""},
+
   { label: "ID transakcije", accessor: "HeadID", type: "IntValue" },
   { label: "Ključ transakcije", accessor: "Key", type: "StringValue" },
   { label: "Pozicija transakcije", accessor: "No", type: "IntValue" },
