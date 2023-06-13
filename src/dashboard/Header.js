@@ -40,7 +40,7 @@ export default function Header() {
 
         <div className="navbar">
             <div className='logo'>
-                <center><img src='logo_riko.png'  class='logo' alt='Riko WMS' height={40} /></center>
+                <center><img src='logo-wms.png'  className='logo' alt='Riko WMS' height={40} /></center>
             </div>
             <div className='menu'></div>
             <div className='logout'>

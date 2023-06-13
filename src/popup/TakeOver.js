@@ -12,6 +12,7 @@ export default function TakeOver(props) {
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [buyer, setBuyer] = useState([]);
+    const [byOrder, setByOrder] = useState(true);
 
     // Chosen states
 
@@ -53,19 +54,20 @@ export default function TakeOver(props) {
 }, []);
 
 
-    $(function() {
+$(function() {
 
-        $("#byOrder").change(function() {
+    $("#byOrder").change(function() {
 
-            if($(this).is(":checked")) {
-                $("#buyer").css("display", "block");
-            } else {
-                $("#buyer").css("display", "none");
-            }
-
-        });
+        if($(this).is(":checked")) {
+            $("#buyer").css("display", "none");
+        } else {
+            $("#buyer").css("display", "block");
+        }
 
     });
+
+});
+
 
 
 
@@ -108,31 +110,37 @@ export default function TakeOver(props) {
 
     async function createHeadDocument ()  {
 
-      var documentData = document;
-      var warehouseData = warehouse;
-      var clientData = client;
-      var dateData = date;
-      var byClient = false
-
-
-      if($('#byOrder').is(":checked"))
-        {
-            byClient = true;
+        var documentData = document;
+        var warehouseData = warehouse;
+      
+        var objectForAPI = {};
+  
+        if (!byOrder) {
+              objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
+        } else {
+              objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
         }
+  
+  
+  
+         if(window.confirm('Ali želite kreirati dokument')) {
+              var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
+              props.close();
+              props.render();    
+          }); 
+         }
+      }
 
-       if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "I", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
-            
-        }); 
-       }
+      function toggleCheck() {
+        setByOrder(!byOrder)
+     }
 
 
-    }
     return ( 
 
         <div className='layout-takeover-container'>
         <div className='layout-takeover-checkbox'>
-        <input type="checkbox" checked />
+        <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' />
         </div>
 
 
@@ -143,7 +151,7 @@ export default function TakeOver(props) {
 
 <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
 <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-<Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+<Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
 <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
      <MdAdd />
 </button>

@@ -34,24 +34,29 @@ export default function Auth(props) {
     let navigate = useNavigate();
     const handleClick = async () => {
       $("#wrong").css("display", "none");
+
+      $(".whole-auth").css("display", "none");
+
       $(".login").toggleClass("disabled");
       var loader = document.getElementById("loader");
       loader.style.display = "block";
       await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=loginUser&password=${password}&i=web`)
       .then(response => {
        // $(".login").toggleClass("disabled");
-
           if(response.data.Items[1].Name === "Error") {
             setTimeout(function() {              
               loader.style.display = "none";
-              $("#wrong").css("display", "block");  
+              $("#wrong").css("display", "block"); 
+              $(".whole-auth").css("display", "block");
+ 
           }, 2000);                        
           } else {
               // Successful login 
               var ts = Math.round(new Date().getTime() / 1000);
               const cookies = new Cookies();
               cookies.set('uid', uuidv4(), { path: '/' });
-              setTimeout(function() { navigate('/dashboard'); }, 2000);      
+              setTimeout(function() {        $(".whole-auth").css("display", "block");
+              navigate('/dashboard'); }, 2000);      
           }
       })
       .catch(error => {
@@ -72,13 +77,26 @@ export default function Auth(props) {
     <Loader />
 
 
+
+    <div className="whole-auth">
+    <div className="navbar auth">
+            <center><div className='logo '>
+                <img src='logo-wms.png'  className='logo' alt='Riko WMS' height={90} />
+            </div></center>
+     
+            
+        </div>
+
+
     <div className="Auth-form-container">
   
         <div className="Auth-form-content">
-          <center><img src="logo_riko.png" width={200} /></center>
+          <center><h1 className="riko-blue">Prijava</h1></center>
           <h3 className="Auth-form-title" style={{marginTop: 1 + "em"}}></h3>
           
           <div className="form-group mt-3" id="password-div" >
+
+            <label for="password" className="label-gray">Vnesite geslo</label>
 
             <input
               id = "password"
@@ -86,7 +104,7 @@ export default function Auth(props) {
               type="password"
               onKeyDown={onKeyDownPassword}
               className="form-control mt-1"
-              placeholder="Vnesite geslo"
+            
             />
             
           </div>
@@ -103,5 +121,7 @@ export default function Auth(props) {
    
     </div>
     </div>
+    </div>
+
   )
 }

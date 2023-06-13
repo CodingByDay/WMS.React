@@ -16,6 +16,7 @@ export default function IssuedGoods(props) {
 
     // Chosen states
 
+    const [byOrder, setByOrder] = useState(true);
     const [document, setDocument] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [client, setClient] = useState("")
@@ -59,9 +60,9 @@ export default function IssuedGoods(props) {
         $("#byOrder").change(function() {
 
             if($(this).is(":checked")) {
-                $("#buyer").css("display", "block");
-            } else {
                 $("#buyer").css("display", "none");
+            } else {
+                $("#buyer").css("display", "block");
             }
 
         });
@@ -111,23 +112,30 @@ export default function IssuedGoods(props) {
 
       var documentData = document;
       var warehouseData = warehouse;
-      var clientData = client;
-      var dateData = date;
-      var byClient = false;
+    
+      var objectForAPI = {};
 
-      if($('#byOrder').is(":checked"))
-        {
-            byClient = true;
-        }
+      if (!byOrder) {
+            objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
+      } else {
+            objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
+      }
+
+
 
        if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
+            var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
             props.close();
             props.render();    
         }); 
        }
 
 
+    }
+
+
+    function toggleCheck() {
+       setByOrder(!byOrder)
     }
 
     return ( 
@@ -141,7 +149,7 @@ export default function IssuedGoods(props) {
         <div className='layout-issued-goods-header-checkbox'>
 
         <label for="byOrder">Po naročilo</label>
-        <input type="checkbox" checked id='byOrder' />
+        <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' />
 
         </div>
 

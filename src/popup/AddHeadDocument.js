@@ -96,17 +96,18 @@ export default function AddHeadDocument(props) {
 
 
             
-    <div class="row">
-        <div class="col-md-3 mx-auto">
+<div class="row">
 
-                <div class="form-group row" id="main-select">
+    <div class="col-md-4 mx-auto">
 
-                <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+        <div class="form-group row" id="main-select">
 
-                </div>
-                
-                {conditional}
+        <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+
         </div>
+        
+        {conditional}
+    </div>
 
 
         

@@ -40,6 +40,10 @@ export default function Transactions() {
 
       var loader = document.getElementById("loader");
 
+
+      
+
+
       loader.style.display = "block";
       $(".main-container").css ("display", "none");
       // window['toggleLoaader']("loader", false);
@@ -156,30 +160,52 @@ export default function Transactions() {
 
 
    async function finishHeadDocument() {
-        if(window.confirm("Ali ste sigurni da želite zaključiti dokument?")) {
+
+          window.swal({
+            title: 'Potrditev',
+            text: "Ali ste sigurni da želite zaključiti dokument?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ja, zaključi!'
+          }).then((result) => {
+            if (result.isConfirmed) {
               var data =  TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
                 var data =  TransactionService.getAllTransactions().then(response => { 
                   setTransactions(response);
                   window.showAlert("Informacija", "Uspešno zaključeno", "success")
                   }); 
-           }); 
-      }      
+              }); 
+            }
+          })    
+
    }
 
 
    function deleteHeadDocument() { 
-    if(window.confirm("Ali ste sigurni da želite zbrisati dokument?")) {
- 
-      var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+      window.swal({
+        title: 'Potrditev',
+        text: "Ali ste sigurni da želite pobrisati pozicijo?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ja, izbriši!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
 
-      if(response.data.includes("OK!")) {
-              var data =  TransactionService.getAllTransactions().then(response => { 
-              setTransactions(response);
-              window.showAlert("Informacija", "Uspešno pobrisano", "success")
-        }); 
-      }
-   }); 
-  } 
+            if(response.data.includes("OK!")) {
+                    var data =  TransactionService.getAllTransactions().then(response => { 
+                    setTransactions(response);
+                    window.showAlert("Informacija", "Uspešno pobrisano", "success")
+              }); 
+            }
+         }); 
+        
+        }
+      })    
 }
 
 
@@ -248,8 +274,11 @@ function deleteItemDocument(id) {
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
+        <div className="down-part">
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
+
+        </div>
         <Add addVisibility = {changeAddVisibility} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />

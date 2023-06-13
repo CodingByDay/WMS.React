@@ -24,13 +24,24 @@ export default function WorkOrder(props) {
     }
 
     async function createHeadDocument ()  {
-   
+
+
+    /* 
+        tbOpenQty.Text = workOrder.GetDouble("OpenQty").ToString(CommonData.GetQtyPicture());
+        tbClient.Text = workOrder.GetString("Consignee");
+        tbIdent.Text = workOrder.GetString("Ident");
+        tbName.Text = workOrder.GetString("Name");
+    */
+
+
+
          if(window.confirm('Ali želite kreirati dokument')) {
-              var data =  PopupService.setMoveHead({ Type: "W"}).then(response => { 
+              var data =  PopupService.setMoveHead({ Type: "W", }).then(response => { 
               props.close();
               props.render();    
           }); 
          }
+         
     }
 
     function changeWorkOrder(e) {
@@ -39,7 +50,7 @@ export default function WorkOrder(props) {
             var client = DataAccess.getData(response, "Consignee", "StringValue");
             var ident = DataAccess.getData(response, "Ident", "StringValue");
             var name = DataAccess.getData(response, "Name", "StringValue");
-            var qty = DataAccess.getData(response, "OpenQty", "DoubleVal");
+            var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var clientField = document.getElementById("clientPopup");
             var identField = document.getElementById("identPopup");
             var nameField = document.getElementById("namePopup");
