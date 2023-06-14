@@ -1,4 +1,3 @@
-import { useNavigate  } from 'react-router-dom';
 import HeaderOrderListing from './HeaderOrderListing';
 import OrderHeadsListing from './OrderHeadsListing';
 import OrderPositions from './OrderPositions';
@@ -45,8 +44,7 @@ export default function Listing() {
 
               loader.style.display = "block";
               $(".main-container").css ("display", "none");
-              var data =  ListingService.getAllListings().then(response => { 
-              window.transactionsObjects = response;
+              ListingService.getAllListings().then(response => { 
               setOrders(response);
               loader.style.display = "none";
               $(".main-container").css ("display", "block");
@@ -54,12 +52,11 @@ export default function Listing() {
     }, []);
 
   async function getPositions(order) {
-      var data =  ListingService.getAllPositions(order).then(response => { 
+    ListingService.getAllPositions(order).then(response => { 
       setPositions(response);  
     });
   }
 
-  const [data, setData] = useState([]);
   const [sort, setSort] = useState();
 
 

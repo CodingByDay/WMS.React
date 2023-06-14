@@ -1,24 +1,18 @@
-import { useNavigate  } from 'react-router-dom';
-import HeaderOrderListing from './HeaderOrderListing';
-import OrderHeadsListing from './OrderHeadsListing';
-import OrderPositions from './OrderPositions';
+
 import Header from './Header';
 import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-import ListingService from '../services/ListingService';
 import TransactionFilters from './TransactionFilters';
 import TransactionHeads from './TransactionHeads';
 import TransactionPositions from './TransactionPositions';
 import TransactionHeaderButtons from './TransactionHeaderButtons';
 import TransactionPositionsButtons from './TransactionPositionsButtons';
 import TransactionService from '../services/TransactionService';
-import StockService from '../services/StockService';
 import Add from '../popup/Add'
 import AddHeadDocument from '../popup/AddHeadDocument'
 import Loader from '../loader/Loader';
 import $ from 'jquery'; 
-import DataAccess from '../utility/DataAccess';
 import LocationComponent from '../popup/LocationComponent';
 import SerialComponent from '../popup/SerialComponent';
 
@@ -35,7 +29,7 @@ export default function Transactions() {
     const [head, setHead] = useState(false);
     const [filters, setFilters] = useState();
     const [component, setComponent] = useState();
-    const [componentVisibility, setVisibilityComponent] = useState(true)
+    const [componentVisibility] = useState(true)
     useEffect(() => {
 
       var loader = document.getElementById("loader");
@@ -47,7 +41,7 @@ export default function Transactions() {
       loader.style.display = "block";
       $(".main-container").css ("display", "none");
       // window['toggleLoaader']("loader", false);
-      var data =  TransactionService.getAllTransactions().then(response => { 
+      TransactionService.getAllTransactions().then(response => { 
       setTransactions(response);
       loader.style.display = "none";
       $(".main-container").css ("display", "block");
@@ -98,9 +92,9 @@ export default function Transactions() {
 
      async function getPositions(order) {   
 
-        if(order!= "") {  
+        if(order!== "") {  
 
-            var data =  TransactionService.getPositionsByHeadId(order).then(response => { 
+         TransactionService.getPositionsByHeadId(order).then(response => { 
             setPositions(response);  
 
         });
@@ -134,16 +128,13 @@ export default function Transactions() {
         if(action === "add") { 
 
             if(table === "positions") {    
-
-     
-
                 if(!isObjectEmpty(selectedRowTransactionsHeads)) {
                 var toggled = ! show;
                 setShow(toggled);
               }
             } else {
-                var toggled = ! show;
-                setHead(toggled);
+                var toggledHead = ! show;
+                setHead(toggledHead);
             }
         } else if (action === "delete") {
           if(table === "positions") {   
@@ -171,8 +162,8 @@ export default function Transactions() {
             confirmButtonText: 'Ja, zaključi!'
           }).then((result) => {
             if (result.isConfirmed) {
-              var data =  TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
-                var data =  TransactionService.getAllTransactions().then(response => { 
+              TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+                TransactionService.getAllTransactions().then(response => { 
                     setTransactions(response);
                     window.showAlert("Informacija", "Uspešno zaključeno", "success")
                   }); 
@@ -194,10 +185,10 @@ export default function Transactions() {
         confirmButtonText: 'Ja, izbriši!'
       }).then((result) => {
         if (result.isConfirmed) {
-          var data =  TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+          TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
 
             if(response.data.includes("OK!")) {
-                    var data =  TransactionService.getAllTransactions().then(response => { 
+                    TransactionService.getAllTransactions().then(response => { 
                     setTransactions(response);
                     window.showAlert("Informacija", "Uspešno pobrisano", "success")
               }); 
@@ -212,10 +203,10 @@ export default function Transactions() {
 function deleteItemDocument(id) { 
   if(window.confirm("Ali ste sigurni da želite zbrisati dokument?")) {
 
-    var data =  TransactionService.deleteMoveItem(id).then(response => { 
+    TransactionService.deleteMoveItem(id).then(response => { 
 
     if(response.data.includes("OK!")) {
-            var data =  TransactionService.getAllTransactions().then(response => { 
+            TransactionService.getAllTransactions().then(response => { 
             setTransactions(response);
             window.showAlert("Informacija", "Uspešno pobrisano", "success")
             }); 
@@ -226,10 +217,10 @@ function deleteItemDocument(id) {
 
 
     const renderComponent = () => { 
-      var data =  TransactionService.getAllTransactions().then(response => { 
+      TransactionService.getAllTransactions().then(response => { 
         setTransactions(response);
         window.showAlert("Informacija", "Uspešno dodano", "success")
-  }); 
+      }); 
     }
 
     const changeAddVisibility = (old, data, close) => {
@@ -239,8 +230,8 @@ function deleteItemDocument(id) {
       if(data.serial)
       {
 
-        var component = <SerialComponent  data = {data} show={componentVisibility} />
-        setComponent(component);
+        var componentSerial = <SerialComponent  data = {data} show={componentVisibility} />
+        setComponent(componentSerial);
 
       } else {
 

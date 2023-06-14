@@ -1,12 +1,9 @@
-import { useNavigate  } from 'react-router-dom';
-import HeaderOrderListing from './HeaderOrderListing';
-import OrderHeadsListing from './OrderHeadsListing';
-import OrderPositions from './OrderPositions';
+
 import Header from './Header';
 import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-import ListingService from '../services/ListingService';
+
 import Select from 'react-select'
 import StockService  from '../services/StockService';
 import $ from 'jquery'; 
@@ -14,12 +11,12 @@ import $ from 'jquery';
 export default function Stock() { 
 
     checkUID () 
-    const [orders, setOrders] = useState([]);
+
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
     const [ident, setIdent] = useState();
-    const [stock, setStock] = useState(0);
+
     const [location, setLocation] = useState();
     const [warehouse, setWarehouse] = useState();
 
@@ -34,13 +31,13 @@ export default function Stock() {
 
     useEffect(() => {
 
-    var data =  StockService.getWarehouses().then(response => {  
+    StockService.getWarehouses().then(response => {  
         var warehouses = onlyWarehouses(response);
         window.warehouses = warehouses;     
         setWarehouses(warehouses);     
     }); 
    
-    var ident =  StockService.getIdents().then(response => {  
+    StockService.getIdents().then(response => {  
         var identsFinal = [];
 
         for (var i = 0; i < response.length; i++) {  
@@ -98,7 +95,7 @@ export default function Stock() {
           locationFinal = ""
         }
         var finalParams = warehouse +  "|" + locationFinal + "|" + ident;
-        var stockValue =  StockService.getStock(finalParams).then(response => {          
+        StockService.getStock(finalParams).then(response => {          
         var stocks = [];
         var stockAmount = 0;
         for(var i = 0; i < response.Items.length; i++) {  
@@ -106,8 +103,8 @@ export default function Stock() {
             stockAmount = stockAmount + response.Items[i].Properties.Items[5].DoubleValue;
         }
         var finalInformation = "";
-        for(var i = 0; i < stocks.length; i++) {  
-            finalInformation = finalInformation + "\n" + stocks[i].location + " - " + stocks[i].quantity;
+        for(var j = 0; j < stocks.length; j++) {  
+            finalInformation = finalInformation + "\n" + stocks[j].location + " - " + stocks[j].quantity;
         }
         var information = $("#information");
         information.text(finalInformation);
@@ -131,7 +128,7 @@ export default function Stock() {
     function handleWarehouseChange(event) { 
         setWarehouse(event); 
         console.log(warehouse);
-        var positions =  StockService.getLocations(event.value).then(response => {  
+        StockService.getLocations(event.value).then(response => {  
 
             var locations = [];
 

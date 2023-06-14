@@ -4,7 +4,6 @@ import Header from './Header';
 import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import $ from 'jquery'; 
-import { useEffect, useState } from "react";
 
 
 export function Dashboard() { 
@@ -13,7 +12,6 @@ export function Dashboard() {
 
   checkUID ()
 
-  const [subMenu, setSubMenu] = useState(false);
 
 
 
@@ -67,23 +65,23 @@ export function Dashboard() {
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
-              <img src='shopping-bag.png' width={50}/>
+              <img alt={""} src='shopping-bag.png' width={50}/>
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
               Transakcije
-              <img src='transaction.png' width={50} />
+              <img alt={""} src='transaction.png' width={50} />
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
               Zaloga
-              <img src='packages.png' width={50} />
+              <img alt={""} src='packages.png' width={50} />
             </button>
 
             
             <button className="btn btn-primary dashboard" id='settings-hover' onClick = { handleSettings }>
               Nastavitve
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
             </div>
 
@@ -91,27 +89,27 @@ export function Dashboard() {
             <div className='settings-divider-context'>
               <button className="btn btn-primary sub" id='1' >
               Sistem
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
             <button className="btn btn-primary sub" id='2' >
               Vrste dokumentov
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
-            <button className="btn btn-primary sub" id='3' >
+            <button alt={""} className="btn btn-primary sub" id='3' >
               Skladišča
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
             <button className="btn btn-primary sub" id='4' >
               Čitalci
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
-            <button className="btn btn-primary sub" id='5' >
+            <button alt={""} className="btn btn-primary sub" id='5' >
               Tiskalniki
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
-            <button className="btn btn-primary sub" id='6' >
+            <button alt={""} className="btn btn-primary sub" id='6' >
               Uporabniki
-              <img src='settings.png' width={50} />
+              <img alt={""} src='settings.png' width={50} />
             </button>
             </div>
             </div>

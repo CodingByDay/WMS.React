@@ -7,7 +7,8 @@ import Cookies from 'universal-cookie';
 const [warehouse, setWarehouse] = useState([]);
 const [location, setLocation] = useState([]);
 const [ident, setIdent] = useState([]);
- 
+   
+
 
     return ( 
 

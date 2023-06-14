@@ -1,5 +1,5 @@
 import { useNavigate  } from 'react-router-dom';
-import Select from 'react-select'
+
 import { MdLogout, MdHome } from "react-icons/md";
 import Cookies from 'universal-cookie';
 
@@ -12,11 +12,7 @@ export default function Header() {
         navigate('/');
     }
 
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
+
       
 
   let navigate = useNavigate();
@@ -26,7 +22,7 @@ export default function Header() {
 
   var button;
 
-  if(pathname != '/dashboard') {
+  if(pathname !== '/dashboard') {
 
     button =  <span className='actions' onClick={() => navigate('/dashboard')}>Domov  
 
