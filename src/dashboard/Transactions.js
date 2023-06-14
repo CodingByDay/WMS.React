@@ -173,8 +173,8 @@ export default function Transactions() {
             if (result.isConfirmed) {
               var data =  TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
                 var data =  TransactionService.getAllTransactions().then(response => { 
-                  setTransactions(response);
-                  window.showAlert("Informacija", "Uspešno zaključeno", "success")
+                    setTransactions(response);
+                    window.showAlert("Informacija", "Uspešno zaključeno", "success")
                   }); 
               }); 
             }

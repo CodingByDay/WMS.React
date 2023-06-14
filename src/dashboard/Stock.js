@@ -18,10 +18,10 @@ export default function Stock() {
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
-    const [ident, setIdent] = useState("");
+    const [ident, setIdent] = useState();
     const [stock, setStock] = useState(0);
-    const [location, setLocation] = useState("");
-    const [warehouse, setWarehouse] = useState("");
+    const [location, setLocation] = useState();
+    const [warehouse, setWarehouse] = useState();
 
 
 
@@ -122,15 +122,15 @@ export default function Stock() {
 
   }
     function handleIdentChange(event) { 
-      setIdent(event.value);
+      setIdent(event);
     }
     function handleLocationChange(event) {
-      setLocation(event.value);
+      setLocation(event);
      }
 
     function handleWarehouseChange(event) { 
-        setWarehouse(event.value); 
-
+        setWarehouse(event); 
+        console.log(warehouse);
         var positions =  StockService.getLocations(event.value).then(response => {  
 
             var locations = [];
@@ -153,21 +153,21 @@ export default function Stock() {
         <Header />   
 
 
-        <div class ="stock-container">  
+        <div className ="stock-container">  
 
 
 
 
-        <Select className='select-filters' placeholder={"Skladišče"} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
-        <Select className='select-filters' placeholder={"Pozicija"} onChange={handleLocationChange} options={locations} id='locationStock'/>
-        <Select className='select-filters' placeholder={"Ident"} onChange={handleIdentChange} options={idents} id='identStock'/>
+        <Select className='select-filters' placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
+        <Select className='select-filters' placeholder={"Pozicija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
+        <Select className='select-filters' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
-        <div class = 'visualization'>
+        <div className = 'visualization'>
         <h3 className='information' id='information'>Ni zaloge</h3>
 
         </div>
-        <span className='actions smallerrr' onClick={handleInventory}>Prikaži</span>
+        <span className='actions smallerr' onClick={handleInventory}>Prikaži</span>
         </div>
 
         <Footer />

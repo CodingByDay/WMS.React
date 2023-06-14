@@ -5,6 +5,7 @@ import Select from 'react-select'
 import PopupService from '../services/PopupService';
 import { useEffect, useState } from "react";
 import { MdAdd} from "react-icons/md";
+import TransactionService from "../services/TransactionService";
 
 export default function WorkOrder(props) { 
     const [workOrders, setWorkOrders] = useState([]);
@@ -32,15 +33,30 @@ export default function WorkOrder(props) {
         tbIdent.Text = workOrder.GetString("Ident");
         tbName.Text = workOrder.GetString("Name");
     */
+        window.swal({
+            title: 'Potrditev',
+            text: "Ali ste sigurni da želite kreirati dokument?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ja, kreiraj!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+    
+      
+                    var data =  PopupService.setMoveHead({ Type: "W", }).then(response => { 
+                        props.close();
+                        props.render();    
+                    });  
+                
+       
+            
+            }
+          })    
 
 
-
-         if(window.confirm('Ali želite kreirati dokument')) {
-              var data =  PopupService.setMoveHead({ Type: "W", }).then(response => { 
-              props.close();
-              props.render();    
-          }); 
-         }
+         
          
     }
 
@@ -51,6 +67,8 @@ export default function WorkOrder(props) {
             var ident = DataAccess.getData(response, "Ident", "StringValue");
             var name = DataAccess.getData(response, "Name", "StringValue");
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
+            var key = DataAccess.getData(response, "Key", "DoubleValue");
+
             var clientField = document.getElementById("clientPopup");
             var identField = document.getElementById("identPopup");
             var nameField = document.getElementById("namePopup");

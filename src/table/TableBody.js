@@ -4,6 +4,14 @@ const TableBody = (props) => {
 
 
 
+    function uuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+
+
     var tableData = props.tableData;
     var table = props.table;
 
@@ -25,7 +33,7 @@ const TableBody = (props) => {
                { columns.map(({ accessor }) => {
 
                 if(accessor == "Chosen") {
-                    return <td className={accessor}></td>;
+                    return <td key={uuid()} className={accessor}></td>;
                 }
                
                var tData = data[`${accessor}`];
@@ -33,7 +41,7 @@ const TableBody = (props) => {
                   
                } catch (e) {
                }
-                   return <td className>{tData}</td>;
+                   return <td key={uuid()} className>{tData}</td>;
                 })}
                </tr>
               );
@@ -219,10 +227,10 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         
           
           return (
-           <tr onClick={getColumnData} className="row-style"> 
+           <tr key={uuid()} onClick={getColumnData} className="row-style"> 
            { columns.map(({ accessor }) => {
             if(accessor == "Chosen") {
-                return <td className={accessor}></td>;
+                return <td key={uuid()} className={accessor}></td>;
             }
            var column = getColumn(accessor);
            
@@ -264,7 +272,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            } catch (e) {
                 // Test 
            }
-           return <td className={accessor}>{tData}</td>;
+           return <td key={uuid()} className={accessor}>{tData}</td>;
         })}
            </tr>
           );
@@ -389,19 +397,11 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 return true;
             }
 
-            
-
-
             var dateFrom = props.sort.period[0].startDate;
-      
-
-
             var endDate= props.sort.period[0].endDate;
-
             var today = new Date();
 
             if(dateFrom.toISOString() === endDate.toISOString() && dateFrom.toDateString() === today.toDateString()) { 
-
                 return true;
             }
           
@@ -410,7 +410,6 @@ if(window.location.href.includes("transactions")&&table=="heads") {
     
             var deadline = new Date(field)
             
-
             if(dateFrom<=deadline && endDate>=deadline) { 
                 return true;
             } else {
@@ -455,10 +454,10 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr onClick={getColumnData}>
+            <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
                  if(accessor == "Chosen") {
-                    return <td className={accessor}></td>;
+                    return <td key={uuid()} className={accessor}></td>;
                 }
             var column = getColumn(accessor);
             
@@ -471,7 +470,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 }
             } catch (e) {
             }
-            return <td className={accessor}>{tData}</td>;
+            return <td key={uuid()} className={accessor}>{tData}</td>;
         })}
             </tr>
            );
@@ -514,7 +513,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr onClick={getColumnData}>
+            <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
                  if(accessor == "Chosen") {
                     return <td className={accessor}></td>;
@@ -568,7 +567,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr onClick={getColumnData}>
+            <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
             var column = getColumn(accessor);
             
@@ -577,7 +576,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
             }
-                return <td className={accessor}>{tData}</td>;
+                return <td key={uuid()} className={accessor}>{tData}</td>;
              })}
             </tr>
            );

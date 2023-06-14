@@ -111,8 +111,12 @@ button#loginButton {
 }
 *{font-family: 'Calibri';
 
-font-size: small;
 
+
+}
+
+table {
+  font-size: x-large;
 }
 .login.disabled {
   background-image: none;
@@ -137,13 +141,23 @@ td {
   background: white!important;
 }
 
+.table>thead {
+  vertical-align: bottom;
+  color: #081A45;
+}
+.menu button {
+  color: #081A45;
+}
+.down-part {
+  margin-top: 5em;
+}
 .main-menu-design, .listing-bg, .content-transactions, .stock-container
 {
 
   background-color: #f7f7f8;
   height: 100vh;
 }tr.mark_row {
-  border: 2px solid gray;
+  border: 3px solid gray;
 }
 table#transactions-table tr, table#table_responsive_positions_transactions tr {
   white-space: nowrap;
@@ -177,6 +191,7 @@ span.actions svg {
   cursor: pointer;
 }
 
+
 .main-container {
   background: #f7f7f8;
 }
@@ -184,9 +199,14 @@ span.actions svg {
 #documentType {
   width: max-content;
 }
+
+
 input {
   border-radius: 0!important;
 }
+
+
+
 span#openRange {
   margin: 1em;
   padding-top: 0.3em;
@@ -198,10 +218,12 @@ span#openRange {
   font-size: 1em;
   font-weight: 600;
   padding-top: 0.3em;
-
   display: flex;
   border: 1px solid #ced4da;
 }
+
+
+
 span.actions {
   margin: 1em;
   color: white;
@@ -240,7 +262,7 @@ span.actions.smaller{
 
 
 span.actions.smallerr {
-  height: 3em;
+  height: 2.3em;
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.4em;
@@ -262,6 +284,10 @@ span.actions.smallerr {
 
 }
 
+.swal-button {
+  background-color: #081A45!important;
+  border-radius: 0;
+}
 
 #edit {
   color: black!important;
@@ -458,7 +484,7 @@ span#openRangeTransaction {
 
 #documentType, #documentSearch, #warehouse, #openRange, #receiver, #consignee {
   width: 10em!important;
-  height: 3em!important;  
+  height: 2.3em!important;  
 }
 
 span#openRange {

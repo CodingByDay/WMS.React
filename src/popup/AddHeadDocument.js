@@ -75,24 +75,24 @@ export default function AddHeadDocument(props) {
      
 
 
-        <div class="header_part" onClick={close}>
+        <div className="header_part" onClick={close}>
             <h1 id='close_add_header'>X</h1>
         </div>
 
 
-        <div class="body_part">
-        <div class="container py-5">
+        <div className="body_part">
+        <div className="container py-5">
 
 
 
 
 
             
-<div class="row">
+<div className="row">
 
-    <div class="col-md-4 mx-auto">
+    <div className="col-md-4 mx-auto">
 
-        <div class="form-group row" id="main-select">
+        <div className="form-group row" id="main-select">
 
         <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
 
