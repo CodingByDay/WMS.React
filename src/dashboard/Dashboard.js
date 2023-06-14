@@ -65,54 +65,27 @@ export function Dashboard() {
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
-              <img alt={""} src='shopping-bag.png' width={50}/>
+              <img alt={""} src='choices-icon.png' width={50}/>
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
               Transakcije
-              <img alt={""} src='transaction.png' width={50} />
+              <img alt={""} src='transfer-icon.png' width={50} />
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
               Zaloga
-              <img alt={""} src='packages.png' width={50} />
+              <img alt={""} src='boxes-icon.png' width={50} />
             </button>
 
             
-            <button className="btn btn-primary dashboard" id='settings-hover' onClick = { handleSettings }>
+            <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
               Nastavitve
-              <img alt={""} src='settings.png' width={50} />
+              <img alt={""} src='settings-icon.png' width={50} />
             </button>
             </div>
 
-            <div className='settings-divider'>
-            <div className='settings-divider-context'>
-              <button className="btn btn-primary sub" id='1' >
-              Sistem
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            <button className="btn btn-primary sub" id='2' >
-              Vrste dokumentov
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            <button alt={""} className="btn btn-primary sub" id='3' >
-              Skladišča
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            <button className="btn btn-primary sub" id='4' >
-              Čitalci
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            <button alt={""} className="btn btn-primary sub" id='5' >
-              Tiskalniki
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            <button alt={""} className="btn btn-primary sub" id='6' >
-              Uporabniki
-              <img alt={""} src='settings.png' width={50} />
-            </button>
-            </div>
-            </div>
+          
       
       </div> 
       <Footer />
