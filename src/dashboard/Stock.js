@@ -3,10 +3,10 @@ import Header from './Header';
 import Footer from './Footer';
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-
 import Select from 'react-select'
 import StockService  from '../services/StockService';
 import $ from 'jquery'; 
+import Table from '../table/Table';
 
 export default function Stock() { 
 
@@ -24,7 +24,8 @@ export default function Stock() {
 
 
 
-
+    // State for the rows
+    const [rows, setRows] = useState([]);
 
 
 
@@ -42,7 +43,7 @@ export default function Stock() {
 
         for (var i = 0; i < response.length; i++) {  
           try {
-                    identsFinal.push({value: response[i], label: response[i]}); 
+              identsFinal.push({value: response[i], label: response[i]}); 
           } catch (e) {
             continue;
           }
@@ -87,20 +88,22 @@ export default function Stock() {
     }
     
     const handleInventory = (e) => {
-        if(ident === "" || warehouse === "") {
+        if(ident.value === "" || warehouse.value === "") {
           window["showAlert"]("Obvestilo", "Podatki manjkajo", "error")
         } else {
         var locationFinal = ""
-        if(location === "") { 
+        if(typeof location !== "undefined") {
+        if(location.value === "") { 
           locationFinal = ""
         }
-        var finalParams = warehouse +  "|" + locationFinal + "|" + ident;
+        }
+        var finalParams = warehouse.value +  "|" + locationFinal + "|" + ident.value;
         StockService.getStock(finalParams).then(response => {          
         var stocks = [];
         var stockAmount = 0;
+        window.stocks = response;
         for(var i = 0; i < response.Items.length; i++) {  
-            stocks.push ( {location: response.Items[i].Properties.Items[1].StringValue, quantity: response.Items[i].Properties.Items[5].DoubleValue} )
-            stockAmount = stockAmount + response.Items[i].Properties.Items[5].DoubleValue;
+            // This works continue here tomarow, add items to the array and show them in the table.
         }
         var finalInformation = "";
         for(var j = 0; j < stocks.length; j++) {  
@@ -129,17 +132,12 @@ export default function Stock() {
         setWarehouse(event); 
         console.log(warehouse);
         StockService.getLocations(event.value).then(response => {  
-
             var locations = [];
-
             for (var i = 0; i < response.Items.length; i++) {  
                 locations.push({value: response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue});
             }
-
-            setLocations(locations);       
-            
+            setLocations(locations);        
         }); 
-
     }
 
 
@@ -152,18 +150,15 @@ export default function Stock() {
 
         <div className ="stock-container">  
 
-
-
-
         <Select className='select-filters' placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
         <Select className='select-filters' placeholder={"Pozicija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
         <Select className='select-filters' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
-        <div className = 'visualization'>
-        <h3 className='information' id='information'>Ni zaloge</h3>
+        <Table table = "stock" className="stock-table" type="stock" class = "table_responsive_stock"  />
 
-        </div>
+
+
         <span className='actions smallerr' onClick={handleInventory}>Prikaži</span>
         </div>
 

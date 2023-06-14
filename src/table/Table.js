@@ -64,6 +64,14 @@ const columnsLocationComponent = [
 ]
 
 
+const columnsStockComponent = [
+  { label: "Ident", accessor: "Ident", type: "StringValue" },
+  { label: "Lokacija", accessor: "Location", type: "StringValue" },
+  { label: "Količina", accessor: "Količina", type: "StringValue" },
+]
+
+
+
     let columns;
 
     if (props.type === "order") {
@@ -86,6 +94,8 @@ const columnsLocationComponent = [
 
       columns = columnsLocationComponent;
 
+    } else if (props.type === "stock" ) {
+      columns = columnsStockComponent;
     }
 
 
