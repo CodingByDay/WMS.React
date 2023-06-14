@@ -26,30 +26,21 @@ export default function AddHeadDocument(props) {
 
     if(type !== undefined) {
         switch (type.value) {  
-
             case "Izdaja blaga":          
-
                 component = <IssuedGoods close={close} render={props.render} />;
                 setConditional(component);
-
                 break;
-            case "Prevzem blaga":
-                
+            case "Prevzem blaga":             
                 component = <TakeOver close={close} render={props.render} />;
                 setConditional(component);
-
                 break;
-            case "Medskladišnica":
-                
+            case "Medskladišnica":       
                 component = <Interwarehouse close={close} render={props.render}/>;
                 setConditional(component);
-
                 break;
             case "Inventura":
-    
                 component = <Inventory close={close} render={props.render}/>;
                 setConditional(component);
-
                 break;
             case "Delovni nalog":
                 component = <WorkOrder close={close} render={props.render} />;
@@ -64,8 +55,9 @@ export default function AddHeadDocument(props) {
 
     const close = () => {
         props.changeVisibility(false)
-
     }
+
+
     function onChangeTypePopup(e) {
         const mutated = {value: e.value, label:e.label}
         setType (mutated);   

@@ -159,7 +159,7 @@ export default function Stock() {
 
 
         <Select className='select-filters' placeholder={"Skladišče"} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
-        <Select className='select-filters' placeholder={"Pozicije"} onChange={handleLocationChange} options={locations} id='locationStock'/>
+        <Select className='select-filters' placeholder={"Pozicija"} onChange={handleLocationChange} options={locations} id='locationStock'/>
         <Select className='select-filters' placeholder={"Ident"} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 

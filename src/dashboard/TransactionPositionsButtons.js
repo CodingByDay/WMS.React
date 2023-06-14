@@ -32,22 +32,22 @@ export default function TransactionPositionsButtons(props) {
         <div className='buttonsPositions'>
 
 
-             <span className='actions smallerr' onClick={toggleAddPosition}>Dodaj
-                                   
+             <span className='actions smallerr' onClick={toggleAddPosition}>
+             <p>Dodaj</p>              
              <MdAdd />
 
              </span>
 
 
-            <span className='actions smallerr' onClick={editPosition}>Popravi
-                                   
+            <span className='actions smallerr' onClick={editPosition}>
+             <p>Popravi</p>                   
              <MdEdit />
 
              </span>
 
 
-             <span className='actions smallerr' onClick={deletePosition}>Izbriši
-             
+             <span className='actions smallerr' onClick={deletePosition}>
+             <p>Izbriši</p>
              <MdDeleteOutline />
              
              </span>

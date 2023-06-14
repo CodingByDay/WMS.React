@@ -93,7 +93,7 @@ const PopupService  =  {
     // Requires the CORS policy.
     // This is the method for setting the moveHead.
     async setMoveHead(data) { 
-        console.log(data);
+
         const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mh&i=web`, data)
         return response.data;
     },

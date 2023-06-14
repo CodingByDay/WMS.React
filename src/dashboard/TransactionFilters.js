@@ -283,7 +283,7 @@ export default function TransactionFilters(props) {
 
                    
 
-                    <Select className='select-filters' placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={users} id='documentType'/>
+                    <Select  placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
 
                     <Select 
                         title={props.title}
@@ -305,7 +305,7 @@ export default function TransactionFilters(props) {
 
 
                     <span className="actions smallerr filter" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
-                    Izberite
+                    <p>Izberite</p>
                     <MdDateRange />
                     </span>  
 

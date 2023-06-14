@@ -96,7 +96,7 @@ export default function Auth(props) {
           
           <div className="form-group mt-3" id="password-div" >
 
-            <label for="password" className="label-gray">Vnesite geslo</label>
+            <label for="password" className="label-gray">VNESITE GESLO</label>
 
             <input
               id = "password"

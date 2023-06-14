@@ -149,13 +149,17 @@ $(function() {
         <div className='left-column'>
 
 
-<Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
-<Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-<Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
-<button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
-     <MdAdd />
-</button>
-</div>
+        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
+
+
+        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
+            <MdAdd />
+        </button>
+
+
+        </div>
 
 
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">

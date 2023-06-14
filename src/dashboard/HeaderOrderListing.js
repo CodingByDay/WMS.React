@@ -86,7 +86,7 @@ export default function HeaderOrderListing(props) {
         <div className="filters">
 
 
-             <Select className='select-filterss' placeholder={"Tip dokumenta"}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select className='select-filterss' placeholder={"Tip"}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
 
              <input
@@ -108,7 +108,7 @@ export default function HeaderOrderListing(props) {
 
 
          <span className='actions smallerr' onClick={toggleVisibility} id="openRange">
-              Izberite
+              <p>Izberite</p>
               <MdDateRange />
          </span>   
 

@@ -1,3 +1,8 @@
+
+.logo.navbar {
+  margin-left: 2em;
+}
+
 .App {
   background-color: white;
 }
@@ -172,6 +177,10 @@ span.actions svg {
   cursor: pointer;
 }
 
+.main-container {
+  background: #f7f7f8;
+}
+
 #documentType {
   width: max-content;
 }
@@ -198,7 +207,7 @@ span.actions {
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;
-  font-size: 1.4em;
+  font-size: 1.7em;
   font-weight: 600;
   padding: 0.3e;
 }
@@ -230,21 +239,22 @@ span.actions.smaller{
 }
 
 
-span.actions.smallerr{
+span.actions.smallerr {
+  height: 3em;
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.4em;
   padding-bottom: 0.4em;
   width: -moz-fit-content;
-  width: fit-content;
-
+  width: 10em;
   background: #081A45;
   border: none;
   font-family: "Titillium Web", sans-serif!important;
   font-size: 0.875em;
   font-weight: 600;
-
+  display: flex;
   color: white;
+  justify-content: center;
 }
 .login
 {
@@ -444,9 +454,19 @@ span#openRangeTransaction {
   margin: 1em;
   align-content: center;
   flex-wrap: wrap;
-
-
 }
+
+#documentType, #documentSearch, #warehouse, #openRange, #receiver, #consignee {
+  width: 10em!important;
+  height: 3em!important;  
+}
+
+span#openRange {
+    display: flex;
+    justify-content: center;
+}
+
+
 
 #businessEvent-option,#erpKey-option {
   border: 1px solid #ced4da;
@@ -527,14 +547,14 @@ h3.information {
   vertical-align: middle;
   line-height: 30vh;
 }
+
+
 .table_responsive_positions {
   height: 40vh;
-  overflow-y: scroll;
+  margin-top: 10vh;
   margin-left: 2em;
   margin-right: 2em;
-  position: absolute;
   bottom: 2em;
-  width: 95.6vw;
 }
 
 td {
@@ -610,7 +630,7 @@ button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-int
 }
 
 .logo {
-  left: 2vh;
+
   position: relative;
 
 }
