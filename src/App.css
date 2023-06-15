@@ -346,17 +346,26 @@ span.actions.smallerr {
 }
 
 div#edit, div#addHeader {
+  /* Add media queries to solve this */
   height: 45vh;
   width: 40vw;
 }
 
+.left-workorder input, .right-workorder input{
+  margin: 1em;
+}
+
 .add-container-workorder {
   width: max-content;
 }
 
+.outer-container-workorder {
+  display: flex;
+  justify-content: space-evenly;
+}
 
 .add-container-workorder {
-  width: max-content;
+  width: 100%;
   gap: 3em;
   display: flex;
   flex-direction: column;

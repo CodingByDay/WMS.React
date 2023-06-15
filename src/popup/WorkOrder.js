@@ -107,11 +107,21 @@ export default function WorkOrder(props) {
             <Select className='select-filters' onChange={changeWorkOrder} options={workOrders} placeholder={"Delovni nalog"} id='workOrder' />
        </center>
 
+       <div className="outer-container-workorder">
 
-       <input type="text" id="clientPopup" placeholder='Naročnik' class="form-control" />
-       <input type="text" id="identPopup" placeholder='Ident' class="form-control" />
-       <input type="text" id="namePopup" placeholder='Naziv' class="form-control" />
-       <input type="text" id="openQtyPopup" placeholder = 'Odprta količina' class="form-control" />
+            <div className="left-workorder">
+                <input type="text" id="clientPopup" placeholder='Naročnik' class="form-control" />
+                <input type="text" id="identPopup" placeholder='Ident' class="form-control" />
+            </div>
+
+            <div className="right-workorder">
+                <input type="text" id="namePopup" placeholder='Naziv' class="form-control" />
+                <input type="text" id="openQtyPopup" placeholder = 'Odprta količina' class="form-control" />
+            </div>
+
+       </div> 
+
+
 
        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi</button>   
 
