@@ -148,7 +148,7 @@ export default function IssuedGoods(props) {
 
         <div className='layout-issued-goods-header-checkbox'>
 
-        <label for="byOrder">Po naročilo</label>
+        <label htmlFor="byOrder">Po naročilo</label>
         <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' />
 
         </div>
@@ -157,12 +157,10 @@ export default function IssuedGoods(props) {
         <div className='left-column'>
 
 
-        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
-        <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-        <Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
-        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
-             <MdAdd />
-        </button>
+        <Select className='select-filters-add' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters-add' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select className='select-filters-add' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+     
         </div>
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
 
@@ -174,7 +172,15 @@ export default function IssuedGoods(props) {
 
 
         </div>
-    
+
+
+       <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
+             <p>Potrdi</p>
+             <MdAdd />
+             </span></center> 
+
+
+  
         </div>
 
 

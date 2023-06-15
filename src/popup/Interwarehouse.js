@@ -161,8 +161,16 @@ function changeEvent(e) {
 
         <div className='layout-interwarehouse-container'>
         <div className='layout-interwarehouse-checkbox'>
-        <input type="checkbox" checked />
+
+
+        <label htmlFor="byOrder" id="hiddenLabel">Po naročilo</label>
+        <input type="checkbox" id="hiddenCheck"/>
+    
+
+
+
         </div>
+
             <div className='layout-interwarehouse-goods'>
             <div className='left-column'>
 
@@ -173,15 +181,18 @@ function changeEvent(e) {
             <Select className='select-filters interwarehouse' isDisabled={true} value={selectedReceiver} options={receiveWarehouse} placeholder={"Prejemno skladišče"} id='receivingWarehouse'/>
         </div>
 
-        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
-             <MdAdd />
-        </button>
+      
         
         </div>
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
         <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
         </div>
         </div>
+
+        <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
+             <p>Potrdi</p>
+             <MdAdd />
+             </span></center> 
         </div>
 
 

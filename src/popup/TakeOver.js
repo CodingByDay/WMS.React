@@ -140,6 +140,8 @@ $(function() {
 
         <div className='layout-takeover-container'>
         <div className='layout-takeover-checkbox'>
+        <label htmlFor="byOrder">Po naročilo</label>
+
         <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' />
         </div>
 
@@ -154,9 +156,7 @@ $(function() {
         <Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
 
 
-        <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi     
-            <MdAdd />
-        </button>
+   
 
 
         </div>
@@ -164,12 +164,17 @@ $(function() {
 
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
 
-        <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
+        <input placeholder="Izberite datum" type="date" id="documentDate" class="form-control" />
 
         </div>
 
 
         </div>
+
+        <center><span className='actions smallerr takeover' onClick={createHeadDocument} id='createDocument'>          
+             <p>Potrdi</p>
+             <MdAdd />
+             </span></center> 
         </div>
 
 

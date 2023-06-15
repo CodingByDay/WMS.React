@@ -176,14 +176,8 @@ span {
 }
 
 
-#warehouse {
-  width: max-content;
-}
 
 
-.layout-takeover-goods #documentType {
-  width: max-content!important;
-}
 
 
 span.actions svg {
@@ -196,9 +190,6 @@ span.actions svg {
   background: #f7f7f8;
 }
 
-#documentType {
-  width: max-content;
-}
 
 
 input {
@@ -292,12 +283,21 @@ span.actions.smallerr {
 #edit {
   color: black!important;
 }
+
 #buyer {
   display: none;
 }
 
-#documentType, #warehouse, #buyer, #documentDate {
-  width:5vw;
+#transactionTypePopup {
+  margin: auto;
+}
+
+.layout-issued-goods {
+  margin: 3em;
+}
+
+#documentType, #warehouse, #buyer, #documentDate, #transactionTypePopup {
+  width:10vw!important;
 }
 
 .layout-issued-goods {
@@ -314,6 +314,25 @@ span.actions.smallerr {
   flex-direction: row-reverse;
   width: fit-content;
   gap: 1em;
+  margin: auto;
+}
+
+
+
+
+
+.layout-takeover-goods {
+  margin: auto;
+}
+
+
+.layout-takeover-checkbox{
+  display: flex;
+  flex-direction: row-reverse;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 1em;
+  margin: auto;
 }
 
 .layout-interwarehouse-goods {
@@ -327,10 +346,8 @@ span.actions.smallerr {
 }
 
 div#edit, div#addHeader {
-  height: max-content;
-
+  height: 45vh;
   width: 40vw;
-
 }
 
 .add-container-workorder {
@@ -370,18 +387,57 @@ body {
   display: flex;
   gap: 2em;
 }
+span#createDocument {
+  margin-top: -1em;
+}
+.layout-interwarehouse-checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 1em;
+  margin: auto;
+}
+.layout-interwarehouse-goods {
+  justify-content: center;
+  margin: 3em;
+}
+
+
+#issuingWarehouse, #receivingWarehouse, #date, #documentTypes
+{
+   width: 10vw;
+}
+
+#hiddenLabel, #hiddenCheck {
+	
+	visibility: hidden;
+
+}
+
 .header_part h1 {
   font-size: initial;
   cursor:pointer;
 }
-
-.layout-issued-goods, .layout-issued-goods {
+.layout-takeover-goods {
+  margin-bottom: 2em;
+}
+.layout-issued-goods {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  position: relative;
+  justify-content: center;
+}
+.layout-takeover-goods {
   display: flex;
   flex-direction: row;
   gap: 2em;
   top: 1em;
   position: relative;
+  justify-content: center;
 }
+
 .left-column {
   display: flex;
   flex-direction: column;
@@ -482,7 +538,7 @@ span#openRangeTransaction {
   flex-wrap: wrap;
 }
 
-#documentType, #documentSearch, #warehouse, #openRange, #receiver, #consignee {
+#documentSearch,  #openRange, #receiver, #consignee {
   width: 10em!important;
   height: 2.3em!important;  
 }
@@ -660,9 +716,7 @@ button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-int
   position: relative;
 
 }
-#documentType {
-  width: 100%;
-}
+
 
 button#search {
   display: flex;

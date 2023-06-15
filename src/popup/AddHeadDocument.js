@@ -76,7 +76,7 @@ export default function AddHeadDocument(props) {
 
 
         <div className="header_part" onClick={close}>
-            <h1 id='close_add_header'>X</h1>
+            <h1 id='close_add_header'><img src='close-icon.png' width={20}></img></h1>
         </div>
 
 
@@ -87,17 +87,10 @@ export default function AddHeadDocument(props) {
 
 
 
-            
-<div className="row">
 
-    <div className="col-md-4 mx-auto">
-
-        <div className="form-group row" id="main-select">
 
         <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
-
-        </div>
-        
+        </div> 
         {conditional}
     </div>
 
@@ -107,15 +100,7 @@ export default function AddHeadDocument(props) {
 
 
 
-        </div>
 
-
-
-        </div>
-
-
-
-        </div>
 
     ); 
 } 
