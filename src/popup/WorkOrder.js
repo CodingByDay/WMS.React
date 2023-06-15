@@ -103,9 +103,9 @@ export default function WorkOrder(props) {
     <div className='add-container-workorder'> 
 
 
-       <div className='first-row'> 
+       <center>
             <Select className='select-filters' onChange={changeWorkOrder} options={workOrders} placeholder={"Delovni nalog"} id='workOrder' />
-       </div>
+       </center>
 
 
        <input type="text" id="clientPopup" placeholder='Naročnik' class="form-control" />
