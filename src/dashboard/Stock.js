@@ -16,13 +16,8 @@ export default function Stock() {
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
     const [ident, setIdent] = useState();
-
     const [location, setLocation] = useState();
     const [warehouse, setWarehouse] = useState();
-
-
-
-
 
     // State for the rows
     const [rows, setRows] = useState([]);
@@ -66,6 +61,7 @@ export default function Stock() {
         return returnArray;
     }
 
+
     function isUUID ( uuid ) {
       let s = "" + uuid;
       s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
@@ -75,6 +71,7 @@ export default function Stock() {
         return true;
      } 
   
+
     function checkUID () {
       const cookies = new Cookies();
       var cookie = cookies.get('uid');
@@ -98,17 +95,29 @@ export default function Stock() {
         }
         }
         var finalParams = warehouse.value +  "|" + locationFinal + "|" + ident.value;
-        StockService.getStock(finalParams).then(response => {          
+        StockService.getStock(finalParams).then(response => {
+
         var stocks = [];
         var stockAmount = 0;
         window.stocks = response;
+
         for(var i = 0; i < response.Items.length; i++) {  
-            // This works continue here tomarow, add items to the array and show them in the table.
+          
+            var ident = DataAccess.getData(response.Items[i], "Ident", "StringValue");
+            var location = DataAccess.getData(response.Items[i], "Location", "StringValue");
+            var qty = DataAccess.getData(response.Items[i], "RealStock", "DoubleValue");
+            stocks.push({Ident: ident, RealStock: qty, Location: location});
+
+
+
+            // Data access is not defined.
         }
+
         var finalInformation = "";
         for(var j = 0; j < stocks.length; j++) {  
             finalInformation = finalInformation + "\n" + stocks[j].location + " - " + stocks[j].quantity;
         }
+
         var information = $("#information");
         information.text(finalInformation);
         if(stockAmount > 0) { 

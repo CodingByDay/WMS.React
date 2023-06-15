@@ -473,9 +473,11 @@ span#createDocument {
   flex-direction: row-reverse;
 }
 
+
 div#addHeader {
-  background: white;
+  background: #f7f7f8;
 }
+
 
 
 
@@ -683,6 +685,13 @@ button.btn.btn-primary.navbar.logout {
   width: max-content;
 }
 
+
+
+thead {
+  background: #969595;
+}
+
+
 .filters {
   display: flex;
   gap: 1em;
@@ -693,8 +702,8 @@ button.btn.btn-primary.navbar.logout {
   align-items: center;
 }
 .menu button {
-  color: #081A45;
-  background: white;
+  color: white;
+  background: #081A45;
   font-size: 1.1em;
   font-weight: 900!important;
 }

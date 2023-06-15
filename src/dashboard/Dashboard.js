@@ -65,23 +65,23 @@ export function Dashboard() {
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
               Pregled naročila
-              <img alt={""} src='choices-icon.png' width={50}/>
+              <img alt={""} src='listing.png' width={100}/>
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
               Transakcije
-              <img alt={""} src='transfer-icon.png' width={50} />
+              <img alt={""} src='transaction.png' width={100} />
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
               Zaloga
-              <img alt={""} src='boxes-icon.png' width={50} />
+              <img alt={""} src='stock.png' width={100} />
             </button>
 
             
             <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
               Nastavitve
-              <img alt={""} src='settings-icon.png' width={50} />
+              <img alt={""} src='settings.png' width={100} />
             </button>
             </div>
 

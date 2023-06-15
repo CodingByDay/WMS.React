@@ -120,11 +120,15 @@ export default function WorkOrder(props) {
             </div>
 
        </div> 
+                <center>
 
+            <span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>   
+                
+            <p>Potrdi</p>
+                <MdAdd />
+            </span>
 
-
-       <button className="btn btn-primary" onClick={createHeadDocument} id="createDocument">Potrdi</button>   
-
+            </center> 
     </div>
     
     ); 
