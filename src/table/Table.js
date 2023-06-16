@@ -67,7 +67,7 @@ const columnsLocationComponent = [
 const columnsStockComponent = [
   { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Lokacija", accessor: "Location", type: "StringValue" },
-  { label: "Količina", accessor: "Količina", type: "StringValue" },
+  { label: "Količina", accessor: "RealStock", type: "StringValue" },
 ]
 
 

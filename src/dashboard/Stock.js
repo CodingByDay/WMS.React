@@ -7,6 +7,7 @@ import Select from 'react-select'
 import StockService  from '../services/StockService';
 import $ from 'jquery'; 
 import Table from '../table/Table';
+import DataAccess from "../utility/DataAccess";
 
 export default function Stock() { 
 
@@ -113,18 +114,8 @@ export default function Stock() {
             // Data access is not defined.
         }
 
-        var finalInformation = "";
-        for(var j = 0; j < stocks.length; j++) {  
-            finalInformation = finalInformation + "\n" + stocks[j].location + " - " + stocks[j].quantity;
-        }
-
-        var information = $("#information");
-        information.text(finalInformation);
-        if(stockAmount > 0) { 
-          $(".visualization").css("color", "green");
-        } else {
-          $(".visualization").css("color", "red");
-        }
+        setRows(stocks);
+        console.log(stocks);
         }); 
 
     }
@@ -164,7 +155,7 @@ export default function Stock() {
         <Select className='select-filters' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
-        <Table table = "stock" className="stock-table" type="stock" class = "table_responsive_stock"  />
+        <Table table = "stock" data={rows} className="stock-table" type="stock" class = "table_responsive_stock"  />
 
 
 

@@ -54,6 +54,38 @@ const TableBody = (props) => {
 
 
 
+    if (window.location.href.includes("stock") && table == "stock") 
+    {
+            alert("test")
+        var columns = props.columns;
+        var tableDataInner = props.tableData;
+        return (
+            <tbody>
+             {
+
+              tableDataInner.map((data, index) => {
+
+
+              return (
+               <tr>
+               { columns.map(({ accessor }) => {
+
+               
+               var tData = data[`${accessor}`];
+               try {          
+                  
+               } catch (e) {
+               }
+                   return <td key={uuid()} className>{tData}</td>;
+                })}
+               </tr>
+              );
+             })}
+            </tbody>
+           );
+    }      
+
+
 
 
 
