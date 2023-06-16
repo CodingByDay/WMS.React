@@ -147,9 +147,8 @@ export default function Inventory(props) {
             <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
              <p>Potrdi</p>
              <MdAdd />
-             </span></center> 
+           </span></center> 
         </div>
-
 
      
         </div>

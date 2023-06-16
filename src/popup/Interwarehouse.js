@@ -189,10 +189,15 @@ function changeEvent(e) {
         </div>
         </div>
 
-        <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
+        <center>
+
+            <span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>   
+                   
              <p>Potrdi</p>
-             <MdAdd />
-             </span></center> 
+                 <MdAdd />
+             </span>
+
+        </center> 
         </div>
 
 

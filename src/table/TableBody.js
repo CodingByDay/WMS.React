@@ -56,7 +56,7 @@ const TableBody = (props) => {
 
     if (window.location.href.includes("stock") && table == "stock") 
     {
-            alert("test")
+
         var columns = props.columns;
         var tableDataInner = props.tableData;
         return (
