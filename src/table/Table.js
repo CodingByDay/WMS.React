@@ -17,7 +17,9 @@ const [tableData, setTableData] = useState(tableData1);
   { label: "Rok dobave", accessor: "DeliveryDeadline", type: "DateTimeValue"},
   { label: "Tip dokumenta", accessor: "DocumentType", type: "StringValue"},
   { label: "Ključ", accessor: "Key", type: "StringValue"},
-  { label: "Sprejemnik", accessor: "Receiver", type: "StringValue"}
+  { label: "Sprejemnik", accessor: "Receiver", type: "StringValue"},
+  { label: "Izbor", accessor: "Chosen", type: "StringValue"}
+
  ];
 
 
@@ -28,6 +30,8 @@ const columnsPositions = [
     { label: "Naziv", accessor: "Name", type: "StringValue"},
     { label: "Odprto", accessor: "OpenQty", type: "DoubleValue"},
     { label: "Skupna količina", accessor: "FullQty", type: "DoubleValue"},
+    { label: "Izbor", accessor: "Chosen", type: "StringValue"}
+
     
 ]
 
@@ -45,6 +49,8 @@ const columnsTransaction = [
   { label: "Datum", accessor: "Date", type: "DateTimeValue" },
   { label: "Vnesel", accessor: "ClerkName", type: "StringValue" },
   { label: "Datum vnosa", accessor: "DateInserted", type: "DateTimeValue" },  
+  { label: "Izbor", accessor: "Chosen", type: "StringValue"}
+
 ]
 
 const columnsTransactionPosition = [
@@ -55,6 +61,8 @@ const columnsTransactionPosition = [
   { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
   { label: "WMS količina", accessor: "Qty", type: "DoubleValue" }, 
+  { label: "Izbor", accessor: "Chosen", type: "StringValue"}
+
 ]
 
 

@@ -30,6 +30,7 @@ export default function Transactions() {
     const [filters, setFilters] = useState();
     const [component, setComponent] = useState();
     const [componentVisibility] = useState(true)
+    const [selector, setSelector] = useState({});
     useEffect(() => {
 
       var loader = document.getElementById("loader");
@@ -56,15 +57,19 @@ export default function Transactions() {
         });
       
 
-      $(".table_responsive_transaction tr").click(function () {
-        if($(this)[0].childNodes[0].innerHTML.startsWith("ID")) {return;}
 
-        $(this).addClass("mark_row")
-
-        $(selectedRowTransactionsHeads).removeClass("mark_row")
-
-        setSelectedRowHeadsTransactions (	this );
+      $('.table_responsive_transaction').on('click', 'table tr', function() {
+        var selectedList = transactions;
+        selectedList.selector = $(this)[0].children[0].innerHTML;
+        setTransactions(selectedList);
+   
+        setSelector($(this)[0].children[0].innerHTML)
+        $(this).addClass('mark_row');
+        //   $(selectedRowTransactionsHeads).removeClass("mark_row")
+        //  setSelectedRowHeadsTransactions (	this );
       });
+     
+
 
       $(".table_responsive_positions_transactions tr").click(function () {
         if($(this)[0].childNodes[0].innerHTML.startsWith("ID")) {return;}
@@ -264,7 +269,7 @@ function deleteItemDocument(id) {
         <div className="content-transactions">
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
-        <TransactionHeads data = {transactions} childToParent = {childToParent} filters = {filters} />
+        <TransactionHeads data = {transactions} selector={selector} childToParent = {childToParent} filters = {filters} />
         <div className="down-part">
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />

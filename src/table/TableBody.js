@@ -128,6 +128,19 @@ if(window.location.href.includes("transactions")&&table=="heads") {
          returnRow(parent);
      }
 
+
+   
+
+     for (var i = 0; i < tableData.Items.length; i++) { 
+
+        if (tableData.selector == DataAccess.getData(tableData.Items[i], "HeadID", "IntValue")) {
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "IZBRANO");
+        }
+     }
+
+ 
+
+
      tableData = tableData.Items.filter((data) => {
 
         if(typeof props.sort == "undefined") {
@@ -261,9 +274,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           return (
            <tr key={uuid()} onClick={getColumnData} className="row-style"> 
            { columns.map(({ accessor }) => {
-            if(accessor == "Chosen") {
-                return <td key={uuid()} className={accessor}></td>;
-            }
+            
            var column = getColumn(accessor);
            
            var tData = ""

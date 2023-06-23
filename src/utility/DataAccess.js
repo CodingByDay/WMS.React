@@ -12,7 +12,25 @@ const DataAccess  =  {
             }
         }
         return "";
+    },
+
+  
+
+    setDataSelected(data,  value) {
+
+        var result = this.getData(data, "Chosen", "StringValue")
+        
+        if(result == "IZBRANO") {
+            return data;
+        }
+
+
+        data.Properties.Items.push({Name: "Chosen", StringValue: value})
+
+        
+        return data;
     }
+  
 }
 
 export default DataAccess;

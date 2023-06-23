@@ -286,7 +286,7 @@ export default function Add(props) {
                         placeholder={"Ident"}
                         id='identListControl'
                         options={identList}
-                        value={ident.valssue}
+                        value={ident.value}
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
@@ -317,6 +317,7 @@ export default function Add(props) {
                     </div>
 
                 </div>
+                
                 <div className="form-group row">
                     <div className="col-sm-6">
                     <label htmlFor="inputContactNumber">Količina</label>
@@ -335,7 +336,7 @@ export default function Add(props) {
 
         </div>
     </div>
-</div>
+    </div>
 
 
 
