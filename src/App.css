@@ -478,7 +478,9 @@ div#addHeader {
   background: #f7f7f8;
 }
 
-
+.table_responsive_transaction {
+  cursor: pointer;
+}
 
 
 

@@ -64,7 +64,7 @@ export default function Transactions() {
         setTransactions(selectedList);
    
         setSelector($(this)[0].children[0].innerHTML)
-        $(this).addClass('mark_row');
+     
         //   $(selectedRowTransactionsHeads).removeClass("mark_row")
         //  setSelectedRowHeadsTransactions (	this );
       });

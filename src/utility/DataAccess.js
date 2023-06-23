@@ -7,7 +7,7 @@ const DataAccess  =  {
     /* Method that searches the json */
     getData(data, name, type) {
         for(var i = 0; i < data.Properties.Items.length; i++) { 
-            if(data.Properties.Items[i].Name == name) {
+            if(data.Properties.Items[i].Name === name) {
                 return data.Properties.Items[i][type];
             }
         }
@@ -17,17 +17,16 @@ const DataAccess  =  {
   
 
     setDataSelected(data,  value) {
-
         var result = this.getData(data, "Chosen", "StringValue")
-        
-        if(result == "IZBRANO") {
-            return data;
+
+        for(var i = 0; i < data.Properties.Items.length; i++) { 
+            if(data.Properties.Items[i].Name === "Chosen") {
+                data.Properties.Items.splice(i, 1);
+            }
         }
 
-
-        data.Properties.Items.push({Name: "Chosen", StringValue: value})
-
-        
+        data.Properties.Items.push({Name: "Chosen", StringValue: value}) 
+        console.log(data)   
         return data;
     }
   

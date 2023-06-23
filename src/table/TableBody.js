@@ -129,12 +129,16 @@ if(window.location.href.includes("transactions")&&table=="heads") {
      }
 
 
-   
+     window.data = tableData;
+
+  
 
      for (var i = 0; i < tableData.Items.length; i++) { 
 
         if (tableData.selector == DataAccess.getData(tableData.Items[i], "HeadID", "IntValue")) {
-            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "IZBRANO");
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+        } else {
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
         }
      }
 
@@ -274,9 +278,10 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           return (
            <tr key={uuid()} onClick={getColumnData} className="row-style"> 
            { columns.map(({ accessor }) => {
-            
-           var column = getColumn(accessor);
-           
+            var column = getColumn(accessor);
+
+          
+
            var tData = ""
            try {         
             tData = "";
