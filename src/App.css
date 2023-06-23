@@ -467,7 +467,9 @@ span#createDocument {
   gap: 2em;
   justify-content: center;
 }
-
+td.Chosen {
+  font-weight: 900;
+}
 .header_part {
   display: flex;
   flex-direction: row-reverse;

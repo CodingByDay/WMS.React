@@ -502,11 +502,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr key={uuid()} onClick={getColumnData}>
+            <tr key={uuid()} onClick={alert("s")}>
             { columns.map(({ accessor }) => {
-                 if(accessor == "Chosen") {
-                    return <td key={uuid()} className={accessor}></td>;
-                }
+                 
             var column = getColumn(accessor);
             
             var tData = ""
@@ -605,6 +603,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         }
     
         const getColumnData = event => {
+            
             var parent = event.target.parentElement;
             returnRow(parent);
         }

@@ -61,12 +61,16 @@ export default function Transactions() {
       $('.table_responsive_transaction').on('click', 'table tr', function() {
         var selectedList = transactions;
         selectedList.selector = $(this)[0].children[0].innerHTML;
-        setTransactions(selectedList);
-   
+        var id = $(this)[0].children[0].innerHTML;
+        setTransactions(selectedList); 
         setSelector($(this)[0].children[0].innerHTML)
-     
-        //   $(selectedRowTransactionsHeads).removeClass("mark_row")
-        //  setSelectedRowHeadsTransactions (	this );
+        setSelectedRowHeadsTransactions (	this );
+
+        TransactionService.getPositionsByHeadId(id).then(response => { 
+          setPositions(response);  
+
+        });
+        
       });
      
 
