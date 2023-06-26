@@ -147,7 +147,7 @@ export default function Inventory(props) {
                     
                     
                     ).then(response => { 
-                    console.log(response); 
+
                     props.close();
                     props.render();                        
         }); 

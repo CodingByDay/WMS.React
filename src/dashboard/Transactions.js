@@ -65,6 +65,7 @@ export default function Transactions() {
           setTransactions(selectedList); 
           setSelector($(this)[0].children[0].innerHTML)
           setSelectedRowHeadsTransactions (	this );
+         
           TransactionService.getPositionsByHeadId(id).then(response => { 
             setPositions(response);  
           });
@@ -75,7 +76,7 @@ export default function Transactions() {
       $('.table_responsive_positions_transactions').on('click', 'table tr', function() {
           var positionsList = positions;
           positionsList.selector = $(this)[0].children[0].innerHTML + $(this)[0].children[2].innerHTML;     
-
+       
           setPositions(positionsList);
           setSelectedRowHeadsTransactionsPositions ( this );
       });
@@ -133,9 +134,9 @@ export default function Transactions() {
         if(action === "add") { 
 
             if(table === "positions") {    
-                if(!isObjectEmpty(selectedRowTransactionsHeads)) {
-                var toggled = ! show;
-                setShow(toggled);
+                if(selectedRowTransactionsHeads) {
+                  var toggled = ! show;
+                  setShow(toggled);
               }
             } else {
                 var toggledHead = ! show;
@@ -268,6 +269,7 @@ function deleteItemDocument(id) {
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} selector={selector} childToParent = {childToParent} filters = {filters} />
         <div className="down-part">
+
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
 

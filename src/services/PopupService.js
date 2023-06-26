@@ -95,6 +95,7 @@ const PopupService  =  {
     async setMoveHead(data) { 
 
         const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mh&i=web`, data)
+        
         return response.data;
     },
 

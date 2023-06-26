@@ -37,7 +37,7 @@ export default function WorkOrder(props) {
         var ident = document.getElementById("identPopup").value;
         var qty = document.getElementById("openQtyPopup").value; 
 
-        alert(`Consignee ${consignee}, identifier ${ident}, name ${qty}`)
+        
 
         window.swal({
             title: 'Potrditev',
@@ -45,11 +45,11 @@ export default function WorkOrder(props) {
             icon: 'warning',
             buttons: ["Ne", "Ja, krairaj"],
           }).then((result) => {
-            if (result.isConfirmed) {     
-                    var data =  PopupService.setMoveHead({ Type: "W", }).then(response => { 
-                        props.close();
-                        props.render();    
-                    });                 
+            if (result) {     
+                var data =  PopupService.setMoveHead({ Type: "W", Consignee: consignee, Ident: ident, OpenQty: qty }).then(response => { 
+                    props.close();
+                    props.render();    
+                });                 
             }
           })    
 

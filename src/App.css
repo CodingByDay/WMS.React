@@ -471,7 +471,10 @@ div#transactionTypePopup {
     margin-bottom: 2em;
 
 }
-
+div#edit, div#addHeader {
+  height: fit-content;
+  width: 40vw;
+}
 button.swal-button.swal-button--cancel {
   color: white;
 }

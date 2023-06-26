@@ -238,7 +238,7 @@ export default function Add(props) {
 
         <div className="body_part">
 
-        <div className="container py-5">
+        <div className="container-insist">
     <div className="row">
 
 
