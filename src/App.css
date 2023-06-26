@@ -465,6 +465,12 @@ span#createDocument {
   cursor: pointer;
 }
 
+div#transactionTypePopup {
+
+    margin: auto;
+    margin-bottom: 2em;
+
+}
 
 .transactionFilters {
   margin-top: 1em;
@@ -472,9 +478,11 @@ span#createDocument {
   gap: 2em;
   justify-content: center;
 }
+
 td.Chosen {
   font-weight: 900;
 }
+
 .header_part {
   display: flex;
   flex-direction: row-reverse;

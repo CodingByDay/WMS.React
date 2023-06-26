@@ -76,12 +76,12 @@ export default function AddHeadDocument(props) {
 
 
         <div className="header_part" onClick={close}>
-            <h1 id='close_add_header'><img src='close-icon.png' width={20}></img></h1>
+            <h1 id='close_add_header'>X</h1>
         </div>
 
 
         <div className="body_part">
-        <div className="container py-5">
+        <div className="container-insist">
 
 
 
