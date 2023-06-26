@@ -116,9 +116,9 @@ $(function() {
         var objectForAPI = {};
   
         if (!byOrder) {
-              objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
+              objectForAPI = {DocumentType: documentData, Type: "I", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
         } else {
-              objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
+              objectForAPI = {DocumentType: documentData, Type: "I", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
         }
   
   

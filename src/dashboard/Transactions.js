@@ -161,12 +161,9 @@ export default function Transactions() {
             title: 'Potrditev',
             text: "Ali ste sigurni da želite zaključiti dokument?",
             icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ja, zaključi!'
+            buttons: ["Ne", "Ja, zaključi"],
           }).then((result) => {
-            if (result.isConfirmed) {
+            if (result) {
               TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
                 TransactionService.getAllTransactions().then(response => { 
                     setTransactions(response);
@@ -184,12 +181,12 @@ export default function Transactions() {
         title: 'Potrditev',
         text: "Ali ste sigurni da želite pobrisati pozicijo?",
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ja, izbriši!'
+        buttons: ["Ne", "Ja, pobriši"],
+
       }).then((result) => {
-        if (result.isConfirmed) {
+
+        if (result) {
+
           TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
 
             if(response.data.includes("OK!")) {

@@ -121,8 +121,35 @@ export default function Inventory(props) {
         }
 
        if(window.confirm('Ali želite kreirati dokument')) {
-            var data =  PopupService.setMoveHead({DocumentType: documentData, Type: "I", WhareHouse: warehouseData, ByOrder: byClient, LinkKey: ""}).then(response => { 
-            
+                 var data =  PopupService.setMoveHead(
+                    
+                    
+                    
+                    {  
+                        DocumentType: documentData, 
+                        
+                        Type: "N",
+                        
+                        WhareHouse: warehouseData,
+
+                        LinkKey: "",
+
+                        LinkNo: 0,
+
+                        Date: dateData,
+
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    ).then(response => { 
+                    console.log(response); 
+                    props.close();
+                    props.render();                        
         }); 
        }
 

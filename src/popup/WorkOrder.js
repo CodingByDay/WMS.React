@@ -26,32 +26,30 @@ export default function WorkOrder(props) {
 
     async function createHeadDocument ()  {
 
+        /* 
+            tbOpenQty.Text = workOrder.GetDouble("OpenQty").ToString(CommonData.GetQtyPicture());
+            tbClient.Text = workOrder.GetString("Consignee");
+            tbIdent.Text = workOrder.GetString("Ident");
+            tbName.Text = workOrder.GetString("Name");
+        */
 
-    /* 
-        tbOpenQty.Text = workOrder.GetDouble("OpenQty").ToString(CommonData.GetQtyPicture());
-        tbClient.Text = workOrder.GetString("Consignee");
-        tbIdent.Text = workOrder.GetString("Ident");
-        tbName.Text = workOrder.GetString("Name");
-    */
+        var consignee = document.getElementById("clientPopup").value;
+        var ident = document.getElementById("identPopup").value;
+        var qty = document.getElementById("openQtyPopup").value; 
+
+        alert(`Consignee ${consignee}, identifier ${ident}, name ${qty}`)
+
         window.swal({
             title: 'Potrditev',
             text: "Ali ste sigurni da želite kreirati dokument?",
             icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ja, kreiraj!'
+            buttons: ["Ne", "Ja, krairaj"],
           }).then((result) => {
-            if (result.isConfirmed) {
-    
-      
+            if (result.isConfirmed) {     
                     var data =  PopupService.setMoveHead({ Type: "W", }).then(response => { 
                         props.close();
                         props.render();    
-                    });  
-                
-       
-            
+                    });                 
             }
           })    
 

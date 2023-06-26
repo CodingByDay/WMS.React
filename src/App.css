@@ -472,6 +472,11 @@ div#transactionTypePopup {
 
 }
 
+button.swal-button.swal-button--cancel {
+  color: white;
+}
+
+
 .transactionFilters {
   margin-top: 1em;
   display: flex;
