@@ -115,7 +115,7 @@ export default function Stock() {
         }
 
         setRows(stocks);
-        console.log(stocks);
+     
         }); 
 
     }
@@ -130,7 +130,6 @@ export default function Stock() {
 
     function handleWarehouseChange(event) { 
         setWarehouse(event); 
-        console.log(warehouse);
         StockService.getLocations(event.value).then(response => {  
             var locations = [];
             for (var i = 0; i < response.Items.length; i++) {  

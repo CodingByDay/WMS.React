@@ -26,7 +26,7 @@ const DataAccess  =  {
         }
 
         data.Properties.Items.push({Name: "Chosen", StringValue: value}) 
-        console.log(data)   
+ 
         return data;
     }
   

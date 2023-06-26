@@ -2,7 +2,7 @@ import DataAccess from "../utility/DataAccess";
 
 const TableBody = (props) => {
 
-
+   
 
     function uuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -14,6 +14,7 @@ const TableBody = (props) => {
 
     var tableData = props.tableData;
     var table = props.table;
+
 
 
     if (window.location.href.includes("transactions") && table == "location") 
@@ -100,7 +101,7 @@ const TableBody = (props) => {
 
 if(window.location.href.includes("transactions")&&table=="heads") {
      // TODO: Conditional sorting
-    
+
 
      var columns = props.columns;
      var returnRow = props.returnRow;
@@ -502,7 +503,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           {
          tableData.map((data, index) => {
            return (
-            <tr key={uuid()} onClick={alert("s")}>
+            <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
                  
             var column = getColumn(accessor);
@@ -528,7 +529,8 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         var columns = props.columns;
         var returnRow = props.returnRow;
-    
+        
+
     
         function findIndex(array, accesor) {
             for(var i=0;i<array.Properties.Items.length;i++) {
@@ -552,8 +554,33 @@ if(window.location.href.includes("transactions")&&table=="heads") {
           
             returnRow(parent);
         }
+
+
+
+   
+        if(typeof tableData.Items != "undefined") {
+
+ 
+            // Part that sets the selection
+        for (var i = 0; i < tableData.Items.length; i++) { 
+
+            var together = DataAccess.getData(tableData.Items[i], "HeadID", "IntValue").toString() + DataAccess.getData(tableData.Items[i], "No", "IntValue").toString();
+            var target = tableData.selector;
+
+
+            if ( tableData.selector == together) {
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+            } else {
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
+            }
+         }
+
+        }
+
+
+
+
         tableData = tableData.Items;
-    
         return (
          <tbody>
           {
@@ -561,9 +588,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            return (
             <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
-                 if(accessor == "Chosen") {
-                    return <td className={accessor}></td>;
-                }
+                 
             var column = getColumn(accessor);
             
             var tData = ""

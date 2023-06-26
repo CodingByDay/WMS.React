@@ -461,6 +461,11 @@ span#createDocument {
   color: black;
 }
 
+.table_responsive_positions_transactions tr {
+  cursor: pointer;
+}
+
+
 .transactionFilters {
   margin-top: 1em;
   display: flex;

@@ -8,7 +8,7 @@ export default function TransactionPositions(props) {
 
     return ( 
         <div>
-            <Table table = "heads" className="positions-table" childToParent = {props.childToParent} data = {props.data} type="positionsTransaction" class = "table_responsive_positions_transactions"  />
+            <Table table = "positions" className="positions-table" childToParent = {props.childToParent} data = {props.data} type="positionsTransaction" class = "table_responsive_positions_transactions"  />
         </div>
     ); 
 

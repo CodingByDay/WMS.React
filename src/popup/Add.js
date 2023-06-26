@@ -180,10 +180,10 @@ export default function Add(props) {
         var no = old.no;
         var transactionHeadID = data.transaction;
 
-        alert(transactionHeadID)
+      //  alert(transactionHeadID)
 
         PopupService.commitPosition({LinkKey: parseInt(key), LinkNo: no, Ident: data.ident.value, HeadID: document.getElementById("transactionIdAdd").value, Qty: document.getElementById("realQty").value}).then(response => { 
-           alert(response)
+       //    alert(response)
         });            
         var objectToCommit = {}
     }

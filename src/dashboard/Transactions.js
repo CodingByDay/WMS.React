@@ -59,29 +59,25 @@ export default function Transactions() {
 
 
       $('.table_responsive_transaction').on('click', 'table tr', function() {
-        var selectedList = transactions;
-        selectedList.selector = $(this)[0].children[0].innerHTML;
-        var id = $(this)[0].children[0].innerHTML;
-        setTransactions(selectedList); 
-        setSelector($(this)[0].children[0].innerHTML)
-        setSelectedRowHeadsTransactions (	this );
-
-        TransactionService.getPositionsByHeadId(id).then(response => { 
-          setPositions(response);  
-
-        });
+          var selectedList = transactions;
+          selectedList.selector = $(this)[0].children[0].innerHTML;
+          var id = $(this)[0].children[0].innerHTML;
+          setTransactions(selectedList); 
+          setSelector($(this)[0].children[0].innerHTML)
+          setSelectedRowHeadsTransactions (	this );
+          TransactionService.getPositionsByHeadId(id).then(response => { 
+            setPositions(response);  
+          });
         
       });
      
 
+      $('.table_responsive_positions_transactions').on('click', 'table tr', function() {
+          var positionsList = positions;
+          positionsList.selector = $(this)[0].children[0].innerHTML + $(this)[0].children[2].innerHTML;     
 
-      $(".table_responsive_positions_transactions tr").click(function () {
-        if($(this)[0].childNodes[0].innerHTML.startsWith("ID")) {return;}
-
-      $(selectedRowTransactionsPositions).removeClass("mark_row")
-
-      $(this).addClass("mark_row")
-      setSelectedRowHeadsTransactionsPositions ( this );
+          setPositions(positionsList);
+          setSelectedRowHeadsTransactionsPositions ( this );
       });
 
     function isUUID ( uuid ) {
