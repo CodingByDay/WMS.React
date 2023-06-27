@@ -40,14 +40,37 @@ const PopupService  =  {
         var ret = {};
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=getObj&table=id&id=${ident}&i=web`)
         var serialNumber = DataAccess.getData(response.data, "HasSerialNumber", "BoolValue")
+        var sscc = DataAccess.getData(response.data, "isSSCC", "BoolValue")
         var identName = DataAccess.getData(response.data, "Name", "StringValue");
         if (typeof serialNumber !== "undefined")
         {
             if (serialNumber) {
-                ret.serial = true
+                ret.serial = true              
+            }   else {
+                ret.serial = false
             }
+
+         
+        } else {
+            ret.serial = false;
+            
         }
-        ret.serial = false;
+
+        if (typeof sscc !== "undefined")
+        {
+            if (sscc) {
+                ret.sscc = true              
+            } else {
+                ret.serial = false
+            }
+
+         
+        } else {
+            ret.sscc = false;
+            
+        }
+       
+      
         ret.name = identName;
         return ret;
 
@@ -93,9 +116,7 @@ const PopupService  =  {
     // Requires the CORS policy.
     // This is the method for setting the moveHead.
     async setMoveHead(data) { 
-
-        const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mh&i=web`, data)
-        
+        const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setObj&table=mh&i=web`, data)   
         return response.data;
     },
 

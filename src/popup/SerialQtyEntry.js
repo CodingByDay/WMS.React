@@ -30,11 +30,27 @@ export default function SerialQtyEntry (props) {
 
     useEffect(() => {
 
-        document.getElementById("identLocationComponent").value = props.data.ident.value;
-        document.getElementById("nameLocationComponent").value = props.data.name;
-        document.getElementById("neededQtyLocationComponent").value = props.data.real;
-        document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value)
-       
+        document.getElementById("identEntry").value = props.data.ident.value + " "   + props.data.name;
+        
+        alert(props.data.serial)
+        alert(props.data.sscc)
+
+        if (! props.data.serial) {
+
+            alert("Please select")
+            $("#serialEntry").css("display", "none");
+
+        }
+        
+        if (! props.data.sscc) {
+
+            alert("Please select")
+            $("#ssccEntry").css("display", "none");
+
+        }
+
+       // document.getElementById("neededQtyLocationComponent").value = props.data.real;
+       // document.getElementById("differenceLocationComponent").value = parseInt(document.getElementById("neededQtyLocationComponent").value)  - parseInt(document.getElementById("qtyLocationComponent").value) 
 
         var data =  TransactionService.getLocations(props.data.warehouse).then(response => { 
             var locations = [];
@@ -102,38 +118,49 @@ export default function SerialQtyEntry (props) {
 
     return ( 
         <div id="SerialQtyEntry" className='serialQtyEntry'>      
-            <div class="header_part" onClick={closePopup}>
-            <h1 id='close_add'>X</h1></div>
-            <div >
-            <div >
+                    <div class="header_part" onClick={closePopup}>
+                    <h1 id='close_add'>X</h1></div>
+                    <div>
+                    <div>
+                        
             <div className='component-outer'>
 
-            <div class="insistRow">
-                <label for="identLocationComponent">Ident</label>
-                <input type="text" class="form-control" id="identLocationComponent" placeholder="Ident" />
-                    </div>
                     <div class="insistRow">
-                        <label for="nameLocationComponent">Ident</label>
-                        <input type="text" class="form-control" id="nameLocationComponent" placeholder="Naziv" />
-                    </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Potrebna količina</label>
-                        <input type="text" class="form-control" id="neededQtyLocationComponent" placeholder="Potrebna količina" />
-                    </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Količina</label>
-                        <input type="text" class="form-control" id="qtyLocationComponent" value="0" placeholder="Količina" />
-                    </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Razlika</label>
-                        <input type="text" class="form-control" id="differenceLocationComponent" placeholder="Razlika" />
+                        <label for="identLocationComponent">Ident</label>
+                        <input type="text" class="form-control" id="identEntry" placeholder="Ident" />
                     </div>
 
+                    <div class="insistRow">
+                        <label for="ssccEntry">SSCC koda</label>
+                        <input type="text" class="form-control" id="ssccEntry" placeholder="Naziv" />
+                    </div>
 
+                    <div class="insistRow">
+                        <label for="serialEntry">Serijska številka</label>
+                        <input type="text" class="form-control" id="serialEntry" placeholder="Potrebna količina" />
+                    </div>
+
+                    <div class="insistRow">
+                        <label for="locationEntry">Lokacija</label>
+                        <input type="text" class="form-control" id="locationEntry" value="0" placeholder="Količina" />
+                    </div>
+
+                    <div class="insistRow">
+                        <label for="qtyEntry">Količina</label>
+                        <input type="text" class="form-control" id="qtyEntry" placeholder="Razlika" />
+                    </div>
+
+                    <div class="insistRow">
+                        <label for="unitsEntry">Št. enot</label>
+                        <input type="text" class="form-control" id="unitsEntry" placeholder="Število enot" />
+                    </div>
+                
                     <span 
                         onClick={commitPositions} className='actions smallerr'id=''>Dodaj      
                         <MdEdit />
-                        </span> 
+                    </span>
+
+
                     </div>
 
             </div>

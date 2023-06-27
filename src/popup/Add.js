@@ -203,12 +203,14 @@ export default function Add(props) {
             } else if(response.includes("Odpremni")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
+                    data.sscc = response.sscc;
                     CommitPositionSingular(orderCurrent, data);                   
                 });           
             } else if(response.includes("Naročilo")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
                     data.name = response.name;
+                    data.sscc = response.sscc;
                     data.transaction = document.getElementById("transactionIdAdd").value;
                     // Multi column place for the data collection //
                     props.addVisibility(orderCurrent, data, true);

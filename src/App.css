@@ -503,6 +503,8 @@ div#transactionTypePopup {
   align-items: center;
   flex-direction: row;
   margin: auto;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 
