@@ -15,6 +15,7 @@ import Loader from '../loader/Loader';
 import $ from 'jquery'; 
 import LocationComponent from '../popup/LocationComponent';
 import SerialComponent from '../popup/SerialComponent';
+import SerialQtyEntry from '../popup/SerialQtyEntry';
 
 
 
@@ -233,12 +234,15 @@ function deleteItemDocument(id) {
       if(data.serial)
       {
 
-        var componentSerial = <SerialComponent  data = {data} show={componentVisibility} />
+        var componentSerial = <SerialQtyEntry  data = {data} show={componentVisibility} />  
+
         setComponent(componentSerial);
 
       } else {
 
-        var component = <LocationComponent old = {old} data = {data} show={componentVisibility} />
+        var component = <SerialQtyEntry old = {old} data = {data} show={componentVisibility} />
+
+
         setComponent(component);
 
       }

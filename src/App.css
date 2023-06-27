@@ -38,6 +38,24 @@ div#addHeader {
   justify-content: space-around;
 }
 
+
+#SerialQtyEntry {
+	  display: none;
+    width: -moz-fit-content;
+    width: 50%;
+    height: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    padding: 10px;
+    color: white;
+    opacity: 1;
+    background: white;
+	}
+
+
 .table_responsive_location-component {
   margin: 2em;
 }
@@ -466,11 +484,29 @@ span#createDocument {
 }
 
 div#transactionTypePopup {
-
     margin: auto;
     margin-bottom: 2em;
-
 }
+
+.component-outer {
+
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: auto;
+}
+
+.insistRow {
+  gap: 2em;
+  width: 15em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+}
+
+
+
 div#edit, div#addHeader {
   height: fit-content;
   width: 40vw;
@@ -837,7 +873,9 @@ label {
 }
 
 
-
+.insistRow input {
+  width: 5vw;
+}
 
 .App {
   text-align: center;

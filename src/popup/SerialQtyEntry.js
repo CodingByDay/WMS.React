@@ -12,16 +12,19 @@ import PopupService from '../services/PopupService';
 import { MdAdd, MdOutlineMerge, MdEdit, MdOutlineKey, MdOutlineQrCode, MdDeleteOutline} from "react-icons/md";
 
 
-export default function LocationComponent (props) { 
+export default function SerialQtyEntry (props) { 
     const [openOrder, setOpenOrder] = useState([]);
     const [locations, setLocations] = useState([])
     const [tableData, setTabledata] = useState([]);
     const [location, setLocation] = useState("")
     const [locationComponentAdd, setLocationComponentAdd] = useState();
     if (props.show) {
-        $(".locationComponent").css("display", "block");
+
+        $(".serialQtyEntry").css("display", "block");
     } else {
-        $(".locationComponent").css("display", "none");
+
+
+        $(".serialQtyEntry").css("display", "none");
     }
 
 
@@ -52,7 +55,7 @@ export default function LocationComponent (props) {
     }
 
     function closePopup(e) {
-        $(".locationComponent").css("display", "none");
+        $(".SerialQtyEntry").css("display", "none");
     }
 
     function addLocation(e) {
@@ -98,12 +101,12 @@ export default function LocationComponent (props) {
     }
 
     return ( 
-        <div id="locationComponent" className='locationComponent'>      
+        <div id="SerialQtyEntry" className='serialQtyEntry'>      
             <div class="header_part" onClick={closePopup}>
             <h1 id='close_add'>X</h1></div>
-            <div className='outer_container'>
-            <div className="bodyLocationComponent">
-            <div className='left-part'>
+            <div >
+            <div >
+            <div className='component-outer'>
 
             <div class="insistRow">
                 <label for="identLocationComponent">Ident</label>
@@ -124,65 +127,39 @@ export default function LocationComponent (props) {
                     <div class="insistRow">
                         <label for="neededQtyLocationComponent">Razlika</label>
                         <input type="text" class="form-control" id="differenceLocationComponent" placeholder="Razlika" />
-                </div>
-            </div>
+                    </div>
+
+
+                    <span 
+                        onClick={commitPositions} className='actions smallerr'id=''>Dodaj      
+                        <MdEdit />
+                        </span> 
+                    </div>
 
             </div>
 
 
 
-            <div className='add-location-container'>
-
-                <Select  
-                
-                            options={locations}
-                            placeholder={"Lokacija"}
-                            onChange={changeAddLocation}
-                            value={locationComponentAdd}
-                            id='locationSelect'
-                />
-
-
-
-                <input 
-                            placeholder = "Količina"
-                            id='qtyAddLocation'
-                            className='form-control'
-                />
-
-
-
-            <span className='actions smallerr' onClick={addLocation} id=''>Dodaj           
-             <MdAdd />
-             </span>
-            </div>
+           
 
 
 
 
 
 
-            <div className='right-part'>
 
-             <span 
-              onClick={commitPositions} className='actions smallerr'id=''>Potrdi         
-             <MdEdit />
-             </span> 
+         
 
           
 
-             <span className='actions smallerr' id=''>Briši               
-             <MdDeleteOutline />
-             </span>
 
 
             </div>
 
         </div>
 
-        <Table className="location-component_table" table="location" data = {tableData} type = "locationComponent" class = "table_responsive_location-component" /> 
 
-        </div>
+    
 
       
         

@@ -13,7 +13,7 @@ import PopupService from '../services/PopupService';
 
 export default function Add(props) { 
 
-    const [ident, setIdent] = useState([]);
+    const [ident, setIdent] = useState({});
     const [identList, setIdentsList] = useState([]);
     const [transactionData, setTransactionData] = useState({});
     const [orderData, setOrderData] = useState([]);
@@ -43,9 +43,7 @@ export default function Add(props) {
 
           if(typeof props.selected.childNodes!== "undefined") {
 
-
             // Continue here tomarow.
-
 
             var rowProperty = {};
 
@@ -53,16 +51,9 @@ export default function Add(props) {
                 rowProperty[`${props.selected.childNodes[i]}`] = props.selected.childNodes[i].innerHTML;
             }    
 
-  
 
             setTransactionData(rowProperty)
-
-
         }
-
-
-
-
 
 
 }, [ident]);
@@ -70,6 +61,9 @@ export default function Add(props) {
 
 
     function findValueByClassWithinArray(array, classNameValue) {
+
+
+
 
         for (var i = 0; i < array.length; i++) {
             var currentObject = array[i];
@@ -102,7 +96,7 @@ export default function Add(props) {
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
-            window.orderTest = response;
+
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
             var no = DataAccess.getData(response, "No", "IntValue");
@@ -111,31 +105,38 @@ export default function Add(props) {
             document.getElementById("deadlineDate").value = deadline;
 
 
+
             // Test the result
         });
            
     }
 
-    function updateOrders(ident) { 
+    function updateOrders(identInternal) { 
+
         // Continue here.
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
-        TransactionService.getOrdersForIdent(ident, type).then(response => { 
+
+    
+
+        TransactionService.getOrdersForIdent(identInternal, type).then(response => { 
+
+
+           
+
 
             var items = []
             items.push({value: '', label: '', key: ''})
 
             for(var i = 0; i < response.Items.length;i++) {
+
                 var item = response.Items[i]    
                 var key = DataAccess.getData(item, "Key", "StringValue")
                 var no = DataAccess.getData(item, "No", "IntValue");
                 var deadline = DataAccess.getData(item, "DeliveryDeadline", "DateTimeValue" )
-
-
-
                 items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key, no: no, deadline: deadline})            
                 // Test this
-
-            }             
+            }       
+             
             setOrderData(items)
             // Multi column place for the data collection //
         });
@@ -180,10 +181,9 @@ export default function Add(props) {
         var no = old.no;
         var transactionHeadID = data.transaction;
 
-      //  alert(transactionHeadID)
 
         PopupService.commitPosition({LinkKey: parseInt(key), LinkNo: no, Ident: data.ident.value, HeadID: document.getElementById("transactionIdAdd").value, Qty: document.getElementById("realQty").value}).then(response => { 
-       //    alert(response)
+
         });            
         var objectToCommit = {}
     }
@@ -285,8 +285,7 @@ export default function Add(props) {
                     <Select 
                         placeholder={"Ident"}
                         id='identListControl'
-                        options={identList}
-                        value={ident.value}
+                        options={identList}                      
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
@@ -304,8 +303,7 @@ export default function Add(props) {
                         placeholder="Naročilo"
                         id='orderInformationAdd'
                         options={orderData}
-                        value={orderCurrent}
-      
+                        value={orderCurrent}     
                         onChange={onChangeOrder} 
                      />
    
