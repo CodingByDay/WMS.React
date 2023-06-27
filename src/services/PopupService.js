@@ -59,13 +59,18 @@ const PopupService  =  {
         if (typeof sscc !== "undefined")
         {
             if (sscc) {
-                ret.sscc = true              
+
+                ret.sscc = true     
+
             } else {
+
                 ret.serial = false
+
             }
 
          
         } else {
+            
             ret.sscc = false;
             
         }

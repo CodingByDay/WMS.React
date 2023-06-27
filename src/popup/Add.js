@@ -78,6 +78,9 @@ export default function Add(props) {
     }
 
 
+    var no = 0;
+    var keyOut = 0;
+
 
     function onChangeIdent(e) {
         document.getElementById("positionNumber").value = "";
@@ -99,7 +102,8 @@ export default function Add(props) {
 
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
-            var no = DataAccess.getData(response, "No", "IntValue");
+            no = DataAccess.getData(response, "No", "IntValue");
+            keyOut = DataAccess.getData(response, "Key", "StringValue");
             document.getElementById("positionNumber").value = no;
             document.getElementById("openQty").value = qty;
             document.getElementById("deadlineDate").value = deadline;
@@ -143,6 +147,7 @@ export default function Add(props) {
 
     }
 
+    var headId = 3;
 
 
 
@@ -153,7 +158,7 @@ export default function Add(props) {
 
         var rowProperty = {};
         if(typeof props.selected.childNodes!== "undefined") {  
-            var headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
+            headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
             var documentType = findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
             // Missing value for String representation of the document.
             var client = findValueByClassWithinArray(props.selected.childNodes, "Receiver");
@@ -190,6 +195,7 @@ export default function Add(props) {
 
 
     function CommitPosition(e) {
+
         var openQty = document.getElementById("openQty").value;
         var realQty = document.getElementById("realQty").value;
         var positionNumber = document.getElementById("positionNumber").value;
@@ -204,6 +210,9 @@ export default function Add(props) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
                     data.sscc = response.sscc;
+                    data.headId = headId;
+                    data.no = no;
+                    data.key = keyOut;
                     CommitPositionSingular(orderCurrent, data);                   
                 });           
             } else if(response.includes("Naročilo")) {
@@ -211,6 +220,9 @@ export default function Add(props) {
                     data.serial = response.serial;
                     data.name = response.name;
                     data.sscc = response.sscc;
+                    data.headId = headId;
+                    data.no = no;
+                    data.key = keyOut;
                     data.transaction = document.getElementById("transactionIdAdd").value;
                     // Multi column place for the data collection //
                     props.addVisibility(orderCurrent, data, true);
@@ -319,14 +331,18 @@ export default function Add(props) {
                 </div>
                 
                 <div className="form-group row">
+
                     <div className="col-sm-6">
                     <label htmlFor="inputContactNumber">Količina</label>
                         <input type='number' className="form-control" id="realQty" placeholder="Količina" />
                     </div>
+
+
                     <div className="col-sm-6">
                         <label htmlFor="inputWebsite">Datum dobave</label>
                         <input type="text" className="form-control" id="deadlineDate" placeholder="Datum dobave" />
                     </div>
+
                 </div>
                 </div>
 

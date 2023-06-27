@@ -488,12 +488,24 @@ div#transactionTypePopup {
     margin-bottom: 2em;
 }
 
-.component-outer {
 
+#locationsSelect {
+  width: 11em;
+}
+
+.component-outer {
   display: flex;
   flex-direction: column;
   gap: 2em;
   margin: auto;
+}
+
+div#locationsSelect {
+  color: black;
+}
+
+.insistRow input {
+  width: 8.5vw;
 }
 
 .insistRow {
@@ -874,10 +886,6 @@ label {
   color: rgb(34, 34, 34);
 }
 
-
-.insistRow input {
-  width: 5vw;
-}
 
 .App {
   text-align: center;
