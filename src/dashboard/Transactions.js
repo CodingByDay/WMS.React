@@ -32,6 +32,8 @@ export default function Transactions() {
     const [component, setComponent] = useState();
     const [componentVisibility] = useState(true)
     const [selector, setSelector] = useState({});
+    const [documentType, setDocumentType] = useState();
+
     useEffect(() => {
 
       var loader = document.getElementById("loader");
@@ -68,6 +70,9 @@ export default function Transactions() {
           setSelector($(this)[0].children[0].innerHTML)
           setSelectedRowHeadsTransactions (	this );
 
+         
+
+          setDocumentType($(this)[0].children[2].innerHTML)
           
           TransactionService.getPositionsByHeadId(id).then(response => { 
              setPositions(response);  
@@ -149,7 +154,7 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
-              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML
+              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML;
            
               deleteItemDocument(idToDelete);       
           } else {
@@ -219,25 +224,28 @@ function deleteItemDocument(id) {
       TransactionService.getPositionsByHeadId(selector).then(response => { 
           setPositions(response);  
           window.showAlert("Informacija", "Uspešno pobrisano", "success")
-     });    
+      });   
+
     }
  }); 
 } 
 }
 
     const renderComponentPositions = () => { 
-      TransactionService.getPositionsByHeadId(selector).then(response => { 
-        setPositions(response);  
-        window.showAlert("Informacija", "Uspešno dodano", "success")
-        $("#SerialQtyEntry").toggle();
 
-     });
+      TransactionService.getPositionsByHeadId(selector).then(response => { 
+          setPositions(response);  
+          window.showAlert("Informacija", "Uspešno dodano", "success")
+          $("#SerialQtyEntry").toggle();
+          setShow(false);
+      });
+
     }
 
     const renderComponent = () => { 
       TransactionService.getAllTransactions().then(response => { 
-        setTransactions(response);
-        window.showAlert("Informacija", "Uspešno dodano", "success")
+          setTransactions(response);
+          window.showAlert("Informacija", "Uspešno dodano", "success")
       }); 
     }
 
@@ -248,13 +256,13 @@ function deleteItemDocument(id) {
       if(data.serial)
       {
 
-        var componentSerial = <SerialQtyEntry render = {renderComponentPositions} data = {data} show={componentVisibility} />  
+        var componentSerial = <SerialQtyEntry document = {documentType} render = {renderComponentPositions} data = {data} show={componentVisibility} />  
 
         setComponent(componentSerial);
 
       } else {
 
-        var component = <SerialQtyEntry render = {renderComponentPositions} old = {old} data = {data} show={componentVisibility} />
+        var component = <SerialQtyEntry document = {documentType} render = {renderComponentPositions} old = {old} data = {data} show={componentVisibility} />
 
 
         setComponent(component);

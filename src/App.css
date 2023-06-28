@@ -492,8 +492,12 @@ div#transactionTypePopup {
     margin-bottom: 2em;
 }
 
-#locationsSelect {
+#locationsSelect, #locationsSelectReceive {
   width: 11em;
+}
+
+#receiveDiv {
+  display: none;
 }
 
 .component-outer {
@@ -508,12 +512,17 @@ div#locationsSelect {
 }
 
 .insistRow input {
-  width: 8.5vw;
+  width: 12vw;
 }
-
+.insistRow label {
+  width: -webkit-fill-available;
+}
+.small {
+  width: 6.4em!important;
+}
 .insistRow {
   gap: 2em;
-  width: 15em;
+  width: 20em;
   display: flex;
   align-items: center;
   flex-direction: row;

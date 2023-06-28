@@ -135,16 +135,16 @@ export default function Add(props) {
 
             for(var i = 0; i < response.Items.length;i++) {
 
-                var item = response.Items[i]    
-                var key = DataAccess.getData(item, "Key", "StringValue")
+                var item = response.Items[i];    
+                var key = DataAccess.getData(item, "Key", "StringValue");
                 var no = DataAccess.getData(item, "No", "IntValue");
-                var deadline = DataAccess.getData(item, "DeliveryDeadline", "DateTimeValue" )
-                items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key, no: no, deadline: deadline})            
-                // Test this
+                var deadline = DataAccess.getData(item, "DeliveryDeadline", "DateTimeValue" );
+                items.push({label: key + " poz. " + no, value: key+ " poz. " + no, key: key, no: no, deadline: deadline});            
+
             }       
              
             setOrderData(items)
-            // Multi column place for the data collection //
+
         });
 
     }
@@ -194,12 +194,29 @@ export default function Add(props) {
         });            
         var objectToCommit = {}
     }
-
+    function isFloat(val) {
+        var floatRegex = /^-?\d+(?:[.,]\d*?)?$/;
+        if (!floatRegex.test(val))
+            return false;
+    
+        val = parseFloat(val);
+        if (isNaN(val))
+            return false;
+        return true;
+    }
 
     function CommitPosition(e) {
 
         var openQty = document.getElementById("openQty").value;
         var realQty = document.getElementById("realQty").value;
+
+        if(realQty === "0" || !isFloat(realQty)) {
+
+            window.showAlert("Informacija", "Vnesite pravilno količino", "success");
+            return;
+        } 
+
+
         var positionNumber = document.getElementById("positionNumber").value;
         var deadlineDate = document.getElementById("deadlineDate").value;
         var warehouse = document.getElementById("warehouseAdd").value;
@@ -336,7 +353,7 @@ export default function Add(props) {
 
                     <div className="col-sm-6">
                     <label htmlFor="inputContactNumber">Količina</label>
-                        <input type='number' className="form-control" id="realQty" placeholder="Količina" />
+                        <input type='text' className="form-control" id="realQty" placeholder="Količina" />
                     </div>
 
 

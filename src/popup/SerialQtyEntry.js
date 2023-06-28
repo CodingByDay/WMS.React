@@ -32,6 +32,16 @@ export default function SerialQtyEntry (props) {
 
     useEffect(() => {
 
+
+
+
+        if(props.document === "Medskladišnica") {
+            $("#receiveDiv").toggle();
+        }
+
+
+
+
         document.getElementById("identEntry").value = props.data.ident.value + " "   + props.data.name;
 
        
@@ -50,9 +60,7 @@ export default function SerialQtyEntry (props) {
 
         }
 
-        var lQty = document.getElementById("qtyLabel")
-
-        lQty.innerHTML = "Količina" + " (" + props.data.open + ") "
+   
        
 
         document.getElementById("unitsEntry").value = "1"
@@ -91,8 +99,27 @@ export default function SerialQtyEntry (props) {
         var sscc = document.getElementById("ssccEntry").value;
         var units = document.getElementById("unitsEntry").value;
         var serial = document.getElementById("serialEntry").value;
-        var qty = parseFloat(document.getElementById("qtyEntry").value);
+        var qty = parseFloat(props.data.real);
   
+
+        if($('#ssccEntry').is(':visible')){
+
+            if(sscc!=="") {
+                window.showAlert("Informacija", "Vnesite pravilno sscc kodo", "success");
+            }
+
+        }
+
+        
+        if($('#serialEntry').is(':visible')){
+
+            if(serial!=="") {
+                window.showAlert("Informacija", "Vnesite pravilno serijsko", "success");
+      
+            }
+
+        }
+
 
         var testObject = {HeadID: headId, Ident: ident, Factor: units, SerialNo: serial, Qty: qty, SSCC: sscc, LinkNo: props.data.no, LinkKey: props.data.key}
 
@@ -112,12 +139,30 @@ export default function SerialQtyEntry (props) {
         setLocation(e)
     }
 
+    function changeLocationReceived(e) {
+
+    }
+
+
+
+    function closePopup(e) { 
+
+       $("#SerialQtyEntry").toggle();
+
+    }
+
+
 
     return ( 
-        <div id="SerialQtyEntry" className='serialQtyEntry'>      
-                    <div class="header_part" >
-                    <h1 id='close_add'>X</h1></div>
+        <div id="SerialQtyEntry" className='serialQtyEntry'>    
+
+
+                    <div class="header_part" onClick={closePopup}>
+                        <h1 id='close_add'>X</h1></div>
                     <div>
+
+
+
                     <div>
                         
             <div className='component-outer'>
@@ -153,22 +198,38 @@ export default function SerialQtyEntry (props) {
 
                     </div>
 
-                    <div class="insistRow">
-                        <label for="qtyEntry" id="qtyLabel">Količina</label>
-                        <input type="text" class="form-control" id="qtyEntry" placeholder="Količina" />
+                    <div class="insistRow" id='receiveDiv'>
+                        <label for="locationsSelectReceive">Prejemna lokacija</label>
+
+
+                    <Select
+                            placeholder="Lokacija"
+                            id='locationsSelectReceive'
+                            value={location}
+                            onChange={changeLocation}
+                            options={locations}
+                        
+                     />
+
+
                     </div>
+
+               
+              
 
                     <div class="insistRow">
                         <label for="unitsEntry">Št. enot</label>
-                        <input type="text" class="form-control" id="unitsEntry" placeholder="Št. enot" />
+                        <input type="text" class="form-control small" id="unitsEntry" placeholder="Št. enot" />
                     </div>
 
-                    <div class="insistRow">
+                    <div class="insistRow ">
                         <span 
                             onClick={commitPositions} className='actions smallerr'id=''>Dodaj      
                             <MdEdit />
                         </span>
                     </div>
+
+                    
                 
 
 
