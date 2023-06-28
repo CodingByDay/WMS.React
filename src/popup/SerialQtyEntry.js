@@ -100,7 +100,8 @@ export default function SerialQtyEntry (props) {
 
         PopupService.commitPosition(testObject).then(response => { 
             // Reload the component LinkNo not correct
-            
+
+            props.render();   
         });
 
     }

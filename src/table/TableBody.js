@@ -563,9 +563,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
  
             // Part that sets the selection
         for (var i = 0; i < tableData.Items.length; i++) { 
-            var together = DataAccess.getData(tableData.Items[i], "HeadID", "IntValue").toString() + DataAccess.getData(tableData.Items[i], "No", "IntValue").toString();
+            var match = DataAccess.getData(tableData.Items[i], "ItemID", "IntValue").toString();
             var target = tableData.selector;
-            if ( tableData.selector == together) {
+            if ( tableData.selector == match) {
                 tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
             } else {
                 tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");

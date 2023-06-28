@@ -57,7 +57,7 @@ const columnsTransactionPosition = [
 
   { label: "ID transakcije", accessor: "HeadID", type: "IntValue" },
   { label: "Ključ transakcije", accessor: "LinkKey", type: "StringValue" },
-  { label: "Pozicija transakcije", accessor: "LinkNo", type: "IntValue" },
+  { label: "Številka pozicije", accessor: "ItemID", type: "IntValue" },
   { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
   { label: "WMS količina", accessor: "Qty", type: "DoubleValue" }, 
@@ -103,7 +103,9 @@ const columnsStockComponent = [
       columns = columnsLocationComponent;
 
     } else if (props.type === "stock" ) {
+
       columns = columnsStockComponent;
+      
     }
 
 

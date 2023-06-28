@@ -60,27 +60,31 @@ export default function Transactions() {
 
 
       $('.table_responsive_transaction').on('click', 'table tr', function() {
+
           var selectedList = transactions;
           selectedList.selector = $(this)[0].children[0].innerHTML;
           var id = $(this)[0].children[0].innerHTML;
           setTransactions(selectedList); 
           setSelector($(this)[0].children[0].innerHTML)
           setSelectedRowHeadsTransactions (	this );
-         
+
+          
           TransactionService.getPositionsByHeadId(id).then(response => { 
-            setPositions(response);  
+             setPositions(response);  
           });
         
       });
      
 
       $('.table_responsive_positions_transactions').on('click', 'table tr', function() {
+
           var positionsList = positions;
-          positionsList.selector = $(this)[0].children[0].innerHTML + $(this)[0].children[2].innerHTML;     
-       
+          positionsList.selector = $(this)[0].children[2].innerHTML;       
           setPositions(positionsList);
           setSelectedRowHeadsTransactionsPositions ( this );
+
       });
+
 
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -110,9 +114,9 @@ export default function Transactions() {
   }
 
 
-  function isObjectEmpty(obj) {
-    return Object.keys(obj).length === 0;
-  }
+    function isObjectEmpty(obj) {
+      return Object.keys(obj).length === 0;
+    }
 
     function checkUID () {
       const cookies = new Cookies();
@@ -145,7 +149,8 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
-              var idToDelete = selectedRowTransactionsPositions.childNodes[0].innerHTML
+              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML
+           
               deleteItemDocument(idToDelete);       
           } else {
                deleteHeadDocument();
@@ -210,15 +215,24 @@ function deleteItemDocument(id) {
     TransactionService.deleteMoveItem(id).then(response => { 
 
     if(response.data.includes("OK!")) {
-            TransactionService.getAllTransactions().then(response => { 
-            setTransactions(response);
-            window.showAlert("Informacija", "Uspešno pobrisano", "success")
-            }); 
+
+      TransactionService.getPositionsByHeadId(selector).then(response => { 
+          setPositions(response);  
+          window.showAlert("Informacija", "Uspešno pobrisano", "success")
+     });    
     }
  }); 
 } 
 }
 
+    const renderComponentPositions = () => { 
+      TransactionService.getPositionsByHeadId(selector).then(response => { 
+        setPositions(response);  
+        window.showAlert("Informacija", "Uspešno dodano", "success")
+        $("#SerialQtyEntry").toggle();
+
+     });
+    }
 
     const renderComponent = () => { 
       TransactionService.getAllTransactions().then(response => { 
@@ -234,13 +248,13 @@ function deleteItemDocument(id) {
       if(data.serial)
       {
 
-        var componentSerial = <SerialQtyEntry  data = {data} show={componentVisibility} />  
+        var componentSerial = <SerialQtyEntry render = {renderComponentPositions} data = {data} show={componentVisibility} />  
 
         setComponent(componentSerial);
 
       } else {
 
-        var component = <SerialQtyEntry old = {old} data = {data} show={componentVisibility} />
+        var component = <SerialQtyEntry render = {renderComponentPositions} old = {old} data = {data} show={componentVisibility} />
 
 
         setComponent(component);
@@ -269,15 +283,18 @@ function deleteItemDocument(id) {
         <div className='main-container'>
         <Header />   
         <div className="content-transactions">
+
         <TransactionFilters bringBackFilters = {bringBackFilters} />
         <TransactionHeaderButtons reactToFront = {reactToFront}  />
         <TransactionHeads data = {transactions} selector={selector} childToParent = {childToParent} filters = {filters} />
+
         <div className="down-part">
 
         <TransactionPositionsButtons reactToFront = {reactToFront} />
         <TransactionPositions data = {positions} childToParent = {childToParent} />
 
         </div>
+
         <Add addVisibility = {changeAddVisibility} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
