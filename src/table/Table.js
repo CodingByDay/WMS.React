@@ -56,8 +56,8 @@ const columnsTransaction = [
 const columnsTransactionPosition = [
 
   { label: "ID transakcije", accessor: "HeadID", type: "IntValue" },
-  { label: "Ključ transakcije", accessor: "Key", type: "StringValue" },
-  { label: "Pozicija transakcije", accessor: "No", type: "IntValue" },
+  { label: "Ključ transakcije", accessor: "LinkKey", type: "StringValue" },
+  { label: "Pozicija transakcije", accessor: "LinkNo", type: "IntValue" },
   { label: "Ident", accessor: "Ident", type: "StringValue" },
   { label: "Naziv identa", accessor: "IdentName", type: "StringValue" },
   { label: "WMS količina", accessor: "Qty", type: "DoubleValue" }, 
