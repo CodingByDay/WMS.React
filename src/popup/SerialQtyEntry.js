@@ -86,17 +86,21 @@ export default function SerialQtyEntry (props) {
 
     function commitPositions (e) {
 
-        var headId = props.data.headId;
-        var ident = document.getElementById("identEntry").value
-        var sscc = document.getElementById("ssccEntry").value
-        var units = document.getElementById("unitsEntry").value
-        var serial = document.getElementById("serialEntry").value
-        var qty = document.getElementById("qtyEntry").value
+        var headId = parseFloat(props.data.headId);
+        var ident = props.data.ident.value;
+        var sscc = document.getElementById("ssccEntry").value;
+        var units = document.getElementById("unitsEntry").value;
+        var serial = document.getElementById("serialEntry").value;
+        var qty = parseFloat(document.getElementById("qtyEntry").value);
+  
 
-        var testObject = {headID: headId, Ident: ident, Factor: units, SerialNo: serial, Qty: qty, SSCC: sscc, LinkNo: props.data.no, LinkKey: props.data.key}
+        var testObject = {HeadID: headId, Ident: ident, Factor: units, SerialNo: serial, Qty: qty, SSCC: sscc, LinkNo: props.data.no, LinkKey: props.data.key}
+
+
 
         PopupService.commitPosition(testObject).then(response => { 
-            alert(response)
+            // Reload the component LinkNo not correct
+            
         });
 
     }
@@ -137,7 +141,7 @@ export default function SerialQtyEntry (props) {
 
 
                     <Select
-                            placeholder="Lokacije"
+                            placeholder="Lokacija"
                             id='locationsSelect'
                             value={location}
                             onChange={changeLocation}

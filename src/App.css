@@ -417,6 +417,7 @@ body {
 span#createDocument {
   margin-top: -1em;
 }
+
 .layout-interwarehouse-checkbox {
   display: flex;
   flex-direction: row-reverse;
@@ -425,6 +426,7 @@ span#createDocument {
   gap: 1em;
   margin: auto;
 }
+
 .layout-interwarehouse-goods {
   justify-content: center;
   margin: 3em;
@@ -437,18 +439,19 @@ span#createDocument {
 }
 
 #hiddenLabel, #hiddenCheck {
-	
-	visibility: hidden;
 
+	visibility: hidden;
 }
 
 .header_part h1 {
   font-size: initial;
   cursor:pointer;
 }
+
 .layout-takeover-goods {
   margin-bottom: 2em;
 }
+
 .layout-issued-goods {
   display: flex;
   flex-direction: row;
@@ -456,6 +459,7 @@ span#createDocument {
   position: relative;
   justify-content: center;
 }
+
 .layout-takeover-goods {
   display: flex;
   flex-direction: row;
@@ -487,7 +491,6 @@ div#transactionTypePopup {
     margin: auto;
     margin-bottom: 2em;
 }
-
 
 #locationsSelect {
   width: 11em;

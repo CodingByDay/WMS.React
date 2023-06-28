@@ -20,6 +20,8 @@ export default function Add(props) {
     const [documentTypeString, setDocumentTypeStringValue] = useState("");
     const [orderCurrent, setOrderCurrent] = useState([]);
 
+    const [no, setNo] = useState({});
+    const [keyOut, setKeyOut] = useState({});
 
 
 
@@ -78,8 +80,7 @@ export default function Add(props) {
     }
 
 
-    var no = 0;
-    var keyOut = 0;
+
 
 
     function onChangeIdent(e) {
@@ -102,14 +103,15 @@ export default function Add(props) {
 
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
-            no = DataAccess.getData(response, "No", "IntValue");
-            keyOut = DataAccess.getData(response, "Key", "StringValue");
+            var no = DataAccess.getData(response, "No", "IntValue");
+            setNo(no);
+            setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
+            
+
+
             document.getElementById("positionNumber").value = no;
             document.getElementById("openQty").value = qty;
             document.getElementById("deadlineDate").value = deadline;
-
-
-
             // Test the result
         });
            
