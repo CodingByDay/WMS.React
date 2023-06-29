@@ -330,6 +330,23 @@ if(window.location.href.includes("transactions")&&table=="heads") {
        );
 } else if(!window.location.href.includes("transactions") && table=="heads") {
 
+    if(typeof tableData.Items != "undefined") {
+
+ 
+        // Part that sets the selection
+    for (var i = 0; i < tableData.Items.length; i++) { 
+        var match = DataAccess.getData(tableData.Items[i], "Key", "StringValue").toString();
+        var target = tableData.selector;
+        if ( tableData.selector == match) {
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+        } else {
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
+        }
+     }
+
+    }
+
+
 
 
     tableData = tableData.Items.filter((data) => {
@@ -498,6 +515,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             returnRow(parent);
         }
     
+
+
+        
         return (
          <tbody>
           {
@@ -632,18 +652,9 @@ if(window.location.href.includes("transactions")&&table=="heads") {
    
 
 
-
-        for (var i = 0; i < tableData.Items.length; i++) { 
-
-            if (tableData.selector == DataAccess.getData(tableData.Items[i], "HeadID", "IntValue")) {
-                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
-            } else {
-                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
-            }
-         }
     
          tableData = tableData.Items;
-         
+
         return (
          <tbody>
           {

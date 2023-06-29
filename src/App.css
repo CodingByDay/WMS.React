@@ -113,6 +113,12 @@ div#addHeader {
   justify-content: center;
 }
 
+
+tr {
+  cursor: pointer;
+}
+
+
 button#loginButton {
   padding-left: 2em;
   padding-right: 2em;
