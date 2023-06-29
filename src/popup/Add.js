@@ -174,6 +174,13 @@ export default function Add(props) {
             clientAdd.value = client;
             var warehouseAdd = document.getElementById("warehouseAdd");
             warehouseAdd.value = warehouse;     
+
+
+            if(props.document === "Medskladišnica") {
+                alert("Hide")
+            }
+
+
         }
     } else {
             $("#edit").css("display", "none");
@@ -212,7 +219,7 @@ export default function Add(props) {
 
         if(realQty === "0" || !isFloat(realQty)) {
 
-            window.showAlert("Informacija", "Vnesite pravilno količino", "success");
+            window.showAlert("Informacija", "Vnesite pravilno količino", "error");
             return;
         } 
 

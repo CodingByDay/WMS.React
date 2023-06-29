@@ -303,7 +303,7 @@ function deleteItemDocument(id) {
 
         </div>
 
-        <Add addVisibility = {changeAddVisibility} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
+        <Add addVisibility = {changeAddVisibility} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 

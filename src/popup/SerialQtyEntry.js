@@ -127,8 +127,14 @@ export default function SerialQtyEntry (props) {
 
         PopupService.commitPosition(testObject).then(response => { 
             // Reload the component LinkNo not correct
-
-            props.render();   
+            if(typeof response!="object") {
+            if(response.startsWith("Exception")) {
+                window.showAlert("Informacija", "Prišlo je do napake", "error");
+                return;
+            }
+            } else {
+              props.render();  
+             } 
         });
 
     }
