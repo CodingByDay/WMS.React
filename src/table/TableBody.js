@@ -629,8 +629,21 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             var parent = event.target.parentElement;
             returnRow(parent);
         }
-        tableData = tableData.Items;
+   
 
+
+
+        for (var i = 0; i < tableData.Items.length; i++) { 
+
+            if (tableData.selector == DataAccess.getData(tableData.Items[i], "HeadID", "IntValue")) {
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+            } else {
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
+            }
+         }
+    
+         tableData = tableData.Items;
+         
         return (
          <tbody>
           {
@@ -638,14 +651,16 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            return (
             <tr key={uuid()} onClick={getColumnData}>
             { columns.map(({ accessor }) => {
-            var column = getColumn(accessor);
-            
+            var column = getColumn(accessor);         
             var tData = ""
             try {          
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
+
             }
-                return <td key={uuid()} className={accessor}>{tData}</td>;
+
+            return <td key={uuid()} className={accessor}>{tData}</td>;
+
              })}
             </tr>
            );

@@ -62,6 +62,7 @@ export default function Listing() {
 
   const  childToParent = (data) => {
       getPositions(data.childNodes[4].innerHTML)
+      orders.selector = $(this)[0].children[0].innerHTML;
   }
 
 

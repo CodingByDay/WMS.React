@@ -86,11 +86,9 @@ export default function Auth(props) {
     <div className="whole-auth">
     <div className="navbar auth">
             <center><div className='logo '>
-                <img src='logo-wms.png'  className='logo' alt='Riko WMS' height={90} />
-            </div></center>
-     
-            
-        </div>
+                <img src='logo-wms.png'  className='logo' alt='Riko WMS' height={70} />
+            </div></center>           
+    </div>
 
 
     <div className="Auth-form-container">

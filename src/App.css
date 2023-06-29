@@ -127,6 +127,7 @@ button#loginButton {
   font-size: 0.875em;
   font-weight: 800;
 }
+
 *{font-family: 'Calibri';
 
 
@@ -154,7 +155,6 @@ table {
   justify-content: space-between;
 }
 
-
 td {
   background: white!important;
 }
@@ -166,9 +166,11 @@ td {
 .menu button {
   color: #081A45;
 }
+
 .down-part {
-  margin-top: 5em;
+  margin-top: 1em;
 }
+
 .main-menu-design, .listing-bg, .content-transactions, .stock-container
 {
 
@@ -238,7 +240,7 @@ span.actions {
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;
-  font-size: 1.7em;
+  font-size: 1.4em;
   font-weight: 600;
   padding: 0.3e;
 }
@@ -496,9 +498,11 @@ div#transactionTypePopup {
   width: 11em;
 }
 
+
 #receiveDiv {
   display: none;
 }
+
 
 .component-outer {
   display: flex;

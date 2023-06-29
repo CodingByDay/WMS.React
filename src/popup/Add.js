@@ -184,7 +184,7 @@ export default function Add(props) {
 
 
                // Continue here
-               
+
             }
 
 
@@ -296,6 +296,7 @@ export default function Add(props) {
                                 <label htmlFor="transactionId">Transakcija</label>
                                 <input type="text" className="form-control" id="transactionIdAdd" disabled />
                 </div>
+                
                 <div className="form-group row">
                                 <label htmlFor="inputFirstname">Tip</label>
                                 <input type="text" className="form-control" id="typeAdd" disabled/>
@@ -305,6 +306,7 @@ export default function Add(props) {
                                 <label htmlFor="inputFirstname">Naročnik</label>
                                 <input type="text" className="form-control" id="clientAdd" disabled />
                 </div>
+
                 <div className="form-group row">
                                 <label htmlFor="inputFirstname">Skladišče</label>
                                 <input type="text" className="form-control" id="warehouseAdd" disabled />
@@ -312,6 +314,7 @@ export default function Add(props) {
 
 
                 <div className="form-group row">
+
                     <div className="col-sm-6">
                   
                     </div>
@@ -320,8 +323,6 @@ export default function Add(props) {
 
                     </div>
                 </div>
-
-
 
                 <div className='editable-group'>
 
@@ -341,6 +342,7 @@ export default function Add(props) {
                         <input type="text" className="form-control" id="positionNumber" placeholder="Pozicija" />
                     </div>
                 </div>
+
                 <div className="form-group row" id='orderRow'>
                     <div className="col-sm-6">
                     <label htmlFor="inputCity">Naročilo</label>
