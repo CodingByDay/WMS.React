@@ -19,7 +19,7 @@ export default function Add(props) {
     const [orderData, setOrderData] = useState([]);
     const [documentTypeString, setDocumentTypeStringValue] = useState("");
     const [orderCurrent, setOrderCurrent] = useState([]);
-
+    const [disabledOrder, setDisabledOrder] = useState(false);
     const [no, setNo] = useState({});
     const [keyOut, setKeyOut] = useState({});
 
@@ -57,6 +57,7 @@ export default function Add(props) {
             setTransactionData(rowProperty)
         }
 
+      
 
 }, [ident]);
 
@@ -100,15 +101,11 @@ export default function Add(props) {
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
-
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
             var no = DataAccess.getData(response, "No", "IntValue");
             setNo(no);
             setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
-            
-
-
             document.getElementById("positionNumber").value = no;
             document.getElementById("openQty").value = qty;
             document.getElementById("deadlineDate").value = deadline;
@@ -177,15 +174,12 @@ export default function Add(props) {
 
 
             if(props.document === "Medskladišnica") {
-               $("#dateRow").prop('disabled', true); 
-               $("#openQtyRow").prop('disabled', true); 
-               $("#orderRow").prop('disabled', true); 
-               $("#positionRow").prop('disabled', true); 
-
-
+                $("#positionRow").css('visibility', 'hidden');
+                $("#orderRow").css('visibility', 'hidden');
+                $("#openQtyRow").css('visibility', 'hidden');
+                $("#dateRow").css('visibility', 'hidden');
                // Continue here
-
-            }
+            } 
 
 
         }
@@ -238,7 +232,17 @@ export default function Add(props) {
         // getDocumentTypeStringBasedOnCode API call
         PopupService.getDocumentTypeStringBasedOnCode(document.getElementById("typeAdd").value).then(response => {           
             if(response.includes("Prenos")) {
-                // Medskladišnica E
+                // This is the current working environment
+                PopupService.hasSerialNumberIdent(ident.value).then(response => {           
+                    data.serial = response.serial;
+                    data.sscc = response.sscc;
+                    data.headId = headId;
+                    data.no = no;
+                    data.key = keyOut;
+                    props.addVisibility(orderCurrent, data, true);
+            
+                });           
+                // This is the current working environment
             } else if(response.includes("Odpremni")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
