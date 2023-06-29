@@ -177,7 +177,14 @@ export default function Add(props) {
 
 
             if(props.document === "Medskladišnica") {
-                alert("Hide")
+               $("#dateRow").prop('disabled', true); 
+               $("#openQtyRow").prop('disabled', true); 
+               $("#orderRow").prop('disabled', true); 
+               $("#positionRow").prop('disabled', true); 
+
+
+               // Continue here
+               
             }
 
 
@@ -318,7 +325,7 @@ export default function Add(props) {
 
                 <div className='editable-group'>
 
-                <div className="form-group row">
+                <div className="form-group row" id='identRow'>
                     <div className="col-sm-6">
                     <label htmlFor="inputFirstname">Ident</label>
 
@@ -329,12 +336,12 @@ export default function Add(props) {
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6" id='positionRow'>
                         <label htmlFor="inputAddressLine2">Pozicija</label>
                         <input type="text" className="form-control" id="positionNumber" placeholder="Pozicija" />
                     </div>
                 </div>
-                <div className="form-group row">
+                <div className="form-group row" id='orderRow'>
                     <div className="col-sm-6">
                     <label htmlFor="inputCity">Naročilo</label>
 
@@ -349,7 +356,7 @@ export default function Add(props) {
    
             
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6" id='openQtyRow'>
                         <label htmlFor="inputState">Odprta količina</label>
                         <input type="text" className="form-control" id="openQty" placeholder="Količina" />
                     </div>
@@ -364,7 +371,7 @@ export default function Add(props) {
                     </div>
 
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-6" id='dateRow'>
                         <label htmlFor="inputWebsite">Datum dobave</label>
                         <input type="text" className="form-control" id="deadlineDate" placeholder="Datum dobave" />
                     </div>
