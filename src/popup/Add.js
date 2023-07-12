@@ -22,10 +22,12 @@ export default function Add(props) {
     const [disabledOrder, setDisabledOrder] = useState(false);
     const [no, setNo] = useState({});
     const [keyOut, setKeyOut] = useState({});
-
+    const [selectedIdent, setSelectedIdent] = useState({})
 
 
     useEffect(() => {
+
+      
 
         var idents = TransactionService.getIdents().then(response=> { 
 
@@ -61,7 +63,15 @@ export default function Add(props) {
 
 }, [ident]);
 
+if(props.edit) {
 
+    var order = props.selectedPosition.childNodes[1].innerHTML
+    var identFill = props.selectedPosition.childNodes[4].innerHTML
+    var qty = props.selectedPosition.childNodes[6].innerHTML
+    resetEditor()
+    setSelectedIdent( {value: identFill, label: identFill} )
+  
+}
 
     function findValueByClassWithinArray(array, classNameValue) {
 
@@ -85,11 +95,14 @@ export default function Add(props) {
 
 
     function onChangeIdent(e) {
+
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
         setIdent({label: e.value, value: e.value });
+        setSelectedIdent({label: e.value, value: e.value});
         updateOrders(e.value);
+
     }
 
     function onChangeOrder(e) {
@@ -192,6 +205,7 @@ export default function Add(props) {
 
 
 
+        props.resetEditor();
         var key = old.key;
         var no = old.no;
         var transactionHeadID = data.transaction;
@@ -274,7 +288,12 @@ export default function Add(props) {
         // Place to check for the serial number
         
     }
-    
+    function resetEditor() {
+
+        props.resetEdit();
+
+    }
+
 
     return ( 
 
@@ -282,7 +301,7 @@ export default function Add(props) {
      
 
 
-        <div className="header_part">
+        <div className="header_part" onClick={resetEditor}>
             <h1 id='close_add'>X</h1>
         </div>
 
@@ -337,7 +356,8 @@ export default function Add(props) {
                     <Select 
                         placeholder={"Ident"}
                         id='identListControl'
-                        options={identList}                      
+                        options={identList}          
+                        value={selectedIdent}            
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>

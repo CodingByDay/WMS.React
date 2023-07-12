@@ -18,7 +18,7 @@ export default function TransactionPositionsButtons(props) {
     }
 
     function editPosition () {
-        // alert("Urejanje pozicije")
+        props.reactToFront({type: 'transaction', action: 'edit', table: 'positions'});
     }
 
     return ( 
@@ -37,10 +37,9 @@ export default function TransactionPositionsButtons(props) {
              </span>
 
 
-            <span className='actions smallerr' onClick={editPosition}>
+             <span className='actions smallerr' onClick={editPosition}>
              <p>Popravi</p>                   
              <MdEdit />
-
              </span>
 
 

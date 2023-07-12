@@ -33,15 +33,11 @@ export default function Transactions() {
     const [componentVisibility] = useState(true)
     const [selector, setSelector] = useState({});
     const [documentType, setDocumentType] = useState();
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
 
       var loader = document.getElementById("loader");
-
-
-      
-
-
       loader.style.display = "block";
       $(".main-container").css ("display", "none");
       // window['toggleLoaader']("loader", false);
@@ -62,18 +58,13 @@ export default function Transactions() {
 
 
       $('.table_responsive_transaction').on('click', 'table tr', function() {
-
           var selectedList = transactions;
           selectedList.selector = $(this)[0].children[0].innerHTML;
           var id = $(this)[0].children[0].innerHTML;
           setTransactions(selectedList); 
           setSelector($(this)[0].children[0].innerHTML)
           setSelectedRowHeadsTransactions (	this );
-
-         
-
-          setDocumentType($(this)[0].children[2].innerHTML)
-          
+          setDocumentType($(this)[0].children[2].innerHTML)   
           TransactionService.getPositionsByHeadId(id).then(response => { 
              setPositions(response);  
           });
@@ -112,7 +103,6 @@ export default function Transactions() {
 
          TransactionService.getPositionsByHeadId(order).then(response => { 
             setPositions(response);  
-
         });
 
       }
@@ -162,6 +152,16 @@ export default function Transactions() {
           }
         } else if (action === "finish") {
                finishHeadDocument();
+        } else if (action === "edit") {
+          var toggled = ! show;
+          setShow(toggled);
+          //console.log(selectedRowTransactionsPositions);
+
+          var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
+          var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
+          var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
+          setIsEdit(true)
+          
         }
       } 
    }
@@ -282,6 +282,17 @@ function deleteItemDocument(id) {
       setFilters(sorting)
     }
 
+
+
+
+    const resetEditable = () => { 
+      //alert("Testing reset")
+      setIsEdit(false)
+
+    }
+
+
+
     return ( 
       
         <div>
@@ -303,7 +314,7 @@ function deleteItemDocument(id) {
 
         </div>
 
-        <Add addVisibility = {changeAddVisibility} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} filters = {filters} heads = {transactions} positions = {positions}/>
+        <Add addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
