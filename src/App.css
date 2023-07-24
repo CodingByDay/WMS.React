@@ -10,6 +10,13 @@
 box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
 background: none;
 }
+
+span#openRangeTransaction {
+  width: auto;
+  height: 2.6em;
+  margin-top: 0.1em;
+}
+
 .settings-divider-context {
   display: flex;
   flex-direction: column;

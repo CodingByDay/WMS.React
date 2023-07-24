@@ -93,6 +93,7 @@ export default function TransactionFilters(props) {
         var dn = TransactionService.getAllTransactions().then(response=> {
             var transactions = []
             transactions.push({value: '', label: ''})
+            ids.push({value: "", label:""});
             for(var i=0;i<response.Items.length;i++) {
 
 
@@ -179,9 +180,9 @@ export default function TransactionFilters(props) {
 
 
 
-          props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedWorkOrder:selectedWorkOrder,setSelectedTransactionId:setSelectedTransactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
+          props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedTransactionId:selectedTransactionId,selectedWorkOrder:selectedWorkOrder,transactionId:transactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
 
-    }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedWorkOrder, setSelectedTransactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser, state]);
+    }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedTransactionId, selectedWorkOrder, transactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser, state]);
 
     // Definition of application states
     // Methods for selection
@@ -244,7 +245,10 @@ export default function TransactionFilters(props) {
     return ( 
         <div>
             <div className="transactionFilters">
+
+
                     <div className='columnDivider'> 
+
                     <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>    
                     <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
@@ -255,6 +259,9 @@ export default function TransactionFilters(props) {
                     options={businessEvent}
                     onChange={(e) => onChangeBusinessEvent(e)}
                     />
+
+
+
                     </div>
 
                     <div className='columnDivider'>
@@ -275,13 +282,14 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeClient(e)} 
                               
                     />
-                    
+
                     <Select
-                                 id = "idTransaction"
-                                 type="text"
-                                 options={ids}
-                                 placeholder={"ID transakcije"} 
-                                 onChange={(e) => onChangeTransactionId(e)} 
+                    
+                        id = "idTransaction"
+                        type="text"
+                        options={ids}
+                        placeholder={"ID transakcije"} 
+                        onChange={(e) => onChangeTransactionId(e)} 
                                     
                     />
 
@@ -290,13 +298,11 @@ export default function TransactionFilters(props) {
                     <div className='columnDivider'>
 
 
-                    <Select 
-                        placeholder={"Ident"}
-                        id='ident'
-                        options={ident}
-                        onChange={(e) => onChangeIdent(e)} 
-                    />
-
+                  
+                    <span className="actions smallerr filter" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
+                    <p>Izberite</p>
+                    <MdDateRange />
+                    </span>  
                    
 
                     <Select  placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
@@ -320,10 +326,7 @@ export default function TransactionFilters(props) {
 
 
 
-                    <span className="actions smallerr filter" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
-                    <p>Izberite</p>
-                    <MdDateRange />
-                    </span>  
+                   
 
 
                    
