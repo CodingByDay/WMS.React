@@ -6,9 +6,10 @@
 .App {
   background-color: white;
 }
+
 .navbar {
-box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
-background: none;
+  box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
+  background: none;
 }
 
 span#openRangeTransaction {

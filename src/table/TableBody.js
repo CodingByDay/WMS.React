@@ -398,7 +398,6 @@ if(window.location.href.includes("transactions")&&table=="heads") {
                 }
             } else {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
-
             } 
            } catch (e) {
                 // Test 

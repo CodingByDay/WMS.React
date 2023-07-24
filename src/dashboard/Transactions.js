@@ -37,17 +37,22 @@ export default function Transactions() {
 
     useEffect(() => {
 
-      var loader = document.getElementById("loader");
-      loader.style.display = "block";
-      $(".main-container").css ("display", "none");
-      // window['toggleLoaader']("loader", false);
-      TransactionService.getAllTransactions().then(response => { 
-      setTransactions(response);
-      loader.style.display = "none";
-      $(".main-container").css ("display", "block");
+            var loader = document.getElementById("loader");
+            loader.style.display = "block";
+            $(".main-container").css ("display", "none");
+            // window['toggleLoaader']("loader", false);
+            TransactionService.getAllTransactions().then(response => { 
+            setTransactions(response);
+            loader.style.display = "none";
+            $(".main-container").css ("display", "block");
 
 
            }); 
+
+
+           setShow(false);
+
+
     }, []);
 
 
@@ -160,7 +165,9 @@ export default function Transactions() {
           var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
           var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
           var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
+          setIsEdit(false);
           setIsEdit(true)
+      
           
         }
       } 
@@ -277,10 +284,10 @@ function deleteItemDocument(id) {
     }
 
     const bringBackFilters = (sorting) => {
+
       // Sorting object comes back from the children component
       // Pass the sorting object down through the children
-      console.log(sorting)
-      console.log(transactions)
+
       setFilters(sorting)
     }
 
@@ -288,7 +295,7 @@ function deleteItemDocument(id) {
 
 
     const resetEditable = () => { 
-      //alert("Testing reset")
+      // alert("Testing reset")
       setIsEdit(false)
 
     }

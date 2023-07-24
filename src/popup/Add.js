@@ -59,19 +59,23 @@ export default function Add(props) {
             setTransactionData(rowProperty)
         }
 
-      
+        if(props.edit) {
+            alert("identFill")
+            var order = props.selectedPosition.childNodes[1].innerHTML
+            var identFill = props.selectedPosition.childNodes[4].innerHTML
+            var qty = props.selectedPosition.childNodes[6].innerHTML
+            resetEditor()
+            alert(identFill)
+            setSelectedIdent( {value: `${identFill}`, label: `${identFill}` })
+          
+        } else {
+            setSelectedIdent( {value: ``, label: `` })
+
+        }
 
 }, [ident]);
 
-if(props.edit) {
 
-    var order = props.selectedPosition.childNodes[1].innerHTML
-    var identFill = props.selectedPosition.childNodes[4].innerHTML
-    var qty = props.selectedPosition.childNodes[6].innerHTML
-    resetEditor()
-    setSelectedIdent( {value: identFill, label: identFill} )
-  
-}
 
     function findValueByClassWithinArray(array, classNameValue) {
 
