@@ -166,7 +166,7 @@ export default function Transactions() {
           var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
           var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
           setIsEdit(false);
-          setIsEdit(true)
+    
       
           
         }

@@ -59,21 +59,21 @@ export default function Add(props) {
             setTransactionData(rowProperty)
         }
 
-        if(props.edit) {
-            alert("identFill")
+      
+            try {
             var order = props.selectedPosition.childNodes[1].innerHTML
             var identFill = props.selectedPosition.childNodes[4].innerHTML
             var qty = props.selectedPosition.childNodes[6].innerHTML
-            resetEditor()
-            alert(identFill)
+            resetEditor()    
             setSelectedIdent( {value: `${identFill}`, label: `${identFill}` })
-          
-        } else {
-            setSelectedIdent( {value: ``, label: `` })
+            } catch (e) { 
 
-        }
+
+            }
+        
 
 }, [ident]);
+
 
 
 
