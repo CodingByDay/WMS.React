@@ -20,7 +20,7 @@ import SerialQtyEntry from '../popup/SerialQtyEntry';
 
 
 export default function Transactions() { 
-
+   
     checkUID ()
     const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] = useState({});
     const [selectedRowTransactionsPositions, setSelectedRowHeadsTransactionsPositions] = useState({});
@@ -279,6 +279,8 @@ function deleteItemDocument(id) {
     const bringBackFilters = (sorting) => {
       // Sorting object comes back from the children component
       // Pass the sorting object down through the children
+      console.log(sorting)
+      console.log(transactions)
       setFilters(sorting)
     }
 

@@ -152,6 +152,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             return true;
         }
         var term = props.sort.selectedBusinessEvent.toLowerCase();
+
         var field = DataAccess.getData(data, "DocumentType", "StringValue").toLowerCase();;
         if (!field.includes(term) &&term!="") {
             return false;
@@ -159,6 +160,60 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
             return true; 
         
+    }).filter((data) => {
+
+        if(typeof props.sort == "undefined") {
+            return true;
+        }
+
+        var term = props.sort.selectedTransationType.toLowerCase();
+      
+
+        var field = DataAccess.getData(data, "Type", "StringValue").toLowerCase();
+
+      
+
+        switch (term) {
+
+            case 'izdaja blaga':
+
+                if (field == "p") {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            case 'prevzem blaga':
+                if (field == "i") {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'medskladišnica':
+                if (field == "e") {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'delovni nalog':
+                if (field == "w" || field == "wi") {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'inventura':
+                if (field == "n" || field == "ni" || field == "np") {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+
+        if (!field.includes(term) &&term!="") {
+            return false;
+        }
+
+            return true;    
     }).filter((data) => {
 
         if(typeof props.sort == "undefined") {

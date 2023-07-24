@@ -67,6 +67,19 @@ export default function TransactionFilters(props) {
       }
      ] );
 
+     function uniqueAndNotEmpty(value, arrayify) {
+
+      if(arrayify.length === 1) {      
+         return true;
+      }
+
+        for (var i = 0; i < arrayify.length; i++) {
+          if(arrayify[i].value === value || arrayify[i].value ==="") {
+            return false
+          }
+        }
+        return true;
+     }
 
     const [user, setUser] = useState([]);
 
@@ -81,15 +94,17 @@ export default function TransactionFilters(props) {
             var transactions = []
             transactions.push({value: '', label: ''})
             for(var i=0;i<response.Items.length;i++) {
-                var id = DataAccess.getData(response.Items[i], "HeadID", "IntValue");
-                var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
-                transactions.push({label: field,  value: field});
-                ids.push({value: id, label:id});
+
+
+                  var id = DataAccess.getData(response.Items[i], "HeadID", "IntValue");
+                  var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
+                  transactions.push({label: field,  value: field});
+                  ids.push({value: id, label:id});
+                  
             }
             setIds(ids);
-            setTransactionOrder(transactions)
+            setTransactionOrder(transactions.filter((v,i,a)=>a.findIndex(v2=>['value','label'].every(k=>v2[k] ===v[k]))===i))
           });
-
             if(selectedEvent!="") {
                $("#businessEvent-option").text(selectedEvent);
             }
