@@ -111,10 +111,10 @@ export default function TransactionFilters(props) {
             setTransactionType([{value: '', label: ''},{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
             var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
-            types.push({value: '', label: ''})
+            types.push({value: '', label: '', code: ''})
 
             for(var i = 0; i < response.type.length;i++) {
-                types.push({value: response.type[i] + " * " + response.names[i], label: response.type[i] + " * " + response.names[i]});
+                types.push({value: response.type[i] + " * " + response.names[i], label: response.type[i] + " * " + response.names[i], code: response.type[i]});
             }
             setBusinessEvent(types);
          }); 
@@ -253,7 +253,7 @@ export default function TransactionFilters(props) {
                     id='businessEvent'
                     onKeyDown={(e) => onKeyDownBusinessEvent(e)}
                     options={businessEvent}
-                    onChange={(action, item) => onChangeBusinessEvent(item)}
+                    onChange={(e) => onChangeBusinessEvent(e)}
                     />
                     </div>
 
@@ -275,7 +275,8 @@ export default function TransactionFilters(props) {
                         onChange={(e) => onChangeClient(e)} 
                               
                     />
-  <Select
+                    
+                    <Select
                                  id = "idTransaction"
                                  type="text"
                                  options={ids}
