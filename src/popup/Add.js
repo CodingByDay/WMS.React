@@ -166,6 +166,7 @@ function transferData() {
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
+
             var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
             var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
             var no = DataAccess.getData(response, "No", "IntValue");
@@ -175,6 +176,7 @@ function transferData() {
             document.getElementById("openQty").value = qty;
             document.getElementById("deadlineDate").value = deadline;
             // Test the result
+
         });
            
     }
@@ -183,9 +185,6 @@ function transferData() {
 
         // Continue here.
         var type =  findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
-
-    
-
         TransactionService.getOrdersForIdent(identInternal, type).then(response => { 
 
 
@@ -300,7 +299,7 @@ function transferData() {
                             No: DataAccess.getData(current, "No", "IntValue"),
                             Ident: DataAccess.getData(current, "Ident", "StringValue"),
                             SerialNo: DataAccess.getData(current, "SerialNo", "StringValue"),
-                            Qty: 33,
+                            Qty: document.getElementById("realQty").value,
                             BadQty: DataAccess.getData(current, "BadQty", "DoubleValue"),
                             Clerk: DataAccess.getData(current, "Clerk", "IntValue"),
                             DateInserted: DataAccess.getData(current, "DateInserted", "DateTimeValue"),
@@ -317,9 +316,9 @@ function transferData() {
                         }
 
                         PopupService.commitPosition(toUpdate).then(response => { 
-
+                            props.refresh()
                         });   
-                          
+
                     }
                 }
             }); 
@@ -461,6 +460,7 @@ function transferData() {
                         isDisabled = {editDisable}         
                         onChange={(e) => onChangeIdent(e)} 
                     />
+
                     </div>
                     <div className="col-sm-6" id='positionRow'>
                         <label htmlFor="inputAddressLine2">Pozicija</label>
@@ -486,7 +486,7 @@ function transferData() {
                     </div>
                     <div className="col-sm-6" id='openQtyRow'>
                         <label htmlFor="inputState">Odprta količina</label>
-                        <input type="text" className="form-control"    disabled = {editDisable}   id="openQty" placeholder="Količina" />
+                        <input type="text" className="form-control" disabled = {editDisable} id="openQty" placeholder="Količina" />
                     </div>
 
                 </div>
@@ -501,7 +501,7 @@ function transferData() {
 
                     <div className="col-sm-6" id='dateRow'>
                         <label htmlFor="inputWebsite">Datum dobave</label>
-                        <input type="text" className="form-control"    disabled = {editDisable}   id="deadlineDate" placeholder="Datum dobave" />
+                        <input type="text" className="form-control" disabled = {editDisable} id="deadlineDate" placeholder="Datum dobave" />
                     </div>
 
                 </div>

@@ -150,8 +150,7 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
-              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML;
-           
+              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML;      
               deleteItemDocument(idToDelete);       
           } else {
                deleteHeadDocument();
@@ -162,14 +161,14 @@ export default function Transactions() {
 
           if (typeof selectedRowTransactionsPositions.childNodes != "undefined")   {
 
-          var toggled = ! show;
-          setShow(toggled);
-          // console.log(selectedRowTransactionsPositions);
-          var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
-          var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
-          var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
-          setIsEdit(false);
-          childRef.current.transferData();
+              var toggled = ! show;
+              setShow(toggled);
+              // console.log(selectedRowTransactionsPositions);
+              var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
+              var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
+              var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
+              setIsEdit(false);
+              childRef.current.transferData();
 
           } else {
             return;
@@ -262,6 +261,19 @@ function deleteItemDocument(id) {
       }); 
     }
 
+
+    const refresh = () => {
+    
+      TransactionService.getPositionsByHeadId(selector).then(response => { 
+        setPositions(response);  
+        window.showAlert("Informacija", "Uspešno spremenjeno", "success")
+        $("#SerialQtyEntry").toggle();
+        setShow(false);
+    });
+    
+    }
+
+
     const changeAddVisibility = (old, data, close) => {
 
       setShow(close)
@@ -329,7 +341,7 @@ function deleteItemDocument(id) {
 
         </div>
 
-        <Add ref={childRef} addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
+        <Add ref={childRef} refresh = {refresh} addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
