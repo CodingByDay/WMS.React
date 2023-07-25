@@ -281,14 +281,30 @@ function transferData() {
 
     function CommitPosition(e) {
 
-        var openQty = document.getElementById("openQty").value;
-        var realQty = document.getElementById("realQty").value;
+   
 
-        if(realQty === "0" || !isFloat(realQty)) {
+        if (editMode) {
+            // Edit position
 
-            window.showAlert("Informacija", "Vnesite pravilno količino", "error");
-            return;
-        } 
+            var itemId = props.selectedPosition.childNodes[2].innerHTML;
+
+            // Service callback
+            TransactionService.getPositionsByHeadId(itemId).then(response => { 
+                console.log(response);
+            }); 
+
+            // Edit position
+        } else {
+
+
+            var openQty = document.getElementById("openQty").value;
+            var realQty = document.getElementById("realQty").value;
+
+            if(realQty === "0" || !isFloat(realQty)) {
+
+                window.showAlert("Informacija", "Vnesite pravilno količino", "error");
+                return;
+            } 
 
 
         var positionNumber = document.getElementById("positionNumber").value;
@@ -338,7 +354,7 @@ function transferData() {
 
         });
         // Place to check for the serial number
-        
+      }
     }
     function resetEditor() {
         setEditDisable(false);
