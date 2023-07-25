@@ -160,6 +160,7 @@ export default function Transactions() {
                finishHeadDocument();
         } else if (action === "edit") {
 
+          if (typeof selectedRowTransactionsPositions.childNodes != "undefined")   {
 
           var toggled = ! show;
           setShow(toggled);
@@ -170,7 +171,9 @@ export default function Transactions() {
           setIsEdit(false);
           childRef.current.transferData();
 
-      
+          } else {
+            return;
+          }
           
         }
       } 

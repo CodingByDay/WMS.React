@@ -22,6 +22,8 @@ const Add = forwardRef((props, ref) =>  {
     const [no, setNo] = useState({});
     const [keyOut, setKeyOut] = useState({});
     const [selectedIdent, setSelectedIdent] = useState({})
+    const [editDisable, setEditDisable] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     useImperativeHandle(ref, () => ({
         transferData() {
@@ -71,17 +73,36 @@ const Add = forwardRef((props, ref) =>  {
 
 
 function transferData() {
+
     try {
-        console.log(props.selectedPosition)
-        var order = props.selectedPosition.childNodes[1].innerHTML
-        var identFill = props.selectedPosition.childNodes[4].innerHTML
-        var qty = props.selectedPosition.childNodes[6].innerHTML
-        resetEditor()    
+
+        var type = props.selected.childNodes[1].innerHTML;
+        var order = props.selectedPosition.childNodes[1].innerHTML;
+        var identFill = props.selectedPosition.childNodes[4].innerHTML;
+        var qty = props.selectedPosition.childNodes[6].innerHTML;
+
+        resetEditor()  
+
         setSelectedIdent( {value: `${identFill}`, label: `${identFill}` })
+
+
+        if (type!="2000" || type!="2200") {
+            setOrderCurrent( {value: `${order}`, label: `${order}`});
+            orderEdit(order, identFill);
+            disableFields();
+            document.getElementById("realQty").value = qty;
+            document.getElementById("addPositionButton").innerHTML = "Posodobi";
+            setEditMode(true);
+        }
+
     } catch (e) { 
-            return;
+        return;
     }
 }
+    function disableFields() {
+        setEditDisable(true)
+    }
+
 
     function findValueByClassWithinArray(array, classNameValue) {
 
@@ -113,6 +134,27 @@ function transferData() {
         setSelectedIdent({label: e.value, value: e.value});
         updateOrders(e.value);
 
+    }
+
+
+
+    function orderEdit(order, ident) {
+        document.getElementById("positionNumber").value = "";
+        document.getElementById("openQty").value = "";
+        document.getElementById("deadlineDate").value = "";
+        var ident = document.getElementById("identListControl").innerText;
+        // Correct data gets to the service
+        PopupService.getOrderDataFromIdentAndOrderNumber(order, ident).then(response => { 
+            var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
+            var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
+            var no = DataAccess.getData(response, "No", "IntValue");
+            setNo(no);
+            setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
+            document.getElementById("positionNumber").value = no;
+            document.getElementById("openQty").value = qty;
+            document.getElementById("deadlineDate").value = deadline;
+            // Test the result
+        });
     }
 
     function onChangeOrder(e) {
@@ -299,7 +341,8 @@ function transferData() {
         
     }
     function resetEditor() {
-
+        setEditDisable(false);
+        setEditMode(false);
         props.resetEdit();
 
     }
@@ -367,13 +410,14 @@ function transferData() {
                         placeholder={"Ident"}
                         id='identListControl'
                         options={identList}          
-                        value={selectedIdent}            
+                        value={selectedIdent}   
+                        isDisabled = {editDisable}         
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
                     <div className="col-sm-6" id='positionRow'>
                         <label htmlFor="inputAddressLine2">Pozicija</label>
-                        <input type="text" className="form-control" id="positionNumber" placeholder="Pozicija" />
+                        <input type="text" className="form-control" id="positionNumber" disabled = {editDisable}   placeholder="Pozicija" />
                     </div>
                 </div>
 
@@ -386,6 +430,7 @@ function transferData() {
                         placeholder="Naročilo"
                         id='orderInformationAdd'
                         options={orderData}
+                        isDisabled = {editDisable}  
                         value={orderCurrent}     
                         onChange={onChangeOrder} 
                      />
@@ -394,7 +439,7 @@ function transferData() {
                     </div>
                     <div className="col-sm-6" id='openQtyRow'>
                         <label htmlFor="inputState">Odprta količina</label>
-                        <input type="text" className="form-control" id="openQty" placeholder="Količina" />
+                        <input type="text" className="form-control"    disabled = {editDisable}   id="openQty" placeholder="Količina" />
                     </div>
 
                 </div>
@@ -409,7 +454,7 @@ function transferData() {
 
                     <div className="col-sm-6" id='dateRow'>
                         <label htmlFor="inputWebsite">Datum dobave</label>
-                        <input type="text" className="form-control" id="deadlineDate" placeholder="Datum dobave" />
+                        <input type="text" className="form-control"    disabled = {editDisable}   id="deadlineDate" placeholder="Datum dobave" />
                     </div>
 
                 </div>
