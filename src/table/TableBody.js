@@ -741,9 +741,10 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         }
     
         const getColumnData = event => {
-            
+
             var parent = event.target.parentElement;
-            returnRow(parent);
+           // returnRow(parent);
+ 
         }
    
 
