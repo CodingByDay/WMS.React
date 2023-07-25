@@ -11,6 +11,23 @@ import Listing from "./dashboard/Listing"
 import Stock from "./dashboard/Stock"
 import Transactions from "./dashboard/Transactions"
 import Settings from "./dashboard/Settings"
+import NoInternetConnection from "./dashboard/NoInternetConnection"
+import axios from 'axios';
+
+
+
+axios.interceptors.response.use(function (response) {
+  // Any status code that lie within the range of 2xx cause this function to trigger
+  // Do something with response data
+
+  return response;
+}, function (error) {
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  // Do something with response error
+
+  window.location.href = "/internet";
+});
+
 
 function App() {
   return (
@@ -22,6 +39,7 @@ function App() {
         <Route path="/stock" element={<Stock />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/internet" element={<NoInternetConnection />} />
         <Route path="/logout" element={<Auth />} />
       </Routes>
     </BrowserRouter>

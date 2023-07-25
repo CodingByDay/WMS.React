@@ -18,6 +18,18 @@ span#openRangeTransaction {
   margin-top: 0.1em;
 }
 
+
+
+
+div#internet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30em;
+}
+
+
 .settings-divider-context {
   display: flex;
   flex-direction: column;

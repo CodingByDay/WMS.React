@@ -38,6 +38,8 @@ export default function Transactions() {
 
     useEffect(() => {
 
+
+      
             var loader = document.getElementById("loader");
             loader.style.display = "block";
             $(".main-container").css ("display", "none");
