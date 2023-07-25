@@ -160,6 +160,10 @@ export default function HeaderOrderListing(props) {
               <p>Uredi</p>
               <MdEdit />
          </span>   
+         <span className='actions smallerr' id="deleteOrder">
+              <p>Pobriši</p>
+              <MdDeleteOutline />
+         </span>   
          
         </div>
 

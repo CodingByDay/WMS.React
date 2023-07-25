@@ -19,8 +19,8 @@ export default function TransactionHeaderButtons(props) {
 
     let navigate = useNavigate();
     return ( 
-        <div>
 
+        <div>
         <div className='buttonsHeaderOuter'>
         <div className='buttonsHeader'>
 

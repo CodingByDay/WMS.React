@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 import ListingService from '../services/ListingService';
 import Loader from '../loader/Loader';
 import $ from 'jquery'; 
-
+import ListingPositionsButtons from './ListingPositionsButtons';
 
 export default function Listing() { 
     checkUID ()
@@ -75,16 +75,28 @@ export default function Listing() {
     return ( 
 
         <div>
-       <Loader />
-        <div className='main-container'>
-        <Header/>  
-        <div className='listing-bg' >
-        <HeaderOrderListing getSortingObject = {getSortingObject} />
-        <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
-        <OrderPositions data = {positions} childToParent = {childToParent} />     
-        <Footer />
+
+
+        <Loader />
+
+            <div className='main-container'>
+
+            <Header/>
+
+            <div className='listing-bg' >
+
+            <HeaderOrderListing getSortingObject = {getSortingObject} />
+            <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
+            <ListingPositionsButtons />
+            <OrderPositions data = {positions} childToParent = {childToParent} />     
+            <Footer />
+
+
         </div>
         
+
+
+
         </div>
 
         </div>
