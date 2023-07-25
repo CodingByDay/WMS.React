@@ -281,16 +281,47 @@ function transferData() {
 
     function CommitPosition(e) {
 
-   
-
         if (editMode) {
             // Edit position
-
             var itemId = props.selectedPosition.childNodes[2].innerHTML;
-
             // Service callback
-            TransactionService.getPositionsByHeadId(itemId).then(response => { 
-                console.log(response);
+            TransactionService.getPositionsByHeadId(document.getElementById("transactionIdAdd").value).then(response => { 
+                for (var i = 0; i < response.Items.length; i++) {
+                    var current = response.Items[i]
+                    var ItemID = DataAccess.getData(current, "ItemID", "IntValue");
+                    if (ItemID == itemId) { 
+
+                        var toUpdate = {
+
+                            HeadID: DataAccess.getData(current, "HeadID", "IntValue"),
+                            ItemID: DataAccess.getData(current, "ItemID", "IntValue"),
+                            LinkKey: DataAccess.getData(current, "LinkKey", "StringValue"),
+                            LinkNo: DataAccess.getData(current, "LinkNo", "IntValue"),
+                            No: DataAccess.getData(current, "No", "IntValue"),
+                            Ident: DataAccess.getData(current, "Ident", "StringValue"),
+                            SerialNo: DataAccess.getData(current, "SerialNo", "StringValue"),
+                            Qty: 33,
+                            BadQty: DataAccess.getData(current, "BadQty", "DoubleValue"),
+                            Clerk: DataAccess.getData(current, "Clerk", "IntValue"),
+                            DateInserted: DataAccess.getData(current, "DateInserted", "DateTimeValue"),
+                            SSCC: DataAccess.getData(current, "SSCC", "StringValue"),
+                            Location: DataAccess.getData(current, "Location", "StringValue"),
+                            Factor: DataAccess.getData(current, "Factor", "DoubleValue"),
+                            Packing: DataAccess.getData(current, "Packing", "DoubleValue"),
+                            MorePrints: DataAccess.getData(current, "MorePrints", "IntValue"),
+                            ClerkName: DataAccess.getData(current, "ClerkName", "StringValue"),
+                            LocationName: DataAccess.getData(current, "LocationName", "StringValue"),
+                            IssueLocationName: DataAccess.getData(current, "IssueLocationName", "StringValue"),
+                            IdentName: DataAccess.getData(current, "IdentName", "StringValue"),
+
+                        }
+
+                        PopupService.commitPosition(toUpdate).then(response => { 
+
+                        });   
+                          
+                    }
+                }
             }); 
 
             // Edit position
