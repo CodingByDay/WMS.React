@@ -402,7 +402,24 @@ if(window.location.href.includes("transactions")&&table=="heads") {
            } catch (e) {
                 // Test 
            }
+
+
+       
+           var type = DataAccess.getData(data, "Type", "StringValue");
+           if(type=="E" && column.accessor == "Receiver") {
+            return <td key={uuid()} className={accessor}>Interno</td>;
+
+           } else if(type=="E" && column.accessor == "WharehouseName") {
+            var fromWhere = DataAccess.getData(data, "Issuer", "StringValue");
+            var toWhere = DataAccess.getData(data, "Receiver", "StringValue");
+            return <td key={uuid()} className={accessor}>{fromWhere + "-" + toWhere}</td>;
+
+        
+
+
+           }
            return <td key={uuid()} className={accessor}>{tData}</td>;
+
         })}
            </tr>
           );
