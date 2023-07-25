@@ -76,10 +76,17 @@ export default function HeaderOrderListing(props) {
     setClient(e.target.value);
 
   }
+
+
   var reload = false;
   function onChangeType(e) {
     const mutated = {value: e.value, label:e.label}
     setDocumentType (mutated);   
+  }
+
+  function openAdd() {
+    
+
   }
 
     return ( 
@@ -151,7 +158,7 @@ export default function HeaderOrderListing(props) {
               <MdDateRange />
          </span>   
 
-         <span className='actions smallerr' id="addOrder">
+         <span className='actions smallerr' id="addOrder" onClick={openAdd}>
               <p>Dodaj</p>
               <MdAdd />
          </span>   
