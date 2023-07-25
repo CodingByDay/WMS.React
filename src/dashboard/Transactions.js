@@ -16,7 +16,7 @@ import $ from 'jquery';
 import LocationComponent from '../popup/LocationComponent';
 import SerialComponent from '../popup/SerialComponent';
 import SerialQtyEntry from '../popup/SerialQtyEntry';
-
+import {forwardRef, useImperativeHandle, useRef} from 'react';
 
 
 export default function Transactions() { 
@@ -34,6 +34,7 @@ export default function Transactions() {
     const [selector, setSelector] = useState({});
     const [documentType, setDocumentType] = useState();
     const [isEdit, setIsEdit] = useState(false);
+    const childRef = useRef(null);
 
     useEffect(() => {
 
@@ -158,15 +159,17 @@ export default function Transactions() {
         } else if (action === "finish") {
                finishHeadDocument();
         } else if (action === "edit") {
+
+
           var toggled = ! show;
           setShow(toggled);
-          //console.log(selectedRowTransactionsPositions);
-
+          // console.log(selectedRowTransactionsPositions);
           var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
           var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
           var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
           setIsEdit(false);
-    
+          childRef.current.transferData();
+
       
           
         }
@@ -323,7 +326,7 @@ function deleteItemDocument(id) {
 
         </div>
 
-        <Add addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
+        <Add ref={childRef} addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
         <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 

@@ -2,7 +2,7 @@
 import $ from 'jquery'; 
 import { useNavigate  } from 'react-router-dom';
 import Table from '../table/Table';
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState, useImperativeHandle } from "react";
 import Select from 'react-select'
 import _ from 'lodash';
 import TransactionService from '../services/TransactionService';
@@ -10,8 +10,7 @@ import { Dropdown, Stack } from '@fluentui/react'
 import DataAccess from '../utility/DataAccess';
 import PopupService from '../services/PopupService';
 
-
-export default function Add(props) { 
+const Add = forwardRef((props, ref) =>  { 
 
     const [ident, setIdent] = useState({});
     const [identList, setIdentsList] = useState([]);
@@ -24,7 +23,12 @@ export default function Add(props) {
     const [keyOut, setKeyOut] = useState({});
     const [selectedIdent, setSelectedIdent] = useState({})
 
-
+    useImperativeHandle(ref, () => ({
+        transferData() {
+            // Calls the function from the parent.
+            transferData()
+        },
+      }));
     useEffect(() => {
 
       
@@ -60,22 +64,24 @@ export default function Add(props) {
         }
 
       
-            try {
-            var order = props.selectedPosition.childNodes[1].innerHTML
-            var identFill = props.selectedPosition.childNodes[4].innerHTML
-            var qty = props.selectedPosition.childNodes[6].innerHTML
-            resetEditor()    
-            setSelectedIdent( {value: `${identFill}`, label: `${identFill}` })
-            } catch (e) { 
-
-
-            }
+           
         
 
 }, [ident]);
 
 
-
+function transferData() {
+    try {
+        console.log(props.selectedPosition)
+        var order = props.selectedPosition.childNodes[1].innerHTML
+        var identFill = props.selectedPosition.childNodes[4].innerHTML
+        var qty = props.selectedPosition.childNodes[6].innerHTML
+        resetEditor()    
+        setSelectedIdent( {value: `${identFill}`, label: `${identFill}` })
+    } catch (e) { 
+            return;
+    }
+}
 
     function findValueByClassWithinArray(array, classNameValue) {
 
@@ -427,4 +433,6 @@ export default function Add(props) {
 
     ); 
 
-} 
+} );
+
+export default Add;
