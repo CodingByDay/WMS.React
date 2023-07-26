@@ -15,6 +15,7 @@ const [tableData, setTableData] = useState(tableData1);
   { label: "Skladišče", accessor: "Warehouse", type: "StringValue"},
   { label: "Prejemnik", accessor: "Consignee", type: "StringValue"},
   { label: "Rok dobave", accessor: "DeliveryDeadline", type: "DateTimeValue"},
+  { label: "Status", accessor: "Status", type: "StringValue"},
   { label: "Tip dokumenta", accessor: "DocumentType", type: "StringValue"},
   { label: "Ključ", accessor: "Key", type: "StringValue"},
   { label: "Sprejemnik", accessor: "Receiver", type: "StringValue"},
@@ -28,6 +29,7 @@ const columnsPositions = [
 
     { label: "Ident", accessor: "Ident", type: "StringValue"},
     { label: "Naziv", accessor: "Name", type: "StringValue"},
+    { label: "Številka", accessor: "No", type: "IntValue"},
     { label: "Odprto", accessor: "OpenQty", type: "DoubleValue"},
     { label: "Skupna količina", accessor: "FullQty", type: "DoubleValue"},
     { label: "Izbor", accessor: "Chosen", type: "StringValue"}

@@ -345,7 +345,7 @@ function deleteItemDocument(id) {
 
         <Add ref={childRef} refresh = {refresh} addVisibility = {changeAddVisibility} resetEdit = {resetEditable} edit = {isEdit} document={documentType} show = {show} selected = {selectedRowTransactionsHeads} selectedPosition = {selectedRowTransactionsPositions} filters = {filters} heads = {transactions} positions = {positions}/>
         {component}
-        <AddHeadDocument render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
+        <AddHeadDocument type={"transactions"} render = {renderComponent} show = {head} changeVisibility = {changeVisibility}  />
 
         <Footer />
         </div>

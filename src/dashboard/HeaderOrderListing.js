@@ -19,18 +19,13 @@ export default function HeaderOrderListing(props) {
     const [types, setTypes] = useState([]);
     const [document, setDocument] = useState("")
     const [head, setHead] = useState(false);
-  // Place for the selected states 
-    let now = new Date();
-    const backdate = new Date(now.setDate(now.getDate() - 15));
-    const future = new Date(now.setDate(now.getDate() + 15));
-
     const [state, setState] = useState([
       {
-        startDate: backdate,
-        endDate: future,
+        startDate: new Date(),
+        endDate: new Date(),
         key: 'selection'
       }
-    ] );
+     ] ); 
     const [open, setOpen] = useState(false);
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")

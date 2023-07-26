@@ -9,6 +9,7 @@ import ListingService from '../services/ListingService';
 import Loader from '../loader/Loader';
 import $ from 'jquery'; 
 import ListingPositionsButtons from './ListingPositionsButtons';
+import DataAccess from "../utility/DataAccess";
 
 export default function Listing() { 
     checkUID ()
@@ -45,6 +46,7 @@ export default function Listing() {
               loader.style.display = "block";
               $(".main-container").css ("display", "none");
               ListingService.getAllListings().then(response => { 
+              // console.log(response);
               setOrders(response);
               loader.style.display = "none";
               $(".main-container").css ("display", "block");
@@ -53,6 +55,13 @@ export default function Listing() {
 
   async function getPositions(order) {
     ListingService.getAllPositions(order).then(response => { 
+      response.Items = response.Items.sort(function(a, b) {
+          var aValue = DataAccess.getData(a, "No", "IntValue")
+          var bValue = DataAccess.getData(b, "No", "IntValue")
+
+
+          return aValue - bValue;
+      });
       setPositions(response);  
     });
   }
@@ -62,8 +71,18 @@ export default function Listing() {
 
   const  childToParent = (data) => {
 
-      getPositions(data.childNodes[4].innerHTML)
-      orders.selector = data.childNodes[4].innerHTML;
+
+      
+
+      if(data.childElementCount > 6)  {
+          getPositions(data.childNodes[5].innerHTML)
+          orders.selector = data.childNodes[5].innerHTML;
+      } else {
+          orders.selector = data.childNodes[2].innerHTML;
+      }
+
+
+      setOrders(orders);
   }
 
 

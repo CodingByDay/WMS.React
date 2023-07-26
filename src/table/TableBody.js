@@ -722,6 +722,33 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         var columns = props.columns;
         var returnRow = props.returnRow;
     
+
+
+
+        if(typeof tableData.Items != "undefined") {
+            // Part that sets the selection
+            for (var i = 0; i < tableData.Items.length; i++) { 
+                var match = DataAccess.getData(tableData.Items[i], "No", "IntValue").toString();
+
+                //alert(match);
+                //alert(tableData.selector)
+
+                
+                console.log(tableData.selector)
+
+                var target = tableData.selector;
+                if ( tableData.selector == match) {
+                    tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+                } else {
+                    tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
+                }
+            }
+    
+        }
+
+
+
+
     
         function findIndex(array, accesor) {
             for(var i=0;i<array.Properties.Items.length;i++) {
@@ -742,8 +769,10 @@ if(window.location.href.includes("transactions")&&table=="heads") {
     
         const getColumnData = event => {
 
+   
+
             var parent = event.target.parentElement;
-            // returnRow(parent);
+            returnRow(parent);
  
         }
    
