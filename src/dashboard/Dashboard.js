@@ -64,7 +64,7 @@ export function Dashboard() {
        <div className = "menu"> 
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
-              Pregled naročila
+              Naročila
               <img alt={""} src='listing.png' width={100}/>
             </button>
 
@@ -74,7 +74,7 @@ export function Dashboard() {
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
-              Zaloga
+              Zaloge
               <img alt={""} src='stock.png' width={100} />
             </button>
 

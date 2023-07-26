@@ -22,28 +22,28 @@ export default function AddHeadDocument(props) {
 
     useEffect(() => {
         
-    setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
+    setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'}]);
 
     if(type !== undefined) {
         switch (type.value) {  
             case "Izdaja blaga":          
-                component = <IssuedGoods close={close} render={props.render} />;
+                component = <IssuedGoods close={close} type = {props.type} render={props.render} />;
                 setConditional(component);
                 break;
             case "Prevzem blaga":             
-                component = <TakeOver close={close} render={props.render} />;
+                component = <TakeOver close={close} type = {props.type} render={props.render} />;
                 setConditional(component);
                 break;
             case "Medskladišnica":       
-                component = <Interwarehouse close={close} render={props.render}/>;
+                component = <Interwarehouse close={close} type = {props.type} render={props.render}/>;
                 setConditional(component);
                 break;
             case "Inventura":
-                component = <Inventory close={close} render={props.render}/>;
+                component = <Inventory close={close} type = {props.type} render={props.render}/>;
                 setConditional(component);
                 break;
             case "Delovni nalog":
-                component = <WorkOrder close={close} render={props.render} />;
+                component = <WorkOrder close={close} type = {props.type} render={props.render} />;
                 setConditional(component);
         }
     }

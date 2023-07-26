@@ -8,19 +8,29 @@ import { useEffect, useState } from "react";
 import { MdOutlineSearch, MdDateRange,MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 import { flushSync } from 'react-dom';
+import AddHeadDocument from '../popup/AddHeadDocument';
+import TransactionService from '../services/TransactionService';
+import ListingService from '../services/ListingService';
+
 
 export default function HeaderOrderListing(props) { 
 
     // States
     const [types, setTypes] = useState([]);
     const [document, setDocument] = useState("")
+    const [head, setHead] = useState(false);
+  // Place for the selected states 
+    let now = new Date();
+    const backdate = new Date(now.setDate(now.getDate() - 15));
+    const future = new Date(now.setDate(now.getDate() + 15));
+
     const [state, setState] = useState([
       {
-        startDate: new Date(),
-        endDate: new Date(),
+        startDate: backdate,
+        endDate: future,
         key: 'selection'
       }
-     ] ); 
+    ] );
     const [open, setOpen] = useState(false);
     const [consignee, setConsignee] = useState("")
     const [client, setClient] = useState("")
@@ -44,6 +54,13 @@ export default function HeaderOrderListing(props) {
 
   let navigate = useNavigate();
 
+ 
+
+
+
+ const changeVisibility = (data) => {
+      setHead(data)
+  }
   function searchTable() { 
     var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
     props.getSortingObject(sorting)
@@ -85,7 +102,7 @@ export default function HeaderOrderListing(props) {
   }
 
   function openAdd() {
-    
+    setHead(!head);
 
   }
 
@@ -171,7 +188,9 @@ export default function HeaderOrderListing(props) {
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
-         
+
+         <AddHeadDocument type={"listing"} show = {head} changeVisibility = {changeVisibility}  />
+
         </div>
 
 

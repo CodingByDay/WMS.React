@@ -56,16 +56,18 @@ export default function TransactionFilters(props) {
     const [selectedUser, setSelectedUser] = useState("");
     const [ids, setIds]= useState([]);  
     // Place for the selected states 
+// Place for the selected states 
+let now = new Date();
+const backdate = new Date(now.setDate(now.getDate() - 15));
+const future = new Date(now.setDate(now.getDate() + 15));
 
-
-
-    const [state, setState] = useState([
-      {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection'
-      }
-     ] );
+const [state, setState] = useState([
+  {
+    startDate: backdate,
+    endDate: future,
+    key: 'selection'
+  }
+ ] );
 
      function uniqueAndNotEmpty(value, arrayify) {
 
