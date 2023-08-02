@@ -19,6 +19,31 @@ export default function ListingPositionsButtons(props) {
 
 
 
+    function deleteOrderHead() {
+       props.communicate("position", "delete");
+    }
+
+   
+    function isFloat(n) {
+     return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
+ }
+    function editQty() {
+     var qty = window.prompt("Spremenite količina. Odprta količina: 100")
+     if (isFloat(qty)) 
+     {
+
+          alert("Number");
+
+
+     } else {
+          window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
+      //    editQty();
+          
+     }
+
+    }
+
+
     return ( 
         <div className="filters">
 
@@ -27,11 +52,11 @@ export default function ListingPositionsButtons(props) {
               <MdAdd />
          </span>   
 
-         <span className='actions smallerr' id="editOrder">
+         <span className='actions smallerr' id="editOrder" onClick={editQty}>
               <p>Uredi</p>
               <MdEdit />
          </span>   
-         <span className='actions smallerr' id="deleteOrder">
+         <span className='actions smallerr' id="deleteOrder" onClick={deleteOrderHead}>
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   

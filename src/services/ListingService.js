@@ -22,6 +22,18 @@ const ListingService  = {
         
       },
 
+
+
+      async deleteHeadDocumentOrder(id) {
+        //  Brisanje dokumenta.
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=deleteOrder&headID=${id}`)
+        return response;
+      },
+
+
+
+
+
     async getAllPositions(order) {
 
         axios.interceptors.response.use(function (response) {

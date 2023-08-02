@@ -40,6 +40,9 @@ export default function Listing() {
     // positions
     const [positions, setPositions] = useState([]);
 
+    const [selectedHeadOrder, setSelectedHeadOrder] = useState();
+    const [selectedPosition, setSelectedPosition] = useState();
+
     useEffect(() => {
       var loader = document.getElementById("loader");
 
@@ -76,13 +79,11 @@ export default function Listing() {
 
 
       if(data.childElementCount > 6)  {
-
           getPositions(data.childNodes[5].innerHTML)
           orders.selector = data.childNodes[5].innerHTML;
           setOrders(orders);
-
+          setSelectedHeadOrder(data);
       } else {
-
           var toChange = positions;
           toChange.selector = data.childNodes[2].innerHTML;
           // positions.selector = data.childNodes[2].innerHTML;
@@ -92,8 +93,7 @@ export default function Listing() {
           positionsInner.selector = data.childNodes[2].innerHTML;
           setPositions(positionsInner);
           // console.log(positions);
-
-
+          setSelectedPosition(data);
       }
 
 
@@ -103,6 +103,48 @@ export default function Listing() {
   const getSortingObject = (sorting) => {
     setSort(sorting);
   }
+
+    const communicate = (type, event) => {       
+        if(type === 'head') {
+          if(event ==="delete") {
+             
+
+            window.swal({
+              title: 'Potrditev',
+              text: "Ali ste sigurni da želite pobrisati naročilo?",
+              icon: 'warning',
+              buttons: ["Ne", "Ja, pobriši"],
+      
+            }).then((result) => {
+      
+              if (result) {
+      
+                ListingService.deleteHeadDocumentOrder(selectedHeadOrder.childNodes[0].innerHTML).then(response => { 
+                    if(response.data.includes("OK!")) {
+
+                              ListingService.getAllListings().then(response => { 
+                                // console.log(response);
+                                setOrders(response);
+                                window.showAlert("Informacija", "Uspešno pobrisano", "success")
+
+                      }); 
+                  }
+               });    
+              }
+            })    
+          }
+        } else {
+          if(event ==="delete") {
+            window.swal({
+              title: 'Potrditev',
+              text: "Ali ste sigurni da želite pobrisati pozicijo?",
+              icon: 'warning',
+              buttons: ["Ne", "Ja, pobriši"],
+            }).then((result) => { 
+            })    
+          }
+        }
+    }
 
 
     return ( 
@@ -120,7 +162,7 @@ export default function Listing() {
 
             <HeaderOrderListing getSortingObject = {getSortingObject} />
             <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
-            <ListingPositionsButtons />
+            <ListingPositionsButtons communicate = {communicate} />
             <OrderPositions data = {positions} childToParent = {childToParent} />     
             <Footer />
 

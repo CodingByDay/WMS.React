@@ -104,6 +104,11 @@ export default function HeaderOrderListing(props) {
 
   }
 
+
+    function changeStatus () {
+        alert("Closing order...");
+    }
+
     return ( 
         <div className="filters">
 
@@ -178,7 +183,7 @@ export default function HeaderOrderListing(props) {
               <MdAdd />
          </span>   
 
-         <span className='actions smallerr' id="editOrder">
+         <span className='actions smallerr' id="editOrder" onClick={changeStatus}>
               <p>Uredi</p>
               <MdEdit />
          </span>   

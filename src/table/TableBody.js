@@ -581,6 +581,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
         });
     
+
         // TODO: Conditional sorting
     
     
@@ -625,16 +626,25 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             var column = getColumn(accessor);
             
             var tData = ""
+
             try {          
                 if (column.type!="DateTimeValue") {
                 tData = DataAccess.getData(data, column.accessor, column.type);  
                 } else {
                     tData = new Date(DataAccess.getData(data, column.accessor, column.type)).toLocaleDateString()
                 }
+
             } catch (e) {
             }
+
+            if (accessor === "Status") {
+                return <td key={uuid()} className={accessor}>Odprt</td>;
+            }
+
+
+
             return <td key={uuid()} className={accessor}>{tData}</td>;
-        })}
+         })}
             </tr>
            );
           })}
@@ -788,13 +798,14 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             { columns.map(({ accessor }) => {
             var column = getColumn(accessor);         
             var tData = ""
+            
             try {          
                 tData = DataAccess.getData(data, column.accessor, column.type);  
             } catch (e) {
 
             }
 
-            return <td key={uuid()} className={accessor}>{tData}</td>;
+                return <td key={uuid()} className={accessor}>{tData}</td>;
 
              })}
             </tr>
