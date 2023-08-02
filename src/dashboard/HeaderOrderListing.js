@@ -31,6 +31,8 @@ export default function HeaderOrderListing(props) {
     const [client, setClient] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState({value:"",label:""})
+
+    const [isOrder, setIsOrder] = useState(false)
     useEffect(() => {
         var data =  SortingService.getAllDocumentTypes().then(response => { 
         var types = [];
@@ -98,6 +100,7 @@ export default function HeaderOrderListing(props) {
 
   function openAdd() {
     setHead(!head);
+    setIsOrder(!isOrder);
 
   }
 
@@ -184,7 +187,7 @@ export default function HeaderOrderListing(props) {
               <MdDeleteOutline />
          </span>   
 
-         <AddHeadDocument type={"listing"} show = {head} changeVisibility = {changeVisibility}  />
+         <AddHeadDocument type={"listing"} order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
 
         </div>
 

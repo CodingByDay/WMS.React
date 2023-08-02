@@ -19,7 +19,7 @@ export default function AddHeadDocument(props) {
     const  [documentType, setDocumentType] = useState([]);
     const [type, setType] = useState();
     const [conditional, setConditional] = useState();
-
+    var isOrder = false;
     useEffect(() => {
         
     setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'}]);
@@ -27,23 +27,23 @@ export default function AddHeadDocument(props) {
     if(type !== undefined) {
         switch (type.value) {  
             case "Izdaja blaga":          
-                component = <IssuedGoods close={close} type = {props.type} render={props.render} />;
+                component = <IssuedGoods order = {isOrder} close={close} type = {props.type} render={props.render} />;
                 setConditional(component);
                 break;
             case "Prevzem blaga":             
-                component = <TakeOver close={close} type = {props.type} render={props.render} />;
+                component = <TakeOver close={close} order = {isOrder} type = {props.type} render={props.render} />;
                 setConditional(component);
                 break;
             case "Medskladišnica":       
-                component = <Interwarehouse close={close} type = {props.type} render={props.render}/>;
+                component = <Interwarehouse close={close} order = {isOrder} type = {props.type} render={props.render}/>;
                 setConditional(component);
                 break;
             case "Inventura":
-                component = <Inventory close={close} type = {props.type} render={props.render}/>;
+                component = <Inventory close={close} order = {isOrder}  type = {props.type} render={props.render}/>;
                 setConditional(component);
                 break;
             case "Delovni nalog":
-                component = <WorkOrder close={close} type = {props.type} render={props.render} />;
+                component = <WorkOrder close={close} order = {isOrder} type = {props.type} render={props.render} />;
                 setConditional(component);
         }
     }
@@ -65,6 +65,10 @@ export default function AddHeadDocument(props) {
     
     if(props.show) {
         $("#addHeader").css("display", "block");
+        if(props.order) {
+            isOrder = true;
+        }
+        
     } else {
         $("#addHeader").css("display", "none");
     }

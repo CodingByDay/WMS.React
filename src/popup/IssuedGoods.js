@@ -22,6 +22,7 @@ export default function IssuedGoods(props) {
     const [client, setClient] = useState("")
     const [date, setDate] = useState("")
 
+    
 
     useEffect(() => {
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
@@ -109,27 +110,53 @@ export default function IssuedGoods(props) {
 
 
     async function createHeadDocument ()  {
-
+    if(!props.order) {
       var documentData = document;
       var warehouseData = warehouse;
-    
       var objectForAPI = {};
-
       if (!byOrder) {
             objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
       } else {
             objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
       }
-
-
-
        if(window.confirm('Ali želite kreirati dokument')) {
             var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
             props.close();
             props.render();    
         }); 
        }
+    } else {
 
+    /*  "DocumentType": "0150",
+        "Key": "0",
+        "LinkKey": "034758475",
+        "Type":  "BW",
+        "Status": "BW",
+        "Clerk": 23    */
+
+
+
+
+
+        var documentData = document;
+        var warehouseData = warehouse;
+        var objectForAPI = {};
+
+
+
+        var order = ""
+
+
+        objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "0", Receiver: client}
+   
+         if(window.confirm('Ali želite kreirati dokument')) {
+              var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
+              props.close();
+              props.render();    
+          }); 
+         }
+     
+    } 
 
     }
 

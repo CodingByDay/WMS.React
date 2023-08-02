@@ -91,7 +91,7 @@ export default function LocationComponent (props) {
             var location = row.Location;
             var qty = row.Quantity;
             PopupService.commitPosition({LinkKey: parseInt(key), LinkNo: no, Ident: props.data.ident.value, HeadID: transactionHeadID, Location: location, Qty: qty}).then(response => { 
-                alert(response)
+              
           });
             
         }

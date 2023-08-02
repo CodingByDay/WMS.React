@@ -68,21 +68,35 @@ export default function Listing() {
 
   const [sort, setSort] = useState();
 
+  const [refresh, setRefresh] = useState("refresh");
 
   const  childToParent = (data) => {
 
 
-      
+
 
       if(data.childElementCount > 6)  {
+
           getPositions(data.childNodes[5].innerHTML)
           orders.selector = data.childNodes[5].innerHTML;
+          setOrders(orders);
+
       } else {
-          orders.selector = data.childNodes[2].innerHTML;
+
+          var toChange = positions;
+          toChange.selector = data.childNodes[2].innerHTML;
+          // positions.selector = data.childNodes[2].innerHTML;
+          setPositions([]);
+          var positionsInner = {};
+          Object.assign(positionsInner, positions);
+          positionsInner.selector = data.childNodes[2].innerHTML;
+          setPositions(positionsInner);
+          // console.log(positions);
+
+
       }
 
 
-      setOrders(orders);
   }
 
 
