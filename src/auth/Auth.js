@@ -71,6 +71,9 @@ export default function Auth(props) {
     function showMobileAlert() {
       window.showAlert("Informacija", "Mobilne naprave niso podprte!", "error")
     }
+
+
+    
   return (
     <div className="login"
     

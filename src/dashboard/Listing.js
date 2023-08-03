@@ -36,10 +36,8 @@ export default function Listing() {
   
     // orders
     const [orders, setOrders] = useState([]);
-
     // positions
     const [positions, setPositions] = useState([]);
-
     const [selectedHeadOrder, setSelectedHeadOrder] = useState();
     const [selectedPosition, setSelectedPosition] = useState();
 
@@ -78,7 +76,7 @@ export default function Listing() {
 
 
 
-      if(data.childElementCount > 6)  {
+      if(data.childElementCount > 7)  {
           getPositions(data.childNodes[5].innerHTML)
           orders.selector = data.childNodes[5].innerHTML;
           setOrders(orders);
@@ -90,7 +88,7 @@ export default function Listing() {
           setPositions([]);
           var positionsInner = {};
           Object.assign(positionsInner, positions);
-          positionsInner.selector = data.childNodes[2].innerHTML;
+          positionsInner.selector = data.childNodes[3].innerHTML;
           setPositions(positionsInner);
           // console.log(positions);
           setSelectedPosition(data);
@@ -104,7 +102,7 @@ export default function Listing() {
     setSort(sorting);
   }
 
-    const communicate = (type, event) => {       
+    const communicate = (type, event, data) => {       
         if(type === 'head') {
           if(event ==="delete") {
              
@@ -126,7 +124,6 @@ export default function Listing() {
                                 // console.log(response);
                                 setOrders(response);
                                 window.showAlert("Informacija", "Uspešno pobrisano", "success")
-
                       }); 
                   }
                });    
@@ -142,6 +139,10 @@ export default function Listing() {
               buttons: ["Ne", "Ja, pobriši"],
             }).then((result) => { 
             })    
+          } else if (event ==="edit") {
+            var editObject = {
+              HeadID: selectedPosition
+            }
           }
         }
     }
@@ -152,7 +153,7 @@ export default function Listing() {
         <div>
 
 
-        <Loader />
+            <Loader />
 
             <div className='main-container'>
 

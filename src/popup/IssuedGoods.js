@@ -5,6 +5,7 @@ import Select from 'react-select'
 import PopupService from '../services/PopupService';
 import { useEffect, useState } from "react";
 import { MdAdd} from "react-icons/md";
+import ListingService from "../services/ListingService";
 
 
 export default function IssuedGoods(props) { 
@@ -22,7 +23,11 @@ export default function IssuedGoods(props) {
     const [client, setClient] = useState("")
     const [date, setDate] = useState("")
 
+
+    var bufferElements = [];
     
+  
+
 
     useEffect(() => {
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
@@ -56,19 +61,7 @@ export default function IssuedGoods(props) {
 }, []);
 
 
-    $(function() {
-
-        $("#byOrder").change(function() {
-
-            if($(this).is(":checked")) {
-                $("#buyer").css("display", "none");
-            } else {
-                $("#buyer").css("display", "block");
-            }
-
-        });
-
-    });
+    
 
 
 
@@ -141,16 +134,33 @@ export default function IssuedGoods(props) {
         var documentData = document;
         var warehouseData = warehouse;
         var objectForAPI = {};
-
+        var note = $('#acNote').val();
 
 
         var order = ""
 
 
-        objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "0", Receiver: client}
+        objectForAPI = {
+            
+            
+            HeadID: 23456789,
+            DocumentType: documentData, 
+            Type: "P",
+            WhareHouse: warehouseData,  
+            LinkKey: "0", 
+            Receiver: client,
+            Note: note,
+            Key: "11111111111111"
+
+
+        }
    
+
+
+
+
          if(window.confirm('Ali želite kreirati dokument')) {
-              var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
+              var data =  ListingService.createOrder(objectForAPI).then(response => { 
               props.close();
               props.render();    
           }); 
@@ -165,46 +175,78 @@ export default function IssuedGoods(props) {
        setByOrder(!byOrder)
     }
 
+    function getCheckBox() {
+        if(!props.order) {
+            return <div><label htmlFor="byOrder">Po naročilo</label>
+            <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' /></div>
+        }
+    }
+
+
+    function getClient() {
+        if(props.order) {
+            return   <Select className='select-filters-add' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+        }
+    }
+
+    function getNote() {
+        if(props.order) {
+            return  <div class="form-group2">
+                    <label for="acNote">Opomba</label>
+                    <textarea class="form-control" id="acNote" rows="3"></textarea>
+            </div>
+        }
+    }
+
+
+
+
+
+
+
+
+
     return ( 
 
-
-
-
         <div className='layout-issued-goods-container'>
-
-
         <div className='layout-issued-goods-header-checkbox'>
-
-        <label htmlFor="byOrder">Po naročilo</label>
-        <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' />
-
+            {getCheckBox()}
         </div>
-
         <div className='layout-issued-goods'>
+
+
+
         <div className='left-column'>
-
-
         <Select className='select-filters-add' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters-add' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-        <Select className='select-filters-add' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
-     
         </div>
+        <div className='right-column'>
+
+
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
-
-
-
+    
         <input placeholder="Izberite datum" type="date" id="documentDate" class="form-control" />
 
         </div>
 
+        
 
+        {getClient()}
         </div>
+        
+        </div>
+
+
+        {getNote()}
 
 
        <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
              <p>Potrdi</p>
              <MdAdd />
-             </span></center> 
+             </span>
+        </center> 
+
+
 
 
   

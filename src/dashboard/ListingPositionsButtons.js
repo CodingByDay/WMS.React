@@ -28,16 +28,16 @@ export default function ListingPositionsButtons(props) {
      return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
  }
     function editQty() {
-     var qty = window.prompt("Spremenite količina. Odprta količina: 100")
+     var qty = window.prompt("Spremenite količino. Odprta količina: 100")
      if (isFloat(qty)) 
      {
-
-          alert("Number");
-
+          var updateObject = {};
+          //updateObject.HeadID = data.childNodes[0].innerHTML;
+         
 
      } else {
           window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
-      //    editQty();
+          editQty();
           
      }
 

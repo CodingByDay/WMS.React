@@ -274,11 +274,6 @@ span {
   cursor: pointer;
 }
 
-
-
-
-
-
 span.actions svg {
   margin: 0.4em;
   cursor: pointer;
@@ -290,11 +285,9 @@ span.actions svg {
 }
 
 
-
 input {
   border-radius: 0!important;
 }
-
 
 
 span#openRange {
@@ -313,7 +306,6 @@ span#openRange {
 }
 
 
-
 span.actions {
   margin: 1em;
   color: white;
@@ -324,7 +316,7 @@ span.actions {
   padding: 0.3e;
 }
 
-span.actions.smaller{
+span.actions.smaller {
   margin: 1em;
   color: #404042;
   padding-right: 1rem;
@@ -334,7 +326,8 @@ span.actions.smaller{
   padding: 0.3e;
 }
 
-.smallerrr{
+
+.smallerrr {
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.4em;
@@ -368,10 +361,14 @@ span.actions.smallerr {
   color: white;
   justify-content: center;
 }
+
+.form-group2 {
+  margin: 4em;
+}
+
 .login
 {
   background-color: #f7f7f8;
-
 }
 
 .swal-button {
@@ -379,13 +376,18 @@ span.actions.smallerr {
   border-radius: 0;
 }
 
+
 #edit {
   color: black!important;
 }
 
-#buyer {
-  display: none;
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
+
 
 #transactionTypePopup {
   margin: auto;

@@ -31,7 +31,11 @@ const ListingService  = {
       },
 
 
-
+    async createOrder(data) { 
+      const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=createOrder`, data)   
+      return response.data;
+  },
+    
 
 
     async getAllPositions(order) {
