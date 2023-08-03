@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import $ from 'jquery'; 
-
+import Analytics from './Analytics';
 
 export function Dashboard() { 
 
@@ -41,7 +41,17 @@ export function Dashboard() {
   }
    
   }
- 
+
+
+  /*
+  <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
+    Nastavitve
+    <img alt={""} src='settings.png' width={100} /> 
+  </button>
+  */
+
+
+
   function handleSettings () {
     $(".settings-divider").toggle();
     // Toggle the visibility
@@ -78,11 +88,19 @@ export function Dashboard() {
               <img alt={""} src='stock.png' width={100} />
             </button>
 
-            
-            <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
-              Nastavitve
-              <img alt={""} src='settings.png' width={100} />
+            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("analytics")} id='settings-hover' >
+            Analitika
+            <img alt={""} src='monitor-icon.png' id='analytics' width={50} />
             </button>
+
+
+
+
+
+
+
+            
+           
             </div>
 
           

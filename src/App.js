@@ -13,6 +13,7 @@ import Transactions from "./dashboard/Transactions"
 import Settings from "./dashboard/Settings"
 import NoInternetConnection from "./dashboard/NoInternetConnection"
 import axios from 'axios';
+import Analytics from './dashboard/Analytics';
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/internet" element={<NoInternetConnection />} />
         <Route path="/logout" element={<Auth />} />
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </BrowserRouter>
   )

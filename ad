@@ -1,0 +1,267 @@
+[33mcommit 88dce95c3dfad907c9df65bbe3c4bbc1ce3d38aa[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Aug 2 14:29:32 2023 +0200
+
+    Complete state
+
+[33mcommit fd6788c64d1c1e5d6671b7b37daabefbc6527e6f[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Aug 2 11:54:58 2023 +0200
+
+    Choosing the row
+
+[33mcommit 6737f8930b30549d07be4fd0e290c5f9592a7d76[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jul 26 10:26:40 2023 +0200
+
+    Publish state
+
+[33mcommit 1cef3396a7278cbba9286ebcf10d353264841c28[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jul 26 08:09:55 2023 +0200
+
+    Default dates
+
+[33mcommit 59fd140b8e97c156c15b39ed050b6a8b7992c826[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 15:21:41 2023 +0200
+
+    Adding head of the order document
+
+[33mcommit 426640c839bb198cae30213c4f192858b4757eb4[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 15:14:16 2023 +0200
+
+    Function buttons for orders
+
+[33mcommit 7e3ceaecc2db3fed3b935eddb12072ec7709f6a5[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 14:46:57 2023 +0200
+
+    Buttons for order creation, deletion and edit
+
+[33mcommit 2acb5c25a6d4068eb7e3de6c8be9a16385c0537b[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 14:32:25 2023 +0200
+
+    Before order module
+
+[33mcommit 29d160de5054399a041be604f698a6adc84f9086[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 13:43:08 2023 +0200
+
+    Position click problem solved
+
+[33mcommit d76f680e4a4c8676cef23ed08daa160c05e52020[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 13:23:02 2023 +0200
+
+    Network error interceotirs
+
+[33mcommit d0552a4555ea567ee326ee5ce97b0745638caf59[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 11:42:35 2023 +0200
+
+    Updating works perfectly
+
+[33mcommit 113f43b0a992a15c1df07bb03ddd280de488fae7[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 11:10:01 2023 +0200
+
+    Testing update
+
+[33mcommit 33ba1ee82145dc687492c87d2421974fa15fbc32[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 10:33:28 2023 +0200
+
+    Alot of functionality for editing
+
+[33mcommit 3eb4515337f6c35003ba2e233362f0209318c998[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 09:08:47 2023 +0200
+
+    Edit button logic
+
+[33mcommit 1b2fb1767e9208f8f3103b1134d05e500ab7c4c7[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 07:57:13 2023 +0200
+
+    Warehouse interwarehouse solution
+
+[33mcommit 2b7e967e7721a2e8ecccc28ba359f0997d64379d[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jul 25 07:38:08 2023 +0200
+
+    Calling child function by forwardReference
+
+[33mcommit f5d6ce23da3124b48e0aa4f19561c0de1688ce4f[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jul 24 15:30:22 2023 +0200
+
+    Passing state
+
+[33mcommit aded2135de059c990193c623408f87288740a5e8[m[33m ([m[1;31morigin/production[m[33m)[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jul 24 15:22:02 2023 +0200
+
+    Filters, design, update
+
+[33mcommit 722ec4e95010019c3b2083afbcea9008cddbd1b3[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jul 24 14:32:49 2023 +0200
+
+    Filters
+
+[33mcommit d49b1a84fe93c2714fbc4be3e2568bd472e4546d[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jul 24 13:41:18 2023 +0200
+
+    Testing filters
+
+[33mcommit c20b1b98d08ef213aeea5dc7488a68913fb4adf5[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jul 24 11:57:04 2023 +0200
+
+    Unique by multiple properties
+
+[33mcommit c2f0a0235218b190c41309f650c3855a97d86427[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jul 12 15:09:34 2023 +0200
+
+    Vacation commit
+
+[33mcommit a3ac6ddce1cb4b7af6266c85ef144707d1bb1484[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 29 14:48:53 2023 +0200
+
+    Adding the interwarehouse position to the trensaction document
+
+[33mcommit 0f8170b1410c036c7933e438c0218eb893c1e452[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 29 12:43:20 2023 +0200
+
+    Complete state
+
+[33mcommit 565e5388fcafbd179c5f6d8741420eff18b419e9[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 29 12:14:59 2023 +0200
+
+    Arrow change
+
+[33mcommit ef127c3fcb42ddbd43f185ea7af921f1a5fd2670[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 29 09:28:11 2023 +0200
+
+    State for publish
+
+[33mcommit bab8e67aa6e0b0cd0584293054a9d4c0fd55e69e[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 29 08:15:06 2023 +0200
+
+    Interwarehouse field hiding
+
+[33mcommit 03052b259bb705e20b77ead63d8e563820108711[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jun 28 15:28:59 2023 +0200
+
+    Finished application before position propagation
+
+[33mcommit 4f6e0b3cf7082d2e438deb28a1d85aaf8570dabd[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jun 28 10:36:21 2023 +0200
+
+    Working improvments
+
+[33mcommit 85f9e384aadf2f3cfd1f7795adbae08581f9e8cd[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jun 28 09:01:24 2023 +0200
+
+    State before proof of concept
+
+[33mcommit 4cf2422103982f72f6a26bb17be55ed0156459d7[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Wed Jun 28 08:24:42 2023 +0200
+
+    Commiting working link connection not correct
+
+[33mcommit 4f53e46252d47c0258f17d60e66b85ad5071b003[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jun 27 15:24:22 2023 +0200
+
+    New process of adding the positions
+
+[33mcommit 0d652ecc81c954155bbfbf2241d2ec1766803fee[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jun 27 12:34:14 2023 +0200
+
+    WMS like positions adding
+
+[33mcommit 066c183376449a39bcc7e86033d4cd2b912fac4e[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Tue Jun 27 08:54:10 2023 +0200
+
+    WMS like form
+
+[33mcommit 9b873cd0ea53d80a78be5faac81e7f8f3a5bec96[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jun 26 13:05:05 2023 +0200
+
+    Moving the workflow from PA to WMS
+
+[33mcommit a9034d526982929a0a8c39ca45f4c4aaba70d816[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jun 26 12:23:53 2023 +0200
+
+    Adding heads finished first iteration
+
+[33mcommit 39158c12d71ba6ba32a8831725a0aceb1247f9ad[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jun 26 10:04:25 2023 +0200
+
+    Correct margins
+
+[33mcommit e50af3c93cf86d0b2c3af34558a30bea465dfaa2[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Mon Jun 26 09:38:58 2023 +0200
+
+    Working choice selection module
+
+[33mcommit 846bc0ec0b10ab7ab6e78bbbf21c1af84599fa59[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Fri Jun 23 15:29:09 2023 +0200
+
+    Working positions
+
+[33mcommit 90f0ab2c0bd60380fb2dac31084ed7781823da2f[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Fri Jun 23 14:56:03 2023 +0200
+
+    Complex rendering selection system implemented working
+
+[33mcommit 40790906b258233b18842b2b47edac9250948f1e[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Fri Jun 23 13:57:43 2023 +0200
+
+    Working rendering selector module
+
+[33mcommit 1ff67191baf7099fa42d4edbb913a2c7ed6c7ae8[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Fri Jun 16 09:31:00 2023 +0200
+
+    App waiting for AMS.Web implementation
+
+[33mcommit 6f2f3a0eb626ffd7365efafe9472602d52fbc47e[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Fri Jun 16 08:00:37 2023 +0200
+
+    Stock implementation
+
+[33mcommit 0025cf87b0a9b022c4e3a8f034a10e792fd85609[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Date:   Thu Jun 15 15:32:51 2023 +0200
+
+    All design for 15.6
+
+[33mcommit de1f2457835d030552d7b062b6816a85e7129388[m
+Author: Janko Jovičić <jankojovicic351@gmail.com>
+Dat
