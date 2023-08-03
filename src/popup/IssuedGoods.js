@@ -21,7 +21,7 @@ export default function IssuedGoods(props) {
     const [document, setDocument] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [client, setClient] = useState("")
-    const [date, setDate] = useState("")
+    const [date, setDate] = useState(new Date().toLocaleDateString())
 
 
     var bufferElements = [];
@@ -97,20 +97,28 @@ export default function IssuedGoods(props) {
 
 
     function onDateChange(e) {
+        console.log(e.target.value)
         setDate(e.target.value)
     }
 
 
 
     async function createHeadDocument ()  {
+
+    // date
+    var dateValue = date;
+
+
+
+
     if(!props.order) {
       var documentData = document;
       var warehouseData = warehouse;
       var objectForAPI = {};
       if (!byOrder) {
-            objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
+            objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
       } else {
-            objectForAPI = {DocumentType: documentData, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
+            objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
       }
        if(window.confirm('Ali želite kreirati dokument')) {
             var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
@@ -143,15 +151,16 @@ export default function IssuedGoods(props) {
         objectForAPI = {
             
             
-            HeadID: 23456789,
+       
             DocumentType: documentData, 
             Type: "P",
             WhareHouse: warehouseData,  
             LinkKey: "0", 
             Receiver: client,
             Note: note,
-            Key: "11111111111111"
-
+            Status: "1",
+            Key: "1111111",
+            Date: dateValue,
 
         }
    
@@ -161,8 +170,7 @@ export default function IssuedGoods(props) {
 
          if(window.confirm('Ali želite kreirati dokument')) {
               var data =  ListingService.createOrder(objectForAPI).then(response => { 
-              props.close();
-              props.render();    
+              console.log(response);
           }); 
          }
      

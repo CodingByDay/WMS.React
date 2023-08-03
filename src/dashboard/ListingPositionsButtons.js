@@ -32,7 +32,7 @@ export default function ListingPositionsButtons(props) {
      if (isFloat(qty)) 
      {
           var updateObject = {};
-          //updateObject.HeadID = data.childNodes[0].innerHTML;
+          // updateObject.HeadID = data.childNodes[0].innerHTML;
          
 
      } else {
