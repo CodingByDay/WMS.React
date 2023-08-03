@@ -109,6 +109,15 @@ export default function HeaderOrderListing(props) {
         alert("Closing order...");
     }
 
+
+
+    function deleteOrder() {
+
+    }
+
+
+
+
     return ( 
         <div className="filters">
 
@@ -187,7 +196,7 @@ export default function HeaderOrderListing(props) {
               <p>Uredi</p>
               <MdEdit />
          </span>   
-         <span className='actions smallerr' id="deleteOrder">
+         <span className='actions smallerr' id="deleteOrder" onClick={deleteOrder}>
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   

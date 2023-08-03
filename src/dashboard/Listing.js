@@ -103,9 +103,11 @@ export default function Listing() {
   }
 
     const communicate = (type, event, data) => {       
+ 
         if(type === 'head') {
           if(event ==="delete") {
-             
+            
+
 
             window.swal({
               title: 'Potrditev',
@@ -161,8 +163,8 @@ export default function Listing() {
 
             <div className='listing-bg' >
 
-            <HeaderOrderListing getSortingObject = {getSortingObject} />
-            <OrderHeadsListing data = {orders} childToParent = {childToParent} sort={sort} />
+            <HeaderOrderListing communicate = {communicate} getSortingObject = {getSortingObject} />
+            <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
             <ListingPositionsButtons communicate = {communicate} />
             <OrderPositions data = {positions} childToParent = {childToParent} />     
             <Footer />
