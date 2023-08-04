@@ -4,17 +4,18 @@ import Header from './Header';
 import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import $ from 'jquery'; 
+import { useSelector, useDispatch } from 'react-redux'
 import Analytics from './Analytics';
-
+import {store} from '../store/store';
 export function Dashboard() { 
 
   let navigate = useNavigate();
 
   checkUID ()
 
-
-
-
+  //const name = useSelector((state) => state.user.nameSurname)
+  //console.log(store)
+  //alert(name);
 
 
 

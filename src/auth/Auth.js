@@ -4,12 +4,12 @@ import { useNavigate  } from 'react-router-dom';
 import  Loader  from "../loader/Loader";
 import $ from 'jquery';
 import Cookies from 'universal-cookie';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import {login} from '../features/user';
 export default function Auth(props) {
 
 
-
+  const dispatch = useDispatch()
 
 
 
@@ -55,6 +55,10 @@ export default function Auth(props) {
               const cookies = new Cookies();
               cookies.set('uid', uuidv4(), { path: '/' });
               setTimeout(function() {        $(".whole-auth").css("display", "block");
+
+              // Redux state changes
+              dispatch(login("admin"));
+
               navigate('/dashboard'); }, 2000);      
           }
       })
