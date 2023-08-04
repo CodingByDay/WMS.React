@@ -10,7 +10,7 @@ import Loader from '../loader/Loader';
 import $ from 'jquery'; 
 import ListingPositionsButtons from './ListingPositionsButtons';
 import DataAccess from "../utility/DataAccess";
-
+import StatusChange from "./StatusChange";
 export default function Listing() { 
     checkUID ()
     function isUUID ( uuid ) {
@@ -40,7 +40,7 @@ export default function Listing() {
     const [positions, setPositions] = useState([]);
     const [selectedHeadOrder, setSelectedHeadOrder] = useState();
     const [selectedPosition, setSelectedPosition] = useState();
-
+    const [showStatusAlert, setShowStatusAlert] = useState(false)
     useEffect(() => {
       var loader = document.getElementById("loader");
 
@@ -104,6 +104,15 @@ export default function Listing() {
 
     const communicate = (type, event, data) => {       
  
+        if(type == "status") {
+          if(typeof selectedHeadOrder != "undefined") {
+            setShowStatusAlert(!showStatusAlert)
+          }
+        }
+
+
+
+
         if(type === 'head') {
           if(event ==="delete") {
             
@@ -166,7 +175,16 @@ export default function Listing() {
             <HeaderOrderListing communicate = {communicate} getSortingObject = {getSortingObject} />
             <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
             <ListingPositionsButtons communicate = {communicate} />
-            <OrderPositions data = {positions} childToParent = {childToParent} />     
+            <OrderPositions data = {positions} childToParent = {childToParent} />   
+
+
+            {
+                showStatusAlert && typeof selectedHeadOrder != "undefined"  && (
+                  <StatusChange order = {selectedHeadOrder.childNodes[5].innerHTML} />
+                )
+            }
+   
+
             <Footer />
 
 

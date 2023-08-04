@@ -22,8 +22,15 @@ export default function AddHeadDocument(props) {
     var isOrder = false;
     useEffect(() => {
         
-    setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'}]);
 
+
+    if(props.order) {    
+        setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'}]);
+    } else {
+        setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'}]);
+    }
+
+    
     if(type !== undefined) {
         switch (type.value) {  
             case "Izdaja blaga":          
@@ -67,6 +74,8 @@ export default function AddHeadDocument(props) {
         $("#addHeader").css("display", "block");
         if(props.order) {
             isOrder = true;
+
+    
         }
         
     } else {

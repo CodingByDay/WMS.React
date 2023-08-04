@@ -106,13 +106,13 @@ export default function HeaderOrderListing(props) {
 
 
     function changeStatus () {
-        alert("Closing order...");
+        props.communicate("status", "", "")
     }
 
 
 
     function deleteOrder() {
-
+      
     }
 
 

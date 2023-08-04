@@ -481,6 +481,26 @@ div#edit, div#addHeader {
   color: #081A45;
 }
 
+.changeStatusOuter {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.chooseStatus {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20em;
+  height: 15em!important;
+  background: #f7f7f8;
+  border: 1px solid gray;
+}
+
+
+
+
 body {
   width: 100vw;
   overflow-x: hidden;
@@ -583,7 +603,11 @@ div#transactionTypePopup {
 #receiveDiv {
   display: none;
 }
-
+#statusChange {
+  width: fit-content;
+  margin-left: 6em;
+  margin-top: 2em;
+}
 
 .component-outer {
   display: flex;
