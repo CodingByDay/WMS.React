@@ -182,21 +182,24 @@ export default function HeaderOrderListing(props) {
               placeholder="Naročnik"
             />
 
-         <span className='actions smallerr' onClick={toggleVisibility} id="openRange">
+
+
+          
+         <span className='actions smallerr s' onClick={toggleVisibility} id="openRange">
               <p>Izberite</p>
               <MdDateRange />
          </span>   
 
-         <span className='actions smallerr' id="addOrder" onClick={openAdd}>
+         <span className='actions smallerr s' id="addOrder" onClick={openAdd}>
               <p>Dodaj</p>
               <MdAdd />
          </span>   
 
-         <span className='actions smallerr' id="editOrder" onClick={changeStatus}>
+         <span className='actions smallerr s' id="editOrder" onClick={changeStatus}>
               <p>Uredi</p>
               <MdEdit />
          </span>   
-         <span className='actions smallerr' id="deleteOrder" onClick={deleteOrder}>
+         <span className='actions smallerr s' id="deleteOrder" onClick={deleteOrder}>
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
