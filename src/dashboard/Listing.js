@@ -12,14 +12,17 @@ import ListingPositionsButtons from './ListingPositionsButtons';
 import DataAccess from "../utility/DataAccess";
 import StatusChange from "./StatusChange";
 import { useSelector, useDispatch } from 'react-redux'
+import * as redux from '../features/data';
+
 export default function Listing() { 
     checkUID ()
-
+    const dispatch = useDispatch()
 
 
    
     const name = useSelector((state) => state.user.fullName)
-    alert(name);
+
+    // alert(name);
   
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -76,19 +79,15 @@ export default function Listing() {
   }
 
   const [sort, setSort] = useState();
-
   const [refresh, setRefresh] = useState("refresh");
-
   const  childToParent = (data) => {
-
-
-
 
       if(data.childElementCount > 7)  {
           getPositions(data.childNodes[5].innerHTML)
           orders.selector = data.childNodes[5].innerHTML;
           setOrders(orders);
           setSelectedHeadOrder(data);
+          dispatch(redux.order(data.childNodes[5].innerHTML));
       } else {
           var toChange = positions;
           toChange.selector = data.childNodes[2].innerHTML;

@@ -36,8 +36,14 @@ const ListingService  = {
       return response.data;
   },
     
+    async changeStatus(orderNumber, status, user) {
+      
+      var test = `/Services/Device/?mode=setOrderStatus&key=${orderNumber}&status=${status}&clerk=${user}`
+      alert(test);
 
-
+      const response = await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setOrderStatus&key=${orderNumber}&status=${status}&clerk=${user}`)
+      return response.data;
+    },
     async getAllPositions(order) {
 
         axios.interceptors.response.use(function (response) {
