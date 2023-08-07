@@ -153,7 +153,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
         }
         var term = props.sort.selectedBusinessEvent.toLowerCase();
 
-        var field = DataAccess.getData(data, "DocumentType", "StringValue").toLowerCase();;
+        var field = DataAccess.getData(data, "DocumentType", "StringValue").toLowerCase();
         if (!field.includes(term) &&term!="") {
             return false;
         }

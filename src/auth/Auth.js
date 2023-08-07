@@ -6,6 +6,8 @@ import $ from 'jquery';
 import Cookies from 'universal-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import {login} from '../features/user';
+import TransactionService from '../services/TransactionService'
+import DataAccess from "../utility/DataAccess";
 export default function Auth(props) {
 
 
@@ -54,10 +56,28 @@ export default function Auth(props) {
               // Successful login 
               const cookies = new Cookies();
               cookies.set('uid', uuidv4(), { path: '/' });
+  
               setTimeout(function() {        $(".whole-auth").css("display", "block");
 
+
+
+              TransactionService.getUsers().then(response => { 
+              for (var i = 0; i < response.Items.length; i++) {
+
+                var passwordGet =  DataAccess.getData(response.Items[i], "WMSPassword", "StringValue")
+                 if(passwordGet == password) {
+     
+     
+                     var name = DataAccess.getData(response.Items[i], "FullName", "StringValue");
+                     var userId = DataAccess.getData(response.Items[i], "UserID", "IntValue");
+                     // UserID
+                     // FullName
+                     dispatch(login([name, userId]));
+                 }
+     
+               }
               // Redux state changes
-              dispatch(login("admin"));
+              });
 
               navigate('/dashboard'); }, 2000);      
           }

@@ -13,10 +13,6 @@ export function Dashboard() {
 
   checkUID ()
 
-  //const name = useSelector((state) => state.user.nameSurname)
-  //console.log(store)
-  //alert(name);
-
 
 
   function isUUID ( uuid ) {

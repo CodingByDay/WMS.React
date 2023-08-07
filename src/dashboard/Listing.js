@@ -11,8 +11,16 @@ import $ from 'jquery';
 import ListingPositionsButtons from './ListingPositionsButtons';
 import DataAccess from "../utility/DataAccess";
 import StatusChange from "./StatusChange";
+import { useSelector, useDispatch } from 'react-redux'
 export default function Listing() { 
     checkUID ()
+
+
+
+   
+    const name = useSelector((state) => state.user.fullName)
+    alert(name);
+  
     function isUUID ( uuid ) {
       let s = "" + uuid;
       s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');

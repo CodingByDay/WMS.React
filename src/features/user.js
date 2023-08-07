@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import TransactionService from '../services/TransactionService'
+import DataAccess from "../utility/DataAccess";
 
 const initialState = {
-  nameSurname: "",
+  fullName: "",
   userId: ""
 }
 
@@ -10,14 +12,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes :).
-      state.nameSurname = action.payload;
-      state.userId = action.payload;
 
-      console.log(state)
+      state.fullName = action.payload[0]
+      state.userId = action.payload[1]
 
     }
   },
