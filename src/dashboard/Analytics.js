@@ -17,6 +17,18 @@ export default function Listing() {
 
     checkUID ()
 
+    useEffect(() => {
+
+
+      var loader = document.getElementById("loader");
+      loader.style.display = "block";
+      $("#analytics-frame").css ("display", "none");
+  
+      setTimeout(function(){
+        loader.style.display = "none";
+        $("#analytics-frame").css ("display", "block");
+     }, 3000); //Time before execution
+      }, []);
 
 
     function isUUID ( uuid ) {
@@ -49,16 +61,16 @@ export default function Listing() {
 
     return ( 
 
+      
         <div id="analytics-panel">
                 <Loader />
-
-
-
+            
+                  
                 <Header/>
 
+               <iframe src="http://172.17.1.31:4444" scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
 
-           <iframe src="http://localhost:4444" scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
         </div>       
-
+       
     ); 
 } 

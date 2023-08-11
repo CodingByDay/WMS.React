@@ -1,7 +1,7 @@
 const Loader = (props) => {
 
     return (
-        <img src="/loader.gif" id="loader" alt="loading" className="loader" />
+        <img src="/loader.gif" id="loader" width="150" alt="loading" className="loader" />
     );
 
 
