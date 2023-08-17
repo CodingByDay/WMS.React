@@ -57,9 +57,9 @@ export default function Auth(props) {
               const cookies = new Cookies();
               cookies.set('uid', uuidv4(), { path: '/' });
   
-              setTimeout(function() {        $(".whole-auth").css("display", "block");
-
-
+              setTimeout(function() {        
+                               
+              $(".whole-auth").css("display", "block");
 
               TransactionService.getUsers().then(response => { 
               for (var i = 0; i < response.Items.length; i++) {

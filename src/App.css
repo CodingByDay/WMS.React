@@ -1,4 +1,5 @@
 
+
 .logo.navbar {
   margin-left: 2em;
 }
@@ -22,7 +23,36 @@ span#openRangeTransaction {
 #analytics-panel {
   height: 100%;
 }
+tr {
+  font-size: large;
+}
+table thead th {
+    position: sticky!important;
+    top: 0px!important;
+}
+.responsive-buttons-order {
+  display: flex;
+  flex-direction: row;
 
+
+}
+@media only screen and (max-width: 1537px){
+
+  .responsive-buttons-order {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+
+}
+
+.responsive-buttons-order span {
+  margin: 0.2em!important;
+}
+
+.table_responsive_order {
+  margin-top: 4em;
+}
+}
 
 #analytics-frame {
   border: 0;
@@ -811,7 +841,7 @@ img.loader {
 }
 
 .table_responsive_positions_transactions {
-  height: 25vh;
+  height: 20vh;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
@@ -837,7 +867,9 @@ h3.information {
   line-height: 30vh;
 }
 
-
+.select-filters-stock {
+  width: 10em!important;
+}
 .table_responsive_positions {
   height: 40vh;
   margin-top: 1vh;
@@ -846,23 +878,47 @@ h3.information {
   bottom: 2em;
 }
 
+.stock-container-filters {
+  display: flex;
+}
+
+
+.table_responsive_stock {
+  margin-top: 5em;
+  height: 60vh!important;
+  overflow-y: scroll!important;
+  margin-left: 2em!important;;
+  margin-right: 2em!important;;
+}
+
+
+
 td {
   height: 0.4em!important;
   font-size: 0.6em!important;
 }
+
 #warehouseStock, #locationStock, #identStock {
   margin: 1em;
   width: 30em;
 }
-.stock-container {
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+
+
+
+.table_responsive_pos {
+  height: 23vh!important;
+  overflow-y: scroll!important;
+  margin-left: 2em!important;;
+  margin-right: 2em!important;;
 }
-.table_responsive_order, .table_responsive_transaction {
+.table_responsive_transaction {
+  height: 20vh!important;
+  overflow-y: scroll;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.table_responsive_order {
   height: 30vh;
   overflow-y: scroll;
   margin-left: 2em;

@@ -13,6 +13,7 @@ export default function Stock() {
 
     checkUID () 
 
+
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
@@ -109,8 +110,6 @@ export default function Stock() {
             var qty = DataAccess.getData(response.Items[i], "RealStock", "DoubleValue");
             stocks.push({Ident: ident, RealStock: qty, Location: location});
 
-
-
             // Data access is not defined.
         }
 
@@ -147,19 +146,22 @@ export default function Stock() {
         <Header />   
 
 
-        <div className ="stock-container">  
+        <div className ="stock-container-filters">  
 
-        <Select className='select-filters' placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
-        <Select className='select-filters' placeholder={"Pozicija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
-        <Select className='select-filters' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
-
-
-        <Table table = "stock" data={rows} className="stock-table" type="stock" class = "table_responsive_stock"  />
+        <Select className='select-filters-stock' placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
+        <Select className='select-filters-stock' placeholder={"Pozicija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
+        <Select className='select-filters-stock' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
 
         <span className='actions smallerr' onClick={handleInventory}>Prikaži</span>
+
         </div>
+        <Table table = "stock" data={rows} className="stock-table" type="stock" class = "table_responsive_stock"  />
+
+
+
+      
 
         <Footer />
 

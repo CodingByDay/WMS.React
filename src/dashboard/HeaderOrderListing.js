@@ -189,7 +189,7 @@ export default function HeaderOrderListing(props) {
               <p>Izberite</p>
               <MdDateRange />
          </span>   
-
+        <div className="responsive-buttons-order">
          <span className='actions smallerr s' id="addOrder" onClick={openAdd}>
               <p>Dodaj</p>
               <MdAdd />
@@ -203,7 +203,7 @@ export default function HeaderOrderListing(props) {
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
-
+          </div>
          <AddHeadDocument type={"listing"} order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
           
         </div>
