@@ -23,22 +23,26 @@ export default function ListingPositionsButtons(props) {
        props.communicate("position", "delete");
     }
 
+    function createPosition() {
+          props.communicate("position", "create");
+    }
    
     function isFloat(n) {
      return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
  }
     function editQty() {
      var qty = window.prompt("Spremenite količino. Odprta količina: 100")
-     if (isFloat(qty)) 
-     {
-          var updateObject = {};
-          // updateObject.HeadID = data.childNodes[0].innerHTML;
+
+     if (qty &&isFloat(qty)) 
+     {    
+
+          props.communicate("position", "update");
+
          
 
      } else {
           window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
-          editQty();
-          
+          editQty();     
      }
 
     }
@@ -47,7 +51,7 @@ export default function ListingPositionsButtons(props) {
     return ( 
         <div className="filters">
 
-         <span className='actions smallerr' id="addOrder">
+         <span className='actions smallerr' onClick={createPosition} id="addOrder">
               <p>Dodaj</p>
               <MdAdd />
          </span>   

@@ -13,6 +13,7 @@ import DataAccess from "../utility/DataAccess";
 import StatusChange from "./StatusChange";
 import { useSelector, useDispatch } from 'react-redux'
 import * as redux from '../features/data';
+import AddOrderPosition from '../popup/AddOrderPosition';
 
 export default function Listing() { 
     checkUID ()
@@ -21,6 +22,12 @@ export default function Listing() {
 
    
     const name = useSelector((state) => state.user.fullName)
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const handlePopupClose = () => {
+
+      setPopupVisible(false);
+    };
 
     // alert(name);
   
@@ -117,8 +124,16 @@ export default function Listing() {
           }
         }
 
+        if(type == "position" && event == "create") {
+            setPopupVisible(!popupVisible) 
+        }
+        if(type == "position" && event == "update") {
+          var objectToUpdate = {}
 
+          console.log (selectedHeadOrder);
 
+          // Getting the correct object;
+      }
 
         if(type === 'head') {
           if(event ==="delete") {
@@ -164,7 +179,7 @@ export default function Listing() {
           }
         }
     }
-
+    const currentHead = selectedHeadOrder?.childNodes[5]?.innerHTML ?? -1;
 
     return ( 
 
@@ -183,6 +198,7 @@ export default function Listing() {
             <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
             <ListingPositionsButtons communicate = {communicate} />
             <OrderPositions data = {positions} childToParent = {childToParent} />   
+            <AddOrderPosition current = {currentHead} isVisible={popupVisible} onClose={handlePopupClose} />
 
 
             {

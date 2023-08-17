@@ -37,7 +37,17 @@ export default function TransactionFilters(props) {
 
 
 
+    // Reset values to placeholder
 
+
+    const [transactionTypeSelected, setTransactionTypeSelected] = useState(null);
+    const [transactionOrderSelected, setTransactionOrderSelected] = useState(null);
+    const [businessEventSelected, setBusinessEventSelected] = useState(null);
+    const [clientSelected, setClientSelected] = useState(null);
+    const [transactionIdSelected, setTransactionIdSelected] = useState(null);
+    const [userSelected, setUserSelected] = useState(null);
+    const [erpKeySelected, setErpKeySelected] = useState(null);
+    const [transactionStatusSelected, setTransactionStatusSelected] = useState(null);
 
 
 
@@ -199,11 +209,19 @@ const [state, setState] = useState([
 
     function onChangeTransactionType(e) {
        setSelectedTransationType(e.value)
+       setTransactionTypeSelected({value: e.value, label:e.value})
     }
 
 
     function onChangeBusinessEvent(e) {
         setSelectedBusinessEvent(e.code);
+
+
+        if (e.code == "") {
+          setBusinessEventSelected(null)
+        } else {
+        setBusinessEventSelected({value: e.code, label:e.code})
+        }
     }
 
 
@@ -212,6 +230,7 @@ const [state, setState] = useState([
     }
 
     function onChangeTransactionId(e) {
+        setTransactionIdSelected({value: e.value, label:e.value})
         setSelectedTransactionId(e.value);
     }
 
@@ -251,13 +270,15 @@ const [state, setState] = useState([
 
                     <div className='columnDivider'> 
 
-                    <Select className='select-filters'  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} options={transactionType} id='transactionType'/>    
-                    <Select className='select-filters'  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
+                    <Select className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} defaultValue={null} options={transactionType} id='transactionType'/>    
+                    <Select className='select-filters' value={transactionOrderSelected}  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
                     title={props.title}
                     placeholder="Poslovni dogodek"
                     id='businessEvent'
+                    value={businessEventSelected}
                     onKeyDown={(e) => onKeyDownBusinessEvent(e)}
+                    
                     options={businessEvent}
                     onChange={(e) => onChangeBusinessEvent(e)}
                     />
@@ -273,11 +294,11 @@ const [state, setState] = useState([
                     
 
 
-                    <Select className='select-filters' placeholder={"Status transakcije"} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
+                    <Select className='select-filters' placeholder={"Status transakcije"} value={transactionStatusSelected} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
 
 
                     <Select
-
+                        value={clientSelected}
                         placeholder={"Stranka"}
                         id='client'
                         options={client}
@@ -289,6 +310,7 @@ const [state, setState] = useState([
                     
                         id = "idTransaction"
                         type="text"
+                        value={transactionIdSelected}
                         options={ids}
                         placeholder={"ID transakcije"} 
                         onChange={(e) => onChangeTransactionId(e)} 
@@ -307,11 +329,12 @@ const [state, setState] = useState([
                     </span>  
                    
 
-                    <Select  placeholder={"Uporabnik"} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
+                    <Select  placeholder={"Uporabnik"} value={userSelected} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
 
                     <Select 
                         title={props.title}
                         placeholder={"ERP ključ"}
+                        value={erpKeySelected}
                         id='erpKey'
                         options={erpKey}
                         selectedKey={props.value}

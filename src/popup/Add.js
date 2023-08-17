@@ -233,6 +233,10 @@ function transferData() {
             var documentTypeAdd = document.getElementById("documentTypeAdd");
             var clientAdd = document.getElementById("clientAdd");
             clientAdd.value = client;
+
+            if(clientAdd.value == "") {
+                clientAdd.value = "Ne vpisano";
+            }
             var warehouseAdd = document.getElementById("warehouseAdd");
             warehouseAdd.value = warehouse;     
 

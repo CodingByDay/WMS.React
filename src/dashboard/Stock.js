@@ -106,13 +106,9 @@ export default function Stock() {
             valueLocation  = "|";
         } else {
             valueLocation = location.value;
-        }
-
-        
-        var finalParams = valueWarehouse +  "|" + valueLocation + "|" + valueIdent;
-        alert(finalParams)
+        }    
+        var finalParams = valueWarehouse +  "|" + valueLocation + "|" + valueIdent; 
         StockService.getStock(finalParams).then(response => {
-
         var stocks = [];
         var stockAmount = 0;
         window.stocks = response;

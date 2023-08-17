@@ -27,7 +27,7 @@ export default function Listing() {
       setTimeout(function(){
         loader.style.display = "none";
         $("#analytics-frame").css ("display", "block");
-     }, 3000); //Time before execution
+     }, 3000); // Time before execution
       }, []);
 
 
