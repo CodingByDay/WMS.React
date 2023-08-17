@@ -87,16 +87,30 @@ export default function Stock() {
     }
     
     const handleInventory = (e) => {
-        if(ident.value === "" || warehouse.value === "") {
-          window["showAlert"]("Obvestilo", "Podatki manjkajo", "error")
+      
+      var valueIdent = "";
+        var valueWarehouse = "";
+        var valueLocation = "";
+
+        if(typeof ident === "undefined") {
+             valueIdent  = "|";
         } else {
-        var locationFinal = ""
-        if(typeof location !== "undefined") {
-        if(location.value === "") { 
-          locationFinal = ""
+             valueIdent = ident.value;
         }
+        if(typeof warehouse === "undefined") {
+            valueWarehouse  = "|";
+        } else {
+            valueWarehouse  = warehouse.value;
         }
-        var finalParams = warehouse.value +  "|" + locationFinal + "|" + ident.value;
+        if(typeof location === "undefined") {
+            valueLocation  = "|";
+        } else {
+            valueLocation = location.value;
+        }
+
+        
+        var finalParams = valueWarehouse +  "|" + valueLocation + "|" + valueIdent;
+        alert(finalParams)
         StockService.getStock(finalParams).then(response => {
 
         var stocks = [];
@@ -117,7 +131,7 @@ export default function Stock() {
      
         }); 
 
-    }
+    
 
   }
     function handleIdentChange(event) { 
