@@ -136,7 +136,7 @@ const [state, setState] = useState([
           setTransactionStatus([{value: '', label: ''},{value: 'Odprt', label: 'Odprt'}, {value: 'Zaključen', label: 'Zaključen'}]);
           var erp = TransactionService.getErpKeys().then(response=> {
           var erps = [];
-          erps.push({erpKey: "", client: "", warehouse: ""})
+          erps.push({erpKey: "", client: "", warehouse: "", label: "", value: ""})
 
           for(var i=0;i<response.Items.length;i++) {
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
@@ -179,6 +179,7 @@ const [state, setState] = useState([
 
           var users = TransactionService.getUsers().then(response=> { 
               var users = [];
+              users.push({ label: "", value: "" });
               for (var i=0; i<response.Items.length; i++) {
                   var user = DataAccess.getData(response.Items[i], "Subject", "StringValue");
                   users.push({ label: user, value: user });
@@ -209,7 +210,11 @@ const [state, setState] = useState([
 
     function onChangeTransactionType(e) {
        setSelectedTransationType(e.value)
-       setTransactionTypeSelected({value: e.value, label:e.value})
+       if (e.value == "") {
+        setTransactionTypeSelected(null)
+      } else {
+        setTransactionTypeSelected({value: e.value, label:e.value})
+      }
     }
 
 
@@ -220,26 +225,49 @@ const [state, setState] = useState([
         if (e.code == "") {
           setBusinessEventSelected(null)
         } else {
-        setBusinessEventSelected({value: e.code, label:e.code})
+          setBusinessEventSelected({value: e.code, label:e.code})
         }
     }
 
 
     function onChangeTransactionOrder(e) {
-        setSelectedWorkOrder(e.value);
+      setSelectedWorkOrder(e.value);
+      if(e.value == "") {
+        setTransactionOrderSelected(null)
+      } else {
+        setTransactionOrderSelected({value: e.value, label:e.value});
+      }
     }
 
     function onChangeTransactionId(e) {
-        setTransactionIdSelected({value: e.value, label:e.value})
         setSelectedTransactionId(e.value);
+        if(e.value == "") {
+          setTransactionIdSelected(null);
+
+        } else {
+          setTransactionIdSelected({value: e.value, label:e.value})     
+        }
+
     }
 
     function onChangeTransactionStatus(e) {
         setSelectedStatus(e.value);
+        if (e.value == "") {
+          setTransactionStatusSelected(null);
+        } else {
+          setTransactionStatusSelected({value: e.value, label: e.value});
+
+        }
     }
 
     function onChangeClient(e) {
         setSelectedClient(e.value);
+        if (e.value == "") {
+          setClientSelected(null);
+        } else {
+          setClientSelected({value: e.value, label: e.value});
+
+        }
     }
 
     function onChangeIdent(e) {
@@ -247,11 +275,23 @@ const [state, setState] = useState([
     }
 
     function onChangeErpKey(e) {
+      alert(e.value)
       setSelectedErpKey(e.value);
+      if (e.value == "") {
+        setErpKeySelected(null);
+      } else {
+        setErpKeySelected({value: e.value, label: e.value});
+      }     
     }
 
     function onChangeUser(e) {
       setSelectedUser(e.value);
+      if (e.value == "") {
+        setUserSelected(null);
+      } else {
+        setUserSelected({value: e.value, label: e.value});
+      } 
+      
     }
 
     function toggleVisibility() {
@@ -270,7 +310,7 @@ const [state, setState] = useState([
 
                     <div className='columnDivider'> 
 
-                    <Select className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)} defaultValue={null} options={transactionType} id='transactionType'/>    
+                    <Select className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)}  options={transactionType} id='transactionType'/>    
                     <Select className='select-filters' value={transactionOrderSelected}  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
                     title={props.title}
@@ -332,13 +372,10 @@ const [state, setState] = useState([
                     <Select  placeholder={"Uporabnik"} value={userSelected} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
 
                     <Select 
-                        title={props.title}
                         placeholder={"ERP ključ"}
                         value={erpKeySelected}
                         id='erpKey'
                         options={erpKey}
-                        selectedKey={props.value}
-                        onRenderLabel={props.selectedValue}
                         onChange={(e) => onChangeErpKey(e)} 
 
                     />
