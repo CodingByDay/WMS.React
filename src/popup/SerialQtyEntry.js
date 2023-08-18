@@ -228,12 +228,12 @@ export default function SerialQtyEntry (props) {
                         <input type="text" class="form-control small" id="unitsEntry" placeholder="Št. enot" />
                     </div>
 
-                    <div class="insistRow ">
-                        <span 
+  
+                        <center><span 
                             onClick={commitPositions} className='actions smallerr'id=''>Dodaj      
                             <MdEdit />
-                        </span>
-                    </div>
+                        </span></center>
+              
 
                     
                 

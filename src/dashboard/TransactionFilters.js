@@ -1,6 +1,6 @@
 import { useNavigate  } from 'react-router-dom';
 import Table from '../table/Table';
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -48,7 +48,7 @@ export default function TransactionFilters(props) {
     const [userSelected, setUserSelected] = useState(null);
     const [erpKeySelected, setErpKeySelected] = useState(null);
     const [transactionStatusSelected, setTransactionStatusSelected] = useState(null);
-
+    const targetElementRef = useRef(null);
 
 
 
@@ -78,7 +78,18 @@ const [state, setState] = useState([
     key: 'selection'
   }
  ] );
+ function isDescendant(parent, child) {
+  let node = child.parentNode;
 
+  while (node != null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+
+  return false;
+}
      function uniqueAndNotEmpty(value, arrayify) {
 
       if(arrayify.length === 1) {      
@@ -100,6 +111,19 @@ const [state, setState] = useState([
       useEffect(() => {
 
         
+        function handleMouseDown(event) {
+          const targetElement = targetElementRef.current;
+
+          if (targetElement && !isDescendant(targetElement, event.target)) {
+              // Click occurred outside the target element
+              toggleVisibility();
+          }
+          
+        }
+    
+     
+    
+     
         var ids = [];
 
         var dn = TransactionService.getAllTransactions().then(response=> {
@@ -127,7 +151,7 @@ const [state, setState] = useState([
             types.push({value: '', label: '', code: ''})
 
             for(var i = 0; i < response.type.length;i++) {
-                types.push({value: response.type[i] + " * " + response.names[i], label: response.type[i] + " * " + response.names[i], code: response.type[i]});
+                types.push({value: " | " +  response.type[i] + " | " + response.names[i] + " | ", label: " | " + response.type[i] + " | " + response.names[i] + " | ", code: response.type[i]});
             }
             setBusinessEvent(types);
          }); 
@@ -142,7 +166,7 @@ const [state, setState] = useState([
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
           var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
-          erps.push({label: erpKey + " * " + warehouse, value: erpKey + " * " + warehouse});
+          erps.push({label: " | " + erpKey + " | " + warehouse + " | ", value: " | " + erpKey + " | " + warehouse + " | "});
           }
           setErpKey(erps)
         });
@@ -189,12 +213,15 @@ const [state, setState] = useState([
 
 
 
-
-
+        
 
 
           props.bringBackFilters({selectedTransationType: selectedTransationType, selectedBusinessEvent:selectedBusinessEvent,selectedTransactionId:selectedTransactionId,selectedWorkOrder:selectedWorkOrder,transactionId:transactionId,selectedStatus:selectedStatus, selectedClient:selectedClient,selectedIdent:selectedIdent,selectedErpKey:selectedErpKey, selectedUser:selectedUser, period: state})
+          document.addEventListener('mousedown', handleMouseDown);
 
+          return () => {
+            document.removeEventListener('mousedown', handleMouseDown);
+          };
     }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedTransactionId, selectedWorkOrder, transactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser, state]);
 
     // Definition of application states
@@ -275,7 +302,6 @@ const [state, setState] = useState([
     }
 
     function onChangeErpKey(e) {
-      alert(e.value)
       setSelectedErpKey(e.value);
       if (e.value == "") {
         setErpKeySelected(null);
@@ -393,8 +419,11 @@ const [state, setState] = useState([
 
                    
                     {open && (
-                    <div className="nameModule">
+                    <div ref={targetElementRef} className="nameModule">
+
                     <DateRangePicker
+                   
+                      className = "dateRangePicker"
                       onChange={item => setState([item.selection])}
                       showSelectionPreview={true}
                       moveRangeOnFirstSelection={false}
@@ -402,6 +431,7 @@ const [state, setState] = useState([
                       ranges={state}
                       direction="horizontal"
                     />
+
                     </div>
                      )}
                     </div>

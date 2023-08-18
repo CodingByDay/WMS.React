@@ -67,12 +67,12 @@ export default function Transactions() {
 
       $('.table_responsive_transaction').on('click', 'table tr', function() {
           var selectedList = transactions;
-          selectedList.selector = $(this)[0].children[0].innerHTML;
-          var id = $(this)[0].children[0].innerHTML;
+          selectedList.selector = $(this)[0].children[1].innerHTML;
+          var id = $(this)[0].children[1].innerHTML;
           setTransactions(selectedList); 
-          setSelector($(this)[0].children[0].innerHTML)
+          setSelector($(this)[0].children[1].innerHTML)
           setSelectedRowHeadsTransactions (	this );
-          setDocumentType($(this)[0].children[2].innerHTML)   
+          setDocumentType($(this)[0].children[3].innerHTML)   
           TransactionService.getPositionsByHeadId(id).then(response => { 
              setPositions(response);  
           });
@@ -83,7 +83,8 @@ export default function Transactions() {
       $('.table_responsive_positions_transactions').on('click', 'table tr', function() {
 
           var positionsList = positions;
-          positionsList.selector = $(this)[0].children[2].innerHTML;       
+      
+          positionsList.selector = $(this)[0].children[3].innerHTML;       
           setPositions(positionsList);
           setSelectedRowHeadsTransactionsPositions ( this );
 
@@ -152,7 +153,7 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
-              var idToDelete = selectedRowTransactionsPositions.childNodes[2].innerHTML;      
+              var idToDelete = selectedRowTransactionsPositions.childNodes[3].innerHTML;      
               deleteItemDocument(idToDelete);       
           } else {
                deleteHeadDocument();
@@ -166,9 +167,9 @@ export default function Transactions() {
               var toggled = ! show;
               setShow(toggled);
               // console.log(selectedRowTransactionsPositions);
-              var order = selectedRowTransactionsPositions.childNodes[1].innerHTML
-              var ident = selectedRowTransactionsPositions.childNodes[4].innerHTML
-              var qty = selectedRowTransactionsPositions.childNodes[6].innerHTML
+              var order = selectedRowTransactionsPositions.childNodes[2].innerHTML
+              var ident = selectedRowTransactionsPositions.childNodes[5].innerHTML
+              var qty = selectedRowTransactionsPositions.childNodes[7].innerHTML
               setIsEdit(false);
               childRef.current.transferData();
 
@@ -190,7 +191,7 @@ export default function Transactions() {
             buttons: ["Ne", "Ja, zaključi"],
           }).then((result) => {
             if (result) {
-              TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+              TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[1].innerHTML).then(response => { 
                 TransactionService.getAllTransactions().then(response => { 
                     setTransactions(response);
                     window.showAlert("Informacija", "Uspešno zaključeno", "success")
@@ -205,7 +206,7 @@ export default function Transactions() {
    function deleteHeadDocument() { 
       window.swal({
         title: 'Potrditev',
-        text: "Ali ste sigurni da želite pobrisati pozicijo?",
+        text: "Ali ste sigurni da želite pobrisati transakcijo?",
         icon: 'warning',
         buttons: ["Ne", "Ja, pobriši"],
 
@@ -213,7 +214,7 @@ export default function Transactions() {
 
         if (result) {
 
-          TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[0].innerHTML).then(response => { 
+          TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[1].innerHTML).then(response => { 
 
             if(response.data.includes("OK!")) {
                     TransactionService.getAllTransactions().then(response => { 
@@ -229,7 +230,7 @@ export default function Transactions() {
 
 
 function deleteItemDocument(id) { 
-  if(window.confirm("Ali ste sigurni da želite zbrisati dokument?")) {
+  if(window.confirm("Ali ste sigurni da želite zbrisati pozicijo?")) {
 
     TransactionService.deleteMoveItem(id).then(response => { 
 
@@ -278,25 +279,16 @@ function deleteItemDocument(id) {
 
     const changeAddVisibility = (old, data, close) => {
 
-      setShow(close)
-
+      setShow(false)
       if(data.serial)
       {
-
         var componentSerial = <SerialQtyEntry document = {documentType} render = {renderComponentPositions} data = {data} show={componentVisibility} />  
-
         setComponent(componentSerial);
-
       } else {
-
         var component = <SerialQtyEntry document = {documentType} render = {renderComponentPositions} old = {old} data = {data} show={componentVisibility} />
-
-
         setComponent(component);
-
       }
-
-      
+     
     }
 
     const changeVisibility = (data) => {
@@ -309,6 +301,8 @@ function deleteItemDocument(id) {
       // Pass the sorting object down through the children
 
       setFilters(sorting)
+      setPositions([]);
+      setSelectedRowHeadsTransactionsPositions ( null );
     }
 
 
@@ -317,6 +311,7 @@ function deleteItemDocument(id) {
     const resetEditable = () => { 
       // alert("Testing reset")
       setIsEdit(false)
+      setShow(!show);
 
     }
 

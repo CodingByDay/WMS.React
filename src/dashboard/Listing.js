@@ -90,19 +90,19 @@ export default function Listing() {
   const  childToParent = (data) => {
 
       if(data.childElementCount > 7)  {
-          getPositions(data.childNodes[5].innerHTML)
-          orders.selector = data.childNodes[5].innerHTML;
+          getPositions(data.childNodes[6].innerHTML)
+          orders.selector = data.childNodes[6].innerHTML;
           setOrders(orders);
           setSelectedHeadOrder(data);
-          dispatch(redux.order(data.childNodes[5].innerHTML));
+          dispatch(redux.order(data.childNodes[6].innerHTML));
       } else {
           var toChange = positions;
-          toChange.selector = data.childNodes[2].innerHTML;
+          toChange.selector = data.childNodes[3].innerHTML;
           // positions.selector = data.childNodes[2].innerHTML;
           setPositions([]);
           var positionsInner = {};
           Object.assign(positionsInner, positions);
-          positionsInner.selector = data.childNodes[3].innerHTML;
+          positionsInner.selector = data.childNodes[4].innerHTML;
           setPositions(positionsInner);
           // console.log(positions);
           setSelectedPosition(data);

@@ -21,16 +21,20 @@ const Add = forwardRef((props, ref) =>  {
     const [disabledOrder, setDisabledOrder] = useState(false);
     const [no, setNo] = useState({});
     const [keyOut, setKeyOut] = useState({});
-    const [selectedIdent, setSelectedIdent] = useState({})
+    const [selectedIdent, setSelectedIdent] = useState(null)
     const [editDisable, setEditDisable] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
     useImperativeHandle(ref, () => ({
+
         transferData() {
             // Calls the function from the parent.
             transferData()
         },
       }));
+
+
+
     useEffect(() => {
 
       
@@ -38,7 +42,7 @@ const Add = forwardRef((props, ref) =>  {
         var idents = TransactionService.getIdents().then(response=> { 
 
             var identObjects = []
-            identObjects.push({value: '', label: ''})
+
             // This is the place to check if all of the idents are correctly rendered.
             for(var i=0;i<response.data.length;i++) {
               identObjects.push({label: response.data[i],  value: response.data[i]});
@@ -53,7 +57,7 @@ const Add = forwardRef((props, ref) =>  {
 
           if(typeof props.selected.childNodes!== "undefined") {
 
-            // Continue here tomarow.
+
 
             var rowProperty = {};
 
@@ -76,10 +80,10 @@ function transferData() {
 
     try {
 
-        var type = props.selected.childNodes[1].innerHTML;
-        var order = props.selectedPosition.childNodes[1].innerHTML;
-        var identFill = props.selectedPosition.childNodes[4].innerHTML;
-        var qty = props.selectedPosition.childNodes[6].innerHTML;
+        var type = props.selected.childNodes[2].innerHTML;
+        var order = props.selectedPosition.childNodes[2].innerHTML;
+        var identFill = props.selectedPosition.childNodes[5].innerHTML;
+        var qty = props.selectedPosition.childNodes[7].innerHTML;
 
         resetEditor()  
 
@@ -130,8 +134,18 @@ function transferData() {
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
-        setIdent({label: e.value, value: e.value });
-        setSelectedIdent({label: e.value, value: e.value});
+
+
+        
+   
+
+        if(e.value === "") {
+            setIdent(null);
+            setSelectedIdent(null);
+        } else {
+            setIdent({label: e.value, value: e.value });
+            setSelectedIdent({label: e.value, value: e.value});
+        }
         updateOrders(e.value);
 
     }
@@ -139,46 +153,65 @@ function transferData() {
 
 
     function orderEdit(order, ident) {
+   
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
         PopupService.getOrderDataFromIdentAndOrderNumber(order, ident).then(response => { 
-            var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
-            var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
-            var no = DataAccess.getData(response, "No", "IntValue");
-            setNo(no);
-            setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
-            document.getElementById("positionNumber").value = no;
-            document.getElementById("openQty").value = qty;
-            document.getElementById("deadlineDate").value = deadline;
-            // Test the result
+
+            if (typeof response.Items !== "undefined") {
+                var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
+                var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
+                var no = DataAccess.getData(response, "No", "IntValue");
+                setNo(no);
+                setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
+                document.getElementById("positionNumber").value = no;
+                document.getElementById("openQty").value = qty;
+                document.getElementById("deadlineDate").value = deadline;
+                // Test the result
+            } else {
+                $('#close_add').click();
+            }
         });
     }
 
     function onChangeOrder(e) {
         
-        setOrderCurrent({label: e.key + " poz. " + e.no, value: e.key+ " poz. " + e.no, key: e.key, no: e.no, deadline: e.deadline });
+
+        if(e.value == "") {
+
+            setOrderCurrent(null);
+
+        } else {
+
+            setOrderCurrent({label: e.key + " poz. " + e.no, value: e.key+ " poz. " + e.no, key: e.key, no: e.no, deadline: e.deadline });
+
+        }
+
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";
         var ident = document.getElementById("identListControl").innerText;
         // Correct data gets to the service
-        PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
-
-            var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
-            var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
-            var no = DataAccess.getData(response, "No", "IntValue");
-            setNo(no);
-            setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
-            document.getElementById("positionNumber").value = no;
-            document.getElementById("openQty").value = qty;
-            document.getElementById("deadlineDate").value = deadline;
-            // Test the result
-
-        });
-           
+        if(ident!="" && e.key != "") {
+            PopupService.getOrderDataFromIdentAndOrderNumber(e.key, ident).then(response => { 
+                if(typeof response.Items !== "undefined") {
+                var qty = DataAccess.getData(response, "OpenQty", "DoubleValue");
+                var deadline = new Date( DataAccess.getData(response, "DeliveryDeadline", "DateTimeValue")) .toLocaleDateString();
+                var no = DataAccess.getData(response, "No", "IntValue");
+                setNo(no);
+                setKeyOut(DataAccess.getData(response, "Key", "StringValue"));
+                document.getElementById("positionNumber").value = no;
+                document.getElementById("openQty").value = qty;
+                document.getElementById("deadlineDate").value = deadline;
+                // Test the result
+                } else {           
+                   // $("#close_add").click();
+                }
+            });
+        }
     }
 
     function updateOrders(identInternal) { 
@@ -221,10 +254,14 @@ function transferData() {
 
         var rowProperty = {};
         if(typeof props.selected.childNodes!== "undefined") {  
+
             headId = findValueByClassWithinArray(props.selected.childNodes, "HeadID");
+
             var documentType = findValueByClassWithinArray(props.selected.childNodes, "DocumentType");
+  
             // Missing value for String representation of the document.
             var client = findValueByClassWithinArray(props.selected.childNodes, "Receiver");
+
             var warehouse = findValueByClassWithinArray(props.selected.childNodes, "WharehouseName")
             var transactionIdElement = document.getElementById("transactionIdAdd");
             transactionIdElement.value = headId
@@ -286,7 +323,7 @@ function transferData() {
 
         if (editMode) {
             // Edit position
-            var itemId = props.selectedPosition.childNodes[2].innerHTML;
+            var itemId = props.selectedPosition.childNodes[1].innerHTML;
             // Service callback
             TransactionService.getPositionsByHeadId(document.getElementById("transactionIdAdd").value).then(response => { 
                 for (var i = 0; i < response.Items.length; i++) {
@@ -346,7 +383,8 @@ function transferData() {
         var warehouse = document.getElementById("warehouseAdd").value;
         var data = {open: openQty, real: realQty, position: positionNumber, deadlineDate: deadlineDate, ident: ident, order: orderData.value, serial: false, name:"", warehouse: warehouse, data: data};
         // getDocumentTypeStringBasedOnCode API call
-        PopupService.getDocumentTypeStringBasedOnCode(document.getElementById("typeAdd").value).then(response => {           
+        PopupService.getDocumentTypeStringBasedOnCode(document.getElementById("typeAdd").value).then(response => {    
+     
             if(response.includes("Prenos")) {
                 // This is the current working environment
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
@@ -368,7 +406,7 @@ function transferData() {
                     data.key = keyOut;
                     CommitPositionSingular(orderCurrent, data);                   
                 });           
-            } else if(response.includes("Naročilo")) {
+            } else if(response.includes("Naročilo") || response.includes("Popravek zaloge prevzem")) {
                 PopupService.hasSerialNumberIdent(ident.value).then(response => {           
                     data.serial = response.serial;
                     data.name = response.name;
@@ -380,21 +418,24 @@ function transferData() {
                     // Multi column place for the data collection //
                     props.addVisibility(orderCurrent, data, true);
                 });
-            } else if(response.includes("Proizvodnja") || response.inlcudes("DN")) {
+            } else if(response.includes("Proizvodnja") || response.includes("DN")) {
                 // Delovni nalog
             } else if(response.includes("Inventura")) {
                 // Inventura N
-            }           
+            }      
 
         });
         // Place to check for the serial number
       }
     }
+
+    function closeFromParent() {
+        props.resetEdit()
+    }
+
     function resetEditor() {
         setEditDisable(false);
         setEditMode(false);
-        props.resetEdit();
-
     }
 
 
@@ -404,7 +445,7 @@ function transferData() {
      
 
 
-        <div className="header_part" onClick={resetEditor}>
+        <div className="header_part" >
             <h1 id='close_add'>X</h1>
         </div>
 
@@ -453,7 +494,9 @@ function transferData() {
                 <div className='editable-group'>
 
                 <div className="form-group row" id='identRow'>
+
                     <div className="col-sm-6">
+
                     <label htmlFor="inputFirstname">Ident</label>
 
                     <Select 
@@ -511,11 +554,12 @@ function transferData() {
                 </div>
                 </div>
 
-                <span className='actions smallerr' onClick={CommitPosition} id="addPositionButton" >Dodaj poziciju           
-                </span>
+            
 
 
         </div>
+        <center><span className='actions smallerr' onClick={CommitPosition} id="addPositionButton" >Dodaj poziciju           
+                </span></center>
     </div>
     </div>
 

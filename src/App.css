@@ -619,16 +619,23 @@ span#createDocument {
 .table_responsive_positions_transactions tr {
   cursor: pointer;
 }
-
+div#SerialQtyEntry {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 35em;
+}
 div#transactionTypePopup {
     margin: auto;
     margin-bottom: 2em;
 }
 
 #locationsSelect, #locationsSelectReceive {
-  width: 11em;
+  width: 15em;
 }
 
+#unitsEntry {
+  width: 7.7em!important;
+}
 
 #receiveDiv {
   display: none;
@@ -693,8 +700,8 @@ td.Chosen {
 }
 
 .header_part {
-  display: flex;
-  flex-direction: row-reverse;
+  display: flex!important;
+  flex-direction: row-reverse!important;
 }
 
 
@@ -855,7 +862,7 @@ img.loader {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -866,6 +873,11 @@ img.loader {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+div#SerialQtyEntry {
+  height: fit-content;
 }
 
 .popup-header {

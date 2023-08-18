@@ -137,7 +137,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
      for (var i = 0; i < tableData.Items.length; i++) { 
 
         if (tableData.selector == DataAccess.getData(tableData.Items[i], "HeadID", "IntValue")) {
-            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+            tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "➤");
         } else {
             tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
         }
@@ -434,7 +434,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             var match = DataAccess.getData(tableData.Items[i], "Key", "StringValue").toString();
             var target = tableData.selector;
             if ( tableData.selector == match) {
-                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "➤");
             } else {
                 tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
             }
@@ -692,7 +692,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
             var match = DataAccess.getData(tableData.Items[i], "ItemID", "IntValue").toString();
             var target = tableData.selector;
             if ( tableData.selector == match) {
-                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+                tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "➤");
             } else {
                 tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
             }
@@ -745,7 +745,7 @@ if(window.location.href.includes("transactions")&&table=="heads") {
 
                 if ( tableData.selector == match) {
                  
-                    tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "←");
+                    tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "➤");
                 } else {
                     tableData.Items[i] = DataAccess.setDataSelected(tableData.Items[i], "");
                 }
