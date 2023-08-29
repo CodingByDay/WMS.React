@@ -153,7 +153,6 @@ function transferData() {
 
 
     function orderEdit(order, ident) {
-   
         document.getElementById("positionNumber").value = "";
         document.getElementById("openQty").value = "";
         document.getElementById("deadlineDate").value = "";

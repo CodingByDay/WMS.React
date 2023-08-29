@@ -33,16 +33,16 @@ export default function ListingPositionsButtons(props) {
     function editQty() {
      var qty = window.prompt("Spremenite količino. Odprta količina: 100")
 
+     if(qty == null) {
+          return;
+     }
+
      if (qty &&isFloat(qty)) 
      {    
-
           props.communicate("position", "update");
-
-         
-
      } else {
           window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
-          editQty();     
+          return; 
      }
 
     }

@@ -96,6 +96,7 @@ export default function Listing() {
           setSelectedHeadOrder(data);
           dispatch(redux.order(data.childNodes[6].innerHTML));
       } else {
+
           var toChange = positions;
           toChange.selector = data.childNodes[3].innerHTML;
           // positions.selector = data.childNodes[2].innerHTML;
@@ -106,6 +107,7 @@ export default function Listing() {
           setPositions(positionsInner);
           // console.log(positions);
           setSelectedPosition(data);
+
       }
 
 
@@ -130,7 +132,7 @@ export default function Listing() {
         if(type == "position" && event == "update") {
           var objectToUpdate = {}
 
-          console.log (selectedHeadOrder);
+      
 
           // Getting the correct object;
       }
