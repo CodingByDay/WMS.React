@@ -13,7 +13,7 @@ const StockService  =  {
 
 
     async getWarehouses() {
-        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&pars=95&i=web`)
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&i=web`)
         return response.data;
     },
 

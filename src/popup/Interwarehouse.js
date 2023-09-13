@@ -5,6 +5,7 @@ import Select from 'react-select'
 import PopupService from '../services/PopupService';
 import { useEffect, useState } from "react";
 import { MdAdd} from "react-icons/md";
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Interwarehouse(props) { 
 
@@ -20,6 +21,8 @@ export default function Interwarehouse(props) {
 
   const [receiveWarehouse, setReceiveWarehouse] = useState([]);
   const [issueWarehouse, setIssueWarehouse] = useState([]);
+
+  const userId = useSelector((state) => state.user.userId)
 
 
   // Chosen states
@@ -42,7 +45,7 @@ export default function Interwarehouse(props) {
           setDocumentTypes(types);
       }); 
 
-      var warehouses =  PopupService.getWarehouses().then(response => {  
+      var warehouses =  PopupService.getWarehouses(userId).then(response => {  
       var warehouses = onlyWarehouses(response);
       setWarehouses(warehouses); 
       setReceiveWarehouse(warehouses); 

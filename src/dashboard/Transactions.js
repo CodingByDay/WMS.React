@@ -309,7 +309,6 @@ function deleteItemDocument(id) {
 
 
     const resetEditable = () => { 
-      // alert("Testing reset")
       setIsEdit(false)
       setShow(!show);
 

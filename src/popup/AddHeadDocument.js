@@ -25,7 +25,7 @@ export default function AddHeadDocument(props) {
 
 
     if(props.order) {    
-        setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'}]);
+        setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'}]);
     } else {
         setDocumentType([{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'}]);
     }
@@ -53,7 +53,7 @@ export default function AddHeadDocument(props) {
                 component = <WorkOrder close={close} order = {isOrder} type = {props.type} render={props.render} />;
                 setConditional(component);
         }
-    }
+    } 
 
 
     }, [type]);
@@ -61,6 +61,7 @@ export default function AddHeadDocument(props) {
 
 
     const close = () => {
+
         props.changeVisibility(false)
     }
 

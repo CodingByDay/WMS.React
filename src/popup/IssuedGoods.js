@@ -1,4 +1,5 @@
 import DataAccess from "../utility/DataAccess";
+import { useSelector, useDispatch } from 'react-redux'
 
 import $ from 'jquery'; 
 import Select from 'react-select'
@@ -25,7 +26,7 @@ export default function IssuedGoods(props) {
 
 
     var bufferElements = [];
-    
+    const userId = useSelector((state) => state.user.userId)
   
 
 
@@ -33,12 +34,14 @@ export default function IssuedGoods(props) {
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
             var types = [];
             for (var i = 0; i < response.Items.length; i++) {
-                types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
-            }     
-            setDocumentTypes(types);
+                var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
+                var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
+                var together = type + "|" + name;
+                types.push({value: together, label:together, code: type});                }     
+                setDocumentTypes(types);
         }); 
 
-        var warehouses =  PopupService.getWarehouses().then(response => {  
+        var warehouses =  PopupService.getWarehouses(userId).then(response => {  
         var warehouses = onlyWarehouses(response);
         setWarehouses(warehouses); 
 
@@ -79,7 +82,7 @@ export default function IssuedGoods(props) {
 
     function onChangeType(e) {
      
-        setDocument(e.value)
+        setDocument(e.code)
     }
 
 
@@ -120,10 +123,10 @@ export default function IssuedGoods(props) {
       } else {
             objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
       }
-       if(window.confirm('Ali želite kreirati dokument')) {
+       if(window.confirm('Ali želite kreirati dokument?')) {
             var data =  PopupService.setMoveHead(objectForAPI).then(response => { 
             props.close();
-            props.render();    
+
         }); 
        }
     } else {
@@ -170,7 +173,8 @@ export default function IssuedGoods(props) {
 
          if(window.confirm('Ali želite kreirati dokument')) {
               var data =  ListingService.createOrder(objectForAPI).then(response => { 
-              console.log(response);
+                props.close();
+                props.render();
           }); 
          }
      
@@ -225,7 +229,7 @@ export default function IssuedGoods(props) {
 
 
         <div className='left-column'>
-        <Select className='select-filters-add' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters-add' onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters-add' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
         </div>
         <div className='right-column'>

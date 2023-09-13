@@ -1,4 +1,5 @@
 import DataAccess from "../utility/DataAccess";
+import { useSelector, useDispatch } from 'react-redux'
 
 import $ from 'jquery'; 
 import Select from 'react-select'
@@ -20,7 +21,7 @@ export default function TakeOver(props) {
     const [warehouse, setWarehouse] = useState("")
     const [client, setClient] = useState("")
     const [date, setDate] = useState("")
-
+    const userId = useSelector((state) => state.user.userId)
 
     useEffect(() => {
 
@@ -34,7 +35,7 @@ export default function TakeOver(props) {
             setDocumentTypes(types);
         }); 
 
-        var warehouses =  PopupService.getWarehouses().then(response => {  
+        var warehouses =  PopupService.getWarehouses(userId).then(response => {  
         var warehouses = onlyWarehouses(response);
         setWarehouses(warehouses); 
 

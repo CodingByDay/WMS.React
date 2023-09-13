@@ -16,8 +16,9 @@ const PopupService  =  {
         return response.data;
      }, 
      
-    async getWarehouses() {
-        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&pars=95&i=web`)
+    async getWarehouses(user) {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&pars=${user}&i=web`)
+        console.log(response);
         return response.data;
     },
 

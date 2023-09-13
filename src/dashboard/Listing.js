@@ -183,6 +183,15 @@ export default function Listing() {
     }
     const currentHead = selectedHeadOrder?.childNodes[5]?.innerHTML ?? -1;
 
+    const renderComponent = () => { 
+      ListingService.getAllListings().then(response => { 
+
+        setOrders(response);
+
+     }); 
+    }
+
+    
     return ( 
 
         <div>
@@ -196,7 +205,7 @@ export default function Listing() {
 
             <div className='listing-bg' >
 
-            <HeaderOrderListing communicate = {communicate} getSortingObject = {getSortingObject} />
+            <HeaderOrderListing render = {renderComponent} communicate = {communicate} getSortingObject = {getSortingObject} />
             <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
             <ListingPositionsButtons communicate = {communicate} />
             <OrderPositions data = {positions} childToParent = {childToParent} />   

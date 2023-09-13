@@ -37,9 +37,6 @@ const ListingService  = {
   },
     
     async changeStatus(orderNumber, status, user) {
-      
-      var test = `/Services/Device/?mode=setOrderStatus&key=${orderNumber}&status=${status}&clerk=${user}`
-      alert(test);
 
       const response = await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setOrderStatus&key=${orderNumber}&status=${status}&clerk=${user}`)
       return response.data;

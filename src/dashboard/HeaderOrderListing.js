@@ -11,7 +11,7 @@ import { flushSync } from 'react-dom';
 import AddHeadDocument from '../popup/AddHeadDocument';
 import TransactionService from '../services/TransactionService';
 import ListingService from '../services/ListingService';
-
+import DataAccess from "../utility/DataAccess";
 
 export default function HeaderOrderListing(props) { 
 
@@ -36,9 +36,15 @@ export default function HeaderOrderListing(props) {
     useEffect(() => {
         var data =  SortingService.getAllDocumentTypes().then(response => { 
         var types = [];
-           
+
             for (var i = 0; i < response.Items.length; i++) {
-                      types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
+
+                      var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
+                      var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
+
+                      var together = type + "|" + name;
+
+                      types.push({value: together, label:together, code: type});                       
             }            
             setTypes(types);
      }); 
@@ -56,6 +62,7 @@ export default function HeaderOrderListing(props) {
 
 
  const changeVisibility = (data) => {
+
       setHead(data)
   }
   function searchTable() { 
@@ -73,7 +80,12 @@ export default function HeaderOrderListing(props) {
   };
 
   function onChangeDocument(e) {
-    setDocument(e.target.value)
+    // testing 
+
+
+
+
+    setDocument(e.target.code)
   }
 
   function onChangeConsignee(e) {
@@ -94,7 +106,7 @@ export default function HeaderOrderListing(props) {
 
   var reload = false;
   function onChangeType(e) {
-    const mutated = {value: e.value, label:e.label}
+    const mutated = {value: e.code, label:e.code}
     setDocumentType (mutated);   
   }
 
@@ -116,6 +128,9 @@ export default function HeaderOrderListing(props) {
     }
 
 
+    const renderComponent = () => { 
+      alert("g")
+    }
 
 
     return ( 
@@ -208,7 +223,7 @@ export default function HeaderOrderListing(props) {
          
           </div>
 
-         <AddHeadDocument type={"listing"} order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
+         <AddHeadDocument type={"listing"} render = {renderComponent}  order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
           
         </div>
 

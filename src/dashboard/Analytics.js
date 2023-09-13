@@ -41,7 +41,7 @@ export default function Listing() {
      } 
   
      function onMyFrameLoad() {
-        alert('myframe is loaded');
+
       };
 
     function checkUID () {
