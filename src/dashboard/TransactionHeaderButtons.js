@@ -37,21 +37,16 @@ export default function TransactionHeaderButtons(props) {
              </span>
 
 
-
-
              <span className='actions smallerr'onClick={deleteHeadDocument}>
              <p>Izbriši</p>
              <MdDeleteOutline />
              </span>
 
 
-
-             <span className='actions smallerr' onClick={toggleAddPosition} id=''>          
+            {/* <span className='actions smallerr' onClick={toggleAddPosition} id=''>          
              <p>Dodaj</p>
              <MdAdd />
-             </span>
-
-
+             </span> */} 
 
         </div>
         </div>

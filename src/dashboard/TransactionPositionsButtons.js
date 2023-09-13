@@ -30,11 +30,10 @@ export default function TransactionPositionsButtons(props) {
         <div className='buttonsPositions'>
 
 
-             <span className='actions smallerr' onClick={toggleAddPosition}>
+            {/* <span className='actions smallerr' onClick={toggleAddPosition}>
              <p>Dodaj</p>              
              <MdAdd />
-
-             </span>
+             </span> */}
 
 
              <span className='actions smallerr' onClick={editPosition}>

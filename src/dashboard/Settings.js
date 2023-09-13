@@ -63,39 +63,37 @@ export default function Settings() {
     
     <div className = "menu"> 
 
-         <button className="btn btn-primary dashboard" >
+         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("system")}>
            Sistem
            <img alt={""} src='settings-icon.png' width={50}/>
          </button>
 
-         <button className="btn btn-primary dashboard" >
+         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("documents")}>
            Vrste dokumentov
            <img alt={""} src='format-icon.png' width={50} />
          </button>
 
-         <button className="btn btn-primary dashboard" >
+         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("warehouses")}>
            Skladišča
            <img alt={""} src='warehouse-icon.png' width={50} />
          </button>
 
          
-         <button className="btn btn-primary dashboard" id='settings-hover' >
+         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("devices")}>
            Čitalci
            <img alt={""} src='rfid-icon.png' width={50} />
          </button>
 
-         <button className="btn btn-primary dashboard" id='settings-hover' >
+         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("printers")}>
            Tiskalniki
            <img alt={""} src='print-icon.png' width={50} />
          </button>
-         <button className="btn btn-primary dashboard" id='settings-hover' >
+
+         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("users")}>
            Uporabniki
            <img alt={""} src='user-icon.png' width={50} />
          </button>
-         <button className="btn btn-primary dashboard" id='settings-hover' >
-           Analitika
-           <img alt={""} src='monitor-icon.png' width={50} />
-         </button>
+
          </div>
 
        

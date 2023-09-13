@@ -68,7 +68,7 @@ export default function Listing() {
                   
                 <Header/>
 
-               <iframe src="http://172.17.1.31:4444" scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
+               <iframe src="http://standalone-analytics.in-sist.si" scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
 
         </div>       
        

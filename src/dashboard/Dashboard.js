@@ -85,6 +85,11 @@ export function Dashboard() {
               <img alt={""} src='stock.png' width={100} />
             </button>
 
+            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
+              Nastavitve
+              <img alt={""} src='settings.png' width={100} />
+            </button>
+
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("analytics")} id='settings-hover' >
             Analitika
             <img alt={""} src='monitor-icon.png' id='analytics' width={50} />

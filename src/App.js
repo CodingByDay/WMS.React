@@ -14,7 +14,12 @@ import Settings from "./dashboard/Settings"
 import NoInternetConnection from "./dashboard/NoInternetConnection"
 import axios from 'axios';
 import Analytics from './dashboard/Analytics';
-
+import System from './settings/System';
+import DocumentType from './settings/DocumentType';
+import Warehouses from './settings/Warehouses';
+import Devices from './settings/Devices';
+import Printers from './settings/Printers';
+import Users from './settings/Users';
 
 
 axios.interceptors.response.use(function (response) {
@@ -34,6 +39,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Auth />} />
         <Route path="/listing" element={<Listing />} />
@@ -43,6 +49,8 @@ function App() {
         <Route path="/internet" element={<NoInternetConnection />} />
         <Route path="/logout" element={<Auth />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/documents" element={<DocumentType  />} />
+
       </Routes>
     </BrowserRouter>
   )
