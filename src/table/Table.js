@@ -30,7 +30,7 @@ const columnsPositions = [
   { label: "Izbor", accessor: "Chosen", type: "StringValue"},
     { label: "Ident", accessor: "Ident", type: "StringValue"},
     { label: "Naziv", accessor: "Name", type: "StringValue"},
-    { label: "Št. artikla", accessor: "ItemID", type: "IntValue"  },
+    { label: "Št. artikla", accessor: "ItemID", type: "IntValue"},
     { label: "Številka", accessor: "No", type: "IntValue"},
     { label: "Izdano", accessor: "OpenQty", type: "DoubleValue"},
     { label: "Naročeno", accessor: "FullQty", type: "DoubleValue"}

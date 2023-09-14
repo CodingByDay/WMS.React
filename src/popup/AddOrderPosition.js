@@ -49,6 +49,9 @@ const AddOrderPosition = (props) => {
 
   const handleAddOrderPosition = () => {
 
+    alert(userId)
+    alert(props.current)
+    alert(selectedIdent.value);
     
     if (selectedIdent) {
 
@@ -140,7 +143,7 @@ const AddOrderPosition = (props) => {
 
           <div className="center-button">
             <span onClick={handleAddOrderPosition} className="actions smallerr">
-              Add
+              Dodaj
             </span>
           </div>
         </div>

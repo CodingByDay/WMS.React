@@ -37,8 +37,16 @@ const ListingService  = {
   },
 
 
+    async deletePosition(id) {
+      const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=deleteOrderItem&itemID=${id}`)   
+      return response.data;
+    },
+
     async createPosition (data) {
-      const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=createOrder`, data)   
+
+      console.log(data);
+
+      const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setOrderItem`, data)   
       return response.data;
     },
       

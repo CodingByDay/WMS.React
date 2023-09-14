@@ -68,8 +68,11 @@ export default function AddHeadDocument(props) {
 
 
     function onChangeTypePopup(e) {
+
         const mutated = {value: e.value, label:e.label}
         setType (mutated);   
+
+        setSelectedOption(mutated);
     }
     
     if(props.show) {

@@ -76,16 +76,13 @@ export default function Listing() {
               loader.style.display = "block";
               $(".main-container").css ("display", "none");
               ListingService.getAllListings().then(response => { 
+
               // console.log(response);
               setOrders(response);
 
               loader.style.display = "none";
               $(".main-container").css ("display", "block");
-           }); 
-
-
-
-        
+           });        
     }, []);
 
   async function getPositions(order) {
@@ -93,10 +90,24 @@ export default function Listing() {
       response.Items = response.Items.sort(function(a, b) {
           var aValue = DataAccess.getData(a, "No", "IntValue")
           var bValue = DataAccess.getData(b, "No", "IntValue")
-
-
           return aValue - bValue;
       });
+
+
+      var positions = [];
+
+
+      for(var i = 0; i < response.Items.length; i++) {
+        var itemID = DataAccess.getData(response.Items[i], "ItemID", "IntValue")
+          if(itemID != 0) {
+            positions.push(response.Items[i])
+          } else {
+           continue;
+          }
+
+      }
+
+      response.Items = positions
       setPositions(response);  
     });
   }
@@ -111,12 +122,7 @@ export default function Listing() {
           setOrders(orders);
           setSelectedHeadOrder(data);
           dispatch(redux.order(data.childNodes[6].innerHTML));
-
-
-
-
-          setIsHeadOrderSelected(true);
-        
+          setIsHeadOrderSelected(true);        
       } else {
 
           var toChange = positions;
@@ -129,12 +135,7 @@ export default function Listing() {
           setPositions(positionsInner);
           // console.log(positions);
           setSelectedPosition(data);
-
-
-
-
           // Checking to see if the position is selected
-
           setIsPositionSelected(true);
       }
 
@@ -203,6 +204,18 @@ export default function Listing() {
               icon: 'warning',
               buttons: ["Ne", "Ja, pobriši"],
             }).then((result) => { 
+
+                  if(result) {
+
+                    const currentId = selectedPosition?.childNodes[3]?.innerHTML ?? -1;
+
+
+                    ListingService.deletePosition(currentId).then(response => {                     
+                      window.showAlert("Informacija", "Uspešno pobrisano", "success")
+                      getPositions(currentHead);
+                   }); 
+                  }
+
             })    
           } else if (event ==="edit") {
             var editObject = {
@@ -218,9 +231,6 @@ export default function Listing() {
 
         setOrders(response);
 
-
-        console.log("Testing the order numbr")
-        console.log(response)
 
      }); 
     }

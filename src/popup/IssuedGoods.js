@@ -119,7 +119,7 @@ export default function IssuedGoods(props) {
       var warehouseData = warehouse;
       var objectForAPI = {};
       if (!byOrder) {
-            objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client}
+            objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: "", Receiver: client, Issuer: client}
       } else {
             objectForAPI = {DocumentType: documentData, Date: dateValue, Type: "P", WhareHouse: warehouseData, ByOrder: byOrder, LinkKey: ""}
       }
@@ -131,14 +131,8 @@ export default function IssuedGoods(props) {
        }
     } else {
 
-    /*  "DocumentType": "0150",
-        "Key": "0",
-        "LinkKey": "034758475",
-        "Type":  "BW",
-        "Status": "BW",
-        "Clerk": 23    */
 
-
+        // P == Prevzem sicer izdaja I
 
 
 
@@ -150,20 +144,22 @@ export default function IssuedGoods(props) {
 
         var order = ""
 
-
+        alert(warehouseData)
+        // I in P zamnjenano na narocilih
+        
         objectForAPI = { 
             DocumentType: documentData, 
             Type: "P",
-            WhareHouse: warehouseData,  
-            LinkKey: "0", 
+            Warehouse: warehouseData,  
             Receiver: client,
+            Issuer: client,
             Note: note,
             Status: "1",
-            Key: "1111111",
             Date: dateValue,
         }
          if(window.confirm('Ali želite kreirati dokument')) {
               var data =  ListingService.createOrder(objectForAPI).then(response => { 
+                console.log(response);
                 props.close();
                 props.render();
           }); 

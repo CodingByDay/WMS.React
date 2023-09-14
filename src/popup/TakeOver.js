@@ -167,23 +167,26 @@ $(function() {
                 var note = $('#acNote').val();
                 var order = ""
 
-                objectForAPI = {
-                    
+                alert(warehouseData)
+                
+                // I in P zamnjenano na narocilih
+
+                objectForAPI = { 
                     DocumentType: documentData, 
                     Type: "I",
-                    WhareHouse: warehouseData,  
-                    LinkKey: "0", 
+                    Warehouse: warehouseData,  
                     Receiver: client,
+                    Issuer: client,
                     Note: note,
                     Status: "1",
-                    Key: "1111111",
                     Date: dateValue,
-
                 }
         
                 if(window.confirm('Ali želite kreirati dokument')) {
                     var data =  ListingService.createOrder(objectForAPI).then(response => { 
                     console.log(response);
+                    props.close();
+                    props.render()
                 }); 
 
                 }
