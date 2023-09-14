@@ -151,10 +151,7 @@ export default function IssuedGoods(props) {
         var order = ""
 
 
-        objectForAPI = {
-            
-            
-       
+        objectForAPI = { 
             DocumentType: documentData, 
             Type: "P",
             WhareHouse: warehouseData,  
@@ -164,13 +161,7 @@ export default function IssuedGoods(props) {
             Status: "1",
             Key: "1111111",
             Date: dateValue,
-
         }
-   
-
-
-
-
          if(window.confirm('Ali želite kreirati dokument')) {
               var data =  ListingService.createOrder(objectForAPI).then(response => { 
                 props.close();

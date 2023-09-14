@@ -14,6 +14,7 @@ import StatusChange from "./StatusChange";
 import { useSelector, useDispatch } from 'react-redux'
 import * as redux from '../features/data';
 import AddOrderPosition from '../popup/AddOrderPosition';
+import TransactionService from '../services/TransactionService';
 
 export default function Listing() { 
     checkUID ()
@@ -23,6 +24,16 @@ export default function Listing() {
    
     const name = useSelector((state) => state.user.fullName)
     const [popupVisible, setPopupVisible] = useState(false);
+
+
+    const [warehouses, setWarehouses] = useState([]);
+    const [locations, setLocations] = useState([]);
+    const [idents, setIdents] = useState([]);
+
+
+    const [isPositionSelected, setIsPositionSelected] = useState(false);
+    const [isHeadOrderSelected, setIsHeadOrderSelected] = useState(false);
+
 
     const handlePopupClose = () => {
 
@@ -67,9 +78,14 @@ export default function Listing() {
               ListingService.getAllListings().then(response => { 
               // console.log(response);
               setOrders(response);
+
               loader.style.display = "none";
               $(".main-container").css ("display", "block");
            }); 
+
+
+
+        
     }, []);
 
   async function getPositions(order) {
@@ -95,6 +111,12 @@ export default function Listing() {
           setOrders(orders);
           setSelectedHeadOrder(data);
           dispatch(redux.order(data.childNodes[6].innerHTML));
+
+
+
+
+          setIsHeadOrderSelected(true);
+        
       } else {
 
           var toChange = positions;
@@ -108,10 +130,20 @@ export default function Listing() {
           // console.log(positions);
           setSelectedPosition(data);
 
+
+
+
+          // Checking to see if the position is selected
+
+          setIsPositionSelected(true);
       }
 
 
   }
+
+
+
+
 
 
   const getSortingObject = (sorting) => {
@@ -130,12 +162,10 @@ export default function Listing() {
             setPopupVisible(!popupVisible) 
         }
         if(type == "position" && event == "update") {
-          var objectToUpdate = {}
-
-      
+        var objectToUpdate = {}
 
           // Getting the correct object;
-      }
+         }
 
         if(type === 'head') {
           if(event ==="delete") {
@@ -181,12 +211,16 @@ export default function Listing() {
           }
         }
     }
-    const currentHead = selectedHeadOrder?.childNodes[5]?.innerHTML ?? -1;
+    const currentHead = selectedHeadOrder?.childNodes[6]?.innerHTML ?? -1;
 
     const renderComponent = () => { 
       ListingService.getAllListings().then(response => { 
 
         setOrders(response);
+
+
+        console.log("Testing the order numbr")
+        console.log(response)
 
      }); 
     }
@@ -206,10 +240,14 @@ export default function Listing() {
             <div className='listing-bg' >
 
             <HeaderOrderListing render = {renderComponent} communicate = {communicate} getSortingObject = {getSortingObject} />
+
             <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
-            <ListingPositionsButtons communicate = {communicate} />
+
+            <ListingPositionsButtons selectedPosition = {isPositionSelected}  selectedHead = {isHeadOrderSelected} communicate = {communicate} />
+
             <OrderPositions data = {positions} childToParent = {childToParent} />   
-            <AddOrderPosition current = {currentHead} isVisible={popupVisible} onClose={handlePopupClose} />
+
+            <AddOrderPosition current = {currentHead} isVisible={popupVisible} onClose={handlePopupClose} warehouse = {warehouses} idents = {idents} locations = {locations} />
 
 
             {

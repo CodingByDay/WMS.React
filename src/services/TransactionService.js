@@ -49,13 +49,20 @@ const TransactionService  = {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=erp&i=web`)
         return response.data;
     },
+    async getWarehouses() {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&i=web`)
+        return response.data;
+    },
 
     async getIdents()
     {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=idx&i=web`)
         return response;
     },
-
+    async getLocations(warehouse) {
+        const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=lo&pars=${warehouse}&i=web`)
+        return response.data;
+    },
     async deleteHeadDocument(id) {
         //  Brisanje dokumenta.
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=delMoveHead&head=${id}&i=web`)

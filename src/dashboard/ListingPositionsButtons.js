@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import { MdOutlineSearch, MdDateRange,MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 import { flushSync } from 'react-dom';
+import EditOrderPosition from '../popup/EditOrderPosition';
+import { Modal, Input } from 'antd';
+
 
 export default function ListingPositionsButtons(props) { 
 
-
+     const [selected, setSelected]  =useState (false)
     useEffect(() => {
         
     }, []);
@@ -48,6 +51,7 @@ export default function ListingPositionsButtons(props) {
     }
 
 
+
     return ( 
         <div className="filters">
 
@@ -56,10 +60,9 @@ export default function ListingPositionsButtons(props) {
               <MdAdd />
          </span>   
 
-         <span className='actions smallerr' id="editOrder" onClick={editQty}>
-              <p>Uredi</p>
-              <MdEdit />
-         </span>   
+
+          <EditOrderPosition selected = {props.selectedPosition} communicate = {props.communicate} />
+       
          <span className='actions smallerr' id="deleteOrder" onClick={deleteOrderHead}>
               <p>Pobriši</p>
               <MdDeleteOutline />

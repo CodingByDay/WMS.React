@@ -17,9 +17,10 @@ export default function AddHeadDocument(props) {
 
 
     const  [documentType, setDocumentType] = useState([]);
-    const [type, setType] = useState();
+    const [type, setType] = useState({value: 'Izdaja blaga', label: 'Izdaja blaga'});
     const [conditional, setConditional] = useState();
-    var isOrder = false;
+    const [selectedOption, setSelectedOption] = useState({value: 'Izdaja blaga', label: 'Izdaja blaga'})
+    var isOrder = true;
     useEffect(() => {
         
 
@@ -103,7 +104,7 @@ export default function AddHeadDocument(props) {
 
 
 
-        <Select className='select-filters'  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+        <Select className='select-filters' value={selectedOption}  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
         </div> 
         {conditional}
     </div>

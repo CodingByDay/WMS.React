@@ -129,7 +129,7 @@ export default function HeaderOrderListing(props) {
 
 
     const renderComponent = () => { 
-      alert("g")
+     
     }
 
 

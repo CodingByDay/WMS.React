@@ -35,7 +35,13 @@ const ListingService  = {
       const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=createOrder`, data)   
       return response.data;
   },
-    
+
+
+    async createPosition (data) {
+      const response =  await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=createOrder`, data)   
+      return response.data;
+    },
+      
     async changeStatus(orderNumber, status, user) {
 
       const response = await axios.post(process.env.REACT_APP_API_URL + `/Services/Device/?mode=setOrderStatus&key=${orderNumber}&status=${status}&clerk=${user}`)
