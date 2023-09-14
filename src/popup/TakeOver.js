@@ -27,12 +27,14 @@ export default function TakeOver(props) {
 
 
 
-        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("I").then(response => { 
+        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
             var types = [];
             for (var i = 0; i < response.Items.length; i++) {
-                types.push({value: response.Items[i].Properties.Items[0].StringValue, label:response.Items[i].Properties.Items[0].StringValue});                       
-            }     
-            setDocumentTypes(types);
+                var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
+                var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
+                var together = type + "|" + name;
+                types.push({value: together, label:together, code: type});                }     
+                setDocumentTypes(types);
         }); 
 
         var warehouses =  PopupService.getWarehouses(userId).then(response => {  
@@ -167,8 +169,6 @@ $(function() {
                 var note = $('#acNote').val();
                 var order = ""
 
-                alert(warehouseData)
-                
                 // I in P zamnjenano na narocilih
 
                 objectForAPI = { 
@@ -220,7 +220,7 @@ $(function() {
         <div className='left-column'>
 
 
-        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
 
 
