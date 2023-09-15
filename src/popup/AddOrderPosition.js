@@ -49,9 +49,8 @@ const AddOrderPosition = (props) => {
 
   const handleAddOrderPosition = () => {
 
-    alert(userId)
-    alert(props.current)
-    alert(selectedIdent.value);
+
+
     
     if (selectedIdent) {
 
@@ -64,7 +63,15 @@ const AddOrderPosition = (props) => {
 
 
       ListingService.createPosition(toSend).then(response => { 
-          console.log(response);
+
+          if (response.Success) {
+            window.showAlert("Informacija", "Uspešno dodana pozicija!", "success")
+          } else {
+            window.showAlert("Informacija", "Napaka v podatkih!", "error")
+          }
+          onClose();
+          props.communicate("position", "render")
+        // close and render
      }); 
 
       // Clear the state after adding

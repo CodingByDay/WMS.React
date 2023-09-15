@@ -73,6 +73,7 @@ export default function Auth(props) {
                      // UserID
                      // FullName
                      dispatch(login([name, userId]));
+                     localStorage.setItem('name', userId);
                  }
      
                }

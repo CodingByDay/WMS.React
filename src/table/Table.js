@@ -32,7 +32,7 @@ const columnsPositions = [
     { label: "Naziv", accessor: "Name", type: "StringValue"},
     { label: "Št. artikla", accessor: "ItemID", type: "IntValue"},
     { label: "Številka", accessor: "No", type: "IntValue"},
-    { label: "Izdano", accessor: "OpenQty", type: "DoubleValue"},
+    { label: "Odprto", accessor: "OpenQty", type: "DoubleValue"},
     { label: "Naročeno", accessor: "FullQty", type: "DoubleValue"}
   
 

@@ -45,6 +45,8 @@ export default function IssuedGoods(props) {
         var warehouses = onlyWarehouses(response);
         setWarehouses(warehouses); 
 
+        
+
     }); 
 
 
@@ -140,13 +142,11 @@ export default function IssuedGoods(props) {
         var warehouseData = warehouse;
         var objectForAPI = {};
         var note = $('#acNote').val();
-
-
         var order = ""
 
-        alert(warehouseData)
+ 
         // I in P zamnjenano na narocilih
-        
+
         objectForAPI = { 
             DocumentType: documentData, 
             Type: "P",
@@ -157,13 +157,17 @@ export default function IssuedGoods(props) {
             Status: "1",
             Date: dateValue,
         }
-         if(window.confirm('Ali želite kreirati dokument')) {
-              var data =  ListingService.createOrder(objectForAPI).then(response => { 
-                console.log(response);
-                props.close();
-                props.render();
+    
+          var data =  ListingService.createOrder(objectForAPI).then(response => { 
+
+                    if(response.data.Success) {
+                        window.showAlert("Informacija", "Uspešno kreirano", "success")
+                        props.close();
+                        props.render();
+                    }
+                    
           }); 
-         }
+         
      
     } 
 

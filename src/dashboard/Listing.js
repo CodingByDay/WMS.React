@@ -77,7 +77,7 @@ export default function Listing() {
               $(".main-container").css ("display", "none");
               ListingService.getAllListings().then(response => { 
 
-              // console.log(response);
+              console.log(response);
               setOrders(response);
 
               loader.style.display = "none";
@@ -170,9 +170,6 @@ export default function Listing() {
 
         if(type === 'head') {
           if(event ==="delete") {
-            
-
-
             window.swal({
               title: 'Potrditev',
               text: "Ali ste sigurni da želite pobrisati naročilo?",
@@ -183,18 +180,25 @@ export default function Listing() {
       
               if (result) {
       
-                ListingService.deleteHeadDocumentOrder(selectedHeadOrder.childNodes[0].innerHTML).then(response => { 
-                    if(response.data.includes("OK!")) {
+                ListingService.deleteHeadDocumentOrder(selectedHeadOrder.childNodes[6].innerHTML).then(response => { 
+
+
+                    console.log(response);
+
+
+                    if(response.data.Success) {
 
                               ListingService.getAllListings().then(response => { 
                                 // console.log(response);
                                 setOrders(response);
                                 window.showAlert("Informacija", "Uspešno pobrisano", "success")
-                      }); 
+                    }); 
                   }
                });    
               }
             })    
+          } else if (event === "render") {
+              renderComponent();
           }
         } else {
           if(event ==="delete") {
@@ -221,6 +225,10 @@ export default function Listing() {
             var editObject = {
               HeadID: selectedPosition
             }
+          } else if (event ==="render") {
+
+             getPositions(currentHead);
+
           }
         }
     }
@@ -257,7 +265,7 @@ export default function Listing() {
 
             <OrderPositions data = {positions} childToParent = {childToParent} />   
 
-            <AddOrderPosition current = {currentHead} isVisible={popupVisible} onClose={handlePopupClose} warehouse = {warehouses} idents = {idents} locations = {locations} />
+            <AddOrderPosition current = {currentHead} isVisible={popupVisible} onClose={handlePopupClose} communicate = {communicate} warehouse = {warehouses} idents = {idents} locations = {locations} />
 
 
             {

@@ -27,7 +27,7 @@ export default function TakeOver(props) {
 
 
 
-        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
+        var documentTypes =  PopupService.getAllDocumentTypeOfEvent("I").then(response => { 
             var types = [];
             for (var i = 0; i < response.Items.length; i++) {
                 var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
@@ -182,14 +182,16 @@ $(function() {
                     Date: dateValue,
                 }
         
-                if(window.confirm('Ali želite kreirati dokument')) {
+            
                     var data =  ListingService.createOrder(objectForAPI).then(response => { 
-                    console.log(response);
-                    props.close();
-                    props.render()
+                        if(response.data.Success) {
+                            window.showAlert("Informacija", "Uspešno kreirano", "success")
+                            props.close();
+                            props.render();
+                        }
                 }); 
 
-                }
+                
             
 
         }
@@ -200,7 +202,6 @@ $(function() {
      }
 
      function onDateChange(e) {
-        console.log(e.target.value)
         setDate(e.target.value)
     }
 
@@ -225,7 +226,7 @@ $(function() {
 
 
 
-        </div>
+        </div> 
 
         <div className='right-column'>
 
