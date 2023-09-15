@@ -148,7 +148,10 @@ export default function Stock() {
         }); 
     }
 
+    // Set up the value for the back button 
+    localStorage.setItem('back', "dashboard")
 
+    
     return ( 
 
         <div>

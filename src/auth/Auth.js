@@ -74,6 +74,7 @@ export default function Auth(props) {
                      // FullName
                      dispatch(login([name, userId]));
                      localStorage.setItem('name', userId);
+                     localStorage.setItem('back', "/")
                  }
      
                }

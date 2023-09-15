@@ -31,12 +31,18 @@ export default function Header() {
     </span>
   }
   
+
+    function goBack() {
+        alert("test");
+    }
+
+
     return ( 
 
 
         <div className="navbar">
-            <div className='logo navbar'>
-                <center><img src='logo-wms.png'  className='logo' alt='Riko WMS' height={30} draggable="false"/></center>
+            <div className='logo navbar' id='back-button' >
+                <center><img src='logo-wms.png' className='logo' alt='Riko WMS' height={30} draggable="false"/></center>
             </div>
             <div className='menu'></div>
             <div className='logout'>

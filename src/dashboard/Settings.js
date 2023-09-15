@@ -56,6 +56,11 @@ export default function Settings() {
       navigate(path); 
     }
   }
+
+      // Set up the value for the back button 
+      localStorage.setItem('back', "dashboard")
+
+      
     return ( 
       <div>
           <Header/>

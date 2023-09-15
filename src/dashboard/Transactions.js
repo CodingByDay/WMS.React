@@ -39,7 +39,10 @@ export default function Transactions() {
     useEffect(() => {
 
 
-      
+             // Set up the value for the back button 
+             localStorage.setItem('back', "dashboard")
+
+             
             var loader = document.getElementById("loader");
             loader.style.display = "block";
             $(".main-container").css ("display", "none");
@@ -313,6 +316,7 @@ function deleteItemDocument(id) {
       setShow(!show);
 
     }
+
 
 
 
