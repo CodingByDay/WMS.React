@@ -486,52 +486,6 @@ if(window.location.href.includes("transactions")&&table=="heads") {
      }).filter((data) => {
     
     
-    
-        // TODO: Conditional sorting
-    
-    
-    
-        if(typeof props.sort == "undefined") {
-            return true;
-        }
-        var term = props.sort.warehouse.toLowerCase();
-        var field = DataAccess.getData(data, "Warehouse", "StringValue").toLowerCase();;
-
-        if (!field.includes(term) &&term!="") {
-            return false;
-        }
-            return true; 
-    
-    
-    
-    
-    
-    
-     }).filter((data) => {
-    
-    
-        // TODO: Conditional sorting
-    
-    
-    
-    
-        if(typeof props.sort == "undefined") {
-            return true;
-        }
-        var term = props.sort.consignee.toLowerCase();
-        var field = DataAccess.getData(data, "Consignee", "StringValue").toLowerCase();;
-        if (!field.includes(term) &&term!="") {
-            return false;
-        }
-            return true; 
-    
-    
-    
-    
-    
-     }).filter((data) => {
-    
-    
         // TODO: Conditional sorting
     
     

@@ -151,7 +151,8 @@ const AddOrderPosition = (props) => {
           <div className="center-button">
             <center><span onClick={handleAddOrderPosition} className="actions smallerr">
               Dodaj
-            </span></center>
+            </span>
+            </center>
           </div>
         </div>
       </div>

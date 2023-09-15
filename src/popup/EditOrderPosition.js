@@ -17,8 +17,8 @@ function EditOrderPosition(props) {
 
   const showModal = () => {
     if(props.selected) {
-    setVisible(true);
-    document.getElementById("quantity").value = ""
+      setVisible(true);
+      document.getElementById("quantity").value = ""
     }
   };
    
@@ -29,13 +29,9 @@ function EditOrderPosition(props) {
 
 
   const handleOk = () => {
-    setVisible(false);
-
-
+    
+       setVisible(false);
         var qty = document.getElementById("quantity").value;
-
-   
-
         if(qty == null) {
               return;
         }

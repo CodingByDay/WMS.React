@@ -11,6 +11,7 @@ import { flushSync } from 'react-dom';
 import AddHeadDocument from '../popup/AddHeadDocument';
 import TransactionService from '../services/TransactionService';
 import ListingService from '../services/ListingService';
+import PopupService from '../services/PopupService';
 import DataAccess from "../utility/DataAccess";
 
 export default function HeaderOrderListing(props) { 
@@ -32,26 +33,80 @@ export default function HeaderOrderListing(props) {
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState({value:"",label:""})
 
+
+
+
+
+
+     const [documentNumbers, setDocumentNumbers] = useState([]);
+     const [warehouses, setWarehouses] = useState([]);
+     const [receivers, setReceivers] = useState([]);
+
+
+     // Variable for the current choice within the different dropdowns
+
+     const [currentType, setCurrentType] = useState(null);
+     const [currentDocumentNumber, setCurrentDocumentNumber] = useState(null);
+     const [currentReceivers, setCurrentReceivers] = useState(null);
+
+
+
+
+
+
     const [isOrder, setIsOrder] = useState(false)
     useEffect(() => {
-        var data =  SortingService.getAllDocumentTypes().then(response => { 
-        var types = [];
 
-            for (var i = 0; i < response.Items.length; i++) {
 
-                      var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
-                      var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
+                          var data =  SortingService.getAllDocumentTypes().then(response => { 
+                          var types = [];
+                          
+                          types.push({value: "", code: "", label: ""});
 
-                      var together = type + "|" + name;
+                          for (var i = 0; i < response.Items.length; i++) {
 
-                      types.push({value: together, label:together, code: type});                       
-            }            
-            setTypes(types);
-     }); 
+                                    var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
+                                    var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
+
+                                    var together = type + "|" + name;
+
+                                    types.push({value: together, label:together, code: type});                       
+                          }            
+                          setTypes(types);
+                  }); 
+
+
+
+                  var dn = TransactionService.getAllTransactions().then(response=> {
+                    var transactions = []
+                    transactions.push({value: '', label: ''})
+                    for(var i=0;i<response.Items.length;i++) {
+
+                          var field = DataAccess.getData(response.Items[i], "LinkKey", "StringValue");
+                          transactions.push({label: field,  value: field});
+
+                          
+                    }
+
+                    setDocumentNumbers(transactions.filter((v,i,a)=>a.findIndex(v2=>['value','label'].every(k=>v2[k] ===v[k]))===i))
+                  });
+
+
+                    var subjects =  PopupService.getSubjects().then(response => { 
+                      window.subjects = response;
+                      var subjectsList = [];   
+                      subjectsList.push({value:"", label:""})
+                    for(var i = 0; i < response.Items.length; i++) {
+                          var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
+                          subjectsList.push({value: field, label: field});
+                    }
+                    setReceivers(subjectsList); 
+            });
+
 
         // filter the table
         searchTable();
-    }, [documentType, consignee, client, warehouse, document, state]);
+    }, [currentType, currentDocumentNumber, currentReceivers, state]);
 
 
 
@@ -66,7 +121,13 @@ export default function HeaderOrderListing(props) {
       setHead(data)
   }
   function searchTable() { 
-    var sorting = {type: documentType.value, document: document, consignee: consignee, client: client, warehouse: warehouse, period: state}
+    var sorting = {
+      type: currentType && currentType.value || "",
+      document: currentDocumentNumber && currentDocumentNumber.value || "",
+      client: currentReceivers && currentReceivers.value || "",
+      period: state || ""
+    };
+    console.log(sorting)
     props.getSortingObject(sorting)
   };
 
@@ -81,10 +142,6 @@ export default function HeaderOrderListing(props) {
 
   function onChangeDocument(e) {
     // testing 
-
-
-
-
     setDocument(e.target.code)
   }
 
@@ -98,18 +155,35 @@ export default function HeaderOrderListing(props) {
   }
 
   function onChangeReceiver(e) {
-
-    setClient(e.target.value);
-
+    if(e.value == "") {
+       setCurrentReceivers(null)
+    } else {
+       setCurrentReceivers({value: e.value, label: e.value})
+    }
   }
 
 
   var reload = false;
-  function onChangeType(e) {
-    const mutated = {value: e.code, label:e.code}
-    setDocumentType (mutated);   
+
+  function onChangeDocumentNumber(e) {
+    if(e.value == "") {
+        setCurrentDocumentNumber(null)
+    } else {
+        setCurrentDocumentNumber({ value: e.value, label: e.value })
+    }
   }
 
+
+
+
+  function onChangeType(e) {
+    if (e.value == "") {
+      setCurrentType(null)
+    } else {
+      const mutated = {value: e.code, label:e.code}
+      setCurrentType (mutated);   
+    }
+  }
   function openAdd() {
     setHead(!head);
     setIsOrder(!isOrder);
@@ -137,25 +211,13 @@ export default function HeaderOrderListing(props) {
         <div className="filters">
 
 
-             <Select className='select-filterss' placeholder={"Tip"}  onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select className='select-filterss' placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+
+             <Select className='select-filterss' placeholder={"Številka naročila"} value={currentDocumentNumber} onChange={(e) => onChangeDocumentNumber(e)} options={documentNumbers} id='documentNumbers'/>
+
+             <Select className='select-filterss' placeholder={"Prejemnik"} value={currentReceivers}  onChange={(e) => onChangeReceiver(e)} options={receivers} id='documentNumbers'/>
 
 
-             <input
-              id = "documentSearch"
-              type="text"
-              onChange={(e)=> onChangeDocument(e)}
-              className="form-control mt-1"
-              placeholder="Dokument"
-             />
-
-
-             <input
-              id = "warehouse"
-              type="text"
-              onChange={(e)=> onChangeWarehouse(e)}
-              className="form-control mt-1"
-              placeholder="Skladišče"
-            />
 
 
      
@@ -181,21 +243,10 @@ export default function HeaderOrderListing(props) {
 
          )}
 
-            <input
-              id = "receiver"
-              type="text"
-              onChange={(e)=> onChangeReceiver(e)}
-              className="form-control mt-1"
-              placeholder="Prejemnik"
-            />
 
-            <input
-              id = "consignee"
-              type="text"
-              onChange={(e)=> onChangeConsignee(e)}
-              className="form-control mt-1"
-              placeholder="Naročnik"
-            />
+
+
+      
 
 
 
