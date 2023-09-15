@@ -18,7 +18,7 @@ function EditOrderPosition(props) {
   const showModal = () => {
     if(props.selected) {
     setVisible(true);
-
+    document.getElementById("quantity").value = ""
     }
   };
    
@@ -34,12 +34,14 @@ function EditOrderPosition(props) {
 
         var qty = document.getElementById("quantity").value;
 
+   
+
         if(qty == null) {
               return;
         }
         if (qty &&isFloat(qty)) 
         {    
-              props.communicate("position", "update");
+              props.communicate("position", "update", qty);
         } else {
               window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
               return; 
@@ -75,8 +77,8 @@ function EditOrderPosition(props) {
       >
 
 
-        <label htmlFor="quantity">Quantity:</label>
-        <Input id="quantity" placeholder="Enter quantity" />
+        <label htmlFor="quantity">Količina:</label>
+        <Input id="quantity" placeholder="Vnesite količino" />
       </Modal>
     </div>
   );

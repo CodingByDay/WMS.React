@@ -152,7 +152,7 @@ export default function Listing() {
   }
 
     const communicate = (type, event, data) => {       
- 
+
         if(type == "status") {
           if(typeof selectedHeadOrder != "undefined") {
             setShowStatusAlert(!showStatusAlert)
@@ -163,9 +163,42 @@ export default function Listing() {
             setPopupVisible(!popupVisible) 
         }
         if(type == "position" && event == "update") {
-        var objectToUpdate = {}
+          
 
-          // Getting the correct object;
+          const key = selectedHeadOrder?.childNodes[6]?.innerHTML ?? -1;
+
+          const itemID = selectedPosition?.childNodes[3]?.innerHTML ?? -1;
+          const no = selectedPosition?.childNodes[4]?.innerHTML ?? -1;
+          const ident = selectedPosition?.childNodes[1]?.innerHTML ?? -1;
+
+
+        
+
+        var objectToUpdate = {
+
+
+          Key: key,
+          Qty: data,
+          ItemID: itemID,
+          Clerk:  localStorage.getItem('name'),
+          No: no,
+          Ident: ident
+          
+        }
+
+
+   
+
+        ListingService.updatePosition(objectToUpdate).then(response => { 
+
+          if (response.Success) {
+            window.showAlert("Informacija", "Uspešno spremenjena pozicija!", "success")
+          } else {
+            window.showAlert("Informacija", "Napaka v podatkih!", "error")
+          }
+       
+          getPositions(currentHead);
+     })
          }
 
         if(type === 'head') {
@@ -183,7 +216,7 @@ export default function Listing() {
                 ListingService.deleteHeadDocumentOrder(selectedHeadOrder.childNodes[6].innerHTML).then(response => { 
 
 
-                    console.log(response);
+
 
 
                     if(response.data.Success) {

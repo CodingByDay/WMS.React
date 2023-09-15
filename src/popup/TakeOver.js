@@ -9,19 +9,20 @@ import { MdAdd} from "react-icons/md";
 import ListingService from "../services/ListingService";
 export default function TakeOver(props) { 
     // States
-
     const [documentTypes, setDocumentTypes] = useState([]);
     const [warehouses, setWarehouses] = useState([]);
     const [buyer, setBuyer] = useState([]);
     const [byOrder, setByOrder] = useState(true);
-
     // Chosen states
-
     const [document, setDocument] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [client, setClient] = useState("")
     const [date, setDate] = useState("")
     const userId = useSelector((state) => state.user.userId)
+    const [selectedType, setSelectedType] = useState(null)
+    const [selectedWarehouse, setSelectedWarehouse] = useState(null)
+    const [selectedClient, setSelectedClient] = useState(null)
+
 
     useEffect(() => {
 
@@ -29,6 +30,7 @@ export default function TakeOver(props) {
 
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("I").then(response => { 
             var types = [];
+            types.push({value:"", label: "", code: ""})
             for (var i = 0; i < response.Items.length; i++) {
                 var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
                 var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
@@ -47,6 +49,7 @@ export default function TakeOver(props) {
     var subjects =  PopupService.getSubjects().then(response => { 
             window.subjects = response;
             var subjectsList = [];   
+            subjectsList.push({value:"", label:""})
        for(var i = 0; i < response.Items.length; i++) {
             var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
             subjectsList.push({value: field, label: field});
@@ -79,7 +82,7 @@ $(function() {
 
     function onlyWarehouses(data) { 
         var returnArray = [];
-
+        returnArray.push({value: "", label: ""})
         for (var i = 0; i < data.Items.length; i++) {  
             returnArray.push({value: data.Items[i].Properties.Items[0].StringValue, label: data.Items[i].Properties.Items[0].StringValue});           
         }
@@ -88,25 +91,38 @@ $(function() {
     }
 
   
-
     function onChangeType(e) {
-     
-        setDocument(e.value)
+        if(e.value=="") {
+            setSelectedType(null);
+        } else {
+        setDocument(e.code)
+        setSelectedType({value: e.code, label: e.code});
+        }
     }
 
 
     function onChangeWarehouse(e) {
- 
+        if(e.value=="") {
+            setSelectedWarehouse(null);
+
+        } else {
         setWarehouse(e.value)
+        setSelectedWarehouse({value: e.value, label: e.value});
+        }
     }
 
 
 
     function onChangeBuyer(e) {
+        if (e.value == "") {
 
+        setSelectedClient(null);
+
+        } else {
         setClient(e.value)
+        setSelectedClient({value: e.value, label: e.value});
+        }
     }
-
 
     function onDateChange(e) {
         setDate(e.target.value)
@@ -122,7 +138,7 @@ $(function() {
 
     function getClient() {
         if(props.order) {
-            return <Select className='select-filters' onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
+            return <Select className='select-filters' value={selectedClient}  onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
         }
     }
 
@@ -184,8 +200,13 @@ $(function() {
         
             
                     var data =  ListingService.createOrder(objectForAPI).then(response => { 
-                        if(response.data.Success) {
+                        cleanFields();
+                        if(response.Success) {
                             window.showAlert("Informacija", "Uspešno kreirano", "success")
+                            props.close();
+                            props.render();
+                        } else {
+                            window.showAlert("Informacija", "Napaka v podatkih", "error")
                             props.close();
                             props.render();
                         }
@@ -196,7 +217,13 @@ $(function() {
 
         }
       }
+      function cleanFields() {
+        setSelectedType(null)
+        setSelectedWarehouse(null)
+        setSelectedClient(null)
+        $('#acNote').val("")
 
+    }
       function toggleCheck() {
         setByOrder(!byOrder)
      }
@@ -221,8 +248,8 @@ $(function() {
         <div className='left-column'>
 
 
-        <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
-        <Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select className='select-filters' value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
 
 
 
@@ -241,6 +268,9 @@ $(function() {
         {getClient()}
         </div>
         </div>
+
+
+        <div className="bottom-part">
         {getNote()}
         <center><span className='actions smallerr takeover' onClick={createHeadDocument} id='createDocument'>          
              <p>Potrdi</p>
@@ -248,7 +278,7 @@ $(function() {
              </span></center> 
         </div>
 
-
+        </div>
         ); 
 }
 

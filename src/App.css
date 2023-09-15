@@ -1,6 +1,6 @@
 
 .center-button span {
-  width: 100%!important;
+
   margin: 0;
 }
 .logo.navbar {
@@ -15,7 +15,15 @@
   box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
   background: none;
 }
-
+.layout-takeover-goods {
+  margin: 0;
+}
+.layout-takeover-goods {
+  margin-top: 2em!important;
+}
+.layout-issued-goods {
+  margin: 0;
+}
 span#openRangeTransaction {
   width: auto;
   height: 2.6em;

@@ -24,6 +24,10 @@ export default function IssuedGoods(props) {
     const [client, setClient] = useState("")
     const [date, setDate] = useState(new Date().toLocaleDateString())
 
+    const [selectedType, setSelectedType] = useState(null)
+    const [selectedWarehouse, setSelectedWarehouse] = useState(null)
+    const [selectedClient, setSelectedClient] = useState(null)
+
 
     var bufferElements = [];
     const userId = useSelector((state) => state.user.userId)
@@ -33,6 +37,7 @@ export default function IssuedGoods(props) {
     useEffect(() => {
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("P").then(response => { 
             var types = [];
+            types.push({value: "", label: ""})
             for (var i = 0; i < response.Items.length; i++) {
                 var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
                 var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
@@ -53,6 +58,7 @@ export default function IssuedGoods(props) {
     var subjects =  PopupService.getSubjects().then(response => { 
             window.subjects = response;
             var subjectsList = [];   
+            subjectsList.push({value:"", label:""})
        for(var i = 0; i < response.Items.length; i++) {
             var field = DataAccess.getData(response.Items[i], "ID", "StringValue");
             subjectsList.push({value: field, label: field});
@@ -72,6 +78,7 @@ export default function IssuedGoods(props) {
 
     function onlyWarehouses(data) { 
         var returnArray = [];
+        returnArray.push({value:"", label:""})
 
         for (var i = 0; i < data.Items.length; i++) {  
             returnArray.push({value: data.Items[i].Properties.Items[0].StringValue, label: data.Items[i].Properties.Items[0].StringValue});           
@@ -83,21 +90,36 @@ export default function IssuedGoods(props) {
   
 
     function onChangeType(e) {
-     
+        if(e.value=="") {
+            setSelectedType(null);
+        } else {
         setDocument(e.code)
+        setSelectedType({value: e.code, label: e.code});
+        }
     }
 
 
     function onChangeWarehouse(e) {
- 
+        if(e.value=="") {
+            setSelectedWarehouse(null);
+
+        } else {
         setWarehouse(e.value)
+        setSelectedWarehouse({value: e.value, label: e.value});
+        }
     }
 
 
 
     function onChangeBuyer(e) {
+        if (e.value == "") {
 
+        setSelectedClient(null);
+
+        } else {
         setClient(e.value)
+        setSelectedClient({value: e.value, label: e.value});
+        }
     }
 
 
@@ -159,13 +181,18 @@ export default function IssuedGoods(props) {
         }
     
           var data =  ListingService.createOrder(objectForAPI).then(response => { 
-
-                    if(response.data.Success) {
+                    cleanFields();
+                    if(response.Success) {
                         window.showAlert("Informacija", "Uspešno kreirano", "success")
                         props.close();
                         props.render();
+                      
+                    } else {
+                        window.showAlert("Informacija", "Napaka v podatkih", "error")
+                        props.close();
+                        props.render();
                     }
-                    
+
           }); 
          
      
@@ -173,6 +200,15 @@ export default function IssuedGoods(props) {
 
     }
 
+
+
+    function cleanFields() {
+        setSelectedType(null)
+        setSelectedWarehouse(null)
+        setSelectedClient(null)
+        $('#acNote').val("")
+
+    }
 
     function toggleCheck() {
        setByOrder(!byOrder)
@@ -188,7 +224,7 @@ export default function IssuedGoods(props) {
 
     function getClient() {
         if(props.order) {
-            return   <Select className='select-filters-add' onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+            return   <Select className='select-filters-add' value={selectedClient} onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
         }
     }
 
@@ -220,8 +256,8 @@ export default function IssuedGoods(props) {
 
 
         <div className='left-column'>
-        <Select className='select-filters-add' onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
-        <Select className='select-filters-add' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select className='select-filters-add' value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters-add' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
         </div>
         <div className='right-column'>
 
@@ -240,6 +276,9 @@ export default function IssuedGoods(props) {
         </div>
 
 
+
+        <div className="bottom-part">
+
         {getNote()}
 
 
@@ -253,7 +292,7 @@ export default function IssuedGoods(props) {
 
 
   
-        </div>
+        </div></div>
 
 
         ); 

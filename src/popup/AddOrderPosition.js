@@ -58,7 +58,7 @@ const AddOrderPosition = (props) => {
         Key: props.current,
         Qty: quantity,
         Ident: selectedIdent.value,
-        Clerk:  userId
+        Clerk:  localStorage.getItem('name')
       }
 
 
@@ -149,9 +149,9 @@ const AddOrderPosition = (props) => {
 
 
           <div className="center-button">
-            <span onClick={handleAddOrderPosition} className="actions smallerr">
+            <center><span onClick={handleAddOrderPosition} className="actions smallerr">
               Dodaj
-            </span>
+            </span></center>
           </div>
         </div>
       </div>
