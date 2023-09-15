@@ -248,8 +248,11 @@ button#loginButton {
   font-weight: 800;
 }
 
-*{font-family: 'Calibri';
-
+*{
+  
+  
+  font-family: 'Open Sans', sans-serif;
+  font-size:medium;
 
 
 }
