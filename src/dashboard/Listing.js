@@ -71,6 +71,13 @@ export default function Listing() {
     const [selectedPosition, setSelectedPosition] = useState();
     const [showStatusAlert, setShowStatusAlert] = useState(false)
     useEffect(() => {
+
+
+          // Set up the value for the back button 
+         localStorage.setItem('back', "dashboard")
+
+
+
       var loader = document.getElementById("loader");
 
               loader.style.display = "block";
@@ -276,8 +283,7 @@ export default function Listing() {
      }); 
     }
 
-    // Set up the value for the back button 
-    localStorage.setItem('back', "dashboard")
+
     
     return ( 
 

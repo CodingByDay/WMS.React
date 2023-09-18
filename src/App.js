@@ -51,6 +51,12 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/documents" element={<DocumentType  />} />
 
+
+
+        <Route path="/users" element={<Users  />} />
+
+        
+
       </Routes>
     </BrowserRouter>
   )
