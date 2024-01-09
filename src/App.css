@@ -1,3 +1,38 @@
+/* Styles for the table container */
+.user-settings-table {
+  max-height: 400px; /* Set the maximum height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 20px auto 0;
+}
+
+/* Styles for the table */
+.react-table-users {
+  width: 90%; /* Limiting the width to 90% */
+  border-collapse: collapse; /* Collapses the borders of the table */
+  margin: 0 auto; /* Center the table horizontally */
+  margin-top: 20px; /* Adds space at the top of the table */
+  margin-bottom: 20px; /* Adds some space below the table */
+}
+
+/* Styles for table headers */
+.react-table-users th {
+  background-color: #f2f2f2; /* Light background color */
+  font-weight: bold; /* Bold font for headers */
+  padding: 8px; /* Padding for headers */
+  text-align: left; /* Aligns header text to the left */
+  border: 1px solid #ccc; /* Adds borders around headers */
+}
+
+/* Styles for table rows */
+.react-table-users td {
+  padding: 8px; /* Padding for table cells */
+  border: 1px solid #ccc; /* Adds borders around cells */
+}
+
+/* Alternate row background color for better readability */
+.react-table-users tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light alternate background color */
+}
 
 .center-button span {
 

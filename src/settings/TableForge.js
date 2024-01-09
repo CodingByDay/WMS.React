@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { MdEdit } from "react-icons/md";
+import { IoMdAddCircle } from "react-icons/io";
+import { MdDeleteForever } from "react-icons/md";
+
 
 import { useTable } from 'react-table';
 
@@ -6,6 +10,278 @@ import SettingsService from '../services/SettingsService';
 function TableForge({ name, url, init }) {
 
     const initialUsers = [
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
         {
             id: 1,
             name: 'John',
@@ -83,8 +359,8 @@ function TableForge({ name, url, init }) {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <button onClick={() => onEdit(row.original)}>Posodobi</button>
-            <button onClick={() => onDelete(row.original)}>Pobriši</button>
+            <button onClick={() => onEdit(row.original)}><MdEdit /></button>
+            <button onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
           </div>
         ),
       },
@@ -110,8 +386,8 @@ function TableForge({ name, url, init }) {
   });
 
   return (
-    <div>
-      <table {...getTableProps()} className="react-table">
+    <div class = "user-settings-table">
+      <table {...getTableProps()} className={`react-table-${name}`}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>

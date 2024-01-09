@@ -56,7 +56,7 @@ function Users() {
     <div>
     <Header />
     <div className="Users">
-      <h1>Uporabniki</h1>
+   
       <div className="users-container-table">
          <TableForge name={tableName} url={urlParam} init = {initialization} />
       </div>
