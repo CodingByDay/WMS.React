@@ -10,14 +10,14 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setting: (state, action) => {
-      state.currentObject = action.payload
-     
+    setCurrentSetting: (state, action) => {
+      state.currentObject = action.payload[0]
+      
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setting } = dataSlice.actions
+export const { setCurrentSetting } = settingsSlice.actions
 
 export default settingsSlice.reducer

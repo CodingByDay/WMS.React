@@ -1,9 +1,11 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import SettingsService from '../services/SettingsService';
+import { useSelector, useDispatch } from 'react-redux';
+import {setCurrentSetting} from '../features/settings'
 function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
 
-
+    const dispatch = useDispatch()
 
 
    function getData() {
@@ -12,8 +14,15 @@ function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
             return response.Items;
         }); */
 
-        
+
         // Dummy data
+
+        // Saving the state to redux store
+        dispatch(setCurrentSetting([initialUsers]));
+
+
+
+
         return initialUsers;
     }
 
