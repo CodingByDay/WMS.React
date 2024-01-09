@@ -13,6 +13,8 @@ import DataAccess from "../utility/DataAccess";
 
 export default function Listing() { 
 
+    const analytics_url = process.env.REACT_APP_ANALYTICS_URL;
+
 
 
     checkUID ()
@@ -63,12 +65,9 @@ export default function Listing() {
 
       
         <div id="analytics-panel">
-                <Loader />
-            
-                  
+                <Loader />                             
                 <Header/>
-
-               <iframe src="http://standalone-analytics.in-sist.si" scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
+               <iframe src={analytics_url} scrolling="no" onload="onMyFrameLoad(this)"  id='analytics-frame'>Your browser doesn't support iFrames.</iframe>
 
         </div>       
        
