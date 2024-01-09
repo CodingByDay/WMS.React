@@ -3,22 +3,21 @@ import TransactionService from '../services/TransactionService'
 import DataAccess from "../utility/DataAccess";
 
 const initialState = {
-    orderKey: "",
-    transactionKey: "",
+    currentObject: {},
 }
 
-export const dataSlice = createSlice({
-  name: 'data',
+export const settingsSlice = createSlice({
+  name: 'settings',
   initialState,
   reducers: {
-    order: (state, action) => {
-      state.orderKey = action.payload
+    setting: (state, action) => {
+      state.currentObject = action.payload
      
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { order } = dataSlice.actions
+export const { setting } = dataSlice.actions
 
-export default dataSlice.reducer
+export default settingsSlice.reducer

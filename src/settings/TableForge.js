@@ -1,15 +1,42 @@
 import React from 'react';
 import { useTable } from 'react-table';
-
+import SettingsService from '../services/SettingsService';
 function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
 
 
 
 
    function getData() {
+        // API IMPLEMENTATION //
+        /* SettingsService.getSettingsData(url).then(response => { 
+            return response.Items;
+        }); */
 
-        return []
-   }
+        
+        // Dummy data
+        return initialUsers;
+    }
+
+
+    const initialUsers = [
+        {
+            id: 1,
+            name: 'John',
+            surname: 'Doe',
+            upName: 'johndoe',
+            password: 'secret123',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            surname: 'Smith',
+            upName: 'janesmith',
+            password: 'mypassword',
+            active: false,
+        },
+    ];
+
 
   // Define your table columns
   const userColumns = React.useMemo(
