@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import UserTable from './UserTable'; // Import the UserTable component
 import Header from '../dashboard/Header';
 import Footer from '../dashboard/Footer';
-
+import TableForge from './TableForge';
 function Users() {
   // Dummy data for users
   const initialUsers = [
@@ -26,24 +26,26 @@ function Users() {
     // Add more dummy user objects as needed
   ];
 
-  // State to hold the user data
+
   const [users, setUsers] = useState(initialUsers);
 
-  // Callbacks for handling actions
   const handleDelete = (userToDelete) => {
-    // Remove the user from the data array
+
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userToDelete.id));
   };
 
   const handleEdit = (editedUser) => {
-    // Implement edit logic here (e.g., opening a modal for editing)
+
     console.log('Editing user:', editedUser);
   };
 
   const handleInsert = () => {
-    // Implement insert logic here (e.g., opening a modal for adding a new user)
+
     console.log('Inserting a new user');
   };
+
+  const tableName = 'users';
+  const urlParam = "/getUsers";
 
   return (
     <div>
@@ -51,7 +53,7 @@ function Users() {
     <div className="Users">
       <h1>Uporabniki</h1>
       <div className="users-container-table">
-         <UserTable data={users} onDelete={handleDelete} onEdit={handleEdit} onInsert={handleInsert} />
+         <TableForge name={tableName} url={urlParam} onDelete={handleDelete} onEdit={handleEdit} onInsert={handleInsert} />
       </div>
     </div>
     <Footer />
