@@ -4,7 +4,13 @@ import UserTable from './UserTable'; // Import the UserTable component
 import Header from '../dashboard/Header';
 import Footer from '../dashboard/Footer';
 import TableForge from './TableForge';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import {store} from '../store/store'
 function Users() {
+
+  const currentState = store.getState();
+
+
   // Dummy data for users
   const initialUsers = [
     {
@@ -27,25 +33,24 @@ function Users() {
   ];
 
 
-  const [users, setUsers] = useState(initialUsers);
 
-  const handleDelete = (userToDelete) => {
 
-    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userToDelete.id));
-  };
 
-  const handleEdit = (editedUser) => {
 
-    console.log('Editing user:', editedUser);
-  };
+  const initialization = () => {
 
-  const handleInsert = () => {
 
-    console.log('Inserting a new user');
-  };
+    
 
+  }
+
+  
   const tableName = 'users';
   const urlParam = "/getUsers";
+
+
+
+
 
   return (
     <div>
@@ -53,7 +58,7 @@ function Users() {
     <div className="Users">
       <h1>Uporabniki</h1>
       <div className="users-container-table">
-         <TableForge name={tableName} url={urlParam} onDelete={handleDelete} onEdit={handleEdit} onInsert={handleInsert} />
+         <TableForge name={tableName} url={urlParam} init = {initialization} />
       </div>
     </div>
     <Footer />

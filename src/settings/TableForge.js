@@ -1,31 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { useTable } from 'react-table';
+
 import SettingsService from '../services/SettingsService';
-import { useSelector, useDispatch } from 'react-redux';
-import {setCurrentSetting} from '../features/settings'
-function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
-
-    const dispatch = useDispatch()
-
-
-   function getData() {
-        // API IMPLEMENTATION //
-        /* SettingsService.getSettingsData(url).then(response => { 
-            return response.Items;
-        }); */
-
-
-        // Dummy data
-
-        // Saving the state to redux store
-        dispatch(setCurrentSetting([initialUsers]));
-
-
-
-
-        return initialUsers;
-    }
-
+function TableForge({ name, url, init }) {
 
     const initialUsers = [
         {
@@ -46,6 +24,30 @@ function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
         },
     ];
 
+    var users = [];
+
+
+
+   function getData() {
+        // API IMPLEMENTATION //
+        /* SettingsService.getSettingsData(url).then(response => { 
+            return response.Items;
+        }); */
+        
+        // Dummy data
+        users = initialUsers;
+        return initialUsers;
+    }
+
+
+   
+
+        function onEdit(data) {
+            alert("test");
+        }
+        function onDelete(data) {
+            alert("test");
+        }
 
   // Define your table columns
   const userColumns = React.useMemo(
@@ -87,7 +89,7 @@ function TableForge({ name, url, onDelete, onEdit, onInsert, onSpecial }) {
         ),
       },
     ],
-    [onDelete, onEdit]
+    []
   );
 
     const tablesAssociation = [
