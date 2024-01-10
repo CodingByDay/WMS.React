@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { MdEdit } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-
+import $ from 'jquery'; 
+import 'bootstrap';
 
 import { useTable } from 'react-table';
 
@@ -315,15 +316,70 @@ function TableForge({ name, url, init }) {
         return initialUsers;
     }
 
-
-   
-
         function onEdit(data) {
             alert("test");
+            console.log(data);
+
         }
+
+
         function onDelete(data) {
             alert("test");
         }
+
+
+        function generatePopupContent(data) {
+          let content = '<div class="modal-dialog">';
+          content += '<div class="modal-content">';
+          content += '<div class="modal-header">';
+          content += '<h5 class="modal-title">Fields and Types</h5>';
+          content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+          content += '<span aria-hidden="true">&times;</span></button></div>';
+          content += '<div class="modal-body"><form>'; // Wrap inputs in a form
+        
+          for (const key in data) {
+            const value = data[key];
+            const type = typeof value;
+            content += `<div class="form-group">`;
+        
+            // Create input fields based on type
+            if (type === 'string' || type === 'number' || type === 'boolean') {
+              content += `<label for="${key}">${key}</label>`;
+              content += `<input type="${type === 'boolean' ? 'checkbox' : 'text'}" id="${key}" name="${key}" value="${value}" class="form-control" ${type === 'boolean' && value ? 'checked' : ''}>`;
+            } else {
+              content += `<p>Unsupported type for ${key}: ${type}</p>`;
+            }        
+            content += `</div>`;
+          }    
+          content += '</form></div></div></div>';
+          return content;
+        }
+        
+
+
+  function onEdit(data) {
+    // Generate HTML content for the popup
+    const popupContent = generatePopupContent(data);
+
+    // Create a Bootstrap modal element
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.innerHTML = popupContent;
+
+    // Add the modal to the document body
+    document.body.appendChild(modal);
+
+    // Show the modal using Bootstrap's modal function
+    window.$(modal).modal('show');
+
+    // Clean up the modal after it's closed
+    $(modal).on('hidden.bs.modal', function () {
+        $(this).remove();
+    });
+
+    // Log the data to console
+    console.log(data);
+}
 
   // Define your table columns
   const userColumns = React.useMemo(
