@@ -4,7 +4,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import $ from 'jquery'; 
 import 'bootstrap';
-
+import Swal from 'sweetalert2';
 import { useTable } from 'react-table';
 
 import SettingsService from '../services/SettingsService';
@@ -307,24 +307,49 @@ function TableForge({ name, url, init }) {
 
    function getData() {
         // API IMPLEMENTATION //
-        /* SettingsService.getSettingsData(url).then(response => { 
+         SettingsService.executeSQLQuery("select * from uwmssetting", []).then(response => { 
+            console.log(response);
             return response.Items;
-        }); */
-        
+         });       
         // Dummy data
         users = initialUsers;
         return initialUsers;
     }
 
+
+
+
+
         function onEdit(data) {
-            alert("test");
+
             console.log(data);
 
         }
 
+        const showDeleteConfirmation = () => {
+          Swal.fire({
+            title: 'Ste prepričani?',
+            text: 'Ta dejanja ni mogoče razveljaviti!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Da, izbriši!',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Obdelajte logiko brisanja tukaj
+              Swal.fire(
+                'Izbrisano!',
+                'Zapis je bil pobrisan.',
+                'success'
+              );
+            }
+          });
+        }
+        
 
         function onDelete(data) {
-            alert("test");
+          showDeleteConfirmation();
         }
 
 
@@ -332,12 +357,15 @@ function TableForge({ name, url, init }) {
           let content = '<div class="modal-dialog">';
           content += '<div class="modal-content">';
           content += '<div class="modal-header">';
-          content += '<h5 class="modal-title">Fields and Types</h5>';
+          content += '<h5 class="modal-title">Posodobitev</h5>';
           content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
           content += '<span aria-hidden="true">&times;</span></button></div>';
-          content += '<div class="modal-body"><form>'; // Wrap inputs in a form
+          content += '<div class="modal-body"><form>';
         
           for (const key in data) {
+            if(key == "id") {
+              continue;
+            }
             const value = data[key];
             const type = typeof value;
             content += `<div class="form-group">`;
@@ -345,40 +373,67 @@ function TableForge({ name, url, init }) {
             // Create input fields based on type
             if (type === 'string' || type === 'number' || type === 'boolean') {
               content += `<label for="${key}">${key}</label>`;
-              content += `<input type="${type === 'boolean' ? 'checkbox' : 'text'}" id="${key}" name="${key}" value="${value}" class="form-control" ${type === 'boolean' && value ? 'checked' : ''}>`;
+              content += `<input type="${type === 'boolean' ? 'checkbox' : 'text'}" id="${key}" name="${key}" value="${value}" class="${type === 'boolean' ? 'form-check-input' : 'form-control'}" ${type === 'boolean' && value ? 'checked' : ''}>`;
             } else {
               content += `<p>Unsupported type for ${key}: ${type}</p>`;
-            }        
+            }
+        
             content += `</div>`;
-          }    
+          }
+        
+          // Add Bootstrap button with save icon
+          content += `
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Shrani
+              </button>
+            </div>
+          `;
+        
           content += '</form></div></div></div>';
           return content;
         }
         
-
+        
+    function handleFormSubmit(formData) {
+  
+      console.log('Form data submitted:', formData);
+    }
 
   function onEdit(data) {
     // Generate HTML content for the popup
     const popupContent = generatePopupContent(data);
-
     // Create a Bootstrap modal element
     const modal = document.createElement('div');
     modal.classList.add('modal', 'fade');
     modal.innerHTML = popupContent;
+    
 
-    // Add the modal to the document body
+    const form = modal.querySelector('form');
+    // Attach a submit event listener to the form
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get form data
+        const formData = new FormData(form);
+        const formDataObject = {};
+        for (const [key, value] of formData.entries()) {
+            formDataObject[key] = value;
+        }
+        // Handle the form submission
+        handleFormSubmit(formDataObject);
+        // Clean up: Hide and remove the modal
+        window.$(modal).modal('hide');
+        window.$(modal).on('hidden.bs.modal', function () {
+          window.$(this).remove();
+        });
+    });
+
+
+
     document.body.appendChild(modal);
-
     // Show the modal using Bootstrap's modal function
     window.$(modal).modal('show');
 
-    // Clean up the modal after it's closed
-    $(modal).on('hidden.bs.modal', function () {
-        $(this).remove();
-    });
-
-    // Log the data to console
-    console.log(data);
 }
 
   // Define your table columns
