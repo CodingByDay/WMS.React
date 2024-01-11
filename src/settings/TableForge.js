@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdEdit } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
@@ -11,30 +11,36 @@ import { CgExport } from "react-icons/cg";
 import SettingsService from '../services/SettingsService';
 
 function TableForge({ name, url, init }) {
+var result = []
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        result = await getData();
 
-   
-       
+        // Further logic with the table props and data
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []); // Make sure to pass an empty dependency array if you don't have dependencies
 
     var users = [];
 
 
 
-   function getData() {
-        // API IMPLEMENTATION //
-         SettingsService.executeSQLQuery("SELECT * FROM uWMSOrderItemByKeyOut;", []).then(response => { 
-            alert("Test")
-            var data = response;
+   async function getData() {
+    try {
+         var data = [];
+         var data =  await SettingsService.executeSQLQuery("SELECT * FROM uWMSOrderItemByKeyOut;", []);
 
-            console.log("return");
-            console.log(data)
-
-
-            return data;
-         });       
-
-      
+         return data;
+    } catch (err) {
+         alert("Error")
+         return []
     }
-
+  }
 
 
 
@@ -284,18 +290,19 @@ function TableForge({ name, url, init }) {
 
     const selectedTable = tablesAssociation.find(table => table.name === name);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns: selectedTable ? selectedTable.value : [],
-    data: [],
-  });
-
-
+    
+        // Use the result as needed
+        const {
+          getTableProps,
+          getTableBodyProps,
+          headerGroups,
+          rows,
+          prepareRow,
+        } = useTable({
+          columns: selectedTable ? selectedTable.value : [],
+          data: result,
+        });
+     
   return (
     <div class = "user-settings-table">
       <table {...getTableProps()} className={`react-table-${name}`}>

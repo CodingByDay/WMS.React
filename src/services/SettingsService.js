@@ -19,10 +19,10 @@ const SettingsService  = {
           
           if(response.data.Success) {
             var dataPacket = response.data.Rows
-            window.rows = dataPacket;
+
             for(var i = 0;i < dataPacket.length;i++) {
                 var toAdd = {}
-                var item = dataPacket[i];
+                var item = dataPacket[i].Items;
                 for(let key in item) {              
                   if(item.hasOwnProperty(key)) {
                     const value = item[key];
@@ -39,7 +39,7 @@ const SettingsService  = {
         .catch(error => {
           return dataReturn;
         });
- 
+      
       return dataReturn;
   },
 
