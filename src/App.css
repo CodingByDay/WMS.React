@@ -93,10 +93,26 @@ button.action-buttons:hover {
   text-align: center;
 }
 
+.react-table-users tr {
+  height: 40px!important; /* Adjust the height as needed */
+}
 
 
+table.react-table-users td {
+  border-left: none;
+  border-right: none;
+}
 
+table.react-table-users th {
+  background: white;
+}
+.react-table-users th {
+  border: none!important;
+}
 
+body{
+  background: #f7f7f8;
+}
 
 
 

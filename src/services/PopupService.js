@@ -18,7 +18,6 @@ const PopupService  =  {
      
     async getWarehouses(user) {
         const response =  await axios.get(process.env.REACT_APP_API_URL + `/Services/Device/?mode=list&table=wh&pars=${user}&i=web`)
-        console.log(response);
         return response.data;
     },
 

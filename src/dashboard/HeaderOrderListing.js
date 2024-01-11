@@ -127,7 +127,6 @@ export default function HeaderOrderListing(props) {
       client: currentReceivers && currentReceivers.value || "",
       period: state || ""
     };
-    console.log(sorting)
     props.getSortingObject(sorting)
   };
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 const SettingsService  = {
 
   async executeSQLQuery(sqlQuery, parameters) {
+    var dataReturn = [];
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
       var requestObject = {
         SQL: sqlQuery
@@ -13,15 +14,33 @@ const SettingsService  = {
         headers: {
             'Content-Type': 'application/json'
         }
-    })
+       })
         .then(response => {
-
+          
+          if(response.data.Success) {
+            var dataPacket = response.data.Rows
+            window.rows = dataPacket;
+            for(var i = 0;i < dataPacket.length;i++) {
+                var toAdd = {}
+                var item = dataPacket[i];
+                for(let key in item) {              
+                  if(item.hasOwnProperty(key)) {
+                    const value = item[key];
+                    toAdd[key] = value;
+                  }
+                }
+                dataReturn.push(toAdd);
+                
+            }
+          } else {
+            return []
+          }
         })
         .catch(error => {
-
+          return dataReturn;
         });
-      return 1;
-    
+ 
+      return dataReturn;
   },
 
     async getSettingsData(url) {
