@@ -34,7 +34,6 @@ axios.interceptors.response.use(function (response) {
   window.location.href = "/internet";
 });
 
-
 function App() {
   return (
     <BrowserRouter>

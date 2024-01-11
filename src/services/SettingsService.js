@@ -5,17 +5,23 @@ const SettingsService  = {
 
   async executeSQLQuery(sqlQuery, parameters) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
+      var requestObject = {
+        SQL: sqlQuery
+      }
+      var requestBody = JSON.stringify(requestObject);
+      axios.post(apiUrl, requestBody, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
 
-    try {
-      const response = await axios.get(apiUrl, {
+        })
+        .catch(error => {
+
+        });
+      return 1;
     
-          "SQL": "select * from uwmssetting"
-        
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
   },
 
     async getSettingsData(url) {

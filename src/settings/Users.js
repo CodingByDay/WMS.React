@@ -10,7 +10,6 @@ function Users() {
 
   const currentState = store.getState();
 
-
   // Dummy data for users
   const initialUsers = [
     {
@@ -51,7 +50,6 @@ function Users() {
 
 
 
-
   return (
     <div>
     <Header />
@@ -60,6 +58,7 @@ function Users() {
       <div className="users-container-table">
          <TableForge name={tableName} url={urlParam} init = {initialization} />
       </div>
+      
     </div>
     <Footer />
     </div>

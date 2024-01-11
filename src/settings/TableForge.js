@@ -6,6 +6,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import Swal from 'sweetalert2';
 import { useTable } from 'react-table';
+import { IoAddCircleSharp } from "react-icons/io5";
 
 import SettingsService from '../services/SettingsService';
 function TableForge({ name, url, init }) {
@@ -400,6 +401,86 @@ function TableForge({ name, url, init }) {
       console.log('Form data submitted:', formData);
     }
 
+
+    function generatePopupCreate(data) {
+      let content = '<div class="modal-dialog">';
+      content += '<div class="modal-content">';
+      content += '<div class="modal-header">';
+      content += '<h5 class="modal-title">Kreiranje pozicije</h5>';
+      content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+      content += '<span aria-hidden="true">&times;</span></button></div>';
+      content += '<div class="modal-body"><form>';
+    
+      for (const key in data) {
+        if(key == "id") {
+          continue;
+        }
+        const value = data[key];
+        const type = typeof value;
+        content += `<div class="form-group">`;
+    
+        // Create input fields based on type
+        if (type === 'string' || type === 'number' || type === 'boolean') {
+          content += `<label for="${key}">${key}</label>`;
+          content += `<input type="${type === 'boolean' ? 'checkbox' : 'text'}" id="${key}" name="${key}" class="${type === 'boolean' ? 'form-check-input' : 'form-control'}" ${type === 'boolean' && value ? 'checked' : ''}>`;
+        } else {
+          content += `<p>Unsupported type for ${key}: ${type}</p>`;
+        }
+    
+        content += `</div>`;
+      }
+    
+      // Add Bootstrap button with save icon
+      content += `
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Shrani
+          </button>
+        </div>
+      `;
+    
+      content += '</form></div></div></div>';
+      return content;
+    }
+
+
+  function onAdd() {
+    // Generate HTML content for the popup
+    const popupContent = generatePopupCreate(data);
+    // Create a Bootstrap modal element
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.innerHTML = popupContent;
+    
+
+    const form = modal.querySelector('form');
+    // Attach a submit event listener to the form
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get form data
+        const formData = new FormData(form);
+        const formDataObject = {};
+        for (const [key, value] of formData.entries()) {
+            formDataObject[key] = value;
+        }
+        // Handle the form submission
+        handleFormSubmit(formDataObject);
+        // Clean up: Hide and remove the modal
+        window.$(modal).modal('hide');
+        window.$(modal).on('hidden.bs.modal', function () {
+          window.$(this).remove();
+        });
+    });
+
+
+
+    document.body.appendChild(modal);
+    // Show the modal using Bootstrap's modal function
+    window.$(modal).modal('show');
+  }
+
+
+
   function onEdit(data) {
     // Generate HTML content for the popup
     const popupContent = generatePopupContent(data);
@@ -470,8 +551,11 @@ function TableForge({ name, url, init }) {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
+
+            <button onClick={() => onAdd()}><IoAddCircleSharp /></button>
             <button onClick={() => onEdit(row.original)}><MdEdit /></button>
             <button onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
+
           </div>
         ),
       },
