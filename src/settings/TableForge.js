@@ -330,12 +330,13 @@ function TableForge({ name, url, init }) {
         const showDeleteConfirmation = () => {
           Swal.fire({
             title: 'Ste prepričani?',
-            text: 'Ta dejanja ni mogoče razveljaviti!',
+            text: 'To dejanje ni mogoče razveljaviti!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Da, izbriši!',
+            cancelButtonText: 'Ne'
           }).then((result) => {
             if (result.isConfirmed) {
               // Obdelajte logiko brisanja tukaj
@@ -555,9 +556,9 @@ function TableForge({ name, url, init }) {
         Cell: ({ row }) => (
           <div>
 
-            <button onClick={() => onAdd()}><IoAddCircleSharp /></button>
-            <button onClick={() => onEdit(row.original)}><MdEdit /></button>
-            <button onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
+            <button class="action-buttons" title="Vnos" onClick={() => onAdd()}><IoAddCircleSharp /></button>
+            <button class="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}><MdEdit /></button>
+            <button class="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
 
           </div>
         ),

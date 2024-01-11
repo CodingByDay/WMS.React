@@ -7,7 +7,7 @@
 
 /* Styles for the table */
 .react-table-users {
-  width: 90%; /* Limiting the width to 90% */
+ /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
   margin-top: 20px; /* Adds space at the top of the table */
@@ -33,6 +33,75 @@
 .react-table-users tr:nth-child(even) {
   background-color: #f9f9f9; /* Light alternate background color */
 }
+
+/* Adjust the width of the last column */
+.react-table-users td:last-child,
+.react-table-users th:last-child {
+  width: auto; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+}
+
+/* Adjust the width of the specific column */
+.react-table-users td:nth-child(5),
+.react-table-users th:nth-child(5) {
+  width: auto; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+/* Adjust the width of the specific column */
+.react-table-users td:nth-child(4),
+.react-table-users th:nth-child(4) {
+  width: 10em; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+.react-table-users td:nth-child(3),
+.react-table-users th:nth-child(3) {
+  width: 10em; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+.react-table-users td:nth-child(2),
+.react-table-users th:nth-child(2) {
+  width: 10em; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+button.action-buttons {
+  background: none;
+  border: none;
+}
+button.action-buttons:hover {
+  background: rgba(8, 26, 69, 0.3);
+}
+.react-table-users td:nth-child(1),
+.react-table-users th:nth-child(1) {
+  width: 10em; /* Let the last column adjust its width based on content */
+  white-space: nowrap; /* Prevent line breaks within the last column */
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
 
 .center-button span {
 
