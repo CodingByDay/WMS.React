@@ -359,8 +359,7 @@ function TableForge({ name, url, init }) {
           content += '<div class="modal-content">';
           content += '<div class="modal-header">';
           content += '<h5 class="modal-title">Posodobitev</h5>';
-          content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-          content += '<span aria-hidden="true">&times;</span></button></div>';
+          content += '</div>';
           content += '<div class="modal-body"><form>';
         
           for (const key in data) {
@@ -403,32 +402,29 @@ function TableForge({ name, url, init }) {
 
 
     function generatePopupCreate(data) {
+
       let content = '<div class="modal-dialog">';
       content += '<div class="modal-content">';
       content += '<div class="modal-header">';
       content += '<h5 class="modal-title">Kreiranje pozicije</h5>';
-      content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-      content += '<span aria-hidden="true">&times;</span></button></div>';
+      content += '</div>';
       content += '<div class="modal-body"><form>';
     
-      for (const key in data) {
-        if(key == "id") {
-          continue;
-        }
-        const value = data[key];
-        const type = typeof value;
+      data.value.map(column => {
+
+        const value = "";
+        const type = column.type;
+        const key = column.Header;
         content += `<div class="form-group">`;
     
         // Create input fields based on type
-        if (type === 'string' || type === 'number' || type === 'boolean') {
+        if (type === 'text' || type === 'checkbox') {
           content += `<label for="${key}">${key}</label>`;
-          content += `<input type="${type === 'boolean' ? 'checkbox' : 'text'}" id="${key}" name="${key}" class="${type === 'boolean' ? 'form-check-input' : 'form-control'}" ${type === 'boolean' && value ? 'checked' : ''}>`;
-        } else {
-          content += `<p>Unsupported type for ${key}: ${type}</p>`;
-        }
+          content += `<input type="${type === 'checkbox' ? 'checkbox' : 'text'}" id="${key}" name="${key}" class="${type === 'checkbox' ? 'form-check-input' : 'form-control'}" ${type === 'checkbox' && value ? 'checked' : ''}>`;
+        } 
     
         content += `</div>`;
-      }
+      });
     
       // Add Bootstrap button with save icon
       content += `
@@ -446,7 +442,7 @@ function TableForge({ name, url, init }) {
 
   function onAdd() {
     // Generate HTML content for the popup
-    const popupContent = generatePopupCreate(data);
+    const popupContent = generatePopupCreate(selectedTable);
     // Create a Bootstrap modal element
     const modal = document.createElement('div');
     modal.classList.add('modal', 'fade');
@@ -524,27 +520,34 @@ function TableForge({ name, url, init }) {
         Header: 'Ime',
         accessor: 'name',
         className: 'name-column-user',
+        type: 'text',
       },
       {
         Header: 'Priimek',
         accessor: 'surname',
         className: 'surname-column-user',
+        type: 'text',
+
       },
       {
         Header: 'UP ime',
         accessor: 'upName',
         className: 'up-column-user',
+        type: 'text',
       },
       {
         Header: 'Geslo',
         accessor: 'password',
         className: 'password-column-user',
+        type: 'text',
       },
       {
         Header: 'Aktiven',
         accessor: 'active',
         Cell: ({ value }) => <input type="checkbox" checked={value} readOnly />,
         className: 'active-column-user',
+        type: 'checkbox',
+
       },
       {
         Header: 'Dejanja',
@@ -558,6 +561,8 @@ function TableForge({ name, url, init }) {
 
           </div>
         ),
+
+        type: 'nothing'
       },
     ],
     []
@@ -599,7 +604,7 @@ function TableForge({ name, url, init }) {
               <tr {...row.getRowProps()}>
                 {row.cells.map(cell => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    <td {...cell.getCellProps()} disabled>{cell.render('Cell')}</td>
                   );
                 })}
               </tr>

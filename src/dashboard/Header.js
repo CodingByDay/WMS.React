@@ -33,7 +33,7 @@ export default function Header() {
   
 
     function goBack() {
-        alert("test");
+  
     }
 
 
