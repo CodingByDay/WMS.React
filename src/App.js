@@ -50,9 +50,15 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/documents" element={<DocumentType  />} />
 
-
+        // Settings // 
 
         <Route path="/users" element={<Users  />} />
+        <Route path="/devices" element={<Devices  />} />
+        <Route path="/documents" element={<DocumentType  />} />
+        <Route path="/printers" element={<Printers  />} />
+        <Route path="/system" element={<System  />} />
+        <Route path="/warehouses" element={<Warehouses  />} />
+
 
         
 

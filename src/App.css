@@ -1230,7 +1230,7 @@ button svg {
   flex-direction: column;
   width: 20%;
   margin: auto;
-  top: 50vh;
+  top: 45vh;
   position: relative;
   transform: translateY(-50%);
 }
