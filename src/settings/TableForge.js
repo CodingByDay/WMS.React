@@ -10,14 +10,14 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { CgExport } from "react-icons/cg";
 import SettingsService from '../services/SettingsService';
 
-function TableForge({ name, url, tableData }) {
-
-      
-
-   
+function TableForge({ name, tableData }) {
 
 
 
+  function createSave() {
+    alert("test");
+  }
+    
         const showDeleteConfirmation = () => {
           Swal.fire({
             title: 'Ste prepričani?',
@@ -105,13 +105,25 @@ function TableForge({ name, url, tableData }) {
 
         const value = "";
         const type = column.type;
-        const key = column.Header;
+        const key = column.accessor;
+
+
+        const popupType = column.popupType;
+        
+
         content += `<div class="form-group">`;
     
         // Create input fields based on type
-        if (type === 'text' || type === 'checkbox') {
+        if (type === 'text' || type === 'checkbox' ) {
+
+          var pType = popupType !== undefined;
           content += `<label for="${key}">${key}</label>`;
-          content += `<input type="${type === 'checkbox' ? 'checkbox' : 'text'}" id="${key}" name="${key}" class="${type === 'checkbox' ? 'form-check-input' : 'form-control'}" ${type === 'checkbox' && value ? 'checked' : ''}>`;
+          if(pType) {
+            content += `<select id="${key}"></select>`;
+
+          } else {
+            content += `<input type="${type === 'checkbox' ? 'checkbox' : 'text'}" id="${key}" name="${key}" class="${type === 'checkbox' ? 'form-check-input' : 'form-control'}" ${type === 'checkbox' && value ? 'checked' : ''}>`;
+          }
         } 
     
         content += `</div>`;
@@ -120,7 +132,7 @@ function TableForge({ name, url, tableData }) {
       // Add Bootstrap button with save icon
       content += `
         <div class="text-center mt-3">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" onclick = {createSave} class="btn btn-primary">
             <i class="bi bi-save"></i> Shrani
           </button>
         </div>
@@ -129,6 +141,11 @@ function TableForge({ name, url, tableData }) {
       content += '</form></div></div></div>';
       return content;
     }
+
+
+
+ 
+
 
 
   function onAdd() {
@@ -205,31 +222,21 @@ function TableForge({ name, url, tableData }) {
 }
 
   // Define your table columns
-  const userColumns = React.useMemo(
+  const systemColumns = React.useMemo(
     () => [
       {
-        Header: 'Ident',
-        accessor: 'acIdent',
-        className: 'name-column-user',
+        Header: 'Naziv',
+        accessor: 'ID',
+        className: 'name-column-system',
         type: 'text',
-      },
-      {
-        Header: 'Key',
-        accessor: 'acKey',
-        className: 'surname-column-user',
-        type: 'text',
+        popupType: 'dropdown',
+        popupSelect: 'SELECT ... '
 
       },
       {
-        Header: 'Name',
-        accessor: 'acName',
-        className: 'up-column-user',
-        type: 'text',
-      },
-      {
-        Header: 'Subject',
-        accessor: 'acSubject',
-        className: 'password-column-user',
+        Header: 'Vrednost',
+        accessor: 'Value',
+        className: 'value-column-system',
         type: 'text',
       },
       {
@@ -252,7 +259,7 @@ function TableForge({ name, url, tableData }) {
   );
 
     const tablesAssociation = [
-        {name: 'users', value: userColumns}
+        {name: 'system', value: systemColumns}
     ]
 
  

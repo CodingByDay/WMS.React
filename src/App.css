@@ -6,7 +6,7 @@
 }
 
 /* Styles for the table */
-.react-table-users {
+.react-table-users, .react-table-system {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */

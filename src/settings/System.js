@@ -17,7 +17,7 @@ function System() {
     const fetchData = async () => {
       
       try {
-        SettingsService.executeSQLQuery("SELECT * FROM uWMSOrderItemByKeyOut;", [])
+        SettingsService.executeSQLQuery("SELECT * FROM uWMSSetting;", [])
         .then(result => {
           setData(result)
         })
@@ -34,8 +34,8 @@ function System() {
   
   var users = [];
 
-  const tableName = 'users';
-  const urlParam = "/getUsers";
+  const tableName = 'system';
+
 
 
   return (
@@ -46,7 +46,7 @@ function System() {
     <div className="Users">
    
       <div className="users-container-table">
-         <TableForge name={tableName} url={urlParam}  tableData = {data} />
+         <TableForge name={tableName} tableData = {data} />
       </div>
       
     </div>
