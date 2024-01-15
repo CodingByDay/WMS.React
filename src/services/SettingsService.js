@@ -3,45 +3,42 @@ import axios from 'axios';
 
 const SettingsService  = {
 
-  async executeSQLQuery(sqlQuery, parameters) {
-    var dataReturn = [];
+  async  executeSQLQuery(sqlQuery, parameters) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
-      var requestObject = {
-        SQL: sqlQuery
-      }
-      var requestBody = JSON.stringify(requestObject);
-      axios.post(apiUrl, requestBody, {
+    const requestObject = {
+      SQL: sqlQuery
+    };
+  
+    try {
+      const response = await axios.post(apiUrl, JSON.stringify(requestObject), {
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         }
-       })
-        .then(response => {
-          
-          if(response.data.Success) {
-            var dataPacket = response.data.Rows
-
-            for(var i = 0;i < dataPacket.length;i++) {
-                var toAdd = {}
-                var item = dataPacket[i].Items;
-                for(let key in item) {              
-                  if(item.hasOwnProperty(key)) {
-                    const value = item[key];
-                    toAdd[key] = value;
-                  }
-                }
-                dataReturn.push(toAdd);
-                
+      });
+  
+      if (response.data.Success) {
+        const dataPacket = response.data.Rows;
+        const dataReturn = dataPacket.map(item => {
+          const toAdd = {};
+          for (const key in item.Items) {
+            if (item.Items.hasOwnProperty(key)) {
+              const value = item.Items[key];
+              toAdd[key] = value;
             }
-          } else {
-            return []
           }
-        })
-        .catch(error => {
-          return dataReturn;
+          return toAdd;
         });
-      
-      return dataReturn;
+        
+        return dataReturn;
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error("Error in executeSQLQuery:", error);
+      return [];
+    }
   },
+  
 
     async getSettingsData(url) {
       const response =  await axios.get(process.env.REACT_APP_API_URL + url)   

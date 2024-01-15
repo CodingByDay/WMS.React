@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { MdEdit } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
@@ -10,46 +10,13 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { CgExport } from "react-icons/cg";
 import SettingsService from '../services/SettingsService';
 
-function TableForge({ name, url, init }) {
-var result = []
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        result = await getData();
+function TableForge({ name, url, tableData }) {
 
-        // Further logic with the table props and data
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []); // Make sure to pass an empty dependency array if you don't have dependencies
-
-    var users = [];
-
-
-
-   async function getData() {
-    try {
-         var data = [];
-         var data =  await SettingsService.executeSQLQuery("SELECT * FROM uWMSOrderItemByKeyOut;", []);
-
-         return data;
-    } catch (err) {
-         alert("Error")
-         return []
-    }
-  }
-
-
-
-
-        function onEdit(data) {
+      
 
    
 
-        }
+
 
         const showDeleteConfirmation = () => {
           Swal.fire({
@@ -288,9 +255,10 @@ var result = []
         {name: 'users', value: userColumns}
     ]
 
-    const selectedTable = tablesAssociation.find(table => table.name === name);
+ 
 
-    
+
+    var selectedTable = tablesAssociation.find(table => table.name === name); 
         // Use the result as needed
         const {
           getTableProps,
@@ -300,9 +268,14 @@ var result = []
           prepareRow,
         } = useTable({
           columns: selectedTable ? selectedTable.value : [],
-          data: result,
+          data: tableData
         });
-     
+
+
+
+
+
+
   return (
     <div class = "user-settings-table">
       <table {...getTableProps()} className={`react-table-${name}`}>

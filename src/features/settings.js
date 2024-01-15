@@ -11,8 +11,7 @@ export const settingsSlice = createSlice({
   initialState,
   reducers: {
     setCurrentSetting: (state, action) => {
-      state.currentObject = action.payload[0]
-      
+      state.currentObject = action.payload[0]      
     }
   },
 })

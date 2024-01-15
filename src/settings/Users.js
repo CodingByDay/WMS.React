@@ -1,5 +1,7 @@
 // Users.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import SettingsService from '../services/SettingsService';
+
 import UserTable from './UserTable'; // Import the UserTable component
 import Header from '../dashboard/Header';
 import Footer from '../dashboard/Footer';
@@ -7,41 +9,40 @@ import TableForge from './TableForge';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import {store} from '../store/store'
 function Users() {
-
-  const currentState = store.getState();
-
-  // Dummy data for users
-  const initialUsers = [
-    {
-      id: 1,
-      name: 'John',
-      surname: 'Doe',
-      upName: 'johndoe',
-      password: 'secret123',
-      active: true,
-    },
-    {
-      id: 2,
-      name: 'Jane',
-      surname: 'Smith',
-      upName: 'janesmith',
-      password: 'mypassword',
-      active: false,
-    },
-    // Add more dummy user objects as needed
-  ];
+  const [data, setData] = useState([]);
 
 
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      
+      try {
+        SettingsService.executeSQLQuery("SELECT * FROM uWMSOrderItemByKeyOut;", [])
+        .then(result => {
+          setData(result)
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+
+      } catch (error) {
+      }
+    };
+    fetchData();
+  }, []);
+
+  
+
+
+  var users = [];
 
 
 
+  
 
-  const initialization = () => {
 
 
-    
-
-  }
 
   
   const tableName = 'users';
@@ -52,15 +53,19 @@ function Users() {
 
   return (
     <div>
+
     <Header />
+
     <div className="Users">
    
       <div className="users-container-table">
-         <TableForge name={tableName} url={urlParam} init = {initialization} />
+         <TableForge name={tableName} url={urlParam}  tableData = {data} />
       </div>
       
     </div>
+
     <Footer />
+    
     </div>
   );
 }
