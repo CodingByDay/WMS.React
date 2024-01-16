@@ -130,9 +130,7 @@ const Insert = (props) => {
         }    
     }
 
-
-    
-
+ 
     // Sending the data to the API //
     
     
@@ -140,6 +138,7 @@ const Insert = (props) => {
 
 
     // Sending the data to the API //
+    
   };
 
 
