@@ -13,16 +13,9 @@ import Insert from '../popup/Insert';
 import Update from '../popup/Update';
 
 
-
-
 function TableForge({ name, tableData }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+        const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
-  function createSave() {
-    alert("test");
-  }
     
         const showDeleteConfirmation = () => {
           Swal.fire({
@@ -65,7 +58,7 @@ function TableForge({ name, tableData }) {
 
 
   function onAdd() {
-    generatePopupCreate(selectedTable);
+      generatePopupCreate(selectedTable);
   }
 
 
@@ -73,7 +66,11 @@ function TableForge({ name, tableData }) {
   function onEdit(data) {
     
 
-}
+  }
+
+
+
+
 
   // Define your table columns
   const systemColumns = React.useMemo(
@@ -82,9 +79,8 @@ function TableForge({ name, tableData }) {
         Header: 'Naziv',
         accessor: 'ID',
         className: 'name-column-system',
-        type: 'text',
-        popupType: 'dropdown',
-        popupSelect: 'SELECT ... '
+        type: 'dropdown',
+        sourceSelect: 'SELECT * FROM  '
 
       },
       {
@@ -143,7 +139,7 @@ function TableForge({ name, tableData }) {
 
 
 
-    <Insert onClose = {onClose} isVisible={isModalOpen} />
+    <Insert onClose = {onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
 
 
 
