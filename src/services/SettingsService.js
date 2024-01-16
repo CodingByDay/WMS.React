@@ -60,6 +60,9 @@ async executeSQLQueryBatch(data) {
             }
           });
       
+
+
+
           if (response.data.Success) {
             const dataPacket = response.data.Rows;
             const dataReturn = dataPacket.map(item => {
@@ -71,18 +74,20 @@ async executeSQLQueryBatch(data) {
                 }
               }
               return toAdd;
-            });            
-            return toReturn[accessor] == dataReturn;
+            });  
+            
+            
+            toReturn[accessor] = dataReturn;
           } else {
-            return toReturn[accessor] == [];
+            toReturn[accessor] = [];
 
           }
         } catch (error) {
-          return toReturn[accessor] == [];
+          toReturn[accessor] = [];
         }
   }}
 
-  
+  return toReturn;
   },
 
 

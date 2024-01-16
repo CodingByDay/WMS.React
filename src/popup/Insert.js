@@ -31,8 +31,7 @@ const Insert = (props) => {
         var pairs = extractDropdownPairs(props.selectedTable)
         SettingsService.executeSQLQueryBatch(pairs)
         .then(result => {
-          alert("test")
-          console.log(result)
+            console.log(result)
         })
         .catch(error => {
           console.error("Error:", error);
