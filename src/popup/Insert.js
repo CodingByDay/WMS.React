@@ -24,29 +24,36 @@ const Insert = (props) => {
 
 
     const connectData = async () => {
+      var finalOptions = {};
       if(props.isVisible) {
       try {
-
-
         var pairs = extractDropdownPairs(props.selectedTable)
         SettingsService.executeSQLQueryBatch(pairs)
         .then(result => {
-            console.log(result)
+            var data = result;
+            for(var i = 0; i < props.selectedTable.value.length; i++) {
+                var current = props.selectedTable.value[i];
+                var currentData = data[current.accessor];
+                var type = current.type;
+                if(type === "dropdown") {
+                  const options = currentData.map(item => {
+                    const value = current.columnOrder.map(field => item[field]).join('|');
+                    return { value, label: value };
+                  });
+                  
+                  finalOptions[current.accessor] = options;
+
+                }
+            }
+
+
+            console.log(finalOptions);
         })
         .catch(error => {
           console.error("Error:", error);
         });
-        // Create an object with dropdown options for each column
-      /*  const optionsObject = props.selectedTable.value.reduce((acc, column) => {
-          if (column.popupType === 'dropdown') {
-            acc[column.accessor] = options;
-          }
-          return acc;
-        }, {});
-        setDropdownOptions(optionsObject);
-        */
 
-
+        
       } catch (error) {
         // Handle errors
         console.error('Error fetching dropdown options:', error);
