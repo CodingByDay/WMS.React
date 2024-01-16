@@ -12,6 +12,11 @@ const Update = (props) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [inputValues, setInputValues] = useState({});
 
+ 
+
+
+
+
 
   function extractDropdownPairs(data) {
     const dropdownPairs = {};
@@ -76,12 +81,25 @@ const Update = (props) => {
 
 
 
-  
+  function connectSelections() {
+      var prevData = props.data;
+      console.log(prevData);
+  }
 
   if (!props.isVisible) {
      return null;
-  } if (Object.keys(dropdownOptions).length === 0) {
-    connectData()
+  } else  {
+    if(Object.keys(dropdownOptions).length === 0) {
+       connectData()
+    }
+
+    if(Object.keys(props.data).length === 0) {
+
+      // Connecting the previous connection.
+      connectSelections()
+      props.data = {}
+
+    }
   }
 
    function onClose() {

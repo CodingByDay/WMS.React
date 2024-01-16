@@ -16,7 +16,7 @@ import Update from '../popup/Update';
 function TableForge({ refresh, name, tableData }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [isModalEditOpen, setIsEditModalOpen] = useState(false);
-
+        const [editData, setEditData] = useState({});
     
         const showDeleteConfirmation = (data) => {
 
@@ -96,7 +96,7 @@ function TableForge({ refresh, name, tableData }) {
     
   };
   const generatePopupEdit = (data) => {   
-
+    setEditData(data);
     setIsEditModalOpen(true);
     
   };
@@ -109,7 +109,7 @@ function TableForge({ refresh, name, tableData }) {
 
 
   function onEdit(data) {
-    generatePopupEdit(selectedTable);
+    generatePopupEdit(data, selectedTable);
   }
 
 
@@ -193,7 +193,7 @@ function TableForge({ refresh, name, tableData }) {
 
 
     <Insert refresh = {refresh} onClose = {onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
-    <Update refresh = {refresh} onClose = {onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
+    <Update  data = {editData} refresh = {refresh} onClose = {onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
 
 
 
