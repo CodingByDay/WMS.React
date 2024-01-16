@@ -47,7 +47,7 @@ const Insert = (props) => {
             }
 
 
-            console.log(finalOptions);
+            setDropdownOptions(finalOptions);
         })
         .catch(error => {
           console.error("Error:", error);
