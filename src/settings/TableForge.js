@@ -69,9 +69,6 @@ function TableForge({ name, tableData }) {
   }
 
 
-
-
-
   // Define your table columns
   const systemColumns = React.useMemo(
     () => [
@@ -93,6 +90,7 @@ function TableForge({ name, tableData }) {
       {
         Header: '',
         accessor: 'actions',
+
         Cell: ({ row }) => (
           <div>
 
@@ -110,7 +108,7 @@ function TableForge({ name, tableData }) {
   );
 
     const tablesAssociation = [
-        {name: 'system', value: systemColumns}
+        {name: 'system', value: systemColumns, insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');"}
     ]
 
  

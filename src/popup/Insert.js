@@ -8,6 +8,7 @@ import SettingsService from '../services/SettingsService';
 const Insert = (props) => {
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [inputValues, setInputValues] = useState({});
 
 
   function extractDropdownPairs(data) {
@@ -21,8 +22,15 @@ const Insert = (props) => {
   
     return dropdownPairs;
   }
+  const getValue = (inputName) => inputValues[inputName] || '';
 
-
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
     const connectData = async () => {
       var finalOptions = {};
@@ -87,20 +95,68 @@ const Insert = (props) => {
 
 
 
+  const sendData = () => {
+
+
+    var insertQuery = props.selectedTable.insertQuery;
+    var columns = props.selectedTable.value;
+
+
+
+    for (let i = 0; i < columns.length; i++) {
+        var column = columns[i];
+        var type = column.type;
+        var accessor = column.accessor;
+        if(accessor!="nothing") {
+            if(type == "text") {
+
+              var theValue = getValue(accessor);
+              var theValueInsideQuery = "@" + accessor;
+              insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
+
+            } else if(type == "dropdown") {
+
+                var theValue = selectedOptions[accessor].value;
+                var theValueInsideQuery = "@" + accessor;
+                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
+                
+
+            } else if(type == "checkbox") {
+
+                var theValue = selectedOptions[accessor];
+                var theValueInsideQuery = "@" + accessor;
+                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);              
+            }
+        }    
+    }
+
+
+    
+
+    // Sending the data to the API //
+    
+    
+
+
+
+    // Sending the data to the API //
+  };
+
+
 
 
   return (
-    <div className="popup-overlay">
-      <div className="popup-content">
-        <div className="popup-header">
-          <button className="popup-close-btn" onClick={onClose} >
+    <div className="popup-overlay insert">
+      <div className="popup-content insert">
+        <div className="popup-header insert">
+          <button className="popup-close-btn insert" onClick={onClose} >
             X
           </button>
         </div>
-        <div className="popup-body">
+        <div className="popup-body insert">
         {props.selectedTable.value.map((column) => (
            column.type !== 'nothing' && (
-            <div key={column.accessor} className="form-group">
+            <div key={column.accessor} className="form-group insert">
               <label htmlFor={column.accessor}>{column.Header}:</label>
               {column.type === 'dropdown' ? (
                <Select
@@ -112,12 +168,13 @@ const Insert = (props) => {
              />
               ) : (
                 <input
-                  type={column.type === 'checkbox' ? 'checkbox' : 'text'}
-                  id={column.accessor}
-                  name={column.accessor}
-                  className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
-                  // Add other necessary attributes and event handlers
-                />
+                type={column.type === 'checkbox' ? 'checkbox' : 'text'}
+                id={column.accessor}
+                name={column.accessor}
+                className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
+                value={getValue(column.accessor)} // Set the value from state
+                onChange={handleInputChange} // Update the state on change
+              />
               )}
             </div>
            )
@@ -125,7 +182,7 @@ const Insert = (props) => {
 
 
           <div className="center-button">
-            <center><span  className="actions smallerr">
+            <center><span onClick={sendData}  className="actions smallerr">
               Dodaj
             </span>
             </center>
