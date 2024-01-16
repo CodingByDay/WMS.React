@@ -4,7 +4,7 @@ import TransactionService from '../services/TransactionService';
 import ListingService from '../services/ListingService';
 import { useSelector, useDispatch } from 'react-redux'
 import DataAccess from "../utility/DataAccess";
-
+import SettingsService from '../services/SettingsService';
 const Insert = (props) => {
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -29,12 +29,16 @@ const Insert = (props) => {
 
 
         var pairs = extractDropdownPairs(props.selectedTable)
-        console.log(pairs)
-        /*
-        // Make an API call to get dropdown options
-        const options = await TransactionService.getDropdownOptions(); // Replace with your actual API call
+        SettingsService.executeSQLQueryBatch(pairs)
+        .then(result => {
+          alert("test")
+          console.log(result)
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
         // Create an object with dropdown options for each column
-        const optionsObject = props.selectedTable.value.reduce((acc, column) => {
+      /*  const optionsObject = props.selectedTable.value.reduce((acc, column) => {
           if (column.popupType === 'dropdown') {
             acc[column.accessor] = options;
           }

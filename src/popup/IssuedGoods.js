@@ -124,7 +124,6 @@ export default function IssuedGoods(props) {
 
 
     function onDateChange(e) {
-        console.log(e.target.value)
         setDate(e.target.value)
     }
 
