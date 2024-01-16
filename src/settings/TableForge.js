@@ -81,7 +81,8 @@ function TableForge({ name, tableData }) {
         className: 'name-column-system',
         type: 'dropdown',
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
-        columnOrder: ['ID', 'Desc']
+        columnOrder: ['ID', 'Desc'],
+        dropdownId: 'ID'
       },
       {
         Header: 'Vrednost',

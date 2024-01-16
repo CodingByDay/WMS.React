@@ -38,7 +38,7 @@ const Insert = (props) => {
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
                     const value = current.columnOrder.map(field => item[field]).join('|');
-                    return { value, label: value };
+                    return { value, label: value, id: item[current.dropdownId] };
                   });
                   
                   finalOptions[current.accessor] = options;
@@ -76,9 +76,10 @@ const Insert = (props) => {
     props.onClose();
   }
   const handleSelectChange = (accessor, selected) => {
+
     setSelectedOptions({
       ...selectedOptions,
-      [accessor]: selected,
+      [accessor]: {value: selected.id, label: selected.id},
     });
   };
 
