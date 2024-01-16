@@ -131,27 +131,29 @@ const Insert = (props) => {
     }
 
  
-    // Sending the data to the API //
-    alert(insertQuery);
+
     
     try {
       SettingsService.insertSQLQuery(insertQuery)
       .then(result => {
           var data = result;
-          //alert(data);
+
+          if(data) {
+
+          } else {
+
+          }
+
+          props.refresh();
       })
       .catch(error => {
-        console.error("Error:", error);
       });
 
       
     } catch (error) {
-      // Handle errors
-      console.error('Error fetching dropdown options:', error);
+
     }
 
-
-    // Sending the data to the API //
 
   };
 

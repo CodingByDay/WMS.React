@@ -1,3 +1,13 @@
+button.action-buttons.white {
+  color: white;
+}
+
+
+button.action-buttons.white:hover {
+  background: none !important;
+}
+
+
 /* Styles for the table container */
 .user-settings-table {
   max-height: 400px; /* Set the maximum height for the container */
@@ -151,6 +161,19 @@ span#openRangeTransaction {
 }
 
 
+.user-settings-table tr {
+  background: #081A45;
+}
+table.react-table-system tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+
+}
+
+
+.react-table-system th, .react-table-system td {
+  padding: 12px; /* Adjust the padding as needed */
+
+}
 #analytics-panel {
   height: 100%;
 }
@@ -160,6 +183,7 @@ tr {
 table thead th {
     position: sticky!important;
     top: 0px!important;
+    color: white;
 }
 .responsive-buttons-order {
   display: flex;

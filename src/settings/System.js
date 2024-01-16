@@ -11,6 +11,7 @@ import {store} from '../store/store'
 function System() {
 
   const [data, setData] = useState([]);
+  const [refreshTrigger, setRefresh] = useState(false);
 
   useEffect(() => {
 
@@ -29,12 +30,22 @@ function System() {
       }
     };
     fetchData();
-  }, []);
+  }, [refreshTrigger]);
 
   
   var users = [];
 
   const tableName = 'system';
+
+
+
+  const refresh = () => {
+
+    alert("Refresh")
+    setRefresh(!refreshTrigger);
+
+
+  }
 
 
 
@@ -46,7 +57,7 @@ function System() {
     <div className="Users">
    
       <div className="users-container-table">
-         <TableForge name={tableName} tableData = {data} />
+         <TableForge refresh={refresh} name={tableName} tableData = {data} />
       </div>
       
     </div>

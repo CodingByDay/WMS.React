@@ -13,7 +13,7 @@ import Insert from '../popup/Insert';
 import Update from '../popup/Update';
 
 
-function TableForge({ name, tableData }) {
+function TableForge({ refresh, name, tableData }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
 
     
@@ -88,13 +88,13 @@ function TableForge({ name, tableData }) {
         type: 'text',
       },
       {
-        Header: '',
+        Header: <button className="action-buttons white" title="Vnos" onClick={() => onAdd()}><IoAddCircleSharp />Dodaj</button>
+        ,
         accessor: 'actions',
 
         Cell: ({ row }) => (
           <div>
 
-            <button className="action-buttons" title="Vnos" onClick={() => onAdd()}><IoAddCircleSharp /></button>
             <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}><MdEdit /></button>
             <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
 
@@ -138,7 +138,7 @@ function TableForge({ name, tableData }) {
 
 
 
-    <Insert onClose = {onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
+    <Insert refresh = {refresh} onClose = {onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
 
 
 
@@ -175,6 +175,7 @@ function TableForge({ name, tableData }) {
       </table>
 
     </div>
+
     </div>
   );
 }
