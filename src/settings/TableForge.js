@@ -17,7 +17,25 @@ function TableForge({ refresh, name, tableData }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
 
     
-        const showDeleteConfirmation = () => {
+        const showDeleteConfirmation = (data) => {
+
+          
+
+          var currentDeleteSQL = selectedTable.deleteQuery;
+          
+
+          for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+              const value = data[key];
+              var theOriginalValue = "@" + key;
+              currentDeleteSQL = currentDeleteSQL.replace(theOriginalValue, value)
+            }
+          }
+
+   
+
+
+
           Swal.fire({
             title: 'Ste prepričani?',
             text: 'To dejanje ni mogoče razveljaviti!',
@@ -28,20 +46,34 @@ function TableForge({ refresh, name, tableData }) {
             confirmButtonText: 'Da, izbriši!',
             cancelButtonText: 'Ne'
           }).then((result) => {
-            if (result.isConfirmed) {
-              // Obdelajte logiko brisanja tukaj
-              Swal.fire(
-                'Izbrisano!',
-                'Zapis je bil pobrisan.',
-                'success'
-              );
+            if (result.isConfirmed) {         
+                SettingsService.insertSQLQuery(currentDeleteSQL)
+                .then(result => {
+                    var data = result;
+          
+                    if(data) {
+                      Swal.fire(
+                        'Izbrisano!',
+                        'Zapis je bil pobrisan.',
+                        'success'
+                      );
+                    } else {
+                      Swal.fire(
+                        'Napaka!',
+                        'Zapis ni bil pobrisan.',
+                        'error'
+                      );
+                    }
+          
+                    refresh();
+                })    
             }
           });
         }
         
 
   function onDelete(data) {
-    showDeleteConfirmation();
+    showDeleteConfirmation(data);
   }
 
 
@@ -108,7 +140,16 @@ function TableForge({ refresh, name, tableData }) {
   );
 
     const tablesAssociation = [
-        {name: 'system', value: systemColumns, insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');"}
+        {
+
+
+        name: 'system', value: systemColumns, 
+        insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');", 
+        deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';"
+          
+      
+      
+        }
     ]
 
  

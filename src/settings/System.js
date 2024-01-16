@@ -41,7 +41,6 @@ function System() {
 
   const refresh = () => {
 
-    alert("Refresh")
     setRefresh(!refreshTrigger);
 
 
