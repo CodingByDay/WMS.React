@@ -23,6 +23,7 @@ const Insert = (props) => {
   }
 
 
+
     const connectData = async () => {
       var finalOptions = {};
       if(props.isVisible) {
@@ -35,13 +36,14 @@ const Insert = (props) => {
                 var current = props.selectedTable.value[i];
                 var currentData = data[current.accessor];
                 var type = current.type;
+                var emptyOption = { value: '', label: '', id: '' }
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
                     const value = current.columnOrder.map(field => item[field]).join('|');
                     return { value, label: value, id: item[current.dropdownId] };
                   });
                   
-                  finalOptions[current.accessor] = options;
+                  finalOptions[current.accessor] = [emptyOption, ...options];
 
                 }
             }
@@ -68,7 +70,7 @@ const Insert = (props) => {
 
   if (!props.isVisible) {
      return null;
-  } else {
+  } if (Object.keys(dropdownOptions).length === 0) {
     connectData()
   }
 
