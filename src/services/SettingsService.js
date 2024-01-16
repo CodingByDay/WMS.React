@@ -3,36 +3,39 @@ import axios from 'axios';
 
 const SettingsService  = {
 
-  async  insertSQLQuery(sqlQuery, parameters) {
+
+
+  async  insertSQLQuery(sqlQuery) {
+
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
+
     const requestObject = {
       SQL: sqlQuery
     };
   
     try {
+
       const response = await axios.post(apiUrl, JSON.stringify(requestObject), {
+
         headers: {
           'Content-Type': 'application/json'
         }
+
       });
   
       if (response.data.Success) {
+
         return true;
       } else {
+
         return false;
       }
     } catch (error) {
+      
       return false;
     }
+
   },
-
-
-
-
-
-
-
-
 
 
   async  executeSQLQuery(sqlQuery, parameters) {
