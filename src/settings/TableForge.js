@@ -49,6 +49,7 @@ function TableForge({ refresh, name, tableData }) {
             if (result.isConfirmed) {         
                 SettingsService.insertSQLQuery(currentDeleteSQL)
                 .then(result => {
+                    
                     var data = result;
           
                     if(data) {
@@ -64,8 +65,12 @@ function TableForge({ refresh, name, tableData }) {
                         'error'
                       );
                     }
+
+
+
+                    setTimeout(refresh, 1000);
           
-                    refresh();
+                   
                 })    
             }
           });
@@ -111,7 +116,8 @@ function TableForge({ refresh, name, tableData }) {
         type: 'dropdown',
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
         columnOrder: ['ID', 'Desc'],
-        dropdownId: 'ID'
+        dropdownId: 'ID',
+        dropdownPlaceholder: ''
       },
       {
         Header: 'Vrednost',

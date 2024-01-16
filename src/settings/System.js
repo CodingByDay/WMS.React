@@ -17,20 +17,17 @@ function System() {
 
     const fetchData = async () => {
       
-      try {
+  
         SettingsService.executeSQLQuery("SELECT * FROM uWMSSetting;", [])
         .then(result => {
           setData(result)
         })
-        .catch(error => {
-          console.error("Error:", error);
-        });
+       
 
-      } catch (error) {
-      }
+     
     };
     fetchData();
-  }, [refreshTrigger]);
+  }, []);
 
   
   var users = [];
@@ -41,7 +38,10 @@ function System() {
 
   const refresh = () => {
 
-    setRefresh(!refreshTrigger);
+    SettingsService.executeSQLQuery("SELECT * FROM uWMSSetting;", [])
+        .then(result => {
+          setData(result)
+        })
 
 
   }

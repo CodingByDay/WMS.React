@@ -5,6 +5,8 @@ import ListingService from '../services/ListingService';
 import { useSelector, useDispatch } from 'react-redux'
 import DataAccess from "../utility/DataAccess";
 import SettingsService from '../services/SettingsService';
+import Swal from 'sweetalert2';
+
 const Insert = (props) => {
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -83,6 +85,8 @@ const Insert = (props) => {
   }
 
    function onClose() {
+    setSelectedOptions({})
+    setInputValues({})
     props.onClose();
   }
   const handleSelectChange = (accessor, selected) => {
@@ -132,27 +136,29 @@ const Insert = (props) => {
 
  
 
-    
-    try {
+
       SettingsService.insertSQLQuery(insertQuery)
       .then(result => {
+          props.refresh();
           var data = result;
 
           if(data) {
-
+              onClose();
           } else {
-
+            Swal.fire(
+              'Napaka!',
+              'Zapis ni bil zapisan.',
+              'error'
+            );
+            onClose();
           }
 
-          props.refresh();
+         
       })
-      .catch(error => {
-      });
+   
 
       
-    } catch (error) {
-
-    }
+    
 
 
   };
@@ -176,6 +182,7 @@ const Insert = (props) => {
               {column.type === 'dropdown' ? (
                <Select
                id={column.accessor}
+               placeholder={column.dropdownPlaceholder}
                name={column.accessor}
                options={dropdownOptions[column.accessor] || []}
                value={selectedOptions[column.accessor]}
