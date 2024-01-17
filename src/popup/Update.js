@@ -95,7 +95,6 @@ const Update = (props) => {
 
         })
         .catch(error => {
-          console.error("Error:", error);
         });
 
         
@@ -125,7 +124,6 @@ const Update = (props) => {
             if(found.dropdownId === key) {
               var specificObject = dropdownOptions[key]
               var insertObject = specificObject.find(item => item.id === value);
-            console.log(insertObject)
             setSelectedOptions({
               ...selectedOptions,
               [key]: insertObject
@@ -163,13 +161,12 @@ const Update = (props) => {
   const handleSelectChange = (accessor, selected) => {
 
     var specificObject = dropdownOptions[accessor]
-    var insertObject = specificObject.find(item => item.id === accessor);
-   
-  setSelectedOptions({
-    ...selectedOptions,
-    [accessor]: insertObject
-  });
-  
+    var insertObject = specificObject.find(item => item.id === selected.id);
+    setSelectedOptions({
+      ...selectedOptions,
+      [accessor]: insertObject
+    });
+    
   };
   const options = [
     { label: 'Column 1', options: [{ value: 'Value 1', label: 'Label 1' }, /* ... */] },
@@ -265,7 +262,7 @@ const Update = (props) => {
               {property}
               </div>
           ): (
-              <div key={index} style={{ fontWeight: '600', backgroundColor: '#081A45', minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'white', marginRight: '0px', whiteSpace: 'nowrap' }}>
+              <div key={index} style={{ fontWeight: '600',  minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
                 {property}
               </div>
             )         
@@ -283,7 +280,6 @@ const Update = (props) => {
   
 
   const formatOptionLabel = ({ label, properties, widths, header, id }) => {
-    
     const exists = Object.values(selectedOptions).some(item => item.id === id);
 
     

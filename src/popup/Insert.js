@@ -77,33 +77,44 @@ const Insert = (props) => {
     }
     };
 
-    const formatOptionLabel = ({ label, properties, widths, header}) => (
-      <DynamicFormatOptionLabel properties={properties} label={label} widths = {widths} header = {header}/>
-    );
-    const DynamicFormatOptionLabel = ({ label, properties, widths, header}) => (
-      <div>
-        {properties && properties.length > 0 ? (
-          <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
-            {properties.map((property, index) => (
-                ( !header ) ? (
-                <div key={index} style={{ minWidth: widths[index], paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
-                {property}
-                </div>
-            ): (
-                <div key={index} style={{ fontWeight: '600', backgroundColor: '#081A45', minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'white', marginRight: '0px', whiteSpace: 'nowrap' }}>
-                  {property}
-                </div>
-              )         
-            ))}
-          </div>
-        ) : (
-          <div style={{ fontSize: '100%' }}>
-            {label}
-          </div>
-        )}
-      </div>
-    );
+    const formatOptionLabel = ({ label, properties, widths, header, id }) => {
+      const exists = Object.values(selectedOptions).some(item => item.id === id);
+  
+      
     
+      // Return the component with the processed data
+      return (
+        <DynamicFormatOptionLabel properties={properties} id={id} label={label} widths={widths} header={header} selected = {exists} />
+     );
+    };
+   
+  const DynamicFormatOptionLabel = ({ label, properties, widths, header, selected, id}) => (
+
+
+    
+    <div>
+      {properties && properties.length > 0 && !selected ? (
+        <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+          {properties.map((property, index) => (
+              ( !header ) ? (
+              <div key={index} style={{ minWidth: widths[index], paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+              {property}
+              </div>
+          ): (
+              <div key={index} style={{ fontWeight: '600',  minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+              </div>
+            )         
+          ))}
+        </div>
+      ) : (
+        <div style={{ fontSize: '100%' }}>
+          {id}
+        </div>
+      )}
+    </div>
+  );
+  
   
 
   if (!props.isVisible) {
@@ -119,9 +130,11 @@ const Insert = (props) => {
   }
   const handleSelectChange = (accessor, selected) => {
 
+    var specificObject = dropdownOptions[accessor]
+    var insertObject = specificObject.find(item => item.id === selected.id);
     setSelectedOptions({
       ...selectedOptions,
-      [accessor]: {value: selected.id, label: selected.id},
+      [accessor]: insertObject
     });
   };
 
