@@ -1,91 +1,58 @@
-import React, { useState, useEffect, memo } from 'react';
-import { MdEdit } from "react-icons/md";
-import { IoMdAddCircle } from "react-icons/io";
-import { MdDeleteForever } from "react-icons/md";
-import $ from 'jquery'; 
-import 'bootstrap';
+import React, { useState, useMemo } from 'react';
+import { MdEdit } from 'react-icons/md';
+import { IoAddCircleSharp } from 'react-icons/io5';
+import { MdDeleteForever } from 'react-icons/md';
+import { useTable, useGlobalFilter } from 'react-table';
 import Swal from 'sweetalert2';
-import { useTable } from 'react-table';
-import { IoAddCircleSharp } from "react-icons/io5";
-import { CgExport } from "react-icons/cg";
 import SettingsService from '../services/SettingsService';
 import Insert from '../popup/Insert';
 import Update from '../popup/Update';
 
-
 function TableForge({ refresh, name, tableData }) {
-        const [isModalOpen, setIsModalOpen] = useState(false);
-        const [isModalEditOpen, setIsEditModalOpen] = useState(false);
-        const [editData, setEditData] = useState({});
- 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalEditOpen, setIsEditModalOpen] = useState(false);
+  const [editData, setEditData] = useState({});
 
+  const showDeleteConfirmation = (data) => {
+    var currentDeleteSQL = selectedTable.deleteQuery;
 
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const value = data[key];
+        var theOriginalValue = '@' + key;
+        currentDeleteSQL = currentDeleteSQL.replace(theOriginalValue, value);
+      }
+    }
 
-        
-        const showDeleteConfirmation = (data) => {
+    Swal.fire({
+      title: 'Ste prepričani?',
+      text: 'To dejanje ni mogoče razveljaviti!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Da, izbriši!',
+      cancelButtonText: 'Ne',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        SettingsService.insertSQLQuery(currentDeleteSQL).then((result) => {
+          var data = result;
 
-          
-
-          var currentDeleteSQL = selectedTable.deleteQuery;
-          
-
-          for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-              const value = data[key];
-              var theOriginalValue = "@" + key;
-              currentDeleteSQL = currentDeleteSQL.replace(theOriginalValue, value)
-            }
+          if (data) {
+            Swal.fire('Izbrisano!', 'Zapis je bil pobrisan.', 'success');
+          } else {
+            Swal.fire('Napaka!', 'Zapis ni bil pobrisan.', 'error');
           }
 
-         
+          setTimeout(refresh, 1000);
+        });
+      }
+    });
+  };
 
-
-
-          Swal.fire({
-            title: 'Ste prepričani?',
-            text: 'To dejanje ni mogoče razveljaviti!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Da, izbriši!',
-            cancelButtonText: 'Ne'
-          }).then((result) => {
-            if (result.isConfirmed) {         
-                SettingsService.insertSQLQuery(currentDeleteSQL)
-                .then(result => {
-                    
-                    var data = result;
-          
-                    if(data) {
-                      Swal.fire(
-                        'Izbrisano!',
-                        'Zapis je bil pobrisan.',
-                        'success'
-                      );
-                    } else {
-                      Swal.fire(
-                        'Napaka!',
-                        'Zapis ni bil pobrisan.',
-                        'error'
-                      );
-                    }
-
-
-
-                    setTimeout(refresh, 1000);
-          
-                   
-                })    
-            }
-          });
-        }
-        
-
-  function onDelete(data) {
+  const onDelete = (data) => {
     showDeleteConfirmation(data);
-  }
-
+  };
 
   const onClose = () => {
     setIsModalOpen(false);
@@ -94,31 +61,25 @@ function TableForge({ refresh, name, tableData }) {
   const onCloseEdit = () => {
     setIsEditModalOpen(false);
   };
-  const generatePopupCreate = (data) => {   
 
+  const generatePopupCreate = () => {
     setIsModalOpen(true);
-    
   };
-  const generatePopupEdit = (data) => {   
+
+  const generatePopupEdit = (data) => {
     setEditData(data);
     setIsEditModalOpen(true);
-    
   };
 
-  
-  function onAdd() {
-      generatePopupCreate(selectedTable);
-  }
+  const onAdd = () => {
+    generatePopupCreate(selectedTable);
+  };
 
-
-
-  function onEdit(data) {
+  const onEdit = (data) => {
     generatePopupEdit(data, selectedTable);
-  }
+  };
 
-
-  // Define your table columns
-  const systemColumns = React.useMemo(
+  const systemColumns = useMemo(
     () => [
       {
         Header: 'Naziv',
@@ -131,7 +92,7 @@ function TableForge({ refresh, name, tableData }) {
         columnOrderWidth: [200, 300],
         dropdownId: 'ID',
         dropdownPlaceholder: '',
-        dropdownHelperField: 'Desc'
+        dropdownHelperField: 'Desc',
       },
       {
         Header: 'Vrednost',
@@ -140,104 +101,97 @@ function TableForge({ refresh, name, tableData }) {
         type: 'text',
       },
       {
-        Header: <button className="action-buttons white" title="Vnos" onClick={() => onAdd()}><IoAddCircleSharp />Dodaj</button>
-        ,
+        Header: (
+          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+            <IoAddCircleSharp />
+            Dodaj
+          </button>
+        ),
         accessor: 'actions',
 
         Cell: ({ row }) => (
           <div>
-
-            <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}><MdEdit /></button>
-            <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}><MdDeleteForever /></button>
-
+            <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+              <MdEdit />
+            </button>
+            <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+              <MdDeleteForever />
+            </button>
           </div>
         ),
-
-        type: 'nothing'
+        type: 'nothing',
       },
     ],
     []
   );
 
-    const tablesAssociation = [
-        {
+  const tablesAssociation = [
+    {
+      name: 'system',
+      value: systemColumns,
+      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
+      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
+      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",
+    },
+  ];
 
+  var selectedTable = tablesAssociation.find((table) => table.name === name);
 
-        name: 'system', value: systemColumns, 
-        insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');", 
-        deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
-        updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';"  
-      
-      
-        }
-    ]
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = useTable(
+    {
+      columns: selectedTable ? selectedTable.value : [],
+      data: tableData,
+    },
+    useGlobalFilter
+  );
 
- 
-
-
-    var selectedTable = tablesAssociation.find(table => table.name === name); 
-        // Use the result as needed
-        const {
-          getTableProps,
-          getTableBodyProps,
-          headerGroups,
-          rows,
-          prepareRow,
-        } = useTable({
-          columns: selectedTable ? selectedTable.value : [],
-          data: tableData
-        });
-
-
-
-
-
+  const { globalFilter } = state;
 
   return (
     <div>
+      <Insert refresh={refresh} onClose={onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
+      <Update data={editData} refresh={refresh} onClose={onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
+      <input
+          type="text"
+          placeholder="Iskanje..."
+          value={globalFilter || ''}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+        />
+      <div className="user-settings-table">
+        
 
-
-
-
-    <Insert refresh = {refresh} onClose = {onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
-    <Update  data = {editData} refresh = {refresh} onClose = {onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
-
-
-
-
-    <div class = "user-settings-table">
-
-    
-
-
-      <table {...getTableProps()} className={`react-table-${name}`}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()} >{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return (
-                    <td {...cell.getCellProps()} disabled>{cell.render('Cell')}</td>
-                  );
-                })}
+        <table {...getTableProps()} className={`react-table-${name}`}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-    </div>
-
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
