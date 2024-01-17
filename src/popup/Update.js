@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+
 import TransactionService from '../services/TransactionService';
 import ListingService from '../services/ListingService';
 import { useSelector, useDispatch } from 'react-redux'
@@ -66,12 +67,11 @@ const Update = (props) => {
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
                     const properties = current.columnOrder.map(field => item[field]);
-                    const names = current.columnOrderTranslation.map(field => field);
-
+                    const names = current.columnOrderTranslation.map(field => field);                
                     return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names };
                   });
                   
-                  console.log(options);
+                  console.log(data);
 
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
@@ -225,16 +225,39 @@ const Update = (props) => {
 
   };
 
+
+  const CustomMenu = props => {
+    return (
+      <components.Menu {...props}>
+        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Header 1</th>
+                <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Header 2</th>
+                {/* Add more headers as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {props.children}
+            </tbody>
+          </table>
+        </div>
+      </components.Menu>
+    );
+  };
+
+
   const DynamicFormatOptionLabel = ({ label, properties, names }) => (
     <div>
       {properties && properties.length > 0 ? (
         <div style={{ display: 'flex' }}>
           {properties.map((property, index) => (
-            property && (
-              <div key={index} style={{ width: '200px', padding: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
-                <strong style={{ fontWeight: 'bold', color: 'black' }}>{names[index]}:</strong> {property}
+        
+              <div key={index} style={{ minWidth: '300px', borderRight: '1px solid gray', borderBottom: '1px solid gray', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+              {property}
               </div>
-            )
+            
           ))}
         </div>
       ) : (
