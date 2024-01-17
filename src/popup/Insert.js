@@ -46,13 +46,16 @@ const Insert = (props) => {
                 var current = props.selectedTable.value[i];
                 var currentData = data[current.accessor];
                 var type = current.type;
-                var emptyOption = { value: '', label: '', id: '' }
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
                     const value = current.columnOrder.map(field => item[field]).join('|');
-                    return { value, label: value, id: item[current.dropdownId] };
+                    const properties = current.columnOrder.map(field => item[field]);
+                    const names = current.columnOrderTranslation.map(field => field);
+                    const widths = current.columnOrderWidth.map(field => field);                
+                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false };
                   });
-                  
+                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, names: current.columnOrderTranslation, header: true }
+
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
                 }
@@ -74,8 +77,33 @@ const Insert = (props) => {
     }
     };
 
-
-
+    const formatOptionLabel = ({ label, properties, widths, header}) => (
+      <DynamicFormatOptionLabel properties={properties} label={label} widths = {widths} header = {header}/>
+    );
+    const DynamicFormatOptionLabel = ({ label, properties, widths, header}) => (
+      <div>
+        {properties && properties.length > 0 ? (
+          <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+            {properties.map((property, index) => (
+                ( !header ) ? (
+                <div key={index} style={{ minWidth: widths[index], paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+                </div>
+            ): (
+                <div key={index} style={{ fontWeight: '600', backgroundColor: '#081A45', minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'white', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                  {property}
+                </div>
+              )         
+            ))}
+          </div>
+        ) : (
+          <div style={{ fontSize: '100%' }}>
+            {label}
+          </div>
+        )}
+      </div>
+    );
+    
   
 
   if (!props.isVisible) {
@@ -184,6 +212,9 @@ const Insert = (props) => {
                id={column.accessor}
                placeholder={column.dropdownPlaceholder}
                name={column.accessor}
+               getOptionLabel={(option) => option.label}
+               getOptionValue={(option) => option.value}
+               formatOptionLabel={formatOptionLabel}
                options={dropdownOptions[column.accessor] || []}
                value={selectedOptions[column.accessor]}
                onChange={(selected) => handleSelectChange(column.accessor, selected)}
