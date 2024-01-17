@@ -40,7 +40,7 @@ export default function Listing() {
       setPopupVisible(false);
     };
 
-    // alert(name);
+    
   
     function isUUID ( uuid ) {
       let s = "" + uuid;
@@ -221,11 +221,6 @@ export default function Listing() {
               if (result) {
       
                 ListingService.deleteHeadDocumentOrder(selectedHeadOrder.childNodes[6].innerHTML).then(response => { 
-
-
-
-
-
                     if(response.data.Success) {
 
                               ListingService.getAllListings().then(response => { 
