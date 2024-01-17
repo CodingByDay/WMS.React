@@ -147,7 +147,17 @@ const Update = (props) => {
       [accessor]: {value: selected.id, label: selected.id},
     });
   };
+  const options = [
+    { label: 'Column 1', options: [{ value: 'Value 1', label: 'Label 1' }, /* ... */] },
+    { label: 'Column 2', options: [{ value: 'Value 2', label: 'Label 2' }, /* ... */] },
+    // Dodajte več stolpcev po potrebi
+  ];
 
+  const formatGroupLabel = data => (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <strong>{data.label}</strong>
+    </div>
+  );
 
 
   const sendData = () => {
@@ -258,6 +268,9 @@ const Update = (props) => {
             <center><span onClick={sendData}  className="actions smallerr">
               Posodobi
             </span>
+
+
+            
             </center>
           </div>
         </div>
