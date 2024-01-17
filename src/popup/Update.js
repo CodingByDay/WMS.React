@@ -63,15 +63,16 @@ const Update = (props) => {
                 var current = props.selectedTable.value[i];
                 var currentData = data[current.accessor];
                 var type = current.type;
-                var emptyOption = { value: '', label: '', id: '' }
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
                     const properties = current.columnOrder.map(field => item[field]);
-                    const names = current.columnOrderTranslation.map(field => field);                
-                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names };
+                    const names = current.columnOrderTranslation.map(field => field);
+                    const widths = current.columnOrderWidth.map(field => field);                
+                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false };
                   });
                   
-                  console.log(data);
+       
+                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, names: current.columnOrderTranslation, header: true }
 
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
@@ -226,38 +227,23 @@ const Update = (props) => {
   };
 
 
-  const CustomMenu = props => {
-    return (
-      <components.Menu {...props}>
-        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Header 1</th>
-                <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Header 2</th>
-                {/* Add more headers as needed */}
-              </tr>
-            </thead>
-            <tbody>
-              {props.children}
-            </tbody>
-          </table>
-        </div>
-      </components.Menu>
-    );
-  };
 
 
-  const DynamicFormatOptionLabel = ({ label, properties, names }) => (
+
+  const DynamicFormatOptionLabel = ({ label, properties, widths, header}) => (
     <div>
       {properties && properties.length > 0 ? (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
           {properties.map((property, index) => (
-        
-              <div key={index} style={{ minWidth: '300px', borderRight: '1px solid gray', borderBottom: '1px solid gray', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+              ( !header ) ? (
+              <div key={index} style={{ minWidth: widths[index], paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
               {property}
               </div>
-            
+          ): (
+              <div key={index} style={{ fontWeight: '600', backgroundColor: '#081A45', minWidth: widths[index], paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'white', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+              </div>
+            )         
           ))}
         </div>
       ) : (
@@ -271,8 +257,8 @@ const Update = (props) => {
   
   
 
-  const formatOptionLabel = ({ label, properties, names }) => (
-    <DynamicFormatOptionLabel properties={properties} label={label} names = {names} />
+  const formatOptionLabel = ({ label, properties, widths, header}) => (
+    <DynamicFormatOptionLabel properties={properties} label={label} widths = {widths} header = {header}/>
   );
 
 

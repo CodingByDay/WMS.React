@@ -124,6 +124,7 @@ function TableForge({ refresh, name, tableData }) {
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
         columnOrder: ['ID', 'Desc'],
         columnOrderTranslation: ['Naziv', 'Opis'],
+        columnOrderWidth: [200, 300],
         dropdownId: 'ID',
         dropdownPlaceholder: ''
       },
