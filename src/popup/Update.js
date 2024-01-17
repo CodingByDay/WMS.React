@@ -20,14 +20,18 @@ const Update = (props) => {
     var isUpdate = props.isVisible;
 
     if(isUpdate) {
-      connectData()
-  
+
+      connectSelections()
+
     }
 
   }, [props.isVisible]);
 
+  useEffect(() => {
 
-
+      connectData() 
+    
+  }, []);
 
   function extractDropdownPairs(data) {
     const dropdownPairs = {};
@@ -52,7 +56,7 @@ const Update = (props) => {
 
     const connectData = async () => {
       var finalOptions = {};
-      if(props.isVisible) {
+ 
       try {
         var pairs = extractDropdownPairs(props.selectedTable)
         SettingsService.executeSQLQueryBatch(pairs)
@@ -78,9 +82,17 @@ const Update = (props) => {
                 }
             }
 
+   
+            setDropdownOptions((prevOptions) => {
+              return {
+                ...prevOptions,
+                ...finalOptions,
+              };
+            });
+            
+       
 
-            setDropdownOptions(finalOptions);
-            connectSelections();
+
         })
         .catch(error => {
           console.error("Error:", error);
@@ -88,18 +100,15 @@ const Update = (props) => {
 
         
       } catch (error) {
-        // Handle errors
-        console.error('Error fetching dropdown options:', error);
+
       }
 
-    }
+    
     };
 
 
 
   function connectSelections() {
-
-
 
 
 
@@ -116,7 +125,7 @@ const Update = (props) => {
             if(found.dropdownId === key) {
               var specificObject = dropdownOptions[key]
               var insertObject = specificObject.find(item => item.id === value);
-
+            console.log(insertObject)
             setSelectedOptions({
               ...selectedOptions,
               [key]: insertObject
@@ -155,7 +164,7 @@ const Update = (props) => {
 
     var specificObject = dropdownOptions[accessor]
     var insertObject = specificObject.find(item => item.id === accessor);
-
+   
   setSelectedOptions({
     ...selectedOptions,
     [accessor]: insertObject
@@ -322,7 +331,7 @@ const Update = (props) => {
               id={column.accessor + "-helper"}
               name={column.accessor+  "-helper"}
               className='form-control'
-              value={selectedOptions[column.accessor].helper} // Set the value from state
+              value={(selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || ''} // Set the value from state
               contentEditable={false}
             />
 

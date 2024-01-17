@@ -17,7 +17,11 @@ function TableForge({ refresh, name, tableData }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [isModalEditOpen, setIsEditModalOpen] = useState(false);
         const [editData, setEditData] = useState({});
-    
+ 
+
+
+
+        
         const showDeleteConfirmation = (data) => {
 
           
@@ -33,7 +37,7 @@ function TableForge({ refresh, name, tableData }) {
             }
           }
 
-   
+         
 
 
 
