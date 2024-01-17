@@ -21,8 +21,7 @@ const Update = (props) => {
 
     if(isUpdate) {
       connectData()
-      connectSelections();
-
+  
     }
 
   }, [props.isVisible]);
@@ -68,11 +67,11 @@ const Update = (props) => {
                     const properties = current.columnOrder.map(field => item[field]);
                     const names = current.columnOrderTranslation.map(field => field);
                     const widths = current.columnOrderWidth.map(field => field);                
-                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false, helper: current.dropdownHelperField  };
+                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false, helper: item[current.dropdownHelperField]  };
                   });
                   
        
-                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, helper: current.dropdownHelperField, names: current.columnOrderTranslation, header: true }
+                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, helper: '', names: current.columnOrderTranslation, header: true }
 
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
@@ -81,14 +80,16 @@ const Update = (props) => {
 
 
             setDropdownOptions(finalOptions);
-
+            connectSelections();
         })
         .catch(error => {
+          console.error("Error:", error);
         });
 
         
       } catch (error) {
         // Handle errors
+        console.error('Error fetching dropdown options:', error);
       }
 
     }
@@ -97,6 +98,12 @@ const Update = (props) => {
 
 
   function connectSelections() {
+
+
+
+
+
+
     var table = props.selectedTable.value;
       var prevData = props.data;
       for (const key in prevData) {
@@ -114,6 +121,7 @@ const Update = (props) => {
               ...selectedOptions,
               [key]: insertObject
             });
+  
           }
           } else if (structureType === "text") {
 
@@ -145,10 +153,14 @@ const Update = (props) => {
   }
   const handleSelectChange = (accessor, selected) => {
 
-    setSelectedOptions({
-      ...selectedOptions,
-      [accessor]: {value: selected.id, label: selected.id},
-    });
+    var specificObject = dropdownOptions[accessor]
+    var insertObject = specificObject.find(item => item.id === accessor);
+
+  setSelectedOptions({
+    ...selectedOptions,
+    [accessor]: insertObject
+  });
+  
   };
   const options = [
     { label: 'Column 1', options: [{ value: 'Value 1', label: 'Label 1' }, /* ... */] },
@@ -231,9 +243,12 @@ const Update = (props) => {
 
 
 
-  const DynamicFormatOptionLabel = ({ label, properties, widths, header}) => (
+  const DynamicFormatOptionLabel = ({ label, properties, widths, header, selected, id}) => (
+
+
+    
     <div>
-      {properties && properties.length > 0 ? (
+      {properties && properties.length > 0 && !selected ? (
         <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
           {properties.map((property, index) => (
               ( !header ) ? (
@@ -249,7 +264,7 @@ const Update = (props) => {
         </div>
       ) : (
         <div style={{ fontSize: '100%' }}>
-          {label}
+          {id}
         </div>
       )}
     </div>
@@ -258,10 +273,18 @@ const Update = (props) => {
   
   
 
-  const formatOptionLabel = ({ label, properties, widths, header}) => (
-    <DynamicFormatOptionLabel properties={properties} label={label} widths = {widths} header = {header}/>
-  );
+  const formatOptionLabel = ({ label, properties, widths, header, id }) => {
+    
+    const exists = Object.values(selectedOptions).some(item => item.id === id);
 
+    
+  
+    // Return the component with the processed data
+    return (
+      <DynamicFormatOptionLabel properties={properties} id={id} label={label} widths={widths} header={header} selected = {exists} />
+   );
+  };
+  
 
   return (
     <div className="popup-overlay insert">
@@ -299,7 +322,7 @@ const Update = (props) => {
               id={column.accessor + "-helper"}
               name={column.accessor+  "-helper"}
               className='form-control'
-              value={selectedOptions[column.accessor]} // Set the value from state
+              value={selectedOptions[column.accessor].helper} // Set the value from state
               contentEditable={false}
             />
 

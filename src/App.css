@@ -7,7 +7,9 @@ button.action-buttons.white:hover {
   background: none !important;
 }
 
-
+.popup-content.insert {
+  width: 60em;
+}
 /* Styles for the table container */
 .user-settings-table {
   max-height: 400px; /* Set the maximum height for the container */
