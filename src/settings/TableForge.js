@@ -126,7 +126,8 @@ function TableForge({ refresh, name, tableData }) {
         columnOrderTranslation: ['Naziv', 'Opis'],
         columnOrderWidth: [200, 300],
         dropdownId: 'ID',
-        dropdownPlaceholder: ''
+        dropdownPlaceholder: '',
+        dropdownHelperField: 'Desc'
       },
       {
         Header: 'Vrednost',

@@ -68,11 +68,11 @@ const Update = (props) => {
                     const properties = current.columnOrder.map(field => item[field]);
                     const names = current.columnOrderTranslation.map(field => field);
                     const widths = current.columnOrderWidth.map(field => field);                
-                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false };
+                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names, widths, header: false, helper: current.dropdownHelperField  };
                   });
                   
        
-                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, names: current.columnOrderTranslation, header: true }
+                  var emptyOption = { value: 'Test', label: 'Test', id: '', properties: current.columnOrderTranslation, widths: current.columnOrderWidth, helper: current.dropdownHelperField, names: current.columnOrderTranslation, header: true }
 
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
@@ -84,13 +84,11 @@ const Update = (props) => {
 
         })
         .catch(error => {
-          console.error("Error:", error);
         });
 
         
       } catch (error) {
         // Handle errors
-        console.error('Error fetching dropdown options:', error);
       }
 
     }
@@ -109,9 +107,12 @@ const Update = (props) => {
           const structureType = found.type;
           if(structureType === "dropdown") {
             if(found.dropdownId === key) {
+              var specificObject = dropdownOptions[key]
+              var insertObject = specificObject.find(item => item.id === value);
+
             setSelectedOptions({
               ...selectedOptions,
-              [key]: {value: value, label: value},
+              [key]: insertObject
             });
           }
           } else if (structureType === "text") {
@@ -276,17 +277,33 @@ const Update = (props) => {
             <div key={column.accessor} className="form-group insert">
               <label htmlFor={column.accessor}>{column.Header}:</label>
               {column.type === 'dropdown' ? (
-               <Select
-               id={column.accessor}
-               placeholder={column.dropdownPlaceholder}
-               name={column.accessor}
-               options={dropdownOptions[column.accessor] || []}
-               value={selectedOptions[column.accessor]}
-               getOptionLabel={(option) => option.label}
-               getOptionValue={(option) => option.value}
-               formatOptionLabel={formatOptionLabel}
-               onChange={(selected) => handleSelectChange(column.accessor, selected)}
-             />
+              <div className='complete select'>
+
+              <Select
+              id={column.accessor}
+              placeholder={column.dropdownPlaceholder}
+              name={column.accessor}
+              getOptionLabel={(option) => option.label}
+              getOptionValue={(option) => option.value}
+              formatOptionLabel={formatOptionLabel}
+              options={dropdownOptions[column.accessor] || []}
+              value={selectedOptions[column.accessor]}
+              onChange={(selected) => handleSelectChange(column.accessor, selected)}
+              
+              />
+
+              <label htmlFor={column.accessor+ "-helper"}>Dodatno:</label>
+
+              <input
+              type='text'
+              id={column.accessor + "-helper"}
+              name={column.accessor+  "-helper"}
+              className='form-control'
+              value={selectedOptions[column.accessor]} // Set the value from state
+              contentEditable={false}
+            />
+
+            </div>
               ) : (
                 <input
                 type={column.type === 'checkbox' ? 'checkbox' : 'text'}

@@ -208,6 +208,10 @@ const Insert = (props) => {
             <div key={column.accessor} className="form-group insert">
               <label htmlFor={column.accessor}>{column.Header}:</label>
               {column.type === 'dropdown' ? (
+
+
+
+
                <Select
                id={column.accessor}
                placeholder={column.dropdownPlaceholder}
@@ -218,7 +222,11 @@ const Insert = (props) => {
                options={dropdownOptions[column.accessor] || []}
                value={selectedOptions[column.accessor]}
                onChange={(selected) => handleSelectChange(column.accessor, selected)}
+               
              />
+            
+
+             
               ) : (
                 <input
                 type={column.type === 'checkbox' ? 'checkbox' : 'text'}
