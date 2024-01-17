@@ -158,8 +158,8 @@ function TableForge({ refresh, name, tableData }) {
 
         name: 'system', value: systemColumns, 
         insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');", 
-        deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';"
-          
+        deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
+        updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';"  
       
       
         }

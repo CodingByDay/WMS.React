@@ -13,7 +13,17 @@ const Update = (props) => {
   const [inputValues, setInputValues] = useState({});
 
  
+  useEffect(() => {
 
+    var isUpdate = props.isVisible;
+
+    if(isUpdate) {
+
+      connectSelections();
+
+    }
+
+  }, [props.isVisible]);
 
 
 
@@ -82,8 +92,38 @@ const Update = (props) => {
 
 
   function connectSelections() {
+    var table = props.selectedTable.value;
       var prevData = props.data;
-      console.log(prevData);
+      for (const key in prevData) {
+        if (prevData.hasOwnProperty(key)) {
+          const value = prevData[key];
+          const found = table.find(item => item.accessor === key);
+    
+          const structureType = found.type;
+          if(structureType === "dropdown") {
+            if(found.dropdownId === key) {
+            setSelectedOptions({
+              ...selectedOptions,
+              [key]: {value: value, label: value},
+            });
+          }
+          } else if (structureType === "text") {
+
+
+  
+            setInputValues((prevValues) => ({
+              ...prevValues,
+              [key]: value,
+            }));
+
+
+          } else if (structureType === "checkbox") {
+
+        }
+
+        
+      }
+    }
   }
 
   if (!props.isVisible) {
@@ -93,13 +133,6 @@ const Update = (props) => {
        connectData()
     }
 
-    if(Object.keys(props.data).length === 0) {
-
-      // Connecting the previous connection.
-      connectSelections()
-      props.data = {}
-
-    }
   }
 
    function onClose() {
@@ -120,7 +153,7 @@ const Update = (props) => {
   const sendData = () => {
 
 
-    var insertQuery = props.selectedTable.insertQuery;
+    var updateQuery = props.selectedTable.updateQuery;
     var columns = props.selectedTable.value;
 
 
@@ -132,22 +165,22 @@ const Update = (props) => {
         if(accessor!="nothing") {
             if(type == "text") {
 
-              var theValue = getValue(accessor);
-              var theValueInsideQuery = "@" + accessor;
-              insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
+                var theValue = getValue(accessor);
+                var theValueInsideQuery = "@" + accessor;
+                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);
 
             } else if(type == "dropdown") {
 
                 var theValue = selectedOptions[accessor].value;
                 var theValueInsideQuery = "@" + accessor;
-                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
+                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);
                 
 
             } else if(type == "checkbox") {
 
                 var theValue = selectedOptions[accessor];
                 var theValueInsideQuery = "@" + accessor;
-                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);              
+                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);              
             }
         }    
     }
@@ -155,7 +188,7 @@ const Update = (props) => {
  
 
 
-      SettingsService.insertSQLQuery(insertQuery)
+      SettingsService.insertSQLQuery(updateQuery)
       .then(result => {
           props.refresh();
           var data = result;
@@ -165,7 +198,7 @@ const Update = (props) => {
           } else {
             Swal.fire(
               'Napaka!',
-              'Zapis ni bil zapisan.',
+              'Zapis ni bil posodobljen.',
               'error'
             );
             onClose();
@@ -223,7 +256,7 @@ const Update = (props) => {
 
           <div className="center-button">
             <center><span onClick={sendData}  className="actions smallerr">
-              Dodaj
+              Posodobi
             </span>
             </center>
           </div>
