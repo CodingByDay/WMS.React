@@ -123,6 +123,7 @@ function TableForge({ refresh, name, tableData }) {
         type: 'dropdown',
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
         columnOrder: ['ID', 'Desc'],
+        columnOrderTranslation: ['Naziv', 'Opis'],
         dropdownId: 'ID',
         dropdownPlaceholder: ''
       },

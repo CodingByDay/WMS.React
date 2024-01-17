@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 const Update = (props) => {
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [dropdownLayouts, setDropdownLayouts] = useState({});
   const [inputValues, setInputValues] = useState({});
 
  
@@ -18,7 +19,7 @@ const Update = (props) => {
     var isUpdate = props.isVisible;
 
     if(isUpdate) {
-
+      connectData()
       connectSelections();
 
     }
@@ -64,10 +65,14 @@ const Update = (props) => {
                 var emptyOption = { value: '', label: '', id: '' }
                 if(type === "dropdown") {
                   const options = currentData.map(item => {
-                    const value = current.columnOrder.map(field => item[field]).join('|');
-                    return { value, label: value, id: item[current.dropdownId] };
+                    const properties = current.columnOrder.map(field => item[field]);
+                    const names = current.columnOrderTranslation.map(field => field);
+
+                    return { value: properties.join('|'), label: properties.join('|'), id: item[current.dropdownId], properties, names };
                   });
                   
+                  console.log(options);
+
                   finalOptions[current.accessor] = [emptyOption, ...options];
 
                 }
@@ -75,6 +80,7 @@ const Update = (props) => {
 
 
             setDropdownOptions(finalOptions);
+
         })
         .catch(error => {
           console.error("Error:", error);
@@ -128,12 +134,7 @@ const Update = (props) => {
 
   if (!props.isVisible) {
      return null;
-  } else  {
-    if(Object.keys(dropdownOptions).length === 0) {
-       connectData()
-    }
-
-  }
+  } 
 
    function onClose() {
     setSelectedOptions({})
@@ -224,7 +225,32 @@ const Update = (props) => {
 
   };
 
+  const DynamicFormatOptionLabel = ({ label, properties, names }) => (
+    <div>
+      {properties && properties.length > 0 ? (
+        <div style={{ display: 'flex' }}>
+          {properties.map((property, index) => (
+            property && (
+              <div key={index} style={{ width: '200px', padding: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                <strong style={{ fontWeight: 'bold', color: 'black' }}>{names[index]}:</strong> {property}
+              </div>
+            )
+          ))}
+        </div>
+      ) : (
+        <div style={{ fontSize: '100%' }}>
+          {label}
+        </div>
+      )}
+    </div>
+  );
+  
+  
+  
 
+  const formatOptionLabel = ({ label, properties, names }) => (
+    <DynamicFormatOptionLabel properties={properties} label={label} names = {names} />
+  );
 
 
   return (
@@ -247,6 +273,9 @@ const Update = (props) => {
                name={column.accessor}
                options={dropdownOptions[column.accessor] || []}
                value={selectedOptions[column.accessor]}
+               getOptionLabel={(option) => option.label}
+               getOptionValue={(option) => option.value}
+               formatOptionLabel={formatOptionLabel}
                onChange={(selected) => handleSelectChange(column.accessor, selected)}
              />
               ) : (
