@@ -180,11 +180,11 @@ function TableForge({ refresh, name, tableData }) {
       },
       {
         Header: 'Subjekt',
-        accessor: 'acIdent',
+        accessor: 'acSubject',
         className: 'name-column-system',
         type: 'dropdown',
-        sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCounty FROM tHE_SetSubject',
-        columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCounty'],
+        sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCountry FROM tHE_SetSubj',
+        columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCountry'],
         columnOrderTranslation: ['Subjekt', 'Naziv', 'Naslov', 'Pošta', 'Država'],
         columnOrderWidth: [200, 300, 200, 200, 200],
         dropdownId: 'acSubject',
@@ -245,6 +245,16 @@ function TableForge({ refresh, name, tableData }) {
     {
       name: 'system',
       value: systemColumns,
+      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
+      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
+      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",
+    },
+
+
+
+    {
+      name: 'subject-codes',
+      value: subjectCodes,
       insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
       deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
       updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",

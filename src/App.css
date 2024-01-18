@@ -8,7 +8,7 @@
 }
 
 
-table.react-table-system {
+table.react-table-system, table.react-table-subject-codes {
   width: 95%;
 }
 .search-container {
@@ -81,6 +81,40 @@ button.action-buttons.white:hover {
   background: none !important;
 }
 
+
+.popup-overlay.insert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 1000; /* Set a high z-index to ensure it's on top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content.insert {
+  background: white;
+  padding: 20px;
+  z-index: 1001; /* Set a higher z-index than overlay */
+}
+
+.popup-header.insert {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-close-btn.insert {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
+
+
 .popup-content.insert {
   width: 60em;
 }
@@ -91,7 +125,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system {
+.react-table-users, .react-table-system, .react-table-subject-codes {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -239,13 +273,13 @@ span#openRangeTransaction {
 .user-settings-table tr {
   background: #081A45;
 }
-table.react-table-system tr th:hover {
+table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover {
   background: rgb(255, 255, 255, 0.2);
 
 }
 
 
-.react-table-system th, .react-table-system td {
+.react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td {
   padding: 12px; /* Adjust the padding as needed */
 
 }

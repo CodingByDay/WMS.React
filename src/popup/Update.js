@@ -21,6 +21,8 @@ const Update = (props) => {
 
     if(isUpdate) {
 
+      connectData() 
+
       connectSelections()
 
     }
@@ -111,24 +113,33 @@ const Update = (props) => {
 
 
 
-
     var table = props.selectedTable.value;
       var prevData = props.data;
       for (const key in prevData) {
+
         if (prevData.hasOwnProperty(key)) {
           const value = prevData[key];
+
           const found = table.find(item => item.accessor === key);
-    
+          if(!found) {
+            continue;
+          }
           const structureType = found.type;
           if(structureType === "dropdown") {
             if(found.dropdownId === key) {
+      
               var specificObject = dropdownOptions[key]
               var insertObject = specificObject.find(item => item.id === value);
-            setSelectedOptions({
-              ...selectedOptions,
-              [key]: insertObject
-            });
+
+
+
+              setSelectedOptions(prevSelectedOptions => ({
+                ...prevSelectedOptions,
+                [key]: insertObject
+              }));
   
+
+      
           }
           } else if (structureType === "text") {
 
