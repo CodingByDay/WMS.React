@@ -4,7 +4,7 @@ import { MdLogout, MdHome } from "react-icons/md";
 import Cookies from 'universal-cookie';
 
 
-export default function Header() { 
+export default function Header(props) { 
 
     function handleLogout() { 
         const cookies = new Cookies();
@@ -44,7 +44,10 @@ export default function Header() {
             <div className='logo navbar' id='back-button' >
                 <center><img src='logo-wms.png' className='logo' alt='Riko WMS' height={30} draggable="false"/></center>
             </div>
-            <div className='menu'></div>
+            <div className='menu'>
+
+                {props.search}
+            </div>
             <div className='logout'>
                 {button}
                 <span className='actions' onClick={() => handleLogout()}>Odjava             

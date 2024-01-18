@@ -47,6 +47,11 @@ function System() {
   }
 
 
+  const search = (callbacks) => {
+
+
+
+  }
 
   return (
     <div>
@@ -56,7 +61,7 @@ function System() {
     <div className="Users">
    
       <div className="users-container-table">
-         <TableForge refresh={refresh} name={tableName} tableData = {data} />
+         <TableForge search={search} refresh={refresh} name={tableName} tableData = {data} />
       </div>
       
     </div>

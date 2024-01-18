@@ -9,7 +9,7 @@
 
 
 table.react-table-system {
-  width: 90%;
+  width: 95%;
 }
 .search-container {
   display: flex;
@@ -35,10 +35,14 @@ table.react-table-system {
   color: white;
   background-color: #081A45; 
 }
-
+.paginationControls span {
+  margin-right: 5px;
+}
 
 .search-icon {
+  width: -moz-fit-content;
   width: fit-content;
+  margin-left: 10px;
 }
 button.action-buttons.white {
   color: white;
@@ -61,6 +65,16 @@ button.action-buttons.white {
  
 }
 
+.user-settings-table {
+  margin-top: 5em;
+}
+
+
+.paginationControls {
+  margin: -2px;
+  float: right;
+  margin-right: 2.5%!important;
+}
 
 
 button.action-buttons.white:hover {
@@ -73,7 +87,7 @@ button.action-buttons.white:hover {
 /* Styles for the table container */
 .user-settings-table {
   max-height: 400px; /* Set the maximum height for the container */
-  margin: 20px auto 0;
+
 }
 
 /* Styles for the table */

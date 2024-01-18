@@ -83,6 +83,32 @@ function TableForge({ refresh, name, tableData }) {
 
   const systemColumns = useMemo(
     () => [
+      
+      {
+        Header: (
+          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+            <IoAddCircleSharp />
+            Dodaj
+            
+          </button>
+          
+        ),
+        accessor: 'actions',
+
+        Cell: ({ row }) => (
+          <div>
+
+            <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+              <MdDeleteForever />
+            </button>
+            <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+              <MdEdit />
+            </button>
+           
+          </div>
+        ),
+        type: 'nothing',
+      },
       {
         Header: 'Naziv',
         accessor: 'ID',
@@ -101,30 +127,7 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'Value',
         className: 'value-column-system',
         type: 'text',
-      },
-      {
-        Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
-            <IoAddCircleSharp />
-            Dodaj
-            
-          </button>
-          
-        ),
-        accessor: 'actions',
-
-        Cell: ({ row }) => (
-          <div>
-            <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
-              <MdEdit />
-            </button>
-            <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
-              <MdDeleteForever />
-            </button>
-          </div>
-        ),
-        type: 'nothing',
-      },
+      }
     ],
     []
   );
@@ -167,7 +170,7 @@ function TableForge({ refresh, name, tableData }) {
   );
 
   return (
-    <div className='global-react-table'>
+    <div className='global-react-table' >
       
 
 
@@ -186,33 +189,8 @@ function TableForge({ refresh, name, tableData }) {
 
 
      <div className="user-settings-table">
-        <table {...getTableProps()} className={`react-table-${name}`}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
 
- {/* Pagination controls */}
- <div className='paginationControls'>
+     <div className='paginationControls'>
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}
         </button>{' '}
@@ -262,6 +240,36 @@ function TableForge({ refresh, name, tableData }) {
     
        
       </div>
+
+
+
+        <table {...getTableProps()} className={`react-table-${name}`}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+
+
 
     </div>
   );
