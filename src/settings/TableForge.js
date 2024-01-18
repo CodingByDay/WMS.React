@@ -132,6 +132,115 @@ function TableForge({ refresh, name, tableData }) {
     []
   );
 
+
+
+
+
+  // This is the configuration for the subject codes // 
+  const subjectCodes = useMemo(
+    () => [
+      
+      {
+        Header: (
+          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+            <IoAddCircleSharp />
+            Dodaj
+            
+          </button>
+          
+        ),
+        accessor: 'actions',
+
+        Cell: ({ row }) => (
+          <div>
+
+            <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+              <MdDeleteForever />
+            </button>
+            <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+              <MdEdit />
+            </button>
+           
+          </div>
+        ),
+        type: 'nothing',
+      },
+      {
+        Header: 'Ident',
+        accessor: 'acIdent',
+        className: 'name-column-system',
+        type: 'dropdown',
+        sourceSelect: 'SELECT acIdent, acName FROM tHE_SetItem;',
+        columnOrder: ['acIdent', 'acName'],
+        columnOrderTranslation: ['Ident', 'Naziv'],
+        columnOrderWidth: [200, 300],
+        dropdownId: 'acIdent',
+        dropdownPlaceholder: '',
+        dropdownHelperField: 'acName',
+      },
+      {
+        Header: 'Subjekt',
+        accessor: 'acIdent',
+        className: 'name-column-system',
+        type: 'dropdown',
+        sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCounty FROM tHE_SetSubject',
+        columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCounty'],
+        columnOrderTranslation: ['Subjekt', 'Naziv', 'Naslov', 'Pošta', 'Država'],
+        columnOrderWidth: [200, 300, 200, 200, 200],
+        dropdownId: 'acSubject',
+        dropdownPlaceholder: '',
+        dropdownHelperField: 'acName2',
+      },
+      {
+        Header: 'Črtna koda',
+        accessor: 'acCode',
+        className: 'name-column-system',
+        type: 'text',      
+      }, 
+      {
+        Header: 'Število kosov',
+        accessor: 'uWMSSerialNoBatch',
+        className: 'name-column-system',
+        type: 'text',      
+      },
+
+    ],
+    []
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const tablesAssociation = [
     {
       name: 'system',
