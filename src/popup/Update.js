@@ -191,6 +191,27 @@ const Update = (props) => {
     </div>
   );
 
+  function detectSQLInjection(input) {
+    // Define common SQL injection patterns
+    const sqlInjectionPatterns = [
+      /(\b(union|select|drop|alter|create|delete|insert|update)\b)/i,
+      /(\b(\/\*|\*\/|;|--|\|)\b)/i,
+      /(\b(exec xp_cmdshell|xp_cmdshell)\b)/i,
+      /(\b(declare|cast|convert)\b)/i,
+      /(\b(and|or)\b\s*[\d]+\s*=\s*[\d]+)/i,
+    ];
+  
+    // Check if input matches any of the SQL injection patterns
+    for (const pattern of sqlInjectionPatterns) {
+      if (pattern.test(input)) {
+        // Potential SQL injection detected
+        return true;
+      }
+    }
+  
+    // No SQL injection patterns detected
+    return false;
+  }
 
   const sendData = () => {
 
@@ -234,8 +255,8 @@ const Update = (props) => {
       
       updateQuery = updateQuery.replace("@id", props.id); 
 
-      console.log(updateQuery);
-     
+      var injection = detectSQLInjection(updateQuery);
+     if(!injection) {
 
       SettingsService.insertSQLQuery(updateQuery)
       .then(result => {
@@ -251,12 +272,12 @@ const Update = (props) => {
               'error'
             );
             onClose();
-          }
-
-         
+          }         
       })
    
-
+    } else {
+      alert("Vaši podatki so posredovani policiji");
+    }
       
     
 

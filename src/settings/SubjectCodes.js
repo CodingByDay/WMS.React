@@ -49,14 +49,27 @@ function SubjectCodes() {
 
   const tableName = 'subject-codes';
 
-
-
   const refresh = () => {
 
-    SettingsService.executeSQLQuery("SELECT * FROM uWMSSetting;", [])
-        .then(result => {
-          setData(result)
-        })
+    const sqlQueryString = `
+    SELECT [acIdent] -- ident <SELECT acIdent, acName FROM tHE_SetItem>
+        ,[acSubject] -- subjekt <SELECT acSubject, acName2, acAddress, acPost, acCounty FROM tHE_SetSubject>
+        ,[acCode] -- subjektova črtna koda identa
+        ,[adTimeIns] -- čas vpisa <samodejno>
+        ,[anUserIns] -- uporabnik, ki je izvedel vpis
+        ,[adTimeChg] -- čas spremembe <samodejno>
+        ,[anUserChg] -- uporabnik, ki je izvedel spremembo
+        ,[anQId] -- autoincrement ID zapisa <samodejno>
+        ,[uWMSSerialNoBatch] -- koliko je število kosov (osnovna enota mere identa) v pakiranju <1 = default>
+    FROM [dbo].[tHE_SetItemExtItemSubj]
+  `;
+  
+
+
+      SettingsService.executeSQLQuery(sqlQueryString, [])
+      .then(result => {
+        setData(result)
+      })
 
 
   }

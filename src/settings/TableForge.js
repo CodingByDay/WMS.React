@@ -248,9 +248,9 @@ function TableForge({ refresh, name, tableData }) {
     {
       name: 'system',
       value: systemColumns,
-      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
-      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
-      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",
+      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value')",
+      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID'",
+      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID'",
       id: "ID",
     },
     {
@@ -267,8 +267,8 @@ function TableForge({ refresh, name, tableData }) {
               '@acSubject',
               '@acCode',
                @user
-              ,@uWMSSerialNoBatch);`,
-      deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id;",
+              ,@uWMSSerialNoBatch)`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id",
       updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj]
                     SET [acIdent] = '@acIdent'
                       ,[acSubject] = '@acSubject'
