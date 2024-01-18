@@ -1,13 +1,66 @@
-input[type="text"] {
-  float: right;
+.paginationControls, .paginationControls button {
+  width: fit-content;
+  background-color: #081A45;
+  color: white;
+  padding: 2px;
+  font-weight: 700;
+  border:none!important;
 }
+
+
 table.react-table-system {
   width: 90%;
 }
+.search-container {
+  display: flex;
+  gap: 0.5em;
+  width: 15em;
+  background: #081A45;
 
+  align-items: center;
+}
+.search-icon {
+  height: fit-content;
+
+}
+
+.paginationControls {
+  display: flex;
+  /* background-color: #081A45; */
+}
+
+
+
+.paginationControls button {
+  color: white;
+  background-color: #081A45; 
+}
+
+
+.search-icon {
+  width: fit-content;
+}
 button.action-buttons.white {
   color: white;
 }
+.global-react-table {
+  overflow: hidden;
+}
+
+.user-settings-table {
+  overflow: hidden;
+}
+
+.paginationControls {
+ 
+}
+.user-settings-table th {
+  position: sticky!important;
+  top: 0!important;
+  z-index: 1!important;
+ 
+}
+
 
 
 button.action-buttons.white:hover {
@@ -20,7 +73,6 @@ button.action-buttons.white:hover {
 /* Styles for the table container */
 .user-settings-table {
   max-height: 400px; /* Set the maximum height for the container */
-  overflow-y: auto; /* Enable vertical scrolling */
   margin: 20px auto 0;
 }
 
