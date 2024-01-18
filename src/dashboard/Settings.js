@@ -66,35 +66,42 @@ export default function Settings() {
           <Header/>
           <div className='main-menu-design'>
     
-    <div className = "menu"> 
+    <div className = "settings menu"> 
 
-         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("system")}>
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("system")}>
            Sistem
            <img alt={""} src='settings-icon.png' width={50}/>
          </button>
 
-         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("documents")}>
+
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subjects")}>
+            Kode subjektov
+           <img alt={""} src='source-code.png' width={50} />
+         </button>
+
+
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("documents")}>
            Vrste dokumentov
            <img alt={""} src='format-icon.png' width={50} />
          </button>
 
-         <button className="btn btn-primary dashboard" onClick = {()=>routeChange("warehouses")}>
+         <button className="btn btn-primary settingsButton  dashboard" onClick = {()=>routeChange("warehouses")}>
            Skladišča
            <img alt={""} src='warehouse-icon.png' width={50} />
          </button>
 
          
-         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("devices")}>
+         <button className="btn btn-primary settingsButton dashboard" id='settings-hover' onClick = {()=>routeChange("devices")}>
            Čitalci
            <img alt={""} src='rfid-icon.png' width={50} />
          </button>
 
-         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("printers")}>
+         <button className="btn btn-primary settingsButton dashboard" id='settings-hover' onClick = {()=>routeChange("printers")}>
            Tiskalniki
            <img alt={""} src='print-icon.png' width={50} />
          </button>
 
-         <button className="btn btn-primary dashboard" id='settings-hover' onClick = {()=>routeChange("users")}>
+         <button className="btn btn-primary settingsButton dashboard" id='settings-hover' onClick = {()=>routeChange("users")}>
            Uporabniki
            <img alt={""} src='user-icon.png' width={50} />
          </button>

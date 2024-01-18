@@ -1324,6 +1324,10 @@ button svg {
   margin-bottom: 2em;
 }
 
+button.btn.btn-primary.settingsButton.dashboard {
+  width: 20em;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -1334,7 +1338,12 @@ button svg {
   transform: translateY(-50%);
 }
 
-
+.settings.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Three items in each row */
+  gap: 20px; /* Adjust the gap between items */
+  justify-content: center;
+}
 
 button.btn.btn-primary.dashboard {
   border: none;
@@ -1342,7 +1351,7 @@ button.btn.btn-primary.dashboard {
 
 button.btn.btn-primary.dashboard {
   margin: 0.3em;
-  height: 5em;
+  height: 4em;
   font-weight: bolder;
 
 }
