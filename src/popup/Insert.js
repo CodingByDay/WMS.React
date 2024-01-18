@@ -65,13 +65,12 @@ const Insert = (props) => {
             setDropdownOptions(finalOptions);
         })
         .catch(error => {
-          console.error("Error:", error);
+
         });
 
         
       } catch (error) {
-        // Handle errors
-        console.error('Error fetching dropdown options:', error);
+
       }
 
     }
@@ -145,6 +144,7 @@ const Insert = (props) => {
 
     var insertQuery = props.selectedTable.insertQuery;
     var columns = props.selectedTable.value;
+    var params = [];
 
 
 
@@ -152,33 +152,43 @@ const Insert = (props) => {
         var column = columns[i];
         var type = column.type;
         var accessor = column.accessor;
-        if(accessor!="nothing") {
+        
+        if(type!="nothing") {
+            
+
+          var column = columns[i];
+          var type = column.type;
+          var accessor = column.accessor;
+          var dbType = column.dbType;
+          if(type !== "nothing") {
+            var theValue = '';
             if(type == "text") {
-
-              var theValue = getValue(accessor);
-              var theValueInsideQuery = "@" + accessor;
-              insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
-
+              theValue = getValue(accessor);
             } else if(type == "dropdown") {
-
-                var theValue = selectedOptions[accessor].value;
-                var theValueInsideQuery = "@" + accessor;
-                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);
-                
-
+              theValue = selectedOptions[accessor].id;          
             } else if(type == "checkbox") {
-
-                var theValue = selectedOptions[accessor];
-                var theValueInsideQuery = "@" + accessor;
-                insertQuery = insertQuery.replace(theValueInsideQuery, theValue);              
+              theValue = selectedOptions[accessor];        
             }
+  
+  
+  
+             var parameter = { Name: accessor, Type: dbType, Value: theValue  }
+  
+             params.push(parameter);
+
+          }
+
+
         }    
     }
 
- 
+    const userId = localStorage.getItem('name');
+
+    var parameterUser = { Name: 'user', Type: 'Int64', Value: userId  } 
 
 
-      SettingsService.insertSQLQuery(insertQuery)
+    params.push(parameterUser);
+      SettingsService.insertSQLQuery(insertQuery, params)
       .then(result => {
           props.refresh();
           var data = result;
@@ -196,12 +206,6 @@ const Insert = (props) => {
 
          
       })
-   
-
-      
-    
-
-
   };
 
 
@@ -221,9 +225,6 @@ const Insert = (props) => {
             <div key={column.accessor} className="form-group insert">
               <label htmlFor={column.accessor}>{column.Header}:</label>
               {column.type === 'dropdown' ? (
-
-
-
 
                <Select
                id={column.accessor}

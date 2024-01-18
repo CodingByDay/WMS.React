@@ -6,7 +6,7 @@ const SettingsService  = {
 
 
   async  insertSQLQuery(sqlQuery, parameters) {
-
+  
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
 
     const requestObject = {
@@ -24,7 +24,7 @@ const SettingsService  = {
       });
 
 
-      console.log(sqlQuery);
+      console.log(response);
 
 
       if (response.data.Success) {

@@ -268,7 +268,7 @@ function TableForge({ refresh, name, tableData }) {
               (@acIdent,
               @acSubject,
               @acCode,
-              @user
+              @user,
               @uWMSSerialNoBatch)`,
       deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id",
       updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj]
