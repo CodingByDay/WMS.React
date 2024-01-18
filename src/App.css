@@ -81,7 +81,9 @@ button.action-buttons.white:hover {
   background: none !important;
 }
 
-
+.hidden-column {
+  display: none;
+}
 .popup-overlay.insert {
   position: fixed;
   top: 0;

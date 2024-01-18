@@ -14,9 +14,11 @@ function TableForge({ refresh, name, tableData }) {
   const [isModalEditOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
   const [isInputVisible, setIsInputVisible] = useState(false);
-
+  const [id, setId] = useState(-1);
   const showDeleteConfirmation = (data) => {
+
     var currentDeleteSQL = selectedTable.deleteQuery;
+    currentDeleteSQL = currentDeleteSQL.replace("@id", id);
 
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
@@ -69,6 +71,7 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const generatePopupEdit = (data) => {
+    setId(data[selectedTable.id])
     setEditData(data);
     setIsEditModalOpen(true);
   };
@@ -202,7 +205,7 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'uWMSSerialNoBatch',
         className: 'name-column-system',
         type: 'text',      
-      },
+      }
 
     ],
     []
@@ -248,16 +251,32 @@ function TableForge({ refresh, name, tableData }) {
       insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
       deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
       updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",
+      id: "ID",
     },
-
-
-
     {
       name: 'subject-codes',
       value: subjectCodes,
-      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value');",
-      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID';",
-      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID';",
+      insertQuery: `INSERT INTO [dbo].[tHE_SetItemExtItemSubj]
+              ([acIdent]
+              ,[acSubject]
+              ,[acCode]
+              ,[anUserIns]
+              ,[uWMSSerialNoBatch])
+        VALUES
+              ('@acIdent',
+              '@acSubject',
+              '@acCode',
+               @user
+              ,@uWMSSerialNoBatch);`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id;",
+      updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj]
+                    SET [acIdent] = '@acIdent'
+                      ,[acSubject] = '@acSubject'
+                      ,[acCode] = '@acCode'
+                      ,[anUserChg] = @user
+                      ,[uWMSSerialNoBatch] = @uWMSSerialNoBatch
+                  WHERE [anQId] = @id;`,
+      id: 'anQId',
     },
   ];
 
@@ -297,7 +316,7 @@ function TableForge({ refresh, name, tableData }) {
 
 
       <Insert refresh={refresh} onClose={onClose} selectedTable={selectedTable} isVisible={isModalOpen} />
-      <Update data={editData} refresh={refresh} onClose={onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
+      <Update id={id} data={editData} refresh={refresh} onClose={onCloseEdit} selectedTable={selectedTable} isVisible={isModalEditOpen} />
 
 
 

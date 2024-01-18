@@ -14,6 +14,8 @@ SELECT [acIdent] -- ident <SELECT acIdent, acName FROM tHE_SetItem>
 GO
 
 
+
+
 INSERT INTO [dbo].[tHE_SetItemExtItemSubj]
            ([acIdent]
            ,[acSubject]
@@ -29,10 +31,10 @@ INSERT INTO [dbo].[tHE_SetItemExtItemSubj]
 GO
 
 UPDATE [dbo].[tHE_SetItemExtItemSubj]
-   SET [acIdent] = <acIdent, varchar(16),>
-      ,[acSubject] = <acSubject, varchar(30),>
-      ,[acCode] = <acCode, varchar(100),>
-      ,[anUserChg] = <anUserChg, int,> -- številka prijavljenega uporabnika
+   SET [acIdent] = '@acIdent'
+      ,[acSubject] = '@acSubject'
+      ,[acCode] = '@acCode'
+      ,[anUserChg] = @user
       ,[uWMSSerialNoBatch] = <uWMSSerialNoBatch, int,>
  WHERE [anQId] = 
 GO

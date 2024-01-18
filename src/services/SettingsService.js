@@ -16,12 +16,12 @@ const SettingsService  = {
     try {
 
       const response = await axios.post(apiUrl, JSON.stringify(requestObject), {
-
         headers: {
           'Content-Type': 'application/json'
         }
 
       });
+      console.log(response)
   
       if (response.data.Success) {
 
@@ -106,7 +106,6 @@ const SettingsService  = {
         return [];
       }
     } catch (error) {
-      console.error("Error in executeSQLQuery:", error);
       return [];
     }
   },

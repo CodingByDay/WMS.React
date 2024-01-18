@@ -194,7 +194,7 @@ const Update = (props) => {
 
   const sendData = () => {
 
-
+    console.log(selectedOptions)
     var updateQuery = props.selectedTable.updateQuery;
     var columns = props.selectedTable.value;
 
@@ -204,6 +204,7 @@ const Update = (props) => {
         var column = columns[i];
         var type = column.type;
         var accessor = column.accessor;
+
         if(accessor!="nothing") {
             if(type == "text") {
 
@@ -213,7 +214,7 @@ const Update = (props) => {
 
             } else if(type == "dropdown") {
 
-                var theValue = selectedOptions[accessor].value;
+                var theValue = selectedOptions[accessor].id;
                 var theValueInsideQuery = "@" + accessor;
                 updateQuery = updateQuery.replace(theValueInsideQuery, theValue);
                 
@@ -227,8 +228,14 @@ const Update = (props) => {
         }    
     }
 
- 
+      const userId = localStorage.getItem('name');
 
+      updateQuery = updateQuery.replace("@user", userId);  
+      
+      updateQuery = updateQuery.replace("@id", props.id); 
+
+      console.log(updateQuery);
+     
 
       SettingsService.insertSQLQuery(updateQuery)
       .then(result => {
