@@ -218,47 +218,45 @@ const Update = (props) => {
     console.log(selectedOptions)
     var updateQuery = props.selectedTable.updateQuery;
     var columns = props.selectedTable.value;
-
+    var params = [];
 
 
     for (let i = 0; i < columns.length; i++) {
         var column = columns[i];
         var type = column.type;
         var accessor = column.accessor;
+        var dbType = column.dbType;
+        if(type !== "nothing") {
+          var theValue = '';
+          if(type == "text") {
+            theValue = getValue(accessor);
+          } else if(type == "dropdown") {
+            theValue = selectedOptions[accessor].id;          
+          } else if(type == "checkbox") {
+            theValue = selectedOptions[accessor];        
+          }
 
-        if(accessor!="nothing") {
-            if(type == "text") {
 
-                var theValue = getValue(accessor);
-                var theValueInsideQuery = "@" + accessor;
-                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);
 
-            } else if(type == "dropdown") {
+           var parameter = { Name: accessor, Type: dbType, Value: theValue  }
 
-                var theValue = selectedOptions[accessor].id;
-                var theValueInsideQuery = "@" + accessor;
-                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);
-                
-
-            } else if(type == "checkbox") {
-
-                var theValue = selectedOptions[accessor];
-                var theValueInsideQuery = "@" + accessor;
-                updateQuery = updateQuery.replace(theValueInsideQuery, theValue);              
-            }
-        }    
+           params.push(parameter);
+           
+        }
     }
 
       const userId = localStorage.getItem('name');
 
-      updateQuery = updateQuery.replace("@user", userId);  
-      
-      updateQuery = updateQuery.replace("@id", props.id); 
+      var parameterUser = { Name: 'user', Type: 'Int64', Value: userId  } 
+      var parameterId = { Name: 'id', Type: 'Int64', Value: props.id  }
 
-      var injection = detectSQLInjection(updateQuery);
-     if(!injection) {
 
-      SettingsService.insertSQLQuery(updateQuery)
+      params.push(parameterUser);
+      params.push(parameterId);
+
+    
+
+      SettingsService.insertSQLQuery(updateQuery, params)
       .then(result => {
           props.refresh();
           var data = result;
@@ -275,9 +273,7 @@ const Update = (props) => {
           }         
       })
    
-    } else {
-      alert("Vaši podatki so posredovani policiji");
-    }
+  
       
     
 

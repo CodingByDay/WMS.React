@@ -91,23 +91,18 @@ function TableForge({ refresh, name, tableData }) {
         Header: (
           <button className="action-buttons white" title="Vnos" onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
-            
-          </button>
-          
+            Dodaj           
+          </button>         
         ),
         accessor: 'actions',
-
         Cell: ({ row }) => (
           <div>
-
             <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
               <MdDeleteForever />
             </button>
             <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
               <MdEdit />
-            </button>
-           
+            </button>          
           </div>
         ),
         type: 'nothing',
@@ -124,12 +119,15 @@ function TableForge({ refresh, name, tableData }) {
         dropdownId: 'ID',
         dropdownPlaceholder: '',
         dropdownHelperField: 'Desc',
+        dbType: 'String'
       },
       {
         Header: 'Vrednost',
         accessor: 'Value',
         className: 'value-column-system',
         type: 'text',
+        dbType: 'String'
+
       }
     ],
     []
@@ -180,6 +178,7 @@ function TableForge({ refresh, name, tableData }) {
         dropdownId: 'acIdent',
         dropdownPlaceholder: '',
         dropdownHelperField: 'acName',
+        dbType: 'String'
       },
       {
         Header: 'Subjekt',
@@ -193,18 +192,21 @@ function TableForge({ refresh, name, tableData }) {
         dropdownId: 'acSubject',
         dropdownPlaceholder: '',
         dropdownHelperField: 'acName2',
+        dbType: 'String'
       },
       {
         Header: 'Črtna koda',
         accessor: 'acCode',
         className: 'name-column-system',
-        type: 'text',      
+        type: 'text',  
+        dbType: 'String'    
       }, 
       {
         Header: 'Število kosov',
         accessor: 'uWMSSerialNoBatch',
         className: 'name-column-system',
-        type: 'text',      
+        type: 'text',  
+        dbType: 'Int64'    
       }
 
     ],
@@ -248,9 +250,9 @@ function TableForge({ refresh, name, tableData }) {
     {
       name: 'system',
       value: systemColumns,
-      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES ('@ID', '@Value')",
-      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = '@ID'",
-      updateQuery: "UPDATE uWMSSetting SET VALUE = '@Value' WHERE ID = '@ID'",
+      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES (@ID, @Value)",
+      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = @ID",
+      updateQuery: "UPDATE uWMSSetting SET VALUE = @Value WHERE ID = @ID",
       id: "ID",
     },
     {
@@ -263,16 +265,16 @@ function TableForge({ refresh, name, tableData }) {
               ,[anUserIns]
               ,[uWMSSerialNoBatch])
         VALUES
-              ('@acIdent',
-              '@acSubject',
-              '@acCode',
-               @user
-              ,@uWMSSerialNoBatch)`,
+              (@acIdent,
+              @acSubject,
+              @acCode,
+              @user
+              @uWMSSerialNoBatch)`,
       deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id",
       updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj]
-                    SET [acIdent] = '@acIdent'
-                      ,[acSubject] = '@acSubject'
-                      ,[acCode] = '@acCode'
+                    SET [acIdent] = @acIdent
+                      ,[acSubject] = @acSubject
+                      ,[acCode] = @acCode
                       ,[anUserChg] = @user
                       ,[uWMSSerialNoBatch] = @uWMSSerialNoBatch
                   WHERE [anQId] = @id;`,

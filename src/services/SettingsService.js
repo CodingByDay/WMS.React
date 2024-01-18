@@ -5,12 +5,13 @@ const SettingsService  = {
 
 
 
-  async  insertSQLQuery(sqlQuery) {
+  async  insertSQLQuery(sqlQuery, parameters) {
 
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
 
     const requestObject = {
-      SQL: sqlQuery
+      SQL: sqlQuery,
+      Parameters: parameters,
     };
   
     try {
@@ -21,8 +22,11 @@ const SettingsService  = {
         }
 
       });
-      console.log(response)
-  
+
+
+      console.log(sqlQuery);
+
+
       if (response.data.Success) {
 
         return true;
@@ -39,12 +43,13 @@ const SettingsService  = {
 
 
 
-  async  deleteSQLQuery(sqlQuery) {
+  async  deleteSQLQuery(sqlQuery, parameters) {
 
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
 
     const requestObject = {
-      SQL: sqlQuery
+      SQL: sqlQuery,
+      Parameters: parameters,
     };
   
     try {
@@ -78,7 +83,8 @@ const SettingsService  = {
   async  executeSQLQuery(sqlQuery, parameters) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
     const requestObject = {
-      SQL: sqlQuery
+      SQL: sqlQuery,
+      Parameters: parameters,
     };
   
     try {
@@ -111,7 +117,7 @@ const SettingsService  = {
   },
 
 
-async executeSQLQueryBatch(data) {
+async executeSQLQueryBatch(data, parameters) {
 
   var toReturn = {}
   for(const accessor in data) {
@@ -120,7 +126,8 @@ async executeSQLQueryBatch(data) {
         const popupSelect = data[accessor];
         const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
         const requestObject = {
-          SQL: popupSelect
+          SQL: popupSelect,
+
         };
       
         try {
