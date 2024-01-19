@@ -23,19 +23,65 @@ export default function TakeOver(props) {
     const [selectedWarehouse, setSelectedWarehouse] = useState(null)
     const [selectedClient, setSelectedClient] = useState(null)
 
+    const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
 
+
+    
+        <div>
+          {properties && properties.length && !exists ? (
+            <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+              {properties.map((property, index) => (
+                  ( !header ) ? (
+                  <div key={index} style={{ minWidth: '300', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                  {property}
+                  </div>
+              ): (
+                  <div key={index} style={{ fontWeight: '600',  minWidth: '300', paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                    {property}
+                  </div>
+                )         
+              ))}
+            </div>
+          ) : (
+            <div style={{ fontSize: '100%' }}>
+              {code}
+            </div>
+          )}
+        </div>
+      );
+      
+      
+      
+    
+      const formatOptionLabel = ({ label, properties, header, code }) => {
+    
+        var exists = false;
+  
+        if(code && selectedType) {
+          exists  = selectedType.code === code || false;
+        }
+  
+      
+        // Return the component with the processed data
+        return (
+          <DynamicFormatOptionLabel properties={properties} exists ={exists}  label={label} code={code}  header={header} />
+       );
+      };
+  
     useEffect(() => {
-
-
 
         var documentTypes =  PopupService.getAllDocumentTypeOfEvent("I").then(response => { 
             var types = [];
-            types.push({value:"", label: "", code: ""})
+            types.push({value: "", code: "", label: "", properties: [], header: true});
             for (var i = 0; i < response.Items.length; i++) {
                 var type = DataAccess.getData(response.Items[i], "Code", "StringValue");
                 var name = DataAccess.getData(response.Items[i], "Name", "StringValue");
                 var together = type + "|" + name;
-                types.push({value: together, label:together, code: type});                }     
+
+
+                var properties = [type, name]
+
+                types.push({value: together, label:together, code: type, header: false, properties: properties});               }     
                 setDocumentTypes(types);
         }); 
 
@@ -96,7 +142,7 @@ $(function() {
             setSelectedType(null);
         } else {
         setDocument(e.code)
-        setSelectedType({value: e.code, label: e.code});
+        setSelectedType(e);
         }
     }
 
@@ -248,7 +294,7 @@ $(function() {
         <div className='left-column'>
 
 
-        <Select className='select-filters' value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
+        <Select className='select-filters' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
 
 
