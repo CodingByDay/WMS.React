@@ -72,12 +72,8 @@ export default function Listing() {
     const [showStatusAlert, setShowStatusAlert] = useState(false)
     useEffect(() => {
 
-
-          // Set up the value for the back button 
-         localStorage.setItem('back', "dashboard")
-
-
-
+      // Set up the value for the back button 
+      localStorage.setItem('back', "dashboard")
       var loader = document.getElementById("loader");
 
               loader.style.display = "block";
@@ -145,14 +141,7 @@ export default function Listing() {
           // Checking to see if the position is selected
           setIsPositionSelected(true);
       }
-
-
   }
-
-
-
-
-
 
   const getSortingObject = (sorting) => {
     setSort(sorting);
@@ -278,7 +267,8 @@ export default function Listing() {
      }); 
     }
 
-
+  
+    
     
     return ( 
 

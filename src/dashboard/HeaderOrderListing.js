@@ -61,7 +61,7 @@ export default function HeaderOrderListing(props) {
                           var data =  SortingService.getAllDocumentTypes().then(response => { 
                           var types = [];
                           
-                          types.push({value: "", code: "", label: ""});
+                          types.push({value: "", code: "", label: "", properties: [], header: true});
 
                           for (var i = 0; i < response.Items.length; i++) {
 
@@ -70,7 +70,9 @@ export default function HeaderOrderListing(props) {
 
                                     var together = type + "|" + name;
 
-                                    types.push({value: together, label:together, code: type});                       
+                                    var properties = [type, name]
+
+                                    types.push({value: together, label:together, code: type, header: false, properties: properties});                       
                           }            
                           setTypes(types);
                   }); 
@@ -122,7 +124,7 @@ export default function HeaderOrderListing(props) {
   }
   function searchTable() { 
     var sorting = {
-      type: currentType && currentType.value || "",
+      type: currentType && currentType.code || "",
       document: currentDocumentNumber && currentDocumentNumber.value || "",
       client: currentReceivers && currentReceivers.value || "",
       period: state || ""
@@ -179,8 +181,8 @@ export default function HeaderOrderListing(props) {
     if (e.value == "") {
       setCurrentType(null)
     } else {
-      const mutated = {value: e.code, label:e.code}
-      setCurrentType (mutated);   
+
+      setCurrentType (e);   
     }
   }
   function openAdd() {
@@ -199,7 +201,50 @@ export default function HeaderOrderListing(props) {
     function deleteOrder() {
       props.communicate("head", "delete");
     }
+    const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
 
+
+    
+      <div>
+        {properties && properties.length && !exists ? (
+          <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+            {properties.map((property, index) => (
+                ( !header ) ? (
+                <div key={index} style={{ minWidth: '300', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+                </div>
+            ): (
+                <div key={index} style={{ fontWeight: '600',  minWidth: '300', paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                  {property}
+                </div>
+              )         
+            ))}
+          </div>
+        ) : (
+          <div style={{ fontSize: '100%' }}>
+            {code}
+          </div>
+        )}
+      </div>
+    );
+    
+    
+    
+  
+    const formatOptionLabel = ({ label, properties, header, code }) => {
+  
+      var exists = false;
+
+      if(code && currentType) {
+        exists  = currentType.code === code || false;
+      }
+
+    
+      // Return the component with the processed data
+      return (
+        <DynamicFormatOptionLabel properties={properties} exists ={exists}  label={label} code={code}  header={header} />
+     );
+    };
 
     const renderComponent = () => { 
      props.communicate("head", "render")
@@ -210,7 +255,7 @@ export default function HeaderOrderListing(props) {
         <div className="filters">
 
 
-             <Select className='select-filterss' placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select className='select-filterss' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
              <Select className='select-filterss' placeholder={"Številka naročila"} value={currentDocumentNumber} onChange={(e) => onChangeDocumentNumber(e)} options={documentNumbers} id='documentNumbers'/>
 
