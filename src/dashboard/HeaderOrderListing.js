@@ -201,6 +201,7 @@ export default function HeaderOrderListing(props) {
     function deleteOrder() {
       props.communicate("head", "delete");
     }
+    
     const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
 
 

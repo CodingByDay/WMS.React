@@ -148,11 +148,16 @@ const [state, setState] = useState([
             setTransactionType([{value: '', label: ''},{value: 'Izdaja blaga', label: 'Izdaja blaga'}, {value: 'Prevzem blaga', label: 'Prevzem blaga'},{value: 'Medskladišnica', label: 'Medskladišnica'},{value: 'Delovni nalog', label: 'Delovni nalog'},{value: 'Inventura', label: 'Inventura'}]);
             var data =  TransactionService.getAllDocumentTypes().then(response => { 
             var types = [];  
-            types.push({value: '', label: '', code: ''})
+            types.push({value: '', label: '', code: '', properties: [], header: true})
 
             for(var i = 0; i < response.type.length;i++) {
-                types.push({value: " | " +  response.type[i] + " | " + response.names[i] + " | ", label: " | " + response.type[i] + " | " + response.names[i] + " | ", code: response.type[i]});
+
+                var properties = [response.type[i], response.names[i]]
+                types.push({value: " | " +  response.type[i] + " | " + response.names[i] + " | ", label: " | " + response.type[i] + " | " + response.names[i] + " | ", code: response.type[i], header: false, properties: properties});
             }
+
+
+
             setBusinessEvent(types);
          }); 
 
@@ -160,13 +165,18 @@ const [state, setState] = useState([
           setTransactionStatus([{value: '', label: ''},{value: 'Odprt', label: 'Odprt'}, {value: 'Zaključen', label: 'Zaključen'}]);
           var erp = TransactionService.getErpKeys().then(response=> {
           var erps = [];
-          erps.push({erpKey: "", client: "", warehouse: "", label: "", value: ""})
+          erps.push({erpKey: "", client: "", warehouse: "", label: "", value: "", properties: [], header: true, code :''})
 
           for(var i=0;i<response.Items.length;i++) {
           var erpKey = DataAccess.getData(response.Items[i], "Key", "StringValue");
           var client = DataAccess.getData(response.Items[i], "Client", "StringValue");
           var warehouse = DataAccess.getData(response.Items[i], "Warehouse", "StringValue");
-          erps.push({label: " | " + erpKey + " | " + warehouse + " | ", value: " | " + erpKey + " | " + warehouse + " | "});
+
+          var properties = [erpKey, warehouse]
+
+
+
+          erps.push({label: " | " + erpKey + " | " + warehouse + " | ", value: " | " + erpKey + " | " + warehouse + " | ", header: false, properties: properties, code: erpKey});
           }
           setErpKey(erps)
         });
@@ -252,7 +262,7 @@ const [state, setState] = useState([
         if (e.code == "") {
           setBusinessEventSelected(null)
         } else {
-          setBusinessEventSelected({value: e.code, label:e.code})
+          setBusinessEventSelected(e)
         }
     }
 
@@ -302,11 +312,11 @@ const [state, setState] = useState([
     }
 
     function onChangeErpKey(e) {
-      setSelectedErpKey(e.value);
+      setSelectedErpKey(e.code);
       if (e.value == "") {
         setErpKeySelected(null);
       } else {
-        setErpKeySelected({value: e.value, label: e.value});
+        setErpKeySelected(e);
       }     
     }
 
@@ -328,6 +338,99 @@ const [state, setState] = useState([
 
     }
 
+
+    const DynamicFormatOptionLabelErp = ({ label, properties, header, code, exists}) => (
+
+
+    
+      <div>
+        {properties && properties.length && !exists ? (
+          <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+            {properties.map((property, index) => (
+                ( !header ) ? (
+                <div key={index} style={{ minWidth: '300', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+                </div>
+            ): (
+                <div key={index} style={{ fontWeight: '600',  minWidth: '300', paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                  {property}
+                </div>
+              )         
+            ))}
+          </div>
+        ) : (
+          <div style={{ fontSize: '100%' }}>
+            {code}
+          </div>
+        )}
+      </div>
+    );
+    
+    
+    
+  
+    const formatOptionLabelErp = ({ label, properties, header, code }) => {
+  
+      var exists = false;
+
+      if(code && erpKeySelected) {
+        exists  = erpKeySelected.code === code || false;
+      }
+
+    
+      // Return the component with the processed data
+      return (
+        <DynamicFormatOptionLabelErp properties={properties} exists ={exists}  label={label} code={code}  header={header} />
+     );
+    };
+
+
+
+
+    const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
+
+
+    
+      <div>
+        {properties && properties.length && !exists ? (
+          <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+            {properties.map((property, index) => (
+                ( !header ) ? (
+                <div key={index} style={{ minWidth: '300', paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+                </div>
+            ): (
+                <div key={index} style={{ fontWeight: '600',  minWidth: '300', paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                  {property}
+                </div>
+              )         
+            ))}
+          </div>
+        ) : (
+          <div style={{ fontSize: '100%' }}>
+            {code}
+          </div>
+        )}
+      </div>
+    );
+    
+    
+    
+  
+    const formatOptionLabel = ({ label, properties, header, code }) => {
+  
+      var exists = false;
+
+      if(code && businessEventSelected) {
+        exists  = businessEventSelected.code === code || false;
+      }
+
+    
+      // Return the component with the processed data
+      return (
+        <DynamicFormatOptionLabel properties={properties} exists ={exists}  label={label} code={code}  header={header} />
+     );
+    };
     
     return ( 
         <div>
@@ -339,14 +442,16 @@ const [state, setState] = useState([
                     <Select className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)}  options={transactionType} id='transactionType'/>    
                     <Select className='select-filters' value={transactionOrderSelected}  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
-                    title={props.title}
-                    placeholder="Poslovni dogodek"
-                    id='businessEvent'
-                    value={businessEventSelected}
-                    onKeyDown={(e) => onKeyDownBusinessEvent(e)}
-                    
-                    options={businessEvent}
-                    onChange={(e) => onChangeBusinessEvent(e)}
+                     getOptionLabel={(option) => option.code} 
+                     getOptionValue={(option) => option.code} 
+                     formatOptionLabel={formatOptionLabel} 
+                     title={props.title}
+                     placeholder="Poslovni dogodek"
+                     id='businessEvent'
+                     value={businessEventSelected}
+                     onKeyDown={(e) => onKeyDownBusinessEvent(e)}    
+                     options={businessEvent}
+                     onChange={(e) => onChangeBusinessEvent(e)}
                     />
 
 
@@ -401,6 +506,9 @@ const [state, setState] = useState([
                         placeholder={"ERP ključ"}
                         value={erpKeySelected}
                         id='erpKey'
+                        getOptionLabel={(option) => option.code} 
+                        getOptionValue={(option) => option.code} 
+                        formatOptionLabel={formatOptionLabelErp} 
                         options={erpKey}
                         onChange={(e) => onChangeErpKey(e)} 
 

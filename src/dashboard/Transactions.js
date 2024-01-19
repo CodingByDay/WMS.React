@@ -299,10 +299,6 @@ function deleteItemDocument(id) {
     }
 
     const bringBackFilters = (sorting) => {
-
-      // Sorting object comes back from the children component
-      // Pass the sorting object down through the children
-
       setFilters(sorting)
       setPositions([]);
       setSelectedRowHeadsTransactionsPositions ( null );
