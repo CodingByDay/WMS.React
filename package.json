@@ -11,6 +11,8 @@
     "@popperjs/core": "^2.11.8",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
+    "@sentry/react": "^7.93.0",
+    "@sentry/webpack-plugin": "^2.10.2",
     "@tanstack/react-table": "^8.10.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
