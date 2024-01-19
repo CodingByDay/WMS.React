@@ -4,7 +4,7 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { addDays, addYears, format, isWeekend } from 'date-fns';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MdOutlineSearch, MdDateRange,MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode } from "react-icons/md";
 import  SortingService  from '../services/SortingService'
 import { flushSync } from 'react-dom';
@@ -32,6 +32,7 @@ export default function HeaderOrderListing(props) {
     const [client, setClient] = useState("")
     const [warehouse, setWarehouse] = useState("")
     const [documentType, setDocumentType] = useState({value:"",label:""})
+    const dateRangePickerRef = useRef(null);
 
 
 
@@ -50,13 +51,18 @@ export default function HeaderOrderListing(props) {
      const [currentReceivers, setCurrentReceivers] = useState(null);
 
 
-
+     const handleClickOutside = (event) => {
+      if (dateRangePickerRef.current && !dateRangePickerRef.current.contains(event.target)) {
+        setOpen(!open)
+      }
+    };
 
 
 
     const [isOrder, setIsOrder] = useState(false)
     useEffect(() => {
 
+                           
 
                           var data =  SortingService.getAllDocumentTypes().then(response => { 
                           var types = [];
@@ -108,6 +114,13 @@ export default function HeaderOrderListing(props) {
 
         // filter the table
         searchTable();
+
+        window.document.addEventListener('mousedown', handleClickOutside);
+
+              // Clean up the event listener when the component unmounts
+        return () => {
+          window.document.removeEventListener('mousedown', handleClickOutside);
+        };
     }, [currentType, currentDocumentNumber, currentReceivers, state]);
 
 
@@ -201,7 +214,7 @@ export default function HeaderOrderListing(props) {
     function deleteOrder() {
       props.communicate("head", "delete");
     }
-    
+
     const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
 
 
@@ -268,25 +281,18 @@ export default function HeaderOrderListing(props) {
      
 
 
-         {open && (
-            <div className="nameModule">
-
-              
+             {open && (
+        <div className="nameModule" ref={dateRangePickerRef}>
           <DateRangePicker
-            onChange={item => setState([item.selection])}
+            onChange={(item) => setState([item.selection])}
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
             months={1}
             ranges={state}
             direction="horizontal"
           />
-
-
-            </div>
-
-
-
-         )}
+        </div>
+      )}
 
 
 
@@ -307,10 +313,16 @@ export default function HeaderOrderListing(props) {
               <MdAdd />
          </span>   
 
-        {/* <span className='actions smallerr s' id="editOrder" onClick={changeStatus}>
+        {
+        
+
+        /* <span className='actions smallerr s' id="editOrder" onClick={changeStatus}>
               <p>Uredi</p>
               <MdEdit />
-         </span>   */}
+         </span>   */
+         
+
+        }
 
          <span className='actions smallerr s' id="deleteOrder" onClick={deleteOrder}>
               <p>Pobriši</p>

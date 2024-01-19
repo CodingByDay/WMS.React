@@ -51,6 +51,7 @@ export default function TransactionFilters(props) {
     const targetElementRef = useRef(null);
 
 
+    const dateRangePickerRef = useRef(null);
 
 
     // Place for the selected states 
@@ -109,6 +110,7 @@ const [state, setState] = useState([
 
       // Data flow
       useEffect(() => {
+        window.document.addEventListener('mousedown', handleClickOutside);
 
         
         function handleMouseDown(event) {
@@ -230,7 +232,7 @@ const [state, setState] = useState([
           document.addEventListener('mousedown', handleMouseDown);
 
           return () => {
-            document.removeEventListener('mousedown', handleMouseDown);
+            document.removeEventListener('mousedown', handleClickOutside);
           };
     }, [selectedEvent, selectedTransationType, selectedBusinessEvent, selectedTransactionId, selectedWorkOrder, transactionId, selectedStatus, selectedClient, selectedIdent, selectedErpKey, selectedUser, state]);
 
@@ -329,7 +331,14 @@ const [state, setState] = useState([
       } 
       
     }
-
+    const handleClickOutside = (event) => {
+      if (dateRangePickerRef.current && document.addEventListener) {
+        if (!dateRangePickerRef.current.contains(event.target)) {
+          // Click occurred outside of the date range picker
+          setOpen(!open);
+        }
+      }
+    };
     function toggleVisibility() {
       setOpen(!open);
     }
@@ -527,7 +536,7 @@ const [state, setState] = useState([
 
                    
                     {open && (
-                    <div ref={targetElementRef} className="nameModule">
+                  <div className="nameModule" ref={dateRangePickerRef}>
 
                     <DateRangePicker
                    
