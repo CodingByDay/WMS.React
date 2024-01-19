@@ -156,8 +156,10 @@ export default function Transactions() {
             }
         } else if (action === "delete") {
           if(table === "positions") {   
+            if (selectedRowTransactionsPositions && typeof selectedRowTransactionsPositions.childNodes != "undefined")   {
               var idToDelete = selectedRowTransactionsPositions.childNodes[3].innerHTML;      
-              deleteItemDocument(idToDelete);       
+              deleteItemDocument(idToDelete);      
+            } 
           } else {
                deleteHeadDocument();
           }
@@ -169,7 +171,6 @@ export default function Transactions() {
 
               var toggled = ! show;
               setShow(toggled);
-              // console.log(selectedRowTransactionsPositions);
               var order = selectedRowTransactionsPositions.childNodes[2].innerHTML
               var ident = selectedRowTransactionsPositions.childNodes[5].innerHTML
               var qty = selectedRowTransactionsPositions.childNodes[7].innerHTML
@@ -194,12 +195,16 @@ export default function Transactions() {
             buttons: ["Ne", "Ja, zaključi"],
           }).then((result) => {
             if (result) {
+              if(selectedRowTransactionsHeads && typeof selectedRowTransactionsHeads.childNodes !== "undefined") {
               TransactionService.finishHeadDocument(selectedRowTransactionsHeads.childNodes[1].innerHTML).then(response => { 
                 TransactionService.getAllTransactions().then(response => { 
                     setTransactions(response);
                     window.showAlert("Informacija", "Uspešno zaključeno", "success")
                   }); 
               }); 
+            } else {
+              window.showAlert("Informacija", "Niste izbrali dokument.", "error")
+            }
             }
           })    
 
@@ -216,7 +221,7 @@ export default function Transactions() {
       }).then((result) => {
 
         if (result) {
-
+          if(selectedRowTransactionsHeads && typeof selectedRowTransactionsHeads.childNodes !== "undefined") {
           TransactionService.deleteHeadDocument(selectedRowTransactionsHeads.childNodes[1].innerHTML).then(response => { 
 
             if(response.data.includes("OK!")) {
@@ -226,6 +231,11 @@ export default function Transactions() {
               }); 
             }
          }); 
+
+        } else {
+          window.showAlert("Informacija", "Niste izbrali dokument.", "error")
+
+        }
         
         }
       })    

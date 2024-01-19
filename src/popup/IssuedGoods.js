@@ -232,9 +232,9 @@ export default function IssuedGoods(props) {
 
     function getNote() {
         if(props.order) {
-            return  <div class="form-group2">
-                    <label for="acNote">Opomba</label>
-                    <textarea class="form-control" id="acNote" rows="3"></textarea>
+            return  <div className="form-group2">
+                    <label htmlFor="acNote">Opomba</label>
+                    <textarea className="form-control" id="acNote" rows="3"></textarea>
             </div>
         }
     }
@@ -309,7 +309,7 @@ export default function IssuedGoods(props) {
 
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
     
-        <input placeholder="Izberite datum" type="date" id="documentDate" class="form-control" />
+        <input placeholder="Izberite datum" type="date" id="documentDate" className="form-control" />
 
         </div>
 

@@ -99,31 +99,31 @@ export default function LocationComponent (props) {
 
     return ( 
         <div id="locationComponent" className='locationComponent'>      
-            <div class="header_part" onClick={closePopup}>
+            <div className="header_part" onClick={closePopup}>
             <h1 id='close_add'>X</h1></div>
             <div className='outer_container'>
             <div className="bodyLocationComponent">
             <div className='left-part'>
 
-            <div class="insistRow">
-                <label for="identLocationComponent">Ident</label>
-                <input type="text" class="form-control" id="identLocationComponent" placeholder="Ident" />
+            <div className="insistRow">
+                <label htmlFor="identLocationComponent">Ident</label>
+                <input type="text" className="form-control" id="identLocationComponent" placeholder="Ident" />
                     </div>
-                    <div class="insistRow">
-                        <label for="nameLocationComponent">Ident</label>
-                        <input type="text" class="form-control" id="nameLocationComponent" placeholder="Naziv" />
+                    <div className="insistRow">
+                        <label htmlFor="nameLocationComponent">Ident</label>
+                        <input type="text" className="form-control" id="nameLocationComponent" placeholder="Naziv" />
                     </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Potrebna količina</label>
-                        <input type="text" class="form-control" id="neededQtyLocationComponent" placeholder="Potrebna količina" />
+                    <div className="insistRow">
+                        <label htmlFor="neededQtyLocationComponent">Potrebna količina</label>
+                        <input type="text" className="form-control" id="neededQtyLocationComponent" placeholder="Potrebna količina" />
                     </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Količina</label>
-                        <input type="text" class="form-control" id="qtyLocationComponent" value="0" placeholder="Količina" />
+                    <div className="insistRow">
+                        <label htmlFor="neededQtyLocationComponent">Količina</label>
+                        <input type="text" className="form-control" id="qtyLocationComponent" value="0" placeholder="Količina" />
                     </div>
-                    <div class="insistRow">
-                        <label for="neededQtyLocationComponent">Razlika</label>
-                        <input type="text" class="form-control" id="differenceLocationComponent" placeholder="Razlika" />
+                    <div className="insistRow">
+                        <label htmlFor="neededQtyLocationComponent">Razlika</label>
+                        <input type="text" className="form-control" id="differenceLocationComponent" placeholder="Razlika" />
                 </div>
             </div>
 

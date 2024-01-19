@@ -108,13 +108,13 @@ export default function WorkOrder(props) {
        <div className="outer-container-workorder">
 
             <div className="left-workorder">
-                <input type="text" id="clientPopup" placeholder='Naročnik' class="form-control" />
-                <input type="text" id="identPopup" placeholder='Ident' class="form-control" />
+                <input type="text" id="clientPopup" placeholder='Naročnik' className="form-control" />
+                <input type="text" id="identPopup" placeholder='Ident' className="form-control" />
             </div>
 
             <div className="right-workorder">
-                <input type="text" id="namePopup" placeholder='Naziv' class="form-control" />
-                <input type="text" id="openQtyPopup" placeholder = 'Odprta količina' class="form-control" />
+                <input type="text" id="namePopup" placeholder='Naziv' className="form-control" />
+                <input type="text" id="openQtyPopup" placeholder = 'Odprta količina' className="form-control" />
             </div>
 
        </div> 

@@ -187,8 +187,8 @@ function changeEvent(e) {
       
         
         </div>
-        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-        <input placeholder="Izberite datum" type="date" id="date" class="form-control" />
+        <div id="date-picker-example" className="md-form md-outline input-with-post-icon datepicker" inline="true">
+        <input placeholder="Izberite datum" type="date" id="date" className="form-control" />
         </div>
         </div>
 

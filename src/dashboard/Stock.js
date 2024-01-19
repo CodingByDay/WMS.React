@@ -20,7 +20,6 @@ export default function Stock() {
     const [ident, setIdent] = useState();
     const [location, setLocation] = useState();
     const [warehouse, setWarehouse] = useState();
-
     // State for the rows
     const [rows, setRows] = useState([]);
 
@@ -86,8 +85,7 @@ export default function Stock() {
       }
     }
     
-    const handleInventory = (e) => {
-      
+    const handleInventory = (e) => {  
       var valueIdent = "";
         var valueWarehouse = "";
         var valueLocation = "";
@@ -122,9 +120,7 @@ export default function Stock() {
 
             // Data access is not defined.
         }
-
         setRows(stocks);
-     
         }); 
 
     

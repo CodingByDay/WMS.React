@@ -163,7 +163,7 @@ export default function SerialQtyEntry (props) {
         <div id="SerialQtyEntry" className='serialQtyEntry'>    
 
 
-                    <div class="header_part" onClick={closePopup}>
+                    <div className="header_part" onClick={closePopup}>
                         <h1 id='close_add'>X</h1></div>
                     <div>
 
@@ -173,23 +173,23 @@ export default function SerialQtyEntry (props) {
                         
             <div className='component-outer'>
 
-                    <div class="insistRow">
-                        <label for="identLocationComponent">Ident</label>
-                        <input type="text" class="form-control" id="identEntry" placeholder="Ident" />
+                    <div className="insistRow">
+                        <label htmlFor="identLocationComponent">Ident</label>
+                        <input type="text" className="form-control" id="identEntry" placeholder="Ident" />
                     </div>
 
-                    <div class="insistRow">
-                        <label for="ssccEntry">SSCC koda</label>
-                        <input type="text" class="form-control" id="ssccEntry" placeholder="SSCC koda" />
+                    <div className="insistRow">
+                        <label htmlFor="ssccEntry">SSCC koda</label>
+                        <input type="text" className="form-control" id="ssccEntry" placeholder="SSCC koda" />
                     </div>
 
-                    <div class="insistRow">
-                        <label for="serialEntry">Serijska številka</label>
-                        <input type="text" class="form-control" id="serialEntry" placeholder="Serijska številka" />
+                    <div className="insistRow">
+                        <label htmlFor="serialEntry">Serijska številka</label>
+                        <input type="text" className="form-control" id="serialEntry" placeholder="Serijska številka" />
                     </div>
 
-                    <div class="insistRow">
-                        <label for="locationEntry">Lokacija</label>
+                    <div className="insistRow">
+                        <label htmlFor="locationEntry">Lokacija</label>
 
 
                     <Select
@@ -204,8 +204,8 @@ export default function SerialQtyEntry (props) {
 
                     </div>
 
-                    <div class="insistRow" id='receiveDiv'>
-                        <label for="locationsSelectReceive">Prejemna lokacija</label>
+                    <div className="insistRow" id='receiveDiv'>
+                        <label htmlFor="locationsSelectReceive">Prejemna lokacija</label>
 
 
                     <Select
@@ -223,9 +223,9 @@ export default function SerialQtyEntry (props) {
                
               
 
-                    <div class="insistRow">
-                        <label for="unitsEntry">Št. enot</label>
-                        <input type="text" class="form-control small" id="unitsEntry" placeholder="Št. enot" />
+                    <div className="insistRow">
+                        <label htmlFor="unitsEntry">Št. enot</label>
+                        <input type="text" className="form-control small" id="unitsEntry" placeholder="Št. enot" />
                     </div>
 
   

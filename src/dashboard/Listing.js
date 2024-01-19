@@ -80,7 +80,6 @@ export default function Listing() {
               $(".main-container").css ("display", "none");
               ListingService.getAllListings().then(response => { 
 
-              console.log(response);
               setOrders(response);
 
               loader.style.display = "none";
@@ -136,7 +135,6 @@ export default function Listing() {
           Object.assign(positionsInner, positions);
           positionsInner.selector = data.childNodes[4].innerHTML;
           setPositions(positionsInner);
-          // console.log(positions);
           setSelectedPosition(data);
           // Checking to see if the position is selected
           setIsPositionSelected(true);
@@ -213,7 +211,6 @@ export default function Listing() {
                     if(response.data.Success) {
 
                               ListingService.getAllListings().then(response => { 
-                                // console.log(response);
                                 setOrders(response);
                                 window.showAlert("Informacija", "Uspešno pobrisano", "success")
                     }); 

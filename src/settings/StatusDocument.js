@@ -35,7 +35,6 @@ function StatusDocument() {
   
         SettingsService.executeSQLQuery(sqlQueryString, [])
         .then(result => {
-          console.log(result);
           setData(result)
         })
        

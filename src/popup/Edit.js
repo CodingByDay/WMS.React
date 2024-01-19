@@ -186,44 +186,44 @@ const onRenderOrderAdd = item => {
      
 
 
-        <div class="header_part">
+        <div className="header_part">
             <h1 id='close_add'>X</h1>
         </div>
 
 
-        <div class="body_part">
+        <div className="body_part">
 
-        <div class="container py-5">
-    <div class="row">
+        <div className="container py-5">
+    <div className="row">
 
 
 
-        <div class="col-md-3 mx-auto">
+        <div className="col-md-3 mx-auto">
 
-                <div class="form-group row">
-                                <label for="transactionId">Transakcija</label>
-                                <input type="text" class="form-control" id="transactionIdAdd" disabled />
+                <div className="form-group row">
+                                <label htmlFor="transactionId">Transakcija</label>
+                                <input type="text" className="form-control" id="transactionIdAdd" disabled />
                 </div>
-                <div class="form-group row">
-                                <label for="inputFirstname">Tip</label>
-                                <input type="text" class="form-control" id="typeAdd" disabled/>
+                <div className="form-group row">
+                                <label htmlFor="inputFirstname">Tip</label>
+                                <input type="text" className="form-control" id="typeAdd" disabled/>
                 </div>
                 
-                <div class="form-group row">
-                                <label for="inputFirstname">Naročnik</label>
-                                <input type="text" class="form-control" id="clientAdd" disabled />
+                <div className="form-group row">
+                                <label htmlFor="inputFirstname">Naročnik</label>
+                                <input type="text" className="form-control" id="clientAdd" disabled />
                 </div>
-                <div class="form-group row">
-                                <label for="inputFirstname">Skladišče</label>
-                                <input type="text" class="form-control" id="warehouseAdd" disabled />
+                <div className="form-group row">
+                                <label htmlFor="inputFirstname">Skladišče</label>
+                                <input type="text" className="form-control" id="warehouseAdd" disabled />
                 </div>
 
 
-                <div class="form-group row">
-                    <div class="col-sm-6">
+                <div className="form-group row">
+                    <div className="col-sm-6">
                   
                     </div>
-                    <div class="col-sm-6">
+                    <div className="col-sm-6">
 
 
                     </div>
@@ -233,9 +233,9 @@ const onRenderOrderAdd = item => {
 
                 <div className='editable-group'>
 
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                    <label for="inputFirstname">Ident</label>
+                <div className="form-group row">
+                    <div className="col-sm-6">
+                    <label htmlFor="inputFirstname">Ident</label>
                         <Select 
                         placeholder={"Ident"}
                         id='identListControl'
@@ -243,14 +243,14 @@ const onRenderOrderAdd = item => {
                         onChange={(e) => onChangeIdent(e)} 
                     />
                     </div>
-                    <div class="col-sm-6">
-                        <label for="inputAddressLine2">Pozicija</label>
-                        <input type="text" class="form-control" id="positionNumber" placeholder="Pozicija" />
+                    <div className="col-sm-6">
+                        <label htmlFor="inputAddressLine2">Pozicija</label>
+                        <input type="text" className="form-control" id="positionNumber" placeholder="Pozicija" />
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                    <label for="inputCity">Naročilo</label>
+                <div className="form-group row">
+                    <div className="col-sm-6">
+                    <label htmlFor="inputCity">Naročilo</label>
 
 
                     <Select
@@ -263,27 +263,27 @@ const onRenderOrderAdd = item => {
    
             
                     </div>
-                    <div class="col-sm-6">
-                        <label for="inputState">Odprta količina</label>
-                        <input type="text" class="form-control" id="openQty" placeholder="Količina" />
+                    <div className="col-sm-6">
+                        <label htmlFor="inputState">Odprta količina</label>
+                        <input type="text" className="form-control" id="openQty" placeholder="Količina" />
                     </div>
 
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                    <label for="inputContactNumber">Količina</label>
-                        <input type="number" class="form-control" id="inputContactNumberForm" value={"0"} placeholder="Količina" />
+                <div className="form-group row">
+                    <div className="col-sm-6">
+                    <label htmlFor="inputContactNumber">Količina</label>
+                        <input type="number" className="form-control" id="inputContactNumberForm" value={"0"} placeholder="Količina" />
                     </div>
-                    <div class="col-sm-6">
-                        <label for="inputWebsite">Datum dobave</label>
-                        <input type="text" class="form-control" id="deadlineDate" placeholder="Datum dobave" />
+                    <div className="col-sm-6">
+                        <label htmlFor="inputWebsite">Datum dobave</label>
+                        <input type="text" className="form-control" id="deadlineDate" placeholder="Datum dobave" />
                     </div>
                 </div>
                 </div>
 
 
 
-                <button type="button" class="btn btn-primary px-4 float-right">Dodaj poziciju</button>
+                <button type="button" className="btn btn-primary px-4 float-right">Dodaj poziciju</button>
 
         </div>
     </div>

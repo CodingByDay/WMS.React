@@ -172,7 +172,7 @@ export default function Inventory(props) {
        <center> <Select className='select-filters' onChange={(e) => onChangeType(e)} placeholder={"Tip dokumenta"} options={documentTypes}  id='documentType'/></center>
         <center><Select className='select-filters' onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  /></center>
 
-        <center><input placeholder="Izberite datum" type="date" id="date" class="form-control" /></center>
+        <center><input placeholder="Izberite datum" type="date" id="date" className="form-control" /></center>
             <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
              <p>Potrdi</p>
              <MdAdd />

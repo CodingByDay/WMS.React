@@ -13,15 +13,31 @@ import { Modal, Input } from 'antd';
 
 
 function EditOrderPosition(props) {
+
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
     if(props.selected) {
       setVisible(true);
-      document.getElementById("quantity").value = ""
+
+
+      setTimeout(cleanField, 1000);
+
     }
   };
    
+
+
+
+
+  function cleanField( ) {
+    const quantityElement = document.getElementById("quantity");
+
+    if (quantityElement) {
+      quantityElement.value = "";
+    } 
+
+  }
   function isFloat(n) {
     return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
 }
@@ -66,8 +82,8 @@ function EditOrderPosition(props) {
       </span>
 
       <Modal
-        title="Quantity"
-        visible={visible}
+        title="Posodobitev"
+        open={visible}
         onOk={handleOk}
         onCancel={handleCancel}
       >

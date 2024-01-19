@@ -24,7 +24,6 @@ const SettingsService  = {
       });
 
 
-      console.log(response);
 
 
       if (response.data.Success) {
@@ -92,7 +91,6 @@ const SettingsService  = {
           'Content-Type': 'application/json'
         }
       });
-      console.log(sqlQuery);
   
       if (response.data.Success) {
         const dataPacket = response.data.Rows;
@@ -105,8 +103,7 @@ const SettingsService  = {
             }
           }
           return toAdd;
-        });
-        
+        });       
         return dataReturn;
       } else {
         return [];
