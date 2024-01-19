@@ -83,8 +83,7 @@ const SettingsService  = {
   async  executeSQLQuery(sqlQuery, parameters) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
     const requestObject = {
-      SQL: sqlQuery,
-      Parameters: parameters,
+      SQL: sqlQuery
     };
   
     try {
@@ -93,6 +92,7 @@ const SettingsService  = {
           'Content-Type': 'application/json'
         }
       });
+      console.log(sqlQuery);
   
       if (response.data.Success) {
         const dataPacket = response.data.Rows;

@@ -8,7 +8,7 @@
 }
 
 
-table.react-table-system, table.react-table-subject-codes {
+table.react-table-system, table.react-table-subject-codes, table.react-table-status-document {
   width: 95%;
 }
 .search-container {
@@ -127,7 +127,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -285,6 +285,19 @@ table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover
   padding: 12px; /* Adjust the padding as needed */
 
 }
+
+table.react-table-status-document tr th:hover,table.react-table-status-document tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+
+}
+
+
+.react-table-status-document th, .react-table-status-document td, .react-table-status-document th, .react-table-status-document td {
+  padding: 12px; /* Adjust the padding as needed */
+
+}
+
+
 #analytics-panel {
   height: 100%;
 }

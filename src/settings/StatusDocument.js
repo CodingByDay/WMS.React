@@ -19,14 +19,14 @@ function StatusDocument() {
       
 
     const sqlQueryString = `
-        SELECT [acDocType] -- vrsta dokumenta <SELECT acDocType, acName FROM tPA_SetDocType>
+        SELECT [acDocType] -- 
         ,[acStatus] -- koda statusa
         ,[acName] -- naziv statusa
-        ,[adTimeIns] -- čas vpisa <samodejno>
-        ,[adTimeChg] -- čas spremembe <samodejno>
+        ,[adTimeIns] -- čas vpisa 
+        ,[adTimeChg] -- čas spremembe
         ,[anUserChg] -- uporabnik, ki je izvedel spremembo
         ,[anUserIns] -- uporabnik, ki je izvedel vpis
-        ,[anQId] -- <samodejno>
+        ,[anQId] -- 
         ,[uWMSShow] -- ali je viden status dokumenta
     FROM [dbo].[tPA_SetDocTypeStat]
     `;
@@ -35,6 +35,7 @@ function StatusDocument() {
   
         SettingsService.executeSQLQuery(sqlQueryString, [])
         .then(result => {
+          console.log(result);
           setData(result)
         })
        
