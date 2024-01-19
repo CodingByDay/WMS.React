@@ -215,7 +215,6 @@ const Update = (props) => {
 
   const sendData = () => {
 
-    console.log(selectedOptions)
     var updateQuery = props.selectedTable.updateQuery;
     var columns = props.selectedTable.value;
     var params = [];

@@ -79,12 +79,18 @@ export default function Settings() {
            <img alt={""} src='source-code.png' width={50} />
          </button>
 
+        
 
          <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("documents")}>
            Vrste dokumentov
            <img alt={""} src='format-icon.png' width={50} />
          </button>
 
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("status")}>
+           Statusi dokumentov
+           <img alt={""} src='document-status.png' width={50} />
+         </button>
+         
          <button className="btn btn-primary settingsButton  dashboard" onClick = {()=>routeChange("warehouses")}>
            Skladišča
            <img alt={""} src='warehouse-icon.png' width={50} />

@@ -15,18 +15,19 @@ function TableForge({ refresh, name, tableData }) {
   const [editData, setEditData] = useState({});
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [id, setId] = useState(-1);
+
+
+
+
+
+  
   const showDeleteConfirmation = (data) => {
 
     var currentDeleteSQL = selectedTable.deleteQuery;
-    currentDeleteSQL = currentDeleteSQL.replace("@id", id);
 
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const value = data[key];
-        var theOriginalValue = '@' + key;
-        currentDeleteSQL = currentDeleteSQL.replace(theOriginalValue, value);
-      }
-    }
+    var params = [];
+    var parameterId = { Name: 'id', Type: 'Int64', Value: data[selectedTable.id]  }
+    params.push(parameterId);
 
     Swal.fire({
       title: 'Ste prepričani?',
@@ -39,7 +40,7 @@ function TableForge({ refresh, name, tableData }) {
       cancelButtonText: 'Ne',
     }).then((result) => {
       if (result.isConfirmed) {
-        SettingsService.insertSQLQuery(currentDeleteSQL).then((result) => {
+        SettingsService.insertSQLQuery(currentDeleteSQL, params).then((result) => {
           var data = result;
 
           if (data) {
@@ -55,6 +56,7 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const onDelete = (data) => {
+    setId(data[selectedTable.id])
     showDeleteConfirmation(data);
   };
 
@@ -67,6 +69,7 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const generatePopupCreate = () => {
+    
     setIsModalOpen(true);
   };
 
@@ -216,7 +219,74 @@ function TableForge({ refresh, name, tableData }) {
 
 
 
+// This is the configuration for the statuses of documents // 
+const statusDocument = useMemo(
+  () => [
+    
+    {
+      Header: (
+        <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <IoAddCircleSharp />
+          Dodaj
+          
+        </button>
+        
+      ),
+      accessor: 'actions',
 
+      Cell: ({ row }) => (
+        <div>
+
+          <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+            <MdDeleteForever />
+          </button>
+          <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+            <MdEdit />
+          </button>
+         
+        </div>
+      ),
+      type: 'nothing',
+    },
+    {
+      Header: 'Vrsta dokumenta',
+      accessor: 'acDocType',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: 'SELECT acDocType, acName FROM tPA_SetDocType;',
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Koda statusa',
+      accessor: 'acStatus',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Naziv statusa',
+      accessor: 'acName',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+    {
+      Header: 'Viden',
+      accessor: 'uWMSShow',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'Int64'    
+    }
+
+  ],
+  []
+);
 
 
 
@@ -278,6 +348,30 @@ function TableForge({ refresh, name, tableData }) {
                       ,[anUserChg] = @user
                       ,[uWMSSerialNoBatch] = @uWMSSerialNoBatch
                   WHERE [anQId] = @id;`,
+      id: 'anQId',
+    }, {
+      name: 'status-document',
+      value: statusDocument,
+      insertQuery: `INSERT INTO [dbo].[tPA_SetDocTypeStat]
+                    ([acDocType]
+                    ,[acStatus]
+                    ,[acName]
+                    ,[anUserIns]
+                    ,[uWMSShow])
+              VALUES
+                    (@acDocType,
+                    ,@acStatus, 
+                    ,@acName, 
+                    ,@user, 
+                    ,<@uWMSShow)`,
+      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocTypeStat] WHERE [anQId] = @id",
+      updateQuery: `UPDATE [dbo].[tPA_SetDocTypeStat]
+                    SET [acDocType] = @acDocType
+                      ,[acStatus] = @acStatus
+                      ,[acName] = @acName
+                      ,[anUserChg] = @user
+                      ,[uWMSShow] = @uWMSShow
+                    WHERE [anQId] =`,
       id: 'anQId',
     },
   ];
