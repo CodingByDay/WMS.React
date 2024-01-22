@@ -76,6 +76,9 @@ function TableForge({ refresh, name, tableData }) {
   const generatePopupEdit = (data) => {
     setId(data[selectedTable.id])
     setEditData(data);
+
+
+
     setIsEditModalOpen(true);
   };
 
@@ -131,7 +134,23 @@ function TableForge({ refresh, name, tableData }) {
         type: 'text',
         dbType: 'String'
 
+      }, 
+    
+      {
+        Header: 'hidden_id_hidden',
+        accessor: '_hidden_',
+        className: 'value-column-system hidden',
+        type: 'nothing',
+        Cell: ({ column, row }) => {
+          const cellValue = row.values['ID'];
+          
+          return (
+            <span className="hidden-cell">{cellValue}</span>
+          );
+        },
       }
+
+
     ],
     []
   );

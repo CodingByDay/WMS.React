@@ -17,6 +17,11 @@ const SettingsService  = {
     try {
 
       const response = await axios.post(apiUrl, JSON.stringify(requestObject), {
+
+
+   
+
+
         headers: {
           'Content-Type': 'application/json'
         }
@@ -24,7 +29,7 @@ const SettingsService  = {
       });
 
 
-
+      console.log(parameters)
 
       if (response.data.Success) {
 

@@ -233,6 +233,7 @@ const Update = (props) => {
 
     for (let i = 0; i < columns.length; i++) {
         var column = columns[i];
+        console.log(column)
         var type = column.type;
         var accessor = column.accessor;
         var dbType = column.dbType;
@@ -245,6 +246,10 @@ const Update = (props) => {
           } else if(type == "checkbox") {
             theValue = getValue(accessor);       
           }
+
+
+
+
            var parameter = { Name: accessor, Type: dbType, Value: theValue  }
            params.push(parameter);     
         }
