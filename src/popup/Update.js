@@ -119,7 +119,6 @@ const Update = (props) => {
 
         if (prevData.hasOwnProperty(key)) {
           const value = prevData[key];
-
           const found = table.find(item => item.accessor === key);
           if(!found) {
             continue;
@@ -152,6 +151,18 @@ const Update = (props) => {
 
 
           } else if (structureType === "checkbox") {
+            
+
+
+
+            setInputValues((prevValues) => ({
+              ...prevValues,
+              [key]: value,
+            }));
+
+
+
+
 
         }
 
@@ -232,15 +243,10 @@ const Update = (props) => {
           } else if(type == "dropdown") {
             theValue = selectedOptions[accessor].id;          
           } else if(type == "checkbox") {
-            theValue = selectedOptions[accessor];        
+            theValue = getValue(accessor);       
           }
-
-
-
            var parameter = { Name: accessor, Type: dbType, Value: theValue  }
-
-           params.push(parameter);
-           
+           params.push(parameter);     
         }
     }
 
@@ -367,14 +373,16 @@ const Update = (props) => {
 
             </div>
               ) : (
-                <input
-                type={column.type === 'checkbox' ? 'checkbox' : 'text'}
-                id={column.accessor}
-                name={column.accessor}
-                className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
-                value={getValue(column.accessor)} // Set the value from state
-                onChange={handleInputChange} // Update the state on change
+               <input
+                  type={column.type === 'checkbox' ? 'checkbox' : 'text'}
+                  id={column.accessor}
+                  name={column.accessor}
+                  className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
+                  checked={column.type === 'checkbox' ? getValue(column.accessor) : undefined}
+                  value={column.type !== 'checkbox' ? getValue(column.accessor) : undefined}
+                  onChange={handleInputChange} // Update the state on change
               />
+
               )}
             </div>
            )

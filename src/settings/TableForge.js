@@ -280,8 +280,17 @@ const statusDocument = useMemo(
       Header: 'Viden',
       accessor: 'uWMSShow',
       className: 'name-column-system',
-      type: 'text',  
-      dbType: 'Int64'    
+      type: 'checkbox',  
+      dbType: 'Boolean',
+      Cell: ({ row }) => (
+        <input
+          type="checkbox"
+          checked={row.values.uWMSShow} // Set the checked state based on the value of uWMSShow
+          onChange={() => {
+
+          }}
+        />
+      ),
     }
 
   ],

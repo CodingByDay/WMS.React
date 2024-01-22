@@ -26,7 +26,7 @@ export default function TransactionHeaderButtons(props) {
 
 
              <span className='actions smallerr' onClick={finishDocument}>             
-             <p>Prenesi</p>            
+             <p>Zaključi</p>            
              <MdDownload />
              </span>
 
