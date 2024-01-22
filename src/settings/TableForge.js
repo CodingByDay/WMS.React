@@ -10,11 +10,16 @@ import Update from '../popup/Update';
 import { FaSearch } from 'react-icons/fa'; // Import the search icon
 
 function TableForge({ refresh, name, tableData }) {
+
+
+
+
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalEditOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
   const [isInputVisible, setIsInputVisible] = useState(false);
-  const [id, setId] = useState(-1);
+  const [id, setId] = useState({});
 
 
 
@@ -74,7 +79,7 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const generatePopupEdit = (data) => {
-    setId(data[selectedTable.id])
+
     setEditData(data);
 
 
@@ -86,8 +91,15 @@ function TableForge({ refresh, name, tableData }) {
     generatePopupCreate(selectedTable);
   };
 
-  const onEdit = (data) => {
-    generatePopupEdit(data, selectedTable);
+  const onEdit = (row) => {
+
+
+
+      var target;
+      var current = selectedTable.id;
+      target = selectedTable.id;
+      setId(row[current])
+      generatePopupEdit(row, selectedTable);
   };
 
   const systemColumns = useMemo(
@@ -125,7 +137,8 @@ function TableForge({ refresh, name, tableData }) {
         dropdownId: 'ID',
         dropdownPlaceholder: '',
         dropdownHelperField: 'Desc',
-        dbType: 'String'
+        dbType: 'String',
+
       },
       {
         Header: 'Vrednost',
@@ -136,19 +149,7 @@ function TableForge({ refresh, name, tableData }) {
 
       }, 
     
-      {
-        Header: 'hidden_id_hidden',
-        accessor: '_hidden_',
-        className: 'value-column-system hidden',
-        type: 'nothing',
-        Cell: ({ column, row }) => {
-          const cellValue = row.values['ID'];
-          
-          return (
-            <span className="hidden-cell">{cellValue}</span>
-          );
-        },
-      }
+     
 
 
     ],
@@ -187,6 +188,14 @@ function TableForge({ refresh, name, tableData }) {
           </div>
         ),
         type: 'nothing',
+      },
+
+
+      {
+        Header: 'Id',
+        accessor: 'anQId',
+        className: 'name-column-system',
+        type: 'nothing',     
       },
       {
         Header: 'Ident',
@@ -268,6 +277,12 @@ const statusDocument = useMemo(
       type: 'nothing',
     },
     {
+      Header: 'Id',
+      accessor: 'anQId',
+      className: 'name-column-system',
+      type: 'nothing',     
+    },
+    {
       Header: 'Vrsta dokumenta',
       accessor: 'acDocType',
       className: 'name-column-system',
@@ -318,40 +333,15 @@ const statusDocument = useMemo(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const tablesAssociation = [
     {
       name: 'system',
       value: systemColumns,
       insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES (@ID, @Value)",
       deleteQuery: "DELETE FROM uWMSSetting WHERE ID = @ID",
-      updateQuery: "UPDATE uWMSSetting SET VALUE = @Value WHERE ID = @ID",
+      updateQuery: "UPDATE uWMSSetting SET VALUE = @Value WHERE ID = @anQId",
       id: "ID",
+      idType: "String"
     },
     {
       name: 'subject-codes',
@@ -375,8 +365,9 @@ const statusDocument = useMemo(
                       ,[acCode] = @acCode
                       ,[anUserChg] = @user
                       ,[uWMSSerialNoBatch] = @uWMSSerialNoBatch
-                  WHERE [anQId] = @id;`,
+                  WHERE [anQId] = @anQId;`,
       id: 'anQId',
+      idType: "Int64"
     }, {
       name: 'status-document',
       value: statusDocument,
@@ -399,8 +390,9 @@ const statusDocument = useMemo(
                       ,[acName] = @acName
                       ,[anUserChg] = @user
                       ,[uWMSShow] = @uWMSShow
-                    WHERE [anQId] =`,
+                    WHERE [anQId] = @anQId`,
       id: 'anQId',
+      idType: "Int64"
     },
   ];
 
@@ -422,10 +414,12 @@ const statusDocument = useMemo(
     pageOptions,
     pageCount,
     setPageSize,
-  } = useTable(
+    
+  } = useTable (
     {
       columns: selectedTable ? selectedTable.value : [],
       data: tableData,
+
     },
     useGlobalFilter,
     usePagination // Add the usePagination hook
@@ -510,9 +504,25 @@ const statusDocument = useMemo(
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+
+
+                  
+                  
+                  <th {...column.getHeaderProps()}
+                  
+                  
+                  
+                  className={column.Header === 'Id' ? 'hidden-column' : ''}
+                  
+                  
+                  
+                  >{column.render('Header')}</th>
                 ))}
+
+
+                
               </tr>
+              
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
@@ -521,7 +531,19 @@ const statusDocument = useMemo(
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+
+
+                    return <td {...cell.getCellProps()}
+                    
+                    
+                    
+                    className={cell.column.Header === 'Id' ? 'hidden-column' : ''}
+
+                    
+                    
+                    
+                    
+                    >{cell.render('Cell')}</td>;
                   })}
                 </tr>
               );

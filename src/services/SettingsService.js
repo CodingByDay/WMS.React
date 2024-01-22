@@ -27,9 +27,8 @@ const SettingsService  = {
         }
 
       });
-
-
-      console.log(parameters)
+      console.log(parameters);
+      console.log(response);
 
       if (response.data.Success) {
 

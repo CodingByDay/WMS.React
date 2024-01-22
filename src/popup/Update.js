@@ -225,15 +225,14 @@ const Update = (props) => {
   }
 
   const sendData = () => {
-
     var updateQuery = props.selectedTable.updateQuery;
     var columns = props.selectedTable.value;
+    var idType = props.selectedTable.idType;
     var params = [];
 
 
     for (let i = 0; i < columns.length; i++) {
         var column = columns[i];
-        console.log(column)
         var type = column.type;
         var accessor = column.accessor;
         var dbType = column.dbType;
@@ -250,15 +249,28 @@ const Update = (props) => {
 
 
 
-           var parameter = { Name: accessor, Type: dbType, Value: theValue  }
+
+            var converted = {};
+            if(dbType == "Int64") {
+              converted = Number(theValue);
+            } else if(dbType == "String") {
+              converted = theValue;
+            } else if(dbType == "Boolean") {
+              converted = theValue;
+            }
+
+
+
+           var parameter = { Name: accessor, Type: dbType, Value: converted  }
            params.push(parameter);     
         }
     }
 
       const userId = localStorage.getItem('name');
+      const userIdAsInt = parseInt(userId, 10); 
 
-      var parameterUser = { Name: 'user', Type: 'Int64', Value: userId  } 
-      var parameterId = { Name: 'id', Type: 'Int64', Value: props.id  }
+      var parameterUser = { Name: 'user', Type: 'Int64', Value: userIdAsInt  } 
+      var parameterId = { Name: 'anQId', Type: idType, Value: props.id  }
 
 
       params.push(parameterUser);
@@ -268,26 +280,27 @@ const Update = (props) => {
 
       SettingsService.insertSQLQuery(updateQuery, params)
       .then(result => {
+
           props.refresh();
+
           var data = result;
 
           if(data) {
+
               onClose();
+
           } else {
+
             Swal.fire(
               'Napaka!',
               'Zapis ni bil posodobljen.',
               'error'
             );
+
             onClose();
           }         
       })
    
-  
-      
-    
-
-
   };
 
 

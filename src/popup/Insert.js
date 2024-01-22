@@ -171,8 +171,17 @@ const Insert = (props) => {
             }
   
   
+
+              var converted = {};
+              if(dbType == "Int64") {
+                converted = Number(theValue);
+              } else if(dbType == "String") {
+                converted = theValue;
+              } else if(dbType == "Boolean") {
+                converted = theValue;
+              }
   
-             var parameter = { Name: accessor, Type: dbType, Value: theValue  }
+             var parameter = { Name: accessor, Type: dbType, Value: converted  }
   
              params.push(parameter);
 
@@ -183,8 +192,9 @@ const Insert = (props) => {
     }
 
     const userId = localStorage.getItem('name');
+    const userIdAsInt = parseInt(userId, 10); 
 
-    var parameterUser = { Name: 'user', Type: 'Int64', Value: userId  } 
+    var parameterUser = { Name: 'user', Type: 'Int64', Value: userIdAsInt  } 
 
 
     params.push(parameterUser);
