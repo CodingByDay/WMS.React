@@ -22,6 +22,8 @@ import Printers from './settings/Printers';
 import Users from './settings/Users';
 import SubjectCodes from "./settings/SubjectCodes"
 import StatusDocument from './settings/StatusDocument';
+import Idents from "./settings/Idents"
+import Subjects from "./settings/Subjects"
 
 axios.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
@@ -54,14 +56,15 @@ function App() {
         // Settings // 
 
         <Route path="/users" element={<Users  />} />
-        <Route path="/subjects" element={<SubjectCodes  />} />
+        <Route path="/subject-codes" element={<SubjectCodes  />} />
         <Route path="/devices" element={<Devices  />} />
         <Route path="/documents" element={<DocumentType  />} />
         <Route path="/printers" element={<Printers  />} />
         <Route path="/system" element={<System  />} />
         <Route path="/warehouses" element={<Warehouses  />} />
         <Route path="/status" element={<StatusDocument  />} />
-
+        <Route path="/idents" element={<Idents />} />
+        <Route path="/subjects" element={<Subjects />} />
         
 
       </Routes>

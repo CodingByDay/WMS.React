@@ -68,13 +68,13 @@ export default function Settings() {
     
     <div className = "settings menu"> 
 
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("system")}>
-           Sistem
-           <img alt={""} src='settings-icon.png' width={50}/>
+        
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subjects")}>
+           Subjekti
+           <img alt={""} src='rating.png' width={50} />
          </button>
 
-
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subjects")}>
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subject-codes")}>
             Kode subjektov
            <img alt={""} src='source-code.png' width={50} />
          </button>
@@ -90,8 +90,39 @@ export default function Settings() {
            Statusi dokumentov
            <img alt={""} src='document-status.png' width={50} />
          </button>
+
+
+
+
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("system")}>
+           Sistem
+           <img alt={""} src='settings-icon.png' width={50}/>
+         </button>
+
+
+
+
+
+         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("idents")}>
+          Identi
+           <img alt={""} src='boxes.png' width={50} />
+         </button>
          
-         <button className="btn btn-primary settingsButton  dashboard" onClick = {()=>routeChange("warehouses")}>
+
+
+
+
+
+
+
+
+         {/*   
+         
+
+
+          For now this is commented out because of time limit.
+         
+          <button className="btn btn-primary settingsButton  dashboard" onClick = {()=>routeChange("warehouses")}>
            Skladišča
            <img alt={""} src='warehouse-icon.png' width={50} />
          </button>
@@ -111,6 +142,11 @@ export default function Settings() {
            Uporabniki
            <img alt={""} src='user-icon.png' width={50} />
          </button>
+         
+         
+         
+         */}
+        
 
          </div>
 
