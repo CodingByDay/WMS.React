@@ -168,8 +168,6 @@ export default function IssuedGoods(props) {
         var note = $('#acNote').val();
         var order = ""
 
- 
-        // I in P zamnjenano na narocilih
 
         objectForAPI = { 
             DocumentType: documentData, 

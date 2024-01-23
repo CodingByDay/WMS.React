@@ -79,7 +79,7 @@ export default function Listing() {
               loader.style.display = "block";
               $(".main-container").css ("display", "none");
               ListingService.getAllListings().then(response => { 
-
+                
               setOrders(response);
 
               loader.style.display = "none";

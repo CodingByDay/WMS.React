@@ -109,7 +109,6 @@ export default function Stock() {
         StockService.getStock(finalParams).then(response => {
         var stocks = [];
         var stockAmount = 0;
-        window.stocks = response;
 
         for(var i = 0; i < response.Items.length; i++) {  
           

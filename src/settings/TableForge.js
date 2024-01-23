@@ -74,16 +74,11 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const generatePopupCreate = () => {
-   
     setIsModalOpen(true);
   };
 
   const generatePopupEdit = (data) => {
-
     setEditData(data);
-
-
-
     setIsEditModalOpen(true);
   };
 
@@ -147,9 +142,7 @@ function TableForge({ refresh, name, tableData }) {
 
       }, 
     
-     
-
-
+    
     ],
     []
   );
@@ -638,7 +631,7 @@ const subjects = useMemo(
       dbType: 'String'  
     },
     {
-      Header: 'hidden-active',
+      Header: 'Aktiven',
       accessor: 'acActive',
       className: 'name-column-system',
       type: 'text',  
@@ -646,7 +639,7 @@ const subjects = useMemo(
       dbType: 'String'  
     },
     {
-      Header: 'hidden-active',
+      Header: 'Zaloga',
       accessor: 'uWMSStock',
       className: 'name-column-system',
       type: 'text',  
@@ -654,7 +647,7 @@ const subjects = useMemo(
       dbType: 'String'  
     },
     {
-      Header: 'hidden-active',
+      Header: 'Viden',
       accessor: 'uWMS',
       className: 'name-column-system',
       type: 'text',  
@@ -662,7 +655,7 @@ const subjects = useMemo(
       dbType: 'String'  
     },
     {
-      Header: 'hidden-active',
+      Header: 'Brez naročila',
       accessor: 'uWMSSubj',
       className: 'name-column-system',
       type: 'text',  

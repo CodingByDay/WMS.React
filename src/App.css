@@ -65,6 +65,16 @@ button.action-buttons.white {
   overflow: hidden;
 }
 
+.paginationControls {
+  margin-bottom: 1em;
+  padding: 0.3em;
+}
+
+button.ant-btn {
+  background: #081A45;
+  color: white;
+  border-radius: 0;
+}
 
 .popup-body.insert {
   display: grid;
@@ -100,8 +110,14 @@ button.action-buttons.white {
   margin: -2px;
   float: right;
   margin-right: 2.5%!important;
+  margin-bottom: 1em;
+  padding: 0.3em;
 }
 
+.paginationControls button {
+  margin-right: 0.4em;
+  margin-left: 0.4em;
+}
 
 button.action-buttons.white:hover {
   background: none !important;
