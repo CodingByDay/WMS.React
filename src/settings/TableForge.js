@@ -331,7 +331,101 @@ const statusDocument = useMemo(
   []
 );
 
+// This is the configuration for the statuses of documents // 
+const documentTypes = useMemo(
+  () => [
+    
+    {
+      Header: (
+        <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <IoAddCircleSharp />
+          Dodaj
+          
+        </button>
+        
+      ),
+      accessor: 'actions',
 
+      Cell: ({ row }) => (
+        <div>
+
+          <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+            <MdDeleteForever />
+          </button>
+          <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+            <MdEdit />
+          </button>
+         
+        </div>
+      ),
+      type: 'nothing',
+    },
+    {
+      Header: 'Id',
+      accessor: 'anQId',
+      className: 'name-column-system',
+      type: 'nothing',     
+    },
+    {
+      Header: 'Vrsta dokumenta',
+      accessor: 'acDocType',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: 'SELECT acDocType, acName FROM tPA_SetDocType;',
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Namen dokumenta',
+      accessor: 'acSetOf',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Varianta vrste dokumenta',
+      accessor: 'acType',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+    {
+      Header: 'Naziv',
+      accessor: 'acName',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+    {
+      Header: 'Izdajno skladišče',
+      accessor: 'acIssuer',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+    {
+      Header: 'Prevzemno skladišče',
+      accessor: 'acReceiver',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+    {
+      Header: 'Skladišče',
+      accessor: 'acReceiver',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }, 
+
+  ],
+  []
+);
 
   const tablesAssociation = [
     {
