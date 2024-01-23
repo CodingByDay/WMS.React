@@ -78,9 +78,7 @@ export default function Settings() {
             Kode subjektov
            <img alt={""} src='source-code.png' width={50} />
          </button>
-
         
-
          <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("documents")}>
            Vrste dokumentov
            <img alt={""} src='format-icon.png' width={50} />
@@ -91,30 +89,16 @@ export default function Settings() {
            <img alt={""} src='document-status.png' width={50} />
          </button>
 
-
-
-
          <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("system")}>
            Sistem
            <img alt={""} src='settings-icon.png' width={50}/>
          </button>
-
-
-
-
 
          <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("idents")}>
           Identi
            <img alt={""} src='boxes.png' width={50} />
          </button>
          
-
-
-
-
-
-
-
 
          {/*   
          

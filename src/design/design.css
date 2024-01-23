@@ -1,4 +1,4 @@
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -6,19 +6,9 @@
   margin-bottom: 20px; /* Adds some space below the table */
 }
 
-
-
-
-
-table.react-table-status-document tr th:hover,table.react-table-status-document tr th:hover {
+table.react-table-subjects tr th:hover,table.react-table-subjects tr th:hover {
   background: rgb(255, 255, 255, 0.2);
-
 }
-
-
-
-
-.react-table-type-document th, .react-table-type-document td, .react-table-type-document th, .react-table-type-document td {
+.react-table-subjects th, .react-table-subjects td, .react-table-subjects th, .react-table-subjects td {
   padding: 12px; /* Adjust the padding as needed */
-
 }

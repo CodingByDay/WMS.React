@@ -506,6 +506,193 @@ const documentTypes = useMemo(
   []
 );
 
+
+const subjects = useMemo(
+  () => [
+    
+    {
+      Header: (
+        <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <IoAddCircleSharp />
+          Dodaj
+          
+        </button>
+        
+      ),
+      accessor: 'actions',
+
+      Cell: ({ row }) => (
+        <div>
+
+          <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+            <MdDeleteForever />
+          </button>
+          <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+            <MdEdit />
+          </button>
+         
+        </div>
+      ),
+      type: 'nothing',
+    },
+    {
+      Header: 'Id',
+      accessor: 'anQId',
+      className: 'name-column-system',
+      type: 'nothing',     
+    },
+    {
+      Header: 'Šifra',
+      accessor: 'acSubject',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Kupec',
+      accessor: 'acBuyer',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Dobavitelj',
+      accessor: 'acSupplier',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    }, 
+    {
+      Header: 'Skladišče',
+      accessor: 'acWarehouse',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Naziv',
+      accessor: 'acName2',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String',
+    },
+    {
+      Header: 'Naslov',
+      accessor: 'acAddress',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    }, 
+    {
+      Header: 'Pošta',
+      accessor: 'acPost',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Država',
+      accessor: 'acCountry',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Predpona',
+      accessor: 'acVATCodePrefix',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Dav. št.',
+      accessor: 'acCode',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Mat. št.',
+      accessor: 'acRegNo',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'hidden-active',
+      accessor: 'acActive',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'hidden-active',
+      accessor: 'uWMSStock',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'hidden-active',
+      accessor: 'uWMS',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'hidden-active',
+      accessor: 'uWMSSubj',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+  ],
+  []
+);
+
+
+
+
+
+
+
+const TruncateCell = ({ value, maxCharacters }) => {
+  // Truncate the value if it exceeds the specified maximum characters
+  const truncatedValue = value.length > maxCharacters ? `${value.slice(0, maxCharacters)}...` : value;
+
+  return <div title={value}>{truncatedValue}</div>;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const tablesAssociation = [
     {
       name: 'system',
@@ -614,6 +801,65 @@ const documentTypes = useMemo(
                       ,[uWMSPartiallyFinishStatus] = @uWMSPartiallyFinishStatus
                       ,[uWMSFinishStatus] = @uWMSFinishStatus
                       WHERE [anQId] = @anQId`,
+      id: 'anQId',
+      idType: "Int64"
+    },
+    {
+      name: 'subjects',
+      value: subjects,
+      insertQuery: `INSERT INTO [dbo].[tHE_SetSubj]
+                    ([acSubject]
+                    ,[acBuyer]
+                    ,[acSupplier]
+                    ,[acWarehouse]
+                    ,[acName2]
+                    ,[acAddress]
+                    ,[acPost]
+                    ,[acCountry]
+                    ,[acVATCodePrefix]
+                    ,[acCode]
+                    ,[acRegNo]
+                    ,[acActive]
+                    ,[anUserIns]
+                    ,[uWMSStock]
+                    ,[uWMS]
+                    ,[uWMSSubj])
+              VALUES
+                    (@acSubject
+                    ,@acBuyer
+                    ,@acSupplier
+                    ,@acWarehouse
+                    ,@acName2
+                    ,@acAddress
+                    ,@acPost
+                    ,@acCountry
+                    ,@acVATCodePrefix
+                    ,@acCode
+                    ,@acRegNo
+                    ,@acActive
+                    ,@anUserIns
+                    ,@uWMSStock
+                    ,@uWMS
+                    ,@uWMSSubj)`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @id",
+      updateQuery: `UPDATE [dbo].[tHE_SetSubj]
+                    SET [acSubject] = @acSubject
+                      ,[acBuyer] = @acBuyer
+                      ,[acSupplier] = @acSupplier
+                      ,[acWarehouse] = @acWarehouse
+                      ,[acName2] = @acName2
+                      ,[acAddress] = @acAddress
+                      ,[acPost] = @acPost
+                      ,[acCountry] = @acCountry
+                      ,[acVATCodePrefix] = @acVATCodePrefix
+                      ,[acCode] = @acCode
+                      ,[acRegNo] = @acRegNo
+                      ,[acActive] = @acActive
+                      ,[anUserChg] = @anUserChg
+                      ,[uWMSStock] = @uWMSStock
+                      ,[uWMS] = @uWMS
+                      ,[uWMSSubj] = @uWMSSubj
+                  WHERE anQid =  @anQId`,
       id: 'anQId',
       idType: "Int64"
     }
@@ -735,7 +981,7 @@ const documentTypes = useMemo(
                   
                   
                   
-                  className={column.Header === 'Id' ? 'hidden-column' : ''}
+                  className={column.Header === 'Id' || column.Header === 'hidden-active' ? 'hidden-column' : ''}
                   
                   
                   
@@ -760,7 +1006,7 @@ const documentTypes = useMemo(
                     
                     
                     
-                    className={cell.column.Header === 'Id' ? 'hidden-column' : ''}
+                    className={cell.column.Header === 'Id' || cell.column.Header === 'hidden-active' ? 'hidden-column' : ''}
 
                     
                     

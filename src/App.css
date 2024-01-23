@@ -9,10 +9,16 @@
 
 
 
-table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document {
+table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects {
   width: 95%;
 }
 
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px; /* Adjust the max-width as needed */
+}
 
 
 .search-container {
@@ -58,7 +64,6 @@ button.action-buttons.white {
 .user-settings-table {
   overflow: hidden;
 }
-
 
 
 .popup-body {
@@ -136,7 +141,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -297,7 +302,12 @@ table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover
   padding: 12px; /* Adjust the padding as needed */
 
 }
-
+table.react-table-subjects tr th:hover,table.react-table-subjects tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+.react-table-subjects th, .react-table-subjects td, .react-table-subjects th, .react-table-subjects td {
+  padding: 12px; /* Adjust the padding as needed */
+}
 table.react-table-status-document tr th:hover,table.react-table-status-document tr th:hover {
   background: rgb(255, 255, 255, 0.2);
 

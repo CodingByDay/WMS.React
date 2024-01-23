@@ -19,34 +19,22 @@ function Subjects() {
       
 
     const sqlQueryString = `
-          SELECT [acDocType] -- vrata dokumenta
-            ,[acSetOf] -- namen dokuenta: /*D = delovni nalog,*/ F = blagovni, N = naročilo, X = default
-            ,[acType] -- varianta vrste dokumenta: 
-              --F: blagovni -> E - medskladiščnica, I = izdaja iz skladišča, N = popis inventure, P = prevzem na skladišče
-              --N: naročilo -> P = prodaja, I = nakup (pazi ravno obratno je kot na blagovnem!!!)
-            ,[acName] -- naziv
-            ,[acIssuer] -- privzeto izdajno skladišče
-            ,[acReceiver] -- privzeto prevzemno skladišče
-            ,[adTimeIns] -- čas vpisa <samodejno>
-            ,[adTimeChg] -- čas spremembe <samodejno>
-            ,[anUserChg] -- uporabnik, ki je izvedel spremembo
-            ,[anUserIns] -- uporabnik, ki je izvedel vpis
-            ,[acWarehouse] -- privzeto skladišče -> select acSubject, acName2 from tHE_SetSubj where acWarehouse = 'T' 
-            ,[anQId]
-            ,[uWMSAcqDocType] -- vrsta dokumenta prevzema ki nastane - uporablja se pri namenu N ob varianti I -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F and acType = 'I'
-            ,[uWMSIssueDocType] -- vrsta dokumenta izdaje ki nastane - uporablja se pri namenu N ob varianti P -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F and acType = 'I'
-            ,[uWMS] -- ali je dokument viden v WMS
-            ,[uWMSPartiallyFinishStatus] -- status delno zaključenega dokumenta -> select acStatus, acName from tPA_SetDocTypeStat where acDocType = <trenutni acDocType>
-            ,[uWMSFinishStatus] -- status zaključenega dokumenta
-          /*,[acDocTypeRef] -- vrsta dokumenta prevzema iz proizvodnje - se uporablja pri namenu D -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F' and acType = 'I'
-            ,[acDocTypeWaste] -- vrsta dokumenta odpadka iz proizvodnje - se uporablja pri namenu D -> -||-
-            ,[uWMSEntryControl] -- ali je pri WMS aktivna vhodna kontrola
-            ,[uWMSCoop] -- ali je proizvodnja pri kooperantu
-            ,[uWMSWOIssueWork] -- dokument vnose porabe dela pri namenu D
-            ,[uWMSWOReceiving] -- dokument prevzema pri namenu D
-            ,[uWMSFinishDoc] -- dokument izdaje izdelka pri namenu D
-            ,[uWMSWOIssueMat] -- dokument porabe materiala pri namenu D*/
-        FROM [dbo].[tPA_SetDocType]
+        SELECT [acSubject] -- šifra subjekta
+        ,[acBuyer] -- kupec
+        ,[acSupplier] -- dobavitelj
+        ,[acWarehouse] -- skladišče
+        ,[acName2] -- naziv
+        ,[acAddress] -- naslov
+        ,[acPost] -- pošta 
+        ,[acCountry] -- država
+        ,[acVATCodePrefix] -- predpona davčne številke
+        ,[acCode] -- davčna številka
+        ,[acRegNo] -- matična številka
+        ,[acActive] -- aktiven
+        ,[uWMSStock] -- vodena zaloga na skladišču
+        ,[uWMS] -- viden v WMS
+        ,[uWMSSubj] -- prevzem brez naročila
+    FROM [dbo].[tHE_SetSubj];
     `;
     
 
@@ -65,39 +53,27 @@ function Subjects() {
   
   var users = [];
 
-  const tableName = 'type-document';
+  const tableName = 'subjects';
 
   const refresh = () => {
 
     const sqlQueryString = `
-        SELECT [acDocType] -- vrata dokumenta
-        ,[acSetOf] -- namen dokuenta: /*D = delovni nalog,*/ F = blagovni, N = naročilo, X = default
-        ,[acType] -- varianta vrste dokumenta: 
-          --F: blagovni -> E - medskladiščnica, I = izdaja iz skladišča, N = popis inventure, P = prevzem na skladišče
-          --N: naročilo -> P = prodaja, I = nakup (pazi ravno obratno je kot na blagovnem!!!)
-        ,[acName] -- naziv
-        ,[acIssuer] -- privzeto izdajno skladišče
-        ,[acReceiver] -- privzeto prevzemno skladišče
-        ,[adTimeIns] -- čas vpisa <samodejno>
-        ,[adTimeChg] -- čas spremembe <samodejno>
-        ,[anUserChg] -- uporabnik, ki je izvedel spremembo
-        ,[anUserIns] -- uporabnik, ki je izvedel vpis
-        ,[acWarehouse] -- privzeto skladišče -> select acSubject, acName2 from tHE_SetSubj where acWarehouse = 'T' 
-        ,[anQId]
-        ,[uWMSAcqDocType] -- vrsta dokumenta prevzema ki nastane - uporablja se pri namenu N ob varianti I -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F and acType = 'I'
-        ,[uWMSIssueDocType] -- vrsta dokumenta izdaje ki nastane - uporablja se pri namenu N ob varianti P -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F and acType = 'I'
-        ,[uWMS] -- ali je dokument viden v WMS
-        ,[uWMSPartiallyFinishStatus] -- status delno zaključenega dokumenta -> select acStatus, acName from tPA_SetDocTypeStat where acDocType = <trenutni acDocType>
-        ,[uWMSFinishStatus] -- status zaključenega dokumenta
-      /*,[acDocTypeRef] -- vrsta dokumenta prevzema iz proizvodnje - se uporablja pri namenu D -> select acDocType, acName from tPA_SetDocType where acSetOf = 'F' and acType = 'I'
-        ,[acDocTypeWaste] -- vrsta dokumenta odpadka iz proizvodnje - se uporablja pri namenu D -> -||-
-        ,[uWMSEntryControl] -- ali je pri WMS aktivna vhodna kontrola
-        ,[uWMSCoop] -- ali je proizvodnja pri kooperantu
-        ,[uWMSWOIssueWork] -- dokument vnose porabe dela pri namenu D
-        ,[uWMSWOReceiving] -- dokument prevzema pri namenu D
-        ,[uWMSFinishDoc] -- dokument izdaje izdelka pri namenu D
-        ,[uWMSWOIssueMat] -- dokument porabe materiala pri namenu D*/
-    FROM [dbo].[tPA_SetDocType]
+    SELECT [acSubject] -- šifra subjekta
+        ,[acBuyer] -- kupec
+        ,[acSupplier] -- dobavitelj
+        ,[acWarehouse] -- skladišče
+        ,[acName2] -- naziv
+        ,[acAddress] -- naslov
+        ,[acPost] -- pošta 
+        ,[acCountry] -- država
+        ,[acVATCodePrefix] -- predpona davčne številke
+        ,[acCode] -- davčna številka
+        ,[acRegNo] -- matična številka
+        ,[acActive] -- aktiven
+        ,[uWMSStock] -- vodena zaloga na skladišču
+        ,[uWMS] -- viden v WMS
+        ,[uWMSSubj] -- prevzem brez naročila
+    FROM [dbo].[tHE_SetSubj];
   `;
   
 

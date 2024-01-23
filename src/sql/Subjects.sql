@@ -1,21 +1,27 @@
--- tHE_SetSubj - �ifrant subjektov
+-- tHE_SetSubj - šifrant subjektov
 
-SELECT [acSubject] -- �ifra subjekta
+
+SELECT [acSubject] -- šifra subjekta
       ,[acBuyer] -- kupec
       ,[acSupplier] -- dobavitelj
-      ,[acWarehouse] -- skladi��e
+      ,[acWarehouse] -- skladišče
       ,[acName2] -- naziv
       ,[acAddress] -- naslov
-      ,[acPost] -- po�ta 
-      ,[acCountry] -- dr�ava
-      ,[acVATCodePrefix] -- predpona dav�ne �tevilke
-      ,[acCode] -- dav�na �tevilka
-      ,[acRegNo] -- mati�na �tevilka
+      ,[acPost] -- pošta 
+      ,[acCountry] -- država
+      ,[acVATCodePrefix] -- predpona davčne številke
+      ,[acCode] -- davčna številka
+      ,[acRegNo] -- matična številka
       ,[acActive] -- aktiven
-      ,[uWMSStock] -- vodena zaloga na skladi��u
+      ,[uWMSStock] -- vodena zaloga na skladišču
       ,[uWMS] -- viden v WMS
-      ,[uWMSSubj] -- prevzem brez naro�ila
+      ,[uWMSSubj] -- prevzem brez naročila
 FROM [dbo].[tHE_SetSubj]
+
+
+
+
+
 
 GO
 
