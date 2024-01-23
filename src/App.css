@@ -9,7 +9,7 @@
 
 
 
-table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects {
+table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects, table.react-table-idents {
   width: 95%;
 }
 
@@ -141,7 +141,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects, .react-table-idents {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -299,6 +299,18 @@ table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover
 
 
 .react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td {
+  padding: 12px; /* Adjust the padding as needed */
+
+}
+
+
+table.react-table-idents tr th:hover,table.react-table-idents tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+
+}
+
+
+.react-table-idents th, .react-table-idents td, .react-table-idents th, .react-table-idents td {
   padding: 12px; /* Adjust the padding as needed */
 
 }

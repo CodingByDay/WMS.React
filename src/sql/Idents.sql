@@ -1,24 +1,43 @@
--- tHE_SetItem - šifrant identov
+-- tHE_SetItem - Å ifrant identov
 
-SELECT [acIdent] -- šifra identa
-      ,[acName] -- naziv
+SELECT [acIdent] -- Å ifra identa
+      ,[acName] -- Naziv
       ,[acCode] -- EAN koda
-      ,[acSetOfItem] -- tip identa -> SELECT acSetOfItem, acName FROM tHE_SetItemType
-      ,[acSupplier] -- dobavitelj -> SELECT acSubject, acName2 FROM tHE_SetSubj where acSupplier = 'T'
-      ,[acUM] -- primarna enota mere -> SELECT acUM, acName FROM tHE_SetUM
-      ,[anUMToUM2] -- pretvornik iz UM1 v UM2
-      ,[acUM2] -- sekundarna enota mere -> SELECT acUM, acName FROM tHE_SetUM
-      ,[acSerialNo] -- tip serijske številke -> 'N' - ni vodeno; 'S' - 1 serijska 1 kos; '
+      ,[acSetOfItem] -- Tip identa -> SELECT acSetOfItem, acName FROM tHE_SetItemType
+      ,[acSupplier] -- Dobavitelj -> SELECT acSubject, acName2 FROM tHE_SetSubj where acSupplier = 'T'
+      ,[acUM] -- Primarna enota mere -> SELECT acUM, acName FROM tHE_SetUM
+      ,[anUMToUM2] -- Pretvornik iz UM1 v UM2
+      ,[acUM2] -- Sekundarna enota mere -> SELECT acUM, acName FROM tHE_SetUM
+      ,[acSerialNo] -- tip serijske Å¡tevilke -> 'N' - ni vodeno; 'S' - 1 serijska 1 kos; '
       ,[acActive] -- ali je ident aktiven
-      ,[anDimHeight] -- višina
-      ,[anDimWidth] -- širina
+      ,[anDimHeight] -- viÅ¡ina
+      ,[anDimWidth] -- Å¡irina
       ,[anDimDepth] -- globina
-      ,[anDimWeight] -- teža
-      ,[anDimWeightBrutto] -- bruto teža
-      ,[acUMDim1] -- enota mere dolžine -> SELECT acUM, acName FROM tHE_SetUM
-      ,[acUMDim2] -- enota mere teže -> SELECT acUM, acName FROM tHE_SetUM
+      ,[anDimWeight] -- teÅ¾a
+      ,[anDimWeightBrutto] -- bruto teÅ¾a
+      ,[acUMDim1] -- enota mere dolÅ¾ine -> SELECT acUM, acName FROM tHE_SetUM
+      ,[acUMDim2] -- enota mere teÅ¾e -> SELECT acUM, acName FROM tHE_SetUM
       ,[uWMS] -- ali je vidno v WMS
 FROM [dbo].[tHE_SetItem]
+
+
+
+{
+      Header: 'Vrsta izdaje',
+      accessor: 'uWMSIssueDocType',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acDocType, acName FROM tPA_SetDocType WHERE acSetOf = 'F' and acType = 'P'`,
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+
+
 
 GO
 

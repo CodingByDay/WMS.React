@@ -128,6 +128,8 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Naziv',
         accessor: 'ID',
+      additional: '', 
+
         className: 'name-column-system',
         type: 'dropdown',
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
@@ -143,6 +145,8 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Vrednost',
         accessor: 'Value',
+      additional: '', 
+
         className: 'value-column-system',
         type: 'text',
         dbType: 'String'
@@ -194,6 +198,7 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Id',
         accessor: 'anQId',
+        
         className: 'name-column-system',
         type: 'nothing',     
       },
@@ -202,6 +207,8 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'acIdent',
         className: 'name-column-system',
         type: 'dropdown',
+      additional: '', 
+
         sourceSelect: 'SELECT acIdent, acName FROM tHE_SetItem;',
         columnOrder: ['acIdent', 'acName'],
         columnOrderTranslation: ['Ident', 'Naziv'],
@@ -216,6 +223,8 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'acSubject',
         className: 'name-column-system',
         type: 'dropdown',
+      additional: '', 
+
         sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCountry FROM tHE_SetSubj',
         columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCountry'],
         columnOrderTranslation: ['Subjekt', 'Naziv', 'Naslov', 'Pošta', 'Država'],
@@ -228,6 +237,8 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Črtna koda',
         accessor: 'acCode',
+      additional: '', 
+
         className: 'name-column-system',
         type: 'text',  
         dbType: 'String'    
@@ -235,6 +246,8 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Število kosov',
         accessor: 'uWMSSerialNoBatch',
+      additional: '', 
+
         className: 'name-column-system',
         type: 'text',  
         dbType: 'Int64'    
@@ -287,6 +300,8 @@ const statusDocument = useMemo(
       accessor: 'acDocType',
       className: 'name-column-system',
       type: 'dropdown',
+      additional: '', 
+
       sourceSelect: 'SELECT acDocType, acName FROM tPA_SetDocType;',
       columnOrder: ['acDocType', 'acName'],
       columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
@@ -301,6 +316,8 @@ const statusDocument = useMemo(
       accessor: 'acStatus',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'  
     },
     {
@@ -308,6 +325,8 @@ const statusDocument = useMemo(
       accessor: 'acName',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -315,6 +334,8 @@ const statusDocument = useMemo(
       accessor: 'uWMSShow',
       className: 'name-column-system',
       type: 'checkbox',  
+      additional: '', 
+
       dbType: 'Boolean',
       Cell: ({ row }) => (
         <input
@@ -388,6 +409,8 @@ const documentTypes = useMemo(
       Header: 'Id',
       accessor: 'anQId',
       className: 'name-column-system',
+      additional: '', 
+
       type: 'nothing',     
     },
     {
@@ -402,6 +425,8 @@ const documentTypes = useMemo(
       dropdownId: 'acDocType',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
+      additional: '', 
+
       dbType: 'String'
     },
     {
@@ -409,6 +434,8 @@ const documentTypes = useMemo(
       accessor: 'acSetOf',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'  
     },
     {
@@ -416,6 +443,8 @@ const documentTypes = useMemo(
       accessor: 'acType',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -423,6 +452,8 @@ const documentTypes = useMemo(
       accessor: 'acName',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -430,6 +461,8 @@ const documentTypes = useMemo(
       accessor: 'acIssuer',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -437,6 +470,8 @@ const documentTypes = useMemo(
       accessor: 'acReceiver',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -451,6 +486,8 @@ const documentTypes = useMemo(
       dropdownId: 'acSubject',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName2',
+      additional: '', 
+
       dbType: 'String'
     },
     {
@@ -465,6 +502,8 @@ const documentTypes = useMemo(
       dropdownId: 'acDocType',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
+      additional: '', 
+
       dbType: 'String'
     },
     {
@@ -479,6 +518,8 @@ const documentTypes = useMemo(
       dropdownId: 'acDocType',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
+      additional: '', 
+
       dbType: 'String'
     },
     {
@@ -486,6 +527,8 @@ const documentTypes = useMemo(
       accessor: 'uWMS',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }, 
     {
@@ -493,6 +536,8 @@ const documentTypes = useMemo(
       accessor: 'uWMSPartiallyFinishStatus',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     },
     {
@@ -500,6 +545,8 @@ const documentTypes = useMemo(
       accessor: 'uWMSFinishStatus',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
+
       dbType: 'String'    
     }
   ],
@@ -539,6 +586,7 @@ const subjects = useMemo(
       Header: 'Id',
       accessor: 'anQId',
       className: 'name-column-system',
+      additional: '', 
       type: 'nothing',     
     },
     {
@@ -546,6 +594,7 @@ const subjects = useMemo(
       accessor: 'acSubject',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -553,6 +602,7 @@ const subjects = useMemo(
       accessor: 'acBuyer',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -560,6 +610,7 @@ const subjects = useMemo(
       accessor: 'acSupplier',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     }, 
     {
@@ -567,6 +618,7 @@ const subjects = useMemo(
       accessor: 'acWarehouse',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -574,6 +626,7 @@ const subjects = useMemo(
       accessor: 'acName2',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String',
     },
     {
@@ -581,6 +634,7 @@ const subjects = useMemo(
       accessor: 'acAddress',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     }, 
     {
@@ -588,6 +642,7 @@ const subjects = useMemo(
       accessor: 'acPost',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -595,6 +650,7 @@ const subjects = useMemo(
       accessor: 'acCountry',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -602,6 +658,7 @@ const subjects = useMemo(
       accessor: 'acVATCodePrefix',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -609,6 +666,7 @@ const subjects = useMemo(
       accessor: 'acCode',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -616,6 +674,7 @@ const subjects = useMemo(
       accessor: 'acRegNo',
       className: 'name-column-system',
       type: 'text',  
+      additional: '', 
       dbType: 'String'  
     },
     {
@@ -623,6 +682,7 @@ const subjects = useMemo(
       accessor: 'acActive',
       className: 'name-column-system',
       type: 'text',  
+      additional: 'hidden-active', 
       dbType: 'String'  
     },
     {
@@ -630,6 +690,7 @@ const subjects = useMemo(
       accessor: 'uWMSStock',
       className: 'name-column-system',
       type: 'text',  
+      additional: 'hidden-active', 
       dbType: 'String'  
     },
     {
@@ -637,6 +698,7 @@ const subjects = useMemo(
       accessor: 'uWMS',
       className: 'name-column-system',
       type: 'text',  
+      additional: 'hidden-active', 
       dbType: 'String'  
     },
     {
@@ -644,6 +706,7 @@ const subjects = useMemo(
       accessor: 'uWMSSubj',
       className: 'name-column-system',
       type: 'text',  
+      additional: 'hidden-active', 
       dbType: 'String'  
     },
   ],
@@ -651,17 +714,216 @@ const subjects = useMemo(
 );
 
 
+const idents = useMemo(
+  () => [
+    
+    {
+      Header: (
+        <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <IoAddCircleSharp />
+          Dodaj          
+        </button>       
+      ),
 
+      accessor: 'actions',
+      Cell: ({ row }) => (
+        <div>
+          <button className="action-buttons" title="Brisanje" onClick={() => onDelete(row.original)}>
+            <MdDeleteForever />
+          </button>
+          <button className="action-buttons" title="Posodobitev" onClick={() => onEdit(row.original)}>
+            <MdEdit />
+          </button>        
+        </div>
+      ),
+      type: 'nothing',
+    },
+    {
+      Header: 'Id',
+      accessor: 'anQId',
+      className: 'name-column-system',
+      type: 'nothing',     
+    },
+    {
+      Header: 'Šifra identa',
+      accessor: 'acIdent',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Naziv',
+      accessor: 'acName',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'EAN koda',
+      accessor: 'acCode',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String',  
+      additional: 'hidden-active' 
+    }, 
+    {
+      Header: 'Tip identa',
+      accessor: 'acSetOfItem',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acSetOfItem, acName FROM tHE_SetItemType`,
+      columnOrder: ['acSetOfItem', 'acName'],
+      columnOrderTranslation: ['Šifra', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acSetOfItem',
+      dropdownPlaceholder: '',
+      additional: 'hidden-active', 
 
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Dobavitelj',
+      accessor: 'acSupplier',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acSubject, acName2 FROM tHE_SetSubj where acSupplier = 'T'`,
+      columnOrder: ['acSubject', 'acName2'],
+      columnOrderTranslation: ['Subjekt', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acSubject',
+      additional: 'hidden-active', 
 
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName2',
+      dbType: 'String'
+    },
+    {
+      Header: 'Primarna enota mere',
+      accessor: 'acUM',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acUM, acName FROM tHE_SetUM`,
+      columnOrder: ['acUM', 'acName'],
+      columnOrderTranslation: ['Enota', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acUM',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Pretvornik iz UM1 v UM2',
+      accessor: 'anUMToUM2',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Sekundarna enota mere',
+      accessor: 'acUM2',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acUM, acName FROM tHE_SetUM`,
+      columnOrder: ['acUM', 'acName'],
+      columnOrderTranslation: ['Enota', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      additional: 'hidden-active', 
 
+      dropdownId: 'acUM',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Tip serijske številke',
+      accessor: 'acSerialNo',
+      additional: 'hidden-active', 
 
-const TruncateCell = ({ value, maxCharacters }) => {
-  // Truncate the value if it exceeds the specified maximum characters
-  const truncatedValue = value.length > maxCharacters ? `${value.slice(0, maxCharacters)}...` : value;
-
-  return <div title={value}>{truncatedValue}</div>;
-};
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Aktiven',
+      accessor: 'acActive',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Višina',
+      accessor: 'anDimHeight',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Širina',
+      accessor: 'anDimWidth',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Globina',
+      accessor: 'anDimDepth',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Teža',
+      accessor: 'anDimWeight',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Bruto',
+      accessor: 'anDimWeightBrutto',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    },
+    {
+      Header: 'Enota mere dolžine',
+      accessor: 'acUMDim1',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acUM, acName FROM tHE_SetUM`,
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Enota', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Enota mere teže',
+      accessor: 'acUMDim2',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acUM, acName FROM tHE_SetUM`,
+      columnOrder: ['acUM', 'acName'],
+      columnOrderTranslation: ['Enota', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Vidno',
+      accessor: 'uWMS',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'  
+    }
+  ],
+  []
+);
 
 
 
@@ -862,6 +1124,74 @@ const TruncateCell = ({ value, maxCharacters }) => {
                   WHERE anQid =  @anQId`,
       id: 'anQId',
       idType: "Int64"
+    } , {
+      name: 'idents',
+      value: idents,
+      insertQuery: `INSERT INTO [dbo].[tHE_SetItem]
+                    ([acIdent]
+                    ,[acName]
+                    ,[acCode]
+                    ,[acSetOfItem]
+                    ,[acSupplier]
+                    ,[acUM]
+                    ,[anUMToUM2]
+                    ,[acUM2]
+                    ,[acSerialNo]
+                    ,[acActive]
+                    ,[anDimHeight]
+                    ,[anDimWidth]
+                    ,[anDimDepth]
+                    ,[anDimWeight] 
+                    ,[anDimWeightBrutto] 
+                    ,[acUMDim1]
+                    ,[acUMDim2]
+                    ,[anUserIns] -- uporabnik, ki je vpisal
+                    ,[uWMS])
+
+              VALUES
+                    (@acIdent
+                    ,@acName
+                    ,@acCode
+                    ,@acSetOfItem
+                    ,@acSupplier
+                    ,@acUM
+                    ,@anUMToUM2
+                    ,@acUM2
+                    ,@acSerialNo
+                    ,@acActive
+                    ,@anDimHeight
+                    ,@anDimWidth
+                    ,@anDimDepth
+                    ,@anDimWeight
+                    ,@anDimWeightBrutto
+                    ,@acUMDim1
+                    ,@acUMDim2
+                    ,@anUserIns
+                    ,@uWMS)`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetItem] WHERE [anQId] = @id",
+      updateQuery: `UPDATE [dbo].[tHE_SetItem]
+                    SET [acIdent] = @acIdent
+                      ,[acName] = @acName
+                      ,[acCode] = @acCode
+                      ,[acSetOfItem] = @acSetOfItem
+                      ,[acSupplier] = @acSupplier
+                      ,[acUM] = @acUM
+                      ,[anUMToUM2] = @anUMToUM2
+                      ,[acUM2] = @acUM2
+                      ,[acSerialNo] = @acSerialNo
+                      ,[acActive] = @acActive
+                      ,[anDimHeight] = @anDimHeight
+                      ,[anDimWidth] = @anDimWidth
+                      ,[anDimDepth] = @anDimDepth
+                      ,[anDimWeight] = @anDimWeight
+                      ,[anDimWeightBrutto] = @anDimWeightBrutto
+                      ,[acUMDim1] = @acUMDim1
+                      ,[acUMDim2] = @acUMDim2
+                      ,[anUserChg] = @anUserChg
+                      ,[uWMS] = @uWMS
+                  WHERE anQid = @anQId`,
+      id: 'anQId',
+      idType: "Int64"
     }
   ];
 
@@ -888,7 +1218,6 @@ const TruncateCell = ({ value, maxCharacters }) => {
     {
       columns: selectedTable ? selectedTable.value : [],
       data: tableData,
-
     },
     useGlobalFilter,
     usePagination // Add the usePagination hook
@@ -972,16 +1301,12 @@ const TruncateCell = ({ value, maxCharacters }) => {
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-
-
-                  
-                  
+                {headerGroup.headers.map((column) => (                 
                   <th {...column.getHeaderProps()}
                   
                   
                   
-                  className={column.Header === 'Id' || column.Header === 'hidden-active' ? 'hidden-column' : ''}
+                  className={column.Header === 'Id' || column.additional === 'hidden-active' ? 'hidden-column' : ''}
                   
                   
                   
@@ -1000,18 +1325,12 @@ const TruncateCell = ({ value, maxCharacters }) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-
-
                     return <td {...cell.getCellProps()}
+                                       
                     
-                    
-                    
-                    className={cell.column.Header === 'Id' || cell.column.Header === 'hidden-active' ? 'hidden-column' : ''}
+                    className={cell.column.Header === 'Id' || cell.column.additional === 'hidden-active' ? 'hidden-column' : ''}
 
-                    
-                    
-                    
-                    
+                                                                            
                     >{cell.render('Cell')}</td>;
                   })}
                 </tr>
@@ -1020,10 +1339,6 @@ const TruncateCell = ({ value, maxCharacters }) => {
           </tbody>
         </table>
       </div>
-
-
-
-
     </div>
   );
 }
