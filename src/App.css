@@ -8,9 +8,13 @@
 }
 
 
-table.react-table-system, table.react-table-subject-codes, table.react-table-status-document {
+
+table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document {
   width: 95%;
 }
+
+
+
 .search-container {
   display: flex;
   gap: 0.5em;
@@ -55,9 +59,14 @@ button.action-buttons.white {
   overflow: hidden;
 }
 
-.paginationControls {
- 
+
+
+.popup-body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* Adjust the gap as needed */
 }
+
 .user-settings-table th {
   position: sticky!important;
   top: 0!important;
@@ -127,7 +136,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -295,15 +304,26 @@ table.react-table-status-document tr th:hover,table.react-table-status-document 
 }
 
 
+table.react-table-type-document tr th:hover,table.react-table-type-document tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+
+
+
 .react-table-status-document th, .react-table-status-document td, .react-table-status-document th, .react-table-status-document td {
   padding: 12px; /* Adjust the padding as needed */
 
+}
+
+.react-table-type-document th, .react-table-type-document td, .react-table-type-document th, .react-table-type-document td {
+  padding: 12px; /* Adjust the padding as needed */
 }
 
 
 #analytics-panel {
   height: 100%;
 }
+
 tr {
   font-size: large;
 }

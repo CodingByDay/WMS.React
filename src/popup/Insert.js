@@ -266,13 +266,14 @@ const Insert = (props) => {
           ))}
 
 
-          <div className="center-button">
+         
+        </div>
+        <div className="center-button">
             <center><span onClick={sendData}  className="actions smallerr">
               Dodaj
             </span>
             </center>
           </div>
-        </div>
       </div>
     </div>
   );

@@ -404,19 +404,21 @@ const Update = (props) => {
               )}
             </div>
            )
-          ))}
+          ))}       
+        </div>
 
 
-          <div className="center-button">
+
+
+
+        <div className="center-button">
             <center><span onClick={sendData}  className="actions smallerr">
               Posodobi
-            </span>
-
-
-            
+            </span>            
             </center>
-          </div>
         </div>
+
+
       </div>
     </div>
   );

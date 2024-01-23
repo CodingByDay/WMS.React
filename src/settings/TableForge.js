@@ -331,6 +331,30 @@ const statusDocument = useMemo(
   []
 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // This is the configuration for the statuses of documents // 
 const documentTypes = useMemo(
   () => [
@@ -367,7 +391,7 @@ const documentTypes = useMemo(
       type: 'nothing',     
     },
     {
-      Header: 'Vrsta dokumenta',
+      Header: 'Vrsta',
       accessor: 'acDocType',
       className: 'name-column-system',
       type: 'dropdown',
@@ -381,14 +405,14 @@ const documentTypes = useMemo(
       dbType: 'String'
     },
     {
-      Header: 'Namen dokumenta',
+      Header: 'Namen',
       accessor: 'acSetOf',
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'  
     },
     {
-      Header: 'Varianta vrste dokumenta',
+      Header: 'Varianta',
       accessor: 'acType',
       className: 'name-column-system',
       type: 'text',  
@@ -402,27 +426,82 @@ const documentTypes = useMemo(
       dbType: 'String'    
     }, 
     {
-      Header: 'Izdajno skladišče',
+      Header: 'Izdajno',
       accessor: 'acIssuer',
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'    
     }, 
     {
-      Header: 'Prevzemno skladišče',
+      Header: 'Prevzemno',
       accessor: 'acReceiver',
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'    
     }, 
     {
-      Header: 'Skladišče',
-      accessor: 'acReceiver',
+      Header: 'Prevzeto',
+      accessor: 'acWarehouse',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `select acSubject, acName2 from tHE_SetSubj where acWarehouse = 'T'`,
+      columnOrder: ['acSubject', 'acName2'],
+      columnOrderTranslation: ['Subjekt', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acSubject',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName2',
+      dbType: 'String'
+    },
+    {
+      Header: 'Vrsta prevzema',
+      accessor: 'uWMSAcqDocType',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acDocType, acName FROM tPA_SetDocType WHERE acSetOf = 'F AND acType = 'I'`,
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Vrsta izdaje',
+      accessor: 'uWMSIssueDocType',
+      className: 'name-column-system',
+      type: 'dropdown',
+      sourceSelect: `SELECT acDocType, acName FROM tPA_SetDocType WHERE acSetOf = 'F' and acType = 'P'`,
+      columnOrder: ['acDocType', 'acName'],
+      columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
+      columnOrderWidth: [200, 300],
+      dropdownId: 'acDocType',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'acName',
+      dbType: 'String'
+    },
+    {
+      Header: 'Viden',
+      accessor: 'uWMS',
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'    
     }, 
-
+    {
+      Header: 'Status delno zakl.',
+      accessor: 'uWMSPartiallyFinishStatus',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    },
+    {
+      Header: 'Status zaklj.',
+      accessor: 'uWMSFinishStatus',
+      className: 'name-column-system',
+      type: 'text',  
+      dbType: 'String'    
+    }
   ],
   []
 );
@@ -488,6 +567,56 @@ const documentTypes = useMemo(
       id: 'anQId',
       idType: "Int64"
     },
+    {
+      name: 'type-document',
+      value: documentTypes,
+      insertQuery: `INSERT INTO [dbo].[tPA_SetDocType]
+                    ([acDocType]
+                    ,[acSetOf]
+                    ,[acType]
+                    ,[acName]
+                    ,[acIssuer]
+                    ,[acReceiver]
+                    ,[anUserIns]
+                    ,[acWarehouse]
+                    ,[uWMSAcqDocType]
+                    ,[uWMSIssueDocType]
+                    ,[uWMS]
+                    ,[uWMSPartiallyFinishStatus]
+                    ,[uWMSFinishStatus])
+              VALUES
+                    (@acDocType
+                    ,@acSetOf
+                    ,@acType
+                    ,@acName
+                    ,@acIssuer
+                    ,@acReceiver
+                    ,@anUserIns
+                    ,@acWarehouse
+                    ,@uWMSAcqDocType
+                    ,@uWMSIssueDocType
+                    ,@uWMS
+                    ,@uWMSPartiallyFinishStatus
+                    ,@uWMSFinishStatus)`,
+      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocType] WHERE [anQId] = @id",
+      updateQuery: `UPDATE [dbo].[tPA_SetDocType]
+                    SET [acDocType] = @acDocType
+                      ,[acSetOf] = @acSetOf
+                      ,[acType] = @acType
+                      ,[acName] = @acName
+                      ,[acIssuer] = @acIssuer
+                      ,[acReceiver] = @acReceiver
+                      ,[anUserChg] = @anUserChg
+                      ,[acWarehouse] = @acWarehouse
+                      ,[uWMSAcqDocType] = @uWMSAcqDocType
+                      ,[uWMSIssueDocType] = @uWMSIssueDocType
+                      ,[uWMS] = @uWMS
+                      ,[uWMSPartiallyFinishStatus] = @uWMSPartiallyFinishStatus
+                      ,[uWMSFinishStatus] = @uWMSFinishStatus
+                      WHERE [anQId] = @anQId`,
+      id: 'anQId',
+      idType: "Int64"
+    }
   ];
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
