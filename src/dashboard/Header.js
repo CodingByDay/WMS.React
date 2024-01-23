@@ -1,6 +1,9 @@
 import { useNavigate  } from 'react-router-dom';
 
 import { MdLogout, MdHome } from "react-icons/md";
+import { GiReturnArrow } from "react-icons/gi";
+import { MdArrowBackIos } from "react-icons/md";
+
 import Cookies from 'universal-cookie';
 
 
@@ -21,6 +24,7 @@ export default function Header(props) {
 
 
   var button;
+  var returnButton;
 
   if(pathname !== '/dashboard') {
 
@@ -29,6 +33,15 @@ export default function Header(props) {
     <MdHome />
 
     </span>
+
+
+    returnButton = <span className='actions' onClick={() => navigate(-1)}>Nazaj  
+
+    <MdArrowBackIos />
+
+    </span>
+
+
   }
   
 
@@ -44,12 +57,10 @@ export default function Header(props) {
             <div className='logo navbar' id='back-button' >
                 <center><img src='logo-wms.png' className='logo' alt='Riko WMS' height={30} draggable="false"/></center>
             </div>
-            <div className='menu'>
-
-                {props.search}
-            </div>
+            
             <div className='logout'>
                 {button}
+                {returnButton}
                 <span className='actions' onClick={() => handleLogout()}>Odjava             
                 <MdLogout />
                 </span>

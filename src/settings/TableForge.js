@@ -74,7 +74,7 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const generatePopupCreate = () => {
-    
+   
     setIsModalOpen(true);
   };
 
@@ -92,9 +92,6 @@ function TableForge({ refresh, name, tableData }) {
   };
 
   const onEdit = (row) => {
-
-
-
       var target;
       var current = selectedTable.id;
       target = selectedTable.id;
@@ -128,8 +125,7 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Naziv',
         accessor: 'ID',
-      additional: '', 
-
+        additional: '', 
         className: 'name-column-system',
         type: 'dropdown',
         sourceSelect: 'SELECT * FROM uWMSSettingList;',
@@ -140,13 +136,11 @@ function TableForge({ refresh, name, tableData }) {
         dropdownPlaceholder: '',
         dropdownHelperField: 'Desc',
         dbType: 'String',
-
       },
       {
         Header: 'Vrednost',
         accessor: 'Value',
-      additional: '', 
-
+        additional: '', 
         className: 'value-column-system',
         type: 'text',
         dbType: 'String'
@@ -355,27 +349,6 @@ const statusDocument = useMemo(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // This is the configuration for the statuses of documents // 
 const documentTypes = useMemo(
   () => [
@@ -410,7 +383,6 @@ const documentTypes = useMemo(
       accessor: 'anQId',
       className: 'name-column-system',
       additional: '', 
-
       type: 'nothing',     
     },
     {
@@ -426,7 +398,6 @@ const documentTypes = useMemo(
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       additional: '', 
-
       dbType: 'String'
     },
     {
@@ -435,7 +406,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'  
     },
     {
@@ -444,7 +414,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }, 
     {
@@ -453,7 +422,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }, 
     {
@@ -462,7 +430,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }, 
     {
@@ -471,7 +438,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }, 
     {
@@ -487,7 +453,6 @@ const documentTypes = useMemo(
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName2',
       additional: '', 
-
       dbType: 'String'
     },
     {
@@ -503,7 +468,6 @@ const documentTypes = useMemo(
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       additional: '', 
-
       dbType: 'String'
     },
     {
@@ -519,7 +483,6 @@ const documentTypes = useMemo(
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       additional: '', 
-
       dbType: 'String'
     },
     {
@@ -528,7 +491,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }, 
     {
@@ -537,7 +499,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     },
     {
@@ -546,7 +507,6 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
       dbType: 'String'    
     }
   ],
@@ -799,7 +759,7 @@ const idents = useMemo(
       dbType: 'String'
     },
     {
-      Header: 'Primarna enota mere',
+      Header: '1 enota',
       accessor: 'acUM',
       className: 'name-column-system',
       type: 'dropdown',
@@ -813,14 +773,14 @@ const idents = useMemo(
       dbType: 'String'
     },
     {
-      Header: 'Pretvornik iz UM1 v UM2',
+      Header: 'Pretvornik',
       accessor: 'anUMToUM2',
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'  
     },
     {
-      Header: 'Sekundarna enota mere',
+      Header: '2 enota',
       accessor: 'acUM2',
       className: 'name-column-system',
       type: 'dropdown',
@@ -829,17 +789,15 @@ const idents = useMemo(
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
       additional: 'hidden-active', 
-
       dropdownId: 'acUM',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'
     },
     {
-      Header: 'Tip serijske številke',
+      Header: 'Tip št.',
       accessor: 'acSerialNo',
       additional: 'hidden-active', 
-
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'  
@@ -887,7 +845,7 @@ const idents = useMemo(
       dbType: 'String'  
     },
     {
-      Header: 'Enota mere dolžine',
+      Header: 'En. dolžine',
       accessor: 'acUMDim1',
       className: 'name-column-system',
       type: 'dropdown',
@@ -901,7 +859,7 @@ const idents = useMemo(
       dbType: 'String'
     },
     {
-      Header: 'Enota mere teže',
+      Header: 'En. teže',
       accessor: 'acUMDim2',
       className: 'name-column-system',
       type: 'dropdown',

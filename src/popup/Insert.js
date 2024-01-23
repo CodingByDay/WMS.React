@@ -12,6 +12,13 @@ const Insert = (props) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [inputValues, setInputValues] = useState({});
 
+  useEffect(() => {
+    var isUpdate = props.isVisible;
+    if(isUpdate) {
+      connectData() 
+    }
+  }, [props.isVisible]);
+
 
   function extractDropdownPairs(data) {
     const dropdownPairs = {};
@@ -37,6 +44,7 @@ const Insert = (props) => {
     const connectData = async () => {
       var finalOptions = {};
       if(props.isVisible) {
+    
       try {
         var pairs = extractDropdownPairs(props.selectedTable)
         SettingsService.executeSQLQueryBatch(pairs)
@@ -118,9 +126,7 @@ const Insert = (props) => {
 
   if (!props.isVisible) {
      return null;
-  } if (Object.keys(dropdownOptions).length === 0) {
-    connectData()
-  }
+  } 
 
    function onClose() {
     setSelectedOptions({})
