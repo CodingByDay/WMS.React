@@ -126,6 +126,14 @@ button.ant-btn {
   margin-right: 0.4em;
   margin-left: 0.4em;
 }
+button.swal2-confirm.swal2-styled {
+  background: #081A45!important;
+  border-radius: 0!important;
+}
+.center-button {
+  margin-top: 2em;
+}
+
 
 button.action-buttons.white:hover {
   background: none !important;

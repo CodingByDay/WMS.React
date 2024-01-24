@@ -6,27 +6,21 @@ const SettingsService  = {
 
 
   async  insertSQLQuery(sqlQuery, parameters) {
-  
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
-
     const requestObject = {
       SQL: sqlQuery,
       Parameters: parameters,
     };
-  
     try {
 
       const response = await axios.post(apiUrl, JSON.stringify(requestObject), {
-
-
-   
-
 
         headers: {
           'Content-Type': 'application/json'
         }
 
       });
+
 
 
       if (response.data.Success) {
@@ -95,6 +89,7 @@ const SettingsService  = {
         }
       });
   
+
       if (response.data.Success) {
         const dataPacket = response.data.Rows;
         const dataReturn = dataPacket.map(item => {
@@ -139,7 +134,6 @@ async executeSQLQueryBatch(data, parameters) {
           });
       
 
-          console.log(response)
 
           if (response.data.Success) {
             const dataPacket = response.data.Rows;

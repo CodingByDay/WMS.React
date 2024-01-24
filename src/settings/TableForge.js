@@ -27,13 +27,10 @@ function TableForge({ refresh, name, tableData }) {
 
   
   const showDeleteConfirmation = (data) => {
-
     var currentDeleteSQL = selectedTable.deleteQuery;
-
     var params = [];
-    var parameterId = { Name: 'id', Type: 'Int64', Value: data[selectedTable.id]  }
+    var parameterId = { Name: 'anQid', Type: 'Int64', Value: data[selectedTable.id]  }
     params.push(parameterId);
-
     Swal.fire({
       title: 'Ste prepričani?',
       text: 'To dejanje ni mogoče razveljaviti!',
@@ -49,13 +46,19 @@ function TableForge({ refresh, name, tableData }) {
           var data = result;
 
           if (data) {
+
             Swal.fire('Izbrisano!', 'Zapis je bil pobrisan.', 'success');
+
           } else {
+
             Swal.fire('Napaka!', 'Zapis ni bil pobrisan.', 'error');
+
           }
 
           setTimeout(refresh, 1000);
+
         });
+        
       }
     });
   };
@@ -610,6 +613,7 @@ const subjects = useMemo(
     }, 
     {
       Header: 'Skladišče',
+      accessor: 'acWarehouse',
       type: 'dropdown',
       sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
       columnOrder: ['vrednost'],
@@ -620,7 +624,6 @@ const subjects = useMemo(
       additional: 'single', 
       dropdownHelperField: 'vrednost',
       className: 'name-column-system',
-      type: 'text',  
       columnOrder: ['vrednost'],
       dbType: 'String'  
     },
@@ -708,7 +711,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'checkbox',  
       additional: 'hidden-active', 
-      dbType: 'String'  
+      dbType: 'Boolean'  
     },
     {
       Header: 'Viden',
@@ -716,7 +719,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'checkbox',  
       additional: 'hidden-active', 
-      dbType: 'String'  
+      dbType: 'Boolean'  
     },
     {
       Header: 'Brez naročila',
@@ -724,7 +727,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'checkbox',  
       additional: 'hidden-active', 
-      dbType: 'String'  
+      dbType: 'Boolean'  
     },
   ],
   []
@@ -1134,11 +1137,11 @@ const idents = useMemo(
                     ,@acCode
                     ,@acRegNo
                     ,@acActive
-                    ,@anUserIns
+                    ,@user
                     ,@uWMSStock
                     ,@uWMS
                     ,@uWMSSubj)`,
-      deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @id",
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @anQId",
       updateQuery: `UPDATE [dbo].[tHE_SetSubj]
                     SET [acSubject] = @acSubject
                       ,[acBuyer] = @acBuyer
@@ -1152,7 +1155,7 @@ const idents = useMemo(
                       ,[acCode] = @acCode
                       ,[acRegNo] = @acRegNo
                       ,[acActive] = @acActive
-                      ,[anUserChg] = @anUserChg
+                      ,[anUserChg] = @user
                       ,[uWMSStock] = @uWMSStock
                       ,[uWMS] = @uWMS
                       ,[uWMSSubj] = @uWMSSubj
@@ -1201,7 +1204,7 @@ const idents = useMemo(
                     ,@anDimWeightBrutto
                     ,@acUMDim1
                     ,@acUMDim2
-                    ,@anUserIns
+                    ,@user
                     ,@uWMS)`,
       deleteQuery: "DELETE FROM [dbo].[tHE_SetItem] WHERE [anQId] = @id",
       updateQuery: `UPDATE [dbo].[tHE_SetItem]
@@ -1222,7 +1225,7 @@ const idents = useMemo(
                       ,[anDimWeightBrutto] = @anDimWeightBrutto
                       ,[acUMDim1] = @acUMDim1
                       ,[acUMDim2] = @acUMDim2
-                      ,[anUserChg] = @anUserChg
+                      ,[anUserChg] = @user
                       ,[uWMS] = @uWMS
                   WHERE anQid = @anQId`,
       id: 'anQId',

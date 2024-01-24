@@ -59,7 +59,6 @@ const Insert = (props) => {
                 
                 if(type === "dropdown") {
 
-                  console.log(currentData);
                   
                   const options = currentData.map(item => {
                     const value = current.columnOrder.map(field => item[field]).join('|');
@@ -177,13 +176,14 @@ const Insert = (props) => {
             if(type == "text") {
               theValue = getValue(accessor);
             } else if(type == "dropdown") {
-              theValue = selectedOptions[accessor].id;          
+              theValue = selectedOptions[accessor]?.id || "";
             } else if(type == "checkbox") {
-              theValue = selectedOptions[accessor];        
+              theValue = selectedOptions[accessor] || false;
+            } else if(type == "number") {
+              theValue = getValue(accessor);
             }
   
   
-
               var converted = {};
               if(dbType == "Int64") {
                 converted = Number(theValue);
@@ -191,7 +191,7 @@ const Insert = (props) => {
                 converted = theValue;
               } else if(dbType == "Boolean") {
                 converted = theValue;
-              }
+              } 
   
              var parameter = { Name: accessor, Type: dbType, Value: converted  }
   
@@ -212,7 +212,7 @@ const Insert = (props) => {
     params.push(parameterUser);
       SettingsService.insertSQLQuery(insertQuery, params)
       .then(result => {
-          props.refresh();
+           props.refresh();
           var data = result;
 
           if(data) {

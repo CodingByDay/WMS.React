@@ -33,8 +33,10 @@ function Subjects() {
         ,[acActive] -- aktiven
         ,[uWMSStock] -- vodena zaloga na skladišču
         ,[uWMS] -- viden v WMS
+        ,[anQId] -- viden v WMS
         ,[uWMSSubj] -- prevzem brez naročila
     FROM [dbo].[tHE_SetSubj];
+
     `;
     
 
@@ -58,23 +60,24 @@ function Subjects() {
   const refresh = () => {
 
     const sqlQueryString = `
-    SELECT [acSubject] -- šifra subjekta
-        ,[acBuyer] -- kupec
-        ,[acSupplier] -- dobavitelj
-        ,[acWarehouse] -- skladišče
-        ,[acName2] -- naziv
-        ,[acAddress] -- naslov
-        ,[acPost] -- pošta 
-        ,[acCountry] -- država
-        ,[acVATCodePrefix] -- predpona davčne številke
-        ,[acCode] -- davčna številka
-        ,[acRegNo] -- matična številka
-        ,[acActive] -- aktiven
-        ,[uWMSStock] -- vodena zaloga na skladišču
-        ,[uWMS] -- viden v WMS
-        ,[uWMSSubj] -- prevzem brez naročila
-    FROM [dbo].[tHE_SetSubj];
-  `;
+          SELECT [acSubject] -- šifra subjekta
+          ,[acBuyer] -- kupec
+          ,[acSupplier] -- dobavitelj
+          ,[acWarehouse] -- skladišče
+          ,[acName2] -- naziv
+          ,[acAddress] -- naslov
+          ,[acPost] -- pošta 
+          ,[acCountry] -- država
+          ,[acVATCodePrefix] -- predpona davčne številke
+          ,[acCode] -- davčna številka
+          ,[acRegNo] -- matična številka
+          ,[acActive] -- aktiven
+          ,[uWMSStock] -- vodena zaloga na skladišču
+          ,[uWMS] -- viden v WMS
+          ,[anQId] -- viden v WMS
+          ,[uWMSSubj] -- prevzem brez naročila
+      FROM [dbo].[tHE_SetSubj];
+      `;
   
 
 

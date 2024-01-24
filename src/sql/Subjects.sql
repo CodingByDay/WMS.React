@@ -20,9 +20,6 @@ FROM [dbo].[tHE_SetSubj]
 
 
 
-
-
-
 GO
 
 INSERT INTO [dbo].[tHE_SetSubj]
@@ -62,7 +59,7 @@ INSERT INTO [dbo].[tHE_SetSubj]
 GO
 
 UPDATE [dbo].[tHE_SetSubj]
-      ,[acBuyer] = <acBuyer, char(1),>
+      ,[acBuyer] = <acBuyer, char(30),>
       ,[acSupplier] = <acSupplier, char(1),>
       ,[acWarehouse] = <acWarehouse, char(1),>
       ,[acName2] = <acName2, varchar(255),>
