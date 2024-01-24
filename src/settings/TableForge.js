@@ -194,8 +194,7 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'acIdent',
         className: 'name-column-system',
         type: 'dropdown',
-      additional: '', 
-
+        additional: '', 
         sourceSelect: 'SELECT acIdent, acName FROM tHE_SetItem;',
         columnOrder: ['acIdent', 'acName'],
         columnOrderTranslation: ['Ident', 'Naziv'],
@@ -210,8 +209,7 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'acSubject',
         className: 'name-column-system',
         type: 'dropdown',
-      additional: '', 
-
+        additional: '', 
         sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCountry FROM tHE_SetSubj',
         columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCountry'],
         columnOrderTranslation: ['Subjekt', 'Naziv', 'Naslov', 'Pošta', 'Država'],
@@ -224,8 +222,8 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Črtna koda',
         accessor: 'acCode',
-      additional: '', 
-
+        additional: '', 
+        max: 100,
         className: 'name-column-system',
         type: 'text',  
         dbType: 'String'    
@@ -233,10 +231,9 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Število kosov',
         accessor: 'uWMSSerialNoBatch',
-      additional: '', 
-
+        additional: '', 
         className: 'name-column-system',
-        type: 'text',  
+        type: 'number',  
         dbType: 'Int64'    
       }
 
@@ -285,6 +282,7 @@ const statusDocument = useMemo(
     {
       Header: 'Vrsta dokumenta',
       accessor: 'acDocType',
+      max: 4,
       className: 'name-column-system',
       type: 'dropdown',
       additional: '', 
@@ -302,7 +300,14 @@ const statusDocument = useMemo(
       Header: 'Koda statusa',
       accessor: 'acStatus',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'vrednost', 
       additional: '', 
 
       dbType: 'String'  
@@ -313,7 +318,7 @@ const statusDocument = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-
+      max: 20,
       dbType: 'String'    
     }, 
     {
@@ -397,7 +402,16 @@ const documentTypes = useMemo(
       Header: 'Namen',
       accessor: 'acSetOf',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      additional: 'single', 
+      dropdownHelperField: 'vrednost',
+      columnOrder: ['vrednost'], 
       additional: '', 
       dbType: 'String'  
     },
@@ -405,13 +419,23 @@ const documentTypes = useMemo(
       Header: 'Varianta',
       accessor: 'acType',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      additional: 'single', 
+      dropdownHelperField: 'vrednost',
+      columnOrder: ['vrednost'],  
       additional: '', 
       dbType: 'String'    
     }, 
     {
       Header: 'Naziv',
       accessor: 'acName',
+      max: 40,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -422,6 +446,7 @@ const documentTypes = useMemo(
       accessor: 'acIssuer',
       className: 'name-column-system',
       type: 'text',  
+      max: 30,
       additional: '', 
       dbType: 'String'    
     }, 
@@ -430,6 +455,7 @@ const documentTypes = useMemo(
       accessor: 'acReceiver',
       className: 'name-column-system',
       type: 'text',  
+      max: 30,
       additional: '', 
       dbType: 'String'    
     }, 
@@ -482,7 +508,7 @@ const documentTypes = useMemo(
       Header: 'Viden',
       accessor: 'uWMS',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'checkbox',  
       additional: '', 
       dbType: 'String'    
     }, 
@@ -491,6 +517,7 @@ const documentTypes = useMemo(
       accessor: 'uWMSPartiallyFinishStatus',
       className: 'name-column-system',
       type: 'text',  
+      max: 5,
       additional: '', 
       dbType: 'String'    
     },
@@ -499,6 +526,7 @@ const documentTypes = useMemo(
       accessor: 'uWMSFinishStatus',
       className: 'name-column-system',
       type: 'text',  
+      max: 5,
       additional: '', 
       dbType: 'String'    
     }
@@ -547,6 +575,7 @@ const subjects = useMemo(
       accessor: 'acSubject',
       className: 'name-column-system',
       type: 'text',  
+      max: 30,
       additional: '', 
       dbType: 'String'  
     },
@@ -554,24 +583,48 @@ const subjects = useMemo(
       Header: 'Kupec',
       accessor: 'acBuyer',
       className: 'name-column-system',
-      type: 'text',  
-      additional: '', 
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      additional: 'single', 
+      dropdownHelperField: 'vrednost',
+      columnOrder: ['vrednost'], 
       dbType: 'String'  
     },
     {
       Header: 'Dobavitelj',
       accessor: 'acSupplier',
       className: 'name-column-system',
-      type: 'text',  
-      additional: '', 
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      additional: 'single', 
+      dropdownHelperField: 'vrednost',
+      columnOrder: ['vrednost'],
       dbType: 'String'  
     }, 
     {
       Header: 'Skladišče',
-      accessor: 'acWarehouse',
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      additional: 'single', 
+      dropdownHelperField: 'vrednost',
       className: 'name-column-system',
       type: 'text',  
-      additional: '', 
+      columnOrder: ['vrednost'],
       dbType: 'String'  
     },
     {
@@ -579,12 +632,14 @@ const subjects = useMemo(
       accessor: 'acName2',
       className: 'name-column-system',
       type: 'text',  
+      max: 255,
       additional: '', 
       dbType: 'String',
     },
     {
       Header: 'Naslov',
       accessor: 'acAddress',
+      max: 256,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -593,6 +648,7 @@ const subjects = useMemo(
     {
       Header: 'Pošta',
       accessor: 'acPost',
+      max: 13,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -601,6 +657,7 @@ const subjects = useMemo(
     {
       Header: 'Država',
       accessor: 'acCountry',
+      max: 60,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -611,12 +668,14 @@ const subjects = useMemo(
       accessor: 'acVATCodePrefix',
       className: 'name-column-system',
       type: 'text',  
+      max: 3,
       additional: '', 
       dbType: 'String'  
     },
     {
       Header: 'Dav. št.',
       accessor: 'acCode',
+      max: 20,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -625,6 +684,7 @@ const subjects = useMemo(
     {
       Header: 'Mat. št.',
       accessor: 'acRegNo',
+      max: 20,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -634,15 +694,22 @@ const subjects = useMemo(
       Header: 'Aktiven',
       accessor: 'acActive',
       className: 'name-column-system',
-      type: 'text',  
-      additional: 'hidden-active', 
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'vrednost',
+      additional: 'hidden-active single', 
       dbType: 'String'  
     },
     {
       Header: 'Zaloga',
       accessor: 'uWMSStock',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'checkbox',  
       additional: 'hidden-active', 
       dbType: 'String'  
     },
@@ -650,7 +717,7 @@ const subjects = useMemo(
       Header: 'Viden',
       accessor: 'uWMS',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'checkbox',  
       additional: 'hidden-active', 
       dbType: 'String'  
     },
@@ -658,7 +725,7 @@ const subjects = useMemo(
       Header: 'Brez naročila',
       accessor: 'uWMSSubj',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'checkbox',  
       additional: 'hidden-active', 
       dbType: 'String'  
     },
@@ -700,12 +767,14 @@ const idents = useMemo(
     {
       Header: 'Šifra identa',
       accessor: 'acIdent',
+      max: 16,
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String'  
     },
     {
       Header: 'Naziv',
+      max: 80,
       accessor: 'acName',
       className: 'name-column-system',
       type: 'text',  
@@ -714,6 +783,7 @@ const idents = useMemo(
     {
       Header: 'EAN koda',
       accessor: 'acCode',
+      max: 50,
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String',  
@@ -721,6 +791,7 @@ const idents = useMemo(
     }, 
     {
       Header: 'Tip identa',
+      max: 3,
       accessor: 'acSetOfItem',
       className: 'name-column-system',
       type: 'dropdown',
@@ -736,6 +807,7 @@ const idents = useMemo(
       dbType: 'String'
     },
     {
+      max: 30,
       Header: 'Dobavitelj',
       accessor: 'acSupplier',
       className: 'name-column-system',
@@ -753,6 +825,7 @@ const idents = useMemo(
     },
     {
       Header: '1 enota',
+      max: 3,
       accessor: 'acUM',
       className: 'name-column-system',
       type: 'dropdown',
@@ -768,8 +841,9 @@ const idents = useMemo(
     {
       Header: 'Pretvornik',
       accessor: 'anUMToUM2',
+      max: 16,
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
@@ -790,51 +864,66 @@ const idents = useMemo(
     {
       Header: 'Tip št.',
       accessor: 'acSerialNo',
-      additional: 'hidden-active', 
+      additional: 'hidden-active single', 
       className: 'name-column-system',
-      type: 'text',  
+      type: 'dropdown',
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'vrednost', 
       dbType: 'String'  
     },
     {
       Header: 'Aktiven',
       accessor: 'acActive',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'dropdown',
+      additional: 'single', 
+      sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
+      columnOrder: ['vrednost'],
+      columnOrderTranslation: ['Vrednost'],
+      columnOrderWidth: [200],
+      dropdownId: 'vrednost',
+      dropdownPlaceholder: '',
+      dropdownHelperField: 'vrednost', 
       dbType: 'String'  
     },
     {
       Header: 'Višina',
       accessor: 'anDimHeight',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
       Header: 'Širina',
       accessor: 'anDimWidth',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
       Header: 'Globina',
       accessor: 'anDimDepth',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
       Header: 'Teža',
       accessor: 'anDimWeight',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
       Header: 'Bruto',
       accessor: 'anDimWeightBrutto',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'number',  
       dbType: 'String'  
     },
     {
@@ -869,7 +958,7 @@ const idents = useMemo(
       Header: 'Vidno',
       accessor: 'uWMS',
       className: 'name-column-system',
-      type: 'text',  
+      type: 'checkbox',  
       dbType: 'String'  
     }
   ],
@@ -1257,7 +1346,7 @@ const idents = useMemo(
                   
                   
                   
-                  className={column.Header === 'Id' || column.additional === 'hidden-active' ? 'hidden-column' : ''}
+                  className={column.Header === 'Id' || (column.additional && column.additional.includes('hidden-active')) ? 'hidden-column' : ''}
                   
                   
                   
@@ -1279,7 +1368,7 @@ const idents = useMemo(
                     return <td {...cell.getCellProps()}
                                        
                     
-                    className={cell.column.Header === 'Id' || cell.column.additional === 'hidden-active' ? 'hidden-column' : ''}
+                    className={cell.column.Header === 'Id' || (cell.column.additional && cell.column.additional.includes('hidden-active')) ? 'hidden-column' : ''}
 
                                                                             
                     >{cell.render('Cell')}</td>;

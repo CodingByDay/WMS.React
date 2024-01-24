@@ -50,11 +50,17 @@ const Insert = (props) => {
         SettingsService.executeSQLQueryBatch(pairs)
         .then(result => {
             var data = result;
+       
             for(var i = 0; i < props.selectedTable.value.length; i++) {
                 var current = props.selectedTable.value[i];
                 var currentData = data[current.accessor];
                 var type = current.type;
+                var additional = current.additional;
+                
                 if(type === "dropdown") {
+
+                  console.log(currentData);
+                  
                   const options = currentData.map(item => {
                     const value = current.columnOrder.map(field => item[field]).join('|');
                     const properties = current.columnOrder.map(field => item[field]);
@@ -259,8 +265,9 @@ const Insert = (props) => {
              
               ) : (
                 <input
-                type={column.type === 'checkbox' ? 'checkbox' : 'text'}
+                type={column.type === 'checkbox' ? 'checkbox' : column.type === 'number' ? 'number' : 'text'}
                 id={column.accessor}
+                maxLength={column.max}
                 name={column.accessor}
                 className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
                 value={getValue(column.accessor)} // Set the value from state

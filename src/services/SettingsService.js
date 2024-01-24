@@ -27,8 +27,7 @@ const SettingsService  = {
         }
 
       });
-      console.log(parameters);
-      console.log(response);
+
 
       if (response.data.Success) {
 
@@ -140,7 +139,7 @@ async executeSQLQueryBatch(data, parameters) {
           });
       
 
-
+          console.log(response)
 
           if (response.data.Success) {
             const dataPacket = response.data.Rows;

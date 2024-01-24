@@ -105,6 +105,10 @@ button.ant-btn {
   margin-top: 5em;
 }
 
+:where(.css-dev-only-do-not-override-18iikkb).ant-modal .ant-modal-content {
+  border-radius: 0!important;
+}
+
 
 .paginationControls {
   margin: -2px;

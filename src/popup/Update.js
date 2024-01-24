@@ -392,7 +392,7 @@ const Update = (props) => {
             </div>
               ) : (
                <input
-                  type={column.type === 'checkbox' ? 'checkbox' : 'text'}
+                  type={column.type === 'checkbox' ? 'checkbox' : column.type === 'number' ? 'number' : 'text'}
                   id={column.accessor}
                   name={column.accessor}
                   className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}

@@ -62,7 +62,6 @@ INSERT INTO [dbo].[tHE_SetSubj]
 GO
 
 UPDATE [dbo].[tHE_SetSubj]
-   SET [acSubject] = <acSubject, varchar(30),>
       ,[acBuyer] = <acBuyer, char(1),>
       ,[acSupplier] = <acSupplier, char(1),>
       ,[acWarehouse] = <acWarehouse, char(1),>
