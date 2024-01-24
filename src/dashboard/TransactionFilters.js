@@ -335,7 +335,7 @@ const [state, setState] = useState([
       if (dateRangePickerRef.current && document.addEventListener) {
         if (!dateRangePickerRef.current.contains(event.target)) {
           // Click occurred outside of the date range picker
-          setOpen(!open);
+          setOpen(false);
         }
       }
     };

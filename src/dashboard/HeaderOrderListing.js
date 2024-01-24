@@ -52,8 +52,13 @@ export default function HeaderOrderListing(props) {
 
 
      const handleClickOutside = (event) => {
+    
+  
+
+
+
       if (dateRangePickerRef.current && !dateRangePickerRef.current.contains(event.target)) {
-        setOpen(!open)
+        setOpen(false)
       }
     };
 

@@ -72,7 +72,7 @@ export default function Listing() {
     const [showStatusAlert, setShowStatusAlert] = useState(false)
     useEffect(() => {
 
-      // Set up the value for the back button 
+
       localStorage.setItem('back', "dashboard")
       var loader = document.getElementById("loader");
 
@@ -257,10 +257,7 @@ export default function Listing() {
 
     const renderComponent = () => { 
       ListingService.getAllListings().then(response => { 
-
         setOrders(response);
-
-
      }); 
     }
 
