@@ -62,7 +62,7 @@ export default function AddHeadDocument(props) {
 
 
     const close = () => {
-
+    
         props.changeVisibility(false)
     }
 
@@ -75,13 +75,8 @@ export default function AddHeadDocument(props) {
         setSelectedOption(mutated);
     }
     
-    if(props.show) {
-        $("#addHeader").css("display", "block");
-        if(props.order) {
-            isOrder = true;
-
-    
-        }
+    if(!props.show) {
+        return;
         
     } else {
         $("#addHeader").css("display", "none");
@@ -89,33 +84,23 @@ export default function AddHeadDocument(props) {
   
     return ( 
 
-        <div className="addHeaderClass" id='addHeader'>
-     
-
-
-        <div className="header_part" onClick={close}>
-            <h1 id='close_add_header'>X</h1>
+        <div className="popup-overlay add" id='add-overlay'>
+      <div className="popup-content add">
+        <div className="popup-header add">
+          <button className="popup-close-btn add" onClick={close} >
+            X
+          </button>
         </div>
-
-
-        <div className="body_part">
-        <div className="container-insist">
-
-
-
-
-
-
-
-        <Select className='select-filters' value={selectedOption}  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
+        <div className="popup-body add">
+         <Select className='select-filters' value={selectedOption}  onChange={onChangeTypePopup} placeholder={"Tip transakcije"} options = {documentType} id='transactionTypePopup'/>
         </div> 
         {conditional}
-    </div>
+              
 
-
+         
+        </div>
         
-    </div>
-
+      </div>
 
 
 

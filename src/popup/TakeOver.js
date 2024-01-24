@@ -282,49 +282,53 @@ $(function() {
 
     return ( 
 
-        <div className='layout-takeover-container'>
-        <div className='layout-takeover-checkbox'>
-
-        {getCheckBox()}
+       
+        <div className='layout-issued-goods-container'>
+        <div className='layout-issued-goods-header-checkbox'>
+            {getCheckBox()}
         </div>
+        <div className='layout-issued-goods'>
 
 
-        <div className='layout-takeover-goods'>
 
         <div className='left-column'>
-
-
         <Select className='select-filters' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select className='select-filters' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
-
-
-
-        </div> 
-
+        </div>
         <div className='right-column'>
+
 
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
 
         <input placeholder="Izberite datum" type="date" id="documentDate" className="form-control" />
 
-
-
-      
         </div>
+
+        
+
         {getClient()}
         </div>
+        
         </div>
+
 
 
         <div className="bottom-part">
+
         {getNote()}
-        <center><span className='actions smallerr takeover' onClick={createHeadDocument} id='createDocument'>          
+
+
+       <center><span className='actions smallerr' onClick={createHeadDocument} id='createDocument'>          
              <p>Potrdi</p>
              <MdAdd />
-             </span></center> 
-        </div>
+             </span>
+        </center> 
 
-        </div>
+
+
+
+  
+        </div></div>
         ); 
 }
 
