@@ -27,7 +27,7 @@ export default function TransactionPositionsButtons(props) {
 
         <div className='buttonsPositionsOuter'>
 
-        <div className='buttonsPositions'>
+        <div className='buttons-positions-bottom'>
 
 
             {/* <span className='actions smallerr' onClick={toggleAddPosition}>

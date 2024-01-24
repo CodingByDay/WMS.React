@@ -24,7 +24,7 @@ export default function TransactionHeaderButtons(props) {
         <div className='buttonsHeaderOuter'>
         <div className='buttonsHeader'>
 
-
+        <div className='header-buttons-div'>
              <span className='actions smallerr' onClick={finishDocument}>             
              <p>Zaključi</p>            
              <MdDownload />
@@ -41,7 +41,7 @@ export default function TransactionHeaderButtons(props) {
              <p>Izbriši</p>
              <MdDeleteOutline />
              </span>
-
+        </div>
 
             {/* <span className='actions smallerr' onClick={toggleAddPosition} id=''>          
              <p>Dodaj</p>

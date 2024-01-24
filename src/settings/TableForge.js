@@ -536,16 +536,13 @@ const documentTypes = useMemo(
 
 
 const subjects = useMemo(
-  () => [
-    
+  () => [   
     {
       Header: (
         <button className="action-buttons white" title="Vnos" onClick={onAdd}>
           <IoAddCircleSharp />
-          Dodaj
-          
-        </button>
-        
+          Dodaj  
+        </button>      
       ),
       accessor: 'actions',
 
@@ -802,7 +799,6 @@ const idents = useMemo(
       dropdownId: 'acSetOfItem',
       dropdownPlaceholder: '',
       additional: 'hidden-active', 
-
       dropdownHelperField: 'acName',
       dbType: 'String'
     },
@@ -818,7 +814,6 @@ const idents = useMemo(
       columnOrderWidth: [200, 300],
       dropdownId: 'acSubject',
       additional: 'hidden-active', 
-
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName2',
       dbType: 'String'
@@ -932,10 +927,10 @@ const idents = useMemo(
       className: 'name-column-system',
       type: 'dropdown',
       sourceSelect: `SELECT acUM, acName FROM tHE_SetUM`,
-      columnOrder: ['acDocType', 'acName'],
+      columnOrder: ['acUM', 'acName'],
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
-      dropdownId: 'acDocType',
+      dropdownId: 'acUM',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'

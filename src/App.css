@@ -109,6 +109,10 @@ button.ant-btn {
   border-radius: 0!important;
 }
 
+.css-13cymwt-control, .actions.smallerr.s, #openRange, .actions.smallerr {
+  border-radius: 0!important;
+  height: 40px!important;
+}
 
 .paginationControls {
   margin: -2px;
@@ -378,6 +382,32 @@ table.react-table-type-document tr th:hover,table.react-table-type-document tr t
   height: 100%;
 }
 
+.buttons-positions-bottom {
+  margin-left: 2em;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-top: 2px;
+
+}
+.header-buttons-div {
+  margin-top: 0.1em;
+  display: flex;
+  gap: 1em;
+  margin-left: 1em;
+}
+
+.stock-container-filters {
+  display: flex;
+  align-items: center;
+}
+.stock-container-filters .actions.smallerr {
+  padding-top: 8px;
+}
+.navbar span {
+  font-size: larger!important;
+}
 tr {
   font-size: large;
 }
@@ -389,25 +419,18 @@ table thead th {
 .responsive-buttons-order {
   display: flex;
   flex-direction: row;
-
+  gap: 1em;
 
 }
 @media only screen and (max-width: 1537px){
 
-  .responsive-buttons-order {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2em;
 
-}
 
 .responsive-buttons-order span {
   margin: 0.2em!important;
 }
 
-.table_responsive_order {
-  margin-top: 4em;
-}
+
 }
 
 #analytics-frame {
@@ -680,7 +703,7 @@ input {
 
 
 span#openRange {
-  margin: 1em;
+
   padding-top: 0.3em;
   border: 1px solid gray;
   color: white;
@@ -696,7 +719,7 @@ span#openRange {
 
 
 span.actions {
-  margin: 1em;
+
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;
@@ -1141,7 +1164,7 @@ span#openRangeTransaction {
   flex-wrap: wrap;
 }
 
-#documentSearch,  #openRange, #receiver, #consignee {
+#documentSearch,   #receiver, #consignee {
   width: 10em!important;
   height: 2.3em!important;  
 }
