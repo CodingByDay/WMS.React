@@ -328,6 +328,9 @@ span#openRangeTransaction {
   height: 2.6em;
   margin-top: 0.1em;
 }
+.center-button span {
+  padding-top: 10px!important;
+}
 
 .hidden-column {
   display: hidden;
@@ -763,8 +766,10 @@ span.actions.smaller {
   color: white!important;
 }
 
-
-span.actions.smallerr {
+.center-button button {
+  padding-top: 10px!important;
+}
+span.actions.smallerr, button.actions.smallerr {
   height: 2.3em;
   padding-left: 1em;
   padding-right: 1em;

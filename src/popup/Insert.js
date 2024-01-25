@@ -148,12 +148,100 @@ const Insert = (props) => {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevents the default form submission behavior
 
+    sendData();
+  };
+
+
+
+
+  function resolveDynamicQuery() {
+    var counter = 0;
+    var fields = "";
+    var values = "";
+    var foundData = [];
+    const propertyCount = Object.keys(inputValues).length + Object.keys(selectedOptions).length;
+    for (const [key, value] of Object.entries(inputValues)) {
+
+      counter += 1;
+
+      if(counter == 1 ) {
+        fields += "(";
+        values += "(";
+      }
+
+      
+      if(counter == propertyCount) {
+        
+
+
+        if(!props.selectedTable.insertHasUser) {
+          fields += "[" +  key + "])";
+          values += "@" +  key + ")";
+        } else {
+          fields += "[" +  key + "],[" +props.insertUserId + "])";
+          values += "@" +  key + "," + props.insertUserId +  ")";
+        }
+
+        
+
+      } else {
+        fields += "[" +  key + "],";
+        values += "@" +  key + ",";
+      }
+      
+      foundData.push(key)
+
+    }
+
+    for (const [key, value] of Object.entries(selectedOptions)) {
+
+      counter += 1;
+
+      if(counter == 1 ) {
+        fields += "(";
+        values += "(";
+      }
+
+      
+        if(counter == propertyCount) {
+       
+          if(!props.selectedTable.insertHasUser) {
+            fields += "[" +  key + "])";
+            values += "@" +  key + ")";
+          } else {
+            fields += "[" +  key + "],[" +props.selectedTable.insertUserId + "])";
+            values += "@" +  key + ",@" + props.selectedTable.insertUserId +  ")";
+          }
+
+      } else {
+        fields += "[" +  key + "],";
+        values += "@" +  key + ",";
+      }
+      
+      foundData.push(key)
+
+    }
+
+    return [fields, values, foundData]
+  }
 
   const sendData = () => {
 
 
+
+    var dynamic = resolveDynamicQuery();
     var insertQuery = props.selectedTable.insertQuery;
+
+
+    insertQuery = insertQuery.replace("(#fields)", dynamic[0])
+    insertQuery = insertQuery.replace("(#parameters)", dynamic[1])
+
+
+    
+    
     var columns = props.selectedTable.value;
     var params = [];
 
@@ -164,7 +252,7 @@ const Insert = (props) => {
         var type = column.type;
         var accessor = column.accessor;
         
-        if(type!="nothing") {
+        if(type!="nothing" && dynamic[2].includes(accessor)) {
             
 
           var column = columns[i];
@@ -206,7 +294,7 @@ const Insert = (props) => {
     const userId = localStorage.getItem('name');
     const userIdAsInt = parseInt(userId, 10); 
 
-    var parameterUser = { Name: 'user', Type: 'Int64', Value: userIdAsInt  } 
+    var parameterUser = { Name: props.selectedTable.insertUserId, Type: 'Int64', Value: userIdAsInt  } 
 
 
     params.push(parameterUser);
@@ -241,7 +329,12 @@ const Insert = (props) => {
             X
           </button>
         </div>
+        <form className="form-insert" onSubmit={handleSubmit}>
+
         <div className="popup-body insert">
+
+
+
         {props.selectedTable.value.map((column) => (
            column.type !== 'nothing' && (
             <div key={column.accessor} className="form-group insert">
@@ -258,7 +351,7 @@ const Insert = (props) => {
                options={dropdownOptions[column.accessor] || []}
                value={selectedOptions[column.accessor]}
                onChange={(selected) => handleSelectChange(column.accessor, selected)}
-               
+               required={column.required}
              />
             
 
@@ -268,6 +361,7 @@ const Insert = (props) => {
                 type={column.type === 'checkbox' ? 'checkbox' : column.type === 'number' ? 'number' : 'text'}
                 id={column.accessor}
                 maxLength={column.max}
+                required={column.type === 'checkbox' ? false : column.required}
                 name={column.accessor}
                 className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
                 value={getValue(column.accessor)} // Set the value from state
@@ -281,12 +375,17 @@ const Insert = (props) => {
 
          
         </div>
+       
+
         <div className="center-button">
-            <center><span onClick={sendData}  className="actions smallerr">
+            <center><button  type="submit"  className="actions smallerr">
               Dodaj
-            </span>
+            </button>
             </center>
           </div>
+
+
+          </form>
       </div>
     </div>
   );

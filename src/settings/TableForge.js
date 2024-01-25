@@ -577,7 +577,8 @@ const subjects = useMemo(
       type: 'text',  
       max: 30,
       additional: '', 
-      dbType: 'String'  
+      dbType: 'String',  
+      required: true
     },
     {
       Header: 'Kupec',
@@ -593,7 +594,9 @@ const subjects = useMemo(
       additional: 'single', 
       dropdownHelperField: 'vrednost',
       columnOrder: ['vrednost'], 
-      dbType: 'String'  
+      dbType: 'String',
+      required: true
+
     },
     {
       Header: 'Dobavitelj',
@@ -609,7 +612,8 @@ const subjects = useMemo(
       additional: 'single', 
       dropdownHelperField: 'vrednost',
       columnOrder: ['vrednost'],
-      dbType: 'String'  
+      dbType: 'String',
+      required: true
     }, 
     {
       Header: 'Skladišče',
@@ -625,7 +629,9 @@ const subjects = useMemo(
       dropdownHelperField: 'vrednost',
       className: 'name-column-system',
       columnOrder: ['vrednost'],
-      dbType: 'String'  
+      dbType: 'String',  
+      required: true
+
     },
     {
       Header: 'Naziv',
@@ -635,6 +641,7 @@ const subjects = useMemo(
       max: 255,
       additional: '', 
       dbType: 'String',
+      required: false
     },
     {
       Header: 'Naslov',
@@ -643,7 +650,9 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
-      dbType: 'String'  
+      dbType: 'String',
+      required: false
+
     }, 
     {
       Header: 'Pošta',
@@ -652,6 +661,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
+      required: true,
       dbType: 'String'  
     },
     {
@@ -661,6 +671,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
+      required: true,
       dbType: 'String'  
     },
     {
@@ -670,6 +681,7 @@ const subjects = useMemo(
       type: 'text',  
       max: 3,
       additional: '', 
+      required: true,
       dbType: 'String'  
     },
     {
@@ -679,6 +691,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
+      required: true,
       dbType: 'String'  
     },
     {
@@ -688,6 +701,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
+      required: true,
       dbType: 'String'  
     },
     {
@@ -703,6 +717,7 @@ const subjects = useMemo(
       dropdownPlaceholder: '',
       dropdownHelperField: 'vrednost',
       additional: 'hidden-active single', 
+      required: false,
       dbType: 'String'  
     },
     {
@@ -711,6 +726,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'checkbox',  
       additional: 'hidden-active', 
+      required: true,
       dbType: 'Boolean'  
     },
     {
@@ -719,6 +735,7 @@ const subjects = useMemo(
       className: 'name-column-system',
       type: 'checkbox',  
       additional: 'hidden-active', 
+      required: true,
       dbType: 'Boolean'  
     },
     {
@@ -726,6 +743,7 @@ const subjects = useMemo(
       accessor: 'uWMSSubj',
       className: 'name-column-system',
       type: 'checkbox',  
+      required: true,
       additional: 'hidden-active', 
       dbType: 'Boolean'  
     },
@@ -970,29 +988,6 @@ const idents = useMemo(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const tablesAssociation = [
     {
       name: 'system',
@@ -1108,39 +1103,11 @@ const idents = useMemo(
       name: 'subjects',
       value: subjects,
       insertQuery: `INSERT INTO [dbo].[tHE_SetSubj]
-                    ([acSubject]
-                    ,[acBuyer]
-                    ,[acSupplier]
-                    ,[acWarehouse]
-                    ,[acName2]
-                    ,[acAddress]
-                    ,[acPost]
-                    ,[acCountry]
-                    ,[acVATCodePrefix]
-                    ,[acCode]
-                    ,[acRegNo]
-                    ,[acActive]
-                    ,[anUserIns]
-                    ,[uWMSStock]
-                    ,[uWMS]
-                    ,[uWMSSubj])
+                    (#fields)
               VALUES
-                    (@acSubject
-                    ,@acBuyer
-                    ,@acSupplier
-                    ,@acWarehouse
-                    ,@acName2
-                    ,@acAddress
-                    ,@acPost
-                    ,@acCountry
-                    ,@acVATCodePrefix
-                    ,@acCode
-                    ,@acRegNo
-                    ,@acActive
-                    ,@user
-                    ,@uWMSStock
-                    ,@uWMS
-                    ,@uWMSSubj)`,
+                    (#parameters)`,
+      insertHasUser: true,
+      insertUserId: "anUserIns",
       deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @anQId",
       updateQuery: `UPDATE [dbo].[tHE_SetSubj]
                     SET [acSubject] = @acSubject
@@ -1160,6 +1127,8 @@ const idents = useMemo(
                       ,[uWMS] = @uWMS
                       ,[uWMSSubj] = @uWMSSubj
                   WHERE anQid =  @anQId`,
+      updateHasUser: true,
+      updateUserId: "anUserChg",
       id: 'anQId',
       idType: "Int64"
     } , {
