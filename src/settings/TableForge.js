@@ -1110,23 +1110,7 @@ const idents = useMemo(
       insertUserId: "anUserIns",
       deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @anQId",
       updateQuery: `UPDATE [dbo].[tHE_SetSubj]
-                    SET [acSubject] = @acSubject
-                      ,[acBuyer] = @acBuyer
-                      ,[acSupplier] = @acSupplier
-                      ,[acWarehouse] = @acWarehouse
-                      ,[acName2] = @acName2
-                      ,[acAddress] = @acAddress
-                      ,[acPost] = @acPost
-                      ,[acCountry] = @acCountry
-                      ,[acVATCodePrefix] = @acVATCodePrefix
-                      ,[acCode] = @acCode
-                      ,[acRegNo] = @acRegNo
-                      ,[acActive] = @acActive
-                      ,[anUserChg] = @user
-                      ,[uWMSStock] = @uWMSStock
-                      ,[uWMS] = @uWMS
-                      ,[uWMSSubj] = @uWMSSubj
-                  WHERE anQid =  @anQId`,
+                    SET #update`,
       updateHasUser: true,
       updateUserId: "anUserChg",
       id: 'anQId',

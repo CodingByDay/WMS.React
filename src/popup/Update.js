@@ -224,8 +224,81 @@ const Update = (props) => {
     return false;
   }
 
+
+
+  function resolveDynamicQuery() {
+    var counter = 0;
+    var sql = "";
+    var foundData = [];
+    const propertyCount = Object.keys(inputValues).length + Object.keys(selectedOptions).length;
+    for (const [key, value] of Object.entries(inputValues)) {
+
+      counter += 1;
+
+ 
+
+      
+      if(counter == propertyCount) {
+        
+        if(props.selectedTable.updateHasUser) {
+          sql += `[${key}] = @${key},`;
+          sql += `[${props.selectedTable.updateUserId}] = @${props.selectedTable.updateUserId}`;
+          sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
+      } else {
+          sql += `[${key}] = @${key}`;
+          sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
+      }
+      } else {
+        sql += `[${key}] = @${key},`;
+      }
+      
+      foundData.push(key)
+
+    }
+
+    for (const [key, value] of Object.entries(selectedOptions)) {
+
+      counter += 1;
+
+   
+
+      
+      if(counter == propertyCount) {
+        
+        if(!props.selectedTable.updateUserId) {
+            sql += `[${key}] = @${key},`;
+            sql += `[${props.selectedTable.updateUserId}] = @${props.selectedTable.updateUserId}`;
+            sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
+        } else {
+            sql += `[${key}] = @${key}`;
+            sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
+        }
+      } else {
+        sql += `[${key}] = @${key},`;
+      }
+      
+      foundData.push(key)
+
+    }
+
+    return [sql, foundData]
+  }
+
+
+
   const sendData = () => {
+
+    var dynamic = resolveDynamicQuery();
+
+
+
+
     var updateQuery = props.selectedTable.updateQuery;
+
+
+
+    updateQuery = updateQuery.replace("#update", dynamic[0])
+
     var columns = props.selectedTable.value;
     var idType = props.selectedTable.idType;
     var params = [];
@@ -236,7 +309,7 @@ const Update = (props) => {
         var type = column.type;
         var accessor = column.accessor;
         var dbType = column.dbType;
-        if(type !== "nothing") {
+        if(type !== "nothing" && dynamic[1].includes(accessor)) {
           var theValue = '';
           if(type == "text") {
             theValue = getValue(accessor);
@@ -245,10 +318,6 @@ const Update = (props) => {
           } else if(type == "checkbox") {
             theValue = getValue(accessor);       
           }
-
-
-
-
 
             var converted = {};
             if(dbType == "Int64") {
@@ -259,8 +328,6 @@ const Update = (props) => {
               converted = theValue;
             }
 
-
-
            var parameter = { Name: accessor, Type: dbType, Value: converted  }
            params.push(parameter);     
         }
@@ -269,8 +336,8 @@ const Update = (props) => {
       const userId = localStorage.getItem('name');
       const userIdAsInt = parseInt(userId, 10); 
 
-      var parameterUser = { Name: 'user', Type: 'Int64', Value: userIdAsInt  } 
-      var parameterId = { Name: 'anQId', Type: idType, Value: props.id  }
+      var parameterUser = { Name: props.selectedTable.updateUserId, Type: 'Int64', Value: userIdAsInt  } 
+      var parameterId = { Name: props.selectedTable.id, Type: idType, Value: props.id  }
 
 
       params.push(parameterUser);
@@ -305,6 +372,11 @@ const Update = (props) => {
 
 
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevents the default form submission behavior
+
+    sendData();
+  };
 
 
   const DynamicFormatOptionLabel = ({ label, properties, widths, header, selected, id}) => (
@@ -357,6 +429,8 @@ const Update = (props) => {
             X
           </button>
         </div>
+        <form className="form-insert" onSubmit={handleSubmit}>
+
         <div className="popup-body insert">
         {props.selectedTable.value.map((column) => (
            column.type !== 'nothing' && (
@@ -375,7 +449,7 @@ const Update = (props) => {
               options={dropdownOptions[column.accessor] || []}
               value={selectedOptions[column.accessor]}
               onChange={(selected) => handleSelectChange(column.accessor, selected)}
-              
+              required={false}
               />
 
         
@@ -386,6 +460,7 @@ const Update = (props) => {
                   type={column.type === 'checkbox' ? 'checkbox' : column.type === 'number' ? 'number' : 'text'}
                   id={column.accessor}
                   name={column.accessor}
+                  required={false}
                   className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
                   checked={column.type === 'checkbox' ? getValue(column.accessor) : undefined}
                   value={column.type !== 'checkbox' ? getValue(column.accessor) : undefined}
@@ -403,12 +478,13 @@ const Update = (props) => {
 
 
         <div className="center-button">
-            <center><span onClick={sendData}  className="actions smallerr">
+            <center><button type='submit' className="actions smallerr">
               Posodobi
-            </span>            
+            </button>            
             </center>
         </div>
 
+        </form>
 
       </div>
     </div>

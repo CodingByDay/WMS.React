@@ -181,8 +181,8 @@ const Insert = (props) => {
           fields += "[" +  key + "])";
           values += "@" +  key + ")";
         } else {
-          fields += "[" +  key + "],[" +props.insertUserId + "])";
-          values += "@" +  key + "," + props.insertUserId +  ")";
+          fields += "[" +  key + "],[" +props.selectedTable.insertUserId + "])";
+          values += "@" +  key + "," + props.selectedTable.insertUserId +  ")";
         }
 
         
