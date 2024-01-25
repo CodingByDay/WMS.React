@@ -278,7 +278,9 @@ const Insert = (props) => {
               } else if(dbType == "String") {
                 converted = theValue;
               } else if(dbType == "Boolean") {
-                converted = theValue;
+                if(theValue == "") {
+                  converted = false;
+                }
               } 
   
              var parameter = { Name: accessor, Type: dbType, Value: converted  }
