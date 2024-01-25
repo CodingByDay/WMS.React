@@ -36,6 +36,7 @@ export default function Stock() {
    
     StockService.getIdents().then(response => {  
         var identsFinal = [];
+        identsFinal.push({value: "", label: ""}); 
 
         for (var i = 0; i < response.length; i++) {  
           try {
@@ -54,6 +55,7 @@ export default function Stock() {
 
     function onlyWarehouses(data) { 
         var returnArray = [];
+        returnArray.push({value: "", label: ""}); 
 
         for (var i = 0; i < data.Items.length; i++) {  
             returnArray.push({value: data.Items[i].Properties.Items[0].StringValue, label: data.Items[i].Properties.Items[0].StringValue});           
@@ -135,7 +137,9 @@ export default function Stock() {
     function handleWarehouseChange(event) { 
         setWarehouse(event); 
         StockService.getLocations(event.value).then(response => {  
-            var locations = [];
+        var locations = [];
+        locations.push({value: "", label: ""}); 
+
             for (var i = 0; i < response.Items.length; i++) {  
                 locations.push({value: response.Items[i].Properties.Items[0].StringValue, label: response.Items[i].Properties.Items[0].StringValue});
             }
