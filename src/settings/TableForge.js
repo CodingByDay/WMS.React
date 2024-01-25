@@ -28,8 +28,10 @@ function TableForge({ refresh, name, tableData }) {
   
   const showDeleteConfirmation = (data) => {
     var currentDeleteSQL = selectedTable.deleteQuery;
+    var idType = selectedTable.idType;
+
     var params = [];
-    var parameterId = { Name: 'anQid', Type: 'Int64', Value: data[selectedTable.id]  }
+    var parameterId = { Name: 'anQId', Type: idType, Value: data[selectedTable.id]  }
     params.push(parameterId);
     Swal.fire({
       title: 'Ste prepričani?',
@@ -133,6 +135,7 @@ function TableForge({ refresh, name, tableData }) {
         dropdownId: 'ID',
         dropdownPlaceholder: '',
         dropdownHelperField: 'Desc',
+        required: true,
         dbType: 'String',
       },
       {
@@ -141,6 +144,7 @@ function TableForge({ refresh, name, tableData }) {
         additional: '', 
         className: 'value-column-system',
         type: 'text',
+        required: true,
         dbType: 'String'
 
       }, 
@@ -188,7 +192,6 @@ function TableForge({ refresh, name, tableData }) {
       {
         Header: 'Id',
         accessor: 'anQId',
-        
         className: 'name-column-system',
         type: 'nothing',     
       },
@@ -197,6 +200,7 @@ function TableForge({ refresh, name, tableData }) {
         accessor: 'acIdent',
         className: 'name-column-system',
         type: 'dropdown',
+        required: true,
         additional: '', 
         sourceSelect: 'SELECT acIdent, acName FROM tHE_SetItem;',
         columnOrder: ['acIdent', 'acName'],
@@ -213,6 +217,7 @@ function TableForge({ refresh, name, tableData }) {
         className: 'name-column-system',
         type: 'dropdown',
         additional: '', 
+        required: true,
         sourceSelect: 'SELECT acSubject, acName2, acAddress, acPost, acCountry FROM tHE_SetSubj',
         columnOrder: ['acSubject', 'acName2', 'acAddress', 'acPost', 'acCountry'],
         columnOrderTranslation: ['Subjekt', 'Naziv', 'Naslov', 'Pošta', 'Država'],
@@ -226,6 +231,7 @@ function TableForge({ refresh, name, tableData }) {
         Header: 'Črtna koda',
         accessor: 'acCode',
         additional: '', 
+        required: true,
         max: 100,
         className: 'name-column-system',
         type: 'text',  
@@ -235,6 +241,7 @@ function TableForge({ refresh, name, tableData }) {
         Header: 'Število kosov',
         accessor: 'uWMSSerialNoBatch',
         additional: '', 
+        required: true,
         className: 'name-column-system',
         type: 'number',  
         dbType: 'Int64'    
@@ -286,6 +293,7 @@ const statusDocument = useMemo(
       Header: 'Vrsta dokumenta',
       accessor: 'acDocType',
       max: 4,
+      required: true,
       className: 'name-column-system',
       type: 'dropdown',
       additional: '', 
@@ -295,6 +303,7 @@ const statusDocument = useMemo(
       columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acDocType',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'
@@ -309,10 +318,10 @@ const statusDocument = useMemo(
       columnOrderTranslation: ['Vrednost'],
       columnOrderWidth: [200],
       dropdownId: 'vrednost',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'vrednost', 
       additional: '', 
-
       dbType: 'String'  
     },
     {
@@ -321,12 +330,14 @@ const statusDocument = useMemo(
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
+      required: true,
       max: 20,
       dbType: 'String'    
     }, 
     {
       Header: 'Viden',
       accessor: 'uWMSShow',
+      required: true,
       className: 'name-column-system',
       type: 'checkbox',  
       additional: '', 
@@ -389,6 +400,7 @@ const documentTypes = useMemo(
     {
       Header: 'Vrsta',
       accessor: 'acDocType',
+      required: true,
       className: 'name-column-system',
       type: 'dropdown',
       sourceSelect: 'SELECT acDocType, acName FROM tPA_SetDocType;',
@@ -406,6 +418,7 @@ const documentTypes = useMemo(
       accessor: 'acSetOf',
       className: 'name-column-system',
       type: 'dropdown',
+      required: true,
       sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
       columnOrder: ['vrednost'],
       columnOrderTranslation: ['Vrednost'],
@@ -423,6 +436,7 @@ const documentTypes = useMemo(
       accessor: 'acType',
       className: 'name-column-system',
       type: 'dropdown',
+      required: true,
       sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
       columnOrder: ['vrednost'],
       columnOrderTranslation: ['Vrednost'],
@@ -439,6 +453,7 @@ const documentTypes = useMemo(
       Header: 'Naziv',
       accessor: 'acName',
       max: 40,
+      required: true,
       className: 'name-column-system',
       type: 'text',  
       additional: '', 
@@ -449,6 +464,7 @@ const documentTypes = useMemo(
       accessor: 'acIssuer',
       className: 'name-column-system',
       type: 'text',  
+      required: true,
       max: 30,
       additional: '', 
       dbType: 'String'    
@@ -457,7 +473,8 @@ const documentTypes = useMemo(
       Header: 'Prevzemno',
       accessor: 'acReceiver',
       className: 'name-column-system',
-      type: 'text',  
+      required: true,
+      type: 'text', 
       max: 30,
       additional: '', 
       dbType: 'String'    
@@ -467,6 +484,7 @@ const documentTypes = useMemo(
       accessor: 'acWarehouse',
       className: 'name-column-system',
       type: 'dropdown',
+      required: true,
       sourceSelect: `select acSubject, acName2 from tHE_SetSubj where acWarehouse = 'T'`,
       columnOrder: ['acSubject', 'acName2'],
       columnOrderTranslation: ['Subjekt', 'Naziv'],
@@ -487,6 +505,7 @@ const documentTypes = useMemo(
       columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acDocType',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       additional: '', 
@@ -502,6 +521,7 @@ const documentTypes = useMemo(
       columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acDocType',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       additional: '', 
@@ -512,6 +532,7 @@ const documentTypes = useMemo(
       accessor: 'uWMS',
       className: 'name-column-system',
       type: 'checkbox',  
+      required: true,
       additional: '', 
       dbType: 'String'    
     }, 
@@ -521,6 +542,7 @@ const documentTypes = useMemo(
       className: 'name-column-system',
       type: 'text',  
       max: 5,
+      required: true,
       additional: '', 
       dbType: 'String'    
     },
@@ -529,6 +551,7 @@ const documentTypes = useMemo(
       accessor: 'uWMSFinishStatus',
       className: 'name-column-system',
       type: 'text',  
+      required: true,
       max: 5,
       additional: '', 
       dbType: 'String'    
@@ -785,6 +808,7 @@ const idents = useMemo(
     {
       Header: 'Šifra identa',
       accessor: 'acIdent',
+      required: true,
       max: 16,
       className: 'name-column-system',
       type: 'text',  
@@ -793,6 +817,7 @@ const idents = useMemo(
     {
       Header: 'Naziv',
       max: 80,
+      required: true,
       accessor: 'acName',
       className: 'name-column-system',
       type: 'text',  
@@ -802,6 +827,7 @@ const idents = useMemo(
       Header: 'EAN koda',
       accessor: 'acCode',
       max: 50,
+      required: true,
       className: 'name-column-system',
       type: 'text',  
       dbType: 'String',  
@@ -818,6 +844,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Šifra', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acSetOfItem',
+      required: true,
       dropdownPlaceholder: '',
       additional: 'hidden-active', 
       dropdownHelperField: 'acName',
@@ -834,6 +861,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Subjekt', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acSubject',
+      required: true,
       additional: 'hidden-active', 
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName2',
@@ -850,6 +878,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acUM',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'
@@ -858,6 +887,7 @@ const idents = useMemo(
       Header: 'Pretvornik',
       accessor: 'anUMToUM2',
       max: 16,
+      required: true,
       className: 'name-column-system',
       type: 'number',  
       dbType: 'String'  
@@ -872,6 +902,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
       additional: 'hidden-active', 
+      required: true,
       dropdownId: 'acUM',
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
@@ -886,6 +917,7 @@ const idents = useMemo(
       sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
       columnOrder: ['vrednost'],
       columnOrderTranslation: ['Vrednost'],
+      required: true,
       columnOrderWidth: [200],
       dropdownId: 'vrednost',
       dropdownPlaceholder: '',
@@ -901,6 +933,7 @@ const idents = useMemo(
       sourceSelect: `SELECT 'T' AS vrednost UNION SELECT 'F' AS vrednost`,
       columnOrder: ['vrednost'],
       columnOrderTranslation: ['Vrednost'],
+      required: true,
       columnOrderWidth: [200],
       dropdownId: 'vrednost',
       dropdownPlaceholder: '',
@@ -912,20 +945,23 @@ const idents = useMemo(
       accessor: 'anDimHeight',
       className: 'name-column-system',
       type: 'number',  
+      required: true,
       dbType: 'String'  
     },
     {
       Header: 'Širina',
       accessor: 'anDimWidth',
       className: 'name-column-system',
-      type: 'number',  
+      type: 'number',
+      required: true,
       dbType: 'String'  
     },
     {
       Header: 'Globina',
       accessor: 'anDimDepth',
       className: 'name-column-system',
-      type: 'number',  
+      type: 'number',
+      required: true,
       dbType: 'String'  
     },
     {
@@ -933,6 +969,7 @@ const idents = useMemo(
       accessor: 'anDimWeight',
       className: 'name-column-system',
       type: 'number',  
+      required: true,
       dbType: 'String'  
     },
     {
@@ -940,6 +977,7 @@ const idents = useMemo(
       accessor: 'anDimWeightBrutto',
       className: 'name-column-system',
       type: 'number',  
+      required: true,
       dbType: 'String'  
     },
     {
@@ -952,6 +990,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acUM',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'
@@ -966,6 +1005,7 @@ const idents = useMemo(
       columnOrderTranslation: ['Enota', 'Naziv'],
       columnOrderWidth: [200, 300],
       dropdownId: 'acDocType',
+      required: true,
       dropdownPlaceholder: '',
       dropdownHelperField: 'acName',
       dbType: 'String'
@@ -973,6 +1013,7 @@ const idents = useMemo(
     {
       Header: 'Vidno',
       accessor: 'uWMS',
+      required: true,
       className: 'name-column-system',
       type: 'checkbox',  
       dbType: 'String'  
@@ -992,125 +1033,62 @@ const idents = useMemo(
     {
       name: 'system',
       value: systemColumns,
-      insertQuery: "INSERT INTO uWMSSetting(ID, VALUE) VALUES (@ID, @Value)",
-      deleteQuery: "DELETE FROM uWMSSetting WHERE ID = @ID",
-      updateQuery: "UPDATE uWMSSetting SET VALUE = @Value WHERE ID = @anQId",
+      insertHasUser: false,
+      insertUserId: "",
+      updateHasUser: false,
+      updateUserId: "",
+      insertQuery: "INSERT INTO  [dbo].[uWMSSetting] (#fields) VALUES (#parameters)",
+      deleteQuery: "DELETE FROM [dbo].[uWMSSetting] WHERE ID = @anQId",
+      updateQuery: "UPDATE [dbo].[uWMSSetting] SET #update",
       id: "ID",
       idType: "String"
     },
     {
       name: 'subject-codes',
       value: subjectCodes,
-      insertQuery: `INSERT INTO [dbo].[tHE_SetItemExtItemSubj]
-              ([acIdent]
-              ,[acSubject]
-              ,[acCode]
-              ,[anUserIns]
-              ,[uWMSSerialNoBatch])
-        VALUES
-              (@acIdent,
-              @acSubject,
-              @acCode,
-              @user,
-              @uWMSSerialNoBatch)`,
-      deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @id",
-      updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj]
-                    SET [acIdent] = @acIdent
-                      ,[acSubject] = @acSubject
-                      ,[acCode] = @acCode
-                      ,[anUserChg] = @user
-                      ,[uWMSSerialNoBatch] = @uWMSSerialNoBatch
-                  WHERE [anQId] = @anQId;`,
+      insertHasUser: true,
+      insertUserId: "anUserIns",
+      updateHasUser: true,
+      updateUserId: "anUserChg",
+      insertQuery: `INSERT INTO [dbo].[tHE_SetItemExtItemSubj] (#fields) VALUES (#parameters)`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetItemExtItemSubj] WHERE [anQId] = @anQId",
+      updateQuery: `UPDATE [dbo].[tHE_SetItemExtItemSubj] SET #update`,
       id: 'anQId',
       idType: "Int64"
     }, {
       name: 'status-document',
       value: statusDocument,
-      insertQuery: `INSERT INTO [dbo].[tPA_SetDocTypeStat]
-                    ([acDocType]
-                    ,[acStatus]
-                    ,[acName]
-                    ,[anUserIns]
-                    ,[uWMSShow])
-              VALUES
-                    (@acDocType,
-                    ,@acStatus, 
-                    ,@acName, 
-                    ,@user, 
-                    ,<@uWMSShow)`,
-      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocTypeStat] WHERE [anQId] = @id",
-      updateQuery: `UPDATE [dbo].[tPA_SetDocTypeStat]
-                    SET [acDocType] = @acDocType
-                      ,[acStatus] = @acStatus
-                      ,[acName] = @acName
-                      ,[anUserChg] = @user
-                      ,[uWMSShow] = @uWMSShow
-                    WHERE [anQId] = @anQId`,
+      insertHasUser: true,
+      insertUserId: "anUserIns",
+      updateHasUser: true,
+      updateUserId: "anUserChg",
+      insertQuery: `INSERT INTO [dbo].[tPA_SetDocTypeStat] (#fields) VALUES (#parameters)`,
+      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocTypeStat] WHERE [anQId] = @anQId",
+      updateQuery: `UPDATE [dbo].[tPA_SetDocTypeStat] SET #update`,
       id: 'anQId',
       idType: "Int64"
     },
     {
       name: 'type-document',
       value: documentTypes,
-      insertQuery: `INSERT INTO [dbo].[tPA_SetDocType]
-                    ([acDocType]
-                    ,[acSetOf]
-                    ,[acType]
-                    ,[acName]
-                    ,[acIssuer]
-                    ,[acReceiver]
-                    ,[anUserIns]
-                    ,[acWarehouse]
-                    ,[uWMSAcqDocType]
-                    ,[uWMSIssueDocType]
-                    ,[uWMS]
-                    ,[uWMSPartiallyFinishStatus]
-                    ,[uWMSFinishStatus])
-              VALUES
-                    (@acDocType
-                    ,@acSetOf
-                    ,@acType
-                    ,@acName
-                    ,@acIssuer
-                    ,@acReceiver
-                    ,@anUserIns
-                    ,@acWarehouse
-                    ,@uWMSAcqDocType
-                    ,@uWMSIssueDocType
-                    ,@uWMS
-                    ,@uWMSPartiallyFinishStatus
-                    ,@uWMSFinishStatus)`,
-      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocType] WHERE [anQId] = @id",
-      updateQuery: `UPDATE [dbo].[tPA_SetDocType]
-                    SET [acDocType] = @acDocType
-                      ,[acSetOf] = @acSetOf
-                      ,[acType] = @acType
-                      ,[acName] = @acName
-                      ,[acIssuer] = @acIssuer
-                      ,[acReceiver] = @acReceiver
-                      ,[anUserChg] = @anUserChg
-                      ,[acWarehouse] = @acWarehouse
-                      ,[uWMSAcqDocType] = @uWMSAcqDocType
-                      ,[uWMSIssueDocType] = @uWMSIssueDocType
-                      ,[uWMS] = @uWMS
-                      ,[uWMSPartiallyFinishStatus] = @uWMSPartiallyFinishStatus
-                      ,[uWMSFinishStatus] = @uWMSFinishStatus
-                      WHERE [anQId] = @anQId`,
+      insertHasUser: false,
+      insertUserId: "",
+      updateHasUser: false,
+      updateUserId: "",
+      insertQuery: `INSERT INTO (#fields) VALUES (#parameters)`,
+      deleteQuery: "DELETE FROM [dbo].[tPA_SetDocType] WHERE [anQId] = @anQId`",
+      updateQuery: `UPDATE [dbo].[tPA_SetDocType] SET #update`,
       id: 'anQId',
       idType: "Int64"
     },
     {
       name: 'subjects',
       value: subjects,
-      insertQuery: `INSERT INTO [dbo].[tHE_SetSubj]
-                    (#fields)
-              VALUES
-                    (#parameters)`,
+      insertQuery: `INSERT INTO [dbo].[tHE_SetSubj] (#fields) VALUES (#parameters)`,
       insertHasUser: true,
       insertUserId: "anUserIns",
       deleteQuery: "DELETE FROM [dbo].[tHE_SetSubj] WHERE [anQId] = @anQId",
-      updateQuery: `UPDATE [dbo].[tHE_SetSubj]
-                    SET #update`,
+      updateQuery: `UPDATE [dbo].[tHE_SetSubj] SET #update`,
       updateHasUser: true,
       updateUserId: "anUserChg",
       id: 'anQId',
@@ -1118,69 +1096,13 @@ const idents = useMemo(
     } , {
       name: 'idents',
       value: idents,
-      insertQuery: `INSERT INTO [dbo].[tHE_SetItem]
-                    ([acIdent]
-                    ,[acName]
-                    ,[acCode]
-                    ,[acSetOfItem]
-                    ,[acSupplier]
-                    ,[acUM]
-                    ,[anUMToUM2]
-                    ,[acUM2]
-                    ,[acSerialNo]
-                    ,[acActive]
-                    ,[anDimHeight]
-                    ,[anDimWidth]
-                    ,[anDimDepth]
-                    ,[anDimWeight] 
-                    ,[anDimWeightBrutto] 
-                    ,[acUMDim1]
-                    ,[acUMDim2]
-                    ,[anUserIns] -- uporabnik, ki je vpisal
-                    ,[uWMS])
-
-              VALUES
-                    (@acIdent
-                    ,@acName
-                    ,@acCode
-                    ,@acSetOfItem
-                    ,@acSupplier
-                    ,@acUM
-                    ,@anUMToUM2
-                    ,@acUM2
-                    ,@acSerialNo
-                    ,@acActive
-                    ,@anDimHeight
-                    ,@anDimWidth
-                    ,@anDimDepth
-                    ,@anDimWeight
-                    ,@anDimWeightBrutto
-                    ,@acUMDim1
-                    ,@acUMDim2
-                    ,@user
-                    ,@uWMS)`,
-      deleteQuery: "DELETE FROM [dbo].[tHE_SetItem] WHERE [anQId] = @id",
-      updateQuery: `UPDATE [dbo].[tHE_SetItem]
-                    SET [acIdent] = @acIdent
-                      ,[acName] = @acName
-                      ,[acCode] = @acCode
-                      ,[acSetOfItem] = @acSetOfItem
-                      ,[acSupplier] = @acSupplier
-                      ,[acUM] = @acUM
-                      ,[anUMToUM2] = @anUMToUM2
-                      ,[acUM2] = @acUM2
-                      ,[acSerialNo] = @acSerialNo
-                      ,[acActive] = @acActive
-                      ,[anDimHeight] = @anDimHeight
-                      ,[anDimWidth] = @anDimWidth
-                      ,[anDimDepth] = @anDimDepth
-                      ,[anDimWeight] = @anDimWeight
-                      ,[anDimWeightBrutto] = @anDimWeightBrutto
-                      ,[acUMDim1] = @acUMDim1
-                      ,[acUMDim2] = @acUMDim2
-                      ,[anUserChg] = @user
-                      ,[uWMS] = @uWMS
-                  WHERE anQid = @anQId`,
+      insertHasUser: true,
+      insertUserId: "anUserIns",
+      updateHasUser: true,
+      updateUserId: "anUserChg",
+      insertQuery: `INSERT INTO [dbo].[tHE_SetItem] (#fields) VALUES (#parameters)`,
+      deleteQuery: "DELETE FROM [dbo].[tHE_SetItem] WHERE [anQId] = @anQId",
+      updateQuery: `UPDATE [dbo].[tHE_SetItem] SET #update`,
       id: 'anQId',
       idType: "Int64"
     }

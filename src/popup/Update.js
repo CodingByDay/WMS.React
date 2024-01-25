@@ -25,6 +25,10 @@ const Update = (props) => {
 
       connectSelections()
 
+
+
+
+     
     }
 
   }, [props.isVisible]);
@@ -49,6 +53,7 @@ const Update = (props) => {
   const getValue = (inputName) => inputValues[inputName] || '';
 
   const handleInputChange = (event) => {
+
     const { name, value } = event.target;
     setInputValues((prevValues) => ({
       ...prevValues,
@@ -164,11 +169,28 @@ const Update = (props) => {
 
 
 
-        }
+        } else if (structureType === "number") {
+            
+
+
+
+          setInputValues((prevValues) => ({
+            ...prevValues,
+            [key]: value,
+          }));
+
+
+
+
+
+      }
 
         
       }
     }
+
+
+
   }
 
   if (!props.isVisible) {
@@ -241,15 +263,29 @@ const Update = (props) => {
       if(counter == propertyCount) {
         
         if(props.selectedTable.updateHasUser) {
+          if(key!=props.selectedTable.id)  {
           sql += `[${key}] = @${key},`;
+          }else {
+            sql = sql.slice(0, -1)
+          }
           sql += `[${props.selectedTable.updateUserId}] = @${props.selectedTable.updateUserId}`;
           sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
       } else {
+          if(key!=props.selectedTable.id)  {
           sql += `[${key}] = @${key}`;
+          }else {
+            sql = sql.slice(0, -1)
+          }
           sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
       }
       } else {
-        sql += `[${key}] = @${key},`;
+        if(key!=props.selectedTable.id)  {
+
+         sql += `[${key}] = @${key},`;
+        }
+        else {
+          sql = sql.slice(0, -1)
+        }
       }
       
       foundData.push(key)
@@ -265,16 +301,36 @@ const Update = (props) => {
       
       if(counter == propertyCount) {
         
-        if(!props.selectedTable.updateUserId) {
+        if(props.selectedTable.updateUserId) {
+          if(key!=props.selectedTable.id)  {
+
             sql += `[${key}] = @${key},`;
+
+          }
+          else {
+            sql = sql.slice(0, -1)
+          }
             sql += `[${props.selectedTable.updateUserId}] = @${props.selectedTable.updateUserId}`;
             sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
         } else {
+            if(key!=props.selectedTable.id)  {
+
             sql += `[${key}] = @${key}`;
+
+            }
+            else {
+              sql = sql.slice(0, -1)
+            }
             sql += ` WHERE [${props.selectedTable.id}] = @${props.selectedTable.id}`;         
         }
       } else {
+        if(key!=props.selectedTable.id)  {
+
         sql += `[${key}] = @${key},`;
+
+        } else {
+          sql = sql.slice(0, -1)
+        }
       }
       
       foundData.push(key)
@@ -317,6 +373,8 @@ const Update = (props) => {
             theValue = selectedOptions[accessor].id;          
           } else if(type == "checkbox") {
             theValue = getValue(accessor);       
+          } else if(type == "number") {
+            theValue = getValue(accessor);       
           }
 
             var converted = {};
@@ -338,11 +396,14 @@ const Update = (props) => {
       const userId = localStorage.getItem('name');
       const userIdAsInt = parseInt(userId, 10); 
 
-      var parameterUser = { Name: props.selectedTable.updateUserId, Type: 'Int64', Value: userIdAsInt  } 
+      if(props.selectedTable.updateUserId!="") {
+       var parameterUser = { Name: props.selectedTable.updateUserId, Type: 'Int64', Value: userIdAsInt  } 
+       params.push(parameterUser);
+
+      }
       var parameterId = { Name: props.selectedTable.id, Type: idType, Value: props.id  }
 
 
-      params.push(parameterUser);
       params.push(parameterId);
 
     
@@ -437,7 +498,12 @@ const Update = (props) => {
         {props.selectedTable.value.map((column) => (
            column.type !== 'nothing' && (
             <div key={column.accessor} className="form-group insert">
-              <label htmlFor={column.accessor}>{column.Header}: {(selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || ''}</label>
+
+
+              <label htmlFor={column.accessor}>
+                {column.Header}: {((selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || '').substring(0, 20)}
+              </label>              
+              
               {column.type === 'dropdown' ? (
               <div className='complete select'>
 
@@ -465,7 +531,7 @@ const Update = (props) => {
                   required={false}
                   className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
                   checked={column.type === 'checkbox' ? getValue(column.accessor) : undefined}
-                  value={column.type !== 'checkbox' ? getValue(column.accessor) : undefined}
+                  value={column.type !== 'checkbox' ? getValue(column.accessor) : ""}
                   onChange={handleInputChange} // Update the state on change
               />
 
