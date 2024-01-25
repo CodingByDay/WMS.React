@@ -361,7 +361,7 @@ const Update = (props) => {
         {props.selectedTable.value.map((column) => (
            column.type !== 'nothing' && (
             <div key={column.accessor} className="form-group insert">
-              <label htmlFor={column.accessor}>{column.Header}:</label>
+              <label htmlFor={column.accessor}>{column.Header}: {(selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || ''}</label>
               {column.type === 'dropdown' ? (
               <div className='complete select'>
 
@@ -378,16 +378,7 @@ const Update = (props) => {
               
               />
 
-              <label htmlFor={column.accessor+ "-helper"}>Dodatno:</label>
-
-              <input
-              type='text'
-              id={column.accessor + "-helper"}
-              name={column.accessor+  "-helper"}
-              className='form-control'
-              value={(selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || ''} // Set the value from state
-              contentEditable={false}
-            />
+        
 
             </div>
               ) : (
