@@ -500,7 +500,7 @@ const documentTypes = useMemo(
       accessor: 'uWMSAcqDocType',
       className: 'name-column-system',
       type: 'dropdown',
-      sourceSelect: `SELECT acDocType, acName FROM tPA_SetDocType WHERE acSetOf = 'F AND acType = 'I'`,
+      sourceSelect: `SELECT acDocType, acName FROM tPA_SetDocType WHERE acSetOf = 'F AND acType = 'P'`,
       columnOrder: ['acDocType', 'acName'],
       columnOrderTranslation: ['Vrsta dokumenta', 'Naziv'],
       columnOrderWidth: [200, 300],

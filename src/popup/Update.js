@@ -53,12 +53,20 @@ const Update = (props) => {
   const getValue = (inputName) => inputValues[inputName] || '';
 
   const handleInputChange = (event) => {
+    console.log(inputValues)
+    if(event.target.type =="checkbox") {
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [event.target.name]: !inputValues[event.target.name],
+      }));
 
+    } else {
     const { name, value } = event.target;
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+      }));
+  }
   };
 
     const connectData = async () => {
@@ -372,7 +380,7 @@ const Update = (props) => {
           } else if(type == "dropdown") {
             theValue = selectedOptions[accessor].id;          
           } else if(type == "checkbox") {
-            theValue = getValue(accessor);       
+            theValue = getValue(accessor);  
           } else if(type == "number") {
             theValue = getValue(accessor);       
           }
@@ -385,8 +393,12 @@ const Update = (props) => {
             } else if(dbType == "Boolean") {
               if(theValue == "") {
                 converted = false;
+              } else {
+                converted = theValue;
               }
             }
+
+
 
            var parameter = { Name: accessor, Type: dbType, Value: converted  }
            params.push(parameter);     
@@ -530,9 +542,9 @@ const Update = (props) => {
                   name={column.accessor}
                   required={false}
                   className={column.type === 'checkbox' ? 'form-check-input' : 'form-control'}
-                  checked={column.type === 'checkbox' ? getValue(column.accessor) : undefined}
-                  value={column.type !== 'checkbox' ? getValue(column.accessor) : ""}
+                  {...(column.type !== 'checkbox' ? { value: getValue(column.accessor) } : {checked: getValue(column.accessor)})}
                   onChange={handleInputChange} // Update the state on change
+                
               />
 
               )}
