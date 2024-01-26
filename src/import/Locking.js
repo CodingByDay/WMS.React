@@ -9,7 +9,8 @@ export default function Locking(props) {
 
   function setChosenColumn(column) {
     var columnObj = props.column;
-    columnObj.connection = column;
+    columnObj.connection = column.Name;
+    columnObj.database = column.Database;
     props.onChosen(columnObj);
   }
 
@@ -32,7 +33,7 @@ export default function Locking(props) {
         <div className='choices'style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em', gap: '1em'}}>
 
             {props.columns.map((column, index) => (
-               <button className='actions smallerr' onClick={() => setChosenColumn(column)}>{column}</button>
+               <button className='actions smallerr' onClick={() => setChosenColumn(column)}>{column.Name}</button>
             ))}
 
         </div>

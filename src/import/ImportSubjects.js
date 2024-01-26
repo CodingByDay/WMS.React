@@ -4,8 +4,11 @@ import ImportWizard from "./ImportWizzard";
 export function ImportSubjects(props) {
 
 
-    var columns = ["Subjekt", "Ident", "Barkod", "Korisnik"]
-    
+    var columns = [{ Name: 'Subject', Database: 'String'}, 
+                   { Name: 'Ident', Database: 'String'}, 
+                   { Name: 'Uporabnik', Database: 'String'}, 
+                   { Name: 'Else', Database: 'String'}]
+
     return (
         <div className="import subjects">
             <Header />

@@ -41,7 +41,12 @@ const ImportWizard = (props) => {
   };
 
   const handleHeaderCellClick = (columnId) => {
+
     // Add your custom logic when a header cell is clicked
+    if(columnStatus[columnId] == "locked") {
+      toggleColumnStatus(columnId)
+    }
+
 
     var currentColumn = columns.find((table) => table.accessor === columnId);
     setCurrentLocking(currentColumn)
@@ -120,6 +125,10 @@ const ImportWizard = (props) => {
         Swal.fire('Napaka!', 'Morate zakleniti vse podatkovne povezave.', 'error');
     } else {
         // Do the actual method.
+
+        Swal.fire('Uspeh!', 'Uspešno dodani zapisi.', 'success');
+
+        console.log(columns)
     }
   }
 
