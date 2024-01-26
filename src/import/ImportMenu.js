@@ -73,16 +73,16 @@ export function ImportMenu() {
   
      <div className = "menu"> 
 
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
+          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-subjects")}>
             Subjekti
        
           </button>
 
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
+          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-idents")}>
             Identi
           </button>
 
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
+          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-orders")}>
             Naročila
          
           </button>
