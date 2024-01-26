@@ -766,9 +766,16 @@ span.actions.smaller {
   color: white!important;
 }
 
+
+.header h {
+  width: max-content;
+}
+
+
 .center-button button {
   padding-top: 10px!important;
 }
+
 span.actions.smallerr, button.actions.smallerr {
   height: 2.3em;
   padding-left: 1em;

@@ -3,11 +3,15 @@ import { useDropzone } from 'react-dropzone';
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import ImportSheetChoice from './ImportSheetChoice';
+
 const ImportWizard = () => {
+
   const [fileContent, setFileContent] = useState([]);
   const [columns, setColumns] = useState([]);
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [sheetNames, setSheetNames] = useState([]);
+  const [workbook, setWorkbook] = useState({});
+
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -18,7 +22,7 @@ const ImportWizard = () => {
 
 
   const onChoiceReceived = (sheetName) => {
-
+        setIsPopupOpen(false)
         const sheetNameString = sheetName;     
         const sheet = workbook.Sheets[sheetNameString];
         const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
@@ -38,14 +42,14 @@ const ImportWizard = () => {
       // Check if the file is in Excel format
       if (file.name.endsWith('.xls') || file.name.endsWith('.xlsx')) {
         const workbook = XLSX.read(content, { type: 'array' });
-        setSheetNames(workbook.SheetNames)       
+        setWorkbook(workbook);
+        setSheetNames(workbook.SheetNames) 
+        openPopup();      
       } else if (file.name.endsWith(".txt")){
         // Handle other types of files
         // (You may need to implement logic based on the specific file type)
       }
-
-
-      
+     
     };
 
     reader.readAsArrayBuffer(file);
@@ -64,7 +68,7 @@ const ImportWizard = () => {
     <div>
 
 
-      <ImportSheetChoice sheets={sheetNames} isOpen={isPopupOpen} onClose={closePopup} />
+      <ImportSheetChoice sheets={sheetNames} onChosen = {onChoiceReceived} isOpen={isPopupOpen} onClose={closePopup} />
 
 
       <div {...getRootProps()} style={dropzoneStyle}>
