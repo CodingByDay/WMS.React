@@ -7,6 +7,8 @@ import $ from 'jquery';
 import { useSelector, useDispatch } from 'react-redux'
 import Analytics from './Analytics';
 import {store} from '../store/store';
+import ImportMenu from "../import/ImportMenu";
+
 export function Dashboard() { 
 
   let navigate = useNavigate();
@@ -85,6 +87,11 @@ export function Dashboard() {
               <img alt={""} src='stock.png' width={100} />
             </button>
 
+            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import")}>
+              Uvoz
+            
+            </button>
+
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
               Nastavitve
               <img alt={""} src='settings.png' width={100} />
@@ -93,20 +100,9 @@ export function Dashboard() {
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("analytics")} id='settings-hover' >
             Analitika
             <img alt={""} src='monitor-icon.png' id='analytics' width={50} />
-            </button>
-
-
-
-
-
-
-
-            
+            </button>         
            
-            </div>
-
-          
-      
+            </div>      
       </div> 
       <Footer />
       </div> 

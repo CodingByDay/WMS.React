@@ -24,17 +24,18 @@ import SubjectCodes from "./settings/SubjectCodes"
 import StatusDocument from './settings/StatusDocument';
 import Idents from "./settings/Idents"
 import Subjects from "./settings/Subjects"
-
+import {ImportMenu} from "./import/ImportMenu"
 axios.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
 
   return response;
 }, function (error) {
-  // Any status codes that falls outside the range of 2xx cause this function to trigger
-  // Do something with response error
-  
-  window.location.href = "/internet";
+   // Any status codes that falls outside the range of 2xx cause this function to trigger
+   // Do something with response error
+   alert("Error")
+   console.log(error)
+   window.location.href = "/internet";
 });
 
 function App() {
@@ -52,6 +53,18 @@ function App() {
         <Route path="/logout" element={<Auth />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/documents" element={<DocumentType  />} />
+
+
+        // Import //
+
+        <Route path="/import" element={<ImportMenu  />} />
+
+
+
+
+
+
+
 
         // Settings // 
 
