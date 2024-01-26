@@ -9,7 +9,7 @@
 
 
 
-table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects, table.react-table-idents {
+table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects, table.react-table-idents, .react-table-wizzard {
   width: 95%;
 }
 
@@ -185,7 +185,7 @@ button.action-buttons.white:hover {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects, .react-table-idents {
+.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects, .react-table-idents, .react-table-wizzard {
  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
@@ -339,17 +339,49 @@ span#openRangeTransaction {
 .user-settings-table tr {
   background: #081A45;
 }
+
+.react-table-wizzard tr, th{
+  background: #081A45;
+
+}
+
 table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover {
   background: rgb(255, 255, 255, 0.2);
 
 }
 
+.export-button-div button {
+  padding-top: 8px!important;
+}
+
+.outer button {
+  padding-top: 10px!important;
+}
 
 .react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td {
   padding: 12px; /* Adjust the padding as needed */
 
 }
+.lower-components {
+  margin-top: 2em;
+}
+.export-button-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+
+table.react-table-wizzard tr th:hover,table.react-table-wizzard tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+
+}
+
+
+.react-table-wizzard th, .react-table-wizzard td, .react-table-wizzard th, .react-table-wizzard td {
+  padding: 12px; /* Adjust the padding as needed */
+
+}
 
 table.react-table-idents tr th:hover,table.react-table-idents tr th:hover {
   background: rgb(255, 255, 255, 0.2);

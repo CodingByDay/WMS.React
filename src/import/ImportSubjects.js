@@ -4,13 +4,14 @@ import ImportWizard from "./ImportWizzard";
 export function ImportSubjects(props) {
 
 
-
+    var columns = ["Subjekt", "Ident", "Barkod", "Korisnik"]
+    
     return (
         <div className="import subjects">
             <Header />
 
 
-                <ImportWizard />
+                <ImportWizard columns = {columns} />
 
 
             <Footer />
