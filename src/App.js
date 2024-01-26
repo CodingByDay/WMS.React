@@ -28,6 +28,8 @@ import {ImportMenu} from "./import/ImportMenu"
 import {ImportOrders} from "./import/ImportOrders"
 import {ImportIdents} from "./import/ImportIdents"
 import {ImportSubjects} from "./import/ImportSubjects"
+import React, { useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 
 axios.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
@@ -40,7 +42,14 @@ axios.interceptors.response.use(function (response) {
    window.location.href = "/internet";
 });
 
+
+
+
+
 function App() {
+
+ 
+
   return (
     <BrowserRouter>
       <Routes>

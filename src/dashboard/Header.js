@@ -54,6 +54,9 @@ export default function Header(props) {
 
 
         <div className="navbar">
+
+            <div id="textOverlay">Aplikacija trenutno ne podpira mobilne naprave.</div>
+
             <div className='logo navbar' id='back-button' >
                 <center><img src='logo-wms.png' className='logo' alt='Riko WMS' height={30} draggable="false"/></center>
             </div>
@@ -66,6 +69,8 @@ export default function Header(props) {
                 </span>
             </div>
         </div>
+
+
 
 
     ); 

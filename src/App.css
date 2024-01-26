@@ -1529,10 +1529,17 @@ button.btn.btn-primary.settingsButton.dashboard {
   width: 20em;
 }
 
+.textOverlay {
+
+}
+
+
+
+
 .menu {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 30%;
   margin: auto;
   top: 45vh;
   position: relative;
