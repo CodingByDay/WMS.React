@@ -69,21 +69,25 @@ export function ImportMenu() {
   return ( 
     <div>
         <Header/>
-   <div className='main-menu-design'>
-  
-     <div className = "menu"> 
+        <div className='main-menu-design'>
+    
+    <div className = "menu"> 
 
           <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-subjects")}>
             Subjekti
-       
+            <img alt={""} src='rating-adjusted.png' width={100} />
+
           </button>
 
           <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-idents")}>
             Identi
+            <img alt={""} src='stock.png' width={100} />
+
           </button>
 
           <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-orders")}>
             Naročila
+            <img alt={""} src='listing.png' width={100} />
          
           </button>
 

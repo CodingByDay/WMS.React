@@ -89,7 +89,8 @@ export function Dashboard() {
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import")}>
               Uvoz
-            
+              <img alt={""} src='import.png' width={100} />
+
             </button>
 
             <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
