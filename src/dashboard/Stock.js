@@ -86,11 +86,20 @@ export default function Stock() {
           window.location.href = "/";
       }
     }
-    
+    const customStyles = {
+      dropdown: (provided) => ({
+        ...provided,
+        zIndex: 9999, // Set a higher z-index value
+      }),
+    };
 
-  const fetchData = async () => {
-      StockService.executeSQLQuery("select acWarehouse, acIdent, anQty, acLocation from uWMSStock;", [])
+  const fetchData = async (sql, params) => {
+
+
+
+      StockService.executeSQLQuery(sql, params)
       .then(result => {
+        console.log(result);
         setData(result)
       })
   };
@@ -99,59 +108,58 @@ export default function Stock() {
 
 
     const handleInventory = (e) => {  
+
+      
+
       var usedFilters = []
       var params = [];
       var sql = "SELECT acWarehouse, acIdent, anQty, acLocation FROM uWMSStock";
-      if(typeof warehouse !== "undefined") {
+      if(typeof warehouse !== "undefined" && warehouse !== null) {
         usedFilters.push("warehouse");
       }
-      if(typeof location !== "undefined") {
+      if(typeof location !== "undefined" && location !== null) {
         usedFilters.push("location");
       }
-      if(typeof ident !== "undefined") {
+      if(typeof ident !== "undefined" && ident !== null) {
         usedFilters.push("ident");
       }
 
       if(usedFilters.length != 0) {
         sql += " WHERE";
       } 
-
       for(var i = 0; i < usedFilters.length; i++) {
           if(i == 0) {
             if(usedFilters[i] == "warehouse") {
               sql += " acWarehouse = @warehouse";
-              var parameter = { Name: "warehouse", Type: "String", Value: warehouse  };
+              var parameter = { Name: "warehouse", Type: "String", Value: warehouse.value  };
               params.push(parameter);     
             } else if(usedFilters[i] == "location") {
               sql += " acLocation = @location";
-              var parameter = { Name: "location", Type: "String", Value: location  };
+              var parameter = { Name: "location", Type: "String", Value: location.value   };
               params.push(parameter);   
             } else if(usedFilters[i] == "ident") {
               sql += " acIdent = @ident";
-              var parameter = { Name: "ident", Type: "String", Value: ident  };
+              var parameter = { Name: "ident", Type: "String", Value: ident.value   };
               params.push(parameter);   
             }
           } else {
             if(usedFilters[i] == "warehouse") {
               sql += " AND acWarehouse = @warehouse";
-              var parameter = { Name: "warehouse", Type: "String", Value: warehouse  };
+              var parameter = { Name: "warehouse", Type: "String", Value: warehouse.value   };
               params.push(parameter);   
             } else if(usedFilters[i] == "location") {
               sql += " AND acLocation = @location";
-              var parameter = { Name: "location", Type: "String", Value: location  };
+              var parameter = { Name: "location", Type: "String", Value: location.value   };
               params.push(parameter);   
             } else if(usedFilters[i] == "ident") {
               sql += " AND acIdent = @ident";
-              var parameter = { Name: "ident", Type: "String", Value: ident  };
+              var parameter = { Name: "ident", Type: "String", Value: ident.value   };
               params.push(parameter);   
             }
           } 
        }
-
-
        sql += ";";
-       alert(sql);
-       console.log(params);
+       fetchData(sql, params);
     }
 
 
@@ -159,14 +167,27 @@ export default function Stock() {
 
 
     function handleIdentChange(event) { 
-      setIdent(event);
+      if(event.value!="") {
+        setIdent(event); 
+      } else {
+        setIdent(null);
+      }
     }
+
     function handleLocationChange(event) {
-      setLocation(event);
-     }
+      if(event.value!="") {
+        setLocation(event); 
+      } else {
+        setLocation(null);
+      }
+    }
 
     function handleWarehouseChange(event) { 
-        setWarehouse(event); 
+        if(event.value!="") {
+          setWarehouse(event); 
+        } else {
+          setWarehouse(null);
+        }
         StockService.getLocations(event.value).then(response => {  
         var locations = [];
         locations.push({value: "", label: ""}); 
@@ -191,9 +212,9 @@ export default function Stock() {
 
         <div className ="stock-container-filters">  
 
-        <Select className='select-filters-stock' placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
-        <Select className='select-filters-stock' placeholder={"Pozicija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
-        <Select className='select-filters-stock' placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
+        <Select className='select-filters-stock' styles={customStyles} placeholder={"Skladišče"} value={warehouse} onChange={handleWarehouseChange} options={warehouses} id='warehouseStock' />
+        <Select className='select-filters-stock' styles={customStyles} placeholder={"Lokacija"} value={location}  onChange={handleLocationChange} options={locations} id='locationStock'/>
+        <Select className='select-filters-stock' styles={customStyles} placeholder={"Ident"} value={ident} onChange={handleIdentChange} options={idents} id='identStock'/>
 
 
 

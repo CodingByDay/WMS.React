@@ -10,7 +10,8 @@ const StockService  =  {
   async  executeSQLQuery(sqlQuery, parameters) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/Services/Device/?mode=sql&type=sel`; 
     const requestObject = {
-      SQL: sqlQuery
+      SQL: sqlQuery,
+      Parameters: parameters,
     };
   
     try {

@@ -102,7 +102,7 @@ button.ant-btn {
 }
 
 .user-settings-table {
-  margin-top: 1em;
+  margin-top: 5em;
 }
 
 :where(.css-dev-only-do-not-override-18iikkb).ant-modal .ant-modal-content {
@@ -210,20 +210,6 @@ button.action-buttons.white:hover {
 
 
 
-/* Styles for table headers */
-.react-table-stock th {
-  background-color: #081A45; /* Light background color */
-  font-weight: bold; /* Bold font for headers */
-  padding: 8px; /* Padding for headers */
-  text-align: left; /* Aligns header text to the left */
-  border: 1px solid #ccc; /* Adds borders around headers */
-}
-
-/* Styles for table rows */
-.react-table-stock td {
-  padding: 8px; /* Padding for table cells */
-  border: 1px solid #ccc; /* Adds borders around cells */
-}
 
 
 /* Alternate row background color for better readability */
@@ -368,6 +354,10 @@ table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover
 
 }
 
+table.react-table-stock th {
+  z-index: 0!important;
+}
+
 .export-button-div button {
   padding-top: 8px!important;
 }
@@ -376,7 +366,7 @@ table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover
   padding-top: 10px!important;
 }
 
-.react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td {
+.react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td, .react-table-stock th, .react-table-stock td {
   padding: 12px; /* Adjust the padding as needed */
 
 }
