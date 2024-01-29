@@ -99,7 +99,6 @@ export default function Stock() {
 
       StockService.executeSQLQuery(sql, params)
       .then(result => {
-        console.log(result);
         setData(result)
       })
   };

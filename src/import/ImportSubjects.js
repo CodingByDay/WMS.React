@@ -32,7 +32,7 @@ export function ImportSubjects(props) {
                    { Name: 'acCode', Database: 'String', default: 'F', required: false},
                    { Name: 'acRegNo', Database: 'String', default: 'F', required: false},
                    { Name: 'acActive', Database: 'String', default: 'T', required: false},
-                   { Name: 'anUserIns', Database: 'Integer', default: '0', required: false},
+                   { Name: 'anUserIns', Database: 'Int32', default: '0', required: false},
                    { Name: 'uWMSStock', Database: 'Boolean', default: '1', required: false},
                    { Name: 'uWMS', Database: 'Boolean', default: '1', required: false},
                    { Name: 'uWMSSubj', Database: 'Boolean', default: '1', required: false},

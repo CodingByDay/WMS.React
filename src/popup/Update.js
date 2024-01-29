@@ -53,7 +53,6 @@ const Update = (props) => {
   const getValue = (inputName) => inputValues[inputName] || '';
 
   const handleInputChange = (event) => {
-    console.log(inputValues)
     if(event.target.type =="checkbox") {
       setInputValues((prevValues) => ({
         ...prevValues,

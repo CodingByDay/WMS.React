@@ -9,6 +9,8 @@ import { FaUnlock } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Loader from '../loader/Loader';
+import ImportService from '../services/ImportService';
+
 
 const ImportWizzard = (props) => {
 
@@ -97,8 +99,6 @@ const ImportWizzard = (props) => {
             initialColumnStatus[header] = 'unlocked'; // You can use 'locked' to initialize as locked if needed
         });
         setColumnStatus(initialColumnStatus);
-
-
         setFileContent(transformedData); // Exclude the header row
   };
 
@@ -136,21 +136,83 @@ const ImportWizzard = (props) => {
     if(unlocked) {
         Swal.fire('Napaka!', 'Morate zakleniti vse podatkovne povezave.', 'error');
     } else {
-        // Import begin
+          // Import begin
+          // Show the loader
+          props.loader(true)
+          // Begin work
+          var columnsData = props.columns;
+          var data = fileContent;
 
-        // Show the loader
-        props.loader(true)
+          for(var i = 0; i < columns.length; i++) {
+             var connection = columns[i].connection;
+             var accessor = columns[i].accessor;
+             columnsData[columnsData.findIndex(column => column.Name == connection)].connection = accessor;            
+          }
+
+          for(var i = 0; i < data.length; i++) {
+              var params = [];
+              var currentObject = data[i]
+              for (var col = 0 ; col < columnsData.length ; col++) {
+                  var columnInformation = columnsData[col];
+                  var found = currentObject[columnInformation.connection]
+                  if (typeof found === "undefined") {
+                      // Not found set to default value //
+                      var defaultValue = columnInformation.default;
+                      var type = columnInformation.Database;      
+                      
+                      if(type == "Boolean") {
+                        if(defaultValue == "1") {
+                            defaultValue = true;
+                        } else {
+                            defaultValue = false;
+                        }
+                      }
+
+                      if(type == "Int32") {
+                        defaultValue = Number(defaultValue);
+                      }
 
 
 
 
+                      var parameter = { Name: columnInformation.Name, Type: type, Value: defaultValue  }
+                      params.push(parameter);   
+                  } else {
+                      var defaultValue = columnInformation.default;
+                      var type = columnInformation.Database;     
+                      
+                      if(type == "Boolean") {
+                        if(defaultValue == "1") {
+                            found = true;
+                        } else {
+                            found = false;
+                        }
+                      }
 
+                      if(type == "Int32") {
+                        found = Number(defaultValue);
+                      }
 
+                      var parameter = { Name: columnInformation.Name, Type: type, Value: found  }
+                      params.push(parameter); 
+              }
+            }
+          
+              // Import the row in the database //
+              
+              console.log(params)
 
+              /* ImportService.insertSQLQuery(props.sql, params)
+                .then(result => {
+                    console.log(result);
+                })
+              */
+              // Import the row in the database //
 
-        props.loader(false)
-    }
-  }
+          }
+          props.loader(false)
+       }
+     }
 
 
   const onDrop = (acceptedFiles) => {
