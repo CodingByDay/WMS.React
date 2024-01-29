@@ -9,7 +9,7 @@ export function ImportIdents(props) {
             <Header />
                 
 
-            <ImportWizard />
+            <ImportWizzard />
 
 
 

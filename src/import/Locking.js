@@ -30,7 +30,7 @@ export default function Locking(props) {
             <h4>Izberite</h4>
         </div>
 
-        <div className='choices'style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em', gap: '1em'}}>
+        <div className='choices'style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px'}}>
 
             {props.columns.map((column, index) => (
                <button className='actions smallerr' onClick={() => setChosenColumn(column)}>{column.Name}</button>

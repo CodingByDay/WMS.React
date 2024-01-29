@@ -8,9 +8,9 @@ import { FaSearch } from 'react-icons/fa'; // Import the search icon
 import { FaUnlock } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import Loader from '../loader/Loader';
 
-
-const ImportWizard = (props) => {
+const ImportWizzard = (props) => {
 
   const [fileContent, setFileContent] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -136,11 +136,19 @@ const ImportWizard = (props) => {
     if(unlocked) {
         Swal.fire('Napaka!', 'Morate zakleniti vse podatkovne povezave.', 'error');
     } else {
-        // Do the actual method.
+        // Import begin
 
-        Swal.fire('Uspeh!', 'Uspešno dodani zapisi.', 'success');
+        // Show the loader
+        props.loader(true)
 
-        console.log(columns)
+
+
+
+
+
+
+
+        props.loader(false)
     }
   }
 
@@ -158,8 +166,8 @@ const ImportWizard = (props) => {
         setSheetNames(workbook.SheetNames) 
         openPopup();      
       } else if (file.name.endsWith(".txt")){
-        // Handle other types of files
-        // (You may need to implement logic based on the specific file type)
+        // 
+        // 
       }
      
     };
@@ -208,6 +216,7 @@ const ImportWizard = (props) => {
   return (
     <div>
 
+  
 
       <ImportSheetChoice sheets={sheetNames} onChosen = {onChoiceReceived} isOpen={isPopupOpen} onClose={closePopup} />
       <Locking columns={props.columns} column={currentLocking} onChosen = {onChoiceReceivedLock} isOpen={lockingVisibility} onClose={closePopupLock} />
@@ -336,4 +345,4 @@ const dropzoneStyle = {
   cursor: 'pointer',
 };
 
-export default ImportWizard;
+export default ImportWizzard;
