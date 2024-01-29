@@ -73,7 +73,7 @@ export function ImportSubjects(props) {
                 ,@anUserIns
                 ,@uWMSStock
                 ,@uWMS
-                ,@uWMSSubj`
+                ,@uWMSSubj)`
     
 
     return (

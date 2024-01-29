@@ -167,13 +167,9 @@ const ImportWizzard = (props) => {
                             defaultValue = false;
                         }
                       }
-
                       if(type == "Int32") {
                         defaultValue = Number(defaultValue);
                       }
-
-
-
 
                       var parameter = { Name: columnInformation.Name, Type: type, Value: defaultValue  }
                       params.push(parameter);   
@@ -198,19 +194,19 @@ const ImportWizzard = (props) => {
               }
             }
           
-              // Import the row in the database //
-              
-              console.log(params)
+               // Import the row in the database //
 
-              /* ImportService.insertSQLQuery(props.sql, params)
+
+               ImportService.insertSQLQuery(props.sql, params)
                 .then(result => {
-                    console.log(result);
+                  Swal.fire('Uvoženi podatki.', 'Uvoz je končan.', 'success');
+                  props.loader(false)
                 })
-              */
+              
               // Import the row in the database //
 
           }
-          props.loader(false)
+        
        }
      }
 
