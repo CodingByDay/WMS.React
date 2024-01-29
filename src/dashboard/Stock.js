@@ -8,6 +8,7 @@ import StockService  from '../services/StockService';
 import $ from 'jquery'; 
 import Table from '../table/Table';
 import DataAccess from "../utility/DataAccess";
+import TableForgeDashboard from './TableForgeDashboard';
 
 export default function Stock() { 
 
@@ -20,8 +21,7 @@ export default function Stock() {
     const [ident, setIdent] = useState();
     const [location, setLocation] = useState();
     const [warehouse, setWarehouse] = useState();
-    // State for the rows
-    const [rows, setRows] = useState([]);
+    const [data, setData] = useState([]);
 
 
 
@@ -87,46 +87,77 @@ export default function Stock() {
       }
     }
     
+
+  const fetchData = async () => {
+      StockService.executeSQLQuery("select acWarehouse, acIdent, anQty, acLocation from uWMSStock;", [])
+      .then(result => {
+        setData(result)
+      })
+  };
+
+
+
+
     const handleInventory = (e) => {  
-      var valueIdent = "";
-        var valueWarehouse = "";
-        var valueLocation = "";
+      var usedFilters = []
+      var params = [];
+      var sql = "SELECT acWarehouse, acIdent, anQty, acLocation FROM uWMSStock";
+      if(typeof warehouse !== "undefined") {
+        usedFilters.push("warehouse");
+      }
+      if(typeof location !== "undefined") {
+        usedFilters.push("location");
+      }
+      if(typeof ident !== "undefined") {
+        usedFilters.push("ident");
+      }
 
-        if(typeof ident === "undefined") {
-             valueIdent  = "|";
-        } else {
-             valueIdent = ident.value;
-        }
-        if(typeof warehouse === "undefined") {
-            valueWarehouse  = "|";
-        } else {
-            valueWarehouse  = warehouse.value;
-        }
-        if(typeof location === "undefined") {
-            valueLocation  = "|";
-        } else {
-            valueLocation = location.value;
-        }    
-        var finalParams = valueWarehouse +  "|" + valueLocation + "|" + valueIdent; 
-        StockService.getStock(finalParams).then(response => {
-        var stocks = [];
-        var stockAmount = 0;
+      if(usedFilters.length != 0) {
+        sql += " WHERE";
+      } 
 
-        for(var i = 0; i < response.Items.length; i++) {  
-          
-            var ident = DataAccess.getData(response.Items[i], "Ident", "StringValue");
-            var location = DataAccess.getData(response.Items[i], "Location", "StringValue");
-            var qty = DataAccess.getData(response.Items[i], "RealStock", "DoubleValue");
-            stocks.push({Ident: ident, RealStock: qty, Location: location});
+      for(var i = 0; i < usedFilters.length; i++) {
+          if(i == 0) {
+            if(usedFilters[i] == "warehouse") {
+              sql += " acWarehouse = @warehouse";
+              var parameter = { Name: "warehouse", Type: "String", Value: warehouse  };
+              params.push(parameter);     
+            } else if(usedFilters[i] == "location") {
+              sql += " acLocation = @location";
+              var parameter = { Name: "location", Type: "String", Value: location  };
+              params.push(parameter);   
+            } else if(usedFilters[i] == "ident") {
+              sql += " acIdent = @ident";
+              var parameter = { Name: "ident", Type: "String", Value: ident  };
+              params.push(parameter);   
+            }
+          } else {
+            if(usedFilters[i] == "warehouse") {
+              sql += " AND acWarehouse = @warehouse";
+              var parameter = { Name: "warehouse", Type: "String", Value: warehouse  };
+              params.push(parameter);   
+            } else if(usedFilters[i] == "location") {
+              sql += " AND acLocation = @location";
+              var parameter = { Name: "location", Type: "String", Value: location  };
+              params.push(parameter);   
+            } else if(usedFilters[i] == "ident") {
+              sql += " AND acIdent = @ident";
+              var parameter = { Name: "ident", Type: "String", Value: ident  };
+              params.push(parameter);   
+            }
+          } 
+       }
 
-            // Data access is not defined.
-        }
-        setRows(stocks);
-        }); 
 
-    
+       sql += ";";
+       alert(sql);
+       console.log(params);
+    }
 
-  }
+
+
+
+
     function handleIdentChange(event) { 
       setIdent(event);
     }
@@ -149,7 +180,7 @@ export default function Stock() {
 
     // Set up the value for the back button 
     localStorage.setItem('back', "dashboard")
-
+    const name = "stock"
     
     return ( 
 
@@ -169,9 +200,8 @@ export default function Stock() {
         <span className='actions smallerr' onClick={handleInventory}>Prikaži</span>
 
         </div>
-        <Table table = "stock" data={rows} className="stock-table" type="stock" class = "table_responsive_stock"  />
 
-
+        <TableForgeDashboard name={name} tableData = {data} />
 
       
 

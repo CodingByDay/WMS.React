@@ -42,13 +42,22 @@ const ImportWizard = (props) => {
 
   const handleHeaderCellClick = (columnId) => {
 
-    // Add your custom logic when a header cell is clicked
+
     if(columnStatus[columnId] == "locked") {
       toggleColumnStatus(columnId)
+      var currentColumn = columns.find((table) => table.accessor === columnId);
+      currentColumn.connection = "";
+      setColumns((prevColumns) => {
+        const col = [...prevColumns];
+        const index = col.findIndex((element) => element.accessor === currentColumn.accessor);
+        col[index] = currentColumn;
+        return col;
+      });
     }
 
 
     var currentColumn = columns.find((table) => table.accessor === columnId);
+    
     setCurrentLocking(currentColumn)
     setLocking(true);
 
@@ -60,7 +69,7 @@ const ImportWizard = (props) => {
         const sheet = workbook.Sheets[sheetNameString];
         const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
         const headers = excelData[0];
-        const tableColumns = headers.map((header) => ({ Header: header, accessor: header }));
+        const tableColumns = headers.map((header) => ({ Header: header, accessor: header, connection: '' }));
         setColumns(tableColumns);
 
         // Get the maximum number of columns in any row
@@ -98,9 +107,12 @@ const ImportWizard = (props) => {
 
 
   const onChoiceReceivedLock = (column) => {
-    var col = columns;
-    col[col.findIndex((element) => element.accessor == column.accessor)] = column;
-    setColumns(col);
+    setColumns((prevColumns) => {
+      const col = [...prevColumns];
+      const index = col.findIndex((element) => element.accessor === column.accessor);
+      col[index] = column;
+      return col;
+    });
     setLocking(false)
     toggleColumnStatus(column.accessor)
   };
@@ -281,6 +293,8 @@ const ImportWizard = (props) => {
                             
                         />
                         )}
+                      {" " + column.render('connection')}
+
                     </div>
                     </th>
                 ))}
