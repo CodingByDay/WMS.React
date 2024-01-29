@@ -71,13 +71,15 @@ function TableForgeDashboard({ refresh, name, tableData }) {
     {
       columns: selectedTable ? selectedTable.value : [],
       data: tableData,
+      initialState: { pageIndex: 0, pageSize: 10 }, // Set the initial page size here
+
     },
     useGlobalFilter,
     usePagination // Add the usePagination hook
   );
 
   return (
-    <div className='global-react-table' >
+    <div className='global-react-table' style={{ height: '100vh' }}>
       
 
 

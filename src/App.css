@@ -102,7 +102,7 @@ button.ant-btn {
 }
 
 .user-settings-table {
-  margin-top: 5em;
+  margin-top: 1em;
 }
 
 :where(.css-dev-only-do-not-override-18iikkb).ant-modal .ant-modal-content {
@@ -180,8 +180,7 @@ button.action-buttons.white:hover {
 }
 /* Styles for the table container */
 .user-settings-table {
-  max-height: 400px; /* Set the maximum height for the container */
-
+  max-height: 70vh; /* Set the maximum height for the container */
 }
 
 /* Styles for the table */
