@@ -135,11 +135,11 @@ export function ImportOrders(props) {
 
 
     const onChosenDataReceived = (data) => {
-        alert("test");
+     
     }
 
     const closePopupData = () => {
-        alert("test")
+   
         setIsOpenData(false);
     };
 

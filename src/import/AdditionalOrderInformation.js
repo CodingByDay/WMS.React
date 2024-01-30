@@ -1,15 +1,82 @@
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select'
+import ImportService from '../services/ImportService';
+
+
 export default function AdditionalOrderInformation(props) {
 
+const [warehouses, setWarehouses] = useState([])
+const [documentTypes, setDocumentTypes] = useState([])
+const [chosenType, setChosenType] = useState(null)
+const [chosenWarehouse, setChosenWarehouse] = useState(null)
 
 
+  useEffect(() => {
+
+        var sqlWarehouses = "";
+        var params = [];
+        ImportService.getWarehouses()
+        .then(result => {  
+            console.log(result);
+        })
+
+        var documentTypes = [];
+        documentTypes.push({value: '', id: '', label: '', properties: ["Tip", "Naziv"], header: true});
+        documentTypes.push({value: 'Izdaja', id: 'I', label: 'Izdaja', properties: ["I", "Izdaja"], header: false});
+        documentTypes.push({value: 'Prevzem', id: 'P', label: 'Prevzem', properties: ["P", "Prevzem"], header: false});
+        setDocumentTypes(documentTypes);
+
+  }, []);
 
   function setChosenState(sheet) {
     props.onChosen(sheet);
   }
+
+  const DynamicFormatOptionLabel = ({ label, properties, header, selected, id}) => (
+
+
+    
+    <div>
+      {properties && properties.length > 0 && !selected ? (
+        <div style={{ display: 'flex', margin: '0', padding: '0'  }}>
+          {properties.map((property, index) => (
+              ( !header ) ? (
+              <div key={index} style={{  paddingLeft: '3px', paddingRight: '3px', fontSize: '80%', color: 'gray', marginRight: '0px', whiteSpace: 'nowrap' }}>
+              {property}
+              </div>
+          ): (
+              <div key={index} style={{ fontWeight: '600',  paddingLeft: '5px', paddingRight: '3px', fontSize: '80%', color: 'black', marginRight: '0px', whiteSpace: 'nowrap' }}>
+                {property}
+              </div>
+            )         
+          ))}
+        </div>
+      ) : (
+        <div style={{ fontSize: '100%' }}>
+          {id}
+        </div>
+      )}
+    </div>
+  );
+
+
+  const formatOptionLabel = ({ label, properties, header, id }) => {
+    const exists = chosenType.id ==  id;
+
+    alert
+  
+    // Return the component with the processed data
+    return (
+      <DynamicFormatOptionLabel properties={properties} id={id} label={label} header={header} selected = {exists} />
+   );
+  };
+
+  function handleSelectChangeType(choice) {
+    setChosenType(documentTypes.find(element => element.properties[0] == choice.properties[0]))
+  }
+
 
 
   return (
@@ -27,24 +94,48 @@ export default function AdditionalOrderInformation(props) {
             <h4>Izberite ali uvažate pozicije ali glave naročila.</h4>
         </div>
 
-        <div className='choices-order'style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em', gap: '2em' }}>
+        <div className='choices-order'style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em', gap: '2em' }}>
 
+
+        <div class="form-group">
+
+
+        <label htmlFor="document-type-import">
+                Tip dokumenta
+        </label>
 
         <Select
-               id={"test1"}
-               placeholder={"test"}
-               options={[]}
+               formatOptionLabel={formatOptionLabel}
+               id="document-type-import"
+               placeholder="Tip dokumenta"
+               value={chosenType}
+               onChange={(selected) => handleSelectChangeType(selected)}
+               options={documentTypes}
         />
 
 
+
+</div>
+
+<div class="form-group">
+
+
+        <label htmlFor="import-warehouse">
+              Skladišče
+        </label>
+
+
         <Select
-               id={"test2"}
-               placeholder={"test"}
+               id="import-warehouse"
+               placeholder="Skladišče"
                options={[]}
         />
 
+</div>
         
         </div>
+        <button className='actions smallerr' id='confirmAdditionalInformation' onClick={() => setChosenState("position")}>Potrdi</button>
+
 
 
         </div>

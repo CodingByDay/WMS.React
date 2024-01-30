@@ -113,7 +113,10 @@ button.ant-btn {
   border-radius: 0!important;
   height: 40px!important;
 }
-
+button#confirmAdditionalInformation {
+  margin: auto;
+  margin-bottom: 2em;
+}
 .paginationControls {
   margin: -2px;
   float: right;
@@ -165,6 +168,12 @@ button.action-buttons.white:hover {
   display: flex;
   justify-content: flex-end;
 }
+
+button#confirmAdditionalInformation {
+  margin: auto;
+  margin-bottom: 2em;
+}
+
 
 .popup-close-btn.insert {
   background: none;
