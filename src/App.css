@@ -177,7 +177,10 @@ button.action-buttons.white:hover {
 .choices {
   padding: 2em;
 }
+span#createDocument {
 
+  margin-bottom: 2em;
+}
 .popup-content.insert {
   width: 60em;
 }

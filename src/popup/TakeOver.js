@@ -200,6 +200,8 @@ $(function() {
     async function createHeadDocument ()  {
         
                  var dateValue = date;
+            
+
 
                 if(!props.order) {
                     var documentData = document;
@@ -231,7 +233,7 @@ $(function() {
                 var note = $('#acNote').val();
                 var order = ""
 
-                // I in P zamnjenano na narocilih
+                // I in P is switched at orders
 
                 objectForAPI = { 
                     DocumentType: documentData, 
