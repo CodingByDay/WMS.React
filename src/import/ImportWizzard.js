@@ -197,7 +197,7 @@ const ImportWizzard = (props) => {
                // Import the row in the database //
                 params = correctDependencies(params, columnsData);
 
-                console.log(params);
+               // console.log(params);
 
 
 

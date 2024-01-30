@@ -7,6 +7,8 @@ export default function Locking(props) {
 
 
 
+
+
   function setChosenColumn(column) {
     var columnObj = props.column;
     columnObj.connection = column.Name;
@@ -33,7 +35,8 @@ export default function Locking(props) {
         <div className='choices'style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px'}}>
 
             {props.columns.map((column, index) => (
-               <button className='actions smallerr' onClick={() => setChosenColumn(column)}>{column.Name}</button>
+
+               <button className='actions smallerr' onClick={() => setChosenColumn(column)}> {column.required ? column.Name + ' (*)'  :  column.Name}</button>
             ))}
 
         </div>

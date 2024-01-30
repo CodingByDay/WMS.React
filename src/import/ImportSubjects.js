@@ -9,6 +9,7 @@ export function ImportSubjects(props) {
 
 
     const openLoader = (state) => {
+        
         if(state) {
             var loader = document.getElementById("loader");
             loader.style.display = "block";
@@ -20,6 +21,8 @@ export function ImportSubjects(props) {
         }
     }
 
+    const userId = localStorage.getItem('name');
+    const userIdAsInt = parseInt(userId, 10); 
     var columns = [{ Name: 'acSubject', Database: 'String', default: '', required: true, hasDependency: false }, 
                    { Name: 'acBuyer', Database: 'String', default: 'F', required: false, hasDependency: false}, 
                    { Name: 'acSupplier', Database: 'String', default: 'F', required: false, hasDependency: false}, 

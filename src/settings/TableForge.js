@@ -1023,12 +1023,6 @@ const idents = useMemo(
 );
 
 
-
-
-
-
-
-
   const tablesAssociation = [
     {
       name: 'system',
