@@ -122,6 +122,13 @@ const ImportWizzard = (props) => {
 
 
   const importData = () => {
+
+    console.log(fileContent)
+    console.log(props.columns)
+
+
+
+
     var unlocked = false;
     for (const key in columnStatus) {
       if (columnStatus.hasOwnProperty(key)) {

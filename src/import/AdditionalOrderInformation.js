@@ -73,10 +73,13 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
 
 
   const formatOptionLabel = ({ label, properties, header, id }) => {
-    const exists = chosenType.id ==  id;
 
-    alert
-  
+    var exists = false;
+
+    if(id!=null && chosenType!=null) {
+         exists = chosenType.id ==  id;
+    }
+
     // Return the component with the processed data
     return (
       <DynamicFormatOptionLabel properties={properties} id={id} label={label} header={header} selected = {exists} />

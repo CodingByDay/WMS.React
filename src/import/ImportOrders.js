@@ -10,11 +10,12 @@ import Swal from 'sweetalert2';
 
 
 export function ImportOrders(props) {
-
     const [initialChoice, setInitial] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenData, setIsOpenData] = useState(false);
 
+    const [columns, setColumns] = useState([]);
+    const [sql, setSql] = useState("");
 
     useEffect(() => {
 
@@ -44,72 +45,119 @@ export function ImportOrders(props) {
         if(data == "head") {
             setIsOpen(false);
             setIsOpenData(true);
-        } 
+            setColumns(columns_head);
+            setSql(sql_head);
+        } else {
+            setColumns(columns_head);
+            setSql(sql_head)
+        }
       };
 
-
-      var columns = [{ Name: 'acIdent', Database: 'String', default: '', required: true }, 
-      { Name: 'acName', Database: 'String', default: '', required: false}, 
-      { Name: 'acCode', Database: 'String', default: '', required: false}, 
-      { Name: 'acSetOfItem', Database: 'String', default: '200', required: false}, 
-      { Name: 'acSupplier', Database: 'String', default: '', required: false},
-      { Name: 'acUM', Database: 'String', default: 'kos', required: false},
-      { Name: 'anUMToUM2', Database: 'String', default: '1', required: false},
-      { Name: 'acUM2', Database: 'String', default: '', required: false},
-      { Name: 'acSerialNo', Database: 'String', default: 'N', required: false},
-      { Name: 'acActive', Database: 'String', default: 'T', required: false},
-      { Name: 'anDimHeight', Database: 'String', default: '', required: false},
-      { Name: 'anDimWidth', Database: 'String', default: '', required: false},
-      { Name: 'anDimDepth', Database: 'String', default: '', required: false},
-      { Name: 'anDimWeightBrutto', Database: 'Int32', default: '', required: false},
-      { Name: 'acUMDim1', Database: 'Boolean', default: '', required: false},
-      { Name: 'acUMDim2', Database: 'Boolean', default: 'kg', required: false},
-      { Name: 'anUserIns', Database: 'Boolean', default: '0', required: false},
-      { Name: 'uWMS', Database: 'Boolean', default: '1', required: false},
-   ]
+      const formattedDatetime = currentDatetime.toLocaleString();
+      var columns_position = 
+     [{ Name: 'acKey', Database: 'String', default: '', required: true }, 
+      { Name: 'anNo', Database: 'Int32', default: '', required: true}, 
+      { Name: 'acIdent', Database: 'String', default: '', required: true}, 
+      { Name: 'acSerialNo', Database: 'String', default: '', required: false}, 
+      { Name: 'anQty', Database: 'Decimal', default: '0', required: false},
+      { Name: 'acNote', Database: 'String', default: '', required: false},
+      { Name: 'anUserIns', Database: 'Int32', default: '1', required: false},
+      { Name: 'adTimeIns', Database: 'DateTime', default: formattedDatetime, required: false}     
+     ]
 
 
-        var sql = `  INSERT INTO [dbo].[tHE_SetItem]
-                    ([acIdent] -- šifra identa
-                    ,[acName] -- opcijsko naziv
-                    ,[acCode] -- opcijsko EAN koda
-                    ,[acSetOfItem] -- tip identa - privzeto '200'
-                    ,[acSupplier] -- dobavitelj - privzeto ''
-                    ,[acUM] -- primarna enota mere - privzeto 'kos'
-                    ,[anUMToUM2] -- pretvornik iz UM1 v UM2 - privzeto 1
-                    ,[acUM2] -- sekundarna enota mere - privzeto ''
-                    ,[acSerialNo] -- tip serijske številke - privzeto 'N'
-                    ,[acActive] -- ali je ident aktiven T/F - privzeto 'T'
-                    ,[anDimHeight] -- opcijsko višina
-                    ,[anDimWidth] -- opcijsko širina
-                    ,[anDimDepth] -- opcijsko globina
-                    ,[anDimWeight] -- opcijsko teža
-                    ,[anDimWeightBrutto] -- opcijsko bruto teža
-                    ,[acUMDim1] -- enota mere dolžine - privzeto 'm'
-                    ,[acUMDim2] -- enota mere teže - privzeto 'kg'
-                    ,[anUserIns] -- uporabnik, ki je vpisal - privzeto 0
-                    ,[uWMS]) -- privzeto 1
+     var columns_head = [{ Name: 'acType', Database: 'String', default: '', required: true }, 
+      { Name: 'acDocType', Database: 'String', default: '', required: true}, 
+      { Name: 'adDate', Database: 'DateTime', default: '', required: false}, 
+      { Name: 'acKey', Database: 'String', default: '', required: true}, 
+      { Name: 'acDoc1', Database: 'String', default: '', required: false},
+      { Name: 'adDatedoc1', Database: 'DateTime', default: 'kos', required: false},
+      { Name: 'acReceiver', Database: 'String', default: '1', required: false},
+      { Name: 'acIssuer', Database: 'String', default: '', required: false},
+      { Name: 'acWarehouse', Database: 'String', default: 'N', required: false},
+      { Name: 'acStatus', Database: 'String', default: 'T', required: false},
+      { Name: 'acNote', Database: 'String', default: '', required: false},
+      { Name: 'acLnkKey', Database: 'String', default: '', required: false},
+      { Name: 'anUserIns', Database: 'Int32', default: '', required: false},
+      { Name: 'adTimeIns', Database: 'DateTime', default: '', required: false},
+      { Name: 'anUserChg', Database: 'Int32', default: '', required: false},
+      { Name: 'adTimeChg', Database: 'DateTime', default: 'kg', required: false}
+     ]
 
-                    VALUES
-                    (@acIdent
-                    ,@acName
-                    ,@acCode
-                    ,@acSetOfItem
-                    ,@acSupplier
-                    ,@acUM
-                    ,@anUMToUM2
-                    ,@acUM2
-                    ,@acSerialNo
-                    ,@acActive
-                    ,@anDimHeight
-                    ,@anDimWidth
-                    ,@anDimDepth
-                    ,@anDimWeight
-                    ,@anDimWeightBrutto
-                    ,@acUMDim1
-                    ,@acUMDim2
-                    ,@anUserIns
-                    ,@uWMS)`
+     var sql_position = `INSERT INTO [dbo].[uWMSOrderItem]
+        ([acKey]
+        ,[anNo]
+        ,[acIdent]
+        ,[acSerialNo]
+        ,[anQty]
+        ,[acNote]
+        ,[anUserIns]
+        ,[adTimeIns])
+    VALUES
+        (@acKey
+        ,<@anNo
+        ,<@acIdent
+        ,<@acSerialNo
+        ,<@anQty
+        ,<@acNote
+        ,<@anUserIns
+        ,<@adTimeIns)`
+    
+
+
+
+
+
+
+
+
+    var sql_head = `  INSERT INTO [dbo].[tHE_SetItem]
+        ([acIdent] -- šifra identa
+        ,[acName] -- opcijsko naziv
+        ,[acCode] -- opcijsko EAN koda
+        ,[acSetOfItem] -- tip identa - privzeto '200'
+        ,[acSupplier] -- dobavitelj - privzeto ''
+        ,[acUM] -- primarna enota mere - privzeto 'kos'
+        ,[anUMToUM2] -- pretvornik iz UM1 v UM2 - privzeto 1
+        ,[acUM2] -- sekundarna enota mere - privzeto ''
+        ,[acSerialNo] -- tip serijske številke - privzeto 'N'
+        ,[acActive] -- ali je ident aktiven T/F - privzeto 'T'
+        ,[anDimHeight] -- opcijsko višina
+        ,[anDimWidth] -- opcijsko širina
+        ,[anDimDepth] -- opcijsko globina
+        ,[anDimWeight] -- opcijsko teža
+        ,[anDimWeightBrutto] -- opcijsko bruto teža
+        ,[acUMDim1] -- enota mere dolžine - privzeto 'm'
+        ,[acUMDim2] -- enota mere teže - privzeto 'kg'
+        ,[anUserIns] -- uporabnik, ki je vpisal - privzeto 0
+        ,[uWMS]) -- privzeto 1
+
+        VALUES
+        (@acIdent
+        ,@acName
+        ,@acCode
+        ,@acSetOfItem
+        ,@acSupplier
+        ,@acUM
+        ,@anUMToUM2
+        ,@acUM2
+        ,@acSerialNo
+        ,@acActive
+        ,@anDimHeight
+        ,@anDimWidth
+        ,@anDimDepth
+        ,@anDimWeight
+        ,@anDimWeightBrutto
+        ,@acUMDim1
+        ,@acUMDim2
+        ,@anUserIns
+        ,@uWMS)`
+
+
+
+
+
+        
 
 
     const closePopup = () => {
@@ -135,13 +183,13 @@ export function ImportOrders(props) {
 
 
     const onChosenDataReceived = (data) => {
-     
+        setIsOpenData(false);
     }
 
-    const closePopupData = () => {
-   
+    const closePopupData = () => {  
         setIsOpenData(false);
     };
+
 
     return (
         <div>

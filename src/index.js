@@ -11,7 +11,7 @@ import {store} from './store/store';
 import { Provider } from 'react-redux'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
+/*
 Sentry.init({
   dsn: "https://6ac4902002c955c3d29c9e2e8a78c01b@o4505147932344320.ingest.sentry.io/4506597835735040",
   integrations: [
@@ -32,7 +32,7 @@ Sentry.init({
 });
 
 
-
+*/
 
 
 root.render(
