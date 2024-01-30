@@ -5,11 +5,16 @@ import ImportOrderChoice from "./ImportOrderChoice";
 import ImportWizzard from "./ImportWizzard";
 import $ from 'jquery'; 
 import Loader from "../loader/Loader";
+import AdditionalOrderInformation from "./AdditionalOrderInformation";
+import Swal from 'sweetalert2';
+
 
 export function ImportOrders(props) {
 
     const [initialChoice, setInitial] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenData, setIsOpenData] = useState(false);
+
 
     useEffect(() => {
 
@@ -36,6 +41,10 @@ export function ImportOrders(props) {
 
         setInitial(data)
 
+        if(data == "head") {
+            setIsOpen(false);
+            setIsOpenData(true);
+        } 
       };
 
 
@@ -104,7 +113,12 @@ export function ImportOrders(props) {
 
 
     const closePopup = () => {
-        setIsOpen(false);
+        if(initialChoice!="") {
+            setIsOpen(false);
+        } else {
+            Swal.fire('Napaka!', 'Morate izbrati tip uvoza.', 'error');
+            setTimeout(window.location.reload(), 1000)
+        }
     };
     const openLoader = (state) => {
         
@@ -118,6 +132,17 @@ export function ImportOrders(props) {
             $(".import").css ("display", "block");
         }
     }
+
+
+    const onChosenDataReceived = (data) => {
+        alert("test");
+    }
+
+    const closePopupData = () => {
+        alert("test")
+        setIsOpenData(false);
+    };
+
     return (
         <div>
         <Loader />
@@ -125,7 +150,7 @@ export function ImportOrders(props) {
         <Header />
                 
             <ImportOrderChoice onChosen = {onChoiceReceived} isOpen={isOpen} onClose={closePopup} />
-
+            <AdditionalOrderInformation onChosen={onChosenDataReceived} isOpen={isOpenData} onClose={closePopupData} />
 
 
 
