@@ -48,10 +48,13 @@ export function ImportOrders(props) {
             setColumns(columns_head);
             setSql(sql_head);
         } else {
-            setColumns(columns_head);
-            setSql(sql_head)
+            setColumns(columns_position);
+            setSql(sql_position)
         }
       };
+
+      
+      const currentDatetime = new Date();
 
       const formattedDatetime = currentDatetime.toLocaleString();
       var columns_position = 
@@ -85,79 +88,60 @@ export function ImportOrders(props) {
      ]
 
      var sql_position = `INSERT INTO [dbo].[uWMSOrderItem]
-        ([acKey]
-        ,[anNo]
-        ,[acIdent]
-        ,[acSerialNo]
-        ,[anQty]
-        ,[acNote]
-        ,[anUserIns]
-        ,[adTimeIns])
-    VALUES
-        (@acKey
-        ,<@anNo
-        ,<@acIdent
-        ,<@acSerialNo
-        ,<@anQty
-        ,<@acNote
-        ,<@anUserIns
-        ,<@adTimeIns)`
+                        ([acKey]
+                        ,[anNo]
+                        ,[acIdent]
+                        ,[acSerialNo]
+                        ,[anQty]
+                        ,[acNote]
+                        ,[anUserIns]
+                        ,[adTimeIns])
+                    VALUES
+                        (@acKey
+                        ,<@anNo
+                        ,<@acIdent
+                        ,<@acSerialNo
+                        ,<@anQty
+                        ,<@acNote
+                        ,<@anUserIns
+                        ,<@adTimeIns)`
     
 
+    var sql_head = `INSERT INTO [dbo].[uWMSOrderHead]
+                    ([acType]
+                    ,[acDocType]
+                    ,[adDate]
+                    ,[acKey]
+                    ,[acDoc1]
+                    ,[adDatedoc1]
+                    ,[acReceiver]
+                    ,[acIssuer]
+                    ,[acWarehouse]
+                    ,[acStatus]
+                    ,[acNote]
+                    ,[acLnkKey]
+                    ,[anUserIns]
+                    ,[adTimeIns]
+                    ,[anUserChg]
+                    ,[adTimeChg])
+                VALUES
+                    (<acType, varchar(2),>
+                    ,<acDocType, varchar(4),>
+                    ,<adDate, smalldatetime,>
+                    ,<acKey, varchar(13),>
+                    ,<acDoc1, varchar(35),>
+                    ,<adDatedoc1, smalldatetime,>
+                    ,<acReceiver, varchar(30),>
+                    ,<acIssuer, varchar(30),>
+                    ,<acWarehouse, varchar(30),>
+                    ,<acStatus, varchar(2),>
+                    ,<acNote, varchar(1000),>
+                    ,<acLnkKey, varchar(13),>
+                    ,<anUserIns, int,>
+                    ,<adTimeIns, datetime,>
+                    ,<anUserChg, int,>
+                    ,<adTimeChg, datetime,>)`
 
-
-
-
-
-
-
-    var sql_head = `  INSERT INTO [dbo].[tHE_SetItem]
-        ([acIdent] -- šifra identa
-        ,[acName] -- opcijsko naziv
-        ,[acCode] -- opcijsko EAN koda
-        ,[acSetOfItem] -- tip identa - privzeto '200'
-        ,[acSupplier] -- dobavitelj - privzeto ''
-        ,[acUM] -- primarna enota mere - privzeto 'kos'
-        ,[anUMToUM2] -- pretvornik iz UM1 v UM2 - privzeto 1
-        ,[acUM2] -- sekundarna enota mere - privzeto ''
-        ,[acSerialNo] -- tip serijske številke - privzeto 'N'
-        ,[acActive] -- ali je ident aktiven T/F - privzeto 'T'
-        ,[anDimHeight] -- opcijsko višina
-        ,[anDimWidth] -- opcijsko širina
-        ,[anDimDepth] -- opcijsko globina
-        ,[anDimWeight] -- opcijsko teža
-        ,[anDimWeightBrutto] -- opcijsko bruto teža
-        ,[acUMDim1] -- enota mere dolžine - privzeto 'm'
-        ,[acUMDim2] -- enota mere teže - privzeto 'kg'
-        ,[anUserIns] -- uporabnik, ki je vpisal - privzeto 0
-        ,[uWMS]) -- privzeto 1
-
-        VALUES
-        (@acIdent
-        ,@acName
-        ,@acCode
-        ,@acSetOfItem
-        ,@acSupplier
-        ,@acUM
-        ,@anUMToUM2
-        ,@acUM2
-        ,@acSerialNo
-        ,@acActive
-        ,@anDimHeight
-        ,@anDimWidth
-        ,@anDimDepth
-        ,@anDimWeight
-        ,@anDimWeightBrutto
-        ,@acUMDim1
-        ,@acUMDim2
-        ,@anUserIns
-        ,@uWMS)`
-
-
-
-
-
-        
 
 
     const closePopup = () => {

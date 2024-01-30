@@ -22,6 +22,7 @@ const ImportWizzard = (props) => {
   const [columnStatus, setColumnStatus] = useState({});
   const [lockingVisibility, setLocking] = useState(false);
   const [currentLocking, setCurrentLocking] = useState({})
+  const [locked, setLocked] = useState([]);
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -113,6 +114,15 @@ const ImportWizzard = (props) => {
       col[index] = column;
       return col;
     });
+
+
+    setLocked((prevLocked) => {
+        const col = [...prevLocked];
+        col.push(column)
+    })
+
+
+
     setLocking(false)
     toggleColumnStatus(column.accessor)
   };
@@ -122,13 +132,6 @@ const ImportWizzard = (props) => {
 
 
   const importData = () => {
-
-    console.log(fileContent)
-    console.log(props.columns)
-
-
-
-
     var unlocked = false;
     for (const key in columnStatus) {
       if (columnStatus.hasOwnProperty(key)) {
