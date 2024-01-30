@@ -30,7 +30,6 @@ export default function Stock() {
 
     StockService.getWarehouses().then(response => {  
         var warehouses = onlyWarehouses(response);
-        window.warehouses = warehouses;     
         setWarehouses(warehouses);     
     }); 
    

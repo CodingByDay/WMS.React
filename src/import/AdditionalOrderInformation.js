@@ -17,10 +17,10 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
 
         var sqlWarehouses = "";
         var params = [];
-        ImportService.getWarehouses()
-        .then(result => {  
-            console.log(result);
-        })
+        ImportService.getWarehouses().then(response => {  
+          var warehouses = onlyWarehouses(response);   
+          setWarehouses(warehouses);     
+      });
 
         var documentTypes = [];
         documentTypes.push({value: '', id: '', label: '', properties: ["Tip", "Naziv"], header: true});
@@ -60,6 +60,16 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
       )}
     </div>
   );
+  function onlyWarehouses(data) { 
+    var returnArray = [];
+    returnArray.push({value: "", label: ""}); 
+
+    for (var i = 0; i < data.Items.length; i++) {  
+        returnArray.push({value: data.Items[i].Properties.Items[0].StringValue, label: data.Items[i].Properties.Items[0].StringValue});           
+    }
+
+    return returnArray;
+}
 
 
   const formatOptionLabel = ({ label, properties, header, id }) => {
@@ -74,10 +84,21 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
   };
 
   function handleSelectChangeType(choice) {
-    setChosenType(documentTypes.find(element => element.properties[0] == choice.properties[0]))
+    if(choice.id ==""){
+      setChosenType(null)
+    } else {
+      setChosenType(documentTypes.find(element => element.properties[0] == choice.properties[0]))
+    }
   }
 
 
+  function handleSelectChangeWarehouse(choice) {
+    if(choice.value == "") {
+      setChosenWarehouse(null)
+    } else {
+     setChosenWarehouse(warehouses.find(element => element.value == choice.value))
+    }
+  }
 
   return (
     <div>
@@ -107,7 +128,7 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
         <Select
                formatOptionLabel={formatOptionLabel}
                id="document-type-import"
-               placeholder="Tip dokumenta"
+               placeholder="Prevzeta vrednost"
                value={chosenType}
                onChange={(selected) => handleSelectChangeType(selected)}
                options={documentTypes}
@@ -126,9 +147,11 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
 
 
         <Select
-               id="import-warehouse"
-               placeholder="Skladišče"
-               options={[]}
+                  id="warehouses-import"
+                  placeholder="Prevzeta vrednost"
+                  value={chosenWarehouse}
+                  onChange={(selected) => handleSelectChangeWarehouse(selected)}
+                  options={warehouses}
         />
 
 </div>
