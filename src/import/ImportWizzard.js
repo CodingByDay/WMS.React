@@ -195,20 +195,53 @@ const ImportWizzard = (props) => {
             }
           
                // Import the row in the database //
+                params = correctDependencies(params, columnsData);
+
+                console.log(params);
 
 
-               ImportService.insertSQLQuery(props.sql, params)
+
+            /*   ImportService.insertSQLQuery(props.sql, params)
                 .then(result => {
-                  Swal.fire('Uvoženi podatki.', 'Uvoz je končan.', 'success');
-                  props.loader(false)
                 })
-              
+              */
               // Import the row in the database //
 
           }
+
+          props.loader(false)
+
         
        }
      }
+
+function correctDependencies(params, columnsData) {
+
+  var returnParameters = params;
+
+  for (var i = 0; i < columnsData.length; i++) {
+    var current = columnsData[i];
+      if(current.hasDependency) {
+          var foundParameter = returnParameters.find((element) => element.Name == current.Name);
+          var dependedParameter = returnParameters.find((element) => element.Name == current.dependency.dependedOn)
+
+          if(dependedParameter.Value == current.dependency.dependencySameAs) {        
+            foundParameter.Value = current.dependency.valueIfDependencySame;
+          } else {
+            foundParameter.Value = current.dependency.else;
+          }
+
+
+
+
+          returnParameters[returnParameters.findIndex((element) => element.Name == current.Name)] = foundParameter;
+      }
+  }
+
+
+  return returnParameters;
+  }
+
 
 
   const onDrop = (acceptedFiles) => {
