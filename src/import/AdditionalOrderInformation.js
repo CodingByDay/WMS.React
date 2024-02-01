@@ -30,8 +30,8 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
 
   }, []);
 
-  function setChosenState(sheet) {
-    props.onChosen(sheet);
+  function setChosenState() {
+    props.onChosen(chosenType, chosenWarehouse);
   }
 
   const DynamicFormatOptionLabel = ({ label, properties, header, selected, id}) => (
@@ -115,7 +115,7 @@ const [chosenWarehouse, setChosenWarehouse] = useState(null)
         <div className="outer-order">
 
         <div className='header-order' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2em' }}>
-            <h4>Izberite ali uvažate pozicije ali glave naročila.</h4>
+            <h4>Izberite.</h4>
         </div>
 
         <div className='choices-order'style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em', gap: '2em' }}>

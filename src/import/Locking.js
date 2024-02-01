@@ -36,7 +36,11 @@ export default function Locking(props) {
 
             {props.columns.map((column, index) => (
 
-               <button className='actions smallerr' onClick={() => setChosenColumn(column)}> {column.required ? column.Name + ' (*)'  :  column.Name}</button>
+                  <button className='actions smallerr lock' onClick={() => setChosenColumn(column)}>
+                  <div>{column.required ? column.Name + ' (*)'  :  column.Name}</div>
+                  <div>{column.friendly}</div>
+                  </button>
+
             ))}
 
         </div>

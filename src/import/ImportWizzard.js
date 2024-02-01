@@ -93,13 +93,14 @@ const ImportWizzard = (props) => {
             return obj;
             }, {});
         });
-
-
         const initialColumnStatus = {};
         headers.forEach((header) => {
             initialColumnStatus[header] = 'unlocked'; // You can use 'locked' to initialize as locked if needed
         });
+
         setColumnStatus(initialColumnStatus);
+
+
         setFileContent(transformedData); // Exclude the header row
   };
 
@@ -119,6 +120,7 @@ const ImportWizzard = (props) => {
     setLocked((prevLocked) => {
         const col = [...prevLocked];
         col.push(column)
+        return col;
     })
 
 
@@ -133,97 +135,91 @@ const ImportWizzard = (props) => {
 
   const importData = () => {
     var unlocked = false;
-    for (const key in columnStatus) {
-      if (columnStatus.hasOwnProperty(key)) {
-
-            const value = columnStatus[key];
-            if(value == "unlocked") {
-              unlocked = true;
-            }
-
+    for(var i = 0; i < props.columns.length; i++) {
+      var current = props.columns[i];
+      if (current.required) {
+        // Try to find the element.
+        var isLocked = locked.findIndex(element => element.connection == current.Name) !== -1;
+        if(!isLocked) {
+          Swal.fire('Napaka!', 'Morate zakleniti vse obvezne podatkovne povezave.', 'error');
+          return;
+        }
       }
     }
-    if(unlocked) {
-        Swal.fire('Napaka!', 'Morate zakleniti vse podatkovne povezave.', 'error');
-    } else {
-          // Import begin
-          // Show the loader
-          props.loader(true)
-          // Begin work
-          var columnsData = props.columns;
-          var data = fileContent;
+    // Import begin
+    // Show the loader
+    props.loader(true)
+    // Begin work
+    var columnsData = props.columns;
+    var data = fileContent;
 
-          for(var i = 0; i < columns.length; i++) {
-             var connection = columns[i].connection;
-             var accessor = columns[i].accessor;
-             columnsData[columnsData.findIndex(column => column.Name == connection)].connection = accessor;            
-          }
+    for(var i = 0; i < columns.length; i++) {
+        var connection = columns[i].connection;
+        var accessor = columns[i].accessor;
+        columnsData[columnsData.findIndex(column => column.Name == connection)].connection = accessor;            
+    }
 
-          for(var i = 0; i < data.length; i++) {
-              var params = [];
-              var currentObject = data[i]
-              for (var col = 0 ; col < columnsData.length ; col++) {
-                  var columnInformation = columnsData[col];
-                  var found = currentObject[columnInformation.connection]
-                  if (typeof found === "undefined") {
-                      // Not found set to default value //
-                      var defaultValue = columnInformation.default;
-                      var type = columnInformation.Database;      
-                      
-                      if(type == "Boolean") {
-                        if(defaultValue == "1") {
-                            defaultValue = true;
-                        } else {
-                            defaultValue = false;
-                        }
-                      }
-                      if(type == "Int32") {
-                        defaultValue = Number(defaultValue);
-                      }
-
-                      var parameter = { Name: columnInformation.Name, Type: type, Value: defaultValue  }
-                      params.push(parameter);   
+    for(var i = 0; i < data.length; i++) {
+        var params = [];
+        var currentObject = data[i]
+        for (var col = 0 ; col < columnsData.length ; col++) {
+            var columnInformation = columnsData[col];
+            var found = currentObject[columnInformation.connection]
+            if (typeof found === "undefined") {            
+                // Not found set to default value //
+                var defaultValue = columnInformation.default;
+                var type = columnInformation.Database;                    
+                if(type == "Boolean") {
+                  if(defaultValue == "1") {
+                      defaultValue = true;
                   } else {
-                      var defaultValue = columnInformation.default;
-                      var type = columnInformation.Database;     
-                      
-                      if(type == "Boolean") {
-                        if(defaultValue == "1") {
-                            found = true;
-                        } else {
-                            found = false;
-                        }
-                      }
+                      defaultValue = false;
+                  }
+                }
+                if(type == "Int32") {
+                  defaultValue = Number(defaultValue);
+                }
+                var parameter = { Name: columnInformation.Name, Type: type, Value: defaultValue  }
+                params.push(parameter);   
+            } else {
+                var defaultValue = columnInformation.default;
+                var type = columnInformation.Database;              
+                if(type == "Boolean") {
+                  if(found == "1") {
+                      found = true;
+                  } else {
+                      found = false;
+                  }
+                }
+                if(type == "Int32") {
+                  found = Number(found);
+                }
+                var parameter = { Name: columnInformation.Name, Type: type, Value: found  }
+                params.push(parameter); 
+        }
+      }
+    
+          // Import the row in the database //
+          params = correctDependencies(params, columnsData);
 
-                      if(type == "Int32") {
-                        found = Number(defaultValue);
-                      }
+          // console.log(params);
 
-                      var parameter = { Name: columnInformation.Name, Type: type, Value: found  }
-                      params.push(parameter); 
-              }
-            }
-          
-               // Import the row in the database //
-                params = correctDependencies(params, columnsData);
+      
 
-               // console.log(params);
+        ImportService.insertSQLQuery(props.sql, params)
+          .then(result => {
+            
+          })
+        
+        // Import the row in the database //
 
+    }
 
-
-            /*   ImportService.insertSQLQuery(props.sql, params)
-                .then(result => {
-                })
-              */
-              // Import the row in the database //
-
-          }
-
-          props.loader(false)
+    props.loader(false)
 
         
-       }
-     }
+  }
+     
 
 function correctDependencies(params, columnsData) {
 

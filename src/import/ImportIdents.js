@@ -20,27 +20,26 @@ export function ImportIdents(props) {
         }
     }
 
-    var columns = [{ Name: 'acIdent', Database: 'String', default: '', required: true }, 
-                   { Name: 'acName', Database: 'String', default: '', required: false}, 
-                   { Name: 'acCode', Database: 'String', default: '', required: false}, 
-                   { Name: 'acSetOfItem', Database: 'String', default: '200', required: false}, 
-                   { Name: 'acSupplier', Database: 'String', default: '', required: false},
-                   { Name: 'acUM', Database: 'String', default: 'kos', required: false},
-                   { Name: 'anUMToUM2', Database: 'String', default: '1', required: false},
-                   { Name: 'acUM2', Database: 'String', default: '', required: false},
-                   { Name: 'acSerialNo', Database: 'String', default: 'N', required: false},
-                   { Name: 'acActive', Database: 'String', default: 'T', required: false},
-                   { Name: 'anDimHeight', Database: 'String', default: '', required: false},
-                   { Name: 'anDimWidth', Database: 'String', default: '', required: false},
-                   { Name: 'anDimDepth', Database: 'String', default: '', required: false},
-                   { Name: 'anDimWeightBrutto', Database: 'Int32', default: '', required: false},
-                   { Name: 'acUMDim1', Database: 'Boolean', default: '', required: false},
-                   { Name: 'acUMDim2', Database: 'Boolean', default: 'kg', required: false},
-                   { Name: 'anUserIns', Database: 'Boolean', default: '0', required: false},
-                   { Name: 'uWMS', Database: 'Boolean', default: '1', required: false},
-
-               
-                ]
+    var columns = [{ Name: 'acIdent', Database: 'String', default: '', required: true, friendly: "Šifra identa"  }, 
+                   { Name: 'acName', Database: 'String', default: '', required: false, friendly: "Naziv" }, 
+                   { Name: 'acCode', Database: 'String', default: '', required: false, friendly: "EAN koda" }, 
+                   { Name: 'acSetOfItem', Database: 'String', default: '200', required: false, friendly: "Tip identa" }, 
+                   { Name: 'acSupplier', Database: 'String', default: '', required: false, friendly: "Dobavitelj" },
+                   { Name: 'acUM', Database: 'String', default: 'kos', required: false, friendly: "Primarna enota" },
+                   { Name: 'anUMToUM2', Database: 'String', default: '1', required: false, friendly: "Pretvornik" },
+                   { Name: 'acUM2', Database: 'String', default: '', required: false, friendly: "Sekundardna" },
+                   { Name: 'acSerialNo', Database: 'String', default: 'N', required: false, friendly: "Tip serijske številke" },
+                   { Name: 'acActive', Database: 'String', default: 'T', required: false, friendly: "Ali je aktiven" },
+                   { Name: 'anDimHeight', Database: 'String', default: '', required: false, friendly: "Višina" },
+                   { Name: 'anDimWidth', Database: 'String', default: '', required: false, friendly: "Širina" },
+                   { Name: 'anDimDepth', Database: 'String', default: '', required: false, friendly: "Globina" },
+                   { Name: 'anDimWeight', Database: 'Int32', default: '', required: false, friendly: "Teža" },
+                   { Name: 'anDimWeightBrutto', Database: 'Int32', default: '', required: false, friendly: "Teža bruto" },
+                   { Name: 'acUMDim1', Database: 'Boolean', default: '', required: false, friendly: "Enota mere dolžine" },
+                   { Name: 'acUMDim2', Database: 'Boolean', default: 'kg', required: false, friendly: "Enota more teže" },
+                   { Name: 'anUserIns', Database: 'Boolean', default: '0', required: false, friendly: "Številka naročila" },
+                   { Name: 'uWMS', Database: 'Boolean', default: '1', required: false, friendly: "Številka naročila" },               
+                  ]
 
 
     var sql = `  INSERT INTO [dbo].[tHE_SetItem]

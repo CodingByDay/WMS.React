@@ -13,9 +13,12 @@ export function ImportOrders(props) {
     const [initialChoice, setInitial] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenData, setIsOpenData] = useState(false);
-
     const [columns, setColumns] = useState([]);
     const [sql, setSql] = useState("");
+    const [currentDocumentType, setDocument] = useState("");
+    const [warehouse, setWarehouse] = useState("");
+
+
 
     useEffect(() => {
 
@@ -26,7 +29,8 @@ export function ImportOrders(props) {
         $(".import").css ("display", "none");
 
         const startActivity = async () => {
-            setIsOpen(true);
+            setColumns(columns_position);
+            setSql(sql_position)
             loader.style.display = "none";
             $(".import").css ("display", "block");
         };
@@ -52,39 +56,38 @@ export function ImportOrders(props) {
             setSql(sql_position)
         }
       };
-
       
-      const currentDatetime = new Date();
+    const currentDatetime = new Date();
+    const formattedDatetime = currentDatetime.toLocaleString();
 
-      const formattedDatetime = currentDatetime.toLocaleString();
-      var columns_position = 
-     [{ Name: 'acKey', Database: 'String', default: '', required: true }, 
-      { Name: 'anNo', Database: 'Int32', default: '', required: true}, 
-      { Name: 'acIdent', Database: 'String', default: '', required: true}, 
-      { Name: 'acSerialNo', Database: 'String', default: '', required: false}, 
-      { Name: 'anQty', Database: 'Decimal', default: '0', required: false},
-      { Name: 'acNote', Database: 'String', default: '', required: false},
-      { Name: 'anUserIns', Database: 'Int32', default: '1', required: false},
-      { Name: 'adTimeIns', Database: 'DateTime', default: formattedDatetime, required: false}     
+    var columns_position = 
+     [
+      { Name: 'acKey', Database: 'String', default: '', required: true, friendly: "Številka naročila" }, 
+      { Name: 'anNo', Database: 'Int32', default: '', required: true, friendly: "Pozicija"}, 
+      { Name: 'acIdent', Database: 'String', default: '', required: true, friendly: "Ident"}, 
+      { Name: 'acSerialNo', Database: 'String', default: '', required: false, friendly: "Serijska številka"}, 
+      { Name: 'anQty', Database: 'Decimal', default: '0', required: false, friendly: "Količina"},
+      { Name: 'acNote', Database: 'String', default: '', required: false, friendly: "Opomba"},
+      { Name: 'anUserIns', Database: 'Int32', default: '1', required: false, friendly: "Upisal"},
+      { Name: 'adTimeIns', Database: 'DateTime', default: formattedDatetime, required: false, friendly: "Datum"}     
      ]
 
-
-     var columns_head = [{ Name: 'acType', Database: 'String', default: '', required: true }, 
-      { Name: 'acDocType', Database: 'String', default: '', required: true}, 
-      { Name: 'adDate', Database: 'DateTime', default: '', required: false}, 
-      { Name: 'acKey', Database: 'String', default: '', required: true}, 
-      { Name: 'acDoc1', Database: 'String', default: '', required: false},
-      { Name: 'adDatedoc1', Database: 'DateTime', default: 'kos', required: false},
-      { Name: 'acReceiver', Database: 'String', default: '1', required: false},
-      { Name: 'acIssuer', Database: 'String', default: '', required: false},
-      { Name: 'acWarehouse', Database: 'String', default: 'N', required: false},
-      { Name: 'acStatus', Database: 'String', default: 'T', required: false},
-      { Name: 'acNote', Database: 'String', default: '', required: false},
-      { Name: 'acLnkKey', Database: 'String', default: '', required: false},
-      { Name: 'anUserIns', Database: 'Int32', default: '', required: false},
-      { Name: 'adTimeIns', Database: 'DateTime', default: '', required: false},
-      { Name: 'anUserChg', Database: 'Int32', default: '', required: false},
-      { Name: 'adTimeChg', Database: 'DateTime', default: 'kg', required: false}
+     var columns_head = [{ Name: 'acType', Database: 'String', default: '', required: true, friendly: "Tip" }, 
+      { Name: 'acDocType', Database: 'String', default: '', required: true, friendly: "Tip dokumenta"}, 
+      { Name: 'adDate', Database: 'DateTime', default: '', required: false, friendly: "Datum"}, 
+      { Name: 'acKey', Database: 'String', default: '', required: true, friendly: "Številka naročila"}, 
+      { Name: 'acDoc1', Database: 'String', default: '', required: false, friendly: "Dokument 1"},
+      { Name: 'adDatedoc1', Database: 'DateTime', default: 'kos', required: false, friendly: "Datum dokumenta 1"},
+      { Name: 'acReceiver', Database: 'String', default: '1', required: false, friendly: "Sprejemnik"},
+      { Name: 'acIssuer', Database: 'String', default: '', required: false, friendly: "Izdajatelj"},
+      { Name: 'acWarehouse', Database: 'String', default: 'N', required: false, friendly: "Skladišče"},
+      { Name: 'acStatus', Database: 'String', default: 'T', required: false, friendly: "Status"},
+      { Name: 'acNote', Database: 'String', default: '', required: false, friendly: "Opomba"},
+      { Name: 'acLnkKey', Database: 'String', default: '', required: false, friendly: "Povezovalni dokument"},
+      { Name: 'anUserIns', Database: 'Int32', default: '', required: false, friendly: "Uporabnik ki je vpisal"},
+      { Name: 'adTimeIns', Database: 'DateTime', default: '', required: false, friendly: "Čas"},
+      { Name: 'anUserChg', Database: 'Int32', default: '', required: false, friendly: "Spremenil"},
+      { Name: 'adTimeChg', Database: 'DateTime', default: 'kg', required: false, friendly: "Čas spremembe"}
      ]
 
      var sql_position = `INSERT INTO [dbo].[uWMSOrderItem]
@@ -98,13 +101,13 @@ export function ImportOrders(props) {
                         ,[adTimeIns])
                     VALUES
                         (@acKey
-                        ,<@anNo
-                        ,<@acIdent
-                        ,<@acSerialNo
-                        ,<@anQty
-                        ,<@acNote
-                        ,<@anUserIns
-                        ,<@adTimeIns)`
+                        ,@anNo
+                        ,@acIdent
+                        ,@acSerialNo
+                        ,@anQty
+                        ,@acNote
+                        ,@anUserIns
+                        ,@adTimeIns)`
     
 
     var sql_head = `INSERT INTO [dbo].[uWMSOrderHead]
@@ -125,22 +128,22 @@ export function ImportOrders(props) {
                     ,[anUserChg]
                     ,[adTimeChg])
                 VALUES
-                    (<acType, varchar(2),>
-                    ,<acDocType, varchar(4),>
-                    ,<adDate, smalldatetime,>
-                    ,<acKey, varchar(13),>
-                    ,<acDoc1, varchar(35),>
-                    ,<adDatedoc1, smalldatetime,>
-                    ,<acReceiver, varchar(30),>
-                    ,<acIssuer, varchar(30),>
-                    ,<acWarehouse, varchar(30),>
-                    ,<acStatus, varchar(2),>
-                    ,<acNote, varchar(1000),>
-                    ,<acLnkKey, varchar(13),>
-                    ,<anUserIns, int,>
-                    ,<adTimeIns, datetime,>
-                    ,<anUserChg, int,>
-                    ,<adTimeChg, datetime,>)`
+                    (@acType
+                    ,@acDocType
+                    ,@adDate
+                    ,@acKey
+                    ,@acDoc1
+                    ,@adDatedoc1
+                    ,@acReceiver
+                    ,@acIssuer
+                    ,@acWarehouse
+                    ,@acStatus
+                    ,@acNote
+                    ,@acLnkKey
+                    ,@anUserIns
+                    ,@adTimeIns
+                    ,@anUserChg
+                    ,@adTimeChg)`
 
 
 
@@ -166,7 +169,9 @@ export function ImportOrders(props) {
     }
 
 
-    const onChosenDataReceived = (data) => {
+    const onChosenDataReceived = (chosenType, chosenWarehouse) => {
+        setDocument(chosenType);
+        setWarehouse(chosenWarehouse);
         setIsOpenData(false);
     }
 
@@ -179,18 +184,10 @@ export function ImportOrders(props) {
         <div>
         <Loader />
         <div className="import orders">
-        <Header />
-                
+        <Header />              
             <ImportOrderChoice onChosen = {onChoiceReceived} isOpen={isOpen} onClose={closePopup} />
-            <AdditionalOrderInformation onChosen={onChosenDataReceived} isOpen={isOpenData} onClose={closePopupData} />
-
-
-
-
+            {/* <AdditionalOrderInformation warehouse = {warehouse} document={currentDocumentType} onChosen={onChosenDataReceived} isOpen={isOpenData} onClose={closePopupData} /> */} 
             <ImportWizzard loader = {openLoader} columns = {columns} sql = {sql} />
-
-
-
             <Footer />
         </div>
 

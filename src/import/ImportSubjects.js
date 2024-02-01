@@ -23,28 +23,29 @@ export function ImportSubjects(props) {
 
     const userId = localStorage.getItem('name');
     const userIdAsInt = parseInt(userId, 10); 
-    var columns = [{ Name: 'acSubject', Database: 'String', default: '', required: true, hasDependency: false }, 
-                   { Name: 'acBuyer', Database: 'String', default: 'F', required: false, hasDependency: false}, 
-                   { Name: 'acSupplier', Database: 'String', default: 'F', required: false, hasDependency: false}, 
-                   { Name: 'acWarehouse', Database: 'String', default: 'F', required: false, hasDependency: false},
-                   { Name: 'acName2', Database: 'String', default: '', required: false, hasDependency: false},
-                   { Name: 'acAddress', Database: 'String', default: '', required: false, hasDependency: false},
-                   { Name: 'acPost', Database: 'String', default: '', required: false, hasDependency: false},
-                   { Name: 'acCountry', Database: 'String', default: '', required: false, hasDependency: false},
-                   { Name: 'acVATCodePrefix', Database: 'String', default: '', required: false, hasDependency: false},
-                   { Name: 'acCode', Database: 'String', default: 'F', required: false, hasDependency: false},
-                   { Name: 'acRegNo', Database: 'String', default: 'F', required: false, hasDependency: false},
-                   { Name: 'acActive', Database: 'String', default: 'T', required: false, hasDependency: false},
-                   { Name: 'anUserIns', Database: 'Int32', default: '0', required: false, hasDependency: false},
+    var columns = [{ Name: 'acSubject', Database: 'String', default: '', required: true, hasDependency: false, friendly:'Šifra' }, 
+                   { Name: 'acBuyer', Database: 'String', default: 'F', required: false, hasDependency: false, friendly:'Kupec'}, 
+                   { Name: 'acSupplier', Database: 'String', default: 'F', required: false, hasDependency: false, friendly:'Dobavitelj'}, 
+                   { Name: 'acWarehouse', Database: 'String', default: 'F', required: false, hasDependency: false, friendly:'Skladišče'},
+                   { Name: 'acName2', Database: 'String', default: '', required: false, hasDependency: false, friendly:'Naziv'},
+                   { Name: 'acAddress', Database: 'String', default: '', required: false, hasDependency: false, friendly:'Naslov'},
+                   { Name: 'acPost', Database: 'String', default: '', required: false, hasDependency: false, friendly:'Poštna številka'},
+                   { Name: 'acCountry', Database: 'String', default: '', required: false, hasDependency: false, friendly:'Država'},
+                   { Name: 'acVATCodePrefix', Database: 'String', default: '', required: false, hasDependency: false, friendly:'Predpona'},
+                   { Name: 'acCode', Database: 'String', default: 'F', required: false, hasDependency: false, friendly:'Davčna številka'},
+                   { Name: 'acRegNo', Database: 'String', default: 'F', required: false, hasDependency: false, friendly:'Matična številka'},
+                   { Name: 'acActive', Database: 'String', default: 'T', required: false, hasDependency: false, friendly:'Aktiven'},
+                   { Name: 'anUserIns', Database: 'Int32', default: '0', required: false, hasDependency: false, friendly:'Vpisal'},
                    { Name: 'uWMSStock', Database: 'Boolean', default: '1', required: false, hasDependency: true, dependency: {
                     // This is the object for dependent field. Follow the convention.
                     dependedOn: 'acWarehouse',
                     valueIfDependencySame: true,
                     dependencySameAs: 'T',
-                    else: false
+                    else: false,
+                    friendly:'Zaloga'
                    }},
-                   { Name: 'uWMS', Database: 'Boolean', default: '1', required: false, hasDependency: false},
-                   { Name: 'uWMSSubj', Database: 'Boolean', default: '1', required: false, hasDependency: false},
+                   { Name: 'uWMS', Database: 'Boolean', default: '1', required: false, hasDependency: false, friendly:'Viden'},
+                   { Name: 'uWMSSubj', Database: 'Boolean', default: '1', required: false, hasDependency: false, friendly:'Subjekt'},
                
                 ]
 

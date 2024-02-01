@@ -101,6 +101,12 @@ button.ant-btn {
  
 }
 
+button.actions.smallerr.lock {
+  display: flex;
+  flex-direction: column;
+  height: 5em!important;
+}
+
 .user-settings-table {
   margin-top: 1em;
 }
