@@ -22,7 +22,6 @@ function Devices() {
           setData(result)
         })
         .catch(error => {
-          console.error("Error:", error);
         });
 
       } catch (error) {

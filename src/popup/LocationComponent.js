@@ -70,10 +70,11 @@ export default function LocationComponent (props) {
         }
 
         if(qtyCount > neededQty) {
-            alert(`Količina ne sme presegati ${neededQty}!!!`)
+            Swal.fire('Napaka!', `Količina ne sme presegati ${neededQty}!!!`, 'error');
+
             items.splice(-1,1)
         } else if (qtyCount == neededQty) { 
-            alert(`Količina je dosežena!`);
+            Swal.fire('Napaka!', `Količina je dosežena!`, 'error');
         }
         setTabledata(items);
       

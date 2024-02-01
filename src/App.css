@@ -1321,10 +1321,37 @@ img.loader {
 button.popup-close-btn {
   color: gray;
 }
-
+.shortened-lock {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10ch; /* You can adjust the value based on your needs */
+}
 button.popup-close-btn.add:hover {
   color: black;
 }
+.lock {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+button.popup-close-btn.insert{
+  color: gray;
+}
+
+button.popup-close-btn.insert:hover {
+  color: black;
+}
+
+.popup-content {
+  padding: 1!important;
+
+}
+
+.smaller-friendly {
+  font-size: smaller;
+}
+
 .popup-overlay {
   position: fixed;
   top: 0;
