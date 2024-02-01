@@ -1317,7 +1317,11 @@ img.loader {
   bottom:2em;
   width: 95vw;
 }
-
+.version-info {
+  padding: 10px;
+  background-color: #081A45;
+  color: white;
+}
 button.popup-close-btn {
   color: gray;
 }
@@ -1330,6 +1334,46 @@ button.popup-close-btn {
 button.popup-close-btn.add:hover {
   color: black;
 }
+
+
+/* VersionInfo.css */
+
+.version-info {
+  position: relative;
+  display: inline-block; /* Ensures the tooltip appears next to the info circle */
+}
+
+.version-number {
+  display: inline-block;
+  margin-right: 8px; /* Adjust spacing between version number and info circle */
+}
+
+.info-icon {
+  cursor: help;
+  font-size: 20px;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* Position below the version number */
+  left: 50%; /* Centered horizontally */
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.version-info:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 .lock {
   white-space: nowrap;
   overflow: hidden;
