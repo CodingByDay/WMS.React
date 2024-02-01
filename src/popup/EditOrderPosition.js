@@ -82,15 +82,18 @@ function EditOrderPosition(props) {
       </span>
 
       <Modal
-        title="Posodobitev"
+        title=""
         open={visible}
         onOk={handleOk}
         onCancel={handleCancel}
+        okText="Posodobi"
+        cancelText="Zapri"
       >
 
-
+        <div className='quantity-form-update'>
         <label htmlFor="quantity">Količina:</label>
-        <Input id="quantity" placeholder="Vnesite količino" />
+        <Input id="quantity" className="form-control" placeholder="Vnesite količino" />
+        </div>
       </Modal>
     </div>
   );

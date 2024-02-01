@@ -72,7 +72,8 @@ export function ImportOrders(props) {
       { Name: 'adTimeIns', Database: 'DateTime', default: formattedDatetime, required: false, friendly: "Datum"}     
      ]
 
-     var columns_head = [{ Name: 'acType', Database: 'String', default: '', required: true, friendly: "Tip" }, 
+     var columns_head = [
+      { Name: 'acType', Database: 'String', default: '', required: true, friendly: "Tip" }, 
       { Name: 'acDocType', Database: 'String', default: '', required: true, friendly: "Tip dokumenta"}, 
       { Name: 'adDate', Database: 'DateTime', default: '', required: false, friendly: "Datum"}, 
       { Name: 'acKey', Database: 'String', default: '', required: true, friendly: "Številka naročila"}, 

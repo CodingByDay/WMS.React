@@ -13,7 +13,6 @@
 
 # misc
 
-
 .env
 .DS_Store
 .env.local
@@ -27,3 +26,8 @@ yarn-error.log*
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+
+.vscode/
+.VSCodeCounter/
+.env

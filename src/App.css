@@ -1318,6 +1318,13 @@ img.loader {
   width: 95vw;
 }
 
+button.popup-close-btn {
+  color: gray;
+}
+
+button.popup-close-btn.add:hover {
+  color: black;
+}
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -1329,10 +1336,22 @@ img.loader {
   justify-content: center;
   align-items: center;
 }
-
+button.popup-close-btn {
+  padding: 5px;
+}
+.quantity-form-update {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding-top: 2em;
+  padding-bottom: 1em;
+}
+.popup-body {
+  padding: 1em;
+}
 .popup-content {
   background-color: white;
-  padding: 20px;
+  padding: 1em;
   border-radius: 5px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
