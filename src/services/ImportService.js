@@ -72,6 +72,8 @@ const ImportService  =  {
               'Content-Type': 'application/json'
             }
           });
+
+          console.log(response);
           if (response.data.Success) {
             return true;
           } else {

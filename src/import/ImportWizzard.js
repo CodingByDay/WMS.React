@@ -134,6 +134,8 @@ const ImportWizzard = (props) => {
 
 
   const importData = () => {
+
+
     var unlocked = false;
     for(var i = 0; i < props.columns.length; i++) {
       var current = props.columns[i];
@@ -146,10 +148,12 @@ const ImportWizzard = (props) => {
         }
       }
     }
-    // Import begin
+
     // Show the loader
     props.loader(true)
     // Begin work
+
+
     var columnsData = props.columns;
     var data = fileContent;
 
@@ -159,6 +163,8 @@ const ImportWizzard = (props) => {
         columnsData[columnsData.findIndex(column => column.Name == connection)].connection = accessor;            
     }
 
+    var error = 0;
+    var counter = 0;
     for(var i = 0; i < data.length; i++) {
         var params = [];
         var currentObject = data[i]
@@ -202,23 +208,34 @@ const ImportWizzard = (props) => {
           // Import the row in the database //
           params = correctDependencies(params, columnsData);
 
-          // console.log(params);
 
       
 
         ImportService.insertSQLQuery(props.sql, params)
           .then(result => {
-            
-          })
-        
-        // Import the row in the database //
+            counter += 1;
 
+            if(!result) {
+              error += 1;
+            }
+
+            if (counter == data.length) {
+              props.loader(false)
+              if(error > 0) {
+                window.showAlert("Informacija", "Prišlo je do napake, nekateri podatki niso bili zapisani.", "error");
+              } else {
+                window.showAlert("Informacija", "Uvoz se končal brez napak", "success");
+              }
+            }
+          })   
+        // Import the row in the database //
     }
 
-    props.loader(false)
+   
+      
+    
 
-        
-  }
+}
      
 
 function correctDependencies(params, columnsData) {
