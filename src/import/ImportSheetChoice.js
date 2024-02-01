@@ -30,7 +30,7 @@ export default function ImportSheetChoice(props) {
         <div className='choices'style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5em' }}>
 
             {props.sheets.map((sheet, index) => (
-               <button className='actions smallerr' onClick={() => setChosenSheetState(sheet)}>{sheet}</button>
+               <button key= {sheet} className='actions smallerr' onClick={() => setChosenSheetState(sheet)}>{sheet}</button>
             ))}
 
         </div>

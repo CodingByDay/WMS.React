@@ -11,7 +11,7 @@ const VersionInfo = () => {
     <div className="version-info">
       <div className="version-number">{`Verzija ${version}`}</div>
       <FaInfoCircle className="info-icon" />
-      {notes && <div className="tooltip">{notes}</div>}
+      {notes && <div className="tooltip">Aktivna licenca. Podatki o verziji: {notes}</div>}
     </div>
   );
 };

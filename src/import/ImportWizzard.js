@@ -10,6 +10,7 @@ import { FaLock } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Loader from '../loader/Loader';
 import ImportService from '../services/ImportService';
+import ExcelJS from 'exceljs';
 
 
 const ImportWizzard = (props) => {
@@ -67,7 +68,10 @@ const ImportWizzard = (props) => {
   };
 
   const onChoiceReceived = (sheetName) => {
+
         setIsPopupOpen(false)
+
+        
         const sheetNameString = sheetName;     
         const sheet = workbook.Sheets[sheetNameString];
         const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
@@ -85,7 +89,6 @@ const ImportWizzard = (props) => {
             // Convert all values to strings
             return paddedRow.map(value => String(value));
         });
-
         // Transform the normalized data to an array of objects
         const transformedData = normalizedData.slice(1).map(row => {
             return row.reduce((obj, value, index) => {
@@ -226,6 +229,11 @@ const ImportWizzard = (props) => {
               } else {
                 window.showAlert("Informacija", "Uvoz se končal brez napak", "success");
               }
+
+
+              setFileContent([])
+              cleanupWorkbook();
+
             }
           })   
         // Import the row in the database //
@@ -265,6 +273,9 @@ function correctDependencies(params, columnsData) {
   return returnParameters;
   }
 
+  const cleanupWorkbook = () => {
+    setWorkbook(null);
+  };
 
 
   const onDrop = (acceptedFiles) => {

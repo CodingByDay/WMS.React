@@ -191,7 +191,7 @@ $(function() {
     function getNote() {
         if(props.order) {
             return  <div className="form-group2">
-                    <label for="acNote">Opomba</label>
+                    <label htmlFor="acNote">Opomba</label>
                     <textarea className="form-control" id="acNote" rows="3"></textarea>
             </div>
         }
@@ -295,12 +295,8 @@ $(function() {
 
         <div className='left-column'>
         <Select className='select-filters'
-          styles={{
-            control: (provided) => ({
-              ...provided,
-              width: '300px', // Adjust the width as needed
-            }),
-          }}
+
+          
         getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select
 
