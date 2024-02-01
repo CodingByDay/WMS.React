@@ -4,7 +4,7 @@ WMS react is a react application used together with the android handheld scanner
 
 ## Development environment
 
-
+![ Cover](https://media-live2.prod.scw.jungheinrichcloud.com/resource/image/1437208/landscape_ratio19x9/3508/1662/bd4d711b895639c28ab43603fc8b344a/C39D6F0E8288F1C0286367CCA65E7E25/jungheinrich-warehouse-management-systeme-wms-.jpg)
 
 If you are using Visual Studio Code IDE.
 
