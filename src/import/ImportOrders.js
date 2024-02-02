@@ -58,15 +58,16 @@ export function ImportOrders(props) {
       };
       
     const currentDatetime = new Date();
-    const formattedDatetime = currentDatetime.toLocaleString();
+
+    const formattedDatetime = currentDatetime.toISOString().slice(0, 19).replace("T", " ");
 
     var columns_position = 
      [
       { Name: 'acKey', Database: 'String', default: '', required: true, friendly: "Številka naročila" }, 
-      { Name: 'anNo', Database: 'Int32', default: '', required: true, friendly: "Pozicija"}, 
+      { Name: 'anNo', Database: 'Int32', default: 0, required: true, friendly: "Pozicija"}, 
       { Name: 'acIdent', Database: 'String', default: '', required: true, friendly: "Ident"}, 
       { Name: 'acSerialNo', Database: 'String', default: '', required: false, friendly: "Serijska številka"}, 
-      { Name: 'anQty', Database: 'Decimal', default: '0', required: false, friendly: "Količina"},
+      { Name: 'anQty', Database: 'Decimal', default: 0, required: false, friendly: "Količina"},
       { Name: 'acNote', Database: 'String', default: '', required: false, friendly: "Opomba"},
       { Name: 'anUserIns', Database: 'Int32', default: '1', required: false, friendly: "Upisal"},
       { Name: 'adTimeIns', Database: 'DateTime', default: formattedDatetime, required: false, friendly: "Datum"}     

@@ -10,7 +10,8 @@ import { MdOutlineSearch, MdDateRange,MdDownload, MdOutlineCancel, MdDeleteOutli
 import  SortingService  from '../services/SortingService'
 import { flushSync } from 'react-dom';
 import { Modal, Input } from 'antd';
-
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function EditOrderPosition(props) {
 
@@ -19,10 +20,7 @@ function EditOrderPosition(props) {
   const showModal = () => {
     if(props.selected) {
       setVisible(true);
-
-
       setTimeout(cleanField, 1000);
-
     }
   };
    
@@ -74,27 +72,20 @@ function EditOrderPosition(props) {
  
   return (
     <div>
-
-
-      <span className='actions smallerr' id="editOrder" onClick={showModal}>
-          <p>Uredi</p>
-          <MdEdit />
-      </span>
-
-      <Modal
-        title=""
-        open={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okText="Posodobi"
-        cancelText="Zapri"
+     
+      <Popup
+        position="right center"
+        open={props.shown}
+        onClose={props.onClose}
       >
-
-        <div className='quantity-form-update'>
+      <div className='quantity-form-update'>
         <label htmlFor="quantity">Količina:</label>
-        <Input id="quantity" className="form-control" placeholder="Vnesite količino" />
+        <Input id="quantity" value={props.quantity} className="form-control" placeholder="Vnesite količino" />
         </div>
-      </Modal>
+     
+      </Popup>
+
+
     </div>
   );
 }

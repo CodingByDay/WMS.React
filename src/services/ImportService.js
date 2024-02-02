@@ -67,6 +67,7 @@ const ImportService  =  {
           Parameters: parameters,
         };
         try {
+          
           const response = await axios.post(apiUrl, JSON.stringify(requestObject), { 
             headers: {
               'Content-Type': 'application/json'
@@ -74,6 +75,7 @@ const ImportService  =  {
           });
 
           console.log(response);
+
           if (response.data.Success) {
             return true;
           } else {

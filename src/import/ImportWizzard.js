@@ -74,7 +74,15 @@ const ImportWizzard = (props) => {
         
         const sheetNameString = sheetName;     
         const sheet = workbook.Sheets[sheetNameString];
-        const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const excelData = XLSX.utils.sheet_to_json(sheet, 
+        // Configuration of the xlsx file reading.
+        { 
+          header: 1, 
+          raw: false, 
+          dateNF: 'yyyy-mm-dd hh:mm:ss',
+          cellText: false,
+          rawNumbers: true
+        });
         const headers = excelData[0];
         const tableColumns = headers.map((header) => ({ Header: header, accessor: header, connection: '' }));
         setColumns(tableColumns);
@@ -188,6 +196,17 @@ const ImportWizzard = (props) => {
                 if(type == "Int32") {
                   defaultValue = Number(defaultValue);
                 }
+
+                
+                if (type == "DateTime") {                
+                  // Reduntant but leave for the future modifications.             
+                  defaultValue = defaultValue;                 
+                }
+
+                if(type == "Decimal") {
+                  defaultValue = Number(defaultValue);
+                }
+
                 var parameter = { Name: columnInformation.Name, Type: type, Value: defaultValue  }
                 params.push(parameter);   
             } else {
@@ -203,6 +222,16 @@ const ImportWizzard = (props) => {
                 if(type == "Int32") {
                   found = Number(found);
                 }
+
+                if (type == "DateTime") {                
+                    // Reduntant but leave for the future modifications.             
+                    found = found;                 
+                }
+
+                if(type == "Decimal") {
+                  found = Number(found);
+                }
+
                 var parameter = { Name: columnInformation.Name, Type: type, Value: found  }
                 params.push(parameter); 
         }
@@ -286,13 +315,12 @@ function correctDependencies(params, columnsData) {
       const content = e.target.result;   
       // Check if the file is in Excel format
       if (file.name.endsWith('.xls') || file.name.endsWith('.xlsx')) {
-        const workbook = XLSX.read(content, { type: 'array' });
+        const workbook = XLSX.read(content, {type:'binary',cellText:false,cellDates:true});
         setWorkbook(workbook);
         setSheetNames(workbook.SheetNames) 
         openPopup();      
       } else if (file.name.endsWith(".txt")){
-        // 
-        // 
+
       }
      
     };
