@@ -54,8 +54,9 @@ export default function ListingPositionsButtons(props) {
     }
     const showModal = () => {
 
-
-        setEditShown(true);
+        if(selected) {
+          setEditShown(true);
+        }
     }
 
     const hideModal = () => {

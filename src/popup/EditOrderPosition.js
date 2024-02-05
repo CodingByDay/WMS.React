@@ -19,8 +19,11 @@ const [quantity, setQuantity] = useState(0);
 
 useEffect(() => {
   if (props.shown) {
-
-    setQuantity(props.object.childNodes[6]?.innerHTML);
+    if(props.object.childNodes) {
+       setQuantity(props.object.childNodes[6]?.innerHTML);
+    } else {
+      props.close();
+    }
   }
 }, [props.shown, props.quantity, props.object]);
 
