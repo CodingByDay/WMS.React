@@ -15,74 +15,62 @@ import 'reactjs-popup/dist/index.css';
 
 function EditOrderPosition(props) {
 
-  const [visible, setVisible] = useState(false);
+const [quantity, setQuantity] = useState(0);
 
-  const showModal = () => {
-    if(props.selected) {
-      setVisible(true);
-      setTimeout(cleanField, 1000);
-    }
-  };
-   
+useEffect(() => {
+  if (props.shown) {
 
-
-
-
-  function cleanField( ) {
-    const quantityElement = document.getElementById("quantity");
-
-    if (quantityElement) {
-      quantityElement.value = "";
-    } 
-
+    setQuantity(props.object.childNodes[6]?.innerHTML);
   }
+}, [props.shown, props.quantity, props.object]);
+
+
+
+
+
   function isFloat(n) {
     return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
-}
-
-
+  }
 
   const handleOk = () => {
     
-       setVisible(false);
-        var qty = document.getElementById("quantity").value;
-        if(qty == null) {
+       props.close()
+  
+        if(quantity == null) {
               return;
         }
-        if (qty &&isFloat(qty)) 
+        if (quantity &&isFloat(quantity)) 
         {    
-              props.communicate("position", "update", qty);
+              props.communicate("position", "update", quantity);
         } else {
               window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
               return; 
         }
   };
-
-  const handleCancel = () => {
-    setVisible(false);
+  const handleInputChange = (e) => {
+    setQuantity(e.target.value);
   };
 
-
-
-
-
-
-
-
- 
   return (
     <div>
      
       <Popup
         position="right center"
-        open={props.shown}
-        onClose={props.onClose}
+        open={props.shown}   
+        onClose={props.close} 
       >
+
       <div className='quantity-form-update'>
         <label htmlFor="quantity">Količina:</label>
-        <Input id="quantity" value={props.quantity} className="form-control" placeholder="Vnesite količino" />
-        </div>
-     
+        <Input id="quantity" value={quantity} onChange={handleInputChange} className="form-control" placeholder="Vnesite količino" />  
+      </div>
+
+        <center><span className='actions smallerr' onClick={handleOk} id='updateQuantity'>          
+             <p>Potrdi</p>
+                          <MdAdd />
+                </span>
+        </center> 
+
       </Popup>
 
 

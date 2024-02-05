@@ -262,7 +262,7 @@ export default function Listing() {
     }
 
   
-    
+    console.log(selectedPosition);
     
     return ( 
 
@@ -281,7 +281,7 @@ export default function Listing() {
 
             <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
 
-            <ListingPositionsButtons selectedPosition = {isPositionSelected}  selectedHead = {isHeadOrderSelected} communicate = {communicate} />
+            <ListingPositionsButtons selectedElement = {selectedPosition} selectedPosition = {isPositionSelected}  selectedHead = {isHeadOrderSelected} communicate = {communicate} />
 
             <OrderPositions data = {positions} childToParent = {childToParent} />   
 

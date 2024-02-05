@@ -14,11 +14,13 @@ import { Modal, Input } from 'antd';
 
 export default function ListingPositionsButtons(props) { 
 
-     const [selected, setSelected]  =useState (false)
+     const [selected, setSelected]  =useState ({})
      const [isEditShow, setEditShown] = useState (false)
     useEffect(() => {
-        
-    }, []);
+        if(typeof props.selectedElement !== 'undefined') {
+          setSelected(props.selectedElement);
+        }
+    }, [props.selectedElement]);
 
 
 
@@ -51,8 +53,19 @@ export default function ListingPositionsButtons(props) {
 
     }
     const showModal = () => {
-        setEditShown(!isEditShow);
+
+
+        setEditShown(true);
     }
+
+    const hideModal = () => {
+
+
+     setEditShown(false);
+ }
+
+
+
 
 
     return ( 
@@ -69,7 +82,7 @@ export default function ListingPositionsButtons(props) {
           <MdEdit />
           </span>
 
-          <EditOrderPosition shown = {isEditShow} selected = {props.selectedPosition} communicate = {props.communicate} />
+          <EditOrderPosition close={hideModal} shown = {isEditShow} object={selected} communicate = {props.communicate} />
        
          <span className='actions smallerr' id="deleteOrder" onClick={deleteOrderHead}>
               <p>Pobriši</p>
