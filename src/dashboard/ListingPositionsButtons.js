@@ -83,13 +83,13 @@ export default function ListingPositionsButtons(props) {
           <MdEdit />
           </span>
 
-          <EditOrderPosition close={hideModal} shown = {isEditShow} object={selected} communicate = {props.communicate} />
        
          <span className='actions smallerr' id="deleteOrder" onClick={deleteOrderHead}>
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
-         
+         <EditOrderPosition close={hideModal} shown = {isEditShow} object={selected} communicate = {props.communicate} />
+
         </div>
 
 

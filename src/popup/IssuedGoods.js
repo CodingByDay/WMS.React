@@ -32,6 +32,24 @@ export default function IssuedGoods(props) {
     var bufferElements = [];
     const userId = useSelector((state) => state.user.userId)
   
+    
+    const customStyles = {
+        control: (base) => ({
+          ...base,
+          width: '15em', // Width of the control
+        }),
+        menu: (base) => ({
+          ...base,
+          width: '15em', // Width of the dropdown menu
+        }),
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: 'nowrap', // Prevent line breaks
+          overflow: 'hidden', // Hide overflowing text
+          textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+        }),
+      };
+  
 
 
     useEffect(() => {
@@ -224,13 +242,13 @@ export default function IssuedGoods(props) {
 
     function getClient() {
         if(props.order) {
-            return   <Select className='select-filters-add' value={selectedClient} onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
+            return   <Select styles={customStyles} className='select-filters-add' value={selectedClient} onChange={(e) => onChangeBuyer(e)} placeholder={"Kupec"} options={buyer} id='buyer' />
         }
     }
 
     function getNote() {
         if(props.order) {
-            return  <div className="form-group2">
+            return  <div styles={customStyles} className="form-group2">
                     <label htmlFor="acNote">Opomba</label>
                     <textarea className="form-control" id="acNote" rows="3"></textarea>
             </div>
@@ -299,15 +317,15 @@ export default function IssuedGoods(props) {
 
 
         <div className='left-column'>
-        <Select className='select-filters-add' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
-        <Select className='select-filters-add' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
+        <Select styles={customStyles} className='select-filters-add' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
+        <Select styles={customStyles} className='select-filters-add' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
         </div>
         <div className='right-column'>
 
 
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
     
-        <input placeholder="Izberite datum" type="date" id="documentDate" className="form-control" />
+        <input styles={customStyles} placeholder="Izberite datum" type="date" id="documentDate" className="form-control" />
 
         </div>
 

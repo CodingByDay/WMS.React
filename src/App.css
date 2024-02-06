@@ -512,9 +512,7 @@ table thead th {
 
 
 
-.responsive-buttons-order span {
-  margin: 0.2em!important;
-}
+
 
 
 }
@@ -1202,9 +1200,23 @@ div#addHeader {
     padding: 10px;
     color: white;
 }
-
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
 .editable-group {
 	width: max-content;
+}
+
+.filters.upper {
+  width: 95%;
+  justify-content: space-between;
+}
+
+.filters-left {
+  display: flex;
+  gap: 1em;
 }
 
 #edit {

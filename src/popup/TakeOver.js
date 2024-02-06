@@ -91,6 +91,24 @@ export default function TakeOver(props) {
 
     }); 
 
+    const customStyles = {
+        control: (base) => ({
+          ...base,
+          width: '15em', // Width of the control
+        }),
+        menu: (base) => ({
+          ...base,
+          width: '15em', // Width of the dropdown menu
+        }),
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: 'nowrap', // Prevent line breaks
+          overflow: 'hidden', // Hide overflowing text
+          textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+        }),
+      };
+
+
 
     var subjects =  PopupService.getSubjects().then(response => { 
             window.subjects = response;
@@ -180,11 +198,26 @@ $(function() {
             <input type="checkbox" onChange={toggleCheck} checked={byOrder} id='byOrder' /></div>
         }
     }
-
+    const customStyles = {
+        control: (base) => ({
+          ...base,
+          width: '15em', // Width of the control
+        }),
+        menu: (base) => ({
+          ...base,
+          width: '15em', // Width of the dropdown menu
+        }),
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: 'nowrap', // Prevent line breaks
+          overflow: 'hidden', // Hide overflowing text
+          textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+        }),
+      };
 
     function getClient() {
         if(props.order) {
-            return <Select className='select-filters' value={selectedClient}  onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
+            return <Select styles={customStyles}  className='select-filters' value={selectedClient}  onChange={(e) => onChangeBuyer(e)} placeholder={"Dobavitelj"} options={buyer} id='buyer' />
         }
     }
 
@@ -296,10 +329,10 @@ $(function() {
         <div className='left-column'>
         <Select className='select-filters'
 
-          
+styles={customStyles} 
         getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} value={selectedType} onChange={(e) => onChangeType(e)} placeholder={"Tip"} options={documentTypes}  id='documentType'/>
         <Select
-
+styles={customStyles} 
         className='select-filters' value={selectedWarehouse} onChange={(e) => onChangeWarehouse(e)} placeholder={"Skladišče"} options={warehouses} id='warehouse'  />
         </div>
         <div className='right-column'>
@@ -307,7 +340,7 @@ $(function() {
 
         <div id="date-picker-example" onChange={(e) => onDateChange(e)}  className="md-form md-outline input-with-post-icon datepicker" inline="true">
 
-        <input placeholder="Izberite datum" type="date" id="documentDate" className="form-control" />
+        <input placeholder="Izberite datum" styles={customStyles}  type="date" id="documentDate" className="form-control" />
 
         </div>
 

@@ -76,6 +76,8 @@ const Update = (props) => {
         SettingsService.executeSQLQueryBatch(pairs)
         .then(result => {
             var data = result;
+            console.log(pairs)
+
             for(var i = 0; i < props.selectedTable.value.length; i++) {
                 var current = props.selectedTable.value[i];
                 var currentData = data[current.accessor];
@@ -104,7 +106,6 @@ const Update = (props) => {
               };
             });
             
-       
 
 
         })
@@ -138,11 +139,15 @@ const Update = (props) => {
           const structureType = found.type;
           if(structureType === "dropdown") {
             if(found.dropdownId === key) {
-      
+             
               var specificObject = dropdownOptions[key]
+
+
+              alert(value)
+
               var insertObject = specificObject.find(item => item.id === value);
 
-
+            
 
               setSelectedOptions(prevSelectedOptions => ({
                 ...prevSelectedOptions,
@@ -484,6 +489,12 @@ const Update = (props) => {
   
 
   const formatOptionLabel = ({ label, properties, widths, header, id }) => {
+
+
+
+
+
+
     const exists = Object.values(selectedOptions).some(item => item.id === id);
 
     

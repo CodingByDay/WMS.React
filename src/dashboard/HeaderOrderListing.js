@@ -287,8 +287,10 @@ export default function HeaderOrderListing(props) {
     };
 
     return ( 
-        <div className="filters">
+        <div className="filters upper">
 
+
+             <div className="filters-left">
 
              <Select styles={customStyles} className='select-filterss' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
@@ -296,10 +298,10 @@ export default function HeaderOrderListing(props) {
 
              <Select styles={customStyles} className='select-filterss' placeholder={"Prejemnik"} value={currentReceivers}  onChange={(e) => onChangeReceiver(e)} options={receivers} id='documentNumbers'/>
 
+            </div>
 
 
-
-     
+      <div className="filter-buttons">
 
 
              {open && (
@@ -349,7 +351,7 @@ export default function HeaderOrderListing(props) {
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
-         
+         </div>
           </div>
 
          <AddHeadDocument type={"listing"} render = {renderComponent}  order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
