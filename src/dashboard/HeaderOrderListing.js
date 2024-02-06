@@ -269,16 +269,32 @@ export default function HeaderOrderListing(props) {
      props.communicate("head", "render")
     }
 
+    const customStyles = {
+      control: (base) => ({
+        ...base,
+        width: '15em', // Width of the control
+      }),
+      menu: (base) => ({
+        ...base,
+        width: '15em', // Width of the dropdown menu
+      }),
+      option: (provided) => ({
+        ...provided,
+        whiteSpace: 'nowrap', // Prevent line breaks
+        overflow: 'hidden', // Hide overflowing text
+        textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+      }),
+    };
 
     return ( 
         <div className="filters">
 
 
-             <Select className='select-filterss' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
+             <Select styles={customStyles} className='select-filterss' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
-             <Select className='select-filterss' placeholder={"Številka naročila"} value={currentDocumentNumber} onChange={(e) => onChangeDocumentNumber(e)} options={documentNumbers} id='documentNumbers'/>
+             <Select styles={customStyles} className='select-filterss' placeholder={"Številka naročila"} value={currentDocumentNumber} onChange={(e) => onChangeDocumentNumber(e)} options={documentNumbers} id='documentNumbers'/>
 
-             <Select className='select-filterss' placeholder={"Prejemnik"} value={currentReceivers}  onChange={(e) => onChangeReceiver(e)} options={receivers} id='documentNumbers'/>
+             <Select styles={customStyles} className='select-filterss' placeholder={"Prejemnik"} value={currentReceivers}  onChange={(e) => onChangeReceiver(e)} options={receivers} id='documentNumbers'/>
 
 
 

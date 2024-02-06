@@ -36,10 +36,10 @@ export default function Listing() {
 
 
     const handlePopupClose = () => {
-
       setPopupVisible(false);
     };
 
+    
     
   
     function isUUID ( uuid ) {

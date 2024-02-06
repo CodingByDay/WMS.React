@@ -18,7 +18,7 @@ span#updateQuantity {
 .popup-content {
   margin: auto;
   background: #fff;
-  width: 30%!important;
+  width: 50%!important;
   padding: 5px;
   border: 1px solid #d7d7d7;
 }
@@ -904,9 +904,7 @@ span.actions.smallerr, button.actions.smallerr {
   margin: 3em;
 }
 
-#documentType, #warehouse, #buyer, #documentDate, #transactionTypePopup {
-  width:10vw!important;
-}
+
 
 .layout-issued-goods {
   color: black;
@@ -1209,7 +1207,6 @@ div#addHeader {
 	width: max-content;
 }
 
-
 #edit {
   display: none;
   width:fit-content;
@@ -1225,28 +1222,9 @@ div#addHeader {
   background: white;
 }
 
-
-
-
-
 .buttonsHeader button, .buttonsPositions button {
   width: 10em;
 }
-
-/* filter on transaction screen */
-#transactionType,
-#businessEvent,
-#transactionOrder,
-#transactionId,
-#transactionStatus,
-#client,
-#ident,
-#identName,
-#erpKey,
-#documentType {
-  width: 20vw;
-}
-
 
 
 span#openRangeTransaction {
