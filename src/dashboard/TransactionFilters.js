@@ -382,7 +382,7 @@ const [state, setState] = useState([
         }),
         menu: (base) => ({
           ...base,
-          width: '15em', // Width of the dropdown menu
+          width: '22em', // Width of the dropdown menu
         }),
         option: (provided) => ({
           ...provided,
