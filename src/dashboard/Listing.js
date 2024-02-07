@@ -262,7 +262,6 @@ export default function Listing() {
     }
 
   
-    console.log(selectedPosition);
     
     return ( 
 

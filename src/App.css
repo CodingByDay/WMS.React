@@ -1491,9 +1491,10 @@ h3.information {
   line-height: 30vh;
 }
 
-.select-filters-stock {
-  width: 10em!important;
+span.actions.smallerr.stock {
+  width: 15em;
 }
+
 .table_responsive_positions {
   height: 40vh;
   margin-top: 1vh;
@@ -1504,6 +1505,9 @@ h3.information {
 
 .stock-container-filters {
   display: flex;
+  gap: 1em;
+  margin-left: 2.5%;
+  margin-top: 1em;
 }
 
 
@@ -1522,10 +1526,6 @@ td {
   font-size: 0.6em!important;
 }
 
-#warehouseStock, #locationStock, #identStock {
-  margin: 1em;
-  width: 30em;
-}
 
 
 

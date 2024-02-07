@@ -375,7 +375,22 @@ const [state, setState] = useState([
       </div>
     );
     
-    
+      const customStyles = {
+        control: (base) => ({
+          ...base,
+          width: '22em', // Width of the control
+        }),
+        menu: (base) => ({
+          ...base,
+          width: '15em', // Width of the dropdown menu
+        }),
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: 'nowrap', // Prevent line breaks
+          overflow: 'hidden', // Hide overflowing text
+          textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+        }),
+      };
     
   
     const formatOptionLabelErp = ({ label, properties, header, code }) => {
@@ -448,9 +463,10 @@ const [state, setState] = useState([
 
                     <div className='columnDivider'> 
 
-                    <Select className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)}  options={transactionType} id='transactionType'/>    
-                    <Select className='select-filters' value={transactionOrderSelected}  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
+                    <Select styles={customStyles} className='select-filters' value={transactionTypeSelected}  placeholder={"Tip transakcije"} onChange={(e) => onChangeTransactionType(e)}  options={transactionType} id='transactionType'/>    
+                    <Select styles={customStyles} className='select-filters' value={transactionOrderSelected}  placeholder={"Nalog za transakcijo"} options={transactionOrder} onChange={(e) => onChangeTransactionOrder(e)} id='transactionOrder'/>
                     <Select 
+                     styles={customStyles}
                      getOptionLabel={(option) => option.code} 
                      getOptionValue={(option) => option.code} 
                      formatOptionLabel={formatOptionLabel} 
@@ -474,10 +490,11 @@ const [state, setState] = useState([
                     
 
 
-                    <Select className='select-filters' placeholder={"Status transakcije"} value={transactionStatusSelected} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
+                    <Select styles={customStyles} className='select-filters' placeholder={"Status transakcije"} value={transactionStatusSelected} onChange={(e) => onChangeTransactionStatus(e)} options={transactionStatus} id='transactionStatus'/>
 
 
                     <Select
+                        styles={customStyles}
                         value={clientSelected}
                         placeholder={"Stranka"}
                         id='client'
@@ -487,7 +504,7 @@ const [state, setState] = useState([
                     />
 
                     <Select
-                    
+                        styles={customStyles}
                         id = "idTransaction"
                         type="text"
                         value={transactionIdSelected}
@@ -503,15 +520,16 @@ const [state, setState] = useState([
 
 
                   
-                    <span className="actions smallerr filter" placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
+                    <span className="actions smallerr filter" styles={customStyles} placeholder={"Izberite"} onClick={toggleVisibility} id="openRangeTransaction">
                     <p>Izberite</p>
                     <MdDateRange />
                     </span>  
                    
 
-                    <Select  placeholder={"Uporabnik"} value={userSelected} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
+                    <Select styles={customStyles}  placeholder={"Uporabnik"} value={userSelected} onChange={(e) => onChangeUser(e)} options={users} id='userSelect'/>
 
                     <Select 
+                        styles={customStyles}
                         placeholder={"ERP ključ"}
                         value={erpKeySelected}
                         id='erpKey'
@@ -539,7 +557,7 @@ const [state, setState] = useState([
                   <div className="nameModule" ref={dateRangePickerRef}>
 
                     <DateRangePicker
-                   
+                      styles={customStyles}
                       className = "dateRangePicker"
                       onChange={item => setState([item.selection])}
                       showSelectionPreview={true}

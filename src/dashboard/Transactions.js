@@ -93,6 +93,8 @@ export default function Transactions() {
 
       });
 
+    
+
 
     function isUUID ( uuid ) {
       let s = "" + uuid;

@@ -541,17 +541,17 @@ const Update = (props) => {
               <div className='complete select'>
 
               <Select
-              id={column.accessor}
-              placeholder={column.dropdownPlaceholder}
-              name={column.accessor}
-              getOptionLabel={(option) => option.label}
-              getOptionValue={(option) => option.value}
-              formatOptionLabel={formatOptionLabel}
-              options={dropdownOptions[column.accessor] || []}
-              value={selectedOptions[column.accessor]}
-              onChange={(selected) => handleSelectChange(column.accessor, selected)}
-              required={false}
-              isDisabled={false}
+                    id={column.accessor}
+                    placeholder={column.dropdownPlaceholder}
+                    name={column.accessor}
+                    getOptionLabel={(option) => option.label}
+                    getOptionValue={(option) => option.value}
+                    formatOptionLabel={formatOptionLabel}
+                    options={dropdownOptions[column.accessor] || []}
+                    value={selectedOptions[column.accessor]}
+                    onChange={(selected) => handleSelectChange(column.accessor, selected)}
+                    required={false}
+                    isDisabled={false}
               />
 
         

@@ -29,7 +29,7 @@ export default function Locking(props) {
         <div className="outer">
 
         <div className='header' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2em' }}>
-            <h4>Izberite</h4>
+            <h4>Povezava iz stolpca <h4 style={{ fontWeight: 'bold', fontStyle: 'italic', display: 'inline' }}>{props.column.Header}</h4></h4>
         </div>
 
         <div className='choices'style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px'}}>

@@ -51,6 +51,7 @@ export default function Stock() {
     });
       }, []);
 
+      
 
     function onlyWarehouses(data) { 
         var returnArray = [];
@@ -90,7 +91,22 @@ export default function Stock() {
         ...provided,
         zIndex: 9999, // Set a higher z-index value
       }),
+      control: (base) => ({
+        ...base,
+        width: '15em', // Width of the control
+      }),
+      menu: (base) => ({
+        ...base,
+        width: '15em', // Width of the dropdown menu
+      }),
+      option: (provided) => ({
+        ...provided,
+        whiteSpace: 'nowrap', // Prevent line breaks
+        overflow: 'hidden', // Hide overflowing text
+        textOverflow: 'ellipsis', // Display ellipsis for overflowed text
+      })
     };
+    
 
   const fetchData = async (sql, params) => {
 
@@ -216,7 +232,7 @@ export default function Stock() {
 
 
 
-        <span className='actions smallerr' onClick={handleInventory}>Prikaži</span>
+        <span className='actions smallerr stock' styles={customStyles} onClick={handleInventory}>Prikaži</span>
 
         </div>
 
