@@ -76,7 +76,6 @@ const Update = (props) => {
         SettingsService.executeSQLQueryBatch(pairs)
         .then(result => {
             var data = result;
-            console.log(pairs)
 
             for(var i = 0; i < props.selectedTable.value.length; i++) {
                 var current = props.selectedTable.value[i];
@@ -143,18 +142,24 @@ const Update = (props) => {
               var specificObject = dropdownOptions[key]
 
 
-              alert(value)
 
               var insertObject = specificObject.find(item => item.id === value);
+              if(typeof insertObject != 'undefined') {
 
-            
 
               setSelectedOptions(prevSelectedOptions => ({
                 ...prevSelectedOptions,
                 [key]: insertObject
               }));
   
+            } else {
 
+
+              setSelectedOptions(prevSelectedOptions => ({
+                ...prevSelectedOptions,
+                [key]: {header: false, helper: 'Ni vpisanega opisa', id: props.data.ID, label: `${key}`, names: ['Naziv', 'Opis'], properties: ["DefaultWarehouse", 'Ni vpisanega opisa']}
+              }));
+            }
       
           }
           } else if (structureType === "text") {
@@ -522,7 +527,13 @@ const Update = (props) => {
             <div key={column.accessor} className="form-group insert">
 
 
-              <label htmlFor={column.accessor}>
+              <label  style={{
+                      display: 'block',
+                      width: '100%',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
+                    }} htmlFor={column.accessor}>
                 {column.Header}: {((selectedOptions[column.accessor] && selectedOptions[column.accessor].helper) || '').substring(0, 20)}
               </label>              
               
@@ -540,6 +551,7 @@ const Update = (props) => {
               value={selectedOptions[column.accessor]}
               onChange={(selected) => handleSelectChange(column.accessor, selected)}
               required={false}
+              isDisabled={false}
               />
 
         
