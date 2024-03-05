@@ -9,12 +9,19 @@ import $ from 'jquery';
 import Table from '../table/Table';
 import DataAccess from "../utility/DataAccess";
 import TableForgeDashboard from './TableForgeDashboard';
+import 'devextreme/dist/css/dx.light.css';
+import {
+    DataGrid
+} from 'devextreme-react/data-grid';
+
+
+
+
+
 
 export default function Stock() { 
 
     checkUID () 
-
-
     const [warehouses, setWarehouses] = useState([]);
     const [locations, setLocations] = useState([]);
     const [idents, setidents] = useState([]);
@@ -236,8 +243,11 @@ export default function Stock() {
 
         </div>
 
-        <TableForgeDashboard name={name} tableData = {data} />
+       {/* <TableForgeDashboard name={name} tableData = {data} /> */}
 
+       <DataGrid id="dataGrid">
+                {/* Configuration goes here */}
+       </DataGrid>
       
 
         <Footer />

@@ -1,9 +1,9 @@
+import 'devextreme/dist/css/dx.light.css';
+import 'devextreme/dist/css/dx.light.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-
 import "./App.css"
 import "./Mobile.css"
 import "./Responsive.css"
-
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Auth from "./auth/Auth"
 import { Dashboard } from "./dashboard/Dashboard"
@@ -30,11 +30,14 @@ import {ImportIdents} from "./import/ImportIdents"
 import {ImportSubjects} from "./import/ImportSubjects"
 import React, { useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import 'devextreme/dist/css/dx.light.css';
+import config from 'devextreme/core/config'; 
+import { licenseKey } from './devextreme-licence'; 
+
 
 axios.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
-
   return response;
 }, function (error) {
    // Any status codes that falls outside the range of 2xx cause this function to trigger
@@ -43,12 +46,12 @@ axios.interceptors.response.use(function (response) {
 });
 
 
-
-
-
 function App() {
 
- 
+
+
+
+  config({ licenseKey });   
 
   return (
     <BrowserRouter>
