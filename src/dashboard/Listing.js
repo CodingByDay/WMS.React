@@ -110,6 +110,8 @@ export default function Listing() {
       }
 
       response.Items = positions
+
+
       setPositions(response);  
     });
   }
@@ -146,7 +148,6 @@ export default function Listing() {
   }
 
     const communicate = (type, event, data) => {       
-
         if(type == "status") {
           if(typeof selectedHeadOrder != "undefined") {
             setShowStatusAlert(!showStatusAlert)
@@ -221,6 +222,9 @@ export default function Listing() {
           } else if (event === "render") {
               renderComponent();
           }
+          else if (event === "select") {
+            getPositions(data.Key)
+          }
         } else {
           if(event ==="delete") {
             window.swal({
@@ -278,7 +282,7 @@ export default function Listing() {
 
             <HeaderOrderListing render = {renderComponent} communicate = {communicate} getSortingObject = {getSortingObject} />
 
-            <OrderHeadsListing  data = {orders} childToParent = {childToParent} sort={sort} />
+            <OrderHeadsListing communicate = {communicate} data = {orders} childToParent = {childToParent} sort={sort} />
 
             <ListingPositionsButtons selectedElement = {selectedPosition} selectedPosition = {isPositionSelected}  selectedHead = {isHeadOrderSelected} communicate = {communicate} />
 

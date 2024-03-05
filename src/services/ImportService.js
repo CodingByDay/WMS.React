@@ -74,7 +74,6 @@ const ImportService  =  {
             }
           });
 
-          console.log(response);
 
           if (response.data.Success) {
             return true;

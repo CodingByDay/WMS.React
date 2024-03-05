@@ -291,13 +291,18 @@ export default function HeaderOrderListing(props) {
 
 
              <div className="filters-left">
+{/*
 
+             [:Discusssion needed:][
+              Explanation:
+              
+             ]
              <Select styles={customStyles} className='select-filterss' getOptionLabel={(option) => option.code} getOptionValue={(option) => option.code} formatOptionLabel={formatOptionLabel} placeholder={"Tip"} value={currentType} onChange={(e) => onChangeType(e)} options={types} id='documentType'/>
 
              <Select styles={customStyles} className='select-filterss' placeholder={"Številka naročila"} value={currentDocumentNumber} onChange={(e) => onChangeDocumentNumber(e)} options={documentNumbers} id='documentNumbers'/>
 
              <Select styles={customStyles} className='select-filterss' placeholder={"Prejemnik"} value={currentReceivers}  onChange={(e) => onChangeReceiver(e)} options={receivers} id='documentNumbers'/>
-
+*/}
             </div>
 
 

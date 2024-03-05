@@ -1,3 +1,17 @@
+/* Devexpress grid rules */
+.devexpress-grid {
+  margin: 3em;
+}
+div#dataGrid {
+  margin: 3em;
+}
+
+
+.devexpress-grid.order {
+  height: 300px!important;
+}
+/* Devexpress grid rules */
+
 .paginationControls, .paginationControls button {
   width: fit-content;
   background-color: #081A45;
@@ -6,9 +20,7 @@
   font-weight: 700;
   border:none!important;
 }
-div#dataGrid {
-  margin: 3em;
-}
+
 span#updateQuantity {
   margin-bottom: 0.5em;
 }
