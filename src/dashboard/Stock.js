@@ -11,12 +11,12 @@ import DataAccess from "../utility/DataAccess";
 import TableForgeDashboard from './TableForgeDashboard';
 import 'devextreme/dist/css/dx.light.css';
 import {
-    DataGrid
+    DataGrid,
+    Column,
+    FilterRow,
+    SearchPanel
 } from 'devextreme-react/data-grid';
-
-
-
-
+import { auto } from '@popperjs/core';
 
 
 export default function Stock() { 
@@ -29,9 +29,6 @@ export default function Stock() {
     const [location, setLocation] = useState();
     const [warehouse, setWarehouse] = useState();
     const [data, setData] = useState([]);
-
-
-
 
     useEffect(() => {
 
@@ -51,11 +48,8 @@ export default function Stock() {
             continue;
           }
         }
-
-        setidents(identsFinal);
-
-
-    });
+            setidents(identsFinal);
+        });
       }, []);
 
       
@@ -223,7 +217,6 @@ export default function Stock() {
     // Set up the value for the back button 
     localStorage.setItem('back', "dashboard")
     const name = "stock"
-    
     return ( 
 
         <div>
@@ -245,9 +238,27 @@ export default function Stock() {
 
        {/* <TableForgeDashboard name={name} tableData = {data} /> */}
 
-       <DataGrid id="dataGrid">
-                {/* Configuration goes here */}
-       </DataGrid>
+          <DataGrid id="dataGrid"
+                    dataSource={data}
+                    keyExpr="acWarehouse"
+                    allowColumnReordering={true}
+                    allowColumnResizing={true}          
+                    noDataText='Ni podatkov'
+                    columnAutoWidth={true}
+                    height={auto}
+                    
+          >
+                <FilterRow visible={true} />
+                <SearchPanel visible={true} />
+
+                <Column dataField="acWarehouse" caption="Skladišče" />
+                <Column dataField="acIdent" caption="Ident" />
+                <Column dataField="anQty" caption="Količina" />
+                <Column dataField="acLocation" caption="Lokacija" />
+
+
+
+          </DataGrid>
       
 
         <Footer />

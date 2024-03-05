@@ -6,7 +6,9 @@
   font-weight: 700;
   border:none!important;
 }
-
+div#dataGrid {
+  margin: 3em;
+}
 span#updateQuantity {
   margin-bottom: 0.5em;
 }

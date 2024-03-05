@@ -49,8 +49,6 @@ axios.interceptors.response.use(function (response) {
 function App() {
 
 
-
-
   config({ licenseKey });   
 
   return (
