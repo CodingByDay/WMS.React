@@ -44,6 +44,7 @@ export default function TransactionHeads(props) {
 
   return (
     <div className='transcation-heads-dashboard'>
+      
       <DataGrid
         className='devexpress-grid transaction-head'
         dataSource={gridData}
@@ -64,7 +65,7 @@ export default function TransactionHeads(props) {
         <Column dataField='LinkKey' caption='Nalog za transakcijo' />
         <Column dataField='Receiver' caption='Stranka' />
         <Column dataField='Wharehouse' caption='Skladišče' />
-        <Column dataField='Date' dataType='date' caption='Datum' />
+        <Column data dataField='Date' dataType='date' caption='Datum' />
         <Column dataField='ClerkName' caption='Vnesel' />
         <Column dataField='DateInserted' caption='Datum vnosa' />
 

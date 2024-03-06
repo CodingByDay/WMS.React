@@ -93,8 +93,10 @@ export default function Transactions() {
   }
 
   const selectHead = (data) => {
+    if(data) {
      setSelectedHead(data)
      getPositions(data.HeadID)
+    }
   }
 
 
@@ -231,7 +233,6 @@ export default function Transactions() {
 
   function deleteItemDocument(id) {
 
-    alert(id)
 
 
     window

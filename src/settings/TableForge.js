@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { MdEdit } from "react-icons/md";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
@@ -8,7 +8,15 @@ import SettingsService from "../services/SettingsService";
 import Insert from "../popup/Insert";
 import Update from "../popup/Update";
 import { FaSearch } from "react-icons/fa"; // Import the search icon
-
+import {
+  DataGrid,
+  Column,
+  SearchPanel,
+  FilterRow,
+  Selection,
+  Button,
+  Editing
+} from 'devextreme-react/data-grid'
 function TableForge({ refresh, name, tableData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalEditOpen, setIsEditModalOpen] = useState(false);
@@ -76,6 +84,21 @@ function TableForge({ refresh, name, tableData }) {
     setEditData(data);
     setIsEditModalOpen(true);
   };
+  const editRow = useCallback((e) => {
+
+    e.event.preventDefault();
+  }, []);
+
+  const deleteRow = useCallback((e) => {
+    
+    e.event.preventDefault();
+  }, []);
+
+  const createRow = useCallback((e) => {
+    
+    e.event.preventDefault();
+  }, []);
+
 
   const onAdd = () => {
     generatePopupCreate(selectedTable);
@@ -1115,6 +1138,21 @@ function TableForge({ refresh, name, tableData }) {
     },
   ];
 
+  const generateColumns = () => {
+    // Define your columns dynamically based on your data structure
+    let columns = [];
+    let selectedTable = tablesAssociation.find((table) => table.name === name);
+    for (let i = 0; i < selectedTable.value.length; i++) {
+      let currentRow = selectedTable.value[i];
+      if(currentRow.type!=="nothing") {
+        columns.push(<Column key={currentRow.accessor} dataField={currentRow.accessor} caption={currentRow.Header} />);
+      }
+    }
+    return columns;
+  };
+
+
+
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
   const {
@@ -1159,107 +1197,47 @@ function TableForge({ refresh, name, tableData }) {
         isVisible={isModalEditOpen}
       />
 
-      <div className="user-settings-table">
-        <div className="paginationControls">
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {"<<"}
-          </button>{" "}
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {"<"}
-          </button>{" "}
-          <div className="search-container">
-            <div className="search-icon">
-              <FaSearch
-                style={{
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              />
-            </div>
 
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search..."
-              value={globalFilter || ""}
-              onChange={(e) => setGlobalFilter(e.target.value)}
-              style={{
-                backgroundColor: "#081A45",
-                color: "white",
-                border: "none", // Remove the white border
-                borderRadius: "5px",
-                height: "2em",
-                padding: "10px",
-                transition: "opacity 2.5s", // Apply a transition for a smooth appearance
-              }}
-            />
-          </div>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {">"}
-          </button>{" "}
-          <button
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {">>"}
-          </button>{" "}
-          <span>
-            Stran{" "}
-            <strong>
-              {pageIndex + 1} od {pageOptions.length}
-            </strong>{" "}
-          </span>
-        </div>
 
-        <table {...getTableProps()} className={`react-table-${name}`}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps()}
-                    className={
-                      column.Header === "Id" ||
-                      (column.additional &&
-                        column.additional.includes("hidden-active"))
-                        ? "hidden-column"
-                        : ""
-                    }
-                  >
-                    {column.render("Header")}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        className={
-                          cell.column.Header === "Id" ||
-                          (cell.column.additional &&
-                            cell.column.additional.includes("hidden-active"))
-                            ? "hidden-column"
-                            : ""
-                        }
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+
+
+        <DataGrid
+
+                  className='devexpress-grid settings-system'
+                  dataSource={tableData}
+                  keyExpr={'ID'}
+                  allowColumnReordering={true}
+                  allowColumnResizing={true}
+                  noDataText='Ni podatkov'
+                  columnAutoWidth={true}
+                  focusedRowEnabled={true}
+                  hoverStateEnabled={true}
+                  
+                >
+                <Editing
+                    mode="row"
+                    useIcons={true}
+                    allowUpdating={true}
+                    allowDeleting={true}     
+                />
+                  <FilterRow visible={true} />
+
+
+                  <Column type="buttons">
+                    <Button name="edit" hoverStateEnabled={false} onClick={editRow} />
+                    <Button name="delete" hoverStateEnabled={false} onClick={deleteRow} />
+                    <Button name="create" hoverStateEnabled={false}  icon="add" onClick={createRow} />
+                  </Column>
+
+
+                  {generateColumns()}
+
+
+                  <Selection mode='single' />
+
+
+</DataGrid>
+   
     </div>
   );
 }

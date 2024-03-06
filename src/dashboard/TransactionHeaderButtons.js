@@ -43,6 +43,7 @@ export default function TransactionHeaderButtons(props) {
               <MdDownload />
             </span>
 
+            {/* [Discusion needed] What are we going to do about stornation? 06.03.2024 */}
             <span className='actions smallerr'>
               <p>Storniraj</p>
               <MdOutlineCancel />

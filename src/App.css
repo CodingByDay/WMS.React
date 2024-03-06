@@ -13,7 +13,16 @@ div#dataGrid {
 .devexpress-grid.order-position {
   height: 160px !important;
 }
+
+.dx-link-icon {
+  background: none!important;
+}
+
+.devexpress-grid.stock {
+  height: 60vh !important;
+}
 /* Devexpress grid rules */
+
 
 .paginationControls,
 .paginationControls button {

@@ -90,7 +90,6 @@ const TransactionService = {
     return response.data;
   },
   async deleteHeadDocument(id) {
-    alert(id)
     //  Brisanje dokumenta.
     const response = await axios.get(
       process.env.REACT_APP_API_URL +

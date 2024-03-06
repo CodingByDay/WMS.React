@@ -263,6 +263,7 @@ export default function Stock() {
       {/* <TableForgeDashboard name={name} tableData = {data} /> */}
 
       <DataGrid
+        className='devexpress-grid stock'
         id='dataGrid'
         dataSource={data}
         keyExpr='acWarehouse'
@@ -273,7 +274,6 @@ export default function Stock() {
         height={auto}
       >
         <FilterRow visible={true} />
-        <SearchPanel visible={true} />
 
         <Column dataField='acWarehouse' caption='Skladišče' />
         <Column dataField='acIdent' caption='Ident' />
