@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
-import TransactionService from '../services/TransactionService';
-import ListingService from '../services/ListingService';
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import TransactionService from "../services/TransactionService";
+import ListingService from "../services/ListingService";
+import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
-import $ from 'jquery'; 
+import $ from "jquery";
 
 const AddOrderPosition = (props) => {
   const [idents, setIdents] = useState([]);
   const [selectedIdent, setSelectedIdent] = useState(null);
-  const [quantity, setQuantity] = useState('');
-  const order = useSelector((state) => state.data.orderKey)
-  const userId = useSelector((state) => state.user.userId)
+  const [quantity, setQuantity] = useState("");
+  const order = useSelector((state) => state.data.orderKey);
+  const userId = useSelector((state) => state.user.userId);
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [warehouses, setWarehouses] = useState([]);
@@ -19,27 +19,28 @@ const AddOrderPosition = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         // Get idents
         const response = await TransactionService.getIdents();
-        const identObjects = response.data.map((ident) => ({ label: ident, value: ident }));
-        setIdents([{ label: '', value: '' }, ...identObjects]);
+        const identObjects = response.data.map((ident) => ({
+          label: ident,
+          value: ident,
+        }));
+        setIdents([{ label: "", value: "" }, ...identObjects]);
 
         // Get the list of warehouses
-        const responseWarehouses = await TransactionService.getWarehouses()
+        const responseWarehouses = await TransactionService.getWarehouses();
 
-        var warehousesReturn = []
+        var warehousesReturn = [];
         for (var i = 0; i < responseWarehouses.Items.length; i++) {
-
-
-          var warehouseObj = DataAccess.getData(responseWarehouses.Items[i], "Name", "StringValue");
-          warehousesReturn.push({value: warehouseObj, label:warehouseObj});   
-               
-        } 
+          var warehouseObj = DataAccess.getData(
+            responseWarehouses.Items[i],
+            "Name",
+            "StringValue",
+          );
+          warehousesReturn.push({ value: warehouseObj, label: warehouseObj });
+        }
 
         setWarehouses(warehousesReturn);
-
-
       } catch (error) {
         // Error handling
       }
@@ -49,37 +50,32 @@ const AddOrderPosition = (props) => {
   }, []);
 
   const handleAddOrderPosition = () => {
-
-
-
-    
     if (selectedIdent) {
-
       var toSend = {
         Key: props.current,
         Qty: quantity,
         Ident: selectedIdent.value,
-        Clerk:  localStorage.getItem('name')
-      }
+        Clerk: localStorage.getItem("name"),
+      };
 
-
-      ListingService.createPosition(toSend).then(response => { 
-
-          if (response.Success) {
-            window.showAlert("Informacija", "Uspešno dodana pozicija!", "success")
-          } else {
-            window.showAlert("Informacija", "Napaka v podatkih!", "error")
-          }
-          onClose();
-          props.communicate("position", "render")
+      ListingService.createPosition(toSend).then((response) => {
+        if (response.Success) {
+          window.showAlert(
+            "Informacija",
+            "Uspešno dodana pozicija!",
+            "success",
+          );
+        } else {
+          window.showAlert("Informacija", "Napaka v podatkih!", "error");
+        }
+        onClose();
+        props.communicate("position", "render");
         // close and render
-     }); 
+      });
 
       // Clear the state after adding
       setSelectedIdent(null);
-      setQuantity('');
-
-
+      setQuantity("");
     }
   };
 
@@ -89,49 +85,44 @@ const AddOrderPosition = (props) => {
     return null;
   } else {
     $(".dx-icon.dx-icon-filter-operation-default").addClass("inactive");
-
   }
 
   function setSelectedLocationEvent(e) {
-    setSelectedLocation({value:e.value, label:e.value})
+    setSelectedLocation({ value: e.value, label: e.value });
   }
 
-  function setSelectedWarehouseEvent(e) { 
-
+  function setSelectedWarehouseEvent(e) {
     const fetchData = async () => {
+      const responseLocations = await TransactionService.getLocations(e.value);
+      var locationsReturn = [];
+      for (var i = 0; i < responseLocations.Items.length; i++) {
+        var locationsObj = DataAccess.getData(
+          responseLocations.Items[i],
+          "Name",
+          "StringValue",
+        );
+        locationsReturn.push({ value: locationsObj, label: locationsObj });
+      }
+      setLocations(locationsReturn);
+    };
 
-              const responseLocations = await TransactionService.getLocations(e.value);
-              var locationsReturn = []
-              for (var i = 0; i < responseLocations.Items.length; i++) {      
-                    var locationsObj = DataAccess.getData(responseLocations.Items[i], "Name", "StringValue");
-                    locationsReturn.push({value: locationsObj, label:locationsObj});                       
-              } 
-              setLocations(locationsReturn);
-      
-    }
+    setSelectedWarehouse({ value: e.value, label: e.value });
 
-    setSelectedWarehouse({value:e.value, label:e.value})
-
-    fetchData() 
-
+    fetchData();
   }
 
-
-
-
-   function onClose() {
-    props.onClose()
+  function onClose() {
+    props.onClose();
   }
   return (
     <div className="popup-overlay">
       <div className="popup-content">
         <div className="popup-header">
-          <button className="popup-close-btn" onClick={onClose} >
+          <button className="popup-close-btn" onClick={onClose}>
             X
           </button>
         </div>
         <div className="popup-body">
-
           <label htmlFor="ident">Ident:</label>
 
           <Select
@@ -141,7 +132,6 @@ const AddOrderPosition = (props) => {
             value={selectedIdent}
             onChange={(selectedOption) => setSelectedIdent(selectedOption)}
           />
-
 
           <label htmlFor="quantity">Količina:</label>
 
@@ -153,15 +143,16 @@ const AddOrderPosition = (props) => {
             onChange={(event) => setQuantity(event.target.value)}
           />
 
-
           <div className="center-button">
-            <center><span onClick={handleAddOrderPosition} className="actions smallerr">
-              Dodaj
-            </span>
+            <center>
+              <span
+                onClick={handleAddOrderPosition}
+                className="actions smallerr"
+              >
+                Dodaj
+              </span>
             </center>
           </div>
-
-
         </div>
       </div>
     </div>

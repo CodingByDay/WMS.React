@@ -1,24 +1,18 @@
-
 @media only screen and (max-width: 600px) {
-
-
-/* Navbar */
-.navbar.auth img {
+  /* Navbar */
+  .navbar.auth img {
     height: 50px;
-}
+  }
 
-.Auth-form-content {
+  .Auth-form-content {
     width: 80vw;
+  }
 
-}
-
-
-.Auth-form-content {
+  .Auth-form-content {
     margin-top: -10em;
-}
+  }
 
-.logo.navbar {
+  .logo.navbar {
     margin-left: 2em;
-}
-
+  }
 }

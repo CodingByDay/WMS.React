@@ -1,22 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
-import TransactionService from '../services/TransactionService'
+import { createSlice } from "@reduxjs/toolkit";
+import TransactionService from "../services/TransactionService";
 import DataAccess from "../utility/DataAccess";
 
 const initialState = {
-    currentObject: {},
-}
+  currentObject: {},
+};
 
 export const settingsSlice = createSlice({
-  name: 'settings',
+  name: "settings",
   initialState,
   reducers: {
     setCurrentSetting: (state, action) => {
-      state.currentObject = action.payload[0]      
-    }
+      state.currentObject = action.payload[0];
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { setCurrentSetting } = settingsSlice.actions
+export const { setCurrentSetting } = settingsSlice.actions;
 
-export default settingsSlice.reducer
+export default settingsSlice.reducer;

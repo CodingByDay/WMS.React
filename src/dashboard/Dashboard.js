@@ -1,46 +1,41 @@
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-import Header from './Header';
-import Footer from './Footer';
-import Cookies from 'universal-cookie';
-import $ from 'jquery'; 
+import Header from './Header'
+import Footer from './Footer'
+import Cookies from 'universal-cookie'
+import $ from 'jquery'
 import { useSelector, useDispatch } from 'react-redux'
-import Analytics from './Analytics';
-import {store} from '../store/store';
-import ImportMenu from "../import/ImportMenu";
+import Analytics from './Analytics'
+import { store } from '../store/store'
+import ImportMenu from '../import/ImportMenu'
 
-export function Dashboard() { 
+export function Dashboard() {
+  let navigate = useNavigate()
 
-  let navigate = useNavigate();
+  checkUID()
 
-  checkUID ()
-
-
-
-  function isUUID ( uuid ) {
-    let s = "" + uuid;
-    s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+  function isUUID(uuid) {
+    let s = '' + uuid
+    s = s.match(
+      '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+    )
     if (s === null) {
-      return false;
+      return false
     }
-    return true;
-   } 
-
-
-
-  function checkUID () {
-    const cookies = new Cookies();
-    var cookie = cookies.get('uid');
-    if (typeof cookie !== "undefined") {     
-      if(isUUID(cookie)) {     
-        return;
-      } 
-  } else {
-    window.location.href = "/";
-  }
-   
+    return true
   }
 
+  function checkUID() {
+    const cookies = new Cookies()
+    var cookie = cookies.get('uid')
+    if (typeof cookie !== 'undefined') {
+      if (isUUID(cookie)) {
+        return
+      }
+    } else {
+      window.location.href = '/'
+    }
+  }
 
   /*
   <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
@@ -49,64 +44,76 @@ export function Dashboard() {
   </button>
   */
 
-
-
-  function handleSettings () {
-    $(".settings-divider").toggle();
+  function handleSettings() {
+    $('.settings-divider').toggle()
     // Toggle the visibility
   }
 
   const routeChange = (option) => {
-    let path = "/" + option;
+    let path = '/' + option
 
-    if(option === "logout") { 
-      navigate("/");
+    if (option === 'logout') {
+      navigate('/')
     } else {
-      navigate(path); 
+      navigate(path)
     }
   }
-    return ( 
-      <div>
-          <Header/>
-     <div className='main-menu-design'>
-    
-       <div className = "menu"> 
+  return (
+    <div>
+      <Header />
+      <div className='main-menu-design'>
+        <div className='menu'>
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('listing')}
+          >
+            Naročila
+            <img alt={''} src='listing.png' width={100} />
+          </button>
 
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("listing")}>
-              Naročila
-              <img alt={""} src='listing.png' width={100}/>
-            </button>
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('transactions')}
+          >
+            Transakcije
+            <img alt={''} src='transaction.png' width={100} />
+          </button>
 
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("transactions")}>
-              Transakcije
-              <img alt={""} src='transaction.png' width={100} />
-            </button>
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('stock')}
+          >
+            Zaloge
+            <img alt={''} src='stock.png' width={100} />
+          </button>
 
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("stock")}>
-              Zaloge
-              <img alt={""} src='stock.png' width={100} />
-            </button>
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('import')}
+          >
+            Uvoz
+            <img alt={''} src='import.png' width={100} />
+          </button>
 
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import")}>
-              Uvoz
-              <img alt={""} src='import.png' width={100} />
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('settings')}
+          >
+            Nastavitve
+            <img alt={''} src='settings.png' width={100} />
+          </button>
 
-            </button>
-
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("settings")}>
-              Nastavitve
-              <img alt={""} src='settings.png' width={100} />
-            </button>
-
-            <button className="btn btn-primary dashboard" onClick = {()=>routeChange("analytics")} id='settings-hover' >
+          <button
+            className='btn btn-primary dashboard'
+            onClick={() => routeChange('analytics')}
+            id='settings-hover'
+          >
             Analitika
-            <img alt={""} src='monitor-icon.png' id='analytics' width={50} />
-            </button>         
-           
-            </div>      
-      </div> 
+            <img alt={''} src='monitor-icon.png' id='analytics' width={50} />
+          </button>
+        </div>
+      </div>
       <Footer />
-      </div> 
-    
-    ); 
-} 
+    </div>
+  )
+}

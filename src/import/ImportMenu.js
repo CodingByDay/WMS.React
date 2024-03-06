@@ -1,44 +1,39 @@
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import Header from '../dashboard/Header';
-import Footer from '../dashboard/Footer';
-import Cookies from 'universal-cookie';
-import $ from 'jquery'; 
-import { useSelector, useDispatch } from 'react-redux'
-import {store} from '../store/store';
+import Header from "../dashboard/Header";
+import Footer from "../dashboard/Footer";
+import Cookies from "universal-cookie";
+import $ from "jquery";
+import { useSelector, useDispatch } from "react-redux";
+import { store } from "../store/store";
 
-export function ImportMenu() { 
-
+export function ImportMenu() {
   let navigate = useNavigate();
 
-  checkUID ()
+  checkUID();
 
-
-
-  function isUUID ( uuid ) {
+  function isUUID(uuid) {
     let s = "" + uuid;
-    s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+    s = s.match(
+      "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+    );
     if (s === null) {
       return false;
     }
     return true;
-   } 
+  }
 
-
-
-  function checkUID () {
+  function checkUID() {
     const cookies = new Cookies();
-    var cookie = cookies.get('uid');
-    if (typeof cookie !== "undefined") {     
-      if(isUUID(cookie)) {     
+    var cookie = cookies.get("uid");
+    if (typeof cookie !== "undefined") {
+      if (isUUID(cookie)) {
         return;
-      } 
-  } else {
-    window.location.href = "/";
+      }
+    } else {
+      window.location.href = "/";
+    }
   }
-   
-  }
-
 
   /*
   <button className="btn btn-primary dashboard" id='settings-hover' onClick = { ()=>routeChange("settings") }>
@@ -47,56 +42,52 @@ export function ImportMenu() {
   </button>
   */
 
-
-
-  function handleSettings () {
+  function handleSettings() {
     $(".settings-divider").toggle();
     // Toggle the visibility
   }
 
-
   const routeChange = (option) => {
     let path = "/" + option;
 
-    if(option === "logout") { 
+    if (option === "logout") {
       navigate("/");
     } else {
-      navigate(path); 
+      navigate(path);
     }
-  }
+  };
 
-
-  return ( 
+  return (
     <div>
-        <Header/>
-        <div className='main-menu-design'>
-    
-    <div className = "menu"> 
-
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-subjects")}>
+      <Header />
+      <div className="main-menu-design">
+        <div className="menu">
+          <button
+            className="btn btn-primary dashboard"
+            onClick={() => routeChange("import-subjects")}
+          >
             Subjekti
-            <img alt={""} src='rating-adjusted.png' width={100} />
-
+            <img alt={""} src="rating-adjusted.png" width={100} />
           </button>
 
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-idents")}>
+          <button
+            className="btn btn-primary dashboard"
+            onClick={() => routeChange("import-idents")}
+          >
             Identi
-            <img alt={""} src='stock.png' width={100} />
-
+            <img alt={""} src="stock.png" width={100} />
           </button>
 
-          <button className="btn btn-primary dashboard" onClick = {()=>routeChange("import-orders")}>
+          <button
+            className="btn btn-primary dashboard"
+            onClick={() => routeChange("import-orders")}
+          >
             Naročila
-            <img alt={""} src='listing.png' width={100} />
-         
+            <img alt={""} src="listing.png" width={100} />
           </button>
-
-              
-         
-          </div>      
-    </div> 
-    <Footer />
-    </div> 
-  
-  ); 
-} 
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+}

@@ -6,23 +6,23 @@ div#dataGrid {
   margin: 2em;
 }
 
-
 .devexpress-grid.order {
-  height: 220px!important;
+  height: 220px !important;
 }
 
 .devexpress-grid.order-position {
-  height:160px!important;
+  height: 160px !important;
 }
 /* Devexpress grid rules */
 
-.paginationControls, .paginationControls button {
+.paginationControls,
+.paginationControls button {
   width: fit-content;
-  background-color: #081A45;
+  background-color: #081a45;
   color: white;
   padding: 2px;
   font-weight: 700;
-  border:none!important;
+  border: none !important;
 }
 
 span#updateQuantity {
@@ -36,13 +36,19 @@ span#updateQuantity {
 .popup-content {
   margin: auto;
   background: #fff;
-  width: 50%!important;
+  width: 50% !important;
   padding: 5px;
   border: 1px solid #d7d7d7;
 }
 
-
-table.react-table-system, table.react-table-subject-codes, table.react-table-status-document, table.react-table-type-document, table.react-table-subjects, table.react-table-idents, .react-table-wizzard, .react-table-stock {
+table.react-table-system,
+table.react-table-subject-codes,
+table.react-table-status-document,
+table.react-table-type-document,
+table.react-table-subjects,
+table.react-table-idents,
+.react-table-wizzard,
+.react-table-stock {
   width: 95%;
 }
 
@@ -53,18 +59,16 @@ td {
   max-width: 100px; /* Adjust the max-width as needed */
 }
 
-
 .search-container {
   display: flex;
   gap: 0.5em;
   width: 15em;
-  background: #081A45;
+  background: #081a45;
 
   align-items: center;
 }
 .search-icon {
   height: fit-content;
-
 }
 
 .paginationControls {
@@ -72,11 +76,9 @@ td {
   /* background-color: #081A45; */
 }
 
-
-
 .paginationControls button {
   color: white;
-  background-color: #081A45; 
+  background-color: #081a45;
 }
 .paginationControls span {
   margin-right: 5px;
@@ -104,7 +106,7 @@ button.action-buttons.white {
 }
 
 button.ant-btn {
-  background: #081A45;
+  background: #081a45;
   color: white;
   border-radius: 0;
 }
@@ -121,23 +123,22 @@ button.ant-btn {
   gap: 10px; /* Adjust the gap as needed */
 }
 
-
-.form-group.insert, .form-group.update {
+.form-group.insert,
+.form-group.update {
   display: flex;
   flex-direction: column;
 }
 
 .user-settings-table th {
-  position: sticky!important;
-  top: 0!important;
-  z-index: 1!important;
- 
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
 }
 
 button.actions.smallerr.lock {
   display: flex;
   flex-direction: column;
-  height: 5em!important;
+  height: 5em !important;
 }
 
 .user-settings-table {
@@ -145,12 +146,15 @@ button.actions.smallerr.lock {
 }
 
 :where(.css-dev-only-do-not-override-18iikkb).ant-modal .ant-modal-content {
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
-.css-13cymwt-control, .actions.smallerr.s, #openRange, .actions.smallerr {
-  border-radius: 0!important;
-  height: 40px!important;
+.css-13cymwt-control,
+.actions.smallerr.s,
+#openRange,
+.actions.smallerr {
+  border-radius: 0 !important;
+  height: 40px !important;
 }
 button#confirmAdditionalInformation {
   margin: auto;
@@ -159,7 +163,7 @@ button#confirmAdditionalInformation {
 .paginationControls {
   margin: -2px;
   float: right;
-  margin-right: 2.5%!important;
+  margin-right: 2.5% !important;
   margin-bottom: 1em;
   padding: 0.3em;
 }
@@ -169,13 +173,12 @@ button#confirmAdditionalInformation {
   margin-left: 0.4em;
 }
 button.swal2-confirm.swal2-styled {
-  background: #081A45!important;
-  border-radius: 0!important;
+  background: #081a45 !important;
+  border-radius: 0 !important;
 }
 .center-button {
   margin-top: 2em;
 }
-
 
 button.action-buttons.white:hover {
   background: none !important;
@@ -184,7 +187,8 @@ button.action-buttons.white:hover {
 .hidden-column {
   display: none;
 }
-.popup-overlay.insert, .popup-overlay.add {
+.popup-overlay.insert,
+.popup-overlay.add {
   position: fixed;
   top: 0;
   left: 0;
@@ -215,7 +219,6 @@ button#confirmAdditionalInformation {
   margin-bottom: 2em;
 }
 
-
 .popup-close-btn.insert {
   background: none;
   border: none;
@@ -228,7 +231,6 @@ button#confirmAdditionalInformation {
   padding: 2em;
 }
 span#createDocument {
-
   margin-bottom: 2em;
 }
 .popup-content.insert {
@@ -240,8 +242,16 @@ span#createDocument {
 }
 
 /* Styles for the table */
-.react-table-users, .react-table-system, .react-table-subject-codes, .react-table-status-document, .react-table-type-document, .react-table-subjects, .react-table-idents, .react-table-wizzard, .react-table-stock {
- /* Limiting the width to 90% */
+.react-table-users,
+.react-table-system,
+.react-table-subject-codes,
+.react-table-status-document,
+.react-table-type-document,
+.react-table-subjects,
+.react-table-idents,
+.react-table-wizzard,
+.react-table-stock {
+  /* Limiting the width to 90% */
   border-collapse: collapse; /* Collapses the borders of the table */
   margin: 0 auto; /* Center the table horizontally */
   margin-top: 20px; /* Adds space at the top of the table */
@@ -262,10 +272,6 @@ span#createDocument {
   padding: 8px; /* Padding for table cells */
   border: 1px solid #ccc; /* Adds borders around cells */
 }
-
-
-
-
 
 /* Alternate row background color for better readability */
 .react-table-users tr:nth-child(even) {
@@ -332,9 +338,8 @@ button.action-buttons:hover {
 }
 
 .react-table-users tr {
-  height: 40px!important; /* Adjust the height as needed */
+  height: 40px !important; /* Adjust the height as needed */
 }
-
 
 table.react-table-users td {
   border-left: none;
@@ -345,20 +350,14 @@ table.react-table-users th {
   background: white;
 }
 .react-table-users th {
-  border: none!important;
+  border: none !important;
 }
 
-body{
+body {
   background: #f7f7f8;
 }
 
-
-
-
-
-
 .center-button span {
-
   margin: 0;
 }
 .logo.navbar {
@@ -370,14 +369,14 @@ body{
 }
 
 .navbar {
-  box-shadow: 0 9px 5px 0 rgba(0,0,0,.03);
+  box-shadow: 0 9px 5px 0 rgba(0, 0, 0, 0.03);
   background: none;
 }
 .layout-takeover-goods {
   margin: 0;
 }
 .layout-takeover-goods {
-  margin-top: 2em!important;
+  margin-top: 2em !important;
 }
 .layout-issued-goods {
   margin: 0;
@@ -388,7 +387,7 @@ span#openRangeTransaction {
   margin-top: 0.1em;
 }
 .center-button span {
-  padding-top: 10px!important;
+  padding-top: 10px !important;
 }
 
 .hidden-column {
@@ -396,34 +395,38 @@ span#openRangeTransaction {
 }
 
 .user-settings-table tr {
-  background: #081A45;
+  background: #081a45;
 }
 
-.react-table-wizzard tr, th{
-  background: #081A45;
-
+.react-table-wizzard tr,
+th {
+  background: #081a45;
 }
 
-table.react-table-system tr th:hover,table.react-table-subject-codes tr th:hover {
+table.react-table-system tr th:hover,
+table.react-table-subject-codes tr th:hover {
   background: rgb(255, 255, 255, 0.2);
-
 }
 
 table.react-table-stock th {
-  z-index: 0!important;
+  z-index: 0 !important;
 }
 
 .export-button-div button {
-  padding-top: 8px!important;
+  padding-top: 8px !important;
 }
 
 .outer button {
-  padding-top: 10px!important;
+  padding-top: 10px !important;
 }
 
-.react-table-system th, .react-table-system td, .react-table-subject-codes th, .react-table-subject-codes td, .react-table-stock th, .react-table-stock td {
+.react-table-system th,
+.react-table-system td,
+.react-table-subject-codes th,
+.react-table-subject-codes td,
+.react-table-stock th,
+.react-table-stock td {
   padding: 12px; /* Adjust the padding as needed */
-
 }
 .lower-components {
   margin-top: 2em;
@@ -434,55 +437,62 @@ table.react-table-stock th {
   justify-content: center;
 }
 
-
-table.react-table-wizzard tr th:hover,table.react-table-wizzard tr th:hover {
-  background: rgb(255, 255, 255, 0.2);
-
-}
-
-
-.react-table-wizzard th, .react-table-wizzard td, .react-table-wizzard th, .react-table-wizzard td {
-  padding: 12px; /* Adjust the padding as needed */
-
-}
-
-table.react-table-idents tr th:hover,table.react-table-idents tr th:hover {
-  background: rgb(255, 255, 255, 0.2);
-
-}
-
-
-.react-table-idents th, .react-table-idents td, .react-table-idents th, .react-table-idents td {
-  padding: 12px; /* Adjust the padding as needed */
-
-}
-table.react-table-subjects tr th:hover,table.react-table-subjects tr th:hover {
-  background: rgb(255, 255, 255, 0.2);
-}
-.react-table-subjects th, .react-table-subjects td, .react-table-subjects th, .react-table-subjects td {
-  padding: 12px; /* Adjust the padding as needed */
-}
-table.react-table-status-document tr th:hover,table.react-table-status-document tr th:hover {
-  background: rgb(255, 255, 255, 0.2);
-
-}
-
-
-table.react-table-type-document tr th:hover,table.react-table-type-document tr th:hover {
+table.react-table-wizzard tr th:hover,
+table.react-table-wizzard tr th:hover {
   background: rgb(255, 255, 255, 0.2);
 }
 
-
-
-.react-table-status-document th, .react-table-status-document td, .react-table-status-document th, .react-table-status-document td {
-  padding: 12px; /* Adjust the padding as needed */
-
-}
-
-.react-table-type-document th, .react-table-type-document td, .react-table-type-document th, .react-table-type-document td {
+.react-table-wizzard th,
+.react-table-wizzard td,
+.react-table-wizzard th,
+.react-table-wizzard td {
   padding: 12px; /* Adjust the padding as needed */
 }
 
+table.react-table-idents tr th:hover,
+table.react-table-idents tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+
+.react-table-idents th,
+.react-table-idents td,
+.react-table-idents th,
+.react-table-idents td {
+  padding: 12px; /* Adjust the padding as needed */
+}
+table.react-table-subjects tr th:hover,
+table.react-table-subjects tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+.react-table-subjects th,
+.react-table-subjects td,
+.react-table-subjects th,
+.react-table-subjects td {
+  padding: 12px; /* Adjust the padding as needed */
+}
+table.react-table-status-document tr th:hover,
+table.react-table-status-document tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+
+table.react-table-type-document tr th:hover,
+table.react-table-type-document tr th:hover {
+  background: rgb(255, 255, 255, 0.2);
+}
+
+.react-table-status-document th,
+.react-table-status-document td,
+.react-table-status-document th,
+.react-table-status-document td {
+  padding: 12px; /* Adjust the padding as needed */
+}
+
+.react-table-type-document th,
+.react-table-type-document td,
+.react-table-type-document th,
+.react-table-type-document td {
+  padding: 12px; /* Adjust the padding as needed */
+}
 
 #analytics-panel {
   height: 100%;
@@ -495,7 +505,6 @@ table.react-table-type-document tr th:hover,table.react-table-type-document tr t
 
 p {
   margin-top: 2px;
-
 }
 .header-buttons-div {
   margin-top: 0.1em;
@@ -512,29 +521,22 @@ p {
   padding-top: 8px;
 }
 .navbar span {
-  font-size: larger!important;
+  font-size: larger !important;
 }
 tr {
   font-size: large;
 }
 table thead th {
-    position: sticky!important;
-    top: 0px!important;
-    color: white;
+  position: sticky !important;
+  top: 0px !important;
+  color: white;
 }
 .responsive-buttons-order {
   display: flex;
   flex-direction: row;
   gap: 1em;
-
 }
-@media only screen and (max-width: 1537px){
-
-
-
-
-
-
+@media only screen and (max-width: 1537px) {
 }
 
 #analytics-frame {
@@ -543,22 +545,22 @@ table thead th {
   height: 90%;
   min-height: 90%;
   max-height: 100%;
-  overflow: hidden
+  overflow: hidden;
 }
 
 #analytics-panel {
-
-  background: #efefef!important;
+  background: #efefef !important;
 }
 
 img#analytics {
   margin-right: 1.6em;
 }
 
-html, body {
-  margin: 0!important;
-  height: 100%!important;
-  overflow: hidden!important;
+html,
+body {
+  margin: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
   overflow-y: hidden;
 }
 
@@ -566,7 +568,7 @@ html, body {
   position: absolute;
   top: -35px;
   width: 100%;
-  height: 100%!important;
+  height: 100% !important;
   min-height: 150px;
   min-width: 300px;
   /* overflow: hidden; */
@@ -576,8 +578,8 @@ div#root {
   height: 100%;
 }
 div#MainContent_ASPxDashboard1 {
-  height: 100%!important;
-  width: 100%!important;
+  height: 100% !important;
+  width: 100% !important;
 }
 div#internet {
   display: flex;
@@ -591,7 +593,7 @@ div#internet {
   position: absolute;
   top: -35px;
   width: 100%;
-  height: 100%!important;
+  height: 100% !important;
   min-height: 150px;
   min-width: 300px;
   /* overflow: hidden; */
@@ -624,29 +626,27 @@ div#addHeader {
   justify-content: space-around;
 }
 
-
 #SerialQtyEntry {
-	  display: none;
-    width: -moz-fit-content;
-    width: 50%;
-    height: 70%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid gray;
-    padding: 10px;
-    color: white;
-    opacity: 1;
-    background: white;
-	}
-
+  display: none;
+  width: -moz-fit-content;
+  width: 50%;
+  height: 70%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  padding: 10px;
+  color: white;
+  opacity: 1;
+  background: white;
+}
 
 .table_responsive_location-component {
   margin: 2em;
 }
-#locationComponent div{
-  color: black!important;
+#locationComponent div {
+  color: black !important;
 }
 .add-location-container {
   display: flex;
@@ -660,21 +660,21 @@ div#addHeader {
 }
 
 #locationComponent {
-   display: none;
-    width: -moz-fit-content;
-    width: 50%;
-    height: 70%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid gray;
-    padding: 10px;
-    color: white;
-    opacity: 1;
-    background: white;
+  display: none;
+  width: -moz-fit-content;
+  width: 50%;
+  height: 70%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  padding: 10px;
+  color: white;
+  opacity: 1;
+  background: white;
 }
- .warehouses-container {
+.warehouses-container {
   display: none;
 }
 
@@ -682,28 +682,23 @@ div#addHeader {
   margin-top: 1em;
 }
 
-
-
 .settings-divider-context button {
   display: flex;
   justify-content: space-between;
 }
-
 
 .settings-divider {
   display: none;
 }
 
 .navbar.auth {
-  height: 9em!important;
+  height: 9em !important;
   justify-content: center;
 }
-
 
 tr {
   cursor: pointer;
 }
-
 
 button#loginButton {
   padding-left: 2em;
@@ -712,21 +707,17 @@ button#loginButton {
   padding-bottom: 0.7em;
   width: 100%;
   margin: auto;
-  border-radius: 0!important;
-  background: #081A45;
+  border-radius: 0 !important;
+  background: #081a45;
   border: none;
-  font-family: "Titillium Web", sans-serif!important;
+  font-family: "Titillium Web", sans-serif !important;
   font-size: 0.875em;
   font-weight: 800;
 }
 
 * {
-  
-  
-  font-family: 'Open Sans', sans-serif;
-  font-size:medium;
-
-
+  font-family: "Open Sans", sans-serif;
+  font-size: medium;
 }
 
 table {
@@ -737,7 +728,7 @@ table {
 }
 
 .Auth-form-content {
- border-top: 0.5em solid #081A45;
+  border-top: 0.5em solid #081a45;
 }
 
 .Auth-form-content {
@@ -751,15 +742,15 @@ table {
 }
 
 td {
-  background: white!important;
+  background: white !important;
 }
 
-.table>thead {
+.table > thead {
   vertical-align: bottom;
-  color: #081A45;
+  color: #081a45;
 }
 .menu button {
-  color: #081A45;
+  color: #081a45;
 }
 .listing-body {
   display: flex;
@@ -772,15 +763,18 @@ td {
   margin-top: 1em;
 }
 
-.main-menu-design, .listing-bg, .content-transactions, .stock-container
-{
-
+.main-menu-design,
+.listing-bg,
+.content-transactions,
+.stock-container {
   background-color: #f7f7f8;
   height: 100vh;
-}tr.mark_row {
+}
+tr.mark_row {
   border: 3px solid gray;
 }
-table#transactions-table tr, table#table_responsive_positions_transactions tr {
+table#transactions-table tr,
+table#table_responsive_positions_transactions tr {
   white-space: nowrap;
   overflow: hidden;
 }
@@ -801,19 +795,15 @@ span.actions svg {
   cursor: pointer;
 }
 
-
 .main-container {
   background: #f7f7f8;
 }
 
-
 input {
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
-
 span#openRange {
-
   padding-top: 0.3em;
   border: 1px solid gray;
   color: white;
@@ -827,9 +817,7 @@ span#openRange {
   border: 1px solid #ced4da;
 }
 
-
 span.actions {
-
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;
@@ -848,7 +836,6 @@ span.actions.smaller {
   padding: 0.3e;
 }
 
-
 .smallerrr {
   padding-left: 1em;
   padding-right: 1em;
@@ -857,25 +844,24 @@ span.actions.smaller {
   width: -moz-fit-content;
   width: fit-content;
   margin: auto;
-  background: #081A45;
+  background: #081a45;
   border: none;
-  font-family: "Titillium Web", sans-serif!important;
-  font-size: 0.875em!important;
+  font-family: "Titillium Web", sans-serif !important;
+  font-size: 0.875em !important;
   font-weight: 600;
-  color: white!important;
+  color: white !important;
 }
-
 
 .header h {
   width: max-content;
 }
 
-
 .center-button button {
-  padding-top: 10px!important;
+  padding-top: 10px !important;
 }
 
-span.actions.smallerr, button.actions.smallerr {
+span.actions.smallerr,
+button.actions.smallerr {
   height: 2.3em;
   padding-left: 1em;
   padding-right: 1em;
@@ -883,9 +869,9 @@ span.actions.smallerr, button.actions.smallerr {
   padding-bottom: 0.4em;
   width: -moz-fit-content;
   width: 10em;
-  background: #081A45;
+  background: #081a45;
   border: none;
-  font-family: "Titillium Web", sans-serif!important;
+  font-family: "Titillium Web", sans-serif !important;
   font-size: 0.875em;
   font-weight: 600;
   display: flex;
@@ -897,28 +883,24 @@ span.actions.smallerr, button.actions.smallerr {
   margin: 4em;
 }
 
-.login
-{
+.login {
   background-color: #f7f7f8;
 }
 
 .swal-button {
-  background-color: #081A45!important;
+  background-color: #081a45 !important;
   border-radius: 0;
 }
 
-
 #edit {
-  color: black!important;
+  color: black !important;
 }
-
 
 .right-column {
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
-
 
 #transactionTypePopup {
   margin: auto;
@@ -928,12 +910,9 @@ span.actions.smallerr, button.actions.smallerr {
   margin: 3em;
 }
 
-
-
 .layout-issued-goods {
   color: black;
 }
-
 
 #transactionTypePopup {
   color: black;
@@ -947,16 +926,11 @@ span.actions.smallerr, button.actions.smallerr {
   margin: auto;
 }
 
-
-
-
-
 .layout-takeover-goods {
   margin: auto;
 }
 
-
-.layout-takeover-checkbox{
+.layout-takeover-checkbox {
   display: flex;
   flex-direction: row-reverse;
   width: -moz-fit-content;
@@ -975,13 +949,15 @@ span.actions.smallerr, button.actions.smallerr {
   width: max-content;
 }
 
-div#edit, div#addHeader {
+div#edit,
+div#addHeader {
   /* Add media queries to solve this */
   height: 45vh;
   width: 40vw;
 }
 
-.left-workorder input, .right-workorder input{
+.left-workorder input,
+.right-workorder input {
   margin: 1em;
 }
 
@@ -1007,7 +983,7 @@ div#edit, div#addHeader {
 }
 
 .riko-blue {
-  color: #081A45;
+  color: #081a45;
 }
 
 .changeStatusOuter {
@@ -1022,13 +998,10 @@ div#edit, div#addHeader {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 20em;
-  height: 15em!important;
+  height: 15em !important;
   background: #f7f7f8;
   border: 1px solid gray;
 }
-
-
-
 
 body {
   width: 100vw;
@@ -1064,20 +1037,21 @@ span#createDocument {
   margin: 3em;
 }
 
-
-#issuingWarehouse, #receivingWarehouse, #date, #documentTypes
-{
-   width: 10vw;
+#issuingWarehouse,
+#receivingWarehouse,
+#date,
+#documentTypes {
+  width: 10vw;
 }
 
-#hiddenLabel, #hiddenCheck {
-
-	visibility: hidden;
+#hiddenLabel,
+#hiddenCheck {
+  visibility: hidden;
 }
 
 .header_part h1 {
   font-size: initial;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .layout-takeover-goods {
@@ -1124,16 +1098,17 @@ div#SerialQtyEntry {
   width: 35em;
 }
 div#transactionTypePopup {
-    margin: auto;
-    margin-bottom: 2em;
+  margin: auto;
+  margin-bottom: 2em;
 }
 
-#locationsSelect, #locationsSelectReceive {
+#locationsSelect,
+#locationsSelectReceive {
   width: 15em;
 }
 
 #unitsEntry {
-  width: 7.7em!important;
+  width: 7.7em !important;
 }
 
 #receiveDiv {
@@ -1163,7 +1138,7 @@ div#locationsSelect {
   width: -webkit-fill-available;
 }
 .small {
-  width: 6.4em!important;
+  width: 6.4em !important;
 }
 .insistRow {
   gap: 2em;
@@ -1176,16 +1151,14 @@ div#locationsSelect {
   justify-content: flex-end;
 }
 
-
-
-div#edit, div#addHeader {
+div#edit,
+div#addHeader {
   height: fit-content;
   width: 40vw;
 }
 button.swal-button.swal-button--cancel {
   color: white;
 }
-
 
 .transactionFilters {
   margin-top: 1em;
@@ -1199,10 +1172,9 @@ td.Chosen {
 }
 
 .header_part {
-  display: flex!important;
-  flex-direction: row-reverse!important;
+  display: flex !important;
+  flex-direction: row-reverse !important;
 }
-
 
 div#addHeader {
   background: #f7f7f8;
@@ -1212,19 +1184,18 @@ div#addHeader {
   cursor: pointer;
 }
 
-
-
-  #edit, #addHeader {
-    display: none;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid gray;
-    padding: 10px;
-    color: white;
+#edit,
+#addHeader {
+  display: none;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  padding: 10px;
+  color: white;
 }
 .filter-buttons {
   display: flex;
@@ -1232,7 +1203,7 @@ div#addHeader {
   gap: 1em;
 }
 .editable-group {
-	width: max-content;
+  width: max-content;
 }
 
 .filters.upper {
@@ -1247,7 +1218,7 @@ div#addHeader {
 
 #edit {
   display: none;
-  width:fit-content;
+  width: fit-content;
   height: max-content;
   position: absolute;
   left: 50%;
@@ -1260,34 +1231,36 @@ div#addHeader {
   background: white;
 }
 
-.buttonsHeader button, .buttonsPositions button {
+.buttonsHeader button,
+.buttonsPositions button {
   width: 10em;
 }
-
 
 span#openRangeTransaction {
   margin: 0;
 }
-.buttonsHeader, .buttonsPositions {
+.buttonsHeader,
+.buttonsPositions {
   display: flex;
   margin: 1em;
   align-content: center;
   flex-wrap: wrap;
 }
 
-#documentSearch,   #receiver, #consignee {
-  width: 10em!important;
-  height: 2.3em!important;  
+#documentSearch,
+#receiver,
+#consignee {
+  width: 10em !important;
+  height: 2.3em !important;
 }
 
 span#openRange {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-
-
-#businessEvent-option,#erpKey-option {
+#businessEvent-option,
+#erpKey-option {
   border: 1px solid #ced4da;
 }
 
@@ -1345,12 +1318,12 @@ img.loader {
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
-  bottom:2em;
+  bottom: 2em;
   width: 95vw;
 }
 .version-info {
   padding: 10px;
-  background-color: #081A45;
+  background-color: #081a45;
   color: white;
 }
 button.popup-close-btn {
@@ -1365,7 +1338,6 @@ button.popup-close-btn {
 button.popup-close-btn.add:hover {
   color: black;
 }
-
 
 /* VersionInfo.css */
 
@@ -1410,7 +1382,7 @@ button.popup-close-btn.add:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-button.popup-close-btn.insert{
+button.popup-close-btn.insert {
   color: gray;
 }
 
@@ -1419,8 +1391,7 @@ button.popup-close-btn.insert:hover {
 }
 
 .popup-content {
-  padding: 1!important;
-
+  padding: 1 !important;
 }
 
 .smaller-friendly {
@@ -1433,7 +1404,7 @@ button.popup-close-btn.insert:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1457,7 +1428,6 @@ button.popup-close-btn {
   border-radius: 5px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 div#SerialQtyEntry {
   height: fit-content;
@@ -1496,14 +1466,12 @@ div#SerialQtyEntry {
   height: 36px;
 }
 
-
 div#addHeader {
   z-index: 1000;
 }
 .table_responsive_transaction {
   width: 95vw;
 }
-
 
 .visualization {
   width: 14%;
@@ -1536,34 +1504,27 @@ span.actions.smallerr.stock {
   margin-top: 1em;
 }
 
-
 .table_responsive_stock {
   margin-top: 5em;
-  height: 60vh!important;
-  overflow-y: scroll!important;
-  margin-left: 2em!important;;
-  margin-right: 2em!important;;
+  height: 60vh !important;
+  overflow-y: scroll !important;
+  margin-left: 2em !important;
+  margin-right: 2em !important;
 }
-
-
 
 td {
-  height: 0.4em!important;
-  font-size: 0.6em!important;
+  height: 0.4em !important;
+  font-size: 0.6em !important;
 }
-
-
-
-
 
 .table_responsive_pos {
-  height: 23vh!important;
-  overflow-y: scroll!important;
-  margin-left: 2em!important;;
-  margin-right: 2em!important;;
+  height: 23vh !important;
+  overflow-y: scroll !important;
+  margin-left: 2em !important;
+  margin-right: 2em !important;
 }
 .table_responsive_transaction {
-  height: 20vh!important;
+  height: 20vh !important;
   overflow-y: scroll;
   margin-left: 2em;
   margin-right: 2em;
@@ -1578,7 +1539,7 @@ td {
 .footer {
   height: 2em;
   position: absolute;
-  bottom:0px;
+  bottom: 0px;
 }
 button.btn.btn-primary.navbar.logout {
   font-weight: 700;
@@ -1586,8 +1547,6 @@ button.btn.btn-primary.navbar.logout {
 .select-filters {
   width: max-content;
 }
-
-
 
 thead {
   background: #969595;
@@ -1614,17 +1573,18 @@ thead {
 }
 .menu button {
   color: white;
-  background: #081A45;
+  background: #081a45;
   font-size: 1.1em;
-  font-weight: 900!important;
+  font-weight: 900 !important;
 }
 
 button.btn.btn-primary.dashboard:hover {
-  background-color: #081A45;
+  background-color: #081a45;
 }
 
-button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-internal.home {
-  margin-right: 2em!important;
+button.btn.btn-primary.navbar-internal.logout,
+button.btn.btn-primary.navbar-internal.home {
+  margin-right: 2em !important;
   padding-left: 2em;
   padding-right: 2em;
   padding-top: 0.7em;
@@ -1632,20 +1592,17 @@ button.btn.btn-primary.navbar-internal.logout, button.btn.btn-primary.navbar-int
   width: -moz-fit-content;
   width: fit-content;
   margin: auto;
-  background: linear-gradient(105deg, #f69333 0%, #e47000 100%)!important;
+  background: linear-gradient(105deg, #f69333 0%, #e47000 100%) !important;
   border: none;
-  font-family: "Titillium Web", sans-serif!important;
+  font-family: "Titillium Web", sans-serif !important;
   font-size: 0.875em;
   font-weight: 800;
-  font-size: 0.7em!important;
+  font-size: 0.7em !important;
 }
 
 .logo {
-
   position: relative;
-
 }
-
 
 button#search {
   display: flex;
@@ -1664,8 +1621,7 @@ button svg {
 .navbar {
   height: max-content;
   padding: 1em;
-  background-color: #081A45;
-
+  background-color: #081a45;
 }
 .Auth-form {
   width: 420px;
@@ -1686,11 +1642,6 @@ button svg {
 button.btn.btn-primary.settingsButton.dashboard {
   width: 20em;
 }
-
-
-
-
-
 
 .menu {
   display: flex;
@@ -1717,10 +1668,7 @@ button.btn.btn-primary.dashboard {
   margin: 0.3em;
   height: 4em;
   font-weight: bolder;
-
 }
-
-
 
 .Auth-form-title {
   text-align: center;
@@ -1735,7 +1683,6 @@ label {
   font-weight: 600;
   color: rgb(34, 34, 34);
 }
-
 
 .App {
   text-align: center;

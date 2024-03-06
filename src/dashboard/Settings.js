@@ -1,106 +1,110 @@
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-import Header from './Header';
-import Footer from './Footer';
-import Cookies from 'universal-cookie';
-import $ from 'jquery'; 
+import Header from './Header'
+import Footer from './Footer'
+import Cookies from 'universal-cookie'
+import $ from 'jquery'
 
+export default function Settings() {
+  let navigate = useNavigate()
 
-export default function Settings() { 
+  checkUID()
 
-  let navigate = useNavigate();
-
-  checkUID ()
-
-
-
-
-
-
-
-  function isUUID ( uuid ) {
-    let s = "" + uuid;
-    s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+  function isUUID(uuid) {
+    let s = '' + uuid
+    s = s.match(
+      '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+    )
     if (s === null) {
-      return false;
+      return false
     }
-    return true;
-   } 
-
-
-
-  function checkUID () {
-    const cookies = new Cookies();
-    var cookie = cookies.get('uid');
-    if (typeof cookie !== "undefined") {     
-      if(isUUID(cookie)) {     
-        return;
-      } 
-  } else {
-    window.location.href = "/";
+    return true
   }
-   
+
+  function checkUID() {
+    const cookies = new Cookies()
+    var cookie = cookies.get('uid')
+    if (typeof cookie !== 'undefined') {
+      if (isUUID(cookie)) {
+        return
+      }
+    } else {
+      window.location.href = '/'
+    }
   }
- 
-  function handleSettings () {
-    $(".settings-divider").toggle();
+
+  function handleSettings() {
+    $('.settings-divider').toggle()
     // Toggle the visibility
   }
 
   const routeChange = (option) => {
-    let path = "/" + option;
+    let path = '/' + option
 
-    if(option === "logout") { 
-      navigate("/");
+    if (option === 'logout') {
+      navigate('/')
     } else {
-      navigate(path); 
+      navigate(path)
     }
   }
 
-      // Set up the value for the back button 
-      localStorage.setItem('back', "dashboard")
+  // Set up the value for the back button
+  localStorage.setItem('back', 'dashboard')
 
-      
-    return ( 
-      <div>
-          <Header/>
-          <div className='main-menu-design'>
-    
-    <div className = "settings menu"> 
+  return (
+    <div>
+      <Header />
+      <div className='main-menu-design'>
+        <div className='settings menu'>
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('subjects')}
+          >
+            Subjekti
+            <img alt={''} src='rating.png' width={50} />
+          </button>
 
-        
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subjects")}>
-           Subjekti
-           <img alt={""} src='rating.png' width={50} />
-         </button>
-
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("subject-codes")}>
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('subject-codes')}
+          >
             Kode subjektov
-           <img alt={""} src='source-code.png' width={50} />
-         </button>
-        
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("documents")}>
-           Vrste dokumentov
-           <img alt={""} src='format-icon.png' width={50} />
-         </button>
+            <img alt={''} src='source-code.png' width={50} />
+          </button>
 
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("status")}>
-           Statusi dokumentov
-           <img alt={""} src='document-status.png' width={50} />
-         </button>
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('documents')}
+          >
+            Vrste dokumentov
+            <img alt={''} src='format-icon.png' width={50} />
+          </button>
 
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("system")}>
-           Sistem
-           <img alt={""} src='settings-icon.png' width={50}/>
-         </button>
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('status')}
+          >
+            Statusi dokumentov
+            <img alt={''} src='document-status.png' width={50} />
+          </button>
 
-         <button className="btn btn-primary settingsButton dashboard" onClick = {()=>routeChange("idents")}>
-          Identi
-           <img alt={""} src='boxes.png' width={50} />
-         </button>
-         
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('system')}
+          >
+            Sistem
+            <img alt={''} src='settings-icon.png' width={50} />
+          </button>
 
-         {/*   
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('idents')}
+          >
+            Identi
+            <img alt={''} src='boxes.png' width={50} />
+          </button>
+
+          {/*   
          
 
 
@@ -130,15 +134,9 @@ export default function Settings() {
          
          
          */}
-        
-
-         </div>
-
-       
-   
-   </div> 
+        </div>
+      </div>
       <Footer />
-      </div> 
-    
-    ); 
-} 
+    </div>
+  )
+}

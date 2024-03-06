@@ -1,7 +1,7 @@
 // VersionInfo.js
 
-import React from 'react';
-import { FaInfoCircle } from 'react-icons/fa';
+import React from "react";
+import { FaInfoCircle } from "react-icons/fa";
 
 const VersionInfo = () => {
   const version = process.env.REACT_APP_VERSION; // Access version from environment variables
@@ -11,7 +11,11 @@ const VersionInfo = () => {
     <div className="version-info">
       <div className="version-number">{`Verzija ${version}`}</div>
       <FaInfoCircle className="info-icon" />
-      {notes && <div className="tooltip">Aktivna licenca. Podatki o verziji: {notes}</div>}
+      {notes && (
+        <div className="tooltip">
+          Aktivna licenca. Podatki o verziji: {notes}
+        </div>
+      )}
     </div>
   );
 };

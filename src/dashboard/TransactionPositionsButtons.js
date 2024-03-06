@@ -1,36 +1,48 @@
-import { useNavigate  } from 'react-router-dom';
-import Table from '../table/Table';
-import { MdDownload, MdOutlineCancel, MdDeleteOutline, MdEdit, MdAdd, MdOutlineMerge, MdOutlineKey, MdOutlineQrCode} from "react-icons/md";
+import { useNavigate } from 'react-router-dom'
+import Table from '../table/Table'
+import {
+  MdDownload,
+  MdOutlineCancel,
+  MdDeleteOutline,
+  MdEdit,
+  MdAdd,
+  MdOutlineMerge,
+  MdOutlineKey,
+  MdOutlineQrCode,
+} from 'react-icons/md'
 
+export default function TransactionPositionsButtons(props) {
+  let navigate = useNavigate()
 
-export default function TransactionPositionsButtons(props) { 
+  function toggleAddPosition() {
+    props.communicate({
+      type: 'transaction',
+      action: 'add',
+      table: 'positions',
+    })
+  }
 
-    let navigate = useNavigate();
+  function deletePosition() {
+    props.communicate({
+      type: 'transaction',
+      action: 'delete',
+      table: 'positions',
+    })
+  }
 
-    function toggleAddPosition() {
-        props.reactToFront({type: 'transaction', action: 'add', table: 'positions'});
-    }
+  function editPosition() {
+    props.communicate({
+      type: 'transaction',
+      action: 'edit',
+      table: 'positions',
+    })
+  }
 
-
-    function deletePosition() {
-        props.reactToFront({type: 'transaction', action: 'delete', table: 'positions'});
-
-    }
-
-    function editPosition () {
-        props.reactToFront({type: 'transaction', action: 'edit', table: 'positions'});
-    }
-
-    return ( 
-        
-        <div>
-
-        <div className='buttonsPositionsOuter'>
-
+  return (
+    <div>
+      <div className='buttonsPositionsOuter'>
         <div className='buttons-positions-bottom'>
-
-
-            {/* <span className='actions smallerr' onClick={toggleAddPosition}>
+          {/* <span className='actions smallerr' onClick={toggleAddPosition}>
              <p>Dodaj</p>              
              <MdAdd />
              </span> 
@@ -39,21 +51,14 @@ export default function TransactionPositionsButtons(props) {
              <span className='actions smallerr' onClick={editPosition}>
              <p>Popravi</p>                   
              <MdEdit />
-    </span> */}
+          </span> */}
 
-
-             <span className='actions smallerr' onClick={deletePosition}>
-             <p>Izbriši</p>
-             <MdDeleteOutline />
-             
-             </span>
-            
-            
+          <span className='actions smallerr' onClick={deletePosition}>
+            <p>Izbriši</p>
+            <MdDeleteOutline />
+          </span>
         </div>
-
-
-        </div>
-       </div>
-    ); 
-
-} 
+      </div>
+    </div>
+  )
+}

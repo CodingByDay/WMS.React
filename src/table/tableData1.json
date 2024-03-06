@@ -1,180 +1,178 @@
 [
-    {
-     "id": 1,
-     "full_name": "Wendall Gripton",
-     "email": "wg@creative.org",
-     "gender": "Male",
-     "age": 100,
-     "start_date": "2022-01-26"
-    },
-    {
-        "id": 1,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creatadadive.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 2,
-        "full_name": "Wendaasdall Gripton",
-        "email": "wg@creatidasdve.org",
-        "gender": "Male",
-        "age": 1020,
-        "start_date": "20ads22-01-26"
-       },
-       {
-        "id": 3,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 1030,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 4,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 5,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 6,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 7,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 8,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 9,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 10,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 11,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 12,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 13,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 14,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 15,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 16,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 17,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 18,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 19,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 20,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       },
-       {
-        "id": 21,
-        "full_name": "Wendall Gripton",
-        "email": "wg@creative.org",
-        "gender": "Male",
-        "age": 100,
-        "start_date": "2022-01-26"
-       }
-
-       
-   ]
+  {
+    "id": 1,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 1,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creatadadive.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 2,
+    "full_name": "Wendaasdall Gripton",
+    "email": "wg@creatidasdve.org",
+    "gender": "Male",
+    "age": 1020,
+    "start_date": "20ads22-01-26"
+  },
+  {
+    "id": 3,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 1030,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 4,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 5,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 6,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 7,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 8,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 9,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 10,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 11,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 12,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 13,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 14,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 15,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 16,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 17,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 18,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 19,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 20,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  },
+  {
+    "id": 21,
+    "full_name": "Wendall Gripton",
+    "email": "wg@creative.org",
+    "gender": "Male",
+    "age": 100,
+    "start_date": "2022-01-26"
+  }
+]

@@ -29,11 +29,10 @@ REACT_APP_ANALYTICS_URL = Write the url of the Analytics module
 
 Keep in mind our formatting and variable naming conventions: we use camel case for variables, functions, and components, prefer let over var, and omit semicolons at the end of statements for consistency. Ensure your code is clean and readable, with meaningful names and clear comments explaining complex logic. We value maintaining a uniform code style, so adhere to our established guidelines and use ESLint or Prettier for formatting.
 
-## Placeholders 
+## Placeholders
 
-[Eliminate] - Elimination needed in near future 
+[Eliminate] - Elimination needed in near future
 [Discusion needed] - Needs team discussion
-
 
 ## Contributing
 
