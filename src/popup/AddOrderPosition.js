@@ -4,6 +4,7 @@ import TransactionService from '../services/TransactionService';
 import ListingService from '../services/ListingService';
 import { useSelector, useDispatch } from 'react-redux'
 import DataAccess from "../utility/DataAccess";
+import $ from 'jquery'; 
 
 const AddOrderPosition = (props) => {
   const [idents, setIdents] = useState([]);
@@ -83,8 +84,12 @@ const AddOrderPosition = (props) => {
   };
 
   if (!props.isVisible || props.current == -1) {
+    $(".dx-icon.dx-icon-filter-operation-default").removeClass("inactive");
 
     return null;
+  } else {
+    $(".dx-icon.dx-icon-filter-operation-default").addClass("inactive");
+
   }
 
   function setSelectedLocationEvent(e) {
@@ -115,7 +120,7 @@ const AddOrderPosition = (props) => {
 
 
    function onClose() {
-    props.onClose();
+    props.onClose()
   }
   return (
     <div className="popup-overlay">
@@ -126,6 +131,7 @@ const AddOrderPosition = (props) => {
           </button>
         </div>
         <div className="popup-body">
+
           <label htmlFor="ident">Ident:</label>
 
           <Select
@@ -154,6 +160,8 @@ const AddOrderPosition = (props) => {
             </span>
             </center>
           </div>
+
+
         </div>
       </div>
     </div>

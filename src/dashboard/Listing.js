@@ -110,10 +110,12 @@ export default function Listing() {
 
       }
 
+
       response.Items = positions
 
 
       setPositions(response);
+
     });
   }
 
@@ -129,7 +131,30 @@ export default function Listing() {
 
     if (type === 'position') {
 
-      if (event == "create") {
+      if (event === "delete") {
+        window.swal({
+          title: 'Potrditev',
+          text: "Ali ste sigurni da želite pobrisati pozicijo?",
+          icon: 'warning',
+          buttons: ["Ne", "Ja, pobriši"],
+        }).then((result) => {
+
+          if (result) {
+            const currentId = selectedPosition.ItemID;
+
+            ListingService.deletePosition(currentId).then(response => {
+              window.showAlert("Informacija", "Uspešno pobrisano", "success")
+              getPositions(selectedHead.Key);
+            });
+          }
+
+        })
+      } else if (event === "render") {
+
+        getPositions(selectedHead.Key);
+
+      }
+      else if (event == "create") {
         setPopupVisible(!popupVisible)
       }
 
@@ -164,7 +189,7 @@ export default function Listing() {
               window.showAlert("Informacija", "Napaka v podatkih!", "error")
             }
 
-            getPositions(currentHead)
+            getPositions(selectedHead.Key)
 
         })
         
@@ -202,39 +227,8 @@ export default function Listing() {
         setSelectedHead(data)
         getPositions(data.Key)
       }
-    } else {
-      if (event === "delete") {
-        window.swal({
-          title: 'Potrditev',
-          text: "Ali ste sigurni da želite pobrisati pozicijo?",
-          icon: 'warning',
-          buttons: ["Ne", "Ja, pobriši"],
-        }).then((result) => {
-
-          if (result) {
-
-            const currentId = selectedPosition?.childNodes[3]?.innerHTML ?? -1;
-
-
-            ListingService.deletePosition(currentId).then(response => {
-              window.showAlert("Informacija", "Uspešno pobrisano", "success")
-              getPositions(currentHead);
-            });
-          }
-
-        })
-      } else if (event === "edit") {
-        var editObject = {
-          HeadID: selectedPosition
-        }
-      } else if (event === "render") {
-
-        getPositions(currentHead);
-
-      }
-    }
+    } 
   }
-  const currentHead = selectedHeadOrder?.childNodes[6]?.innerHTML ?? -1;
 
   const renderComponent = () => {
     ListingService.getAllListings().then(response => {
@@ -247,49 +241,28 @@ export default function Listing() {
   return (
 
     <div>
-
-
       <Loader />
-
       <div className='main-container'>
-
         <Header />
 
         <div className='listing-bg' >
           <div className='listing-body'>
 
             <HeaderOrderListing render={renderComponent} communicate={communicate} getSortingObject={getSortingObject} />
-
             <OrderHeadsListing communicate={communicate} data={orders} sort={sort} />
-
             <ListingPositionsButtons selectedElement={selectedPosition}  communicate={communicate} />
-
             <OrderPositions communicate={communicate} data={positions} />
-
-            <AddOrderPosition current={currentHead} isVisible={popupVisible} onClose={handlePopupClose} communicate={communicate} warehouse={warehouses} idents={idents} locations={locations} />
-
-
+            <AddOrderPosition current={selectedHead.Key} isVisible={popupVisible} onClose={handlePopupClose} communicate={communicate} warehouse={warehouses} idents={idents} locations={locations} />
             {
               showStatusAlert && typeof selectedHeadOrder != "undefined" && (
-                <StatusChange order={selectedHeadOrder.childNodes[5].innerHTML} />
+                <StatusChange order={selectedHead.Key} />
               )
             }
 
           </div>
         </div>
         <Footer />
-
-
-
-
-
-
-
       </div>
-
     </div>
-
-
-
   );
 } 

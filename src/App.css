@@ -202,7 +202,9 @@ button.action-buttons.white:hover {
   padding: 20px;
   z-index: 1001; /* Set a higher z-index than overlay */
 }
-
+i.dx-icon.dx-icon-filter-operation-default.inactive {
+  visibility: hidden;
+}
 .popup-header.insert {
   display: flex;
   justify-content: flex-end;

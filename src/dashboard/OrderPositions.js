@@ -14,8 +14,7 @@ import {
 export default function OrderPositions(props) { 
 
 
-  let navigate = useNavigate();
-
+    let navigate = useNavigate();
 
     // This code converts the old api result to the devexpress data array.
     let gridData = [];
@@ -37,7 +36,6 @@ export default function OrderPositions(props) {
 
 
     const selectPosition = useCallback((e) => {
-
         let chosenHeadDocument = e.selectedRowsData;
         // Communicate to parent component.
         props.communicate("position", "select", chosenHeadDocument[0]);
@@ -53,26 +51,20 @@ export default function OrderPositions(props) {
                         allowColumnResizing={true}          
                         noDataText='Ni podatkov'
                         columnAutoWidth={true}
-                        focusedRowEnabled={true}
+                        focusedRowEnabled={true}                       
                         hoverStateEnabled={true}
               >
 
-
                     <FilterRow visible={true} />
-
-
-                    <Column dataField="Ident" caption="Ident" />
-                    <Column dataField="Name" caption="Name" />
-                    <Column dataField="No" caption="Št. artikla" />
-                    <Column dataField="ItemID" caption="Številka" />
-                    <Column dataField="OpenQty" caption="Odprto" />
-                    <Column dataField="FullQty" caption="Naročeno" />
-
-                    <Selection mode="single" />
-
+                        <Column dataField="Ident" caption="Ident" />
+                        <Column dataField="Name" caption="Name" />
+                        <Column dataField="No" caption="Št. artikla" />
+                        <Column dataField="ItemID" caption="Številka" />
+                        <Column dataField="OpenQty" caption="Odprto" />
+                        <Column dataField="FullQty" caption="Naročeno" />
+                    <Selection  mode="single"  />
 
               </DataGrid> 
-   
        </div>
     ); 
 
