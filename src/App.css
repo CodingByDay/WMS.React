@@ -1,14 +1,18 @@
 /* Devexpress grid rules */
 .devexpress-grid {
-  margin: 3em;
+  margin: 2em;
 }
 div#dataGrid {
-  margin: 3em;
+  margin: 2em;
 }
 
 
 .devexpress-grid.order {
-  height: 300px!important;
+  height: 220px!important;
+}
+
+.devexpress-grid.order-position {
+  height:160px!important;
 }
 /* Devexpress grid rules */
 
@@ -754,6 +758,12 @@ td {
 }
 .menu button {
   color: #081A45;
+}
+.listing-body {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 50em); /* Adjust as needed */
+  margin-bottom: 15em;
 }
 
 .down-part {
@@ -1581,13 +1591,22 @@ thead {
   background: #969595;
 }
 
-
 .filters {
   display: flex;
   gap: 1em;
   flex-direction: row;
   width: max-content;
-  margin: 2em;
+  margin: 1em 0 0 3em;
+  height: 2em;
+  align-items: center;
+}
+
+.filters.positions {
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  width: max-content;
+  margin: 1em 0 0 1.8em;
   height: 2em;
   align-items: center;
 }

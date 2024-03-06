@@ -279,7 +279,7 @@ export default function Listing() {
             <Header/>
 
             <div className='listing-bg' >
-
+            <div className='listing-body'>
             <HeaderOrderListing render = {renderComponent} communicate = {communicate} getSortingObject = {getSortingObject} />
 
             <OrderHeadsListing communicate = {communicate} data = {orders} childToParent = {childToParent} sort={sort} />
@@ -297,11 +297,12 @@ export default function Listing() {
                 )
             }
    
-
+            </div>
+            </div>
             <Footer />
 
 
-        </div>
+      
         
 
 

@@ -63,7 +63,6 @@ export default function OrderHeadsListing(props) {
 
 
                     <FilterRow visible={true} />
-                    <SearchPanel visible={true} />
                   
 
                     <Column dataField="Warehouse" caption="Skladišče" />

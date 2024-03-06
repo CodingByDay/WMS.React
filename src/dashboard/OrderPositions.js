@@ -48,7 +48,6 @@ export default function OrderPositions(props) {
 
 
                     <FilterRow visible={true} />
-                    <SearchPanel visible={true} />
 
 
                     <Column dataField="Ident" caption="Ident" />

@@ -60,8 +60,6 @@ export default function ListingPositionsButtons(props) {
     }
 
     const hideModal = () => {
-
-
      setEditShown(false);
  }
 
@@ -70,7 +68,7 @@ export default function ListingPositionsButtons(props) {
 
 
     return ( 
-        <div className="filters">
+        <div className="filters positions">
 
          <span className='actions smallerr' onClick={createPosition} id="addOrder">
               <p>Dodaj</p>
