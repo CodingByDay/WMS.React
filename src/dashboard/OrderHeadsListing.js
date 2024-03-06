@@ -68,7 +68,7 @@ export default function OrderHeadsListing(props) {
                     <Column dataField="Warehouse" caption="Skladišče" />
                     <Column dataField="Consignee" caption="Prejemnik" />
                     <Column dataField="DeliveryDeadline" date dataType='datetime' caption="Rok dobave" />
-                    <Column dataField="DocumentType" caption="Tip dokumenta" />
+                    <Column dataField="DocumentType" caption="Tip dokumenta"  />
                     <Column dataField="Key" caption="Ključ" />
                     <Column dataField="Receiver" caption="Sprejemnik" />
                     <Selection mode="single" />

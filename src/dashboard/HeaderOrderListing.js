@@ -212,15 +212,15 @@ export default function HeaderOrderListing(props) {
 
   }
 
-
+  /* [Eliminate]
     function changeStatus () {
         props.communicate("status", "", "")
     }
-
+  */ 
 
 
     function deleteOrder() {
-      props.communicate("head", "delete");
+      props.communicate("head", "delete", );
     }
 
     const DynamicFormatOptionLabel = ({ label, properties, header, code, exists}) => (
