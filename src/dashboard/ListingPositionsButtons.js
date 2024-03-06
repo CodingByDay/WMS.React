@@ -26,7 +26,6 @@ export default function ListingPositionsButtons(props) {
   const [selected, setSelected] = useState({})
   const [isEditShow, setEditShown] = useState(false)
   useEffect(() => {
-    console.log(props.selectedElement)
     if (typeof props.selectedElement !== 'undefined') {
       setSelected(props.selectedElement)
     }

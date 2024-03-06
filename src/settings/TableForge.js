@@ -1158,8 +1158,7 @@ function TableForge({ refresh, name, tableData }) {
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
- console.log(selectedTable)
- console.log(tableData)
+
 
   return (
     <div className="global-react-table">
