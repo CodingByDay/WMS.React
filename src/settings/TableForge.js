@@ -85,17 +85,20 @@ function TableForge({ refresh, name, tableData }) {
     setIsEditModalOpen(true);
   };
   const editRow = useCallback((e) => {
-
+    var rowData = e.row.data
+    onEdit(rowData)
     e.event.preventDefault();
   }, []);
 
   const deleteRow = useCallback((e) => {
-    
+    var rowData = e.row.data
+    onDelete(rowData)
     e.event.preventDefault();
   }, []);
 
   const createRow = useCallback((e) => {
-    
+    var rowData = e.row.data
+    onAdd(rowData)
     e.event.preventDefault();
   }, []);
 
@@ -1155,30 +1158,7 @@ function TableForge({ refresh, name, tableData }) {
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page, // Instead of 'rows', we use 'page' which represents the currently visible page
-    prepareRow,
-    state: { globalFilter, pageIndex, pageSize },
-    setGlobalFilter,
-    gotoPage,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    pageCount,
-    setPageSize,
-  } = useTable(
-    {
-      columns: selectedTable ? selectedTable.value : [],
-      data: tableData,
-    },
-    useGlobalFilter,
-    usePagination, // Add the usePagination hook
-  );
+ 
 
   return (
     <div className="global-react-table">
