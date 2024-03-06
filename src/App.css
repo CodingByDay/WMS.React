@@ -13,6 +13,9 @@ div#dataGrid {
 .devexpress-grid.order-position {
   height: 160px !important;
 }
+.devexpress-grid.settings {
+  height: 70vh !important;
+}
 
 .dx-link-icon {
   background: none!important;

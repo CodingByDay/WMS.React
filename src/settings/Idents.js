@@ -15,7 +15,7 @@ function Idents() {
   useEffect(() => {
     const fetchData = async () => {
       const sqlQueryString = `
-          SELECT [acIdent] -- Šifra identa
+          SELECT [anQId], [acIdent] -- Šifra identa
           ,[acName] -- Naziv
           ,[acCode] -- EAN koda
           ,[acSetOfItem] -- Tip identa -> SELECT acSetOfItem, acName FROM tHE_SetItemType

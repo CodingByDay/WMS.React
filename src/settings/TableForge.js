@@ -1158,7 +1158,8 @@ function TableForge({ refresh, name, tableData }) {
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
- 
+ console.log(selectedTable)
+ console.log(tableData)
 
   return (
     <div className="global-react-table">
@@ -1183,9 +1184,9 @@ function TableForge({ refresh, name, tableData }) {
 
         <DataGrid
 
-                  className='devexpress-grid settings-system'
+                  className='devexpress-grid settings'
                   dataSource={tableData}
-                  keyExpr={'ID'}
+                  keyExpr={selectedTable["id"]}
                   allowColumnReordering={true}
                   allowColumnResizing={true}
                   noDataText='Ni podatkov'
