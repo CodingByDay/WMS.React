@@ -1,11 +1,14 @@
 import { useNavigate  } from 'react-router-dom';
 import Table from '../table/Table';
 import 'devextreme/dist/css/dx.light.css';
+import { useCallback } from 'react';
+
 import {
   DataGrid,
   Column,
   SearchPanel,
   FilterRow,
+  Selection
 } from 'devextreme-react/data-grid';
 
 export default function OrderPositions(props) { 
@@ -33,10 +36,18 @@ export default function OrderPositions(props) {
     } 
 
 
+    const selectPosition = useCallback((e) => {
+
+        let chosenHeadDocument = e.selectedRowsData;
+        // Communicate to parent component.
+        props.communicate("position", "select", chosenHeadDocument[0]);
+    }, [])
+
     return ( 
         <div>
              <DataGrid className="devexpress-grid order-position"
                         dataSource={gridData}
+                        onSelectionChanged={selectPosition}
                         keyExpr={"id"}
                         allowColumnReordering={true}
                         allowColumnResizing={true}          
@@ -56,6 +67,8 @@ export default function OrderPositions(props) {
                     <Column dataField="ItemID" caption="Številka" />
                     <Column dataField="OpenQty" caption="Odprto" />
                     <Column dataField="FullQty" caption="Naročeno" />
+
+                    <Selection mode="single" />
 
 
               </DataGrid> 

@@ -133,12 +133,16 @@ export default function Listing() {
         setPopupVisible(!popupVisible)
       }
 
+      else if (event == "select") {
+          setSelectedPosition(data)
+      }
+
       else if (type == "position" && event == "update") {
 
-        const key = selectedHeadOrder?.childNodes[6]?.innerHTML ?? -1;
-        const itemID = selectedPosition?.childNodes[3]?.innerHTML ?? -1;
-        const no = selectedPosition?.childNodes[4]?.innerHTML ?? -1;
-        const ident = selectedPosition?.childNodes[1]?.innerHTML ?? -1;
+        let key = selectedHead.Key;
+        let itemID = selectedPosition.ItemID;
+        let no = selectedPosition.No;
+        let ident = selectedPosition.Ident;
 
         var objectToUpdate = {
 
@@ -151,17 +155,19 @@ export default function Listing() {
 
         }
 
-        ListingService.updatePosition(objectToUpdate).then(response => {
+        
+         ListingService.updatePosition(objectToUpdate).then(response => {
 
-          if (response.Success) {
-            window.showAlert("Informacija", "Uspešno spremenjena pozicija!", "success")
-          } else {
-            window.showAlert("Informacija", "Napaka v podatkih!", "error")
-          }
+            if (response.Success) {
+              window.showAlert("Informacija", "Uspešno spremenjena pozicija!", "success")
+            } else {
+              window.showAlert("Informacija", "Napaka v podatkih!", "error")
+            }
 
-          getPositions(currentHead);
+            getPositions(currentHead)
 
         })
+        
       }
 
     }
@@ -256,9 +262,9 @@ export default function Listing() {
 
             <OrderHeadsListing communicate={communicate} data={orders} sort={sort} />
 
-            <ListingPositionsButtons selectedElement={selectedPosition} selectedPosition={isPositionSelected} selectedHead={isHeadOrderSelected} communicate={communicate} />
+            <ListingPositionsButtons selectedElement={selectedPosition}  communicate={communicate} />
 
-            <OrderPositions data={positions} />
+            <OrderPositions communicate={communicate} data={positions} />
 
             <AddOrderPosition current={currentHead} isVisible={popupVisible} onClose={handlePopupClose} communicate={communicate} warehouse={warehouses} idents={idents} locations={locations} />
 

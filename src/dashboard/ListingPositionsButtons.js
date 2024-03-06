@@ -17,6 +17,7 @@ export default function ListingPositionsButtons(props) {
      const [selected, setSelected]  =useState ({})
      const [isEditShow, setEditShown] = useState (false)
     useEffect(() => {
+      console.log(props.selectedElement)
         if(typeof props.selectedElement !== 'undefined') {
           setSelected(props.selectedElement);
         }
@@ -30,42 +31,16 @@ export default function ListingPositionsButtons(props) {
     }
 
     function createPosition() {
-          props.communicate("position", "create");
+       props.communicate("position", "create");
     }
-   
-    function isFloat(n) {
-     return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
- }
-    function editQty() {
-     var qty = window.prompt("Spremenite količino. Odprta količina: 100")
-
-     if(qty == null) {
-          return;
-     }
-
-     if (qty &&isFloat(qty)) 
-     {    
-          props.communicate("position", "update");
-     } else {
-          window.showAlert("Informacija", "Morate vpisati pravilno količino", "error")
-          return; 
-     }
-
-    }
+    
     const showModal = () => {
-
-        if(selected) {
-          setEditShown(true);
-        }
+       setEditShown(true); 
     }
 
     const hideModal = () => {
-     setEditShown(false);
- }
-
-
-
-
+       setEditShown(false);
+    }
 
     return ( 
         <div className="filters positions">
@@ -77,8 +52,8 @@ export default function ListingPositionsButtons(props) {
 
 
          <span className='actions smallerr' id="editOrder" onClick={showModal}>
-          <p>Uredi</p>
-          <MdEdit />
+               <p>Uredi</p>
+               <MdEdit />
           </span>
 
        
@@ -86,6 +61,7 @@ export default function ListingPositionsButtons(props) {
               <p>Pobriši</p>
               <MdDeleteOutline />
          </span>   
+
          <EditOrderPosition close={hideModal} shown = {isEditShow} object={selected} communicate = {props.communicate} />
 
         </div>
