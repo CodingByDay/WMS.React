@@ -25,6 +25,13 @@ REACT_APP_API_URL = Write the url of the API
 REACT_APP_ANALYTICS_URL = Write the url of the Analytics module
 ```
 
+
+## Placeholders 
+
+[Eliminate] - Elimination needed in near future 
+[Discusion needed] - Needs team discussion
+
+
 ## Contributing
 
 Help is welcomed. Please make sure to write component tests in Jest and follow best practises.

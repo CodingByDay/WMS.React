@@ -280,6 +280,7 @@ export default function Listing() {
 
             <div className='listing-bg' >
             <div className='listing-body'>
+              
             <HeaderOrderListing render = {renderComponent} communicate = {communicate} getSortingObject = {getSortingObject} />
 
             <OrderHeadsListing communicate = {communicate} data = {orders} childToParent = {childToParent} sort={sort} />

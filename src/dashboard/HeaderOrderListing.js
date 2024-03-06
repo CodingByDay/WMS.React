@@ -67,7 +67,7 @@ export default function HeaderOrderListing(props) {
     const [isOrder, setIsOrder] = useState(false)
     useEffect(() => {
 
-                           
+     /* Part that is not needed because of devexpress                      
 
                           var data =  SortingService.getAllDocumentTypes().then(response => { 
                           var types = [];
@@ -115,7 +115,7 @@ export default function HeaderOrderListing(props) {
                     }
                     setReceivers(subjectsList); 
             });
-
+        */  
 
         // filter the table
         searchTable();
@@ -140,11 +140,14 @@ export default function HeaderOrderListing(props) {
 
       setHead(data)
   }
+
+
+
   function searchTable() { 
     var sorting = {
-      type: currentType && currentType.code || "",
+      /* type: currentType && currentType.code || "",
       document: currentDocumentNumber && currentDocumentNumber.value || "",
-      client: currentReceivers && currentReceivers.value || "",
+      client: currentReceivers && currentReceivers.value || "", - [Eliminate] */
       period: state || ""
     };
     props.getSortingObject(sorting)
@@ -292,8 +295,8 @@ export default function HeaderOrderListing(props) {
 
              <div className="filters-left">
 {/*
-
-             [:Discusssion needed:][
+[Eliminate]
+             [Discusssion needed][
               Explanation:
               
              ]
@@ -309,7 +312,7 @@ export default function HeaderOrderListing(props) {
       <div className="filter-buttons">
 
 
-             {open && (
+           {/*  {open && (
         <div className="nameModule" ref={dateRangePickerRef}>
           <DateRangePicker
             onChange={(item) => setState([item.selection])}
@@ -321,7 +324,7 @@ export default function HeaderOrderListing(props) {
           />
         </div>
       )}
-
+      */}
 
 
 
@@ -330,10 +333,12 @@ export default function HeaderOrderListing(props) {
 
 
           
-         <span className='actions smallerr s' onClick={toggleVisibility} id="openRange">
+        {/* <span className='actions smallerr s' onClick={toggleVisibility} id="openRange">
               <p>Izberite</p>
               <MdDateRange />
          </span>   
+        */}
+
         <div className="responsive-buttons-order">
 
          <span className='actions smallerr s' id="addOrder" onClick={openAdd}>
@@ -357,7 +362,7 @@ export default function HeaderOrderListing(props) {
               <MdDeleteOutline />
          </span>   
          </div>
-          </div>
+         </div>
 
          <AddHeadDocument type={"listing"} render = {renderComponent}  order = {isOrder} show = {head} changeVisibility = {changeVisibility}  />
           
