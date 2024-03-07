@@ -10,6 +10,7 @@ import Loader from '../loader/Loader'
 import $ from 'jquery'
 import ListingPositionsButtons from './ListingPositionsButtons'
 import DataAccess from '../utility/DataAccess'
+import { DashboardControl } from 'devexpress-dashboard-react';
 
 export default function Listing() {
   const analytics_url = process.env.REACT_APP_ANALYTICS_URL
@@ -17,14 +18,14 @@ export default function Listing() {
   checkUID()
 
   useEffect(() => {
-    var loader = document.getElementById('loader')
+    /*var loader = document.getElementById('loader')
     loader.style.display = 'block'
     $('#analytics-frame').css('display', 'none')
 
     setTimeout(function () {
       loader.style.display = 'none'
       $('#analytics-frame').css('display', 'block')
-    }, 3000) // Time before execution
+    }, 3000) // Time before execution */
   }, [])
 
   function isUUID(uuid) {
@@ -58,7 +59,12 @@ export default function Listing() {
     <div id='analytics-panel'>
       <Loader />
       <Header />
-      <iframe
+
+      <DashboardControl style={{ height: '100%' }} 
+        endpoint="https://demos.devexpress.com/services/dashboard/api">
+      </DashboardControl>
+
+      {/*<iframe
         src={analytics_url}
         scrolling='no'
         onload='onMyFrameLoad(this)'
@@ -66,6 +72,7 @@ export default function Listing() {
       >
         Your browser doesn't support iFrames.
       </iframe>
+  */}
     </div>
   )
 }
