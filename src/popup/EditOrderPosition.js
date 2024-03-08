@@ -19,7 +19,6 @@ import {
 } from "react-icons/md";
 import SortingService from "../services/SortingService";
 import { flushSync } from "react-dom";
-import { Modal, Input } from "antd";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 

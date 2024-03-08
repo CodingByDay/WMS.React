@@ -15,7 +15,6 @@ import {
   FilterRow,
   SearchPanel,
 } from 'devextreme-react/data-grid'
-import { auto } from '@popperjs/core'
 
 export default function Stock() {
   checkUID()
@@ -271,7 +270,6 @@ export default function Stock() {
         allowColumnResizing={true}
         noDataText='Ni podatkov'
         columnAutoWidth={true}
-        height={auto}
       >
         <FilterRow visible={true} />
 

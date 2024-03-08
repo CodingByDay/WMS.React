@@ -8,7 +8,6 @@ import {
   SearchPanel,
   Selection,
 } from 'devextreme-react/data-grid'
-import { auto } from '@popperjs/core'
 import { useCallback } from 'react'
 
 export default function OrderHeadsListing(props) {

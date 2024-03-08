@@ -6,8 +6,6 @@ import 'react-date-range/dist/styles.css' // main css file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { MdOutlineSearch, MdDateRange } from 'react-icons/md'
 import Select from 'react-select'
-import { Dropdown, Stack } from '@fluentui/react'
-import _ from 'lodash'
 import { HiChevronDown } from 'react-icons/hi'
 import TransactionService from '../services/TransactionService'
 import $ from 'jquery'

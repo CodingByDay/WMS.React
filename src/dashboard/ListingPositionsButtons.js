@@ -20,7 +20,6 @@ import {
 import SortingService from '../services/SortingService'
 import { flushSync } from 'react-dom'
 import EditOrderPosition from '../popup/EditOrderPosition'
-import { Modal, Input } from 'antd'
 
 export default function ListingPositionsButtons(props) {
   const [selected, setSelected] = useState({})
