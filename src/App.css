@@ -27,6 +27,12 @@ div#dataGrid {
 /* Devexpress grid rules */
 
 
+/* Supress the devexpress warning due to proprietery packages. */
+.ace-ambiance .ace_gutter {
+  background-image: linear-gradient("to right", #3D3D3D, #333) !important;
+}
+
+
 .paginationControls,
 .paginationControls button {
   width: fit-content;

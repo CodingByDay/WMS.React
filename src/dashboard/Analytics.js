@@ -11,21 +11,24 @@ import $ from 'jquery'
 import ListingPositionsButtons from './ListingPositionsButtons'
 import DataAccess from '../utility/DataAccess'
 import { DashboardControl } from 'devexpress-dashboard-react';
+import {DashboardPanelExtension} from 'devexpress-dashboard/common';
 
 export default function Listing() {
+
+
   const analytics_url = process.env.REACT_APP_ANALYTICS_URL
 
   checkUID()
 
   useEffect(() => {
-    /*var loader = document.getElementById('loader')
+    /* var loader = document.getElementById('loader')
     loader.style.display = 'block'
     $('#analytics-frame').css('display', 'none')
-
     setTimeout(function () {
       loader.style.display = 'none'
       $('#analytics-frame').css('display', 'block')
     }, 3000) // Time before execution */
+    // [Eliminate] - Not needed anymore but maybe because of better ui let it load for a few seconds? - Janko Jovičić - 08.03.2024
   }, [])
 
   function isUUID(uuid) {
@@ -53,26 +56,31 @@ export default function Listing() {
     }
   }
 
+  function onBeforeRender(sender) {
+    var dashboardControl = sender.component;
+    dashboardControl.registerExtension(new DashboardPanelExtension(dashboardControl));
+    dashboardControl.unregisterExtension("designerToolbar");
+}
   // orders
 
   return (
     <div id='analytics-panel'>
+
       <Loader />
       <Header />
+        
+      <div className='dashboard-div' style={{ position : 'absolute', height: '85%', top : '8em', left: '0px', right : '0px', bottom: '0px' }}>
 
-      <DashboardControl style={{ height: '100%' }} 
-        endpoint="https://demos.devexpress.com/services/dashboard/api">
-      </DashboardControl>
+        <DashboardControl 
+          className='dashboard-control-devexpress'
+          onBeforeRender={onBeforeRender}
+          workingMode='Designer'
+          endpoint={analytics_url}      
+        >
+        </DashboardControl>
 
-      {/*<iframe
-        src={analytics_url}
-        scrolling='no'
-        onload='onMyFrameLoad(this)'
-        id='analytics-frame'
-      >
-        Your browser doesn't support iFrames.
-      </iframe>
-  */}
+      </div>
+
     </div>
   )
 }
