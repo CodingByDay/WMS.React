@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="DB Zaloge - 1" />
+  <DataSources>
+    <SqlDataSource Name="CustomSqlQuery" ComponentName="sqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="Riko" FromAppConfig="true" />
+      <Query Type="CustomSqlQuery" Name="CustomSqlQuery">
+        <Sql>select * from dbo.uTN_DB_Zaloge Where ZalogaSkladišče='Skladisce 60';</Sql>
+      </Query>
+      <Query Type="SelectQuery" Name="uWMSStockItem">
+        <Tables>
+          <Table Name="uWMSStockItem" />
+        </Tables>
+        <Columns>
+          <Column Table="uWMSStockItem" Name="acLocation" />
+          <Column Table="uWMSStockItem" Name="anCapacity" />
+          <Column Table="uWMSStockItem" Name="acIdent" />
+          <Column Table="uWMSStockItem" Name="acName" />
+          <Column Table="uWMSStockItem" Name="anQty" />
+          <Column Table="uWMSStockItem" Name="acWarehouse" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+      <CalculatedFields>
+        <CalculatedField Name="ZalogaObratDni" Expression="((ZalogaKoličinaEM-ZalogaPrevzemKoličina+ZalogaIzdajaKoličina)*365+ZalogaPrevzemDniDoDanes-ZalogaIzdajaDniDoDanes)/&#xD;&#xA;(ZalogaKoličinaEM-ZalogaPrevzemKoličina+ZalogaIzdajaKoličina+ZalogaPrevzemKoličina)" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaZadostujeDni" Expression="[ZalogaKoličinaEM]/&#xD;&#xA;(Iif([ZalogaIzdajaKoličina]=0,1,[ZalogaIzdajaKoličina])/&#xD;&#xA;Iif(([ZalogaKoličinaEM]-[ZalogaPrevzemKoličina]+[ZalogaIzdajaKoličina])=0,DateDiffDay([ZalogaDatumPrvegaPrevzema],LocalDateTimeNow()), 365))" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaObdobjeZaležanosti" Expression="Iif([ZalogaObratDni]&lt;15, 'Do  15 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;30, 'Do  30 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;45, 'Do  45 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;60, 'Do  60 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;90, 'Do  90 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;180,'Do 180 dni','Nad 180 dni'))))))" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaZačetnoStanje" Expression="sum([ZalogaKoličinaEM])-sum([ZalogaPrevzemKoličina])+sum([ZalogaIzdajaKoličina])" DataType="Auto" DataMember="CustomSqlQuery" />
+      </CalculatedFields>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <ListBox ComponentName="listBoxDashboardItem2" Name="ODLAGALNA MESTA" DataSource="sqlDataSource1" DataMember="uWMSStockItem">
+      <DataItems>
+        <Dimension DataMember="acLocation" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <Grid ComponentName="gridDashboardItem2" Name="PREGLED ZALOGE PO LOKACIJAH IN KAPACITETAH ODLAGALNIH MEST" DataSource="sqlDataSource1" DataMember="uWMSStockItem">
+      <DataItems>
+        <Dimension DataMember="acLocation" DefaultId="DataItem0" />
+        <Measure DataMember="anCapacity" DefaultId="DataItem1" />
+        <Measure DataMember="anQty" DefaultId="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Dimension DataMember="acIdent" DefaultId="DataItem3" />
+        <Dimension DataMember="acName" DefaultId="DataItem4" />
+        <Dimension DataMember="acWarehouse" DefaultId="DataItem5" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn Name="LOKACIJA">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="KAPACITETA">
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="ZALOGA ">
+          <Measure DefaultId="DataItem2" />
+        </GridMeasureColumn>
+        <GridDimensionColumn Name="IDENT">
+          <Dimension DefaultId="DataItem3" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="NAZIV">
+          <Dimension DefaultId="DataItem4" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="SKLADIŠČE">
+          <Dimension DefaultId="DataItem5" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+    <ListBox ComponentName="listBoxDashboardItem1" Name="ARTIKLI" DataSource="sqlDataSource1" DataMember="uWMSStockItem" EnableSearch="true">
+      <DataItems>
+        <Dimension DataMember="acName" Name="ARTIKEL" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <ListBox ComponentName="listBoxDashboardItem3" Name="SKLADIŠČA" DataSource="sqlDataSource1" DataMember="uWMSStockItem">
+      <DataItems>
+        <Dimension DataMember="acWarehouse" Name="SKLADIŠČE" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="0.98745294855708909">
+        <LayoutGroup Orientation="Vertical" Weight="0.14328402906508347">
+          <LayoutItem DashboardItem="listBoxDashboardItem3" Weight="0.6384478023503426" />
+          <LayoutItem DashboardItem="listBoxDashboardItem2" Weight="1.1516766353339327" />
+          <LayoutItem DashboardItem="listBoxDashboardItem1" Weight="1.4874177554482251" />
+        </LayoutGroup>
+        <LayoutItem DashboardItem="gridDashboardItem2" Weight="1.5671290820337085" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

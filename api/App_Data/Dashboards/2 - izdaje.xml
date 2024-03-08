@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="Transakcije graf" />
+  <DataSources>
+    <SqlDataSource Name="transakcijemovehead" ComponentName="sqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="Riko" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="transakcijemovehead">
+        <Tables>
+          <Table Name="uWMSMoveHead" />
+          <Table Name="uWMSMoveItem" />
+          <Table Name="uvWMSIdent" />
+          <Relation Type="Inner" Parent="uWMSMoveItem" Nested="uWMSMoveHead">
+            <KeyColumn Parent="anIDHead" Nested="anIDHead" />
+          </Relation>
+          <Relation Type="Inner" Parent="uvWMSIdent" Nested="uWMSMoveItem">
+            <KeyColumn Parent="acIdent" Nested="acIdent" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="uWMSMoveHead" Name="anIDHead" />
+          <Column Table="uWMSMoveItem" Name="anIDHead" Alias="uWMSMoveItem_anIDHead" />
+          <Column Table="uWMSMoveHead" Name="acDocType" />
+          <Column Table="uWMSMoveHead" Name="adDatedoc1" />
+          <Column Table="uWMSMoveHead" Name="acDoc1" />
+          <Column Table="uWMSMoveHead" Name="adDate" />
+          <Column Table="uWMSMoveHead" Name="acNote" />
+          <Column Table="uWMSMoveHead" Name="acReceiver" />
+          <Column Table="uWMSMoveHead" Name="acIssuer" />
+          <Column Table="uWMSMoveHead" Name="acType" />
+          <Column Table="uWMSMoveItem" Name="acIdent" />
+          <Column Table="uWMSMoveItem" Name="acSerialno" />
+          <Column Table="uWMSMoveItem" Name="anIDItem" />
+          <Column Table="uWMSMoveItem" Name="acSSCC" />
+          <Column Table="uWMSMoveItem" Name="uWMSSubject" />
+          <Column Table="uvWMSIdent" Name="acIdent" Alias="uvWMSIdent_acIdent" />
+          <Column Table="uvWMSIdent" Name="acName" />
+          <Column Table="uWMSMoveHead" Name="abByOrder" />
+          <Column Table="uWMSMoveItem" Name="uWMSPalette" />
+          <Column Table="uWMSMoveItem" Name="uWMSFactor" />
+          <Column Table="uWMSMoveItem" Name="uWMSPacking" />
+          <Column Table="uWMSMoveItem" Name="uWMSMorePrints" />
+          <Column Table="uWMSMoveItem" Name="anBadQty" />
+          <Column Table="uWMSMoveHead" Name="acWharehouse" />
+          <Column Table="uWMSMoveItem" Name="anQty" />
+          <Column Table="uWMSMoveItem" Name="acLnkKey" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Pie ComponentName="pieDashboardItem1" Name="Volumen po dnevih" DataSource="sqlDataSource1" DataMember="transakcijemovehead" PieType="Donut" LabelContentType="ArgumentValueAndPercent" TooltipContentType="ArgumentAndValue">
+      <DataItems>
+        <Dimension DataMember="adDate" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem2" />
+        <Measure DataMember="anQty" DefaultId="DataItem3" />
+        <Dimension DataMember="acType" Name="Vrsta prometa" TextGroupInterval="Alphabetical" DefaultId="DataItem4" />
+        <Dimension DataMember="acIdent" DefaultId="DataItem0" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem4" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value DefaultId="DataItem3" />
+      </Values>
+    </Pie>
+    <ListBox ComponentName="listBoxDashboardItem1" Name="Vrsta prometa" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="acType" TextGroupInterval="Alphabetical" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <ListBox ComponentName="listBoxDashboardItem2" Name="Po naročilu" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="abByOrder" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <DateFilter ComponentName="dateFilterDashboardItem1" Name="Izberi obdobje" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="adDate" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem1" />
+      </DataItems>
+      <Dimension DefaultId="DataItem1" />
+    </DateFilter>
+    <ListBox ComponentName="listBoxDashboardItem3" Name="Izdajatelj" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="acIssuer" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <ListBox ComponentName="listBoxDashboardItem4" Name="Prejemnik" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="acReceiver" Name="Prejemnik" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <ComboBox ComponentName="comboBoxDashboardItem1" Name="Naročilo" DataSource="sqlDataSource1" DataMember="transakcijemovehead" ComboBoxType="Checked">
+      <DataItems>
+        <Dimension DataMember="acLnkKey" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ComboBox>
+    <ListBox ComponentName="listBoxDashboardItem5" Name="Skladišče" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="acWharehouse" Name="Skladišče" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="sqlDataSource1" DataMember="transakcijemovehead">
+      <DataItems>
+        <Dimension DataMember="acLnkKey" DefaultId="DataItem0" />
+        <Dimension DataMember="acName" DefaultId="DataItem2" />
+        <Dimension DataMember="acIdent" DefaultId="DataItem1" />
+        <Measure DataMember="anQty" DefaultId="DataItem3" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn Name="Naročilo">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="Ident">
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="Naziv">
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="Skupna količina">
+          <Measure DefaultId="DataItem3" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="1.2031943034788097">
+        <LayoutGroup Weight="0.48807253726438832">
+          <LayoutItem DashboardItem="comboBoxDashboardItem1" Weight="0.3068863298475229" />
+          <LayoutItem DashboardItem="listBoxDashboardItem1" Weight="0.35954223886351044" />
+          <LayoutItem DashboardItem="dateFilterDashboardItem1" Weight="0.24625875268697217" />
+          <LayoutItem DashboardItem="listBoxDashboardItem2" Weight="0.39374230919195519" />
+          <LayoutItem DashboardItem="listBoxDashboardItem5" Weight="0.56058333653513837" />
+          <LayoutItem DashboardItem="listBoxDashboardItem3" Weight="0.56058333653513837" />
+          <LayoutItem DashboardItem="listBoxDashboardItem4" Weight="0.6078819156049079" />
+        </LayoutGroup>
+        <LayoutGroup Weight="1.7073080465336417">
+          <LayoutItem DashboardItem="pieDashboardItem1" Weight="1.7073080465336417" />
+          <LayoutItem DashboardItem="gridDashboardItem1" Weight="1.7073080465336417" />
+        </LayoutGroup>
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

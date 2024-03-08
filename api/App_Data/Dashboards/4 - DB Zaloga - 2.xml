@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="DB Zaloge - 2" />
+  <DataSources>
+    <SqlDataSource Name="CustomSqlQuery" ComponentName="sqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="Riko" FromAppConfig="true" />
+      <Query Type="CustomSqlQuery" Name="CustomSqlQuery">
+        <Sql>select * from dbo.uTN_DB_Zaloge Where ZalogaSkladišče='Skladisce 60';</Sql>
+      </Query>
+      <Query Type="SelectQuery" Name="uWMSStockItem">
+        <Tables>
+          <Table Name="uWMSStockItem" />
+        </Tables>
+        <Columns>
+          <Column Table="uWMSStockItem" Name="acWarehouse" />
+          <Column Table="uWMSStockItem" Name="acLocationName" />
+          <Column Table="uWMSStockItem" Name="acSerialNo" />
+          <Column Table="uWMSStockItem" Name="acIdent" />
+          <Column Table="uWMSStockItem" Name="acName" />
+          <Column Table="uWMSStockItem" Name="anQty" />
+          <Column Table="uWMSStockItem" Name="acUM" />
+          <Column Table="uWMSStockItem" Name="acSetOfItem" />
+          <Column Table="uWMSStockItem" Name="acSSCC" />
+          <Column Table="uWMSStockItem" Name="anCapacity" />
+          <Column Table="uWMSStockItem" Name="acCode" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+      <CalculatedFields>
+        <CalculatedField Name="ZalogaObratDni" Expression="((ZalogaKoličinaEM-ZalogaPrevzemKoličina+ZalogaIzdajaKoličina)*365+ZalogaPrevzemDniDoDanes-ZalogaIzdajaDniDoDanes)/&#xD;&#xA;(ZalogaKoličinaEM-ZalogaPrevzemKoličina+ZalogaIzdajaKoličina+ZalogaPrevzemKoličina)" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaZadostujeDni" Expression="[ZalogaKoličinaEM]/&#xD;&#xA;(Iif([ZalogaIzdajaKoličina]=0,1,[ZalogaIzdajaKoličina])/&#xD;&#xA;Iif(([ZalogaKoličinaEM]-[ZalogaPrevzemKoličina]+[ZalogaIzdajaKoličina])=0,DateDiffDay([ZalogaDatumPrvegaPrevzema],LocalDateTimeNow()), 365))" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaObdobjeZaležanosti" Expression="Iif([ZalogaObratDni]&lt;15, 'Do  15 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;30, 'Do  30 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;45, 'Do  45 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;60, 'Do  60 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;90, 'Do  90 dni',&#xD;&#xA;Iif([ZalogaObratDni]&lt;180,'Do 180 dni','Nad 180 dni'))))))" DataType="Auto" DataMember="CustomSqlQuery" />
+        <CalculatedField Name="ZalogaZačetnoStanje" Expression="sum([ZalogaKoličinaEM])-sum([ZalogaPrevzemKoličina])+sum([ZalogaIzdajaKoličina])" DataType="Auto" DataMember="CustomSqlQuery" />
+      </CalculatedFields>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Pregled zaloge po identih" ShowCaption="false" DataSource="sqlDataSource1" DataMember="uWMSStockItem">
+      <DataItems>
+        <Dimension DataMember="acIdent" DefaultId="DataItem0" />
+        <Dimension DataMember="acName" DefaultId="DataItem1" />
+        <Dimension DataMember="acLocationName" DefaultId="DataItem2" />
+        <Dimension DataMember="acSerialNo" DefaultId="DataItem3" />
+        <Measure DataMember="anQty" DefaultId="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn Name="IDENT">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="NAZIV">
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn Name="LOKACIJA">
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="ZALOGA">
+          <Measure DefaultId="DataItem4" />
+        </GridMeasureColumn>
+        <GridDimensionColumn Name="SERIJSKA ŠTEVILKA">
+          <Dimension DefaultId="DataItem3" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions EnableBandedRows="true" WordWrap="true" />
+    </Grid>
+    <Image ComponentName="imageDashboardItem1" Name="Zasedenost skladišča" Url="http://riko-wms.in-sist.si/Services/Image/?wh=Skladisce%2060&amp;m=full" SizeMode="Zoom" />
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="1.1772339704548995">
+        <LayoutItem DashboardItem="gridDashboardItem1" Weight="1.4334704262213487" />
+        <LayoutItem DashboardItem="imageDashboardItem1" Weight="1.4334704262213487" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

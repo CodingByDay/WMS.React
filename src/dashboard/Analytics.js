@@ -17,7 +17,6 @@ export default function Listing() {
 
 
   const analytics_url = process.env.REACT_APP_ANALYTICS_URL
-
   checkUID()
 
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function Listing() {
     return true
   }
 
-  function onMyFrameLoad() {}
 
   function checkUID() {
     const cookies = new Cookies()
@@ -61,7 +59,10 @@ export default function Listing() {
     dashboardControl.registerExtension(new DashboardPanelExtension(dashboardControl));
     dashboardControl.unregisterExtension("designerToolbar");
 }
+
+
   // orders
+
 
   return (
     <div id='analytics-panel'>
@@ -72,6 +73,7 @@ export default function Listing() {
       <div className='dashboard-div' style={{ position : 'absolute', height: '85%', top : '8em', left: '0px', right : '0px', bottom: '0px' }}>
 
         <DashboardControl 
+
           className='dashboard-control-devexpress'
           onBeforeRender={onBeforeRender}
           workingMode='Designer'
