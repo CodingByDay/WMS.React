@@ -20,6 +20,7 @@ import {
 import SortingService from "../services/SortingService";
 import { flushSync } from "react-dom";
 import Popup from "reactjs-popup";
+import { Modal, Input } from 'antd';
 import "reactjs-popup/dist/index.css";
 
 function EditOrderPosition(props) {
