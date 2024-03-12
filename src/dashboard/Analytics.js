@@ -80,10 +80,10 @@ export default function Listing() {
           className='dashboard-control-devexpress'
           onBeforeRender={onBeforeRender}
           endpoint={analyticsUrl}     
-
+          limitVisibleDataMode='DesignerAndViewer'
           >
 
-         <DataRequestOptions itemDataRequestMode='batch'></DataRequestOptions>
+         <DataRequestOptions  itemDataRequestMode='batch'></DataRequestOptions>
 
         </DashboardControl>
 
