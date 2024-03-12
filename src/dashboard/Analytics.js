@@ -10,7 +10,7 @@ import Loader from '../loader/Loader'
 import $ from 'jquery'
 import ListingPositionsButtons from './ListingPositionsButtons'
 import DataAccess from '../utility/DataAccess'
-import { DashboardControl } from 'devexpress-dashboard-react';
+import { DashboardControl, DataRequestOptions } from 'devexpress-dashboard-react';
 import {DashboardPanelExtension} from 'devexpress-dashboard/common';
 
 export default function Listing() {
@@ -58,6 +58,10 @@ export default function Listing() {
     var dashboardControl = sender.component;
     dashboardControl.registerExtension(new DashboardPanelExtension(dashboardControl));
     dashboardControl.unregisterExtension("designerToolbar");
+
+
+
+  
 }
 
 
@@ -73,12 +77,11 @@ export default function Listing() {
       <div className='dashboard-div' style={{ position : 'absolute', height: '85%', top : '8em', left: '0px', right : '0px', bottom: '0px' }}>
 
         <DashboardControl 
-
           className='dashboard-control-devexpress'
           onBeforeRender={onBeforeRender}
-          workingMode='Designer'
-          endpoint={analytics_url}      
-        >
+          endpoint={analytics_url}     
+
+          >
         </DashboardControl>
 
       </div>
