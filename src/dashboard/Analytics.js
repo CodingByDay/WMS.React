@@ -16,7 +16,7 @@ import {DashboardPanelExtension} from 'devexpress-dashboard/common';
 export default function Listing() {
 
 
-  const analytics_url = process.env.REACT_APP_ANALYTICS_URL
+  const analyticsUrl = process.env.REACT_APP_ANALYTICS_URL
   checkUID()
 
   useEffect(() => {
@@ -79,9 +79,12 @@ export default function Listing() {
         <DashboardControl 
           className='dashboard-control-devexpress'
           onBeforeRender={onBeforeRender}
-          endpoint={analytics_url}     
+          endpoint={analyticsUrl}     
 
           >
+
+         <DataRequestOptions itemDataRequestMode='batch'></DataRequestOptions>
+
         </DashboardControl>
 
       </div>
