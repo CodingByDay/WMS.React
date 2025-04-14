@@ -81,6 +81,14 @@ export function Dashboard() {
 
           <button
             className='btn btn-primary dashboard'
+            onClick={() => routeChange('transactions')}
+          >
+            Komisioniranje
+            <img alt={''} src='planning.png' width={100} />
+          </button>
+
+          <button
+            className='btn btn-primary dashboard'
             onClick={() => routeChange('stock')}
           >
             Zaloge
