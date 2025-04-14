@@ -7,6 +7,7 @@ import "./Responsive.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./auth/Auth";
 import { Dashboard } from "./dashboard/Dashboard";
+import  Commissioning  from "./dashboard/Commissioning";
 import Listing from "./dashboard/Listing";
 import Stock from "./dashboard/Stock";
 import Transactions from "./dashboard/Transactions";
@@ -33,6 +34,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import "devextreme/dist/css/dx.light.css";
 import config from "devextreme/core/config";
 import { licenseKey } from "./devextreme-licence";
+
 
 axios.interceptors.response.use(
   function (response) {
@@ -63,6 +65,8 @@ function App() {
         <Route path="/logout" element={<Auth />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/documents" element={<DocumentType />} />
+        <Route path="/commissioning" element={<Commissioning />} />
+
         // Import //
         <Route path="/import" element={<ImportMenu />} />
         <Route path="/import-idents" element={<ImportIdents />} />
@@ -79,6 +83,7 @@ function App() {
         <Route path="/status" element={<StatusDocument />} />
         <Route path="/idents" element={<Idents />} />
         <Route path="/subjects" element={<Subjects />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -81,7 +81,7 @@ export function Dashboard() {
 
           <button
             className='btn btn-primary dashboard'
-            onClick={() => routeChange('transactions')}
+            onClick={() => routeChange('commissioning')}
           >
             Komisioniranje
             <img alt={''} src='planning.png' width={100} />
