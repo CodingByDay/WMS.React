@@ -83,26 +83,27 @@ export default function Stock() {
       window.location.href = '/'
     }
   }
-  const customStyles = {
-    dropdown: (provided) => ({
-      ...provided,
-      zIndex: 9999, // Set a higher z-index value
-    }),
-    control: (base) => ({
-      ...base,
-      width: '15em', // Width of the control
-    }),
-    menu: (base) => ({
-      ...base,
-      width: '15em', // Width of the dropdown menu
-    }),
-    option: (provided) => ({
-      ...provided,
-      whiteSpace: 'nowrap', // Prevent line breaks
-      overflow: 'hidden', // Hide overflowing text
-      textOverflow: 'ellipsis', // Display ellipsis for overflowed text
-    }),
-  }
+ const customStyles = {
+  control: (base) => ({
+    ...base,
+    width: '15em',
+  }),
+  menu: (base) => ({
+    ...base,
+    width: '15em',
+    zIndex: 9999999,          // still good to set
+  }),
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 99999999,         // THIS is the real winner
+  }),
+  option: (provided) => ({
+    ...provided,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  }),
+}
 
   const fetchData = async (sql, params) => {
     StockService.executeSQLQuery(sql, params).then((result) => {
@@ -113,7 +114,7 @@ export default function Stock() {
   const handleInventory = (e) => {
     var usedFilters = []
     var params = []
-    var sql = 'SELECT acWarehouse, acIdent, anQty, acLocation FROM uWMSStock'
+    var sql = 'SELECT si.acName, s.* FROM uWMSStock s JOIN tHE_SEtItem si ON s.acIdent = si.acIdent'
     if (typeof warehouse !== 'undefined' && warehouse !== null) {
       usedFilters.push('warehouse')
     }
@@ -275,6 +276,7 @@ export default function Stock() {
 
         <Column dataField='acWarehouse' caption='Skladišče' />
         <Column dataField='acIdent' caption='Ident' />
+        <Column dataField='acName' caption='Naziv' />
         <Column dataField='anQty' caption='Količina' />
         <Column dataField='acLocation' caption='Lokacija' />
       </DataGrid>
