@@ -79,14 +79,15 @@ export function Dashboard() {
             <img alt={''} src='transaction.png' width={100} />
           </button>
 
-          <button
+          {/* <button
             className='btn btn-primary dashboard'
             onClick={() => routeChange('commissioning')}
           >
             Komisioniranje
             <img alt={''} src='planning.png' width={100} />
           </button>
-
+          */}
+          
           <button
             className='btn btn-primary dashboard'
             onClick={() => routeChange('stock')}
