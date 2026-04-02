@@ -332,7 +332,7 @@ export default function HeaderOrderListing(props) {
 
         <div className='responsive-buttons-order'>
           <span className='actions smallerr s' id='addOrder' onClick={openAdd}>
-            <p>Dodaj</p>
+            <span className='wms-action-label'>Dodaj</span>
             <MdAdd />
           </span>
 
@@ -346,7 +346,7 @@ export default function HeaderOrderListing(props) {
             id='deleteOrder'
             onClick={deleteOrder}
           >
-            <p>Pobriši</p>
+            <span className='wms-action-label'>Pobriši</span>
             <MdDeleteOutline />
           </span>
         </div>

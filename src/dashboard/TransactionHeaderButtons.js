@@ -39,18 +39,18 @@ export default function TransactionHeaderButtons(props) {
         <div className='buttonsHeader'>
           <div className='header-buttons-div'>
             <span className='actions smallerr' onClick={finishDocument}>
-              <p>Zaključi</p>
+              <span className='wms-action-label'>Zaključi</span>
               <MdDownload />
             </span>
 
             {/* [Discusion needed] What are we going to do about stornation? 06.03.2024 */}
             <span className='actions smallerr'>
-              <p>Storniraj</p>
+              <span className='wms-action-label'>Storniraj</span>
               <MdOutlineCancel />
             </span>
 
             <span className='actions smallerr' onClick={deleteHeadDocument}>
-              <p>Izbriši</p>
+              <span className='wms-action-label'>Izbriši</span>
               <MdDeleteOutline />
             </span>
           </div>

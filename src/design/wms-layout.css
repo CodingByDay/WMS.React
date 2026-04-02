@@ -6,6 +6,25 @@ body {
   color: var(--wms-color-text);
 }
 
+/* --- Bootstrap buttons: vertical centering without breaking dashboard/menu layouts --- */
+.btn:not(.dashboard) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wms-space-2);
+  line-height: 1.1;
+}
+
+/* Buttons that intentionally use space-between keep their layout, just normalize line height */
+.btn.dashboard {
+  line-height: 1.1;
+}
+
+.btn svg,
+.btn img {
+  flex-shrink: 0;
+  display: block;
+}
+
 /* --- Action buttons/spans only (fixes mis-centering like "Prikaži") --- */
 span.actions,
 span.actions.smallerr,
@@ -15,6 +34,33 @@ button.actions.smallerr {
   justify-content: center;
   gap: var(--wms-space-2);
   line-height: 1.1;
+}
+
+/* Label next to icon — no default <p> margins (was pushing text to top) */
+.wms-action-label {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Legacy: any remaining <p> inside action chips */
+span.actions.smallerr p,
+span.actions.smallerr.s p,
+button.actions.smallerr p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  display: inline-block;
+}
+
+/* Remove faint outline/border on navy action chips */
+span.actions.smallerr,
+span.actions.smallerr.s,
+button.actions.smallerr {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Normalize icon spacing inside action buttons only */

@@ -883,8 +883,8 @@ button.actions.smallerr {
   height: 2.3em;
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
+  padding-top: 0;
+  padding-bottom: 0;
   width: -moz-fit-content;
   width: 10em;
   background: #081a45;

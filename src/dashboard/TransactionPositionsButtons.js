@@ -54,7 +54,7 @@ export default function TransactionPositionsButtons(props) {
           </span> */}
 
           <span className='actions smallerr' onClick={deletePosition}>
-            <p>Izbriši</p>
+            <span className='wms-action-label'>Izbriši</span>
             <MdDeleteOutline />
           </span>
         </div>

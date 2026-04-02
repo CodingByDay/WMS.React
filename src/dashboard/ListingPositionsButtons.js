@@ -49,12 +49,12 @@ export default function ListingPositionsButtons(props) {
   return (
     <div className='filters positions'>
       <span className='actions smallerr' onClick={createPosition} id='addOrder'>
-        <p>Dodaj</p>
+        <span className='wms-action-label'>Dodaj</span>
         <MdAdd />
       </span>
 
       <span className='actions smallerr' id='editOrder' onClick={showModal}>
-        <p>Uredi</p>
+        <span className='wms-action-label'>Uredi</span>
         <MdEdit />
       </span>
 
@@ -63,7 +63,7 @@ export default function ListingPositionsButtons(props) {
         id='deleteOrder'
         onClick={deleteOrderHead}
       >
-        <p>Pobriši</p>
+        <span className='wms-action-label'>Pobriši</span>
         <MdDeleteOutline />
       </span>
 

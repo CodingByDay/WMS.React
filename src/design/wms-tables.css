@@ -125,6 +125,43 @@ table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
   background: var(--wms-color-bg-row-hover) !important;
 }
 
+/* Search icon (pagination/search strips) — remove any border/box artifacts */
+.search-container {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: var(--wms-color-primary) !important;
+}
+
+.search-container .search-icon,
+.search-container .search-icon * {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Remove seam/border between icon and input */
+.search-container input,
+.search-container input.form-control {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Ensure the icon container itself doesn't draw a box */
+.search-container .search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
 /* --- DevExtreme DataGrid (listing, stock, transactions, settings) --- */
 .dx-datagrid {
   font-family: var(--wms-font-sans);
@@ -133,6 +170,62 @@ table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
   overflow: hidden;
   border: 1px solid var(--wms-color-border);
   box-shadow: var(--wms-shadow-sm);
+}
+
+/* DevExtreme filter row: remove the small gray border around the search icon button */
+.dx-datagrid-filter-row .dx-texteditor-buttons-container,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container * {
+  box-shadow: none !important;
+}
+
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-texteditor-button,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-texteditor-button * {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.dx-datagrid-filter-row
+  .dx-texteditor-buttons-container
+  .dx-texteditor-button
+  .dx-button {
+  border: none !important;
+  background: transparent !important;
+}
+
+.dx-datagrid-filter-row
+  .dx-texteditor-buttons-container
+  .dx-texteditor-button
+  .dx-button-content {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-button,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-button::before,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-button::after,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-texteditor-button::before,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-texteditor-button::after,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-dropdowneditor-button,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-dropdowneditor-button::before,
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-dropdowneditor-button::after {
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-button-mode-contained {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.dx-datagrid-filter-row .dx-texteditor-buttons-container .dx-icon {
+  opacity: 0.8;
 }
 
 .dx-datagrid-headers {
