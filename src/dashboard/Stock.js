@@ -1,7 +1,6 @@
 import Header from './Header'
 import Footer from './Footer'
 import { useEffect, useState } from 'react'
-import Cookies from 'universal-cookie'
 import Select from 'react-select'
 import StockService from '../services/StockService'
 import $ from 'jquery'
@@ -17,7 +16,6 @@ import {
 } from 'devextreme-react/data-grid'
 
 export default function Stock() {
-  checkUID()
   const [warehouses, setWarehouses] = useState([])
   const [locations, setLocations] = useState([])
   const [idents, setidents] = useState([])
@@ -61,28 +59,6 @@ export default function Stock() {
     return returnArray
   }
 
-  function isUUID(uuid) {
-    let s = '' + uuid
-    s = s.match(
-      '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
-    )
-    if (s === null) {
-      return false
-    }
-    return true
-  }
-
-  function checkUID() {
-    const cookies = new Cookies()
-    var cookie = cookies.get('uid')
-    if (typeof cookie !== 'undefined') {
-      if (isUUID(cookie)) {
-        return
-      }
-    } else {
-      window.location.href = '/'
-    }
-  }
  const customStyles = {
   control: (base) => ({
     ...base,

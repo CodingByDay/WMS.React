@@ -1,13 +1,13 @@
 import "devextreme/dist/css/dx.light.css";
-import "devextreme/dist/css/dx.light.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./Mobile.css";
 import "./Responsive.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./auth/Auth";
+import ProtectedRoute from "./auth/ProtectedRoute";
 import { Dashboard } from "./dashboard/Dashboard";
-import  Commissioning  from "./dashboard/Commissioning";
+import Commissioning from "./dashboard/Commissioning";
 import Listing from "./dashboard/Listing";
 import Stock from "./dashboard/Stock";
 import Transactions from "./dashboard/Transactions";
@@ -29,23 +29,22 @@ import { ImportMenu } from "./import/ImportMenu";
 import { ImportOrders } from "./import/ImportOrders";
 import { ImportIdents } from "./import/ImportIdents";
 import { ImportSubjects } from "./import/ImportSubjects";
-import React, { useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import "devextreme/dist/css/dx.light.css";
+import React from "react";
 import config from "devextreme/core/config";
 import { licenseKey } from "./devextreme-licence";
 
-
 axios.interceptors.response.use(
   function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
     return response;
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    window.location.href = "/internet";
+    if (error.code === "ERR_CANCELED") {
+      return Promise.reject(error);
+    }
+    if (!error.response) {
+      window.location.href = "/internet";
+    }
+    return Promise.reject(error);
   },
 );
 
@@ -55,35 +54,89 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/" element={<Auth />} />
-        <Route path="/listing" element={<Listing />} />
-        <Route path="/stock" element={<Stock />} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/listing"
+          element={
+            <ProtectedRoute>
+              <Listing />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/stock"
+          element={
+            <ProtectedRoute>
+              <Stock />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <ProtectedRoute>
+              <Transactions />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/internet" element={<NoInternetConnection />} />
         <Route path="/logout" element={<Auth />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/documents" element={<DocumentType />} />
-        <Route path="/commissioning" element={<Commissioning />} />
+        <Route
+          path="/commissioning"
+          element={
+            <ProtectedRoute>
+              <Commissioning />
+            </ProtectedRoute>
+          }
+        />
 
-        // Import //
-        <Route path="/import" element={<ImportMenu />} />
+        <Route
+          path="/import"
+          element={
+            <ProtectedRoute>
+              <ImportMenu />
+            </ProtectedRoute>
+          }
+        />
+        {/* Same as before refactor: sub-imports and settings CRUD had no checkUID */}
         <Route path="/import-idents" element={<ImportIdents />} />
         <Route path="/import-orders" element={<ImportOrders />} />
         <Route path="/import-subjects" element={<ImportSubjects />} />
-        // Settings //
+
         <Route path="/users" element={<Users />} />
         <Route path="/subject-codes" element={<SubjectCodes />} />
         <Route path="/devices" element={<Devices />} />
-        <Route path="/documents" element={<DocumentType />} />
         <Route path="/printers" element={<Printers />} />
         <Route path="/system" element={<System />} />
         <Route path="/warehouses" element={<Warehouses />} />
         <Route path="/status" element={<StatusDocument />} />
         <Route path="/idents" element={<Idents />} />
         <Route path="/subjects" element={<Subjects />} />
-
       </Routes>
     </BrowserRouter>
   );
