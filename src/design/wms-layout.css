@@ -6,6 +6,45 @@ body {
   color: var(--wms-color-text);
 }
 
+/* --- Action buttons/spans only (fixes mis-centering like "Prikaži") --- */
+span.actions,
+span.actions.smallerr,
+button.actions.smallerr {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wms-space-2);
+  line-height: 1.1;
+}
+
+/* Normalize icon spacing inside action buttons only */
+span.actions svg,
+button.actions.smallerr svg {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+span.actions img,
+button.actions.smallerr img {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* --- Header actions (top buttons) --- */
+.navbar .actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wms-space-2);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.navbar .actions svg {
+  margin: 0;
+  flex-shrink: 0;
+}
+
 .main-menu-design,
 .listing-bg,
 .content-transactions,
@@ -40,6 +79,21 @@ body {
 .stock-container-filters {
   padding: var(--wms-space-4) var(--wms-space-6) var(--wms-space-3);
   box-sizing: border-box;
+}
+
+/* Stock: override legacy padding-top that mis-centers "Prikaži" */
+.stock-container-filters .actions.smallerr {
+  padding-top: 0 !important;
+  align-items: center;
+}
+
+/* Stock: the legacy .actions.smallerr has fixed height + vertical padding which breaks centering.
+   Normalize just the stock action to rely on flex centering. */
+.stock-container-filters span.actions.smallerr.stock {
+  height: 2.3em;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1;
 }
 
 #dataGrid.devexpress-grid,

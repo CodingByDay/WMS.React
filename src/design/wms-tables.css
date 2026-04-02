@@ -24,6 +24,19 @@
   margin-bottom: var(--wms-space-6);
 }
 
+.wms-table-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wms-space-2);
+  line-height: 1.1;
+}
+
+.wms-table-toolbar button svg,
+.wms-table-toolbar button img {
+  flex-shrink: 0;
+}
+
 table.wms-data-table {
   width: 100%;
   border-collapse: collapse;

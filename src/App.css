@@ -895,6 +895,8 @@ button.actions.smallerr {
   display: flex;
   color: white;
   justify-content: center;
+  align-items: center;
+  line-height: 1.1;
 }
 
 .form-group2 {
