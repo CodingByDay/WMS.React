@@ -444,10 +444,11 @@ const ImportWizzard = (props) => {
               </span>
             </div>
 
+            <div className="wms-table-wrap">
             <table
               {...getTableProps()}
               style={{}}
-              className="react-table-wizzard"
+              className="react-table-wizzard wms-data-table"
             >
               <thead>
                 {headerGroups.map((headerGroup) => (
@@ -496,6 +497,7 @@ const ImportWizzard = (props) => {
                 })}
               </tbody>
             </table>
+            </div>
 
             <div className="export-button-div">
               <button className="actions smallerr" onClick={() => importData()}>

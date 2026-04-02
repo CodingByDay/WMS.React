@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./Mobile.css";
 import "./Responsive.css";
+import "./design/wms-layout.css";
+import "./design/wms-tables.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./auth/Auth";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -29,6 +31,7 @@ import { ImportMenu } from "./import/ImportMenu";
 import { ImportOrders } from "./import/ImportOrders";
 import { ImportIdents } from "./import/ImportIdents";
 import { ImportSubjects } from "./import/ImportSubjects";
+import DesignCanvas from "./canvas/DesignCanvas";
 import React from "react";
 import config from "devextreme/core/config";
 import { licenseKey } from "./devextreme-licence";
@@ -59,6 +62,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/canvas"
+          element={
+            <ProtectedRoute>
+              <DesignCanvas />
             </ProtectedRoute>
           }
         />

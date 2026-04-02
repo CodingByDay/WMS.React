@@ -1,0 +1,73 @@
+/**
+ * WMS global design tokens — spacing, type scale, color, radii, elevation.
+ * Import once from index.css. Use var(--wms-*) in new or refactored CSS.
+ */
+:root {
+  /* Brand (aligned with existing #081a45 / orange CTAs) */
+  --wms-color-primary: #081a45;
+  --wms-color-primary-hover: #0c2560;
+  --wms-color-accent: #e47000;
+  --wms-color-accent-soft: #f69333;
+
+  --wms-color-bg-app: #f0f2f5;
+  --wms-color-bg-elevated: #ffffff;
+  /** Zebra / hover for data tables */
+  --wms-color-bg-row-alt: rgba(8, 26, 69, 0.045);
+  --wms-color-bg-row-hover: rgba(8, 26, 69, 0.09);
+  --wms-color-border: #e4e6eb;
+  --wms-color-border-strong: #cfd4dc;
+
+  --wms-color-text: #1a1d21;
+  --wms-color-text-muted: #5c6370;
+  --wms-color-text-on-primary: #ffffff;
+
+  /* Typography */
+  --wms-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, "Helvetica Neue", sans-serif;
+  --wms-font-weight-regular: 400;
+  --wms-font-weight-medium: 600;
+  --wms-font-weight-bold: 700;
+
+  --wms-text-xs: 0.75rem; /* 12px */
+  --wms-text-sm: 0.875rem; /* 14px */
+  --wms-text-base: 1rem; /* 16px */
+  --wms-text-lg: 1.125rem; /* 18px */
+  --wms-text-xl: 1.25rem; /* 20px */
+  --wms-text-2xl: 1.5rem; /* 24px */
+  --wms-text-3xl: 1.875rem; /* 30px */
+
+  --wms-leading-tight: 1.25;
+  --wms-leading-normal: 1.5;
+
+  /* Spacing scale (4px base) */
+  --wms-space-1: 0.25rem;
+  --wms-space-2: 0.5rem;
+  --wms-space-3: 0.75rem;
+  --wms-space-4: 1rem;
+  --wms-space-5: 1.25rem;
+  --wms-space-6: 1.5rem;
+  --wms-space-8: 2rem;
+  --wms-space-10: 2.5rem;
+  --wms-space-12: 3rem;
+
+  /* Layout */
+  --wms-page-max-width: 1200px;
+  --wms-page-padding-x: var(--wms-space-6);
+  --wms-page-padding-y: var(--wms-space-6);
+  --wms-header-height: auto;
+
+  /* Shape */
+  --wms-radius-sm: 6px;
+  --wms-radius-md: 10px;
+  --wms-radius-lg: 14px;
+  --wms-radius-full: 9999px;
+
+  /* Elevation */
+  --wms-shadow-sm: 0 1px 2px rgba(8, 26, 69, 0.06);
+  --wms-shadow-md: 0 4px 12px rgba(8, 26, 69, 0.08);
+  --wms-shadow-lg: 0 8px 24px rgba(8, 26, 69, 0.1);
+
+  /* Motion */
+  --wms-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --wms-duration-fast: 150ms;
+}

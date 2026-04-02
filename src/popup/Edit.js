@@ -43,7 +43,7 @@ export default function Edit(props) {
 
   const onRenderOrderAdd = (item) => {
     return (
-      <table>
+      <table className="wms-data-table wms-table--compact">
         <tbody>
           <tr>
             <td style={{ width: 150 }}>{item.order}</td>

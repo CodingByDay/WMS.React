@@ -1,0 +1,50 @@
+/**
+ * App-wide shell: backgrounds, type, horizontal rhythm (works with existing class names).
+ */
+body {
+  font-family: var(--wms-font-sans);
+  color: var(--wms-color-text);
+}
+
+.main-menu-design,
+.listing-bg,
+.content-transactions,
+.stock-container,
+.main-container {
+  background-color: var(--wms-color-bg-app);
+  font-family: var(--wms-font-sans);
+  color: var(--wms-color-text);
+}
+
+.listing-body,
+.content-transactions {
+  padding-left: var(--wms-space-6);
+  padding-right: var(--wms-space-6);
+  box-sizing: border-box;
+}
+
+/* Settings / admin pages use Header + table block */
+.Users,
+.global-react-table {
+  padding-left: var(--wms-space-6);
+  padding-right: var(--wms-space-6);
+  padding-bottom: var(--wms-space-8);
+  box-sizing: border-box;
+}
+
+.users-container-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.stock-container-filters {
+  padding: var(--wms-space-4) var(--wms-space-6) var(--wms-space-3);
+  box-sizing: border-box;
+}
+
+#dataGrid.devexpress-grid,
+.devexpress-grid.stock {
+  margin-left: var(--wms-space-6);
+  margin-right: var(--wms-space-6);
+  margin-bottom: var(--wms-space-8);
+}

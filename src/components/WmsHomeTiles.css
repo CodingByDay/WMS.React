@@ -1,0 +1,112 @@
+/* Home shell + intro (tokens) */
+.wms-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--wms-color-bg-app);
+  font-family: var(--wms-font-sans);
+  color: var(--wms-color-text);
+}
+
+.wms-main--home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--wms-page-max-width);
+  margin: 0 auto;
+  padding: var(--wms-page-padding-y) var(--wms-page-padding-x)
+    var(--wms-space-10);
+  box-sizing: border-box;
+}
+
+.wms-home-title {
+  font-size: var(--wms-text-2xl);
+  font-weight: var(--wms-font-weight-bold);
+  line-height: var(--wms-leading-tight);
+  margin: 0 0 var(--wms-space-2);
+  color: var(--wms-color-text);
+}
+
+.wms-home-subtitle {
+  font-size: var(--wms-text-sm);
+  color: var(--wms-color-text-muted);
+  margin: 0;
+  line-height: var(--wms-leading-normal);
+  max-width: 42rem;
+}
+
+/* Centers the menu column vertically like the original .main-menu-design */
+.wms-home-menu-host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: var(--wms-space-8);
+}
+
+/* Original: narrow column (~30%), stacked buttons */
+.wms-home-menu {
+  width: min(30vw, 22rem);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wms-space-1);
+}
+
+.wms-home-menu__btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 4.25rem;
+  padding: var(--wms-space-2) var(--wms-space-4) var(--wms-space-2)
+    var(--wms-space-8);
+  margin: 0;
+  border: none;
+  border-radius: var(--wms-radius-sm);
+  background: var(--wms-color-primary);
+  color: var(--wms-color-text-on-primary);
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-lg);
+  font-weight: 800;
+  line-height: var(--wms-leading-tight);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--wms-duration-fast) var(--wms-ease-out);
+}
+
+.wms-home-menu__btn:hover {
+  background: var(--wms-color-primary-hover);
+  color: var(--wms-color-text-on-primary);
+}
+
+.wms-home-menu__btn:focus-visible {
+  outline: 2px solid var(--wms-color-accent-soft);
+  outline-offset: 2px;
+}
+
+.wms-home-menu__label {
+  flex: 0 1 auto;
+}
+
+.wms-home-menu__icon {
+  width: 100px;
+  height: auto;
+  max-height: 4rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.wms-home-menu__icon--sm {
+  width: 50px;
+  max-height: 3.125rem;
+}
+
+/* Design canvas: same buttons, block in content flow */
+.wms-canvas__menu-preview .wms-home-menu {
+  width: min(30vw, 22rem);
+  margin: 0 auto;
+}

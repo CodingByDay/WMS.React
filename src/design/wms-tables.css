@@ -1,0 +1,152 @@
+/**
+ * HTML tables (Bootstrap .table, react-table-*, wizard) + DevExtreme grid accents.
+ * Loads after App.css. table.wms-data-table is added in shared components.
+ */
+
+/* --- Legacy HTML / react-table data tables --- */
+.wms-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: var(--wms-space-5);
+  border: 1px solid var(--wms-color-border);
+  border-radius: var(--wms-radius-md);
+  background: var(--wms-color-bg-elevated);
+  box-shadow: var(--wms-shadow-sm);
+}
+
+.wms-table-wrap .wms-data-table {
+  margin-bottom: 0;
+}
+
+.wms-table-toolbar {
+  margin-top: var(--wms-space-4);
+  margin-bottom: var(--wms-space-6);
+}
+
+table.wms-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-sm);
+  line-height: var(--wms-leading-normal);
+  color: var(--wms-color-text);
+}
+
+table.wms-data-table thead th {
+  background: var(--wms-color-primary) !important;
+  color: var(--wms-color-text-on-primary) !important;
+  font-weight: var(--wms-font-weight-medium);
+  font-size: var(--wms-text-sm);
+  padding: var(--wms-space-3) var(--wms-space-4);
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 2px solid var(--wms-color-primary-hover);
+  white-space: nowrap;
+}
+
+table.wms-data-table tbody td {
+  padding: var(--wms-space-3) var(--wms-space-4);
+  border-bottom: 1px solid var(--wms-color-border);
+  background: var(--wms-color-bg-elevated) !important;
+  color: var(--wms-color-text);
+  font-size: var(--wms-text-sm);
+  vertical-align: middle;
+}
+
+table.wms-data-table tbody tr:nth-child(even) td {
+  background: var(--wms-color-bg-row-alt) !important;
+}
+
+table.wms-data-table tbody tr:hover td {
+  background: var(--wms-color-bg-row-hover) !important;
+}
+
+table.wms-data-table tbody tr.row-style:hover td {
+  background: var(--wms-color-bg-row-hover) !important;
+}
+
+/* Inline / popup helper tables */
+table.wms-table--compact tbody td {
+  padding: var(--wms-space-2) var(--wms-space-3);
+  font-size: var(--wms-text-xs);
+}
+
+/* Tables that still use Bootstrap .table — keep density consistent */
+.main-container table.table.wms-data-table {
+  font-size: var(--wms-text-sm);
+}
+
+/* Global table font reset (App.css used x-large) */
+.main-container table {
+  font-size: var(--wms-text-sm);
+}
+
+/* Match react-table / wizzard tables that may omit wms-data-table on wrapper only */
+table[class*="react-table"]:not(.dx-datagrid-table) {
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-sm);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table[class*="react-table"]:not(.dx-datagrid-table) thead th {
+  background: var(--wms-color-primary) !important;
+  color: var(--wms-color-text-on-primary) !important;
+  font-weight: var(--wms-font-weight-medium);
+  padding: var(--wms-space-3) var(--wms-space-4);
+  border-bottom: 2px solid var(--wms-color-primary-hover);
+}
+
+table[class*="react-table"]:not(.dx-datagrid-table) tbody td {
+  padding: var(--wms-space-3) var(--wms-space-4);
+  border-bottom: 1px solid var(--wms-color-border);
+  background: var(--wms-color-bg-elevated) !important;
+}
+
+table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:nth-child(even) td {
+  background: var(--wms-color-bg-row-alt) !important;
+}
+
+table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
+  background: var(--wms-color-bg-row-hover) !important;
+}
+
+/* --- DevExtreme DataGrid (listing, stock, transactions, settings) --- */
+.dx-datagrid {
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-sm);
+  border-radius: var(--wms-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--wms-color-border);
+  box-shadow: var(--wms-shadow-sm);
+}
+
+.dx-datagrid-headers {
+  font-weight: var(--wms-font-weight-medium);
+}
+
+.dx-datagrid-headers,
+.dx-datagrid-headers .dx-datagrid-table .dx-row > td,
+.dx-datagrid-headers .dx-datagrid-table .dx-row > tr > td {
+  background-color: var(--wms-color-primary) !important;
+  color: var(--wms-color-text-on-primary) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dx-header-filter {
+  color: var(--wms-color-text-on-primary) !important;
+}
+
+.dx-datagrid-rowsview .dx-row.dx-row-alt > td {
+  background-color: var(--wms-color-bg-row-alt) !important;
+}
+
+.dx-datagrid-rowsview .dx-row:hover:not(.dx-edit-row) > td {
+  background-color: var(--wms-color-bg-row-hover) !important;
+}
+
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
+.dx-datagrid-rowsview .dx-selection.dx-row:hover:not(.dx-row-focused) > td {
+  background-color: rgba(8, 26, 69, 0.14) !important;
+}

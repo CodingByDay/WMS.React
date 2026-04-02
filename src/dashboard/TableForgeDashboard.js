@@ -128,7 +128,11 @@ function TableForgeDashboard({ refresh, name, tableData }) {
           </span>
         </div>
 
-        <table {...getTableProps()} className={`react-table-${name}`}>
+        <div className="wms-table-wrap">
+        <table
+          {...getTableProps()}
+          className={`react-table-${name} wms-data-table`}
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
@@ -155,6 +159,7 @@ function TableForgeDashboard({ refresh, name, tableData }) {
             })}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   )

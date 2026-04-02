@@ -86,8 +86,11 @@ const Table = (props) => {
   }
 
   return (
-    <div className={props.class}>
-      <table className="table notStripped" id={props.passID}>
+    <div className={`wms-table-wrap ${props.class || ""}`.trim()}>
+      <table
+        className="table notStripped wms-data-table"
+        id={props.passID}
+      >
         <TableHead className="orders" columns={columns} />
         <TableBody
           table={props.table}
