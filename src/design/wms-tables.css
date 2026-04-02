@@ -172,6 +172,46 @@ table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
   box-shadow: var(--wms-shadow-sm);
 }
 
+/*
+ * Filter-row magnifier is a .dx-menu-item inside .dx-filter-menu (not texteditor-buttons).
+ * dx.light.css: .dx-datagrid-filter-row .dx-menu-item.dx-state-focused::after { border: 2px solid #5c95c5; }
+ */
+.dx-datagrid-filter-row .dx-menu-item.dx-state-focused::after,
+.dx-datagrid-filter-row .dx-menu-item.dx-state-hover::after {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.dx-datagrid-filter-row .dx-menu ul.dx-menu-horizontal > li > .dx-menu-item {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.dx-datagrid-filter-row .dx-menu-item-content {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Filter menu wrapper itself can draw a border in some states */
+.dx-datagrid-filter-row
+  .dx-menu.dx-widget.dx-visibility-change-handler.dx-collection.dx-menu-base.dx-datagrid.dx-cell-focus-disabled.dx-filter-menu {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* Date filter editors: remove unnecessary rounding in filter row */
+.dx-datagrid-filter-row .dx-datebox,
+.dx-datagrid-filter-row .dx-datebox .dx-texteditor,
+.dx-datagrid-filter-row .dx-datebox .dx-texteditor-input-container,
+.dx-datagrid-filter-row .dx-datebox .dx-texteditor-buttons-container,
+.dx-datagrid-filter-row .dx-datebox .dx-dropdowneditor-button {
+  border-radius: 0 !important;
+}
+
 /* DevExtreme filter row: remove the small gray border around the search icon button */
 .dx-datagrid-filter-row .dx-texteditor-buttons-container,
 .dx-datagrid-filter-row .dx-texteditor-buttons-container * {
