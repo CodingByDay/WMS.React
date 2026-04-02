@@ -96,13 +96,6 @@ function TableForge({ refresh, name, tableData }) {
     e.event.preventDefault();
   }, []);
 
-  const createRow = useCallback((e) => {
-    var rowData = e.row.data
-    onAdd(rowData)
-    e.event.preventDefault();
-  }, []);
-
-
   const onAdd = () => {
     generatePopupCreate(selectedTable);
   };
@@ -1162,6 +1155,12 @@ function TableForge({ refresh, name, tableData }) {
 
   return (
     <div className="global-react-table">
+      <div className="filters positions wms-settings-grid-actions">
+        <span className="actions smallerr" onClick={onAdd}>
+          <span className="wms-action-label">Dodaj</span>
+          <IoAddCircleSharp />
+        </span>
+      </div>
       <Insert
         refresh={refresh}
         onClose={onClose}
@@ -1190,6 +1189,7 @@ function TableForge({ refresh, name, tableData }) {
                   allowColumnResizing={true}
                   noDataText='Ni podatkov'
                   columnAutoWidth={true}
+                  columnHidingEnabled={true}
                   focusedRowEnabled={true}
                   hoverStateEnabled={true}
                   
@@ -1203,15 +1203,12 @@ function TableForge({ refresh, name, tableData }) {
                   <FilterRow visible={true} />
 
 
-                  <Column type="buttons">
+                  <Column type="buttons" width={96}>
                     <Button name="edit" hoverStateEnabled={false} onClick={editRow} />
                     <Button name="delete" hoverStateEnabled={false} onClick={deleteRow} />
-                    <Button name="create" hoverStateEnabled={false}  icon="add" onClick={createRow} />
                   </Column>
 
-
                   {generateColumns()}
-
 
                   <Selection mode='single' />
 

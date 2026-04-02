@@ -122,6 +122,22 @@ button.actions.smallerr img {
   overflow-x: auto;
 }
 
+/* Settings (TableForge) grid: use full width, avoid horizontal scroller */
+.Users .users-container-table {
+  overflow-x: hidden;
+}
+
+.Users .users-container-table .devexpress-grid.settings {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.Users .users-container-table .dx-datagrid {
+  width: 100% !important;
+}
+
 .stock-container-filters {
   padding: var(--wms-space-4) var(--wms-space-6) var(--wms-space-3);
   box-sizing: border-box;
@@ -147,4 +163,24 @@ button.actions.smallerr img {
   margin-left: var(--wms-space-6);
   margin-right: var(--wms-space-6);
   margin-bottom: var(--wms-space-8);
+}
+
+/* Right-align action button rows that use the legacy `.filters.positions` wrapper */
+.filters.positions {
+  width: calc(100% - (var(--wms-space-6) * 2));
+  margin-left: var(--wms-space-6);
+  margin-right: var(--wms-space-6);
+  justify-content: flex-start;
+}
+
+/* Settings (TableForge): keep only the top "Dodaj" bar on the right */
+.filters.positions.wms-settings-grid-actions {
+  justify-content: flex-end;
+}
+
+/* In Settings, the table is full-width; make the actions bar full-width too */
+.Users .filters.positions.wms-settings-grid-actions {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }

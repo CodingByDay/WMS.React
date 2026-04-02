@@ -172,6 +172,19 @@ table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
   box-shadow: var(--wms-shadow-sm);
 }
 
+/* Filter row should look like a normal row (no special tint) */
+.dx-datagrid-filter-row,
+.dx-datagrid-filter-row > td,
+.dx-datagrid-filter-row .dx-editor-cell,
+.dx-datagrid-filter-row .dx-editor-cell > .dx-editor-container {
+  background: var(--wms-color-bg-elevated) !important;
+}
+
+.dx-datagrid-filter-row .dx-editor-cell .dx-texteditor,
+.dx-datagrid-filter-row .dx-editor-cell .dx-texteditor-input {
+  background: transparent !important;
+}
+
 /*
  * Filter-row magnifier is a .dx-menu-item inside .dx-filter-menu (not texteditor-buttons).
  * dx.light.css: .dx-datagrid-filter-row .dx-menu-item.dx-state-focused::after { border: 2px solid #5c95c5; }
@@ -270,14 +283,32 @@ table[class*="react-table"]:not(.dx-datagrid-table) tbody tr:hover td {
 
 .dx-datagrid-headers {
   font-weight: var(--wms-font-weight-medium);
+  /* Neutral behind the table; only .dx-header-row cells are navy (filter row is also .dx-row) */
+  background-color: var(--wms-color-bg-elevated) !important;
 }
 
-.dx-datagrid-headers,
-.dx-datagrid-headers .dx-datagrid-table .dx-row > td,
-.dx-datagrid-headers .dx-datagrid-table .dx-row > tr > td {
+/* Navy applies only to the title row — NOT .dx-datagrid-filter-row (same tr also has .dx-row) */
+.dx-datagrid-headers .dx-datagrid-table .dx-header-row > td,
+.dx-datagrid-headers .dx-datagrid-table .dx-header-row > th {
   background-color: var(--wms-color-primary) !important;
   color: var(--wms-color-text-on-primary) !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Filter row: explicit neutral text/borders (theme may still inherit header colors on editors) */
+.dx-datagrid-headers .dx-datagrid-filter-row > td,
+.dx-datagrid-headers .dx-datagrid-filter-row .dx-editor-cell {
+  background-color: var(--wms-color-bg-elevated) !important;
+  color: var(--wms-color-text) !important;
+  border-color: var(--wms-color-border) !important;
+}
+
+.dx-datagrid-headers .dx-datagrid-filter-row .dx-menu-item-content .dx-icon {
+  color: #898989 !important;
+}
+
+.dx-datagrid-headers .dx-datagrid-filter-row .dx-texteditor-input {
+  color: var(--wms-color-text) !important;
 }
 
 .dx-header-filter {
