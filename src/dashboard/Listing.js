@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as redux from '../features/data'
 import AddOrderPosition from '../popup/AddOrderPosition'
 import TransactionService from '../services/TransactionService'
+import { maybeShowListingApiFieldsPopup } from '../utility/listingApiFieldDebug'
 
 export default function Listing() {
   const dispatch = useDispatch()
@@ -50,6 +51,7 @@ export default function Listing() {
 
     ListingService.getAllListings().then((response) => {
       setOrders(response)
+      maybeShowListingApiFieldsPopup(response)
       loader.style.display = 'none'
       $('.main-container').css('display', 'block')
     })
@@ -182,6 +184,7 @@ export default function Listing() {
   const renderComponent = () => {
     ListingService.getAllListings().then((response) => {
       setOrders(response)
+      maybeShowListingApiFieldsPopup(response)
     })
   }
 

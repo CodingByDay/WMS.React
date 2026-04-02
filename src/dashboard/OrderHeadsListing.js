@@ -29,6 +29,9 @@ export default function OrderHeadsListing(props) {
             ''
           return acc
         }, {})
+        if (properties.acStatus === undefined && properties.AcStatus !== undefined) {
+          properties.acStatus = properties.AcStatus
+        }
         // Add auto-increment id field
         properties.id = index + 1
         return properties
@@ -69,6 +72,7 @@ export default function OrderHeadsListing(props) {
           caption='Rok dobave'
         />
         <Column dataField='DocumentType' caption='Tip dokumenta' />
+        <Column dataField='acStatus' caption='Status' />
         <Column dataField='Key' caption='Ključ' />
         <Column dataField='Receiver' caption='Sprejemnik' />
         <Selection mode='single' />

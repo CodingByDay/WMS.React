@@ -728,6 +728,7 @@ function TableForge({ refresh, name, tableData }) {
         additional: "",
         required: true,
         dbType: "String",
+        hideInGrid: true,
       },
       {
         Header: "Dav. št.",
@@ -748,6 +749,7 @@ function TableForge({ refresh, name, tableData }) {
         additional: "",
         required: true,
         dbType: "String",
+        hideInGrid: true,
       },
       {
         Header: "Aktiven",
@@ -1141,7 +1143,14 @@ function TableForge({ refresh, name, tableData }) {
     for (let i = 0; i < selectedTable.value.length; i++) {
       let currentRow = selectedTable.value[i];
       if(currentRow.type!=="nothing") {
-        columns.push(<Column key={currentRow.accessor} dataField={currentRow.accessor} caption={currentRow.Header} />);
+        columns.push(
+          <Column
+            key={currentRow.accessor}
+            dataField={currentRow.accessor}
+            caption={currentRow.Header}
+            visible={currentRow.hideInGrid ? false : true}
+          />,
+        );
       }
     }
     return columns;
