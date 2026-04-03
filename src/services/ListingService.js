@@ -1,27 +1,23 @@
 import axios from "axios";
+import SettingsService from "./SettingsService";
+
+/**
+ * Same seven data columns as legacy grid (+ acKey for positions API).
+ * Add acStatus to the SELECT when your view exposes it, then map stays in sync.
+ */
+const LISTING_OPEN_ORDERS_SQL = `
+SELECT acKey, acWarehouse, acConsignee, adDeliveryDeadline, acDocType, acReceiver
+FROM uvWMSOpenOrder
+`.trim();
 
 const ListingService = {
   async getAllListings() {
-    axios.interceptors.response.use(
-      function (response) {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response;
-      },
-      function (error) {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
-        return Promise.reject(error);
-      },
+    const rows = await SettingsService.executeSQLQuery(
+      LISTING_OPEN_ORDERS_SQL,
+      [],
     );
-
-    const response = await axios.get(
-      process.env.REACT_APP_API_URL +
-        `/Services/Device/?mode=list&table=ooa&i=web`,
-    );
-
-    window.items = response.data;
-    return response.data;
+    window.items = { rows, fromSql: true };
+    return { rows: Array.isArray(rows) ? rows : [], fromSql: true };
   },
 
   async deleteHeadDocumentOrder(id) {

@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as redux from '../features/data'
 import AddOrderPosition from '../popup/AddOrderPosition'
 import TransactionService from '../services/TransactionService'
-import { maybeShowListingApiFieldsPopup } from '../utility/listingApiFieldDebug'
 
 export default function Listing() {
   const dispatch = useDispatch()
@@ -36,8 +35,8 @@ export default function Listing() {
     setPopupVisible(false)
   }
 
-  // orders
-  const [orders, setOrders] = useState([])
+  // orders — { rows } from SQL uvWMSOpenOrder (getAllListings); legacy shape { Items } still supported in grid
+  const [orders, setOrders] = useState({ rows: [] })
   // positions
   const [positions, setPositions] = useState([])
   const [selectedHeadOrder, setSelectedHeadOrder] = useState()
@@ -51,7 +50,6 @@ export default function Listing() {
 
     ListingService.getAllListings().then((response) => {
       setOrders(response)
-      maybeShowListingApiFieldsPopup(response)
       loader.style.display = 'none'
       $('.main-container').css('display', 'block')
     })
@@ -184,7 +182,6 @@ export default function Listing() {
   const renderComponent = () => {
     ListingService.getAllListings().then((response) => {
       setOrders(response)
-      maybeShowListingApiFieldsPopup(response)
     })
   }
 

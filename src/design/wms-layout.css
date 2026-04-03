@@ -158,6 +158,62 @@ button.actions.smallerr img {
   line-height: 1;
 }
 
+/* --- Login (/): Prijava CTA --- */
+.login .wms-login-actions {
+  margin-top: var(--wms-space-4);
+}
+
+.login .wms-login-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wms-space-2);
+  width: 100%;
+  min-height: 3rem;
+  padding: var(--wms-space-3) var(--wms-space-8);
+  margin: 0;
+  border: none;
+  border-radius: var(--wms-radius-md);
+  background: linear-gradient(
+    180deg,
+    var(--wms-color-primary-hover) 0%,
+    var(--wms-color-primary) 100%
+  );
+  color: var(--wms-color-text-on-primary);
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-base);
+  font-weight: var(--wms-font-weight-bold);
+  letter-spacing: 0.03em;
+  text-transform: none;
+  box-shadow: var(--wms-shadow-md);
+  cursor: pointer;
+  transition:
+    background var(--wms-duration-fast) var(--wms-ease-out),
+    box-shadow var(--wms-duration-fast) var(--wms-ease-out),
+    transform var(--wms-duration-fast) var(--wms-ease-out);
+}
+
+.login .wms-login-submit:hover {
+  background: linear-gradient(180deg, #0d2d7a 0%, var(--wms-color-primary-hover) 100%);
+  box-shadow: var(--wms-shadow-lg);
+}
+
+.login .wms-login-submit:active {
+  transform: translateY(1px);
+  box-shadow: var(--wms-shadow-sm);
+}
+
+.login .wms-login-submit:focus-visible {
+  outline: 2px solid var(--wms-color-accent);
+  outline-offset: 3px;
+}
+
+.login.disabled .wms-login-submit {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 #dataGrid.devexpress-grid,
 .devexpress-grid.stock {
   margin-left: var(--wms-space-6);

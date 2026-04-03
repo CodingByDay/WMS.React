@@ -145,10 +145,11 @@ export default function Auth(props) {
               Napačno geslo.
             </div>
 
-            <div className="d-grid gap-2 mt-3">
+            <div className="d-grid gap-2 mt-3 wms-login-actions">
               {!mobile && (
                 <button
-                  className="btn btn-primary"
+                  type="button"
+                  className="wms-login-submit"
                   id="loginButton"
                   onClick={handleClick}
                 >
@@ -158,8 +159,8 @@ export default function Auth(props) {
 
               {mobile && (
                 <button
-                  className="btn btn-primary"
-                  id="loginButton"
+                  type="button"
+                  className="wms-login-submit"
                   onClick={() => {
                     showMobileAlert();
                   }}

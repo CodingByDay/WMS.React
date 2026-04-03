@@ -7,11 +7,11 @@ div#dataGrid {
 }
 
 .devexpress-grid.order {
-  height: 220px !important;
+  height: 292px !important; /* ~15% above prior 254px */
 }
 
 .devexpress-grid.order-position {
-  height: 160px !important;
+  height: 213px !important; /* ~15% above prior 185px */
 }
 .devexpress-grid.settings {
   height: 70vh !important;
@@ -716,21 +716,6 @@ div#addHeader {
 
 tr {
   cursor: pointer;
-}
-
-button#loginButton {
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-top: 0.7em;
-  padding-bottom: 0.7em;
-  width: 100%;
-  margin: auto;
-  border-radius: 0 !important;
-  background: #081a45;
-  border: none;
-  font-family: "Titillium Web", sans-serif !important;
-  font-size: 0.875em;
-  font-weight: 800;
 }
 
 * {

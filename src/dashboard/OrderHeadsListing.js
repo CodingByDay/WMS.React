@@ -13,10 +13,21 @@ import { useCallback } from 'react'
 export default function OrderHeadsListing(props) {
   let navigate = useNavigate()
 
-  // This code converts the old api result to the devexpress data array.
+  // SQL (query API): { rows }; legacy: { Items } from mode=list&table=ooa
   let gridData = []
 
-  if (props.data && Array.isArray(props.data.Items)) {
+  if (props.data?.rows && Array.isArray(props.data.rows)) {
+    gridData = props.data.rows.map((row, index) => ({
+      id: index + 1,
+      Key: row.acKey,
+      Warehouse: row.acWarehouse,
+      Consignee: row.acConsignee,
+      DeliveryDeadline: row.adDeliveryDeadline,
+      DocumentType: row.acDocType,
+      acStatus: row.acStatus ?? row.AcStatus ?? '',
+      Receiver: row.acReceiver,
+    }))
+  } else if (props.data && Array.isArray(props.data.Items)) {
     gridData = props.data.Items.map((item, index) => {
       try {
         const properties = item.Properties.Items.reduce((acc, prop) => {
