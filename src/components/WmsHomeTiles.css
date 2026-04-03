@@ -94,15 +94,10 @@
 
 .wms-home-menu__icon {
   width: 100px;
-  height: auto;
+  height: 4rem;
   max-height: 4rem;
   object-fit: contain;
   flex-shrink: 0;
-}
-
-.wms-home-menu__icon--sm {
-  width: 50px;
-  max-height: 3.125rem;
 }
 
 /* Design canvas: same buttons, block in content flow */

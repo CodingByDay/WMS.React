@@ -20,12 +20,8 @@ export default function WmsHomeTiles({ onSelect }) {
             src={tile.icon}
             alt=""
             width={100}
-            className={
-              tile.iconSize === "compact"
-                ? "wms-home-menu__icon wms-home-menu__icon--sm"
-                : "wms-home-menu__icon"
-            }
-            id={tile.key === "analytics" ? "analytics" : undefined}
+            height={64}
+            className="wms-home-menu__icon"
             draggable={false}
           />
         </button>

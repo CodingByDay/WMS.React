@@ -5,10 +5,5 @@ export const WMS_HOME_TILES = [
   { key: "stock", label: "Zaloge", icon: "stock.png" },
   { key: "import", label: "Uvoz", icon: "import.png" },
   { key: "settings", label: "Nastavitve", icon: "settings.png" },
-  {
-    key: "analytics",
-    label: "Analitika",
-    icon: "monitor-icon.png",
-    iconSize: "compact",
-  },
+  { key: "analytics", label: "Analitika", icon: "monitor-icon.png" },
 ];

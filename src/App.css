@@ -570,7 +570,8 @@ table thead th {
   background: #efefef !important;
 }
 
-img#analytics {
+/* Scoped: dashboard menu tiles must not use id="analytics" (avoids layout bleed). */
+#analytics-panel img#analytics {
   margin-right: 1.6em;
 }
 
