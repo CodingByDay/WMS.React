@@ -1,8 +1,11 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ImportOrderChoice(props) {
+  const { t } = useTranslation();
+
   function setChosenState(sheet) {
     props.onChosen(sheet);
   }
@@ -24,7 +27,7 @@ export default function ImportOrderChoice(props) {
               marginTop: "2em",
             }}
           >
-            <h4>Izberite ali uvažate pozicije ali glave naročila.</h4>
+            <h4>{t("import.chooseOrderImportMode")}</h4>
           </div>
 
           <div
@@ -41,13 +44,13 @@ export default function ImportOrderChoice(props) {
               className="actions smallerr"
               onClick={() => setChosenState("head")}
             >
-              Glave
+              {t("import.orderHeads")}
             </button>
             <button
               className="actions smallerr"
               onClick={() => setChosenState("position")}
             >
-              Pozicije
+              {t("import.orderLines")}
             </button>
           </div>
         </div>

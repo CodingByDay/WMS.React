@@ -20,8 +20,10 @@ import {
 import SortingService from '../services/SortingService'
 import { flushSync } from 'react-dom'
 import EditOrderPosition from '../popup/EditOrderPosition'
+import { useTranslation } from 'react-i18next'
 
 export default function ListingPositionsButtons(props) {
+  const { t } = useTranslation()
   const [selected, setSelected] = useState({})
   const [isEditShow, setEditShown] = useState(false)
   useEffect(() => {
@@ -49,12 +51,12 @@ export default function ListingPositionsButtons(props) {
   return (
     <div className='filters positions'>
       <span className='actions smallerr' onClick={createPosition} id='addOrder'>
-        <span className='wms-action-label'>Dodaj</span>
+        <span className='wms-action-label'>{t('common.add')}</span>
         <MdAdd />
       </span>
 
       <span className='actions smallerr' id='editOrder' onClick={showModal}>
-        <span className='wms-action-label'>Uredi</span>
+        <span className='wms-action-label'>{t('common.edit')}</span>
         <MdEdit />
       </span>
 
@@ -63,7 +65,7 @@ export default function ListingPositionsButtons(props) {
         id='deleteOrder'
         onClick={deleteOrderHead}
       >
-        <span className='wms-action-label'>Pobriši</span>
+        <span className='wms-action-label'>{t('common.delete')}</span>
         <MdDeleteOutline />
       </span>
 

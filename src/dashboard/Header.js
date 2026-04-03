@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
-import { MdLogout, MdHome } from 'react-icons/md'
-import { GiReturnArrow } from 'react-icons/gi'
-import { MdArrowBackIos } from 'react-icons/md'
+import { MdLogout, MdHome, MdArrowBackIos } from 'react-icons/md'
 import VersionInfo from '../versioning/VersionInfo'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 import Cookies from 'universal-cookie'
 
 export default function Header(props) {
+  const { t } = useTranslation()
   function handleLogout() {
     const cookies = new Cookies()
     cookies.remove('uid', { path: '/' })
@@ -23,14 +24,14 @@ export default function Header(props) {
   if (pathname !== '/dashboard') {
     button = (
       <span className='actions' onClick={() => navigate('/dashboard')}>
-        Domov
+        {t('nav.home')}
         <MdHome />
       </span>
     )
 
     returnButton = (
       <span className='actions' onClick={() => navigate(-1)}>
-        Nazaj
+        {t('nav.back')}
         <MdArrowBackIos />
       </span>
     )
@@ -40,24 +41,23 @@ export default function Header(props) {
 
   return (
     <div className='navbar'>
-      <div className='logo navbar' id='back-button'>
-        <center>
-          <img
-            src='logo-wms.png'
-            className='logo'
-            alt='Riko WMS'
-            height={30}
-            draggable='false'
-          />
-        </center>
+      <div className='logo navbar wms-navbar-logo' id='back-button'>
+        <img
+          src='logo-wms.png'
+          className='logo'
+          alt='Riko WMS'
+          height={30}
+          draggable='false'
+        />
       </div>
 
       <div className='logout'>
+        <LanguageSwitcher variant="header" />
         <VersionInfo />
         {button}
         {returnButton}
         <span className='actions' onClick={() => handleLogout()}>
-          Odjava
+          {t('nav.logout')}
           <MdLogout />
         </span>
       </div>

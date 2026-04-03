@@ -11,8 +11,11 @@ import {
   Selection,
 } from 'devextreme-react/data-grid';
 import Table from '../table/Table';
+import { useTranslation } from 'react-i18next';
+import { trHeader } from '../i18n/headerMap';
 
 export default function TransactionPositions(props) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // This code converts the old api result to the devexpress data array.
@@ -48,20 +51,20 @@ export default function TransactionPositions(props) {
         keyExpr="id"
         allowColumnReordering
         allowColumnResizing
-        noDataText="Ni podatkov"
+        noDataText={t("common.noData")}
         columnAutoWidth
         focusedRowEnabled
         hoverStateEnabled
       >
 
         <FilterRow visible />
-        <Column dataField="HeadID" caption="ID transakcije" />
-        <Column dataField="LinkKey" caption="Ključ transakcije" />
-        <Column dataField="ItemID" caption="Številka pozicije" />
-        <Column dataField="SerialNo" caption="Serijska številka" />
-        <Column dataField="Ident" caption="Ident" />
-        <Column dataField="IdentName" caption="Naziv identa" />
-        <Column dataField="Qty" caption="WMS količina" />
+        <Column dataField="HeadID" caption={trHeader("ID transakcije", t)} />
+        <Column dataField="LinkKey" caption={trHeader("Ključ transakcije", t)} />
+        <Column dataField="ItemID" caption={trHeader("Številka pozicije", t)} />
+        <Column dataField="SerialNo" caption={trHeader("Serijska številka", t)} />
+        <Column dataField="Ident" caption={trHeader("Ident", t)} />
+        <Column dataField="IdentName" caption={trHeader("Naziv identa", t)} />
+        <Column dataField="Qty" caption={trHeader("WMS količina", t)} />
         <Selection mode="single" />
 
       </DataGrid>

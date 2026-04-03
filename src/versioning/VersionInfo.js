@@ -1,19 +1,23 @@
 // VersionInfo.js
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { FaInfoCircle } from "react-icons/fa";
 
 const VersionInfo = () => {
-  const version = process.env.REACT_APP_VERSION; // Access version from environment variables
+  const { t } = useTranslation();
+  const version = process.env.REACT_APP_VERSION;
   const notes = process.env.REACT_APP_VERSION_TEXT;
 
   return (
     <div className="version-info">
-      <div className="version-number">{`Verzija ${version}`}</div>
+      <div className="version-number">
+        {t("version.label", { version: version ?? "" })}
+      </div>
       <FaInfoCircle className="info-icon" />
       {notes && (
         <div className="tooltip">
-          Aktivna licenca. Podatki o verziji: {notes}
+          {t("version.tooltip", { notes })}
         </div>
       )}
     </div>

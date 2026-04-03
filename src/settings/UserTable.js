@@ -1,48 +1,55 @@
 import React from "react";
 import { useTable } from "react-table";
+import { useTranslation } from "react-i18next";
+import { trHeader } from "../i18n/headerMap";
 
 function UserTable({ data, onDelete, onEdit, onInsert }) {
+  const { t } = useTranslation();
   // Define your table columns
   const columns = React.useMemo(
     () => [
       {
-        Header: "Ime",
+        Header: trHeader("Ime", t),
         accessor: "name",
         className: "name-column-user",
       },
       {
-        Header: "Priimek",
+        Header: trHeader("Priimek", t),
         accessor: "surname",
         className: "surname-column-user",
       },
       {
-        Header: "UP ime",
+        Header: trHeader("UP ime", t),
         accessor: "upName",
         className: "up-column-user",
       },
       {
-        Header: "Geslo",
+        Header: trHeader("Geslo", t),
         accessor: "password",
         className: "password-column-user",
       },
       {
-        Header: "Aktiven",
+        Header: trHeader("Aktiven", t),
         accessor: "active",
         Cell: ({ value }) => <input type="checkbox" checked={value} readOnly />,
         className: "active-column-user",
       },
       {
-        Header: "Dejanja",
+        Header: trHeader("Dejanja", t),
         accessor: "actions",
         Cell: ({ row }) => (
           <div>
-            <button onClick={() => onEdit(row.original)}>Posodobi</button>
-            <button onClick={() => onDelete(row.original)}>Pobriši</button>
+            <button onClick={() => onEdit(row.original)}>
+              {trHeader("Posodobi", t)}
+            </button>
+            <button onClick={() => onDelete(row.original)}>
+              {trHeader("Pobriši", t)}
+            </button>
           </div>
         ),
       },
     ],
-    [onDelete, onEdit],
+    [onDelete, onEdit, t],
   );
 
   // Create a table instance
@@ -83,7 +90,7 @@ function UserTable({ data, onDelete, onEdit, onInsert }) {
       </div>
       <div className="wms-table-toolbar">
         <button type="button" onClick={() => onInsert()}>
-          Dodaj
+          {t("common.add")}
         </button>
       </div>
     </>

@@ -8,8 +8,10 @@ import { MdAdd } from 'react-icons/md'
 import ListingService from '../services/ListingService'
 import TransactionService from '../services/TransactionService'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 export default function StatusChange(props) {
+  const { t } = useTranslation()
   const [statusList, setStatusList] = useState([])
   const [status, setStatus] = useState('')
 
@@ -20,13 +22,13 @@ export default function StatusChange(props) {
   useEffect(() => {
     setOrderKey(order)
     setStatusList([
-      { value: '1', label: 'Vpisan' },
-      { value: '2', label: 'Potrjen' },
-      { value: '3', label: 'Delno izdan' },
-      { value: 'Z', label: 'Zaključen' },
-      { value: 'X', label: 'Storno' },
+      { value: '1', label: t('orderStatus.entered') },
+      { value: '2', label: t('orderStatus.confirmed') },
+      { value: '3', label: t('orderStatus.partialIssued') },
+      { value: 'Z', label: t('orderStatus.completed') },
+      { value: 'X', label: t('orderStatus.storno') },
     ])
-  }, [])
+  }, [t])
 
   function onChangeStatus(e) {
     setStatus(e.value)
@@ -50,7 +52,7 @@ export default function StatusChange(props) {
         <div className='main-part'>
           <Select
             className='select-filterss'
-            placeholder={'Status'}
+            placeholder={t('common.selectStatus')}
             onChange={(e) => onChangeStatus(e)}
             options={statusList}
             id='statusChange'
@@ -63,7 +65,7 @@ export default function StatusChange(props) {
             onClick={changeStatus}
             id='createDocument'
           >
-            <p>Potrdi</p>
+            <p>{t('common.confirmBtn')}</p>
             <MdAdd />
           </span>
         </center>

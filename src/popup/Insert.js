@@ -6,8 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
 import SettingsService from "../services/SettingsService";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+import { trHeader, trHeaders } from "../i18n/headerMap";
 
 const Insert = (props) => {
+  const { t } = useTranslation();
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [inputValues, setInputValues] = useState({});
@@ -62,8 +65,9 @@ const Insert = (props) => {
                   const properties = current.columnOrder.map(
                     (field) => item[field],
                   );
-                  const names = current.columnOrderTranslation.map(
-                    (field) => field,
+                  const names = trHeaders(
+                    current.columnOrderTranslation,
+                    t,
                   );
                   const widths = current.columnOrderWidth.map((field) => field);
                   return {
@@ -80,9 +84,9 @@ const Insert = (props) => {
                   value: "Test",
                   label: "Test",
                   id: "",
-                  properties: current.columnOrderTranslation,
+                  properties: trHeaders(current.columnOrderTranslation, t),
                   widths: current.columnOrderWidth,
-                  names: current.columnOrderTranslation,
+                  names: trHeaders(current.columnOrderTranslation, t),
                   header: true,
                 };
 
@@ -336,7 +340,12 @@ const Insert = (props) => {
               (column) =>
                 column.type !== "nothing" && (
                   <div key={column.accessor} className="form-group insert">
-                    <label htmlFor={column.accessor}>{column.Header}:</label>
+                    <label htmlFor={column.accessor}>
+                      {typeof column.Header === "string"
+                        ? trHeader(column.Header, t)
+                        : column.Header}
+                      :
+                    </label>
                     {column.type === "dropdown" ? (
                       <Select
                         id={column.accessor}
@@ -384,7 +393,7 @@ const Insert = (props) => {
           <div className="center-button">
             <center>
               <button type="submit" className="actions smallerr">
-                Dodaj
+                {t("common.add")}
               </button>
             </center>
           </div>

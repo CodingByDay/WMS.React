@@ -15,6 +15,7 @@ import LocationComponent from '../popup/LocationComponent'
 import SerialComponent from '../popup/SerialComponent'
 import SerialQtyEntry from '../popup/SerialQtyEntry'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
+import i18n from '../i18n'
 
 export default function Transactions() {
   const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] =
@@ -147,10 +148,10 @@ export default function Transactions() {
   async function finishHeadDocument() {
     window
       .swal({
-        title: 'Potrditev',
-        text: 'Ali ste sigurni da želite zaključiti dokument?',
+        title: i18n.t('common.confirm'),
+        text: i18n.t('transactions.confirmFinish'),
         icon: 'warning',
-        buttons: ['Ne', 'Ja, zaključi'],
+        buttons: [i18n.t('common.no'), i18n.t('transactions.yesFinish')],
       })
       .then((result) => {
         if (result) {
@@ -162,11 +163,11 @@ export default function Transactions() {
             ).then((response) => {
               TransactionService.getAllTransactions().then((response) => {
                 setTransactions(response)
-                window.showAlert('Informacija', 'Uspešno zaključeno', 'success')
+                window.showAlert(i18n.t('common.info'), i18n.t('transactions.finishSuccess'), 'success')
               })
             })
           } else {
-            window.showAlert('Informacija', 'Niste izbrali dokument.', 'error')
+            window.showAlert(i18n.t('common.info'), i18n.t('common.noDocumentSelected'), 'error')
           }
         }
       })
@@ -175,10 +176,10 @@ export default function Transactions() {
   function deleteHeadDocument() {
     window
       .swal({
-        title: 'Potrditev',
-        text: 'Ali ste sigurni da želite pobrisati transakcijo?',
+        title: i18n.t('common.confirm'),
+        text: i18n.t('transactions.confirmDeleteHead'),
         icon: 'warning',
-        buttons: ['Ne', 'Ja, pobriši'],
+        buttons: [i18n.t('common.no'), i18n.t('transactions.yesDelete')],
       })
       .then((result) => {
         if (result) {
@@ -192,15 +193,15 @@ export default function Transactions() {
                 TransactionService.getAllTransactions().then((response) => {
                   setTransactions(response)
                   window.showAlert(
-                    'Informacija',
-                    'Uspešno pobrisano',
+                    i18n.t('common.info'),
+                    i18n.t('listing.deleteSuccess'),
                     'success',
                   )
                 })
               }
             })
           } else {
-            window.showAlert('Informacija', 'Niste izbrali dokument.', 'error')
+            window.showAlert(i18n.t('common.info'), i18n.t('common.noDocumentSelected'), 'error')
           }
         }
       })
@@ -212,10 +213,10 @@ export default function Transactions() {
 
     window
     .swal({
-      title: 'Potrditev',
-      text: 'Ali ste sigurni da želite pobrisati pozicijo?',
+      title: i18n.t('common.confirm'),
+      text: i18n.t('transactions.confirmDeletePosition'),
       icon: 'warning',
-      buttons: ['Ne', 'Ja, pobriši'],
+      buttons: [i18n.t('common.no'), i18n.t('transactions.yesDelete')],
     })
     .then((result) => {
       if (result) {
@@ -223,7 +224,7 @@ export default function Transactions() {
           if (response.data.includes('OK!')) {
             TransactionService.getPositionsByHeadId(selector).then((response) => {
               setPositions(response)
-              window.showAlert('Informacija', 'Uspešno pobrisano', 'success')
+              window.showAlert(i18n.t('common.info'), i18n.t('listing.deleteSuccess'), 'success')
             })
           }
         })
@@ -235,7 +236,7 @@ export default function Transactions() {
   const renderComponentPositions = () => {
     TransactionService.getPositionsByHeadId(selector).then((response) => {
       setPositions(response)
-      window.showAlert('Informacija', 'Uspešno dodano', 'success')
+      window.showAlert(i18n.t('common.info'), i18n.t('common.successAdded'), 'success')
       $('#SerialQtyEntry').toggle()
       setShow(false)
     })
@@ -244,7 +245,7 @@ export default function Transactions() {
   const renderComponent = () => {
     TransactionService.getAllTransactions().then((response) => {
       setTransactions(response)
-      window.showAlert('Informacija', 'Uspešno dodano', 'success')
+      window.showAlert(i18n.t('common.info'), i18n.t('common.successAdded'), 'success')
     })
   }
 

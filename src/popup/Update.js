@@ -7,8 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
 import SettingsService from "../services/SettingsService";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+import { trHeader, trHeaders } from "../i18n/headerMap";
 
 const Update = (props) => {
+  const { t } = useTranslation();
   const [dropdownOptions, setDropdownOptions] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [dropdownLayouts, setDropdownLayouts] = useState({});
@@ -73,9 +76,7 @@ const Update = (props) => {
                 const properties = current.columnOrder.map(
                   (field) => item[field],
                 );
-                const names = current.columnOrderTranslation.map(
-                  (field) => field,
-                );
+                const names = trHeaders(current.columnOrderTranslation, t);
                 const widths = current.columnOrderWidth.map((field) => field);
                 return {
                   value: properties.join("|"),
@@ -93,10 +94,10 @@ const Update = (props) => {
                 value: "Test",
                 label: "Test",
                 id: "",
-                properties: current.columnOrderTranslation,
+                properties: trHeaders(current.columnOrderTranslation, t),
                 widths: current.columnOrderWidth,
                 helper: "",
-                names: current.columnOrderTranslation,
+                names: trHeaders(current.columnOrderTranslation, t),
                 header: true,
               };
 
@@ -484,7 +485,10 @@ const Update = (props) => {
                       }}
                       htmlFor={column.accessor}
                     >
-                      {column.Header}:{" "}
+                      {typeof column.Header === "string"
+                        ? trHeader(column.Header, t)
+                        : column.Header}
+                      :{" "}
                       {(
                         (selectedOptions[column.accessor] &&
                           selectedOptions[column.accessor].helper) ||

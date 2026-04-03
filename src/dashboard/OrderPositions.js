@@ -11,7 +11,11 @@ import {
   Selection,
 } from 'devextreme-react/data-grid'
 
+import { useTranslation } from 'react-i18next'
+import { trHeader } from '../i18n/headerMap'
+
 export default function OrderPositions(props) {
+  const { t } = useTranslation()
   let navigate = useNavigate()
 
   // This code converts the old api result to the devexpress data array.
@@ -53,18 +57,18 @@ export default function OrderPositions(props) {
         keyExpr={'id'}
         allowColumnReordering={true}
         allowColumnResizing={true}
-        noDataText='Ni podatkov'
+        noDataText={t('common.noData')}
         columnAutoWidth={true}
         focusedRowEnabled={true}
         hoverStateEnabled={true}
       >
         <FilterRow visible={true} />
-        <Column dataField='Ident' caption='Ident' />
-        <Column dataField='Name' caption='Name' />
-        <Column dataField='No' caption='Št. artikla' />
-        <Column dataField='ItemID' caption='Številka' />
-        <Column dataField='OpenQty' caption='Odprto' />
-        <Column dataField='FullQty' caption='Naročeno' />
+        <Column dataField='Ident' caption={trHeader('Ident', t)} />
+        <Column dataField='Name' caption={trHeader('Name', t)} />
+        <Column dataField='No' caption={trHeader('Št. artikla', t)} />
+        <Column dataField='ItemID' caption={trHeader('Številka', t)} />
+        <Column dataField='OpenQty' caption={trHeader('Odprto', t)} />
+        <Column dataField='FullQty' caption={trHeader('Naročeno', t)} />
         <Selection mode='single' />
       </DataGrid>
     </div>

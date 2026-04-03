@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Footer from "../dashboard/Footer";
 import $ from "jquery";
+import { useTranslation } from "react-i18next";
 
 export function ImportMenu() {
+  const { t } = useTranslation();
   let navigate = useNavigate();
 
   /*
@@ -38,7 +40,7 @@ export function ImportMenu() {
             className="btn btn-primary dashboard"
             onClick={() => routeChange("import-subjects")}
           >
-            Subjekti
+            {t("importMenu.subjects")}
             <img alt={""} src="rating-adjusted.png" width={100} />
           </button>
 
@@ -46,7 +48,7 @@ export function ImportMenu() {
             className="btn btn-primary dashboard"
             onClick={() => routeChange("import-idents")}
           >
-            Identi
+            {t("importMenu.idents")}
             <img alt={""} src="stock.png" width={100} />
           </button>
 
@@ -54,7 +56,7 @@ export function ImportMenu() {
             className="btn btn-primary dashboard"
             onClick={() => routeChange("import-orders")}
           >
-            Naročila
+            {t("importMenu.orders")}
             <img alt={""} src="listing.png" width={100} />
           </button>
         </div>

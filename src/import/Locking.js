@@ -1,8 +1,12 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { trHeader } from "../i18n/headerMap";
 
 export default function Locking(props) {
+  const { t } = useTranslation();
+
   function setChosenColumn(column) {
     var columnObj = props.column;
     columnObj.connection = column.Name;
@@ -28,16 +32,7 @@ export default function Locking(props) {
             }}
           >
             <h4>
-              Povezava iz stolpca{" "}
-              <h4
-                style={{
-                  fontWeight: "bold",
-                  fontStyle: "italic",
-                  display: "inline",
-                }}
-              >
-                {props.column.Header}
-              </h4>
+              {t("import.linkingTitle", { col: props.column?.Header ?? "" })}
             </h4>
           </div>
 
@@ -49,7 +44,7 @@ export default function Locking(props) {
               gap: "16px",
             }}
           >
-            {props.columns.map((column, index) => (
+            {props.columns.map((column) => (
               <button
                 key={column.Name}
                 className="actions smallerr lock"
@@ -58,7 +53,11 @@ export default function Locking(props) {
                 <div className="shortened-lock">
                   {column.required ? column.Name + " (*)" : column.Name}
                 </div>
-                <div className="smaller-friendly">{column.friendly}</div>
+                <div className="smaller-friendly">
+                  {typeof column.friendly === "string"
+                    ? trHeader(column.friendly, t)
+                    : column.friendly}
+                </div>
               </button>
             ))}
           </div>

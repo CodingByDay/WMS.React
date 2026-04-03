@@ -17,7 +17,11 @@ import {
   Button,
   Editing
 } from 'devextreme-react/data-grid'
+import { useTranslation } from "react-i18next";
+import { trHeader } from "../i18n/headerMap";
+
 function TableForge({ refresh, name, tableData }) {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalEditOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
@@ -36,14 +40,14 @@ function TableForge({ refresh, name, tableData }) {
     };
     params.push(parameterId);
     Swal.fire({
-      title: "Ste prepričani?",
-      text: "To dejanje ni mogoče razveljaviti!",
+      title: t("common.confirmTitle"),
+      text: t("common.confirmDelete"),
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Da, izbriši!",
-      cancelButtonText: "Ne",
+      confirmButtonText: t("common.yesDelete"),
+      cancelButtonText: t("common.no"),
     }).then((result) => {
       if (result.isConfirmed) {
         SettingsService.insertSQLQuery(currentDeleteSQL, params).then(
@@ -51,9 +55,9 @@ function TableForge({ refresh, name, tableData }) {
             var data = result;
 
             if (data) {
-              Swal.fire("Izbrisano!", "Zapis je bil pobrisan.", "success");
+              Swal.fire(t("common.deleted"), t("common.recordDeleted"), "success");
             } else {
-              Swal.fire("Napaka!", "Zapis ni bil pobrisan.", "error");
+              Swal.fire(t("common.error"), t("common.recordNotDeleted"), "error");
             }
 
             setTimeout(refresh, 1000);
@@ -112,9 +116,9 @@ function TableForge({ refresh, name, tableData }) {
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
         accessor: "actions",
@@ -122,14 +126,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -164,7 +168,7 @@ function TableForge({ refresh, name, tableData }) {
         dbType: "String",
       },
     ],
-    [],
+    [t],
   );
 
   // This is the configuration for the subject codes //
@@ -172,9 +176,9 @@ function TableForge({ refresh, name, tableData }) {
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
         accessor: "actions",
@@ -183,14 +187,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -271,7 +275,7 @@ function TableForge({ refresh, name, tableData }) {
         dbType: "Int64",
       },
     ],
-    [],
+    [t],
   );
 
   // This is the configuration for the statuses of documents //
@@ -279,9 +283,9 @@ function TableForge({ refresh, name, tableData }) {
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
         accessor: "actions",
@@ -290,14 +294,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -375,7 +379,7 @@ function TableForge({ refresh, name, tableData }) {
         ),
       },
     ],
-    [],
+    [t],
   );
 
   // This is the configuration for the statuses of documents //
@@ -383,9 +387,9 @@ function TableForge({ refresh, name, tableData }) {
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
         accessor: "actions",
@@ -394,14 +398,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -577,16 +581,16 @@ function TableForge({ refresh, name, tableData }) {
         dbType: "String",
       },
     ],
-    [],
+    [t],
   );
 
   const subjects = useMemo(
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
         accessor: "actions",
@@ -595,14 +599,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -795,16 +799,16 @@ function TableForge({ refresh, name, tableData }) {
         dbType: "Boolean",
       },
     ],
-    [],
+    [t],
   );
 
   const idents = useMemo(
     () => [
       {
         Header: (
-          <button className="action-buttons white" title="Vnos" onClick={onAdd}>
+          <button className="action-buttons white" title={t("common.entry")} onClick={onAdd}>
             <IoAddCircleSharp />
-            Dodaj
+            {t("common.add")}
           </button>
         ),
 
@@ -813,14 +817,14 @@ function TableForge({ refresh, name, tableData }) {
           <div>
             <button
               className="action-buttons"
-              title="Brisanje"
+              title={t("common.deletion")}
               onClick={() => onDelete(row.original)}
             >
               <MdDeleteForever />
             </button>
             <button
               className="action-buttons"
-              title="Posodobitev"
+              title={t("common.update")}
               onClick={() => onEdit(row.original)}
             >
               <MdEdit />
@@ -1049,7 +1053,7 @@ function TableForge({ refresh, name, tableData }) {
         dbType: "String",
       },
     ],
-    [],
+    [t],
   );
 
   const tablesAssociation = [
@@ -1147,7 +1151,7 @@ function TableForge({ refresh, name, tableData }) {
           <Column
             key={currentRow.accessor}
             dataField={currentRow.accessor}
-            caption={currentRow.Header}
+            caption={typeof currentRow.Header === "string" ? trHeader(currentRow.Header, t) : currentRow.Header}
             visible={currentRow.hideInGrid ? false : true}
           />,
         );
@@ -1166,7 +1170,7 @@ function TableForge({ refresh, name, tableData }) {
     <div className="global-react-table">
       <div className="filters positions wms-settings-grid-actions">
         <span className="actions smallerr" onClick={onAdd}>
-          <span className="wms-action-label">Dodaj</span>
+          <span className="wms-action-label">{t("common.add")}</span>
           <IoAddCircleSharp />
         </span>
       </div>
@@ -1196,7 +1200,7 @@ function TableForge({ refresh, name, tableData }) {
                   keyExpr={selectedTable["id"]}
                   allowColumnReordering={true}
                   allowColumnResizing={true}
-                  noDataText='Ni podatkov'
+                  noDataText={t("common.noData")}
                   columnAutoWidth={true}
                   columnHidingEnabled={true}
                   focusedRowEnabled={true}

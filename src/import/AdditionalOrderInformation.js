@@ -3,45 +3,47 @@ import "reactjs-popup/dist/index.css";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import ImportService from "../services/ImportService";
+import { useTranslation } from "react-i18next";
+import { trHeaders } from "../i18n/headerMap";
 
 export default function AdditionalOrderInformation(props) {
+  const { t } = useTranslation();
   const [warehouses, setWarehouses] = useState([]);
   const [documentTypes, setDocumentTypes] = useState([]);
   const [chosenType, setChosenType] = useState(null);
   const [chosenWarehouse, setChosenWarehouse] = useState(null);
 
   useEffect(() => {
-    var sqlWarehouses = "";
-    var params = [];
     ImportService.getWarehouses().then((response) => {
       var warehouses = onlyWarehouses(response);
       setWarehouses(warehouses);
     });
 
+    const typeNameHeaders = trHeaders(["Tip", "Naziv"], t);
     var documentTypes = [];
     documentTypes.push({
       value: "",
       id: "",
       label: "",
-      properties: ["Tip", "Naziv"],
+      properties: typeNameHeaders,
       header: true,
     });
     documentTypes.push({
-      value: "Izdaja",
+      value: t("import.docTypeIssue"),
       id: "I",
-      label: "Izdaja",
-      properties: ["I", "Izdaja"],
+      label: t("import.docTypeIssue"),
+      properties: ["I", t("import.docTypeIssue")],
       header: false,
     });
     documentTypes.push({
-      value: "Prevzem",
+      value: t("import.docTypeReceipt"),
       id: "P",
-      label: "Prevzem",
-      properties: ["P", "Prevzem"],
+      label: t("import.docTypeReceipt"),
+      properties: ["P", t("import.docTypeReceipt")],
       header: false,
     });
     setDocumentTypes(documentTypes);
-  }, []);
+  }, [t]);
 
   function setChosenState() {
     props.onChosen(chosenType, chosenWarehouse);
@@ -116,7 +118,6 @@ export default function AdditionalOrderInformation(props) {
       exists = chosenType.id == id;
     }
 
-    // Return the component with the processed data
     return (
       <DynamicFormatOptionLabel
         properties={properties}
@@ -167,7 +168,7 @@ export default function AdditionalOrderInformation(props) {
               marginTop: "2em",
             }}
           >
-            <h4>Izberite.</h4>
+            <h4>{t("import.additionalTitle")}</h4>
           </div>
 
           <div
@@ -181,25 +182,29 @@ export default function AdditionalOrderInformation(props) {
               gap: "2em",
             }}
           >
-            <div class="form-group">
-              <label htmlFor="document-type-import">Tip dokumenta</label>
+            <div className="form-group">
+              <label htmlFor="document-type-import">
+                {t("import.additionalDocType")}
+              </label>
 
               <Select
                 formatOptionLabel={formatOptionLabel}
                 id="document-type-import"
-                placeholder="Prevzeta vrednost"
+                placeholder={t("import.placeholderDefault")}
                 value={chosenType}
                 onChange={(selected) => handleSelectChangeType(selected)}
                 options={documentTypes}
               />
             </div>
 
-            <div class="form-group">
-              <label htmlFor="import-warehouse">Skladišče</label>
+            <div className="form-group">
+              <label htmlFor="import-warehouse">
+                {t("import.additionalWarehouse")}
+              </label>
 
               <Select
                 id="warehouses-import"
-                placeholder="Prevzeta vrednost"
+                placeholder={t("import.placeholderDefault")}
                 value={chosenWarehouse}
                 onChange={(selected) => handleSelectChangeWarehouse(selected)}
                 options={warehouses}
@@ -211,7 +216,7 @@ export default function AdditionalOrderInformation(props) {
             id="confirmAdditionalInformation"
             onClick={() => setChosenState("position")}
           >
-            Potrdi
+            {t("common.confirmBtn")}
           </button>
         </div>
       </Popup>

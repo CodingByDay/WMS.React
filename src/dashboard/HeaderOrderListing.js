@@ -24,8 +24,10 @@ import TransactionService from '../services/TransactionService'
 import ListingService from '../services/ListingService'
 import PopupService from '../services/PopupService'
 import DataAccess from '../utility/DataAccess'
+import { useTranslation } from 'react-i18next'
 
 export default function HeaderOrderListing(props) {
+  const { t } = useTranslation()
   // States
   const [types, setTypes] = useState([])
   const [document, setDocument] = useState('')
@@ -332,7 +334,7 @@ export default function HeaderOrderListing(props) {
 
         <div className='responsive-buttons-order'>
           <span className='actions smallerr s' id='addOrder' onClick={openAdd}>
-            <span className='wms-action-label'>Dodaj</span>
+            <span className='wms-action-label'>{t('common.add')}</span>
             <MdAdd />
           </span>
 
@@ -346,7 +348,7 @@ export default function HeaderOrderListing(props) {
             id='deleteOrder'
             onClick={deleteOrder}
           >
-            <span className='wms-action-label'>Pobriši</span>
+            <span className='wms-action-label'>{t('common.delete')}</span>
             <MdDeleteOutline />
           </span>
         </div>

@@ -1,8 +1,11 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ImportSheetChoice(props) {
+  const { t } = useTranslation();
+
   function setChosenSheetState(sheet) {
     props.onChosen(sheet);
   }
@@ -24,7 +27,7 @@ export default function ImportSheetChoice(props) {
               marginTop: "2em",
             }}
           >
-            <h4>List dokumenta</h4>
+            <h4>{t("import.pickSheet")}</h4>
           </div>
 
           <div
@@ -36,7 +39,7 @@ export default function ImportSheetChoice(props) {
               margin: "5em",
             }}
           >
-            {props.sheets.map((sheet, index) => (
+            {props.sheets.map((sheet) => (
               <button
                 key={sheet}
                 className="actions smallerr"

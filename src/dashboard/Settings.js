@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import $ from 'jquery'
+import { useTranslation } from 'react-i18next'
 
 export default function Settings() {
+  const { t } = useTranslation()
   let navigate = useNavigate()
 
   function handleSettings() {
@@ -34,7 +36,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('subjects')}
           >
-            Subjekti
+            {t('settingsMenu.subjects')}
             <img alt={''} src='rating.png' width={50} />
           </button>
 
@@ -42,7 +44,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('subject-codes')}
           >
-            Kode subjektov
+            {t('settingsMenu.subjectCodes')}
             <img alt={''} src='source-code.png' width={50} />
           </button>
 
@@ -50,7 +52,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('documents')}
           >
-            Vrste dokumentov
+            {t('settingsMenu.documentTypes')}
             <img alt={''} src='format-icon.png' width={50} />
           </button>
 
@@ -58,7 +60,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('status')}
           >
-            Statusi dokumentov
+            {t('settingsMenu.documentStatuses')}
             <img alt={''} src='document-status.png' width={50} />
           </button>
 
@@ -66,7 +68,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('system')}
           >
-            Sistem
+            {t('settingsMenu.system')}
             <img alt={''} src='settings-icon.png' width={50} />
           </button>
 
@@ -74,7 +76,7 @@ export default function Settings() {
             className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('idents')}
           >
-            Identi
+            {t('settingsMenu.idents')}
             <img alt={''} src='boxes.png' width={50} />
           </button>
 

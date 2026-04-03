@@ -18,6 +18,7 @@ jest.mock("devexpress-dashboard/common", () => ({
   DashboardPanelExtension: function MockExtension() {},
 }));
 
+import "./i18n";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import App from "./App";

@@ -713,6 +713,7 @@ div#addHeader {
 .navbar.auth {
   height: 9em !important;
   justify-content: center;
+  position: relative;
 }
 
 tr {

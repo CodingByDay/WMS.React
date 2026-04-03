@@ -8,8 +8,11 @@ import {
   FilterRow,
   Selection,
 } from 'devextreme-react/data-grid'
+import { useTranslation } from 'react-i18next'
+import { trHeader } from '../i18n/headerMap'
 
 export default function TransactionHeads(props) {
+  const { t } = useTranslation()
   let navigate = useNavigate()
 
   // This code converts the old api result to the devexpress data array.
@@ -52,22 +55,22 @@ export default function TransactionHeads(props) {
         keyExpr={'id'}
         allowColumnReordering={true}
         allowColumnResizing={true}
-        noDataText='Ni podatkov'
+        noDataText={t('common.noData')}
         columnAutoWidth={true}
         focusedRowEnabled={true}
         hoverStateEnabled={true}
       >
         <FilterRow visible={true} />
 
-        <Column dataField='DocumentType' caption='Tip' />
-        <Column dataField='Status' caption='Status' />
-        <Column dataField='Key' caption='ERP ključ' />
-        <Column dataField='LinkKey' caption='Nalog za transakcijo' />
-        <Column dataField='Receiver' caption='Stranka' />
-        <Column dataField='Wharehouse' caption='Skladišče' />
-        <Column data dataField='Date' dataType='date' caption='Datum' />
-        <Column dataField='ClerkName' caption='Vnesel' />
-        <Column dataField='DateInserted' caption='Datum vnosa' />
+        <Column dataField='DocumentType' caption={trHeader('Tip', t)} />
+        <Column dataField='Status' caption={trHeader('Status', t)} />
+        <Column dataField='Key' caption={trHeader('ERP ključ', t)} />
+        <Column dataField='LinkKey' caption={trHeader('Nalog za transakcijo', t)} />
+        <Column dataField='Receiver' caption={trHeader('Stranka', t)} />
+        <Column dataField='Wharehouse' caption={trHeader('Skladišče', t)} />
+        <Column dataField='Date' dataType='date' caption={trHeader('Datum', t)} />
+        <Column dataField='ClerkName' caption={trHeader('Vnesel', t)} />
+        <Column dataField='DateInserted' caption={trHeader('Datum vnosa', t)} />
 
         <Selection mode='single' />
       </DataGrid>

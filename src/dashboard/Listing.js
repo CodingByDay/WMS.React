@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as redux from '../features/data'
 import AddOrderPosition from '../popup/AddOrderPosition'
 import TransactionService from '../services/TransactionService'
+import i18n from '../i18n'
 
 export default function Listing() {
   const dispatch = useDispatch()
@@ -92,17 +93,17 @@ export default function Listing() {
       if (event === 'delete') {
         window
           .swal({
-            title: 'Potrditev',
-            text: 'Ali ste sigurni da želite pobrisati pozicijo?',
+            title: i18n.t('common.confirm'),
+            text: i18n.t('listing.confirmDeletePosition'),
             icon: 'warning',
-            buttons: ['Ne', 'Ja, pobriši'],
+            buttons: [i18n.t('common.no'), i18n.t('listing.yesDelete')],
           })
           .then((result) => {
             if (result) {
               const currentId = selectedPosition.ItemID
 
               ListingService.deletePosition(currentId).then((response) => {
-                window.showAlert('Informacija', 'Uspešno pobrisano', 'success')
+                window.showAlert(i18n.t('common.info'), i18n.t('listing.deleteSuccess'), 'success')
                 getPositions(selectedHead.Key)
               })
             }
@@ -131,12 +132,12 @@ export default function Listing() {
         ListingService.updatePosition(objectToUpdate).then((response) => {
           if (response.Success) {
             window.showAlert(
-              'Informacija',
-              'Uspešno spremenjena pozicija!',
+              i18n.t('common.info'),
+              i18n.t('listing.positionUpdated'),
               'success',
             )
           } else {
-            window.showAlert('Informacija', 'Napaka v podatkih!', 'error')
+            window.showAlert(i18n.t('common.info'), i18n.t('common.dataError'), 'error')
           }
 
           getPositions(selectedHead.Key)
@@ -146,10 +147,10 @@ export default function Listing() {
       if (event === 'delete') {
         window
           .swal({
-            title: 'Potrditev',
-            text: 'Ali ste sigurni da želite pobrisati naročilo?',
+            title: i18n.t('common.confirm'),
+            text: i18n.t('listing.confirmDeleteOrder'),
             icon: 'warning',
-            buttons: ['Ne', 'Ja, pobriši'],
+            buttons: [i18n.t('common.no'), i18n.t('listing.yesDelete')],
           })
           .then((result) => {
             if (result) {
@@ -158,8 +159,8 @@ export default function Listing() {
                   if (response.data.Success) {
                     ListingService.getAllListings().then((response) => {
                       window.showAlert(
-                        'Informacija',
-                        'Uspešno pobrisano',
+                        i18n.t('common.info'),
+                        i18n.t('listing.deleteSuccess'),
                         'success',
                       )
 

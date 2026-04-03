@@ -14,8 +14,11 @@ import {
   FilterRow,
   SearchPanel,
 } from 'devextreme-react/data-grid'
+import { useTranslation } from 'react-i18next'
+import { trHeader } from '../i18n/headerMap'
 
 export default function Stock() {
+  const { t } = useTranslation()
   const [warehouses, setWarehouses] = useState([])
   const [locations, setLocations] = useState([])
   const [idents, setidents] = useState([])
@@ -202,7 +205,7 @@ export default function Stock() {
         <Select
           className='select-filters-stock'
           styles={customStyles}
-          placeholder={'Skladišče'}
+          placeholder={t('stock.placeholderWarehouse')}
           value={warehouse}
           onChange={handleWarehouseChange}
           options={warehouses}
@@ -211,7 +214,7 @@ export default function Stock() {
         <Select
           className='select-filters-stock'
           styles={customStyles}
-          placeholder={'Lokacija'}
+          placeholder={t('stock.placeholderLocation')}
           value={location}
           onChange={handleLocationChange}
           options={locations}
@@ -220,7 +223,7 @@ export default function Stock() {
         <Select
           className='select-filters-stock'
           styles={customStyles}
-          placeholder={'Ident'}
+          placeholder={t('stock.placeholderIdent')}
           value={ident}
           onChange={handleIdentChange}
           options={idents}
@@ -232,7 +235,7 @@ export default function Stock() {
           styles={customStyles}
           onClick={handleInventory}
         >
-          Prikaži
+          {t('common.show')}
         </span>
       </div>
 
@@ -245,16 +248,16 @@ export default function Stock() {
         keyExpr='acWarehouse'
         allowColumnReordering={true}
         allowColumnResizing={true}
-        noDataText='Ni podatkov'
+        noDataText={t('common.noData')}
         columnAutoWidth={true}
       >
         <FilterRow visible={true} />
 
-        <Column dataField='acWarehouse' caption='Skladišče' />
-        <Column dataField='acIdent' caption='Ident' />
-        <Column dataField='acName' caption='Naziv' />
-        <Column dataField='anQty' caption='Količina' />
-        <Column dataField='acLocation' caption='Lokacija' />
+        <Column dataField='acWarehouse' caption={trHeader('Skladišče', t)} />
+        <Column dataField='acIdent' caption={trHeader('Ident', t)} />
+        <Column dataField='acName' caption={trHeader('Naziv', t)} />
+        <Column dataField='anQty' caption={trHeader('Količina', t)} />
+        <Column dataField='acLocation' caption={trHeader('Lokacija', t)} />
       </DataGrid>
 
       <Footer />

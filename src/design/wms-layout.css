@@ -76,6 +76,61 @@ button.actions.smallerr img {
   flex-shrink: 0;
 }
 
+/* Main app header: single row — logo left, actions right (avoid <center> full-width wrap) */
+.navbar:not(.auth) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 0.75rem;
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  min-height: 0;
+}
+
+.navbar:not(.auth) .wms-navbar-logo {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 45%;
+  min-width: 0;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar:not(.auth) .wms-navbar-logo .logo {
+  display: block;
+  height: 30px;
+  width: auto;
+}
+
+.navbar:not(.auth) .logout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.navbar:not(.auth) .version-info {
+  padding: 4px 6px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.navbar:not(.auth) .version-number {
+  font-size: 0.95em;
+}
+
 /* --- Header actions (top buttons) --- */
 .navbar .actions {
   display: inline-flex;

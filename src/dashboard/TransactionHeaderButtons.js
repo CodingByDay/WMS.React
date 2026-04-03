@@ -10,8 +10,10 @@ import {
   MdOutlineKey,
   MdOutlineQrCode,
 } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 
 export default function TransactionHeaderButtons(props) {
+  const { t } = useTranslation()
   function toggleAddPosition() {
     props.communicate({ type: 'transaction', action: 'add', table: 'header' })
   }
@@ -39,18 +41,18 @@ export default function TransactionHeaderButtons(props) {
         <div className='buttonsHeader'>
           <div className='header-buttons-div'>
             <span className='actions smallerr' onClick={finishDocument}>
-              <span className='wms-action-label'>Zaključi</span>
+              <span className='wms-action-label'>{t('common.finish')}</span>
               <MdDownload />
             </span>
 
             {/* [Discusion needed] What are we going to do about stornation? 06.03.2024 */}
             <span className='actions smallerr'>
-              <span className='wms-action-label'>Storniraj</span>
+              <span className='wms-action-label'>{t('common.storno')}</span>
               <MdOutlineCancel />
             </span>
 
             <span className='actions smallerr' onClick={deleteHeadDocument}>
-              <span className='wms-action-label'>Izbriši</span>
+              <span className='wms-action-label'>{t('common.remove')}</span>
               <MdDeleteOutline />
             </span>
           </div>

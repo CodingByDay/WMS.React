@@ -11,8 +11,11 @@ import Swal from "sweetalert2";
 import Loader from "../loader/Loader";
 import ImportService from "../services/ImportService";
 import ExcelJS from "exceljs";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 const ImportWizzard = (props) => {
+  const { t } = useTranslation();
   const [fileContent, setFileContent] = useState([]);
   const [columns, setColumns] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -146,8 +149,8 @@ const ImportWizzard = (props) => {
           -1;
         if (!isLocked) {
           Swal.fire(
-            "Napaka!",
-            "Morate zakleniti vse obvezne podatkovne povezave.",
+            i18n.t("common.error"),
+            i18n.t("import.errMustLock"),
             "error",
           );
           return;
@@ -254,14 +257,14 @@ const ImportWizzard = (props) => {
           props.loader(false);
           if (error > 0) {
             window.showAlert(
-              "Informacija",
-              "Prišlo je do napake, nekateri podatki niso bili zapisani.",
+              i18n.t("common.info"),
+              i18n.t("import.partialFail"),
               "error",
             );
           } else {
             window.showAlert(
-              "Informacija",
-              "Uvoz se končal brez napak",
+              i18n.t("common.info"),
+              i18n.t("import.successAll"),
               "success",
             );
           }
@@ -380,10 +383,7 @@ const ImportWizzard = (props) => {
 
       <div {...getRootProps()} style={dropzoneStyle}>
         <input {...getInputProps()} />
-        <p>
-          Povlecite in spustite besedilno ali Excel datoteko ali pa kliknite, da
-          jo izberete.
-        </p>
+        <p>{t("import.dropzone")}</p>
       </div>
 
       {fileContent.length > 0 && (
@@ -413,7 +413,7 @@ const ImportWizzard = (props) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Search..."
+                  placeholder={t("import.searchPlaceholder")}
                   value={globalFilter || ""}
                   onChange={(e) => setGlobalFilter(e.target.value)}
                   style={{
@@ -437,10 +437,10 @@ const ImportWizzard = (props) => {
                 {">>"}
               </button>{" "}
               <span>
-                Stran{" "}
-                <strong>
-                  {pageIndex + 1} od {pageOptions.length}
-                </strong>{" "}
+                {t("import.pageOf", {
+                  current: pageIndex + 1,
+                  total: pageOptions.length,
+                })}
               </span>
             </div>
 
@@ -501,7 +501,7 @@ const ImportWizzard = (props) => {
 
             <div className="export-button-div">
               <button className="actions smallerr" onClick={() => importData()}>
-                Uvozi podatke
+                {t("import.runImport")}
               </button>
             </div>
           </div>

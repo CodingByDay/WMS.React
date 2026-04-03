@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Loader from "../loader/Loader";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 import $ from "jquery";
 import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +12,7 @@ import TransactionService from "../services/TransactionService";
 import DataAccess from "../utility/DataAccess";
 
 export default function Auth(props) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   var mobile =
@@ -101,7 +104,7 @@ export default function Auth(props) {
   }
 
   function showMobileAlert() {
-    window.showAlert("Informacija", "Mobilne naprave niso podprte!", "error");
+    window.showAlert(t("auth.mobileTitle"), t("auth.mobileBody"), "error");
   }
 
   return (
@@ -110,6 +113,7 @@ export default function Auth(props) {
 
       <div className="whole-auth">
         <div className="navbar auth">
+          <LanguageSwitcher variant="auth" />
           <center>
             <div className="logo ">
               <img
@@ -125,12 +129,12 @@ export default function Auth(props) {
         <div className="Auth-form-container">
           <div className="Auth-form-content">
             <center>
-              <h1 className="riko-blue">Prijava</h1>
+              <h1 className="riko-blue">{t("auth.title")}</h1>
             </center>
 
             <div className="form-group mt-3" id="password-div">
               <label htmlFor="password" className="label-gray">
-                VNESITE GESLO
+                {t("auth.passwordLabel")}
               </label>
 
               <input
@@ -142,7 +146,7 @@ export default function Auth(props) {
               />
             </div>
             <div className="alert alert-danger wrong" id="wrong" role="alert">
-              Napačno geslo.
+              {t("auth.wrongPassword")}
             </div>
 
             <div className="d-grid gap-2 mt-3 wms-login-actions">
@@ -153,7 +157,7 @@ export default function Auth(props) {
                   id="loginButton"
                   onClick={handleClick}
                 >
-                  Prijava
+                  {t("auth.submit")}
                 </button>
               )}
 
@@ -165,7 +169,7 @@ export default function Auth(props) {
                     showMobileAlert();
                   }}
                 >
-                  Prijava
+                  {t("auth.submit")}
                 </button>
               )}
             </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import "./WmsHomeTiles.css";
 import { WMS_HOME_TILES } from "./wmsHomeTilesConfig";
 
@@ -6,8 +7,13 @@ import { WMS_HOME_TILES } from "./wmsHomeTilesConfig";
  * @param {{ onSelect: (key: string) => void }} props
  */
 export default function WmsHomeTiles({ onSelect }) {
+  const { t } = useTranslation();
   return (
-    <div className="wms-home-menu" role="navigation" aria-label="Glavni meni">
+    <div
+      className="wms-home-menu"
+      role="navigation"
+      aria-label={t("home.mainMenuAria")}
+    >
       {WMS_HOME_TILES.map((tile) => (
         <button
           key={tile.key}
@@ -15,7 +21,7 @@ export default function WmsHomeTiles({ onSelect }) {
           className="wms-home-menu__btn"
           onClick={() => onSelect(tile.key)}
         >
-          <span className="wms-home-menu__label">{tile.label}</span>
+          <span className="wms-home-menu__label">{t(tile.labelKey)}</span>
           <img
             src={tile.icon}
             alt=""

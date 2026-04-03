@@ -10,8 +10,10 @@ import {
   MdOutlineKey,
   MdOutlineQrCode,
 } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 
 export default function TransactionPositionsButtons(props) {
+  const { t } = useTranslation()
   let navigate = useNavigate()
 
   function toggleAddPosition() {
@@ -54,7 +56,7 @@ export default function TransactionPositionsButtons(props) {
           </span> */}
 
           <span className='actions smallerr' onClick={deletePosition}>
-            <span className='wms-action-label'>Izbriši</span>
+            <span className='wms-action-label'>{t('common.remove')}</span>
             <MdDeleteOutline />
           </span>
         </div>

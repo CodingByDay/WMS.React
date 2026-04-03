@@ -9,8 +9,11 @@ import {
   Selection,
 } from 'devextreme-react/data-grid'
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { trHeader } from '../i18n/headerMap'
 
 export default function OrderHeadsListing(props) {
+  const { t } = useTranslation()
   let navigate = useNavigate()
 
   // SQL (query API): { rows }; legacy: { Items } from mode=list&table=ooa
@@ -67,25 +70,25 @@ export default function OrderHeadsListing(props) {
         onSelectionChanged={selectHeader}
         allowColumnReordering={true}
         allowColumnResizing={true}
-        noDataText='Ni podatkov'
+        noDataText={t('common.noData')}
         columnAutoWidth={true}
         focusedRowEnabled={true}
         hoverStateEnabled={true}
       >
         <FilterRow visible={true} />
 
-        <Column dataField='Warehouse' caption='Skladišče' />
-        <Column dataField='Consignee' caption='Prejemnik' />
+        <Column dataField='Warehouse' caption={trHeader('Skladišče', t)} />
+        <Column dataField='Consignee' caption={trHeader('Prejemnik', t)} />
         <Column
           dataField='DeliveryDeadline'
           date
           dataType='datetime'
-          caption='Rok dobave'
+          caption={trHeader('Rok dobave', t)}
         />
-        <Column dataField='DocumentType' caption='Tip dokumenta' />
-        <Column dataField='acStatus' caption='Status' />
-        <Column dataField='Key' caption='Ključ' />
-        <Column dataField='Receiver' caption='Sprejemnik' />
+        <Column dataField='DocumentType' caption={trHeader('Vrsta dokumenta', t)} />
+        <Column dataField='acStatus' caption={trHeader('Status', t)} />
+        <Column dataField='Key' caption={trHeader('Ključ', t)} />
+        <Column dataField='Receiver' caption={trHeader('Sprejemnik', t)} />
         <Selection mode='single' />
       </DataGrid>
     </div>
