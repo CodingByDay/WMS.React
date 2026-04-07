@@ -1,4 +1,5 @@
 @import "./design/design-tokens.css";
+@import "./design/wms-popups.css";
 
 body {
   margin: 0;

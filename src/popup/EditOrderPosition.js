@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Select from "react-select";
-import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { addDays, addYears, format, isWeekend } from "date-fns";
-import {
-  MdOutlineSearch,
-  MdDateRange,
-  MdDownload,
-  MdOutlineCancel,
-  MdDeleteOutline,
-  MdEdit,
-  MdAdd,
-  MdOutlineMerge,
-  MdOutlineKey,
-  MdOutlineQrCode,
-} from "react-icons/md";
-import SortingService from "../services/SortingService";
-import { flushSync } from "react-dom";
+import { Input } from "antd";
+import { MdAdd } from "react-icons/md";
 import Popup from "reactjs-popup";
-import { Modal, Input } from 'antd';
 import "reactjs-popup/dist/index.css";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 function EditOrderPosition(props) {
   const [quantity, setQuantity] = useState(0);
@@ -59,28 +41,46 @@ function EditOrderPosition(props) {
 
   return (
     <div>
-      <Popup position="right center" open={props.shown} onClose={props.close}>
-        <div className="quantity-form-update">
-          <label htmlFor="quantity">Količina:</label>
-          <Input
-            id="quantity"
-            value={quantity}
-            onChange={handleInputChange}
-            className="form-control"
-            placeholder="Vnesite količino"
-          />
-        </div>
+      <Popup
+        className="wms-listing-edit-qty"
+        position="right center"
+        open={props.shown}
+        onClose={props.close}
+      >
+        <div className="wms-edit-order-position-popup">
+          <div className="wms-popup-header">
+            <PopupCloseButton onClick={props.close} />
+          </div>
+          <div className="quantity-form-update">
+            <label htmlFor="quantity">Količina:</label>
+            <Input
+              id="quantity"
+              value={quantity}
+              onChange={handleInputChange}
+              className="form-control"
+              placeholder="Vnesite količino"
+            />
+          </div>
 
-        <center>
-          <span
-            className="actions smallerr"
-            onClick={handleOk}
-            id="updateQuantity"
-          >
-            <p>Potrdi</p>
-            <MdAdd />
-          </span>
-        </center>
+          <div className="wms-popup-footer-actions">
+            <span
+              className="actions smallerr"
+              onClick={handleOk}
+              id="updateQuantity"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleOk();
+                }
+              }}
+            >
+              <span className="wms-action-label">Potrdi</span>
+              <MdAdd />
+            </span>
+          </div>
+        </div>
       </Popup>
     </div>
   );

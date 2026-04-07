@@ -5,6 +5,7 @@ import ListingService from "../services/ListingService";
 import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
 import $ from "jquery";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 const AddOrderPosition = (props) => {
   const [idents, setIdents] = useState([]);
@@ -117,10 +118,8 @@ const AddOrderPosition = (props) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <div className="popup-header">
-          <button className="popup-close-btn" onClick={onClose}>
-            X
-          </button>
+        <div className="popup-header wms-popup-header">
+          <PopupCloseButton onClick={onClose} />
         </div>
         <div className="popup-body">
           <label htmlFor="ident">Ident:</label>
@@ -143,15 +142,21 @@ const AddOrderPosition = (props) => {
             onChange={(event) => setQuantity(event.target.value)}
           />
 
-          <div className="center-button">
-            <center>
-              <span
-                onClick={handleAddOrderPosition}
-                className="actions smallerr"
-              >
-                Dodaj
-              </span>
-            </center>
+          <div className="wms-popup-footer-actions">
+            <span
+              onClick={handleAddOrderPosition}
+              className="actions smallerr"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleAddOrderPosition();
+                }
+              }}
+            >
+              Dodaj
+            </span>
           </div>
         </div>
       </div>

@@ -54,6 +54,7 @@
   "common": {
     "noData": "No data",
     "add": "Add",
+    "close": "Close",
     "edit": "Edit",
     "delete": "Delete",
     "remove": "Remove",

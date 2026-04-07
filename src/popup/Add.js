@@ -6,6 +6,7 @@ import Select from "react-select";
 import TransactionService from "../services/TransactionService";
 import DataAccess from "../utility/DataAccess";
 import PopupService from "../services/PopupService";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 const Add = forwardRef((props, ref) => {
   const [ident, setIdent] = useState({});
@@ -432,8 +433,8 @@ const Add = forwardRef((props, ref) => {
 
   return (
     <div className="edit" id="edit">
-      <div className="header_part">
-        <h1 id="close_add">X</h1>
+      <div className="header_part wms-popup-header-row">
+        <PopupCloseButton id="close_add" />
       </div>
 
       <div className="body_part">

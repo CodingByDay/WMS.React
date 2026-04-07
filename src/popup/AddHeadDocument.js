@@ -7,6 +7,7 @@ import TakeOver from "./TakeOver";
 import WorkOrder from "./WorkOrder";
 import Inventory from "./Inventory";
 import { MdAdd } from "react-icons/md";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 export default function AddHeadDocument(props) {
   var component = null;
@@ -115,10 +116,8 @@ export default function AddHeadDocument(props) {
   return (
     <div className="popup-overlay add" id="add-overlay">
       <div className="popup-content add">
-        <div className="popup-header add">
-          <button className="popup-close-btn add" onClick={close}>
-            X
-          </button>
+        <div className="popup-header add wms-popup-header">
+          <PopupCloseButton onClick={close} />
         </div>
         <div className="popup-body add">
           <Select

@@ -9,6 +9,7 @@ import ListingService from '../services/ListingService'
 import TransactionService from '../services/TransactionService'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import PopupCloseButton from '../components/PopupCloseButton'
 
 export default function StatusChange(props) {
   const { t } = useTranslation()
@@ -44,8 +45,8 @@ export default function StatusChange(props) {
 
   return (
     <div className='chooseStatus'>
-      <div className='header_part' onClick={closeWindow}>
-        <h1 id='close_add_header'>X</h1>
+      <div className='header_part wms-popup-header-row'>
+        <PopupCloseButton onClick={closeWindow} />
       </div>
 
       <div className='changeStatusOuter'>

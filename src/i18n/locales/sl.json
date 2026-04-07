@@ -54,6 +54,7 @@
   "common": {
     "noData": "Ni podatkov",
     "add": "Dodaj",
+    "close": "Zapri",
     "edit": "Uredi",
     "delete": "Pobriši",
     "remove": "Izbriši",

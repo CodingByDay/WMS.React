@@ -6,6 +6,7 @@ import Select from "react-select";
 import TransactionService from "../services/TransactionService";
 import DataAccess from "../utility/DataAccess";
 import PopupService from "../services/PopupService";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 export default function Edit(props) {
   const [ident, setIdent] = useState("");
@@ -153,8 +154,8 @@ export default function Edit(props) {
 
   return (
     <div className="edit" id="edit">
-      <div className="header_part">
-        <h1 id="close_add">X</h1>
+      <div className="header_part wms-popup-header-row">
+        <PopupCloseButton onClick={() => $("#edit").css("display", "none")} />
       </div>
 
       <div className="body_part">

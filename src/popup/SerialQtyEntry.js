@@ -1,4 +1,5 @@
 import $ from "jquery";
+import PopupCloseButton from "../components/PopupCloseButton";
 import { useNavigate } from "react-router-dom";
 import Table from "../table/Table";
 import { useEffect, useState } from "react";
@@ -132,8 +133,8 @@ export default function SerialQtyEntry(props) {
 
   return (
     <div id="SerialQtyEntry" className="serialQtyEntry">
-      <div className="header_part" onClick={closePopup}>
-        <h1 id="close_add">X</h1>
+      <div className="header_part wms-popup-header-row">
+        <PopupCloseButton onClick={closePopup} />
       </div>
       <div>
         <div>

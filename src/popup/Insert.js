@@ -8,6 +8,7 @@ import SettingsService from "../services/SettingsService";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { trHeader, trHeaders } from "../i18n/headerMap";
+import PopupCloseButton from "../components/PopupCloseButton";
 
 const Insert = (props) => {
   const { t } = useTranslation();
@@ -329,10 +330,8 @@ const Insert = (props) => {
   return (
     <div className="popup-overlay insert">
       <div className="popup-content insert">
-        <div className="popup-header insert">
-          <button className="popup-close-btn insert" onClick={onClose}>
-            X
-          </button>
+        <div className="popup-header insert wms-popup-header">
+          <PopupCloseButton onClick={onClose} />
         </div>
         <form className="form-insert" onSubmit={handleSubmit}>
           <div className="popup-body insert">

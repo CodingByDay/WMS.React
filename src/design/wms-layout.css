@@ -122,13 +122,26 @@ button.actions.smallerr img {
 }
 
 .navbar:not(.auth) .version-info {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wms-space-2);
   padding: 4px 6px;
   flex-shrink: 1;
   min-width: 0;
+  /* Match .navbar span + span.actions (home / back / logout) */
+  font-size: larger !important;
+  font-weight: 600;
+  color: var(--wms-color-text-on-primary, #fff);
 }
 
 .navbar:not(.auth) .version-number {
-  font-size: 0.95em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.navbar:not(.auth) .version-info .info-icon {
+  font-size: 1em;
+  flex-shrink: 0;
 }
 
 /* --- Header actions (top buttons) --- */
