@@ -42,8 +42,6 @@ export default function Auth(props) {
     $(".whole-auth").css("display", "none");
 
     $(".login").toggleClass("disabled");
-    var loader = document.getElementById("loader");
-    loader.style.display = "block";
     await axios
       .get(
         process.env.REACT_APP_API_URL +
@@ -53,7 +51,6 @@ export default function Auth(props) {
         // $(".login").toggleClass("disabled");
         if (response.data.Items[1].Name === "Error") {
           setTimeout(function () {
-            loader.style.display = "none";
             $("#wrong").css("display", "block");
             $(".whole-auth").css("display", "block");
           }, 2000);

@@ -195,9 +195,57 @@ button.actions.smallerr img {
 
 .wms-tableforge-below {
   margin-top: var(--wms-space-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-left: var(--wms-space-6);
   padding-right: var(--wms-space-6);
   box-sizing: border-box;
+}
+
+/* Document types ↔ statuses navigation (matches site primary / login CTA) */
+.wms-tableforge-below__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wms-space-2);
+  min-height: 2.75rem;
+  padding: var(--wms-space-3) var(--wms-space-8);
+  margin: 0;
+  border: none;
+  border-radius: var(--wms-radius-md);
+  font-family: var(--wms-font-sans);
+  font-size: var(--wms-text-base);
+  font-weight: var(--wms-font-weight-bold);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: var(--wms-color-text-on-primary);
+  background: linear-gradient(
+    180deg,
+    var(--wms-color-primary-hover) 0%,
+    var(--wms-color-primary) 100%
+  );
+  box-shadow: var(--wms-shadow-sm);
+  transition:
+    background var(--wms-duration-fast) var(--wms-ease-out),
+    box-shadow var(--wms-duration-fast) var(--wms-ease-out);
+}
+
+.wms-tableforge-below__btn:hover {
+  color: var(--wms-color-text-on-primary);
+  background: linear-gradient(180deg, #0d2d7a 0%, var(--wms-color-primary-hover) 100%);
+  box-shadow: var(--wms-shadow-md);
+}
+
+.wms-tableforge-below__btn:focus-visible {
+  outline: 2px solid var(--wms-color-accent-soft);
+  outline-offset: 2px;
+}
+
+.wms-tableforge-below__btn svg {
+  flex-shrink: 0;
+  width: 1.35em;
+  height: 1.35em;
 }
 
 .stock-container-filters {

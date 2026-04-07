@@ -16,6 +16,8 @@ import Transactions from "./dashboard/Transactions";
 import Settings from "./dashboard/Settings";
 import NoInternetConnection from "./dashboard/NoInternetConnection";
 import axios from "axios";
+import { store } from "./store/store";
+import { loadingReset } from "./features/ui";
 import Analytics from "./dashboard/Analytics";
 import System from "./settings/System";
 import DocumentType from "./settings/DocumentType";
@@ -35,6 +37,7 @@ import DesignCanvas from "./canvas/DesignCanvas";
 import React from "react";
 import config from "devextreme/core/config";
 import { licenseKey } from "./devextreme-licence";
+import GlobalLoader from "./loader/GlobalLoader";
 
 axios.interceptors.response.use(
   function (response) {
@@ -45,6 +48,7 @@ axios.interceptors.response.use(
       return Promise.reject(error);
     }
     if (!error.response) {
+      store.dispatch(loadingReset());
       window.location.href = "/internet";
     }
     return Promise.reject(error);
@@ -56,6 +60,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <GlobalLoader />
       <Routes>
         <Route
           path="/dashboard"

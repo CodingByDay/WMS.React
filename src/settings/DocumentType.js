@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { MdArrowForward, MdOutlineFactCheck } from "react-icons/md";
 import SettingsService from "../services/SettingsService";
 import UserTable from "./UserTable"; // Import the UserTable component
 import Header from "../dashboard/Header";
@@ -124,7 +125,7 @@ function DocumentType() {
     selectedRow?.acDocType != null && String(selectedRow.acDocType) !== "" ? (
       <button
         type="button"
-        className="btn btn-primary settingsButton dashboard"
+        className="wms-tableforge-below__btn"
         onClick={() =>
           navigate("/status", {
             state: {
@@ -135,7 +136,9 @@ function DocumentType() {
           })
         }
       >
-        {t("settingsDocuments.showRelatedStatuses")}
+        <MdOutlineFactCheck aria-hidden />
+        <span>{t("settingsDocuments.showRelatedStatuses")}</span>
+        <MdArrowForward aria-hidden />
       </button>
     ) : null;
 

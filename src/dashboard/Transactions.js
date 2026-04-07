@@ -39,14 +39,9 @@ export default function Transactions() {
   useEffect(() => {
     // Set up the value for the back button
     localStorage.setItem('back', 'dashboard')
-    var loader = document.getElementById('loader')
-    loader.style.display = 'block'
-    $('.main-container').css('display', 'none')
     // window['toggleLoaader']("loader", false)
     TransactionService.getAllTransactions().then((response) => {
       setTransactions(response)
-      loader.style.display = 'none'
-      $('.main-container').css('display', 'block')
     })
 
     setShow(false)

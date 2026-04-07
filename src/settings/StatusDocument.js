@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { MdArrowBack, MdDescription } from "react-icons/md";
 import SettingsService from "../services/SettingsService";
 import UserTable from "./UserTable"; // Import the UserTable component
 import Header from "../dashboard/Header";
@@ -87,14 +88,16 @@ function StatusDocument() {
   const backFooter = showBack ? (
     <button
       type="button"
-      className="btn btn-primary settingsButton dashboard"
+      className="wms-tableforge-below__btn"
       onClick={() =>
         navigate("/documents", {
           state: { restoreAnQId: nav.documentAnQId },
         })
       }
     >
-      {t("settingsDocuments.backToDocumentTypes")}
+      <MdArrowBack aria-hidden />
+      <span>{t("settingsDocuments.backToDocumentTypes")}</span>
+      <MdDescription aria-hidden />
     </button>
   ) : null;
 
