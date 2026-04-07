@@ -167,6 +167,7 @@
     "orderNumber": "Broj narudžbe"
   },
   "listing": {
+    "byOrder": "Prema narudžbi",
     "confirmDeletePosition": "Jeste li sigurni da želite obrisati stavku?",
     "confirmDeleteOrder": "Jeste li sigurni da želite obrisati narudžbu?",
     "yesDelete": "Da, obriši",

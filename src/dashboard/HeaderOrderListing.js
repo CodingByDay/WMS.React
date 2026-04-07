@@ -357,6 +357,7 @@ export default function HeaderOrderListing(props) {
       <AddHeadDocument
         type={'listing'}
         render={renderComponent}
+        refreshListingAfterOrder={props.refreshListingAfterOrder}
         order={isOrder}
         show={head}
         changeVisibility={changeVisibility}

@@ -1,72 +1,114 @@
-import { useNavigate } from 'react-router-dom'
-import Table from '../table/Table'
 import 'devextreme/dist/css/dx.light.css'
 import {
   DataGrid,
   Column,
   FilterRow,
-  SearchPanel,
   Selection,
 } from 'devextreme-react/data-grid'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
 
-export default function OrderHeadsListing(props) {
+export default function OrderHeadsListing (props) {
   const { t } = useTranslation()
-  let navigate = useNavigate()
+  const { communicate, focusOrderKey, onFocusOrderHandled } = props
+  const gridRef = useRef(null)
 
-  // SQL (query API): { rows }; legacy: { Items } from mode=list&table=ooa
-  let gridData = []
+  const gridData = useMemo(() => {
+    let out = []
 
-  if (props.data?.rows && Array.isArray(props.data.rows)) {
-    gridData = props.data.rows.map((row, index) => ({
-      id: index + 1,
-      Key: row.acKey,
-      Warehouse: row.acWarehouse,
-      Consignee: row.acConsignee,
-      DeliveryDeadline: row.adDeliveryDeadline,
-      DocumentType: row.acDocType,
-      acStatus: row.acStatus ?? row.AcStatus ?? '',
-      Receiver: row.acReceiver,
-    }))
-  } else if (props.data && Array.isArray(props.data.Items)) {
-    gridData = props.data.Items.map((item, index) => {
-      try {
-        const properties = item.Properties.Items.reduce((acc, prop) => {
-          acc[prop.Name] =
-            prop.StringValue ||
-            prop.IntValue ||
-            prop.DoubleValue ||
-            prop.BoolValue ||
-            prop.DateTimeValue ||
-            ''
-          return acc
-        }, {})
-        if (properties.acStatus === undefined && properties.AcStatus !== undefined) {
-          properties.acStatus = properties.AcStatus
+    if (props.data?.rows && Array.isArray(props.data.rows)) {
+      out = props.data.rows.map((row, index) => {
+        const keyBase = row.acKey
+        const Key =
+          keyBase != null && keyBase !== ''
+            ? String(keyBase)
+            : `__row-${index}`
+        return {
+          Key,
+          Warehouse: row.acWarehouse,
+          Consignee: row.acConsignee,
+          DeliveryDeadline: row.adDeliveryDeadline,
+          DocumentType: row.acDocType,
+          acStatus: row.acStatus ?? row.AcStatus ?? '',
+          Receiver: row.acReceiver,
         }
-        // Add auto-increment id field
-        properties.id = index + 1
-        return properties
-      } catch (error) {
-        return null // or any other error handling logic
-      }
-    }).filter((item) => item !== null) // Filter out null values if needed
-  }
+      })
+    } else if (props.data && Array.isArray(props.data.Items)) {
+      out = props.data.Items.map((item, index) => {
+        try {
+          const properties = item.Properties.Items.reduce((acc, prop) => {
+            acc[prop.Name] =
+              prop.StringValue ||
+              prop.IntValue ||
+              prop.DoubleValue ||
+              prop.BoolValue ||
+              prop.DateTimeValue ||
+              ''
+            return acc
+          }, {})
+          if (properties.acStatus === undefined && properties.AcStatus !== undefined) {
+            properties.acStatus = properties.AcStatus
+          }
+          const keyRaw = properties.Key || properties.acKey
+          properties.Key =
+            keyRaw != null && keyRaw !== ''
+              ? String(keyRaw)
+              : `__legacy-${index}`
+          return properties
+        } catch (error) {
+          return null
+        }
+      }).filter((item) => item !== null)
+    }
+
+    return out
+  }, [props.data])
 
   const selectHeader = useCallback((e) => {
-    let chosenHeadDocument = e.selectedRowsData
-    // Communicate to parent component.
-    props.communicate('head', 'select', chosenHeadDocument[0])
-  }, [])
+    const chosenHeadDocument = e.selectedRowsData
+    if (chosenHeadDocument && chosenHeadDocument[0]) {
+      communicate('head', 'select', chosenHeadDocument[0])
+    }
+  }, [communicate])
+
+  useEffect(() => {
+    if (!focusOrderKey || !gridData.length) return undefined
+
+    const row = gridData.find((r) => String(r.Key) === String(focusOrderKey))
+    if (!row) {
+      onFocusOrderHandled?.()
+      return undefined
+    }
+
+    const timer = window.setTimeout(() => {
+      const grid = gridRef.current?.instance?.()
+      if (!grid) {
+        onFocusOrderHandled?.()
+        return
+      }
+      try {
+        grid.deselectAll()
+        grid.selectRows([row.Key], true)
+        grid.option('focusedRowKey', row.Key)
+        if (typeof grid.navigateToRow === 'function') {
+          grid.navigateToRow(row.Key)
+        }
+      } finally {
+        onFocusOrderHandled?.()
+      }
+    }, 0)
+
+    return () => window.clearTimeout(timer)
+  }, [focusOrderKey, gridData, onFocusOrderHandled])
 
   return (
     <div>
       <DataGrid
+        ref={gridRef}
         className='devexpress-grid order'
         dataSource={gridData}
-        keyExpr={'id'}
+        keyExpr='Key'
         onSelectionChanged={selectHeader}
         allowColumnReordering={true}
         allowColumnResizing={true}

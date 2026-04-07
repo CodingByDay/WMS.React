@@ -167,6 +167,7 @@
     "orderNumber": "Številka naročila"
   },
   "listing": {
+    "byOrder": "Po naročilu",
     "confirmDeletePosition": "Ali ste sigurni da želite pobrisati pozicijo?",
     "confirmDeleteOrder": "Ali ste sigurni da želite pobrisati naročilo?",
     "yesDelete": "Ja, pobriši",

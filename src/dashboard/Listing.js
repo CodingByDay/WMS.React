@@ -3,7 +3,7 @@ import OrderHeadsListing from './OrderHeadsListing'
 import OrderPositions from './OrderPositions'
 import Header from './Header'
 import Footer from './Footer'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import ListingService from '../services/ListingService'
 import Loader from '../loader/Loader'
 import $ from 'jquery'
@@ -42,6 +42,23 @@ export default function Listing() {
   const [positions, setPositions] = useState([])
   const [selectedHeadOrder, setSelectedHeadOrder] = useState()
   const [showStatusAlert, setShowStatusAlert] = useState(false)
+  const [focusOrderKey, setFocusOrderKey] = useState(null)
+  const [focusPositionItemId, setFocusPositionItemId] = useState(null)
+
+  const refreshListingAfterOrder = useCallback((createdKey) => {
+    ListingService.getAllListings().then((response) => {
+      setOrders(response)
+      if (createdKey != null && createdKey !== '') {
+        setFocusOrderKey(String(createdKey))
+      }
+    })
+  }, [])
+
+  const clearFocusOrderKey = useCallback(() => setFocusOrderKey(null), [])
+  const clearFocusPositionItemId = useCallback(
+    () => setFocusPositionItemId(null),
+    [],
+  )
 
   useEffect(() => {
     localStorage.setItem('back', 'dashboard')
@@ -50,7 +67,8 @@ export default function Listing() {
     })
   }, [])
 
-  async function getPositions(order) {
+  function getPositions(order, focusItemId = null) {
+    if (order == null || order === '') return
     ListingService.getAllPositions(order).then((response) => {
       response.Items = response.Items.sort(function (a, b) {
         var aValue = DataAccess.getData(a, 'No', 'IntValue')
@@ -72,6 +90,11 @@ export default function Listing() {
       response.Items = positions
 
       setPositions(response)
+      if (focusItemId != null && focusItemId !== '') {
+        setFocusPositionItemId(String(focusItemId))
+      } else {
+        setFocusPositionItemId(null)
+      }
     })
   }
 
@@ -103,7 +126,14 @@ export default function Listing() {
             }
           })
       } else if (event === 'render') {
-        getPositions(selectedHead.Key)
+        const focusItemId =
+          data &&
+          typeof data === 'object' &&
+          data.focusItemId != null &&
+          data.focusItemId !== ''
+            ? data.focusItemId
+            : null
+        getPositions(selectedHead.Key, focusItemId)
       } else if (event == 'create') {
         setPopupVisible(!popupVisible)
       } else if (event == 'select') {
@@ -190,6 +220,7 @@ export default function Listing() {
           <div className='listing-body'>
             <HeaderOrderListing
               render={renderComponent}
+              refreshListingAfterOrder={refreshListingAfterOrder}
               communicate={communicate}
               getSortingObject={getSortingObject}
             />
@@ -197,12 +228,19 @@ export default function Listing() {
               communicate={communicate}
               data={orders}
               sort={sort}
+              focusOrderKey={focusOrderKey}
+              onFocusOrderHandled={clearFocusOrderKey}
             />
             <ListingPositionsButtons
               selectedElement={selectedPosition}
               communicate={communicate}
             />
-            <OrderPositions communicate={communicate} data={positions} />
+            <OrderPositions
+              communicate={communicate}
+              data={positions}
+              focusItemId={focusPositionItemId}
+              onFocusPositionHandled={clearFocusPositionItemId}
+            />
             <AddOrderPosition
               current={selectedHead.Key}
               isVisible={popupVisible}

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
 import $ from "jquery";
 import PopupCloseButton from "../components/PopupCloseButton";
+import { pickCreatedPositionItemId } from "../utility/listingOrderUtils";
 
 const AddOrderPosition = (props) => {
   const [idents, setIdents] = useState([]);
@@ -70,8 +71,16 @@ const AddOrderPosition = (props) => {
           window.showAlert("Informacija", "Napaka v podatkih!", "error");
         }
         onClose();
-        props.communicate("position", "render");
-        // close and render
+        const newItemId = response.Success
+          ? pickCreatedPositionItemId(response)
+          : null;
+        props.communicate(
+          "position",
+          "render",
+          newItemId != null && newItemId !== ""
+            ? { focusItemId: newItemId }
+            : undefined,
+        );
       });
 
       // Clear the state after adding

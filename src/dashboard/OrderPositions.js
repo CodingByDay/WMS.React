@@ -1,12 +1,9 @@
-import { useNavigate } from 'react-router-dom'
-import Table from '../table/Table'
 import 'devextreme/dist/css/dx.light.css'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 
 import {
   DataGrid,
   Column,
-  SearchPanel,
   FilterRow,
   Selection,
 } from 'devextreme-react/data-grid'
@@ -14,14 +11,14 @@ import {
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
 
-export default function OrderPositions(props) {
+export default function OrderPositions (props) {
   const { t } = useTranslation()
-  let navigate = useNavigate()
+  const { communicate, focusItemId, onFocusPositionHandled } = props
+  const gridRef = useRef(null)
 
-  // This code converts the old api result to the devexpress data array.
-  let gridData = []
-  if (props.data && Array.isArray(props.data.Items)) {
-    gridData = props.data.Items.map((item, index) => {
+  const gridData = useMemo(() => {
+    if (!props.data || !Array.isArray(props.data.Items)) return []
+    return props.data.Items.map((item, index) => {
       try {
         const properties = item.Properties.Items.reduce((acc, prop) => {
           acc[prop.Name] =
@@ -33,28 +30,67 @@ export default function OrderPositions(props) {
             ''
           return acc
         }, {})
-        // Add auto-increment id field
-        properties.id = index + 1
-        return properties
+        const rawId = properties.ItemID
+        const itemID =
+          rawId !== '' && rawId != null ? Number(rawId) : NaN
+        const ItemID = Number.isFinite(itemID) ? itemID : index
+        return { ...properties, ItemID, id: index + 1 }
       } catch (error) {
-        return null // or any other error handling logic
+        return null
       }
-    }).filter((item) => item !== null) // Filter out null values if needed
-  }
+    }).filter((item) => item !== null)
+  }, [props.data])
 
-  const selectPosition = useCallback((e) => {
-    let chosenPositionDocument = e.selectedRowsData
-    // Communicate to parent component.
-    props.communicate('position', 'select', chosenPositionDocument[0])
-  }, [])
+  const selectPosition = useCallback(
+    (e) => {
+      const chosen = e.selectedRowsData
+      if (chosen && chosen[0]) {
+        communicate('position', 'select', chosen[0])
+      }
+    },
+    [communicate],
+  )
+
+  useEffect(() => {
+    if (!focusItemId || !gridData.length) return undefined
+
+    const want = String(focusItemId)
+    const row = gridData.find((r) => String(r.ItemID) === want)
+    if (!row) {
+      onFocusPositionHandled?.()
+      return undefined
+    }
+
+    const timer = window.setTimeout(() => {
+      const grid = gridRef.current?.instance?.()
+      if (!grid) {
+        onFocusPositionHandled?.()
+        return
+      }
+      try {
+        grid.deselectAll()
+        grid.selectRows([row.ItemID], true)
+        grid.option('focusedRowKey', row.ItemID)
+        if (typeof grid.navigateToRow === 'function') {
+          grid.navigateToRow(row.ItemID)
+        }
+        communicate('position', 'select', row)
+      } finally {
+        onFocusPositionHandled?.()
+      }
+    }, 0)
+
+    return () => window.clearTimeout(timer)
+  }, [focusItemId, gridData, onFocusPositionHandled, communicate])
 
   return (
     <div>
       <DataGrid
+        ref={gridRef}
         className='devexpress-grid order-position'
         dataSource={gridData}
+        keyExpr='ItemID'
         onSelectionChanged={selectPosition}
-        keyExpr={'id'}
         allowColumnReordering={true}
         allowColumnResizing={true}
         noDataText={t('common.noData')}

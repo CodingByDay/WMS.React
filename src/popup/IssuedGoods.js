@@ -4,11 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import $ from "jquery";
 import Select from "react-select";
 import PopupService from "../services/PopupService";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import ListingService from "../services/ListingService";
+import { useTranslation } from "react-i18next";
+import { trHeader } from "../i18n/headerMap";
+import {
+  pickCreatedOrderKey,
+  toDateInputValue,
+} from "../utility/listingOrderUtils";
+import { getListingOrderSelectStyles } from "../utility/listingFormSelectStyles";
 
 export default function IssuedGoods(props) {
+  const { t } = useTranslation();
   // States
 
   const [documentTypes, setDocumentTypes] = useState([]);
@@ -21,7 +29,7 @@ export default function IssuedGoods(props) {
   const [document, setDocument] = useState("");
   const [warehouse, setWarehouse] = useState("");
   const [client, setClient] = useState("");
-  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [date, setDate] = useState(() => toDateInputValue(new Date()));
 
   const [selectedType, setSelectedType] = useState(null);
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
@@ -30,22 +38,19 @@ export default function IssuedGoods(props) {
   var bufferElements = [];
   const userId = useSelector((state) => state.user.userId);
 
-  const customStyles = {
-    control: (base) => ({
-      ...base,
-      width: "15em", // Width of the control
-    }),
-    menu: (base) => ({
-      ...base,
-      width: "15em", // Width of the dropdown menu
-    }),
-    option: (provided) => ({
-      ...provided,
-      whiteSpace: "nowrap", // Prevent line breaks
-      overflow: "hidden", // Hide overflowing text
-      textOverflow: "ellipsis", // Display ellipsis for overflowed text
-    }),
-  };
+  const listingForm = props.order && props.type === "listing";
+  const selectStyles = useMemo(
+    () =>
+      getListingOrderSelectStyles({
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }),
+      }),
+    [],
+  );
 
   useEffect(() => {
     var documentTypes = PopupService.getAllDocumentTypeOfEvent("P").then(
@@ -201,16 +206,25 @@ export default function IssuedGoods(props) {
         Date: dateValue,
       };
 
-      var data = ListingService.createOrder(objectForAPI).then((response) => {
+      ListingService.createOrder(objectForAPI).then((response) => {
         cleanFields();
         if (response.Success) {
-          window.showAlert("Informacija", "Uspešno kreirano", "success");
+          window.showAlert(
+            t("common.info"),
+            t("common.successAdded"),
+            "success",
+          );
+          const newKey = pickCreatedOrderKey(response);
           props.close();
-          props.render();
+          if (props.refreshListingAfterOrder) {
+            props.refreshListingAfterOrder(newKey);
+          } else {
+            props.render?.();
+          }
         } else {
-          window.showAlert("Informacija", "Napaka v podatkih", "error");
+          window.showAlert(t("common.info"), t("common.dataError"), "error");
           props.close();
-          props.render();
+          props.render?.();
         }
       });
     }
@@ -230,8 +244,8 @@ export default function IssuedGoods(props) {
   function getCheckBox() {
     if (!props.order) {
       return (
-        <div>
-          <label htmlFor="byOrder">Po naročilo</label>
+        <div className="wms-listing-head-form__checkbox">
+          <label htmlFor="byOrder">{t("listing.byOrder")}</label>
           <input
             type="checkbox"
             onChange={toggleCheck}
@@ -246,15 +260,23 @@ export default function IssuedGoods(props) {
   function getClient() {
     if (props.order) {
       return (
-        <Select
-          styles={customStyles}
-          className="select-filters-add"
-          value={selectedClient}
-          onChange={(e) => onChangeBuyer(e)}
-          placeholder={"Kupec"}
-          options={buyer}
-          id="buyer"
-        />
+        <div className="wms-field">
+          <label className="wms-field-label" htmlFor="issued-buyer-input">
+            {trHeader("Prejemnik", t)}
+          </label>
+          <div className="wms-field-control">
+            <Select
+              styles={selectStyles}
+              className="select-filters-add"
+              inputId="issued-buyer-input"
+              value={selectedClient}
+              onChange={(e) => onChangeBuyer(e)}
+              placeholder={trHeader("Prejemnik", t)}
+              options={buyer}
+              id="buyer"
+            />
+          </div>
+        </div>
       );
     }
   }
@@ -262,9 +284,13 @@ export default function IssuedGoods(props) {
   function getNote() {
     if (props.order) {
       return (
-        <div styles={customStyles} className="form-group2">
-          <label htmlFor="acNote">Opomba</label>
-          <textarea className="form-control" id="acNote" rows="3"></textarea>
+        <div className="wms-field form-group2 wms-listing-head-form__note-centered">
+          <label className="wms-field-label" htmlFor="acNote">
+            {t("import.note")}
+          </label>
+          <div className="wms-field-control">
+            <textarea className="form-control" id="acNote" rows={3} />
+          </div>
         </div>
       );
     }
@@ -340,66 +366,99 @@ export default function IssuedGoods(props) {
     );
   };
 
-  return (
-    <div className="layout-issued-goods-container">
-      <div className="layout-issued-goods-header-checkbox">{getCheckBox()}</div>
-      <div className="layout-issued-goods">
-        <div className="left-column">
-          <Select
-            styles={customStyles}
-            className="select-filters-add"
-            getOptionLabel={(option) => option.code}
-            getOptionValue={(option) => option.code}
-            formatOptionLabel={formatOptionLabel}
-            value={selectedType}
-            onChange={(e) => onChangeType(e)}
-            placeholder={"Tip"}
-            options={documentTypes}
-            id="documentType"
-          />
-          <Select
-            styles={customStyles}
-            className="select-filters-add"
-            value={selectedWarehouse}
-            onChange={(e) => onChangeWarehouse(e)}
-            placeholder={"Skladišče"}
-            options={warehouses}
-            id="warehouse"
-          />
-        </div>
-        <div className="right-column">
-          <div
-            id="date-picker-example"
-            onChange={(e) => onDateChange(e)}
-            className="md-form md-outline input-with-post-icon datepicker"
-            inline="true"
-          >
-            <input
-              styles={customStyles}
-              placeholder="Izberite datum"
-              type="date"
-              id="documentDate"
-              className="form-control"
-            />
-          </div>
+  const containerClass =
+    listingForm
+      ? "layout-issued-goods-container wms-listing-head-form"
+      : "layout-issued-goods-container";
 
+  return (
+    <div className={containerClass}>
+      <div className="layout-issued-goods-header-checkbox">{getCheckBox()}</div>
+      <div
+        className={
+          listingForm
+            ? "layout-issued-goods wms-listing-head-form__grid"
+            : "layout-issued-goods"
+        }
+      >
+        <div className="left-column wms-listing-head-form__col">
+          <div className="wms-field">
+            <label className="wms-field-label" htmlFor="issued-doc-type-input">
+              {trHeader("Vrsta dokumenta", t)}
+            </label>
+            <div className="wms-field-control">
+              <Select
+                styles={selectStyles}
+                className="select-filters-add"
+                inputId="issued-doc-type-input"
+                getOptionLabel={(option) => option.code}
+                getOptionValue={(option) => option.code}
+                formatOptionLabel={formatOptionLabel}
+                value={selectedType}
+                onChange={(e) => onChangeType(e)}
+                placeholder={trHeader("Vrsta dokumenta", t)}
+                options={documentTypes}
+                id="documentType"
+              />
+            </div>
+          </div>
+          <div className="wms-field">
+            <label className="wms-field-label" htmlFor="issued-warehouse-input">
+              {trHeader("Skladišče", t)}
+            </label>
+            <div className="wms-field-control">
+              <Select
+                styles={selectStyles}
+                className="select-filters-add"
+                inputId="issued-warehouse-input"
+                value={selectedWarehouse}
+                onChange={(e) => onChangeWarehouse(e)}
+                placeholder={trHeader("Skladišče", t)}
+                options={warehouses}
+                id="warehouse"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="right-column wms-listing-head-form__col">
+          <div className="wms-field">
+            <label className="wms-field-label" htmlFor="documentDate">
+              {trHeader("Rok dobave", t)}
+            </label>
+            <div className="wms-field-control">
+              <input
+                type="date"
+                id="documentDate"
+                className="form-control"
+                value={date}
+                onChange={onDateChange}
+              />
+            </div>
+          </div>
           {getClient()}
         </div>
       </div>
 
-      <div className="bottom-part">
+      <div className="bottom-part wms-listing-head-form__footer">
         {getNote()}
-
-        <center>
+        <div className="wms-popup-footer-actions">
           <span
             className="actions smallerr"
             onClick={createHeadDocument}
             id="createDocument"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                createHeadDocument();
+              }
+            }}
           >
-            <p>Potrdi</p>
+            <span className="wms-action-label">{t("common.confirmBtn")}</span>
             <MdAdd />
           </span>
-        </center>
+        </div>
       </div>
     </div>
   );

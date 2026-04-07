@@ -142,3 +142,180 @@ div#SerialQtyEntry.wms-popup-frame,
 .wms-edit-order-position-popup .wms-popup-footer-actions {
   margin-top: var(--wms-space-4);
 }
+
+/* Fixed width for listing add-order fields (select + date); avoids shrink on short labels */
+:root {
+  --wms-listing-form-control-width: 20rem;
+}
+
+.wms-field-control {
+  width: var(--wms-listing-form-control-width);
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.wms-field-control .form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Listing / transactions: add order head — align with grid column labels */
+.wms-listing-head-form {
+  font-family: var(--wms-font-sans);
+  color: var(--wms-color-text);
+}
+
+.wms-listing-head-form--type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wms-space-2);
+  text-align: center;
+  width: 100%;
+}
+
+.wms-listing-head-form--type .wms-field-control {
+  width: min(
+    var(--wms-listing-form-control-width),
+    100%
+  );
+}
+
+.wms-listing-head-form--type .wms-field-label {
+  margin-bottom: var(--wms-space-1);
+  text-align: center;
+  width: 100%;
+}
+
+/* Opomba — center block in modal (override .form-group2 margin from App.css) */
+.wms-listing-head-form__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--wms-space-4);
+}
+
+.wms-listing-head-form .wms-field.wms-listing-head-form__note-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--wms-space-3);
+  margin-bottom: var(--wms-space-8);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.wms-listing-head-form .wms-field.wms-listing-head-form__note-centered.form-group2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--wms-space-3);
+  margin-bottom: var(--wms-space-8);
+}
+
+.wms-listing-head-form .wms-field.wms-listing-head-form__note-centered .wms-field-label {
+  text-align: center;
+  width: 100%;
+}
+
+/* Opomba when listing class is not on outer container (e.g. transactions add flow) */
+.layout-issued-goods-container .wms-field.wms-listing-head-form__note-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--wms-space-3);
+  margin-bottom: var(--wms-space-8);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.layout-issued-goods-container
+  .wms-field.wms-listing-head-form__note-centered.form-group2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--wms-space-3);
+  margin-bottom: var(--wms-space-8);
+}
+
+.layout-issued-goods-container
+  .wms-field.wms-listing-head-form__note-centered
+  .wms-field-label {
+  text-align: center;
+  width: 100%;
+}
+
+.layout-issued-goods-container .bottom-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.wms-listing-head-form__grid {
+  display: grid;
+  grid-template-columns:
+    minmax(var(--wms-listing-form-control-width), 1fr)
+    minmax(var(--wms-listing-form-control-width), 1fr);
+  gap: var(--wms-space-4) var(--wms-space-6);
+  align-items: flex-start;
+}
+
+@media (max-width: 720px) {
+  .wms-listing-head-form__grid {
+    grid-template-columns: minmax(var(--wms-listing-form-control-width), 1fr);
+  }
+}
+
+.wms-listing-head-form__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wms-space-3);
+  min-width: 0;
+}
+
+.wms-listing-head-form .wms-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wms-space-1);
+  min-width: 0;
+}
+
+.wms-listing-head-form .wms-field-label {
+  font-size: var(--wms-text-sm);
+  font-weight: var(--wms-font-weight-medium);
+  color: var(--wms-color-text-muted);
+  line-height: 1.2;
+}
+
+.wms-listing-head-form .form-control {
+  max-width: 100%;
+  border-radius: var(--wms-radius-sm);
+  border: 1px solid var(--wms-color-border-strong);
+}
+
+.wms-listing-head-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--wms-space-2);
+  margin-bottom: var(--wms-space-2);
+}
+
+.wms-listing-head-form__checkbox label {
+  margin: 0;
+  font-size: var(--wms-text-sm);
+}
+
+.wms-listing-head-form__footer .wms-popup-footer-actions {
+  margin-top: var(--wms-space-4);
+  width: 100%;
+  justify-content: center;
+}

@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
 import IssuedGoods from "../popup/IssuedGoods";
 import Interwarehouse from "../popup/Interwarehouse";
@@ -8,8 +8,16 @@ import WorkOrder from "./WorkOrder";
 import Inventory from "./Inventory";
 import { MdAdd } from "react-icons/md";
 import PopupCloseButton from "../components/PopupCloseButton";
+import { useTranslation } from "react-i18next";
+import { trHeader } from "../i18n/headerMap";
+import { getListingOrderSelectStyles } from "../utility/listingFormSelectStyles";
 
 export default function AddHeadDocument(props) {
+  const { t } = useTranslation();
+  const transactionTypeSelectStyles = useMemo(
+    () => getListingOrderSelectStyles(),
+    [],
+  );
   var component = null;
 
   const [documentType, setDocumentType] = useState([]);
@@ -45,6 +53,7 @@ export default function AddHeadDocument(props) {
               close={close}
               type={props.type}
               render={props.render}
+              refreshListingAfterOrder={props.refreshListingAfterOrder}
             />
           );
           setConditional(component);
@@ -56,6 +65,7 @@ export default function AddHeadDocument(props) {
               order={isOrder}
               type={props.type}
               render={props.render}
+              refreshListingAfterOrder={props.refreshListingAfterOrder}
             />
           );
           setConditional(component);
@@ -119,15 +129,22 @@ export default function AddHeadDocument(props) {
         <div className="popup-header add wms-popup-header">
           <PopupCloseButton onClick={close} />
         </div>
-        <div className="popup-body add">
-          <Select
-            className="select-filters"
-            value={selectedOption}
-            onChange={onChangeTypePopup}
-            placeholder={"Tip transakcije"}
-            options={documentType}
-            id="transactionTypePopup"
-          />
+        <div className="popup-body add wms-listing-head-form wms-listing-head-form--type">
+          <label className="wms-field-label" htmlFor="transactionTypePopup-input">
+            {trHeader("Vrsta dokumenta", t)}
+          </label>
+          <div className="wms-field-control">
+            <Select
+              className="select-filters wms-listing-head-form__select"
+              styles={transactionTypeSelectStyles}
+              inputId="transactionTypePopup-input"
+              value={selectedOption}
+              onChange={onChangeTypePopup}
+              placeholder={trHeader("Vrsta dokumenta", t)}
+              options={documentType}
+              id="transactionTypePopup"
+            />
+          </div>
         </div>
         {conditional}
       </div>

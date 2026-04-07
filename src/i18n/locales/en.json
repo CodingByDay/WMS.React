@@ -167,6 +167,7 @@
     "orderNumber": "Order number"
   },
   "listing": {
+    "byOrder": "By order",
     "confirmDeletePosition": "Are you sure you want to delete this line?",
     "confirmDeleteOrder": "Are you sure you want to delete this order?",
     "yesDelete": "Yes, delete",
