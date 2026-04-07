@@ -102,12 +102,14 @@ button.actions.smallerr img {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  cursor: pointer;
 }
 
 .navbar:not(.auth) .wms-navbar-logo .logo {
   display: block;
   height: 30px;
   width: auto;
+  cursor: pointer;
 }
 
 .navbar:not(.auth) .logout {
@@ -142,6 +144,7 @@ button.actions.smallerr img {
 .navbar:not(.auth) .version-info .info-icon {
   font-size: 1em;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 /* --- Header actions (top buttons) --- */
@@ -152,11 +155,13 @@ button.actions.smallerr img {
   gap: var(--wms-space-2);
   line-height: 1;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .navbar .actions svg {
   margin: 0;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .main-menu-design,

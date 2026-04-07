@@ -132,7 +132,7 @@ export default function SerialQtyEntry(props) {
   }
 
   return (
-    <div id="SerialQtyEntry" className="serialQtyEntry">
+    <div id="SerialQtyEntry" className="serialQtyEntry wms-popup-frame">
       <div className="header_part wms-popup-header-row">
         <PopupCloseButton onClick={closePopup} />
       </div>

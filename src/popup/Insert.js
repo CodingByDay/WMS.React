@@ -329,7 +329,7 @@ const Insert = (props) => {
 
   return (
     <div className="popup-overlay insert">
-      <div className="popup-content insert">
+      <div className="popup-content insert wms-popup-shell">
         <div className="popup-header insert wms-popup-header">
           <PopupCloseButton onClick={onClose} />
         </div>

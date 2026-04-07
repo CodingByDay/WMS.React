@@ -117,7 +117,7 @@ const AddOrderPosition = (props) => {
   }
   return (
     <div className="popup-overlay">
-      <div className="popup-content">
+      <div className="popup-content wms-popup-shell">
         <div className="popup-header wms-popup-header">
           <PopupCloseButton onClick={onClose} />
         </div>

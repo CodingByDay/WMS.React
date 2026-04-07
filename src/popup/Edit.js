@@ -153,7 +153,7 @@ export default function Edit(props) {
   // var documentTypeStringValue  = findValueByClassWithinArray(props.selected.childNodes, "Type");
 
   return (
-    <div className="edit" id="edit">
+    <div className="edit wms-popup-frame" id="edit">
       <div className="header_part wms-popup-header-row">
         <PopupCloseButton onClick={() => $("#edit").css("display", "none")} />
       </div>

@@ -1,4 +1,6 @@
 /* Shared popup close (X) — use with PopupCloseButton.js */
+/* Standard inset from popup edge to content (and around header X) */
+/* --wms-space-5 = 1.25rem (~20px), aligns former settings insert padding with listing */
 
 .wms-popup-close {
   display: inline-flex;
@@ -33,15 +35,57 @@
 .wms-popup-close__icon {
   width: 1.35rem;
   height: 1.35rem;
+  cursor: pointer;
 }
 
 /* Optional header row: right-aligned close */
 .wms-popup-header {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   min-height: 2.25rem;
-  margin: 0 0 var(--wms-space-2) 0;
+  margin: 0 0 var(--wms-space-3) 0;
+}
+
+/* Overlay modals: single padding on shell, no double padding from .popup-body */
+.wms-popup-shell.popup-content,
+.wms-popup-shell.popup-content.insert,
+.wms-popup-shell.popup-content.add {
+  box-sizing: border-box;
+  padding: var(--wms-space-5) !important;
+  background: var(--wms-color-bg-elevated) !important;
+  border-radius: var(--wms-radius-md);
+  box-shadow: var(--wms-shadow-md);
+}
+
+.wms-popup-shell.popup-content.insert {
+  width: 60em;
+  max-width: 96vw;
+}
+
+.wms-popup-shell .popup-body,
+.wms-popup-shell .popup-body.insert,
+.wms-popup-shell .popup-body.add {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.wms-popup-shell .wms-popup-header {
+  margin: 0 0 var(--wms-space-3) 0;
+}
+
+/* Legacy full-screen panels (#edit, listing status, serial entry, location) */
+.wms-popup-frame,
+div#edit.wms-popup-frame,
+#locationComponent.wms-popup-frame,
+div#SerialQtyEntry.wms-popup-frame,
+.chooseStatus.wms-popup-frame {
+  box-sizing: border-box;
+  padding: var(--wms-space-5) !important;
+}
+
+.wms-popup-frame .header_part.wms-popup-header-row {
+  margin-bottom: var(--wms-space-3);
 }
 
 /* Legacy transaction popups: .header_part uses row-reverse */
@@ -82,8 +126,19 @@
 }
 
 .wms-edit-order-position-popup {
+  box-sizing: border-box;
+  padding: var(--wms-space-5);
   background: var(--wms-color-bg-elevated);
   border-radius: var(--wms-radius-sm);
   box-shadow: var(--wms-shadow-md);
   min-width: 14rem;
+}
+
+.wms-edit-order-position-popup .quantity-form-update {
+  padding: 0 !important;
+  margin: 0;
+}
+
+.wms-edit-order-position-popup .wms-popup-footer-actions {
+  margin-top: var(--wms-space-4);
 }

@@ -231,7 +231,7 @@ button.action-buttons.white:hover {
 
 .popup-content.insert {
   background: white;
-  padding: 20px;
+  padding: 0; /* padding comes from .wms-popup-shell in wms-popups.css */
   z-index: 1001; /* Set a higher z-index than overlay */
 }
 i.dx-icon.dx-icon-filter-operation-default.inactive {

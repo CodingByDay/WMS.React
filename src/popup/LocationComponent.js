@@ -111,7 +111,7 @@ export default function LocationComponent(props) {
   }
 
   return (
-    <div id="locationComponent" className="locationComponent">
+    <div id="locationComponent" className="locationComponent wms-popup-frame">
       <div className="header_part wms-popup-header-row">
         <PopupCloseButton onClick={closePopup} />
       </div>

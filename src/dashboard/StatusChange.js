@@ -44,7 +44,7 @@ export default function StatusChange(props) {
   }
 
   return (
-    <div className='chooseStatus'>
+    <div className='chooseStatus wms-popup-frame'>
       <div className='header_part wms-popup-header-row'>
         <PopupCloseButton onClick={closeWindow} />
       </div>

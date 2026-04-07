@@ -432,7 +432,7 @@ const Add = forwardRef((props, ref) => {
   }
 
   return (
-    <div className="edit" id="edit">
+    <div className="edit wms-popup-frame" id="edit">
       <div className="header_part wms-popup-header-row">
         <PopupCloseButton id="close_add" />
       </div>

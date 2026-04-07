@@ -115,7 +115,7 @@ export default function AddHeadDocument(props) {
 
   return (
     <div className="popup-overlay add" id="add-overlay">
-      <div className="popup-content add">
+      <div className="popup-content add wms-popup-shell">
         <div className="popup-header add wms-popup-header">
           <PopupCloseButton onClick={close} />
         </div>

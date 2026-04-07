@@ -43,6 +43,7 @@ export default function Analytics() {
           onBeforeRender={onBeforeRender}
           endpoint={analyticsUrl}
           limitVisibleDataMode="DesignerAndViewer"
+          defaultWorkingMode="Viewer"
         >
           <DataRequestOptions itemDataRequestMode="batch"></DataRequestOptions>
         </DashboardControl>
