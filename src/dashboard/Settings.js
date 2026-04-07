@@ -42,6 +42,22 @@ export default function Settings() {
 
           <button
             className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('system')}
+          >
+            {t('settingsMenu.system')}
+            <img alt={''} src='settings-icon.png' width={50} />
+          </button>
+
+          <button
+            className='btn btn-primary settingsButton dashboard'
+            onClick={() => routeChange('idents')}
+          >
+            {t('settingsMenu.idents')}
+            <img alt={''} src='boxes.png' width={50} />
+          </button>
+
+          <button
+            className='btn btn-primary settingsButton dashboard'
             onClick={() => routeChange('subject-codes')}
           >
             {t('settingsMenu.subjectCodes')}
@@ -62,22 +78,6 @@ export default function Settings() {
           >
             {t('settingsMenu.documentStatuses')}
             <img alt={''} src='document-status.png' width={50} />
-          </button>
-
-          <button
-            className='btn btn-primary settingsButton dashboard'
-            onClick={() => routeChange('system')}
-          >
-            {t('settingsMenu.system')}
-            <img alt={''} src='settings-icon.png' width={50} />
-          </button>
-
-          <button
-            className='btn btn-primary settingsButton dashboard'
-            onClick={() => routeChange('idents')}
-          >
-            {t('settingsMenu.idents')}
-            <img alt={''} src='boxes.png' width={50} />
           </button>
 
           {/*   

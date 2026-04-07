@@ -193,6 +193,10 @@
     "system": "System",
     "idents": "Idents"
   },
+  "settingsDocuments": {
+    "showRelatedStatuses": "Show related statuses",
+    "backToDocumentTypes": "Back to document types"
+  },
   "importMenu": {
     "subjects": "Subjects",
     "idents": "Idents",

@@ -1,5 +1,7 @@
 // Users.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import SettingsService from "../services/SettingsService";
 import UserTable from "./UserTable"; // Import the UserTable component
 import Header from "../dashboard/Header";
@@ -9,8 +11,13 @@ import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { store } from "../store/store";
 
 function StatusDocument() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const nav = location.state;
   const [data, setData] = useState([]);
   const [refreshTrigger, setRefresh] = useState(false);
+  const [filterDeviated, setFilterDeviated] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +40,24 @@ function StatusDocument() {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setFilterDeviated(false);
+  }, [nav?.fromDocuments, nav?.filterAcDocType, nav?.documentAnQId]);
+
+  const initialFilterColumn = useMemo(() => {
+    if (nav?.fromDocuments && nav?.filterAcDocType != null && nav.filterAcDocType !== "") {
+      return { dataField: "acDocType", value: nav.filterAcDocType };
+    }
+    return undefined;
+  }, [nav?.fromDocuments, nav?.filterAcDocType]);
+
+  const showBack =
+    nav?.fromDocuments === true &&
+    nav?.filterAcDocType != null &&
+    String(nav.filterAcDocType) !== "" &&
+    nav?.documentAnQId != null &&
+    !filterDeviated;
 
   var users = [];
 
@@ -59,6 +84,20 @@ function StatusDocument() {
 
   const search = (callbacks) => {};
 
+  const backFooter = showBack ? (
+    <button
+      type="button"
+      className="btn btn-primary settingsButton dashboard"
+      onClick={() =>
+        navigate("/documents", {
+          state: { restoreAnQId: nav.documentAnQId },
+        })
+      }
+    >
+      {t("settingsDocuments.backToDocumentTypes")}
+    </button>
+  ) : null;
+
   return (
     <div>
       <Header />
@@ -70,6 +109,9 @@ function StatusDocument() {
             refresh={refresh}
             name={tableName}
             tableData={data}
+            initialFilterColumn={initialFilterColumn}
+            onInitialFilterOverridden={() => setFilterDeviated(true)}
+            gridBelow={backFooter}
           />
         </div>
       </div>

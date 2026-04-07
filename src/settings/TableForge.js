@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
@@ -20,8 +20,75 @@ import {
 import { useTranslation } from "react-i18next";
 import { trHeader } from "../i18n/headerMap";
 
-function TableForge({ refresh, name, tableData }) {
+function TableForge({
+  refresh,
+  name,
+  tableData,
+  onSelectionChanged,
+  selectedRowKeys: selectedRowKeysProp,
+  onSelectedRowKeysChange,
+  gridBelow = null,
+  initialFilterColumn,
+  onInitialFilterOverridden,
+}) {
   const { t } = useTranslation();
+  const dataGridRef = useRef(null);
+  const filterApplySuppressUntilRef = useRef(0);
+  const filterInitialAppliedRef = useRef(false);
+
+  useEffect(() => {
+    filterInitialAppliedRef.current = false;
+  }, [initialFilterColumn?.value, tableData]);
+
+  const handleContentReady = useCallback(
+    (e) => {
+      if (
+        name !== "status-document" ||
+        !initialFilterColumn?.value ||
+        initialFilterColumn.value === ""
+      ) {
+        return;
+      }
+      if (filterInitialAppliedRef.current) return;
+      const grid = e.component;
+      grid.columnOption(initialFilterColumn.dataField, "filterValue", initialFilterColumn.value);
+      grid.columnOption(initialFilterColumn.dataField, "selectedFilterOperation", "=");
+      filterInitialAppliedRef.current = true;
+      filterApplySuppressUntilRef.current = Date.now() + 500;
+    },
+    [name, initialFilterColumn],
+  );
+
+  const handleOptionChanged = useCallback(
+    (e) => {
+      if (!initialFilterColumn || !onInitialFilterOverridden) return;
+      if (Date.now() < filterApplySuppressUntilRef.current) return;
+      const n = e.name || "";
+      const fn = String(e.fullName || "");
+      if (!/filter/i.test(n) && !/filter/i.test(fn)) return;
+      requestAnimationFrame(() => {
+        try {
+          const inst =
+            e.component ||
+            (typeof dataGridRef.current?.instance === "function"
+              ? dataGridRef.current.instance()
+              : null);
+          if (!inst) return;
+          const field = initialFilterColumn.dataField;
+          const fv = inst.columnOption(field, "filterValue");
+          const expected = String(initialFilterColumn.value ?? "");
+          const actual = fv == null || fv === "" ? "" : String(fv);
+          if (actual !== expected) {
+            onInitialFilterOverridden();
+          }
+        } catch {
+          /* ignore */
+        }
+      });
+    },
+    [initialFilterColumn, onInitialFilterOverridden],
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalEditOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
@@ -1164,7 +1231,25 @@ function TableForge({ refresh, name, tableData }) {
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
+  const handleSelectionChanged = useCallback(
+    (e) => {
+      onSelectionChanged?.(e);
+      if (onSelectedRowKeysChange) {
+        const keys =
+          e.selectedRowKeys ??
+          (typeof e.component?.getSelectedRowKeys === "function"
+            ? e.component.getSelectedRowKeys()
+            : []);
+        onSelectedRowKeysChange(Array.isArray(keys) ? keys : []);
+      }
+    },
+    [onSelectionChanged, onSelectedRowKeysChange],
+  );
 
+  const selectionProps =
+    selectedRowKeysProp !== undefined
+      ? { selectedRowKeys: selectedRowKeysProp }
+      : {};
 
   return (
     <div className="global-react-table">
@@ -1194,7 +1279,7 @@ function TableForge({ refresh, name, tableData }) {
 
 
         <DataGrid
-
+                  ref={dataGridRef}
                   className='devexpress-grid settings'
                   dataSource={tableData}
                   keyExpr={selectedTable["id"]}
@@ -1205,7 +1290,10 @@ function TableForge({ refresh, name, tableData }) {
                   columnHidingEnabled={true}
                   focusedRowEnabled={true}
                   hoverStateEnabled={true}
-                  
+                  onContentReady={handleContentReady}
+                  onOptionChanged={handleOptionChanged}
+                  onSelectionChanged={handleSelectionChanged}
+                  {...selectionProps}
                 >
                 <Editing
                     mode="row"
@@ -1227,7 +1315,7 @@ function TableForge({ refresh, name, tableData }) {
 
 
 </DataGrid>
-   
+      {gridBelow ? <div className="wms-tableforge-below">{gridBelow}</div> : null}
     </div>
   );
 }

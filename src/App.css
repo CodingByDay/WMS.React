@@ -7,12 +7,24 @@ div#dataGrid {
 }
 
 .devexpress-grid.order {
-  height: 292px !important; /* ~15% above prior 254px */
+  height: 322px !important; /* +5% vs 307px — listing upper (order heads) */
 }
 
 .devexpress-grid.order-position {
-  height: 213px !important; /* ~15% above prior 185px */
+  height: 213px !important;
 }
+
+/* Listing /listing: lower grid (taller than default order-position) */
+.listing-body .devexpress-grid.order-position {
+  height: 235px !important; /* +5% vs 224px */
+}
+
+/* /transactions — both grids same height (−5% vs 290px) */
+.content-transactions .devexpress-grid.transaction-head,
+.content-transactions .devexpress-grid.order-position {
+  height: 276px !important;
+}
+
 .devexpress-grid.settings {
   height: 70vh !important;
 }
@@ -21,9 +33,7 @@ div#dataGrid {
   background: none!important;
 }
 
-.devexpress-grid.stock {
-  height: 60vh !important;
-}
+/* Stock grid height: flex + 100% inside .stock-grid-host (see wms-layout.css) */
 /* Devexpress grid rules */
 
 

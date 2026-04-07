@@ -193,6 +193,10 @@
     "system": "Sustav",
     "idents": "Identi"
   },
+  "settingsDocuments": {
+    "showRelatedStatuses": "Prikaži povezane statuse",
+    "backToDocumentTypes": "Natrag na vrste dokumenata"
+  },
   "importMenu": {
     "subjects": "Subjekti",
     "idents": "Identi",

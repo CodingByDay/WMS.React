@@ -193,9 +193,86 @@ button.actions.smallerr img {
   width: 100% !important;
 }
 
+.wms-tableforge-below {
+  margin-top: var(--wms-space-4);
+  padding-left: var(--wms-space-6);
+  padding-right: var(--wms-space-6);
+  box-sizing: border-box;
+}
+
 .stock-container-filters {
   padding: var(--wms-space-4) var(--wms-space-6) var(--wms-space-3);
   box-sizing: border-box;
+}
+
+/* /stock — same horizontal rhythm as /listing; page = one viewport tall, grid fills remainder */
+.main-container.stock-main {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+@supports (height: 100dvh) {
+  .main-container.stock-main {
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+  }
+}
+
+/* Header + footer stay measured; middle flexes (overrides global .listing-bg { height: 100vh }) */
+.main-container.stock-main > .navbar {
+  flex-shrink: 0;
+}
+
+.main-container.stock-main > .listing-bg {
+  flex: 1 1 0%;
+  min-height: 0;
+  height: auto !important;
+  max-height: none !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-container.stock-main > div:last-child {
+  flex-shrink: 0;
+}
+
+.main-container.stock-main .footer {
+  position: relative !important;
+  bottom: auto !important;
+}
+
+.listing-body.stock-listing-body {
+  max-height: none;
+  margin-bottom: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.listing-body.stock-listing-body .stock-container-filters {
+  padding-left: 0;
+  padding-right: 0;
+  flex-shrink: 0;
+}
+
+/* Mirrors listing: devexpress-grid margin 2em L/R/B inside padded listing-body */
+.stock-grid-host {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 2em 1em;
+  overflow: hidden;
 }
 
 /* Stock: override legacy padding-top that mis-centers "Prikaži" */
@@ -269,11 +346,15 @@ button.actions.smallerr img {
   cursor: not-allowed;
 }
 
-#dataGrid.devexpress-grid,
-.devexpress-grid.stock {
-  margin-left: var(--wms-space-6);
-  margin-right: var(--wms-space-6);
-  margin-bottom: var(--wms-space-8);
+/* Stock grid: fill host; inset comes from .stock-grid-host */
+.stock-grid-host #dataGrid.devexpress-grid,
+.stock-grid-host .devexpress-grid.stock {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100% !important;
 }
 
 /* Right-align action button rows that use the legacy `.filters.positions` wrapper */

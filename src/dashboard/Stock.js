@@ -199,68 +199,76 @@ export default function Stock() {
   const name = 'stock'
   return (
     <div>
-      <Header />
+      <div className='main-container stock-main'>
+        <Header />
 
-      <div className='stock-container-filters'>
-        <Select
-          className='select-filters-stock'
-          styles={customStyles}
-          placeholder={t('stock.placeholderWarehouse')}
-          value={warehouse}
-          onChange={handleWarehouseChange}
-          options={warehouses}
-          id='warehouseStock'
-        />
-        <Select
-          className='select-filters-stock'
-          styles={customStyles}
-          placeholder={t('stock.placeholderLocation')}
-          value={location}
-          onChange={handleLocationChange}
-          options={locations}
-          id='locationStock'
-        />
-        <Select
-          className='select-filters-stock'
-          styles={customStyles}
-          placeholder={t('stock.placeholderIdent')}
-          value={ident}
-          onChange={handleIdentChange}
-          options={idents}
-          id='identStock'
-        />
+        <div className='listing-bg'>
+          <div className='listing-body stock-listing-body'>
+            <div className='stock-container-filters'>
+              <Select
+                className='select-filters-stock'
+                styles={customStyles}
+                placeholder={t('stock.placeholderWarehouse')}
+                value={warehouse}
+                onChange={handleWarehouseChange}
+                options={warehouses}
+                id='warehouseStock'
+              />
+              <Select
+                className='select-filters-stock'
+                styles={customStyles}
+                placeholder={t('stock.placeholderLocation')}
+                value={location}
+                onChange={handleLocationChange}
+                options={locations}
+                id='locationStock'
+              />
+              <Select
+                className='select-filters-stock'
+                styles={customStyles}
+                placeholder={t('stock.placeholderIdent')}
+                value={ident}
+                onChange={handleIdentChange}
+                options={idents}
+                id='identStock'
+              />
 
-        <span
-          className='actions smallerr stock'
-          styles={customStyles}
-          onClick={handleInventory}
-        >
-          {t('common.show')}
-        </span>
+              <span
+                className='actions smallerr stock'
+                styles={customStyles}
+                onClick={handleInventory}
+              >
+                {t('common.show')}
+              </span>
+            </div>
+
+            {/* <TableForgeDashboard name={name} tableData = {data} /> */}
+
+            <div className='stock-grid-host'>
+              <DataGrid
+                className='devexpress-grid stock'
+                id='dataGrid'
+                dataSource={data}
+                keyExpr='acWarehouse'
+                allowColumnReordering={true}
+                allowColumnResizing={true}
+                noDataText={t('common.noData')}
+                columnAutoWidth={true}
+              >
+                <FilterRow visible={true} />
+
+                <Column dataField='acWarehouse' caption={trHeader('Skladišče', t)} />
+                <Column dataField='acIdent' caption={trHeader('Ident', t)} />
+                <Column dataField='acName' caption={trHeader('Naziv', t)} />
+                <Column dataField='anQty' caption={trHeader('Količina', t)} />
+                <Column dataField='acLocation' caption={trHeader('Lokacija', t)} />
+              </DataGrid>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
       </div>
-
-      {/* <TableForgeDashboard name={name} tableData = {data} /> */}
-
-      <DataGrid
-        className='devexpress-grid stock'
-        id='dataGrid'
-        dataSource={data}
-        keyExpr='acWarehouse'
-        allowColumnReordering={true}
-        allowColumnResizing={true}
-        noDataText={t('common.noData')}
-        columnAutoWidth={true}
-      >
-        <FilterRow visible={true} />
-
-        <Column dataField='acWarehouse' caption={trHeader('Skladišče', t)} />
-        <Column dataField='acIdent' caption={trHeader('Ident', t)} />
-        <Column dataField='acName' caption={trHeader('Naziv', t)} />
-        <Column dataField='anQty' caption={trHeader('Količina', t)} />
-        <Column dataField='acLocation' caption={trHeader('Lokacija', t)} />
-      </DataGrid>
-
-      <Footer />
     </div>
   )
 }

@@ -1,5 +1,7 @@
 // Users.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import SettingsService from "../services/SettingsService";
 import UserTable from "./UserTable"; // Import the UserTable component
 import Header from "../dashboard/Header";
@@ -9,8 +11,13 @@ import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { store } from "../store/store";
 
 function DocumentType() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [data, setData] = useState([]);
   const [refreshTrigger, setRefresh] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedKeys, setSelectedKeys] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +57,24 @@ function DocumentType() {
       });
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const rid = location.state?.restoreAnQId;
+    if (rid == null || !data?.length) return;
+    const key = Number(rid);
+    const normKey = Number.isFinite(key) ? key : rid;
+    setSelectedKeys([normKey]);
+    const row = data.find(
+      (r) => r.anQId === normKey || r.anQId === rid || String(r.anQId) === String(rid),
+    );
+    setSelectedRow(row || null);
+    navigate("/documents", { replace: true, state: {} });
+  }, [data, location.state?.restoreAnQId, navigate]);
+
+  const onSelectionChanged = useCallback((e) => {
+    const row = e.selectedRowsData?.[0];
+    setSelectedRow(row ?? null);
   }, []);
 
   var users = [];
@@ -95,6 +120,25 @@ function DocumentType() {
 
   const search = (callbacks) => {};
 
+  const showRelatedFooter =
+    selectedRow?.acDocType != null && String(selectedRow.acDocType) !== "" ? (
+      <button
+        type="button"
+        className="btn btn-primary settingsButton dashboard"
+        onClick={() =>
+          navigate("/status", {
+            state: {
+              fromDocuments: true,
+              filterAcDocType: selectedRow.acDocType,
+              documentAnQId: selectedRow.anQId,
+            },
+          })
+        }
+      >
+        {t("settingsDocuments.showRelatedStatuses")}
+      </button>
+    ) : null;
+
   return (
     <div>
       <Header />
@@ -106,6 +150,10 @@ function DocumentType() {
             refresh={refresh}
             name={tableName}
             tableData={data}
+            selectedRowKeys={selectedKeys}
+            onSelectedRowKeysChange={setSelectedKeys}
+            onSelectionChanged={onSelectionChanged}
+            gridBelow={showRelatedFooter}
           />
         </div>
       </div>

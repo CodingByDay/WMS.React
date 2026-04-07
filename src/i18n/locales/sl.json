@@ -193,6 +193,10 @@
     "system": "Sistem",
     "idents": "Identi"
   },
+  "settingsDocuments": {
+    "showRelatedStatuses": "Prikaži povezane statuse",
+    "backToDocumentTypes": "Nazaj na vrste dokumentov"
+  },
   "importMenu": {
     "subjects": "Subjekti",
     "idents": "Identi",

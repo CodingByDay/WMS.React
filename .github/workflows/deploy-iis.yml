@@ -1,0 +1,79 @@
+# Build the SPA on GitHub, then copy the `build/` folder to your IIS VM over SSH.
+#
+# One-time server setup (Windows VM):
+# - Install "OpenSSH Server" (Settings → Apps → Optional features, or: Add-WindowsCapability)
+# - Start sshd; open TCP 22 (or your port) in the VM firewall / NSG
+# - Create a dedicated deploy user (or use one with write access to the IIS site folder)
+# - Put the user's **public** key in C:\ProgramData\ssh\administrators_authorized_keys (for admins)
+#   or the user's profile .ssh\authorized_keys — match your OpenSSH docs for Windows
+# - IIS site physical path should be the folder you set in DEPLOY_TARGET below (e.g. C:\inetpub\wwwroot\wms)
+#
+# GitHub repo → Settings → Secrets and variables → Actions → New repository secret:
+#   DEPLOY_HOST          — VM hostname or IP
+#   DEPLOY_USER          — SSH username
+#   DEPLOY_SSH_KEY       — **private** key (full PEM, including BEGIN/END lines)
+#   DEPLOY_TARGET        — Remote directory, forward slashes OK, e.g. C:/inetpub/wwwroot/wms
+#   REACT_APP_API_URL, REACT_APP_ANALYTICS_URL, REACT_APP_DEVEXPRESS_LICENSE_KEY, etc.
+#
+# Optional: REACT_APP_VERSION_TEXT — override or omit and use defaults from .env.production locally only;
+#   in CI, env vars below override at build time.
+
+name: Deploy to IIS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test -- --watchAll=false
+        env:
+          CI: true
+
+      - name: Production build
+        run: npm run build:production
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_ANALYTICS_URL: ${{ secrets.REACT_APP_ANALYTICS_URL }}
+          REACT_APP_VERSION: ${{ github.sha }}
+          REACT_APP_DEVEXPRESS_LICENSE_KEY: ${{ secrets.REACT_APP_DEVEXPRESS_LICENSE_KEY }}
+
+      - name: Upload build folder to server (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: 22
+          source: "build/*"
+          target: ${{ secrets.DEPLOY_TARGET }}
+          strip_components: 0
+          rm: false
+          overwrite: true
+
+      # Optional: recycle the site without full IIS reset (uncomment if you use app pool name "DefaultAppPool" etc.)
+      # - name: Recycle app pool (optional)
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.DEPLOY_HOST }}
+      #     username: ${{ secrets.DEPLOY_USER }}
+      #     key: ${{ secrets.DEPLOY_SSH_KEY }}
+      #     script: |
+      #       %windir%\system32\inetsrv\appcmd recycle apppool /apppool.name:"YourAppPoolName"
