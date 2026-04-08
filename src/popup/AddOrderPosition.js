@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import TransactionService from "../services/TransactionService";
 import ListingService from "../services/ListingService";
-import { useSelector, useDispatch } from "react-redux";
 import DataAccess from "../utility/DataAccess";
 import $ from "jquery";
 import PopupCloseButton from "../components/PopupCloseButton";
+import i18n from "../i18n";
 import { pickCreatedPositionItemId } from "../utility/listingOrderUtils";
 
 const AddOrderPosition = (props) => {
   const [idents, setIdents] = useState([]);
   const [selectedIdent, setSelectedIdent] = useState(null);
   const [quantity, setQuantity] = useState("");
-  const order = useSelector((state) => state.data.orderKey);
-  const userId = useSelector((state) => state.user.userId);
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [warehouses, setWarehouses] = useState([]);
@@ -52,41 +50,62 @@ const AddOrderPosition = (props) => {
   }, []);
 
   const handleAddOrderPosition = () => {
-    if (selectedIdent) {
-      var toSend = {
-        Key: props.current,
-        Qty: quantity,
-        Ident: selectedIdent.value,
-        Clerk: localStorage.getItem("name"),
-      };
+    if (!selectedIdent) return;
 
-      ListingService.createPosition(toSend).then((response) => {
+    const identCaptured = selectedIdent.value;
+    const qtyCaptured = quantity;
+
+    const toSend = {
+      Key: props.current,
+      Qty: quantity,
+      Ident: identCaptured,
+      Clerk: localStorage.getItem("name"),
+    };
+
+    ListingService.createPosition(toSend)
+      .then((response) => {
         if (response.Success) {
           window.showAlert(
-            "Informacija",
-            "Uspešno dodana pozicija!",
+            i18n.t("common.info"),
+            i18n.t("common.successAdded"),
             "success",
           );
         } else {
-          window.showAlert("Informacija", "Napaka v podatkih!", "error");
+          window.showAlert(
+            i18n.t("common.info"),
+            i18n.t("common.dataError"),
+            "error",
+          );
         }
+        return response;
+      })
+      .catch((err) => {
+        const msg =
+          err?.response?.data != null
+            ? typeof err.response.data === "object"
+              ? JSON.stringify(err.response.data)
+              : String(err.response.data)
+            : err?.message || String(err);
+        window.showAlert(i18n.t("common.info"), msg, "error");
+        return null;
+      })
+      .then((response) => {
         onClose();
-        const newItemId = response.Success
+        setSelectedIdent(null);
+        setQuantity("");
+        const newItemId = response
           ? pickCreatedPositionItemId(response)
           : null;
-        props.communicate(
-          "position",
-          "render",
-          newItemId != null && newItemId !== ""
-            ? { focusItemId: newItemId }
-            : undefined,
-        );
+        props.communicate("position", "render", {
+          focusItemId:
+            newItemId != null && newItemId !== "" ? newItemId : null,
+          focusIdent: identCaptured || null,
+          focusQty:
+            qtyCaptured != null && qtyCaptured !== ""
+              ? String(qtyCaptured)
+              : null,
+        });
       });
-
-      // Clear the state after adding
-      setSelectedIdent(null);
-      setQuantity("");
-    }
   };
 
   if (!props.isVisible || props.current == -1) {

@@ -206,27 +206,39 @@ export default function IssuedGoods(props) {
         Date: dateValue,
       };
 
-      ListingService.createOrder(objectForAPI).then((response) => {
-        cleanFields();
-        if (response.Success) {
-          window.showAlert(
-            t("common.info"),
-            t("common.successAdded"),
-            "success",
-          );
-          const newKey = pickCreatedOrderKey(response);
+      ListingService.createOrder(objectForAPI)
+        .then((response) => {
+          cleanFields();
+          if (response.Success) {
+            window.showAlert(
+              t("common.info"),
+              t("common.successAdded"),
+              "success",
+            );
+          } else {
+            window.showAlert(t("common.info"), t("common.dataError"), "error");
+          }
           props.close();
+          const newKey = response.Success
+            ? pickCreatedOrderKey(response)
+            : null;
           if (props.refreshListingAfterOrder) {
             props.refreshListingAfterOrder(newKey);
           } else {
             props.render?.();
           }
-        } else {
-          window.showAlert(t("common.info"), t("common.dataError"), "error");
+        })
+        .catch((err) => {
+          const msg =
+            err?.response?.data != null
+              ? typeof err.response.data === "object"
+                ? JSON.stringify(err.response.data)
+                : String(err.response.data)
+              : err?.message || String(err);
+          window.showAlert(t("common.info"), msg, "error");
           props.close();
           props.render?.();
-        }
-      });
+        });
     }
   }
 

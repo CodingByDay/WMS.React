@@ -10,10 +10,11 @@ import {
 
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
+import { getDxDataGridInstance } from '../utility/devextremeGridInstance'
 
 export default function OrderPositions (props) {
   const { t } = useTranslation()
-  const { communicate, focusItemId, onFocusPositionHandled } = props
+  const { communicate, focusHint, onFocusPositionHandled } = props
   const gridRef = useRef(null)
 
   const gridData = useMemo(() => {
@@ -52,17 +53,37 @@ export default function OrderPositions (props) {
   )
 
   useEffect(() => {
-    if (!focusItemId || !gridData.length) return undefined
+    if (!focusHint || !gridData.length) return undefined
 
-    const want = String(focusItemId)
-    const row = gridData.find((r) => String(r.ItemID) === want)
+    const { itemId, ident, qty } = focusHint
+    let row = null
+    if (itemId) {
+      row = gridData.find((r) => String(r.ItemID) === String(itemId))
+    }
+    if (!row && ident) {
+      const matches = gridData.filter((r) => String(r.Ident) === String(ident))
+      if (matches.length) {
+        if (qty != null && qty !== '') {
+          const byQty = matches.filter(
+            (r) =>
+              String(r.FullQty) === String(qty) ||
+              String(r.OpenQty) === String(qty),
+          )
+          row = byQty.length
+            ? byQty[byQty.length - 1]
+            : matches[matches.length - 1]
+        } else {
+          row = matches[matches.length - 1]
+        }
+      }
+    }
     if (!row) {
       onFocusPositionHandled?.()
       return undefined
     }
 
     const timer = window.setTimeout(() => {
-      const grid = gridRef.current?.instance?.()
+      const grid = getDxDataGridInstance(gridRef)
       if (!grid) {
         onFocusPositionHandled?.()
         return
@@ -81,7 +102,7 @@ export default function OrderPositions (props) {
     }, 0)
 
     return () => window.clearTimeout(timer)
-  }, [focusItemId, gridData, onFocusPositionHandled, communicate])
+  }, [focusHint, gridData, onFocusPositionHandled, communicate])
 
   return (
     <div>

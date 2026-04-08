@@ -8,6 +8,8 @@ import {
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
+import { getDxDataGridInstance } from '../utility/devextremeGridInstance'
+import { toLocalDateAtMidnight } from '../utility/listingOrderUtils'
 
 export default function OrderHeadsListing (props) {
   const { t } = useTranslation()
@@ -24,11 +26,14 @@ export default function OrderHeadsListing (props) {
           keyBase != null && keyBase !== ''
             ? String(keyBase)
             : `__row-${index}`
+        /** DevExtreme requires unique keyExpr; SQL view often repeats the same acKey per row. */
+        const rowId = `${Key}::${index}`
         return {
+          rowId,
           Key,
           Warehouse: row.acWarehouse,
           Consignee: row.acConsignee,
-          DeliveryDeadline: row.adDeliveryDeadline,
+          DeliveryDeadline: toLocalDateAtMidnight(row.adDeliveryDeadline),
           DocumentType: row.acDocType,
           acStatus: row.acStatus ?? row.AcStatus ?? '',
           Receiver: row.acReceiver,
@@ -55,6 +60,15 @@ export default function OrderHeadsListing (props) {
             keyRaw != null && keyRaw !== ''
               ? String(keyRaw)
               : `__legacy-${index}`
+          properties.rowId = `${properties.Key}::legacy-${index}`
+          const deadlineRaw =
+            properties.adDeliveryDeadline ??
+            properties.DeliveryDeadline ??
+            null
+          if (deadlineRaw != null && deadlineRaw !== '') {
+            properties.DeliveryDeadline =
+              toLocalDateAtMidnight(deadlineRaw)
+          }
           return properties
         } catch (error) {
           return null
@@ -75,24 +89,28 @@ export default function OrderHeadsListing (props) {
   useEffect(() => {
     if (!focusOrderKey || !gridData.length) return undefined
 
-    const row = gridData.find((r) => String(r.Key) === String(focusOrderKey))
+    const matches = gridData.filter(
+      (r) => String(r.Key) === String(focusOrderKey),
+    )
+    const row =
+      matches.length > 0 ? matches[matches.length - 1] : null
     if (!row) {
       onFocusOrderHandled?.()
       return undefined
     }
 
     const timer = window.setTimeout(() => {
-      const grid = gridRef.current?.instance?.()
+      const grid = getDxDataGridInstance(gridRef)
       if (!grid) {
         onFocusOrderHandled?.()
         return
       }
       try {
         grid.deselectAll()
-        grid.selectRows([row.Key], true)
-        grid.option('focusedRowKey', row.Key)
+        grid.selectRows([row.rowId], true)
+        grid.option('focusedRowKey', row.rowId)
         if (typeof grid.navigateToRow === 'function') {
-          grid.navigateToRow(row.Key)
+          grid.navigateToRow(row.rowId)
         }
       } finally {
         onFocusOrderHandled?.()
@@ -108,7 +126,7 @@ export default function OrderHeadsListing (props) {
         ref={gridRef}
         className='devexpress-grid order'
         dataSource={gridData}
-        keyExpr='Key'
+        keyExpr='rowId'
         onSelectionChanged={selectHeader}
         allowColumnReordering={true}
         allowColumnResizing={true}
@@ -123,9 +141,9 @@ export default function OrderHeadsListing (props) {
         <Column dataField='Consignee' caption={trHeader('Prejemnik', t)} />
         <Column
           dataField='DeliveryDeadline'
-          date
-          dataType='datetime'
+          dataType='date'
           caption={trHeader('Rok dobave', t)}
+          editorOptions={{ type: 'date', showClearButton: true }}
         />
         <Column dataField='DocumentType' caption={trHeader('Vrsta dokumenta', t)} />
         <Column dataField='acStatus' caption={trHeader('Status', t)} />

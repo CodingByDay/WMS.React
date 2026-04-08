@@ -168,6 +168,8 @@
   },
   "listing": {
     "byOrder": "Prema narudžbi",
+    "listingApiResponseTitle": "Odgovor API-ja za listing (getAllListings)",
+    "listingApiResponseHint": "Cjeloviti payload koji aplikacija dobije nakon SQL upita otvorenih narudžbi (uvWMSOpenOrder). Uključuje niz rows i metapodatke.",
     "confirmDeletePosition": "Jeste li sigurni da želite obrisati stavku?",
     "confirmDeleteOrder": "Jeste li sigurni da želite obrisati narudžbu?",
     "yesDelete": "Da, obriši",

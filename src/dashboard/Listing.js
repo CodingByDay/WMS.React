@@ -3,7 +3,7 @@ import OrderHeadsListing from './OrderHeadsListing'
 import OrderPositions from './OrderPositions'
 import Header from './Header'
 import Footer from './Footer'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import ListingService from '../services/ListingService'
 import Loader from '../loader/Loader'
 import $ from 'jquery'
@@ -15,6 +15,7 @@ import * as redux from '../features/data'
 import AddOrderPosition from '../popup/AddOrderPosition'
 import TransactionService from '../services/TransactionService'
 import i18n from '../i18n'
+import { pickNovelOrderKeyFromRows } from '../utility/listingOrderUtils'
 
 export default function Listing() {
   const dispatch = useDispatch()
@@ -38,25 +39,60 @@ export default function Listing() {
 
   // orders — { rows } from SQL uvWMSOpenOrder (getAllListings); legacy shape { Items } still supported in grid
   const [orders, setOrders] = useState({ rows: [] })
+  const ordersRef = useRef(orders)
   // positions
   const [positions, setPositions] = useState([])
   const [selectedHeadOrder, setSelectedHeadOrder] = useState()
   const [showStatusAlert, setShowStatusAlert] = useState(false)
   const [focusOrderKey, setFocusOrderKey] = useState(null)
-  const [focusPositionItemId, setFocusPositionItemId] = useState(null)
+  const [focusPositionHint, setFocusPositionHint] = useState(null)
+
+  useEffect(() => {
+    ordersRef.current = orders
+  }, [orders])
 
   const refreshListingAfterOrder = useCallback((createdKey) => {
-    ListingService.getAllListings().then((response) => {
-      setOrders(response)
-      if (createdKey != null && createdKey !== '') {
-        setFocusOrderKey(String(createdKey))
-      }
-    })
+    const prevRows = ordersRef.current?.rows || []
+    const previousKeys = new Set(
+      prevRows
+        .map((r) =>
+          r && r.acKey != null && r.acKey !== '' ? String(r.acKey) : null,
+        )
+        .filter(Boolean),
+    )
+
+    const MAX_ATTEMPTS = 3
+    let attempt = 0
+
+    const fetchAndFocus = () => {
+      ListingService.getAllListings().then((response) => {
+        const rows = response.rows || []
+        setOrders(response)
+
+        let keyToFocus =
+          createdKey != null && createdKey !== '' ? String(createdKey) : null
+        if (!keyToFocus) {
+          keyToFocus = pickNovelOrderKeyFromRows(previousKeys, rows)
+        }
+
+        if (keyToFocus) {
+          setFocusOrderKey(keyToFocus)
+          return
+        }
+
+        attempt += 1
+        if (attempt < MAX_ATTEMPTS) {
+          window.setTimeout(fetchAndFocus, 500)
+        }
+      })
+    }
+
+    fetchAndFocus()
   }, [])
 
   const clearFocusOrderKey = useCallback(() => setFocusOrderKey(null), [])
-  const clearFocusPositionItemId = useCallback(
-    () => setFocusPositionItemId(null),
+  const clearFocusPositionHint = useCallback(
+    () => setFocusPositionHint(null),
     [],
   )
 
@@ -67,7 +103,7 @@ export default function Listing() {
     })
   }, [])
 
-  function getPositions(order, focusItemId = null) {
+  function getPositions(order, hint = null) {
     if (order == null || order === '') return
     ListingService.getAllPositions(order).then((response) => {
       response.Items = response.Items.sort(function (a, b) {
@@ -90,10 +126,30 @@ export default function Listing() {
       response.Items = positions
 
       setPositions(response)
-      if (focusItemId != null && focusItemId !== '') {
-        setFocusPositionItemId(String(focusItemId))
+      const hasItemId =
+        hint &&
+        typeof hint === 'object' &&
+        hint.focusItemId != null &&
+        hint.focusItemId !== ''
+      const hasIdent =
+        hint &&
+        typeof hint === 'object' &&
+        hint.focusIdent != null &&
+        hint.focusIdent !== ''
+      if (hasItemId || hasIdent) {
+        setFocusPositionHint({
+          itemId: hasItemId ? String(hint.focusItemId) : null,
+          ident: hasIdent ? String(hint.focusIdent) : null,
+          qty:
+            hint &&
+            typeof hint === 'object' &&
+            hint.focusQty != null &&
+            hint.focusQty !== ''
+              ? String(hint.focusQty)
+              : null,
+        })
       } else {
-        setFocusPositionItemId(null)
+        setFocusPositionHint(null)
       }
     })
   }
@@ -126,14 +182,24 @@ export default function Listing() {
             }
           })
       } else if (event === 'render') {
-        const focusItemId =
-          data &&
-          typeof data === 'object' &&
-          data.focusItemId != null &&
-          data.focusItemId !== ''
-            ? data.focusItemId
+        const hint =
+          data && typeof data === 'object'
+            ? {
+                focusItemId:
+                  data.focusItemId != null && data.focusItemId !== ''
+                    ? data.focusItemId
+                    : null,
+                focusIdent:
+                  data.focusIdent != null && data.focusIdent !== ''
+                    ? String(data.focusIdent)
+                    : null,
+                focusQty:
+                  data.focusQty != null && data.focusQty !== ''
+                    ? String(data.focusQty)
+                    : null,
+              }
             : null
-        getPositions(selectedHead.Key, focusItemId)
+        getPositions(selectedHead.Key, hint)
       } else if (event == 'create') {
         setPopupVisible(!popupVisible)
       } else if (event == 'select') {
@@ -238,8 +304,8 @@ export default function Listing() {
             <OrderPositions
               communicate={communicate}
               data={positions}
-              focusItemId={focusPositionItemId}
-              onFocusPositionHandled={clearFocusPositionItemId}
+              focusHint={focusPositionHint}
+              onFocusPositionHandled={clearFocusPositionHint}
             />
             <AddOrderPosition
               current={selectedHead.Key}

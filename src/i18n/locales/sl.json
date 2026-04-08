@@ -168,6 +168,8 @@
   },
   "listing": {
     "byOrder": "Po naročilu",
+    "listingApiResponseTitle": "Odgovor API-ja za seznam naročil (getAllListings)",
+    "listingApiResponseHint": "Celotna vsebina, ki jo aplikacija dobi po SQL poizvedbi odprtih naročil (uvWMSOpenOrder). Vključuje polje rows in metapodatke.",
     "confirmDeletePosition": "Ali ste sigurni da želite pobrisati pozicijo?",
     "confirmDeleteOrder": "Ali ste sigurni da želite pobrisati naročilo?",
     "yesDelete": "Ja, pobriši",
