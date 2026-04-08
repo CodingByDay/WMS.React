@@ -431,6 +431,25 @@ button.actions.smallerr img {
   justify-content: flex-start;
 }
 
+/* Positions toolbar: make "Dodaj" a clearer primary action */
+.filters.positions .actions.smallerr.wms-positions-add {
+  background: linear-gradient(
+    180deg,
+    var(--wms-color-primary-hover) 0%,
+    var(--wms-color-primary) 100%
+  ) !important;
+  color: var(--wms-color-text-on-primary) !important;
+  border-radius: var(--wms-radius-md);
+  padding-left: var(--wms-space-5);
+  padding-right: var(--wms-space-5);
+  box-shadow: var(--wms-shadow-sm);
+}
+
+.filters.positions .actions.smallerr.wms-positions-add:hover {
+  background: linear-gradient(180deg, #0d2d7a 0%, var(--wms-color-primary-hover) 100%) !important;
+  box-shadow: var(--wms-shadow-md);
+}
+
 /* Settings (TableForge): keep only the top "Dodaj" bar on the right */
 .filters.positions.wms-settings-grid-actions {
   justify-content: flex-end;

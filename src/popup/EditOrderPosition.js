@@ -9,10 +9,20 @@ function EditOrderPosition(props) {
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (props.shown) {
-      setQuantity(props.object.FullQty);
-    }
-  }, [props.shown, props.quantity, props.object]);
+    if (!props.shown) return;
+    const next =
+      props.object?.FullQty ??
+      props.object?.Qty ??
+      props.object?.OpenQty ??
+      0;
+    setQuantity(next);
+  }, [
+    props.shown,
+    props.object?.ItemID,
+    props.object?.FullQty,
+    props.object?.Qty,
+    props.object?.OpenQty,
+  ]);
 
   function isFloat(n) {
     return parseFloat(n.match(/^-?\d*(\.\d+)?$/)) > 0;

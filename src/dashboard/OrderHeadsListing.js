@@ -107,12 +107,22 @@ export default function OrderHeadsListing (props) {
       }
       try {
         grid.deselectAll()
-        grid.selectRows([row.rowId], true)
         grid.option('focusedRowKey', row.rowId)
         if (typeof grid.navigateToRow === 'function') {
-          grid.navigateToRow(row.rowId)
+          Promise.resolve(grid.navigateToRow(row.rowId))
+            .catch(() => undefined)
+            .finally(() => {
+              try {
+                grid.selectRows([row.rowId], true)
+              } catch {
+                /* ignore */
+              }
+            })
+        } else {
+          grid.selectRows([row.rowId], true)
         }
       } finally {
+        // If navigateToRow is async, we still clear the hint immediately.
         onFocusOrderHandled?.()
       }
     }, 0)

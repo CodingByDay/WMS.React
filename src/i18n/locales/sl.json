@@ -168,6 +168,7 @@
   },
   "listing": {
     "byOrder": "Po naročilu",
+    "createdButNotVisible": "Uspešno ustvarjeno, vendar ni vidno v seznamu naročil (uvWMSOpenOrder).",
     "listingApiResponseTitle": "Odgovor API-ja za seznam naročil (getAllListings)",
     "listingApiResponseHint": "Celotna vsebina, ki jo aplikacija dobi po SQL poizvedbi odprtih naročil (uvWMSOpenOrder). Vključuje polje rows in metapodatke.",
     "confirmDeletePosition": "Ali ste sigurni da želite pobrisati pozicijo?",

@@ -112,6 +112,77 @@ div#SerialQtyEntry.wms-popup-frame,
   cursor: pointer;
 }
 
+/* Add position: react-select ident dropdown — multi-column option rendering */
+.wms-ident-option {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: var(--wms-space-3);
+  align-items: center;
+  justify-items: center;
+}
+
+.wms-ident-option__ident,
+.wms-ident-option__name {
+  text-align: center;
+}
+
+.wms-ident-option--header {
+  padding: var(--wms-space-2) var(--wms-space-3);
+  border-bottom: 1px solid var(--wms-color-border);
+  margin-bottom: var(--wms-space-2);
+}
+
+.wms-ident-option--header .wms-ident-option__ident,
+.wms-ident-option--header .wms-ident-option__name {
+  color: var(--wms-color-text);
+  font-size: var(--wms-text-xs, 0.75rem);
+  font-weight: var(--wms-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wms-ident-option__ident {
+  font-weight: var(--wms-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wms-ident-option__name {
+  color: var(--wms-color-text-muted, #71717a);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Add position popup layout */
+.wms-add-position-popup .wms-add-position-popup__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wms-space-4);
+  padding: var(--wms-space-5);
+  align-items: center;
+}
+
+.wms-add-position-popup .wms-add-position-popup__control {
+  width: min(32rem, 100%);
+}
+
+.wms-add-position-popup .wms-field-control {
+  /* Override listing head form fixed control width */
+  width: 100%;
+}
+
+.wms-add-position-popup .wms-field {
+  width: 100%;
+  max-width: min(32rem, 100%);
+}
+
+.wms-add-position-popup .wms-field-label {
+  margin-bottom: var(--wms-space-2);
+}
+
 /*
  * Listing Uredi quantity: reactjs-popup adds .popup-content; App.css forces border
  * and width on all .popup-content — reset here (className → .wms-listing-edit-qty-content).

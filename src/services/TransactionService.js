@@ -1,4 +1,5 @@
 import axios from "axios";
+import SettingsService from "./SettingsService";
 
 const TransactionService = {
   async getCorrectDataBusinessEvents(arr) {
@@ -72,6 +73,15 @@ const TransactionService = {
         `/Services/Device/?mode=list&table=idx&i=web`,
     );
     return response;
+  },
+
+  async getIdentsWithNames() {
+    // Source of truth used elsewhere in settings: tHE_SetItem(acIdent, acName)
+    const rows = await SettingsService.executeSQLQuery(
+      "SELECT acIdent, acName FROM tHE_SetItem;",
+      [],
+    );
+    return Array.isArray(rows) ? rows : [];
   },
   async deleteHeadDocument(id) {
     //  Brisanje dokumenta.

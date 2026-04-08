@@ -50,7 +50,7 @@ export default function ListingPositionsButtons(props) {
 
   return (
     <div className='filters positions'>
-      <span className='actions smallerr' onClick={createPosition} id='addOrder'>
+      <span className='actions smallerr wms-positions-add' onClick={createPosition} id='addOrder'>
         <span className='wms-action-label'>{t('common.add')}</span>
         <MdAdd />
       </span>

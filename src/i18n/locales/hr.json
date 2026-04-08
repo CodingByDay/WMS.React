@@ -168,6 +168,7 @@
   },
   "listing": {
     "byOrder": "Prema narudžbi",
+    "createdButNotVisible": "Uspješno kreirano, ali nije vidljivo u listi narudžbi (uvWMSOpenOrder).",
     "listingApiResponseTitle": "Odgovor API-ja za listing (getAllListings)",
     "listingApiResponseHint": "Cjeloviti payload koji aplikacija dobije nakon SQL upita otvorenih narudžbi (uvWMSOpenOrder). Uključuje niz rows i metapodatke.",
     "confirmDeletePosition": "Jeste li sigurni da želite obrisati stavku?",

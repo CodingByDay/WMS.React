@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import TransactionService from "../services/TransactionService";
 import ListingService from "../services/ListingService";
 import DataAccess from "../utility/DataAccess";
@@ -19,13 +19,35 @@ const AddOrderPosition = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Get idents
-        const response = await TransactionService.getIdents();
-        const identObjects = response.data.map((ident) => ({
-          label: ident,
-          value: ident,
-        }));
-        setIdents([{ label: "", value: "" }, ...identObjects]);
+        // Get idents (with names). If SQL route isn't available, fall back to idx list (ident only).
+        let identObjects = [];
+        try {
+          const rows = await TransactionService.getIdentsWithNames();
+          identObjects = (rows || [])
+            .filter((r) => r && r.acIdent != null && r.acIdent !== "")
+            .map((r) => ({
+              value: String(r.acIdent),
+              label: String(r.acIdent),
+              name:
+                r.acName ??
+                r.acname ??
+                r.ACNAME ??
+                r.Name ??
+                r.name ??
+                "",
+            }));
+        } catch {
+          identObjects = [];
+        }
+        if (!identObjects.length) {
+          const response = await TransactionService.getIdents();
+          identObjects = (response?.data || []).map((ident) => ({
+            label: ident,
+            value: ident,
+            name: "",
+          }));
+        }
+        setIdents([{ label: "", value: "", name: "" }, ...identObjects]);
 
         // Get the list of warehouses
         const responseWarehouses = await TransactionService.getWarehouses();
@@ -49,6 +71,43 @@ const AddOrderPosition = (props) => {
     fetchData();
   }, []);
 
+  const identSelectStyles = {
+    menu: (base) => ({ ...base, zIndex: 9999 }),
+    option: (base) => ({ ...base, paddingTop: 6, paddingBottom: 6 }),
+  };
+
+  const IdentMenuList = (props) => {
+    return (
+      <components.MenuList {...props}>
+        <div className="wms-ident-option wms-ident-option--header">
+          <span className="wms-ident-option__ident">Ident</span>
+          <span className="wms-ident-option__name">{i18n.t("grid.identName")}</span>
+        </div>
+        {props.children}
+      </components.MenuList>
+    );
+  };
+
+  const IdentSingleValue = (props) => {
+    return (
+      <components.SingleValue {...props}>
+        {props.data?.value || ""}
+      </components.SingleValue>
+    );
+  };
+
+  const onQtyKeyDown = (e) => {
+    if (["e", "E", "+", "-", ",", "."].includes(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  const onQtyChange = (event) => {
+    const raw = event.target.value;
+    const cleaned = raw.replace(/[^\d]/g, "");
+    setQuantity(cleaned);
+  };
+
   const handleAddOrderPosition = () => {
     if (!selectedIdent) return;
 
@@ -64,13 +123,7 @@ const AddOrderPosition = (props) => {
 
     ListingService.createPosition(toSend)
       .then((response) => {
-        if (response.Success) {
-          window.showAlert(
-            i18n.t("common.info"),
-            i18n.t("common.successAdded"),
-            "success",
-          );
-        } else {
+        if (!response.Success) {
           window.showAlert(
             i18n.t("common.info"),
             i18n.t("common.dataError"),
@@ -145,30 +198,65 @@ const AddOrderPosition = (props) => {
   }
   return (
     <div className="popup-overlay">
-      <div className="popup-content wms-popup-shell">
+      <div className="popup-content wms-popup-shell wms-add-position-popup">
         <div className="popup-header wms-popup-header">
           <PopupCloseButton onClick={onClose} />
         </div>
-        <div className="popup-body">
-          <label htmlFor="ident">Ident:</label>
+        <div className="popup-body wms-add-position-popup__body">
+          <div className="wms-field">
+            <label className="wms-field-label" htmlFor="identListControl">
+              Ident:
+            </label>
+            <div className="wms-field-control wms-add-position-popup__control">
+              <Select
+                placeholder="Ident"
+                inputId="identListControl"
+                options={idents}
+                value={selectedIdent}
+                onChange={(selectedOption) => setSelectedIdent(selectedOption)}
+                styles={identSelectStyles}
+                components={{
+                  MenuList: IdentMenuList,
+                  SingleValue: IdentSingleValue,
+                }}
+                formatOptionLabel={(option) => {
+                  if (!option.value) return <span>&nbsp;</span>;
+                  return (
+                    <div className="wms-ident-option">
+                      <span className="wms-ident-option__ident">
+                        {option.value}
+                      </span>
+                      <span className="wms-ident-option__name">
+                        {option.name || "—"}
+                      </span>
+                    </div>
+                  );
+                }}
+                getOptionLabel={(o) =>
+                  `${o.value}${o.name ? " " + o.name : ""}`
+                }
+              />
+            </div>
+          </div>
 
-          <Select
-            placeholder="Ident"
-            id="identListControl"
-            options={idents}
-            value={selectedIdent}
-            onChange={(selectedOption) => setSelectedIdent(selectedOption)}
-          />
-
-          <label htmlFor="quantity">Količina:</label>
-
-          <input
-            type="number"
-            id="quantity"
-            className="popup-input"
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-          />
+          <div className="wms-field">
+            <label className="wms-field-label" htmlFor="quantity">
+              Količina:
+            </label>
+            <div className="wms-field-control wms-add-position-popup__control">
+              <input
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                id="quantity"
+                className="form-control"
+                value={quantity}
+                onKeyDown={onQtyKeyDown}
+                onChange={onQtyChange}
+                placeholder="0"
+              />
+            </div>
+          </div>
 
           <div className="wms-popup-footer-actions">
             <span

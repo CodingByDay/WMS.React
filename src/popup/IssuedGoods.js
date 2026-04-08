@@ -209,19 +209,14 @@ export default function IssuedGoods(props) {
       ListingService.createOrder(objectForAPI)
         .then((response) => {
           cleanFields();
-          if (response.Success) {
-            window.showAlert(
-              t("common.info"),
-              t("common.successAdded"),
-              "success",
-            );
-          } else {
-            window.showAlert(t("common.info"), t("common.dataError"), "error");
-          }
           props.close();
-          const newKey = response.Success
-            ? pickCreatedOrderKey(response)
-            : null;
+          if (!response.Success) {
+            window.showAlert(t("common.info"), t("common.dataError"), "error");
+            props.render?.();
+            return;
+          }
+
+          const newKey = pickCreatedOrderKey(response);
           if (props.refreshListingAfterOrder) {
             props.refreshListingAfterOrder(newKey);
           } else {

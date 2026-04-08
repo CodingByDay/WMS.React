@@ -52,42 +52,51 @@ export default function Listing() {
   }, [orders])
 
   const refreshListingAfterOrder = useCallback((createdKey) => {
-    const prevRows = ordersRef.current?.rows || []
-    const previousKeys = new Set(
-      prevRows
-        .map((r) =>
-          r && r.acKey != null && r.acKey !== '' ? String(r.acKey) : null,
-        )
-        .filter(Boolean),
-    )
+    return new Promise((resolve) => {
+      const prevRows = ordersRef.current?.rows || []
+      const previousKeys = new Set(
+        prevRows
+          .map((r) =>
+            r && r.acKey != null && r.acKey !== '' ? String(r.acKey) : null,
+          )
+          .filter(Boolean),
+      )
 
-    const MAX_ATTEMPTS = 3
-    let attempt = 0
+      const MAX_ATTEMPTS = 1
+      let attempt = 0
 
-    const fetchAndFocus = () => {
-      ListingService.getAllListings().then((response) => {
-        const rows = response.rows || []
-        setOrders(response)
+      const fetchAndFocus = () => {
+        ListingService.getAllListings()
+          .then((response) => {
+            const rows = response.rows || []
+            setOrders(response)
 
-        let keyToFocus =
-          createdKey != null && createdKey !== '' ? String(createdKey) : null
-        if (!keyToFocus) {
-          keyToFocus = pickNovelOrderKeyFromRows(previousKeys, rows)
-        }
+            let keyToFocus =
+              createdKey != null && createdKey !== ''
+                ? String(createdKey)
+                : null
+            if (!keyToFocus) {
+              keyToFocus = pickNovelOrderKeyFromRows(previousKeys, rows)
+            }
 
-        if (keyToFocus) {
-          setFocusOrderKey(keyToFocus)
-          return
-        }
+            if (keyToFocus) {
+              setFocusOrderKey(keyToFocus)
+              resolve(keyToFocus)
+              return
+            }
 
-        attempt += 1
-        if (attempt < MAX_ATTEMPTS) {
-          window.setTimeout(fetchAndFocus, 500)
-        }
-      })
-    }
+            attempt += 1
+            if (attempt < MAX_ATTEMPTS) {
+              window.setTimeout(fetchAndFocus, 500)
+              return
+            }
+            resolve(null)
+          })
+          .catch(() => resolve(null))
+      }
 
-    fetchAndFocus()
+      fetchAndFocus()
+    })
   }, [])
 
   const clearFocusOrderKey = useCallback(() => setFocusOrderKey(null), [])
@@ -220,17 +229,12 @@ export default function Listing() {
         }
 
         ListingService.updatePosition(objectToUpdate).then((response) => {
-          if (response.Success) {
-            window.showAlert(
-              i18n.t('common.info'),
-              i18n.t('listing.positionUpdated'),
-              'success',
-            )
-          } else {
+          if (!response.Success) {
             window.showAlert(i18n.t('common.info'), i18n.t('common.dataError'), 'error')
           }
 
-          getPositions(selectedHead.Key)
+          // Refresh and re-focus the edited line so subsequent edits show latest qty
+          getPositions(selectedHead.Key, { focusItemId: itemID })
         })
       }
     } else if (type === 'head') {
