@@ -82,18 +82,20 @@ export default function SerialQtyEntry(props) {
     var qty = parseFloat(props.data.real);
 
     if ($("#ssccEntry").is(":visible")) {
-      if (sscc !== "") {
+      if (sscc === "") {
         window.showAlert(
           "Informacija",
           "Vnesite pravilno sscc kodo",
-          "success",
+          "error",
         );
+        return;
       }
     }
 
     if ($("#serialEntry").is(":visible")) {
-      if (serial !== "") {
-        window.showAlert("Informacija", "Vnesite pravilno serijsko", "success");
+      if (serial === "") {
+        window.showAlert("Informacija", "Vnesite pravilno serijsko", "error");
+        return;
       }
     }
 

@@ -78,6 +78,8 @@ export default function Transactions() {
   const selectHead = (data) => {
     if(data) {
      setSelectedHead(data)
+     // Keep a stable head selector for refresh operations (delete/add/edit position)
+     setSelector(data.HeadID)
      getPositions(data.HeadID)
     }
   }
@@ -158,7 +160,6 @@ export default function Transactions() {
             ).then((response) => {
               TransactionService.getAllTransactions().then((response) => {
                 setTransactions(response)
-                window.showAlert(i18n.t('common.info'), i18n.t('transactions.finishSuccess'), 'success')
               })
             })
           } else {
@@ -187,11 +188,6 @@ export default function Transactions() {
               if (response.data.includes('OK!')) {
                 TransactionService.getAllTransactions().then((response) => {
                   setTransactions(response)
-                  window.showAlert(
-                    i18n.t('common.info'),
-                    i18n.t('listing.deleteSuccess'),
-                    'success',
-                  )
                 })
               }
             })
@@ -217,10 +213,14 @@ export default function Transactions() {
       if (result) {
         TransactionService.deleteMoveItem(id).then((response) => {
           if (response.data.includes('OK!')) {
-            TransactionService.getPositionsByHeadId(selector).then((response) => {
-              setPositions(response)
-              window.showAlert(i18n.t('common.info'), i18n.t('listing.deleteSuccess'), 'success')
-            })
+            const headIdToRefresh = selectedHead?.HeadID ?? selector
+            if (headIdToRefresh) {
+              TransactionService.getPositionsByHeadId(headIdToRefresh).then((response) => {
+                setPositions(response)
+              })
+            } else {
+              setPositions({ Items: [] })
+            }
           }
         })
       }
@@ -229,9 +229,10 @@ export default function Transactions() {
   }
 
   const renderComponentPositions = () => {
-    TransactionService.getPositionsByHeadId(selector).then((response) => {
+    const headIdToRefresh = selectedHead?.HeadID ?? selector
+    if (!headIdToRefresh) return
+    TransactionService.getPositionsByHeadId(headIdToRefresh).then((response) => {
       setPositions(response)
-      window.showAlert(i18n.t('common.info'), i18n.t('common.successAdded'), 'success')
       $('#SerialQtyEntry').toggle()
       setShow(false)
     })
@@ -240,14 +241,14 @@ export default function Transactions() {
   const renderComponent = () => {
     TransactionService.getAllTransactions().then((response) => {
       setTransactions(response)
-      window.showAlert(i18n.t('common.info'), i18n.t('common.successAdded'), 'success')
     })
   }
 
   const refresh = () => {
-    TransactionService.getPositionsByHeadId(selector).then((response) => {
+    const headIdToRefresh = selectedHead?.HeadID ?? selector
+    if (!headIdToRefresh) return
+    TransactionService.getPositionsByHeadId(headIdToRefresh).then((response) => {
       setPositions(response)
-      window.showAlert('Informacija', 'Uspešno spremenjeno', 'success')
       $('#SerialQtyEntry').toggle()
       setShow(false)
     })

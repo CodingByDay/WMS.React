@@ -1385,7 +1385,8 @@ button.popup-close-btn.add:hover {
   padding: 4px;
   border-radius: 4px;
   font-size: 14px;
-  white-space: nowrap;
+  /* allow \\n-separated notes */
+  white-space: pre-line;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s;

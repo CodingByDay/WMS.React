@@ -13,6 +13,7 @@ import {
   Column,
   FilterRow,
   SearchPanel,
+  Selection,
 } from 'devextreme-react/data-grid'
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
@@ -86,7 +87,14 @@ export default function Stock() {
 
   const fetchData = async (sql, params) => {
     StockService.executeSQLQuery(sql, params).then((result) => {
-      setData(result)
+      const rows = Array.isArray(result) ? result : []
+      // DevExtreme needs a unique keyExpr; stock rows can repeat warehouse
+      setData(
+        rows.map((r, index) => ({
+          ...r,
+          rowId: `${r.acWarehouse ?? ''}::${r.acIdent ?? ''}::${r.acLocation ?? ''}::${index}`,
+        })),
+      )
     })
   }
 
@@ -249,13 +257,16 @@ export default function Stock() {
                 className='devexpress-grid stock'
                 id='dataGrid'
                 dataSource={data}
-                keyExpr='acWarehouse'
+                keyExpr='rowId'
                 allowColumnReordering={true}
                 allowColumnResizing={true}
                 noDataText={t('common.noData')}
                 columnAutoWidth={true}
+                focusedRowEnabled={true}
+                hoverStateEnabled={true}
               >
                 <FilterRow visible={true} />
+                <Selection mode='single' />
 
                 <Column dataField='acWarehouse' caption={trHeader('Skladišče', t)} />
                 <Column dataField='acIdent' caption={trHeader('Ident', t)} />

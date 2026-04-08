@@ -7,7 +7,8 @@ import { FaInfoCircle } from "react-icons/fa";
 const VersionInfo = () => {
   const { t } = useTranslation();
   const version = process.env.REACT_APP_VERSION;
-  const notes = process.env.REACT_APP_VERSION_TEXT;
+  const notesRaw = process.env.REACT_APP_VERSION_TEXT;
+  const notes = notesRaw ? String(notesRaw).replace(/\\n/g, "\n") : "";
 
   return (
     <div className="version-info">
@@ -15,11 +16,11 @@ const VersionInfo = () => {
         {t("version.label", { version: version ?? "" })}
       </div>
       <FaInfoCircle className="info-icon" />
-      {notes && (
+      {notes ? (
         <div className="tooltip">
           {t("version.tooltip", { notes })}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
