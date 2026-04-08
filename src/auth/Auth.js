@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Loader from "../loader/Loader";
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import $ from "jquery";
 import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../features/user";
@@ -14,10 +13,18 @@ import DataAccess from "../utility/DataAccess";
 export default function Auth(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  var mobile =
-    Math.min(window.screen.width, window.screen.height) < 768 ||
-    navigator.userAgent.indexOf("Mobi") > -1;
+  const mobile = useMemo(() => {
+    return (
+      Math.min(window.screen.width, window.screen.height) < 768 ||
+      navigator.userAgent.indexOf("Mobi") > -1
+    );
+  }, []);
+
+  const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showWrong, setShowWrong] = useState(false);
 
   function onKeyDownPassword(e) {
     if (e.key === "Enter") {
@@ -34,70 +41,67 @@ export default function Auth(props) {
     );
   }
 
-  var password = "";
-  let navigate = useNavigate();
   const handleClick = async () => {
-    $("#wrong").css("display", "none");
+    if (isSubmitting) return;
+    setShowWrong(false);
+    setIsSubmitting(true);
 
-    $(".whole-auth").css("display", "none");
-
-    $(".login").toggleClass("disabled");
-    await axios
-      .get(
+    try {
+      const response = await axios.get(
         process.env.REACT_APP_API_URL +
           `/Services/Device/?mode=loginUser&password=${password}&i=web`,
-      )
-      .then((response) => {
-        // $(".login").toggleClass("disabled");
-        if (response.data.Items[1].Name === "Error") {
-          setTimeout(function () {
-            $("#wrong").css("display", "block");
-            $(".whole-auth").css("display", "block");
-          }, 2000);
-        } else {
-          // Successful login
-          const cookies = new Cookies();
-          cookies.set("uid", uuidv4(), { path: "/" });
+      );
 
-          setTimeout(function () {
-            $(".whole-auth").css("display", "block");
+      if (response?.data?.Items?.[1]?.Name === "Error") {
+        setShowWrong(true);
+        return;
+      }
 
-            TransactionService.getUsers().then((response) => {
-              for (var i = 0; i < response.Items.length; i++) {
-                var passwordGet = DataAccess.getData(
-                  response.Items[i],
-                  "WMSPassword",
-                  "StringValue",
-                );
-                if (passwordGet == password) {
-                  var name = DataAccess.getData(
-                    response.Items[i],
-                    "FullName",
-                    "StringValue",
-                  );
-                  var userId = DataAccess.getData(
-                    response.Items[i],
-                    "UserID",
-                    "IntValue",
-                  );
-                  // UserID
-                  // FullName
-                  dispatch(login([name, userId]));
-                  localStorage.setItem("name", userId);
-                  localStorage.setItem("back", "/");
-                }
-              }
-              // Redux state changes
-            });
+      // Successful login
+      const cookies = new Cookies();
+      cookies.set("uid", uuidv4(), { path: "/" });
 
-            navigate("/dashboard");
-          }, 2000);
+      // Load user list and populate redux (used by header etc.)
+      try {
+        const users = await TransactionService.getUsers();
+        const items = users?.Items || [];
+        for (let i = 0; i < items.length; i++) {
+          const passwordGet = DataAccess.getData(
+            items[i],
+            "WMSPassword",
+            "StringValue",
+          );
+          if (passwordGet == password) {
+            const name = DataAccess.getData(
+              items[i],
+              "FullName",
+              "StringValue",
+            );
+            const userId = DataAccess.getData(
+              items[i],
+              "UserID",
+              "IntValue",
+            );
+            dispatch(login([name, userId]));
+            localStorage.setItem("name", userId);
+            localStorage.setItem("back", "/");
+            break;
+          }
         }
-      })
-      .catch((error) => {});
+      } catch {
+        // If this fails, still allow navigation (ProtectedRoute only checks uid cookie).
+      }
+
+      navigate("/dashboard");
+    } catch {
+      // Network/API failure: show the same wrong-password banner (keeps UX simple)
+      setShowWrong(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   function onChangePassword(e) {
-    password = e.target.value;
+    setPassword(e.target.value);
   }
 
   function showMobileAlert() {
@@ -105,8 +109,8 @@ export default function Auth(props) {
   }
 
   return (
-    <div className="login">
-      <Loader />
+    <div className={isSubmitting ? "login disabled" : "login"}>
+      {isSubmitting && <Loader />}
 
       <div className="whole-auth">
         <div className="navbar auth">
@@ -140,11 +144,14 @@ export default function Auth(props) {
                 type="password"
                 onKeyDown={onKeyDownPassword}
                 className="form-control mt-1"
+                disabled={isSubmitting}
               />
             </div>
-            <div className="alert alert-danger wrong" id="wrong" role="alert">
-              {t("auth.wrongPassword")}
-            </div>
+            {showWrong && (
+              <div className="alert alert-danger wrong" id="wrong" role="alert">
+                {t("auth.wrongPassword")}
+              </div>
+            )}
 
             <div className="d-grid gap-2 mt-3 wms-login-actions">
               {!mobile && (
@@ -153,6 +160,7 @@ export default function Auth(props) {
                   className="wms-login-submit"
                   id="loginButton"
                   onClick={handleClick}
+                  disabled={isSubmitting || !password}
                 >
                   {t("auth.submit")}
                 </button>
