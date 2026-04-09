@@ -10,6 +10,10 @@
     "sl": "Slovenščina",
     "hr": "Hrvaščina"
   },
+  "analytics": {
+    "hidePanel": "Skrij seznam nadzornih plošč",
+    "showPanel": "Prikaži seznam nadzornih plošč"
+  },
   "home": {
     "mainMenuAria": "Glavni meni",
     "tiles": {

@@ -10,6 +10,10 @@
     "sl": "Slovenski",
     "hr": "Hrvatski"
   },
+  "analytics": {
+    "hidePanel": "Sakrij popis nadzornih ploča",
+    "showPanel": "Prikaži popis nadzornih ploča"
+  },
   "home": {
     "mainMenuAria": "Glavni izbornik",
     "tiles": {

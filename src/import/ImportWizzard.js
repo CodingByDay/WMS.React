@@ -13,6 +13,7 @@ import ImportService from "../services/ImportService";
 import ExcelJS from "exceljs";
 import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
+import { MdUpload } from "react-icons/md";
 
 const ImportWizzard = (props) => {
   const { t } = useTranslation();
@@ -496,8 +497,9 @@ const ImportWizzard = (props) => {
             </div>
 
             <div className="export-button-div">
-              <button className="actions smallerr" onClick={() => importData()}>
-                {t("import.runImport")}
+              <button className="actions smallerr" type="button" onClick={() => importData()}>
+                <span className="wms-action-label">{t("import.runImport")}</span>
+                <MdUpload aria-hidden />
               </button>
             </div>
           </div>

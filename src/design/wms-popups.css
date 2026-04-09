@@ -74,6 +74,96 @@
   margin: 0 0 var(--wms-space-3) 0;
 }
 
+/* Settings (TableForge): shared create / edit popup layout */
+.wms-settings-form-popup.wms-popup-shell.popup-content.insert {
+  width: min(48rem, 96vw);
+  max-width: 96vw;
+}
+
+.wms-settings-form-popup .form-insert {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--wms-space-3);
+}
+
+.wms-settings-form-popup .popup-body.insert {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wms-space-4);
+  max-height: min(70vh, 36rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: var(--wms-space-1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.wms-settings-form-popup .form-group.insert {
+  width: min(40rem, 100%);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wms-settings-form-popup .form-group.insert.wms-settings-row-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--wms-space-3);
+}
+
+.wms-settings-form-popup .form-group.insert.wms-settings-row-checkbox .wms-settings-field-label {
+  margin-bottom: 0;
+  flex: 1 1 auto;
+}
+
+.wms-settings-form-popup .wms-settings-field-label {
+  display: block;
+  width: 100%;
+  margin-bottom: var(--wms-space-2);
+  text-align: left;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--wms-color-text);
+}
+
+.wms-settings-form-popup .wms-settings-field-label-text {
+  display: inline;
+}
+
+.wms-settings-form-popup .wms-settings-field-hint {
+  display: inline;
+  font-weight: 500;
+  color: var(--wms-color-text-muted, #5a6070);
+}
+
+.wms-settings-form-popup .form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wms-settings-form-popup .wms-settings-select,
+.wms-settings-form-popup .complete.select {
+  width: 100%;
+  min-width: 0;
+}
+
+.wms-settings-form-popup .wms-settings-select > div,
+.wms-settings-form-popup .complete.select > div {
+  width: 100%;
+}
+
+.wms-settings-form-footer {
+  margin-top: var(--wms-space-2);
+  padding-top: var(--wms-space-3);
+  border-top: 1px solid var(--wms-color-border, #e4e4e7);
+}
+
+.wms-settings-form-footer .actions.smallerr {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* Legacy full-screen panels (#edit, listing status, serial entry, location) */
 .wms-popup-frame,
 div#edit.wms-popup-frame,

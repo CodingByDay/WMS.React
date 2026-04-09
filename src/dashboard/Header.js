@@ -7,6 +7,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher'
 import Cookies from 'universal-cookie'
 
 export default function Header(props) {
+  const { trailingSlot, centerSlot } = props
   const { t } = useTranslation()
   function handleLogout() {
     const cookies = new Cookies()
@@ -51,11 +52,14 @@ export default function Header(props) {
         />
       </div>
 
+      <div className='wms-navbar-center'>{centerSlot}</div>
+
       <div className='logout'>
         <LanguageSwitcher variant="header" />
         <VersionInfo />
         {button}
         {returnButton}
+        {trailingSlot}
         <span className='actions' onClick={() => handleLogout()}>
           {t('nav.logout')}
           <MdLogout />

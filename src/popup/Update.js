@@ -464,7 +464,7 @@ const Update = (props) => {
 
   return (
     <div className="popup-overlay insert">
-      <div className="popup-content insert wms-popup-shell">
+      <div className="popup-content insert wms-popup-shell wms-settings-form-popup">
         <div className="popup-header insert wms-popup-header">
           <PopupCloseButton onClick={onClose} />
         </div>
@@ -473,30 +473,35 @@ const Update = (props) => {
             {props.selectedTable.value.map(
               (column) =>
                 column.type !== "nothing" && (
-                  <div key={column.accessor} className="form-group insert">
+                  <div
+                    key={column.accessor}
+                    className={
+                      column.type === "checkbox"
+                        ? "form-group insert wms-settings-row-checkbox"
+                        : "form-group insert"
+                    }
+                  >
                     <label
-                      style={{
-                        display: "block",
-                        width: "100%",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
+                      className="wms-settings-field-label"
                       htmlFor={column.accessor}
                     >
-                      {typeof column.Header === "string"
-                        ? trHeader(column.Header, t)
-                        : column.Header}
-                      :{" "}
-                      {(
-                        (selectedOptions[column.accessor] &&
-                          selectedOptions[column.accessor].helper) ||
-                        ""
-                      ).substring(0, 20)}
+                      <span className="wms-settings-field-label-text">
+                        {typeof column.Header === "string"
+                          ? trHeader(column.Header, t)
+                          : column.Header}
+                      </span>
+                      {(selectedOptions[column.accessor]?.helper || "") ? (
+                        <span className="wms-settings-field-hint">
+                          {" — "}
+                          {String(
+                            selectedOptions[column.accessor].helper || "",
+                          ).slice(0, 120)}
+                        </span>
+                      ) : null}
                     </label>
 
                     {column.type === "dropdown" ? (
-                      <div className="complete select">
+                      <div className="complete select wms-settings-select">
                         <Select
                           id={column.accessor}
                           placeholder={column.dropdownPlaceholder}
@@ -541,12 +546,10 @@ const Update = (props) => {
             )}
           </div>
 
-          <div className="center-button">
-            <center>
-              <button type="submit" className="actions smallerr">
-                Posodobi
-              </button>
-            </center>
+          <div className="wms-popup-footer-actions wms-settings-form-footer">
+            <button type="submit" className="actions smallerr">
+              {t("users.update")}
+            </button>
           </div>
         </form>
       </div>

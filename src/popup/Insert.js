@@ -319,6 +319,31 @@ const Insert = (props) => {
       var data = result;
 
       if (data) {
+        try {
+          const keyField = props?.selectedTable?.id;
+          if (keyField) {
+            const col = props?.selectedTable?.value?.find(
+              (c) => c && c.accessor === keyField,
+            );
+            let createdKey = null;
+            if (col?.type === "dropdown") {
+              createdKey = selectedOptions[keyField]?.id ?? null;
+            } else if (col?.type === "checkbox") {
+              createdKey = selectedOptions[keyField] ?? null;
+            } else {
+              createdKey = getValue(keyField) ?? null;
+            }
+            if (createdKey != null && createdKey !== "") {
+              props.onInserted?.({ key: createdKey });
+            } else {
+              props.onInserted?.({ key: null });
+            }
+          } else {
+            props.onInserted?.({ key: null });
+          }
+        } catch {
+          props.onInserted?.({ key: null });
+        }
         onClose();
       } else {
         Swal.fire("Napaka!", "Zapis ni bil zapisan.", "error");
@@ -329,7 +354,7 @@ const Insert = (props) => {
 
   return (
     <div className="popup-overlay insert">
-      <div className="popup-content insert wms-popup-shell">
+      <div className="popup-content insert wms-popup-shell wms-settings-form-popup">
         <div className="popup-header insert wms-popup-header">
           <PopupCloseButton onClick={onClose} />
         </div>
@@ -338,28 +363,41 @@ const Insert = (props) => {
             {props.selectedTable.value.map(
               (column) =>
                 column.type !== "nothing" && (
-                  <div key={column.accessor} className="form-group insert">
-                    <label htmlFor={column.accessor}>
-                      {typeof column.Header === "string"
-                        ? trHeader(column.Header, t)
-                        : column.Header}
-                      :
+                  <div
+                    key={column.accessor}
+                    className={
+                      column.type === "checkbox"
+                        ? "form-group insert wms-settings-row-checkbox"
+                        : "form-group insert"
+                    }
+                  >
+                    <label
+                      className="wms-settings-field-label"
+                      htmlFor={column.accessor}
+                    >
+                      <span className="wms-settings-field-label-text">
+                        {typeof column.Header === "string"
+                          ? trHeader(column.Header, t)
+                          : column.Header}
+                      </span>
                     </label>
                     {column.type === "dropdown" ? (
-                      <Select
-                        id={column.accessor}
-                        placeholder={column.dropdownPlaceholder}
-                        name={column.accessor}
-                        getOptionLabel={(option) => option.label}
-                        getOptionValue={(option) => option.value}
-                        formatOptionLabel={formatOptionLabel}
-                        options={dropdownOptions[column.accessor] || []}
-                        value={selectedOptions[column.accessor]}
-                        onChange={(selected) =>
-                          handleSelectChange(column.accessor, selected)
-                        }
-                        required={column.required}
-                      />
+                      <div className="wms-settings-select">
+                        <Select
+                          id={column.accessor}
+                          placeholder={column.dropdownPlaceholder}
+                          name={column.accessor}
+                          getOptionLabel={(option) => option.label}
+                          getOptionValue={(option) => option.value}
+                          formatOptionLabel={formatOptionLabel}
+                          options={dropdownOptions[column.accessor] || []}
+                          value={selectedOptions[column.accessor]}
+                          onChange={(selected) =>
+                            handleSelectChange(column.accessor, selected)
+                          }
+                          required={column.required}
+                        />
+                      </div>
                     ) : (
                       <input
                         type={
@@ -389,12 +427,10 @@ const Insert = (props) => {
             )}
           </div>
 
-          <div className="center-button">
-            <center>
-              <button type="submit" className="actions smallerr">
-                {t("common.add")}
-              </button>
-            </center>
+          <div className="wms-popup-footer-actions wms-settings-form-footer">
+            <button type="submit" className="actions smallerr">
+              {t("common.add")}
+            </button>
           </div>
         </form>
       </div>

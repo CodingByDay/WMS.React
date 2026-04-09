@@ -19,6 +19,7 @@ import {
 } from 'devextreme-react/data-grid'
 import { useTranslation } from "react-i18next";
 import { trHeader } from "../i18n/headerMap";
+import { getDxDataGridInstance } from "../utility/devextremeGridInstance";
 
 function TableForge({
   refresh,
@@ -35,6 +36,66 @@ function TableForge({
   const dataGridRef = useRef(null);
   const filterApplySuppressUntilRef = useRef(0);
   const filterInitialAppliedRef = useRef(false);
+  const lastKeysBeforeInsertRef = useRef(null);
+  const pendingInsertFocusRef = useRef(null);
+
+  useEffect(() => {
+    const pending = pendingInsertFocusRef.current;
+    if (!pending) return;
+
+    const selectedTable = tablesAssociation.find((table) => table.name === name);
+    const keyField = selectedTable?.id;
+    if (!keyField) return;
+
+    const rows = Array.isArray(tableData) ? tableData : [];
+    const keysNow = rows
+      .map((r) => (r && r[keyField] != null ? String(r[keyField]) : null))
+      .filter(Boolean);
+    if (keysNow.length === 0) return;
+
+    const prevKeys = pending.prevKeys || new Set();
+    let keyToFocus =
+      pending.knownKey != null && pending.knownKey !== ""
+        ? String(pending.knownKey)
+        : null;
+    if (!keyToFocus) {
+      const novel = keysNow.filter((k) => !prevKeys.has(k));
+      keyToFocus = novel.length ? novel[novel.length - 1] : null;
+    }
+    if (!keyToFocus) return;
+
+    const grid = getDxDataGridInstance(dataGridRef);
+    if (!grid) return;
+
+    pendingInsertFocusRef.current = null;
+
+    try {
+      grid.option?.("focusedRowKey", keyToFocus);
+    } catch {
+      /* ignore */
+    }
+    if (typeof grid.navigateToRow === "function") {
+      Promise.resolve(grid.navigateToRow(keyToFocus))
+        .catch(() => undefined)
+        .finally(() => {
+          try {
+            grid.selectRows?.([keyToFocus], false);
+          } catch {
+            /* ignore */
+          }
+        });
+    } else {
+      try {
+        grid.selectRows?.([keyToFocus], false);
+      } catch {
+        /* ignore */
+      }
+    }
+
+    if (onSelectedRowKeysChange) {
+      onSelectedRowKeysChange([keyToFocus]);
+    }
+  }, [tableData, name, onSelectedRowKeysChange]);
 
   useEffect(() => {
     filterInitialAppliedRef.current = false;
@@ -168,6 +229,21 @@ function TableForge({
   }, []);
 
   const onAdd = () => {
+    try {
+      const selectedTable = tablesAssociation.find((table) => table.name === name);
+      const keyField = selectedTable?.id;
+      const rows = Array.isArray(tableData) ? tableData : [];
+      const prevKeys = new Set(
+        rows
+          .map((r) => (r && keyField && r[keyField] != null ? String(r[keyField]) : null))
+          .filter(Boolean),
+      );
+      lastKeysBeforeInsertRef.current = prevKeys;
+      pendingInsertFocusRef.current = { prevKeys, knownKey: null };
+    } catch {
+      lastKeysBeforeInsertRef.current = null;
+      pendingInsertFocusRef.current = { prevKeys: new Set(), knownKey: null };
+    }
     generatePopupCreate(selectedTable);
   };
 
@@ -214,14 +290,7 @@ function TableForge({
         accessor: "ID",
         additional: "",
         className: "name-column-system",
-        type: "dropdown",
-        sourceSelect: "SELECT * FROM uWMSSettingList;",
-        columnOrder: ["ID", "Desc"],
-        columnOrderTranslation: ["Naziv", "Opis"],
-        columnOrderWidth: [200, 300],
-        dropdownId: "ID",
-        dropdownPlaceholder: "",
-        dropdownHelperField: "Desc",
+        type: "text",
         required: true,
         dbType: "String",
       },
@@ -1262,6 +1331,13 @@ function TableForge({
       <Insert
         refresh={refresh}
         onClose={onClose}
+        onInserted={(payload) => {
+          const prevKeys = lastKeysBeforeInsertRef.current || new Set();
+          pendingInsertFocusRef.current = {
+            prevKeys,
+            knownKey: payload?.key ?? null,
+          };
+        }}
         selectedTable={selectedTable}
         isVisible={isModalOpen}
       />

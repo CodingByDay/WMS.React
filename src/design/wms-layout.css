@@ -112,6 +112,14 @@ button.actions.smallerr img {
   cursor: pointer;
 }
 
+.navbar:not(.auth) .wms-navbar-center {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navbar:not(.auth) .logout {
   display: flex;
   flex-direction: row;
@@ -119,7 +127,7 @@ button.actions.smallerr img {
   align-items: center;
   justify-content: flex-end;
   gap: 0.35rem 0.5rem;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-width: 0;
 }
 
@@ -546,4 +554,78 @@ button.actions.smallerr img {
 
 .import .wms-import-preview .wms-table-wrap table.react-table-wizzard.wms-data-table {
   width: 100%;
+}
+
+.import .wms-import-preview .export-button-div {
+  width: 95%;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--wms-space-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Undo App.css `.export-button-div button { padding-top: 8px }` so label is vertically centered */
+.import .wms-import-preview .export-button-div button.actions.smallerr {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center;
+  line-height: 1.1;
+  width: auto !important;
+  min-width: 10em;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+}
+
+/* Analytics: fill viewport; dashboard uses remaining space below header */
+.wms-analytics-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.wms-analytics-layout > .navbar {
+  flex-shrink: 0;
+}
+
+.navbar:not(.auth) .logout .wms-analytics-panel-toggle-icon {
+  padding-left: 0.4rem !important;
+  padding-right: 0.4rem !important;
+  min-width: unset !important;
+  width: auto !important;
+}
+
+.wms-analytics-layout .dashboard-div {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.wms-analytics-layout .dashboard-control-devexpress {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* DevExpress Web Dashboard default CSS in App.css shifts surface up (top: -35px),
+   which clips the top part inside our full-height analytics layout. */
+.wms-analytics-layout .dx-dashboard-widget-container {
+  top: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
 }
