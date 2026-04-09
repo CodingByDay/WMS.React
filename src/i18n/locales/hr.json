@@ -229,6 +229,8 @@
     "timeCol": "Vrijeme",
     "modifiedBy": "Promijenio",
     "modifiedAt": "Vrijeme promjene",
+    "previewHeading": "Pregled: podaci iz Excel datoteke",
+    "previewHelp": "Tablica prikazuje retke s odabranog lista. Kliknite zaglavlje stupca, zatim u dijalogu odaberite odgovarajuće polje u sustavu. Za obavezna polja mora uz zaglavlje biti ikona lokota (mapiranje potvrđeno). Zatim kliknite »Uvezi podatke«.",
     "dropzone": "Povucite i ispustite tekstualnu ili Excel datoteku ili kliknite za odabir.",
     "searchPlaceholder": "Pretraži…",
     "pageOf": "Stranica {{current}} od {{total}}",

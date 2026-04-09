@@ -461,3 +461,89 @@ button.actions.smallerr img {
   margin-left: 0;
   margin-right: 0;
 }
+
+/* --- Import wizard: preview hint + toolbar vertical alignment --- */
+.import .wms-import-preview__help {
+  max-width: 52rem;
+  margin: 0 auto var(--wms-space-5) auto;
+  padding: var(--wms-space-4) var(--wms-space-5);
+  border-radius: var(--wms-radius-md);
+  background: color-mix(in srgb, var(--wms-color-primary) 8%, var(--wms-color-bg-elevated, #fff));
+  border: 1px solid color-mix(in srgb, var(--wms-color-primary) 22%, transparent);
+  text-align: center;
+}
+
+.import .wms-import-preview__heading {
+  margin: 0 0 var(--wms-space-2) 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--wms-color-text);
+}
+
+.import .wms-import-preview__instructions {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--wms-color-text-muted, #444);
+}
+
+.import .wms-import-preview .paginationControls.wms-import-pagination {
+  float: none;
+  width: fit-content;
+  max-width: 100%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.import .wms-import-preview .paginationControls .search-container {
+  align-items: center;
+  min-height: 2.25rem;
+}
+
+.import .wms-import-preview .wms-import-search-input {
+  background-color: #081a45 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 5px;
+  height: 2.25rem !important;
+  min-height: 2.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+.import .wms-import-preview .wms-import-pagination-page {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  margin: 0 0 0 0.15rem;
+  min-height: 2.25rem;
+}
+
+.import .wms-import-preview .paginationControls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  box-sizing: border-box;
+}
+
+/* Match dashboard/settings table inset (e.g. filters.upper width 95%, ~2.5% side rhythm) */
+.import .wms-import-preview .wms-table-wrap {
+  width: 95%;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.import .wms-import-preview .wms-table-wrap table.react-table-wizzard.wms-data-table {
+  width: 100%;
+}

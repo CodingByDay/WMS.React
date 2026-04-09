@@ -388,8 +388,13 @@ const ImportWizzard = (props) => {
 
       {fileContent.length > 0 && (
         <>
-          <div className="lower-components">
-            <div className="paginationControls">
+          <div className="lower-components wms-import-preview">
+            <div className="wms-import-preview__help" role="region" aria-label={t("import.previewHeading")}>
+              <p className="wms-import-preview__heading">{t("import.previewHeading")}</p>
+              <p className="wms-import-preview__instructions">{t("import.previewHelp")}</p>
+            </div>
+
+            <div className="paginationControls wms-import-pagination">
               <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                 {"<<"}
               </button>{" "}
@@ -412,19 +417,10 @@ const ImportWizzard = (props) => {
 
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control wms-import-search-input"
                   placeholder={t("import.searchPlaceholder")}
                   value={globalFilter || ""}
                   onChange={(e) => setGlobalFilter(e.target.value)}
-                  style={{
-                    backgroundColor: "#081A45",
-                    color: "white",
-                    border: "none", // Remove the white border
-                    borderRadius: "5px",
-                    height: "2em",
-                    padding: "10px",
-                    transition: "opacity 2.5s", // Apply a transition for a smooth appearance
-                  }}
                 />
               </div>
               <button onClick={() => nextPage()} disabled={!canNextPage}>
@@ -436,7 +432,7 @@ const ImportWizzard = (props) => {
               >
                 {">>"}
               </button>{" "}
-              <span>
+              <span className="wms-import-pagination-page">
                 {t("import.pageOf", {
                   current: pageIndex + 1,
                   total: pageOptions.length,

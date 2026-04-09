@@ -229,6 +229,8 @@
     "timeCol": "Time",
     "modifiedBy": "Modified by",
     "modifiedAt": "Modified at",
+    "previewHeading": "Preview: data from your Excel file",
+    "previewHelp": "The table shows the rows from the worksheet you chose. Click a column header, then select the matching system field in the dialog. Map every required field until its header shows a lock (mapped). When done, press Import data.",
     "dropzone": "Drag and drop a text or Excel file here, or click to select.",
     "searchPlaceholder": "Search…",
     "pageOf": "Page {{current}} of {{total}}",

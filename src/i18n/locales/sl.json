@@ -229,6 +229,8 @@
     "timeCol": "Čas",
     "modifiedBy": "Spremenil",
     "modifiedAt": "Čas spremembe",
+    "previewHeading": "Predogled: podatki iz Excel datoteke",
+    "previewHelp": "Tabela prikazuje vrstice iz izbranega delovnega lista. Kliknite glavo stolpca in v pogovornem oknu izberite ustrezno polje v sistemu. Pri obveznih stolpcih mora ob glavi biti ikona ključavnice (povezava zaklenjena). Nato kliknite »Uvozi podatke«.",
     "dropzone": "Povlecite in spustite besedilno ali Excel datoteko ali pa kliknite, da jo izberete.",
     "searchPlaceholder": "Iskanje…",
     "pageOf": "Stran {{current}} od {{total}}",
