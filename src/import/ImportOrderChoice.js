@@ -13,13 +13,16 @@ export default function ImportOrderChoice(props) {
   return (
     <div>
       <Popup
-        position="right center"
+        className="wms-import-popup"
+        position="center center"
+        modal
+        closeOnDocumentClick
         open={props.isOpen}
         onClose={props.onClose}
       >
-        <div className="outer-order">
+        <div className="outer-order wms-import-popup-panel">
           <div
-            className="header-order"
+            className="header-order wms-import-popup-header"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -30,16 +33,7 @@ export default function ImportOrderChoice(props) {
             <h4>{t("import.chooseOrderImportMode")}</h4>
           </div>
 
-          <div
-            className="choices-order"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "5em",
-              gap: "2em",
-            }}
-          >
+          <div className="choices-order wms-import-order-mode-choices">
             <button
               className="actions smallerr"
               onClick={() => setChosenState("head")}

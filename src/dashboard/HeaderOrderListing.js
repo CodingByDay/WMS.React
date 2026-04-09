@@ -351,6 +351,8 @@ export default function HeaderOrderListing(props) {
             <span className='wms-action-label'>{t('common.delete')}</span>
             <MdDeleteOutline />
           </span>
+
+          {props.appendActions}
         </div>
       </div>
 

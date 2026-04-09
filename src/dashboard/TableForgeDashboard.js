@@ -8,6 +8,7 @@ import SettingsService from '../services/SettingsService'
 import Insert from '../popup/Insert'
 import Update from '../popup/Update'
 import { FaSearch } from 'react-icons/fa' // Import the search icon
+import TableExportButton from '../components/TableExportButton'
 
 function TableForgeDashboard({ refresh, name, tableData }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -47,10 +48,22 @@ function TableForgeDashboard({ refresh, name, tableData }) {
 
   var selectedTable = tablesAssociation.find((table) => table.name === name)
 
+  const dashboardExportColumns = useMemo(() => {
+    const cols = selectedTable?.value ?? []
+    return cols.map((c) => ({
+      key: c.accessor,
+      header:
+        typeof c.Header === 'string'
+          ? c.Header
+          : String(c.accessor ?? ''),
+    }))
+  }, [selectedTable?.value])
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     page, // Instead of 'rows', we use 'page' which represents the currently visible page
     prepareRow,
     state: { globalFilter, pageIndex, pageSize },
@@ -126,6 +139,12 @@ function TableForgeDashboard({ refresh, name, tableData }) {
               {pageIndex + 1} od {pageOptions.length}
             </strong>{' '}
           </span>
+
+          <TableExportButton
+            fileBaseName={`wms-${name}`}
+            columnDefs={dashboardExportColumns}
+            getRows={() => rows.map((r) => ({ ...r.original }))}
+          />
         </div>
 
         <div className="wms-table-wrap">

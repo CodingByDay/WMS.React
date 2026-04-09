@@ -29,9 +29,11 @@
     "title": "Sign in",
     "passwordLabel": "ENTER PASSWORD",
     "wrongPassword": "Incorrect password.",
-    "submit": "Sign in",
-    "mobileTitle": "Information",
-    "mobileBody": "Mobile devices are not supported."
+    "submit": "Sign in"
+  },
+  "mobileNotSupported": {
+    "title": "Not supported on mobile devices",
+    "message": "Riko WMS only works in a desktop browser on a computer. Please use a PC or laptop."
   },
   "version": {
     "label": "Version {{version}}",
@@ -91,6 +93,17 @@
     "successAdded": "Added successfully",
     "noDocumentSelected": "No document selected.",
     "selectStatus": "Status"
+  },
+  "export": {
+    "export": "Export",
+    "tooltip": "Export table (choose columns, then Excel or CSV)",
+    "title": "Export",
+    "chooseColumns": "Include columns:",
+    "chooseFormat": "Format:",
+    "selectAll": "Select all",
+    "clearAll": "Clear all",
+    "excel": "Excel",
+    "csv": "CSV"
   },
   "grid": {
     "itemName": "Name",

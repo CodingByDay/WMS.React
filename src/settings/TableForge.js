@@ -19,7 +19,11 @@ import {
 } from 'devextreme-react/data-grid'
 import { useTranslation } from "react-i18next";
 import { trHeader } from "../i18n/headerMap";
-import { getDxDataGridInstance } from "../utility/devextremeGridInstance";
+import {
+  getDxDataGridInstance,
+  getDxExportRows,
+} from "../utility/devextremeGridInstance";
+import TableExportButton from "../components/TableExportButton";
 
 function TableForge({
   refresh,
@@ -1300,6 +1304,16 @@ function TableForge({
 
   var selectedTable = tablesAssociation.find((table) => table.name === name);
 
+  const settingsExportColumnDefs = selectedTable.value
+    .filter((c) => c.type !== "nothing")
+    .map((c) => ({
+      key: c.accessor,
+      header:
+        typeof c.Header === "string"
+          ? trHeader(c.Header, t)
+          : String(c.accessor),
+    }));
+
   const handleSelectionChanged = useCallback(
     (e) => {
       onSelectionChanged?.(e);
@@ -1327,6 +1341,11 @@ function TableForge({
           <span className="wms-action-label">{t("common.add")}</span>
           <IoAddCircleSharp />
         </span>
+        <TableExportButton
+          fileBaseName={`wms-settings-${name}`}
+          columnDefs={settingsExportColumnDefs}
+          getRows={() => getDxExportRows(dataGridRef, tableData)}
+        />
       </div>
       <Insert
         refresh={refresh}

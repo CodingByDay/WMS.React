@@ -5,6 +5,7 @@ import "./Mobile.css";
 import "./Responsive.css";
 import "./design/wms-layout.css";
 import "./design/wms-tables.css";
+import "./design/wms-mobile.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./auth/Auth";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -38,6 +39,8 @@ import React from "react";
 import config from "devextreme/core/config";
 import { licenseKey } from "./devextreme-licence";
 import GlobalLoader from "./loader/GlobalLoader";
+import MobileNotSupported from "./components/MobileNotSupported";
+import { isMobileClient } from "./utility/isMobileClient";
 
 axios.interceptors.response.use(
   function (response) {
@@ -57,6 +60,10 @@ axios.interceptors.response.use(
 
 function App() {
   config({ licenseKey });
+
+  if (isMobileClient()) {
+    return <MobileNotSupported />;
+  }
 
   return (
     <BrowserRouter>

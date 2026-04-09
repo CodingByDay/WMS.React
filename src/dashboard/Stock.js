@@ -1,6 +1,6 @@
 import Header from './Header'
 import Footer from './Footer'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
 import Select from 'react-select'
 import StockService from '../services/StockService'
 import $ from 'jquery'
@@ -16,7 +16,10 @@ import {
   Selection,
 } from 'devextreme-react/data-grid'
 import { useTranslation } from 'react-i18next'
+import { MdVisibility } from 'react-icons/md'
 import { trHeader } from '../i18n/headerMap'
+import { getDxExportRows } from '../utility/devextremeGridInstance'
+import TableExportButton from '../components/TableExportButton'
 
 export default function Stock() {
   const { t } = useTranslation()
@@ -27,6 +30,18 @@ export default function Stock() {
   const [location, setLocation] = useState()
   const [warehouse, setWarehouse] = useState()
   const [data, setData] = useState([])
+  const stockGridRef = useRef(null)
+
+  const stockExportColumns = useMemo(
+    () => [
+      { key: 'acWarehouse', header: trHeader('Skladišče', t) },
+      { key: 'acIdent', header: trHeader('Ident', t) },
+      { key: 'acName', header: trHeader('Naziv', t) },
+      { key: 'anQty', header: trHeader('Količina', t) },
+      { key: 'acLocation', header: trHeader('Lokacija', t) },
+    ],
+    [t],
+  )
 
   useEffect(() => {
     StockService.getWarehouses().then((response) => {
@@ -246,14 +261,22 @@ export default function Stock() {
                 styles={customStyles}
                 onClick={handleInventory}
               >
-                {t('common.show')}
+                <span className='wms-action-label'>{t('common.show')}</span>
+                <MdVisibility aria-hidden />
               </span>
+
+              <TableExportButton
+                fileBaseName='wms-stock'
+                columnDefs={stockExportColumns}
+                getRows={() => getDxExportRows(stockGridRef, data)}
+              />
             </div>
 
             {/* <TableForgeDashboard name={name} tableData = {data} /> */}
 
             <div className='stock-grid-host'>
               <DataGrid
+                ref={stockGridRef}
                 className='devexpress-grid stock'
                 id='dataGrid'
                 dataSource={data}

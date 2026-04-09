@@ -1,6 +1,7 @@
 import { useTable, useGlobalFilter, usePagination } from "react-table";
 import { useDropzone } from "react-dropzone";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import TableExportButton from "../components/TableExportButton";
 import * as XLSX from "xlsx";
 import ImportSheetChoice from "./ImportSheetChoice";
 import Locking from "./Locking";
@@ -337,10 +338,25 @@ const ImportWizzard = (props) => {
     onDrop,
   });
 
+  const importExportColumns = useMemo(
+    () =>
+      columns
+        .filter((c) => c && c.accessor != null && String(c.accessor) !== "")
+        .map((c) => ({
+          key: c.accessor,
+          header:
+            typeof c.Header === "string"
+              ? c.Header
+              : String(c.accessor ?? ""),
+        })),
+    [columns],
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     page, // Instead of 'rows', we use 'page' which represents the currently visible page
     prepareRow,
     state: { globalFilter, pageIndex, pageSize },
@@ -382,7 +398,11 @@ const ImportWizzard = (props) => {
         onClose={closePopupLock}
       />
 
-      <div {...getRootProps()} style={dropzoneStyle}>
+      <div
+        {...getRootProps()}
+        className="wms-import-dropzone"
+        style={dropzoneStyle}
+      >
         <input {...getInputProps()} />
         <p>{t("import.dropzone")}</p>
       </div>
@@ -439,6 +459,12 @@ const ImportWizzard = (props) => {
                   total: pageOptions.length,
                 })}
               </span>
+
+              <TableExportButton
+                fileBaseName="wms-import-preview"
+                columnDefs={importExportColumns}
+                getRows={() => rows.map((r) => ({ ...r.original }))}
+              />
             </div>
 
             <div className="wms-table-wrap">

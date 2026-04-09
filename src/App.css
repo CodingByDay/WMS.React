@@ -101,6 +101,8 @@ td {
 
 .paginationControls {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   /* background-color: #081A45; */
 }
 
@@ -527,6 +529,10 @@ table.react-table-type-document tr th:hover {
 }
 
 .buttons-positions-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
   margin-left: 2em;
   margin-bottom: 0.5em;
 }
@@ -537,6 +543,8 @@ p {
 .header-buttons-div {
   margin-top: 0.1em;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 1em;
   margin-left: 1em;
 }

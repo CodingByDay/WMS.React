@@ -59,6 +59,8 @@ export default function TransactionPositionsButtons(props) {
             <span className='wms-action-label'>{t('common.remove')}</span>
             <MdDeleteOutline />
           </span>
+
+          {props.appendActions}
         </div>
       </div>
     </div>

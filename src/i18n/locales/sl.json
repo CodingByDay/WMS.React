@@ -29,9 +29,11 @@
     "title": "Prijava",
     "passwordLabel": "VNESITE GESLO",
     "wrongPassword": "Napačno geslo.",
-    "submit": "Prijava",
-    "mobileTitle": "Informacija",
-    "mobileBody": "Mobilne naprave niso podprte."
+    "submit": "Prijava"
+  },
+  "mobileNotSupported": {
+    "title": "Ni podprto na mobilnih napravah",
+    "message": "Riko WMS deluje le v namiznem brskalniku na računalniku. Prosimo, uporabite osebni računalnik ali prenosnik."
   },
   "version": {
     "label": "Verzija {{version}}",
@@ -91,6 +93,17 @@
     "successAdded": "Uspešno dodano",
     "noDocumentSelected": "Niste izbrali dokument.",
     "selectStatus": "Status"
+  },
+  "export": {
+    "export": "Izvoz",
+    "tooltip": "Izvoz tabele (izbira stolpcev, nato Excel ali CSV)",
+    "title": "Izvoz",
+    "chooseColumns": "Vključeni stolpci:",
+    "chooseFormat": "Zapis:",
+    "selectAll": "Izberi vse",
+    "clearAll": "Počisti",
+    "excel": "Excel",
+    "csv": "CSV"
   },
   "grid": {
     "itemName": "Name",

@@ -1,18 +1,223 @@
 @media only screen and (max-width: 600px) {
-  /* Navbar */
-  .navbar.auth img {
+  /* Login header: column layout so language flags stay in flow (not overlapping logo) */
+  .navbar.auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto !important;
+    min-height: 0;
+    gap: 0.75rem;
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
+  .navbar.auth > center {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Logo only — do not use .navbar.auth img (would resize language flags and clip them) */
+  .navbar.auth img.logo {
     height: 50px;
+    width: auto;
+    max-width: min(70vw, 280px);
+    object-fit: contain;
   }
 
   .Auth-form-content {
-    width: 80vw;
+    width: min(80vw, 22rem);
   }
 
   .Auth-form-content {
-    margin-top: -10em;
+    margin-top: -6rem;
   }
 
   .logo.navbar {
     margin-left: 2em;
   }
+}
+
+/*
+ * Phones & small tablets (post-login + global shell):
+ * App.css sets body { overflow-y: hidden } — that blocks page scroll on mobile.
+ */
+@media screen and (max-width: 768px) {
+  body {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  .Auth-form-container {
+    min-height: 100dvh;
+    height: auto !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+
+  .navbar:not(.auth) {
+    flex-wrap: wrap;
+    row-gap: 0.35rem;
+    align-items: center;
+    padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
+    padding-top: max(0.35rem, env(safe-area-inset-top, 0px));
+    box-sizing: border-box;
+  }
+
+  .navbar:not(.auth) .wms-navbar-logo {
+    max-width: min(50vw, 200px);
+    min-width: 0;
+  }
+
+  .navbar:not(.auth) .logout {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 100%;
+    gap: 0.25rem 0.4rem;
+  }
+
+  .navbar:not(.auth) .actions {
+    white-space: normal;
+  }
+
+  .navbar:not(.auth) .wms-navbar-center:empty {
+    display: none;
+  }
+
+  .listing-body,
+  .content-transactions {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .Users,
+  .global-react-table {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .wms-tableforge-below {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+  }
+
+  .listing-bg,
+  .content-transactions {
+    height: auto !important;
+    min-height: 100dvh;
+    min-height: 100svh;
+    box-sizing: border-box;
+  }
+
+  .main-container {
+    min-height: 100dvh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .main-container > .listing-bg {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-container > .listing-bg > .listing-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-container > .content-transactions {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wms-page {
+    min-height: 100dvh;
+    min-height: 100svh;
+  }
+
+  .wms-main--home {
+    max-width: 100%;
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
+  .wms-home-menu {
+    width: min(100%, 22rem);
+  }
+
+  .wms-home-menu__icon {
+    display: none !important;
+  }
+
+  .devexpress-grid {
+    margin: 0.65rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  div#dataGrid {
+    margin: 0.65rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .devexpress-grid.order {
+    height: min(300px, 42vh) !important;
+  }
+
+  .devexpress-grid.order-position {
+    height: min(220px, 36vh) !important;
+  }
+
+  .listing-body .devexpress-grid.order-position {
+    height: min(235px, 38vh) !important;
+  }
+
+  .content-transactions .devexpress-grid.transaction-head,
+  .content-transactions .devexpress-grid.order-position {
+    height: min(260px, 38vh) !important;
+  }
+
+  .listing-body.stock-listing-body .stock-grid-host {
+    margin-left: 0.65rem !important;
+    margin-right: 0.65rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+}
+
+/* Mobile/tablet blocked screen (see App.js + MobileNotSupported.js) */
+.wms-mobile-blocked {
+  text-align: center;
+  padding: 0.5rem 0.75rem 1.5rem;
+  max-width: 28rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wms-mobile-blocked p {
+  margin-top: 1rem;
+  line-height: 1.55;
+  font-size: 1rem;
 }

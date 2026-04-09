@@ -69,6 +69,8 @@ export default function ListingPositionsButtons(props) {
         <MdDeleteOutline />
       </span>
 
+      {props.appendActions}
+
       <EditOrderPosition
         close={hideModal}
         shown={isEditShow}

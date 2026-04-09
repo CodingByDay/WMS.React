@@ -60,6 +60,75 @@
 .wms-lang-switcher--auth {
   position: absolute;
   top: 0.75rem;
-  right: 1rem;
+  right: max(1rem, env(safe-area-inset-right, 0px));
   z-index: 3;
+}
+
+/*
+ * Mobile: show the whole flag. Desktop uses scale(1.14) + cover to trim PNG borders;
+ * on small sizes that crops too much of the actual flag.
+ */
+@media screen and (max-width: 600px) {
+  .wms-lang-switcher {
+    gap: 0.2rem;
+  }
+
+  .wms-lang-switcher__crop {
+    width: 26px;
+    height: auto;
+    max-height: 18px;
+    min-height: 0;
+    overflow: visible;
+    border-radius: 2px;
+    line-height: 0;
+  }
+
+  .wms-lang-switcher__flag {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 18px;
+    transform: none;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .wms-lang-switcher__btn--active {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.25),
+      0 0 0 2px rgba(255, 255, 255, 0.95);
+  }
+
+  .wms-lang-switcher--auth {
+    position: static;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 max(0.5rem, env(safe-area-inset-right, 0px)) 0
+      max(0.5rem, env(safe-area-inset-left, 0px));
+    margin: 0;
+    gap: 0.35rem;
+    row-gap: 0.35rem;
+  }
+
+  .wms-lang-switcher--auth .wms-lang-switcher__btn {
+    overflow: visible;
+    padding: 0.2rem 0.25rem;
+    min-width: 1.85rem;
+    min-height: 1.85rem;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .wms-lang-switcher__crop {
+    width: 22px;
+    max-height: 16px;
+  }
+
+  .wms-lang-switcher__flag {
+    max-height: 16px;
+  }
 }

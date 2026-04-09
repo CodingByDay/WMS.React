@@ -1,0 +1,798 @@
+/**
+ * Narrow-viewport overrides (phones / small tablets).
+ * Loaded after wms-layout.css and wms-tables.css so these rules win.
+ * Complements Mobile.css (login + shell scroll).
+ */
+
+@media screen and (max-width: 768px) {
+  /* --- App header: stack vertically so logo + lang/version/actions are not crushed --- */
+  .navbar:not(.auth) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.5rem;
+    row-gap: 0.5rem;
+  }
+
+  .navbar:not(.auth) .wms-navbar-logo {
+    align-self: center;
+    max-width: min(92vw, 280px);
+    order: 1;
+  }
+
+  .navbar:not(.auth) .wms-navbar-center:not(:empty) {
+    order: 2;
+    width: 100%;
+    flex: 0 0 auto;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .navbar:not(.auth) .wms-navbar-center:empty {
+    display: none;
+  }
+
+  .navbar:not(.auth) .logout {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.65rem;
+    padding: 0.15rem 0 0.35rem;
+    box-sizing: border-box;
+  }
+
+  .navbar:not(.auth) .wms-lang-switcher--header {
+    flex-shrink: 0;
+  }
+
+  .navbar:not(.auth) .actions {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.5rem;
+    box-sizing: border-box;
+    border-radius: var(--wms-radius-sm, 4px);
+  }
+
+  /* Legacy App.css `.navbar span { font-size: larger }` blows up mobile header */
+  .navbar:not(.auth) .logout > span,
+  .navbar:not(.auth) .version-info {
+    font-size: 1rem !important;
+  }
+
+  .navbar:not(.auth) .wms-lang-switcher--header {
+    gap: 0.2rem;
+  }
+
+  /*
+   * Listing: App.css sets .listing-body { max-height: calc(100vh - 50em) }
+   * — on phones that is tiny/negative and collapses the page.
+   */
+  .listing-bg .listing-body,
+  .main-container .listing-body {
+    max-height: none !important;
+    margin-bottom: 1rem !important;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-container > .listing-bg {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow: visible;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .main-container > .listing-bg > .listing-body {
+    flex: 0 1 auto !important;
+    min-height: auto !important;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .listing-body .devexpress-grid,
+  .listing-body div#dataGrid {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+
+  .main-container .footer {
+    position: relative !important;
+    bottom: auto !important;
+    width: 100%;
+  }
+
+  .filters.upper .filter-buttons {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .responsive-buttons-order {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem !important;
+    box-sizing: border-box;
+  }
+
+  /* --- Dashboard home (/dashboard): vertically + horizontally centered column --- */
+  .wms-home-menu-host {
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    justify-content: center;
+    align-items: center;
+    padding-top: var(--wms-space-3, 0.75rem);
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .wms-home-menu {
+    width: min(100%, 22rem) !important;
+    max-width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .wms-home-menu__btn {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0.85rem 1rem !important;
+    min-height: 3.25rem;
+    box-sizing: border-box;
+  }
+
+  .wms-home-menu__label {
+    flex: none !important;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem !important;
+    line-height: 1.3;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .wms-home-menu__icon {
+    display: none !important;
+  }
+
+  /* Non-settings menus (e.g. /import hub): avoid hitting .settings.menu — hub rules below */
+  .main-menu-design .menu:not(.settings) {
+    width: 100% !important;
+    max-width: 100%;
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
+  .main-menu-design .menu:not(.settings) > .btn.btn-primary.dashboard {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100%;
+    min-height: 4rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    text-align: center;
+    white-space: normal !important;
+    line-height: 1.25;
+    padding: 0.75rem 1rem !important;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .main-menu-design .menu:not(.settings) > .btn.btn-primary.dashboard img {
+    width: min(4.5rem, 42vw) !important;
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  .main-menu-design {
+    min-height: auto !important;
+    height: auto !important;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+  }
+
+  /* --- Modal overlays: scroll tall dialogs; respect safe areas --- */
+  .popup-overlay,
+  .popup-overlay.insert,
+  .popup-overlay.add,
+  .wms-export-overlay {
+    align-items: flex-start !important;
+    justify-content: center;
+    padding: max(0.35rem, env(safe-area-inset-top, 0px))
+      max(0.5rem, env(safe-area-inset-right, 0px)) max(0.75rem, env(safe-area-inset-bottom, 0px))
+      max(0.5rem, env(safe-area-inset-left, 0px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+  }
+
+  .popup-content,
+  .wms-popup-shell.popup-content,
+  .wms-popup-shell.popup-content.insert,
+  .wms-popup-shell.popup-content.add {
+    width: min(calc(100vw - 1rem), 100%) !important;
+    max-width: 100% !important;
+    max-height: min(92dvh, 92vh) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+
+  .popup-body.insert,
+  .popup-body.update,
+  .popup-body.add {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+
+  .wms-edit-order-position-popup {
+    width: min(calc(100vw - 2rem), 22rem);
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- Tables: horizontal scroll (~sliders); headers stay single-line on mobile only --- */
+  .wms-table-wrap,
+  .global-react-table,
+  .user-settings-table,
+  .users-container-table,
+  .table-responsive,
+  .stock-grid-host,
+  .listing-body .devexpress-grid,
+  .content-transactions .devexpress-grid,
+  .main-container .devexpress-grid,
+  div#dataGrid {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .wms-popup-shell .wms-table-wrap,
+  .popup-body .wms-table-wrap {
+    overflow-x: auto !important;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ant-table-wrapper {
+    overflow-x: auto !important;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Widen tables to full column content so scrollbars appear */
+  table:not(.dx-datagrid-table) {
+    width: max-content !important;
+    min-width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  table.react-table-system,
+  table.react-table-subject-codes,
+  table.react-table-status-document,
+  table.react-table-type-document,
+  table.react-table-subjects,
+  table.react-table-idents,
+  .react-table-wizzard,
+  .react-table-stock,
+  table.react-table-users {
+    width: max-content !important;
+    min-width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  /* Headers: one line; scroll horizontally to read */
+  th,
+  thead th,
+  table thead th,
+  .user-settings-table th,
+  table[class*="react-table"]:not(.dx-datagrid-table) thead th {
+    white-space: nowrap !important;
+    vertical-align: middle;
+  }
+
+  /* Body cells can wrap within their column */
+  td {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: none !important;
+    word-break: break-word;
+  }
+
+  tr {
+    font-size: 0.95rem;
+  }
+
+  table thead th {
+    font-size: 0.85rem;
+  }
+
+  /* DevExtreme: keep header labels on one row; row cells may wrap */
+  .dx-datagrid-headers .dx-header-row > td,
+  .dx-datagrid-headers .dx-header-row > th {
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+  }
+
+  .dx-datagrid-headers .dx-datagrid-text-content {
+    white-space: nowrap !important;
+  }
+
+  .dx-datagrid .dx-datagrid-rowsview .dx-row > td {
+    white-space: normal !important;
+    vertical-align: top;
+  }
+
+  /* --- Filters, search, transaction toolbars --- */
+  .filters,
+  .filters.positions {
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .filters.upper {
+    width: 100% !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .filters-left {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .search-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .stock-container-filters {
+    flex-wrap: wrap !important;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  .buttonsHeader,
+  .buttonsPositions {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .buttonsHeader button,
+  .buttonsPositions button {
+    width: auto !important;
+    min-width: 0;
+    flex: 1 1 calc(50% - 0.5rem);
+    max-width: 100%;
+  }
+
+  .header-buttons-div,
+  .buttons-positions-bottom {
+    margin-left: 0 !important;
+    padding-left: max(0.35rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.35rem, env(safe-area-inset-right, 0px));
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #documentSearch,
+  #receiver,
+  #consignee {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .paginationControls {
+    float: none !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .table_responsive_transaction {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+  }
+
+  .dashboard {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    gap: 0.5rem;
+  }
+
+  /* SweetAlert2 */
+  .swal2-popup {
+    width: min(calc(100vw - 1rem), 22em) !important;
+    max-width: calc(100vw - 0.75rem) !important;
+    margin: 0.35rem !important;
+    box-sizing: border-box;
+  }
+
+  /* Ant Design modal */
+  .ant-modal {
+    max-width: calc(100vw - 1rem) !important;
+    margin: 0.75rem auto !important;
+    padding-bottom: 0;
+    top: 0;
+  }
+
+  .ant-modal-content {
+    max-height: min(90dvh, 90vh);
+    overflow-y: auto;
+  }
+
+  .ant-modal-wrap {
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+      env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    box-sizing: border-box;
+  }
+
+  /* --- /import hub + import-* pages + import reactjs-popup dialogs --- */
+  /*
+   * Hub: no horizontal padding on outer wrapper — otherwise the navy navbar
+   * doesn’t span full viewport width. Inset only the menu block below the header.
+   */
+  /* Hub shells: /import and /settings — same margins, header width, centered menu column */
+  .wms-import-hub,
+  .wms-settings-hub {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    min-height: 100svh;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+    overflow-x: hidden;
+  }
+
+  .wms-import-hub > *:first-child,
+  .wms-settings-hub > *:first-child {
+    flex-shrink: 0;
+  }
+
+  .wms-import-hub > *:last-child,
+  .wms-settings-hub > *:last-child {
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .wms-import-hub > .navbar:not(.auth),
+  .wms-settings-hub > .navbar:not(.auth) {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    /* Match listing / wms-main--home rhythm */
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .wms-import-hub .main-menu-design,
+  .wms-settings-hub .main-menu-design {
+    /* Fill space below header so justify-content:center actually vertically centers the menu */
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    /* App.css gives .main-menu-design { height: 100vh } — breaks flex hub + pushes footer */
+    height: auto !important;
+    max-height: none !important;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    /* Match .wms-home-menu-host vertical rhythm on /dashboard */
+    padding-top: var(--wms-space-3, 0.75rem);
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+  }
+
+  /*
+   * App.css .menu { margin: auto; top: 45vh; transform: translateY(-50%); } —
+   * margin-top/bottom: auto pins the stack to the bottom of the flex area on mobile.
+   */
+  .wms-import-hub .main-menu-design .menu,
+  .wms-settings-hub .main-menu-design .settings.menu {
+    width: min(100%, 22rem) !important;
+    max-width: 100%;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    grid-template-columns: unset !important;
+    gap: 0.75rem;
+    box-sizing: border-box;
+  }
+
+  /* /settings: same stack spacing as .wms-home-menu on /dashboard */
+  .wms-settings-hub .main-menu-design .settings.menu {
+    gap: 0.5rem !important;
+  }
+
+  .wms-import-hub .main-menu-design .menu > .btn.btn-primary.dashboard,
+  .wms-settings-hub .main-menu-design .settings.menu > .btn.btn-primary.settingsButton.dashboard {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100%;
+    gap: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    line-height: 1.25;
+    min-height: 3.25rem;
+    height: auto !important;
+    padding: 0.75rem 1rem !important;
+    box-sizing: border-box;
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* /settings tiles: match .wms-home-menu__btn mobile (padding, type, min-height) */
+  .wms-settings-hub .main-menu-design .settings.menu > .btn.btn-primary.settingsButton.dashboard {
+    padding: 0.85rem 1rem !important;
+    min-height: 3.25rem !important;
+    line-height: 1.3 !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    font-family: var(--wms-font-sans, inherit);
+    border-radius: var(--wms-radius-sm, 4px);
+    border: none;
+  }
+
+  .wms-import-hub .main-menu-design .menu > .btn.btn-primary.dashboard img,
+  .wms-settings-hub .main-menu-design .settings.menu > .btn.btn-primary.settingsButton.dashboard img {
+    display: none !important;
+  }
+
+  .import.orders,
+  .import.idents,
+  .import.subjects {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+    overflow-x: hidden;
+  }
+
+  .import.orders > .navbar:not(.auth),
+  .import.idents > .navbar:not(.auth),
+  .import.subjects > .navbar:not(.auth) {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .import .wms-import-dropzone {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0.5rem 0 1rem;
+    padding: 1rem max(0.65rem, env(safe-area-inset-left, 0px)) 1rem
+      max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .import .wms-import-dropzone p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    padding: 0 0.25rem;
+  }
+
+  .import .lower-components.wms-import-preview {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .import .wms-import-preview__help {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: var(--wms-space-3, 0.75rem) var(--wms-space-3, 0.75rem) !important;
+    box-sizing: border-box;
+  }
+
+  .import .wms-import-preview .wms-table-wrap,
+  .import .wms-import-preview .export-button-div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .import .wms-import-preview .paginationControls.wms-import-pagination {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* reactjs-popup: sheet / link / mode / additional-info */
+  .popup-content.wms-import-popup-content {
+    width: calc(100vw - 0.75rem) !important;
+    max-width: calc(100vw - 0.75rem) !important;
+    max-height: min(92dvh, 92vh) !important;
+    margin: 0 auto !important;
+    padding: 0.65rem 0.65rem 1rem !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wms-import-locking-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    margin: var(--wms-space-3, 0.75rem) 0 !important;
+    max-height: min(58vh, 22rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 2px;
+    box-sizing: border-box;
+  }
+
+  .wms-import-popup-panel button.actions.smallerr.lock {
+    height: auto !important;
+    min-height: 3rem;
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+
+  .wms-import-sheet-choices,
+  .wms-import-order-mode-choices,
+  .wms-import-additional-fields {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: var(--wms-space-3, 0.75rem) !important;
+    margin-bottom: var(--wms-space-3, 0.75rem) !important;
+  }
+
+  .wms-import-order-mode-choices {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .wms-import-order-mode-choices .actions.smallerr {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .wms-import-popup-header {
+    margin-top: 0.35rem !important;
+  }
+
+  .wms-import-popup-header h4 {
+    font-size: 1rem !important;
+    padding: 0 0.25rem;
+  }
+
+  .wms-import-additional-fields #confirmAdditionalInformation {
+    width: 100%;
+    max-width: 100%;
+    margin: 0.5rem 0 0 !important;
+    box-sizing: border-box;
+  }
+}
+
+/* Very narrow: icon-first chips; stacked header already adds room above 480px */
+@media screen and (max-width: 480px) {
+  .navbar:not(.auth) .wms-nav-text,
+  .navbar:not(.auth) .wms-version-label {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .navbar:not(.auth) .version-info {
+    font-size: 1rem !important;
+  }
+
+  .navbar:not(.auth) .actions {
+    gap: 0.15rem;
+  }
+}

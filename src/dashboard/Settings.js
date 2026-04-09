@@ -28,7 +28,7 @@ export default function Settings() {
   localStorage.setItem('back', 'dashboard')
 
   return (
-    <div>
+    <div className='wms-settings-hub'>
       <Header />
       <div className='main-menu-design'>
         <div className='settings menu'>

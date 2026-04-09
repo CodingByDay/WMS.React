@@ -154,13 +154,16 @@ export default function AdditionalOrderInformation(props) {
   return (
     <div>
       <Popup
-        position="right center"
+        className="wms-import-popup"
+        position="center center"
+        modal
+        closeOnDocumentClick
         open={props.isOpen}
         onClose={props.onClose}
       >
-        <div className="outer-order">
+        <div className="outer-order wms-import-popup-panel">
           <div
-            className="header-order"
+            className="header-order wms-import-popup-header"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -171,17 +174,7 @@ export default function AdditionalOrderInformation(props) {
             <h4>{t("import.additionalTitle")}</h4>
           </div>
 
-          <div
-            className="choices-order"
-            style={{
-              flexDirection: "column",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "5em",
-              gap: "2em",
-            }}
-          >
+          <div className="choices-order wms-import-additional-fields">
             <div className="form-group">
               <label htmlFor="document-type-import">
                 {t("import.additionalDocType")}

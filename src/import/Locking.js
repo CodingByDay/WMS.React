@@ -17,13 +17,16 @@ export default function Locking(props) {
   return (
     <div>
       <Popup
-        position="right center"
+        className="wms-import-popup"
+        position="center center"
+        modal
+        closeOnDocumentClick
         open={props.isOpen}
         onClose={props.onClose}
       >
-        <div className="outer">
+        <div className="outer wms-import-popup-panel">
           <div
-            className="header"
+            className="header wms-import-popup-header"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -36,14 +39,7 @@ export default function Locking(props) {
             </h4>
           </div>
 
-          <div
-            className="choices"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "16px",
-            }}
-          >
+          <div className="choices wms-import-locking-grid">
             {props.columns.map((column) => (
               <button
                 key={column.Name}

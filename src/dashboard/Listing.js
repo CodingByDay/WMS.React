@@ -3,7 +3,13 @@ import OrderHeadsListing from './OrderHeadsListing'
 import OrderPositions from './OrderPositions'
 import Header from './Header'
 import Footer from './Footer'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import TableExportButton from '../components/TableExportButton'
+import {
+  getOrderListingHeadExportColumns,
+  getOrderListingPositionsExportColumns,
+} from '../utility/tableExportColumnSets'
 import ListingService from '../services/ListingService'
 import Loader from '../loader/Loader'
 import $ from 'jquery'
@@ -18,7 +24,19 @@ import i18n from '../i18n'
 import { pickNovelOrderKeyFromRows } from '../utility/listingOrderUtils'
 
 export default function Listing() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
+  const orderHeadsGridRef = useRef(null)
+  const orderPositionsGridRef = useRef(null)
+
+  const orderHeadExportColumns = useMemo(
+    () => getOrderListingHeadExportColumns(t),
+    [t],
+  )
+  const orderPositionsExportColumns = useMemo(
+    () => getOrderListingPositionsExportColumns(t),
+    [t],
+  )
 
   const name = useSelector((state) => state.user.fullName)
   const [popupVisible, setPopupVisible] = useState(false)
@@ -293,8 +311,18 @@ export default function Listing() {
               refreshListingAfterOrder={refreshListingAfterOrder}
               communicate={communicate}
               getSortingObject={getSortingObject}
+              appendActions={
+                <TableExportButton
+                  fileBaseName="wms-listing-orders"
+                  columnDefs={orderHeadExportColumns}
+                  getRows={() =>
+                    orderHeadsGridRef.current?.getExportRows?.() ?? []
+                  }
+                />
+              }
             />
             <OrderHeadsListing
+              ref={orderHeadsGridRef}
               communicate={communicate}
               data={orders}
               sort={sort}
@@ -304,8 +332,18 @@ export default function Listing() {
             <ListingPositionsButtons
               selectedElement={selectedPosition}
               communicate={communicate}
+              appendActions={
+                <TableExportButton
+                  fileBaseName="wms-listing-positions"
+                  columnDefs={orderPositionsExportColumns}
+                  getRows={() =>
+                    orderPositionsGridRef.current?.getExportRows?.() ?? []
+                  }
+                />
+              }
             />
             <OrderPositions
+              ref={orderPositionsGridRef}
               communicate={communicate}
               data={positions}
               focusHint={focusPositionHint}

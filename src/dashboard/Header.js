@@ -24,16 +24,40 @@ export default function Header(props) {
 
   if (pathname !== '/dashboard') {
     button = (
-      <span className='actions' onClick={() => navigate('/dashboard')}>
-        {t('nav.home')}
-        <MdHome />
+      <span
+        className='actions'
+        onClick={() => navigate('/dashboard')}
+        role='button'
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            navigate('/dashboard')
+          }
+        }}
+        aria-label={t('nav.home')}
+      >
+        <span className='wms-nav-text'>{t('nav.home')}</span>
+        <MdHome aria-hidden />
       </span>
     )
 
     returnButton = (
-      <span className='actions' onClick={() => navigate(-1)}>
-        {t('nav.back')}
-        <MdArrowBackIos />
+      <span
+        className='actions'
+        onClick={() => navigate(-1)}
+        role='button'
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            navigate(-1)
+          }
+        }}
+        aria-label={t('nav.back')}
+      >
+        <span className='wms-nav-text'>{t('nav.back')}</span>
+        <MdArrowBackIos aria-hidden />
       </span>
     )
   }
@@ -60,9 +84,21 @@ export default function Header(props) {
         {button}
         {returnButton}
         {trailingSlot}
-        <span className='actions' onClick={() => handleLogout()}>
-          {t('nav.logout')}
-          <MdLogout />
+        <span
+          className='actions'
+          onClick={() => handleLogout()}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              handleLogout()
+            }
+          }}
+          aria-label={t('nav.logout')}
+        >
+          <span className='wms-nav-text'>{t('nav.logout')}</span>
+          <MdLogout aria-hidden />
         </span>
       </div>
     </div>

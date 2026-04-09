@@ -32,7 +32,7 @@ export function ImportMenu() {
   };
 
   return (
-    <div>
+    <div className="wms-import-hub">
       <Header />
       <div className="main-menu-design">
         <div className="menu">

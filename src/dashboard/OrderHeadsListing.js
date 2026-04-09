@@ -5,13 +5,20 @@ import {
   FilterRow,
   Selection,
 } from 'devextreme-react/data-grid'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
-import { getDxDataGridInstance } from '../utility/devextremeGridInstance'
+import { getDxDataGridInstance, getDxExportRows } from '../utility/devextremeGridInstance'
 import { toLocalDateAtMidnight } from '../utility/listingOrderUtils'
 
-export default function OrderHeadsListing (props) {
+const OrderHeadsListing = forwardRef(function OrderHeadsListing (props, ref) {
   const { t } = useTranslation()
   const { communicate, focusOrderKey, onFocusOrderHandled } = props
   const gridRef = useRef(null)
@@ -78,6 +85,14 @@ export default function OrderHeadsListing (props) {
 
     return out
   }, [props.data])
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      getExportRows: () => getDxExportRows(gridRef, gridData),
+    }),
+    [gridData],
+  )
 
   const selectHeader = useCallback((e) => {
     const chosenHeadDocument = e.selectedRowsData
@@ -163,4 +178,6 @@ export default function OrderHeadsListing (props) {
       </DataGrid>
     </div>
   )
-}
+})
+
+export default OrderHeadsListing

@@ -1,19 +1,22 @@
-import { useNavigate } from 'react-router-dom'
-import Table from '../table/Table'
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 import {
   DataGrid,
   Column,
-  SearchPanel,
   FilterRow,
   Selection,
 } from 'devextreme-react/data-grid'
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
+import { getDxExportRows } from '../utility/devextremeGridInstance'
 
-export default function TransactionHeads(props) {
+const TransactionHeads = forwardRef(function TransactionHeads(props, ref) {
   const { t } = useTranslation()
-  let navigate = useNavigate()
+  const gridRef = useRef(null)
 
   // This code converts the old api result to the devexpress data array.
   let gridData = []
@@ -39,6 +42,14 @@ export default function TransactionHeads(props) {
     }).filter((item) => item !== null) // Filter out null values if needed
   }
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      getExportRows: () => getDxExportRows(gridRef, gridData),
+    }),
+    [gridData],
+  )
+
   const selectPosition = useCallback((e) => {
     let chosenHeadDocument = e.selectedRowsData
     // Communicate to parent component.
@@ -47,8 +58,8 @@ export default function TransactionHeads(props) {
 
   return (
     <div className='transcation-heads-dashboard'>
-      
       <DataGrid
+        ref={gridRef}
         className='devexpress-grid transaction-head'
         dataSource={gridData}
         onSelectionChanged={selectPosition}
@@ -76,4 +87,6 @@ export default function TransactionHeads(props) {
       </DataGrid>
     </div>
   )
-}
+})
+
+export default TransactionHeads

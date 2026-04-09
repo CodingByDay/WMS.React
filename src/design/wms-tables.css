@@ -20,6 +20,10 @@
 }
 
 .wms-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wms-space-3);
   margin-top: var(--wms-space-4);
   margin-bottom: var(--wms-space-6);
 }

@@ -12,7 +12,7 @@ const VersionInfo = () => {
 
   return (
     <div className="version-info">
-      <div className="version-number">
+      <div className="version-number wms-version-label">
         {t("version.label", { version: version ?? "" })}
       </div>
       <FaInfoCircle className="info-icon" />

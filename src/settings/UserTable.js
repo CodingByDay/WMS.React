@@ -2,6 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import { useTranslation } from "react-i18next";
 import { trHeader } from "../i18n/headerMap";
+import TableExportButton from "../components/TableExportButton";
 
 function UserTable({ data, onDelete, onEdit, onInsert }) {
   const { t } = useTranslation();
@@ -92,6 +93,11 @@ function UserTable({ data, onDelete, onEdit, onInsert }) {
         <button type="button" onClick={() => onInsert()}>
           {t("common.add")}
         </button>
+        <TableExportButton
+          fileBaseName="wms-users"
+          columnDefs={userExportColumns}
+          getRows={() => rows.map((r) => ({ ...r.original }))}
+        />
       </div>
     </>
   );

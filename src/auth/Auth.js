@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -14,13 +14,6 @@ export default function Auth(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const mobile = useMemo(() => {
-    return (
-      Math.min(window.screen.width, window.screen.height) < 768 ||
-      navigator.userAgent.indexOf("Mobi") > -1
-    );
-  }, []);
 
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -104,10 +97,6 @@ export default function Auth(props) {
     setPassword(e.target.value);
   }
 
-  function showMobileAlert() {
-    window.showAlert(t("auth.mobileTitle"), t("auth.mobileBody"), "error");
-  }
-
   return (
     <div className={isSubmitting ? "login disabled" : "login"}>
       {isSubmitting && <Loader />}
@@ -154,29 +143,15 @@ export default function Auth(props) {
             )}
 
             <div className="d-grid gap-2 mt-3 wms-login-actions">
-              {!mobile && (
-                <button
-                  type="button"
-                  className="wms-login-submit"
-                  id="loginButton"
-                  onClick={handleClick}
-                  disabled={isSubmitting || !password}
-                >
-                  {t("auth.submit")}
-                </button>
-              )}
-
-              {mobile && (
-                <button
-                  type="button"
-                  className="wms-login-submit"
-                  onClick={() => {
-                    showMobileAlert();
-                  }}
-                >
-                  {t("auth.submit")}
-                </button>
-              )}
+              <button
+                type="button"
+                className="wms-login-submit"
+                id="loginButton"
+                onClick={handleClick}
+                disabled={isSubmitting || !password}
+              >
+                {t("auth.submit")}
+              </button>
             </div>
           </div>
         </div>

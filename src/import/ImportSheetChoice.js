@@ -13,13 +13,16 @@ export default function ImportSheetChoice(props) {
   return (
     <div>
       <Popup
-        position="right center"
+        className="wms-import-popup"
+        position="center center"
+        modal
+        closeOnDocumentClick
         open={props.isOpen}
         onClose={props.onClose}
       >
-        <div className="outer">
+        <div className="outer wms-import-popup-panel">
           <div
-            className="header"
+            className="header wms-import-popup-header"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -30,15 +33,7 @@ export default function ImportSheetChoice(props) {
             <h4>{t("import.pickSheet")}</h4>
           </div>
 
-          <div
-            className="choices"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "5em",
-            }}
-          >
+          <div className="choices wms-import-sheet-choices">
             {props.sheets.map((sheet) => (
               <button
                 key={sheet}

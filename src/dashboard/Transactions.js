@@ -1,6 +1,12 @@
 import Header from './Header'
 import Footer from './Footer'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import TableExportButton from '../components/TableExportButton'
+import {
+  getTransactionHeadExportColumns,
+  getTransactionPositionsExportColumns,
+} from '../utility/tableExportColumnSets'
 import TransactionFilters from './TransactionFilters'
 import TransactionHeads from './TransactionHeads'
 import TransactionPositions from './TransactionPositions'
@@ -14,10 +20,22 @@ import $ from 'jquery'
 import LocationComponent from '../popup/LocationComponent'
 import SerialComponent from '../popup/SerialComponent'
 import SerialQtyEntry from '../popup/SerialQtyEntry'
-import { forwardRef, useImperativeHandle, useRef } from 'react'
 import i18n from '../i18n'
 
 export default function Transactions() {
+  const { t } = useTranslation()
+  const transactionHeadsGridRef = useRef(null)
+  const transactionPositionsGridRef = useRef(null)
+
+  const transactionHeadExportColumns = useMemo(
+    () => getTransactionHeadExportColumns(t),
+    [t],
+  )
+  const transactionPositionsExportColumns = useMemo(
+    () => getTransactionPositionsExportColumns(t),
+    [t],
+  )
+
   const [selectedRowTransactionsHeads, setSelectedRowHeadsTransactions] =
     useState({})
   const [
@@ -299,17 +317,42 @@ export default function Transactions() {
           <Header />
           <div className='content-transactions'>
 
-            <TransactionHeaderButtons communicate={communicate} />
+            <TransactionHeaderButtons
+              communicate={communicate}
+              appendActions={
+                <TableExportButton
+                  fileBaseName="wms-transactions-heads"
+                  columnDefs={transactionHeadExportColumns}
+                  getRows={() =>
+                    transactionHeadsGridRef.current?.getExportRows?.() ?? []
+                  }
+                />
+              }
+            />
 
             <TransactionHeads
+              ref={transactionHeadsGridRef}
               data={transactions}
               selector={selector}
               selectHead={selectHead}
             />
 
             <div className='down-part'>
-              <TransactionPositionsButtons communicate={communicate} />
+              <TransactionPositionsButtons
+                communicate={communicate}
+                appendActions={
+                  <TableExportButton
+                    fileBaseName="wms-transactions-positions"
+                    columnDefs={transactionPositionsExportColumns}
+                    getRows={() =>
+                      transactionPositionsGridRef.current?.getExportRows?.() ??
+                      []
+                    }
+                  />
+                }
+              />
               <TransactionPositions
+                ref={transactionPositionsGridRef}
                 data={positions}
                 selectPosition={selectPosition}
               />

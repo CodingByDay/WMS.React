@@ -1,5 +1,12 @@
 import 'devextreme/dist/css/dx.light.css'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react'
 
 import {
   DataGrid,
@@ -10,9 +17,9 @@ import {
 
 import { useTranslation } from 'react-i18next'
 import { trHeader } from '../i18n/headerMap'
-import { getDxDataGridInstance } from '../utility/devextremeGridInstance'
+import { getDxDataGridInstance, getDxExportRows } from '../utility/devextremeGridInstance'
 
-export default function OrderPositions (props) {
+const OrderPositions = forwardRef(function OrderPositions (props, ref) {
   const { t } = useTranslation()
   const { communicate, focusHint, onFocusPositionHandled } = props
   const gridRef = useRef(null)
@@ -41,6 +48,14 @@ export default function OrderPositions (props) {
       }
     }).filter((item) => item !== null)
   }, [props.data])
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      getExportRows: () => getDxExportRows(gridRef, gridData),
+    }),
+    [gridData],
+  )
 
   const selectPosition = useCallback(
     (e) => {
@@ -130,4 +145,6 @@ export default function OrderPositions (props) {
       </DataGrid>
     </div>
   )
-}
+})
+
+export default OrderPositions
