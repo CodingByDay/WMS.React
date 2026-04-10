@@ -30,35 +30,33 @@ export default function Interwarehouse(props) {
   const [date, setDate] = useState("");
 
   useEffect(() => {
-    var documentTypes = PopupService.getAllDocumentTypeOfEvent("E|").then(
-      (response) => {
-        var types = [];
-        for (var i = 0; i < response.Items.length; i++) {
-          var name = DataAccess.getData(
-            response.Items[i],
-            "Name",
-            "StringValue",
-          );
-          var receive = DataAccess.getData(
-            response.Items[i],
-            "ReceiveWarehouse",
-            "StringValue",
-          );
-          var issue = DataAccess.getData(
-            response.Items[i],
-            "IssueWarehouse",
-            "StringValue",
-          );
-          types.push({
-            value: name,
-            label: name,
-            receive: receive,
-            issue: issue,
-          });
-        }
-        setDocumentTypes(types);
-      },
-    );
+    PopupService.getAllDocumentTypeOfEvent("E|").then((response) => {
+      var types = [];
+      for (var i = 0; i < response.Items.length; i++) {
+        var name = DataAccess.getData(
+          response.Items[i],
+          "Name",
+          "StringValue",
+        );
+        var receive = DataAccess.getData(
+          response.Items[i],
+          "ReceiveWarehouse",
+          "StringValue",
+        );
+        var issue = DataAccess.getData(
+          response.Items[i],
+          "IssueWarehouse",
+          "StringValue",
+        );
+        types.push({
+          value: name,
+          label: name,
+          receive: receive,
+          issue: issue,
+        });
+      }
+      setDocumentTypes(types);
+    });
 
     var warehouses = PopupService.getWarehouses(userId).then((response) => {
       var warehouses = onlyWarehouses(response);
@@ -129,13 +127,13 @@ export default function Interwarehouse(props) {
     }
 
     if (window.confirm("Ali želite kreirati dokument")) {
-      var data = PopupService.setMoveHead({
+      PopupService.setMoveHead({
         DocumentType: documentData,
         Type: "E",
         Issuer: selectedIssuer.label,
         Receiver: selectedReceiver.label,
         LinkKey: "",
-      }).then((response) => {
+      }).then(() => {
         props.close();
         props.render();
       });

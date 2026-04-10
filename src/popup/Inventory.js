@@ -23,18 +23,16 @@ export default function Inventory(props) {
   const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
-    var documentTypes = PopupService.getAllDocumentTypeOfEvent("N").then(
-      (response) => {
-        var types = [];
-        for (var i = 0; i < response.Items.length; i++) {
-          types.push({
-            value: response.Items[i].Properties.Items[0].StringValue,
-            label: response.Items[i].Properties.Items[0].StringValue,
-          });
-        }
-        setDocumentTypes(types);
-      },
-    );
+    PopupService.getAllDocumentTypeOfEvent("N").then((response) => {
+      var types = [];
+      for (var i = 0; i < response.Items.length; i++) {
+        types.push({
+          value: response.Items[i].Properties.Items[0].StringValue,
+          label: response.Items[i].Properties.Items[0].StringValue,
+        });
+      }
+      setDocumentTypes(types);
+    });
 
     var warehouses = PopupService.getWarehouses(userId).then((response) => {
       var warehouses = onlyWarehouses(response);
@@ -103,7 +101,7 @@ export default function Inventory(props) {
     }
 
     if (window.confirm("Ali želite kreirati dokument")) {
-      var data = PopupService.setMoveHead({
+      PopupService.setMoveHead({
         DocumentType: documentData,
 
         Type: "N",
@@ -115,7 +113,7 @@ export default function Inventory(props) {
         LinkNo: 0,
 
         Date: dateData,
-      }).then((response) => {
+      }).then(() => {
         props.close();
         props.render();
       });

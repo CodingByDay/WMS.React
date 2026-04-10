@@ -132,27 +132,28 @@ export default function Listing() {
 
   function getPositions(order, hint = null) {
     if (order == null || order === '') return
-    ListingService.getAllPositions(order).then((response) => {
-      response.Items = response.Items.sort(function (a, b) {
-        var aValue = DataAccess.getData(a, 'No', 'IntValue')
-        var bValue = DataAccess.getData(b, 'No', 'IntValue')
-        return aValue - bValue
-      })
+    ListingService.getAllPositions(order)
+      .then((response) => {
+        const base = response && typeof response === 'object' ? response : {}
+        const rawItems = Array.isArray(base.Items) ? base.Items : []
+        const sorted = [...rawItems].sort(function (a, b) {
+          var aValue = DataAccess.getData(a, 'No', 'IntValue')
+          var bValue = DataAccess.getData(b, 'No', 'IntValue')
+          return aValue - bValue
+        })
 
-      var positions = []
+        var positions = []
 
-      for (var i = 0; i < response.Items.length; i++) {
-        var itemID = DataAccess.getData(response.Items[i], 'ItemID', 'IntValue')
-        if (itemID != 0) {
-          positions.push(response.Items[i])
-        } else {
-          continue
+        for (var i = 0; i < sorted.length; i++) {
+          var itemID = DataAccess.getData(sorted[i], 'ItemID', 'IntValue')
+          if (itemID != 0) {
+            positions.push(sorted[i])
+          } else {
+            continue
+          }
         }
-      }
 
-      response.Items = positions
-
-      setPositions(response)
+        setPositions({ ...base, Items: positions })
       const hasItemId =
         hint &&
         typeof hint === 'object' &&
@@ -178,7 +179,11 @@ export default function Listing() {
       } else {
         setFocusPositionHint(null)
       }
-    })
+      })
+      .catch(() => {
+        setPositions({ Items: [] })
+        setFocusPositionHint(null)
+      })
   }
 
   const [sort, setSort] = useState()

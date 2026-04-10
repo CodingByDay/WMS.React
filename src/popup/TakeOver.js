@@ -105,42 +105,40 @@ export default function TakeOver(props) {
   };
 
   useEffect(() => {
-    var documentTypes = PopupService.getAllDocumentTypeOfEvent("I").then(
-      (response) => {
-        var types = [];
+    PopupService.getAllDocumentTypeOfEvent("I").then((response) => {
+      var types = [];
+      types.push({
+        value: "",
+        code: "",
+        label: "",
+        properties: [],
+        header: true,
+      });
+      for (var i = 0; i < response.Items.length; i++) {
+        var type = DataAccess.getData(
+          response.Items[i],
+          "Code",
+          "StringValue",
+        );
+        var name = DataAccess.getData(
+          response.Items[i],
+          "Name",
+          "StringValue",
+        );
+        var together = type + "|" + name;
+
+        var properties = [type, name];
+
         types.push({
-          value: "",
-          code: "",
-          label: "",
-          properties: [],
-          header: true,
+          value: together,
+          label: together,
+          code: type,
+          header: false,
+          properties: properties,
         });
-        for (var i = 0; i < response.Items.length; i++) {
-          var type = DataAccess.getData(
-            response.Items[i],
-            "Code",
-            "StringValue",
-          );
-          var name = DataAccess.getData(
-            response.Items[i],
-            "Name",
-            "StringValue",
-          );
-          var together = type + "|" + name;
-
-          var properties = [type, name];
-
-          types.push({
-            value: together,
-            label: together,
-            code: type,
-            header: false,
-            properties: properties,
-          });
-        }
-        setDocumentTypes(types);
-      },
-    );
+      }
+      setDocumentTypes(types);
+    });
 
     var warehouses = PopupService.getWarehouses(userId).then((response) => {
       var warehouses = onlyWarehouses(response);
@@ -213,6 +211,19 @@ export default function TakeOver(props) {
     setDate(e.target.value);
   }
 
+  const selectStyles = useMemo(
+    () =>
+      getListingOrderSelectStyles({
+        option: (provided) => ({
+          ...provided,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }),
+      }),
+    [],
+  );
+
   function getCheckBox() {
     if (!props.order) {
       return (
@@ -228,19 +239,6 @@ export default function TakeOver(props) {
       );
     }
   }
-
-  const selectStyles = useMemo(
-    () =>
-      getListingOrderSelectStyles({
-        option: (provided) => ({
-          ...provided,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }),
-      }),
-    [],
-  );
 
   function getClient() {
     if (props.order) {
@@ -310,7 +308,7 @@ export default function TakeOver(props) {
       }
 
       if (window.confirm("Ali želite kreirati dokument")) {
-        var data = PopupService.setMoveHead(objectForAPI).then((response) => {
+        PopupService.setMoveHead(objectForAPI).then(() => {
           props.close();
           props.render();
         });
@@ -374,7 +372,6 @@ export default function TakeOver(props) {
   function toggleCheck() {
     setByOrder(!byOrder);
   }
-
   const containerClass =
     listingForm
       ? "layout-issued-goods-container wms-listing-head-form"

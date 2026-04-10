@@ -1,8 +1,50 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import DataAccess from "../utility/DataAccess";
+import SettingsService from "./SettingsService";
+
+/** Listing head: tPA_SetDocType rows (default DB from API connection). */
+const LISTING_HEAD_DOCUMENT_TYPES_SQL = `
+SELECT [acDocType]
+      ,[acName]
+      ,[acIssuer]
+      ,[acReceiver]
+      ,[acDocTypeRef]
+      ,[acEvidence]
+      ,[acDocTypeWaste]
+      ,[adTimeIns]
+      ,[anUserIns]
+      ,[adTimeChg]
+      ,[anUserChg]
+      ,[acWarehouse]
+      ,[acIsWareHouseDisabled]
+      ,[acIsWareHouseHeadDisabled]
+      ,[anQId]
+      ,[uWMSEntryControl]
+      ,[uWMSAcqDocType]
+      ,[uWMSIssueDocType]
+      ,[uWMS]
+      ,[uWMSCoop]
+      ,[uWMSPartiallyFinishStatus]
+      ,[uWMSFinishStatus]
+      ,[uWMSWOIssueWork]
+      ,[uWMSWOReceiving]
+      ,[uWMSFinishDoc]
+      ,[uWMSWOIssueMat]
+      ,[acIsDoc]
+      ,[acTypeOfDoc]
+  FROM [dbo].[tPA_SetDocType]
+  WHERE [uWMS] = 1 AND [acSetOf] = 'N'
+`.trim();
 
 const PopupService = {
+  async getDocumentTypesListingSql() {
+    const rows = await SettingsService.executeSQLQuery(
+      LISTING_HEAD_DOCUMENT_TYPES_SQL,
+      [],
+    );
+    return Array.isArray(rows) ? rows : [];
+  },
+
   async getAllDocumentTypes() {
     const response = await axios.get(
       process.env.REACT_APP_API_URL +

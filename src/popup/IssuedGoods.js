@@ -15,6 +15,32 @@ import {
 } from "../utility/listingOrderUtils";
 import { getListingOrderSelectStyles } from "../utility/listingFormSelectStyles";
 
+function buildIssuedGoodsDocumentTypeOptions(rows) {
+  var types = [];
+  types.push({
+    value: "",
+    code: "",
+    label: "",
+    properties: [],
+    header: true,
+  });
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i] || {};
+    var type = row.acDocType ?? row.AcDocType ?? "";
+    var name = row.acName ?? row.AcName ?? "";
+    var together = type + "|" + name;
+    var properties = [type, name];
+    types.push({
+      value: together,
+      label: together,
+      code: type,
+      header: false,
+      properties: properties,
+    });
+  }
+  return types;
+}
+
 export default function IssuedGoods(props) {
   const { t } = useTranslation();
   // States
@@ -53,42 +79,30 @@ export default function IssuedGoods(props) {
   );
 
   useEffect(() => {
-    var documentTypes = PopupService.getAllDocumentTypeOfEvent("P").then(
-      (response) => {
-        var types = [];
-        types.push({
-          value: "",
-          code: "",
-          label: "",
-          properties: [],
-          header: true,
-        });
+    if (props.type === "listing") {
+      PopupService.getDocumentTypesListingSql().then((rows) => {
+        setDocumentTypes(buildIssuedGoodsDocumentTypeOptions(rows));
+      });
+    } else {
+      PopupService.getAllDocumentTypeOfEvent("P").then((response) => {
+        var rows = [];
         for (var i = 0; i < response.Items.length; i++) {
-          var type = DataAccess.getData(
-            response.Items[i],
-            "Code",
-            "StringValue",
-          );
-          var name = DataAccess.getData(
-            response.Items[i],
-            "Name",
-            "StringValue",
-          );
-          var together = type + "|" + name;
-
-          var properties = [type, name];
-
-          types.push({
-            value: together,
-            label: together,
-            code: type,
-            header: false,
-            properties: properties,
+          rows.push({
+            acDocType: DataAccess.getData(
+              response.Items[i],
+              "Code",
+              "StringValue",
+            ),
+            acName: DataAccess.getData(
+              response.Items[i],
+              "Name",
+              "StringValue",
+            ),
           });
         }
-        setDocumentTypes(types);
-      },
-    );
+        setDocumentTypes(buildIssuedGoodsDocumentTypeOptions(rows));
+      });
+    }
 
     var warehouses = PopupService.getWarehouses(userId).then((response) => {
       var warehouses = onlyWarehouses(response);
@@ -105,7 +119,7 @@ export default function IssuedGoods(props) {
       }
       setBuyer(subjectsList);
     });
-  }, []);
+  }, [props.type, userId]);
 
   function onlyWarehouses(data) {
     var returnArray = [];
@@ -182,7 +196,7 @@ export default function IssuedGoods(props) {
         };
       }
       if (window.confirm("Ali želite kreirati dokument?")) {
-        var data = PopupService.setMoveHead(objectForAPI).then((response) => {
+        PopupService.setMoveHead(objectForAPI).then(() => {
           props.close();
         });
       }
