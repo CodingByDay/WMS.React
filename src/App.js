@@ -42,6 +42,9 @@ import GlobalLoader from "./loader/GlobalLoader";
 import MobileNotSupported from "./components/MobileNotSupported";
 import { isMobileClient } from "./utility/isMobileClient";
 
+/** Base URL path when the app is not served from the site root (see package.json "homepage"). */
+const APP_BASE_PATH = (process.env.PUBLIC_URL || "").replace(/\/$/, "");
+
 axios.interceptors.response.use(
   function (response) {
     return response;
@@ -52,7 +55,7 @@ axios.interceptors.response.use(
     }
     if (!error.response) {
       store.dispatch(loadingReset());
-      window.location.href = "/internet";
+      window.location.href = `${APP_BASE_PATH}/internet`;
     }
     return Promise.reject(error);
   },
@@ -66,7 +69,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={APP_BASE_PATH || undefined}>
       <GlobalLoader />
       <Routes>
         <Route
